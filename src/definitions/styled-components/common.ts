@@ -1,8 +1,4 @@
-// #region Global Imports
-import { BaseTheme } from 'styled-components';
-// #endregion Global Imports
-
-const common: BaseTheme = {
+const common: any = {
   colors: {
     transparent: 'transparent',
     darkGrey: '#282C34',

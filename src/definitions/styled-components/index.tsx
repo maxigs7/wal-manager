@@ -28,6 +28,7 @@ export const StyledThemeProvider: React.FC = ({ children }) => {
 
   const toggle = () => {
     setTheme((theme) => (theme === 'light' ? 'dark' : 'light'));
+    return undefined;
   };
   const values = React.useMemo(
     () => ({
