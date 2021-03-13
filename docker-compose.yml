@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  base: &base
+    build: .
+    environment:
+      - DATABASE_COLLECTION_NAME
+      - DATABASE_NAME
+      - DATABASE_URL
+      - NODE_ENV
+      - PORT
+    ports:
+      - '${PORT}:${PORT}'
+
+  app:
+    <<: *base
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      target: dev
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    restart: unless-stopped
+    volumes:
+      - ./.mongodb:/data/db
+    ports:
+      - 27017:27017
