@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import 'isomorphic-unfetch';
+import 'jest-styled-components';
 import nock from 'nock';
 import dotenv from 'dotenv';
 

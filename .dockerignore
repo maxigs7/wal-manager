@@ -1,5 +1,3 @@
-
-
 # Logs
 logs
 *.log
@@ -73,8 +71,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.test
+*.env*
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -107,14 +104,13 @@ dist
 # TernJS port file
 .tern-port
 
-# mongodb
-./.mongodb
 # for all code you usually don't want .git history in image, just the current commit you have checked out
-.git
+**/.git
 
 # you usually don't want dockerfile and compose files in the image either
-*Dockerfile*
-*docker-compose*
+**/.docker
+**/Dockerfile*
+**/docker-compose*
 
 # for Node.js apps, you want to build the node_modules in the image, and not copy from host
 node_modules

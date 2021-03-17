@@ -35,8 +35,7 @@
               "@containers": "./src/containers",
               "@definitions": "./src/definitions",
               "@redux": "./src/redux",
-              "@styles": "./src/styles",
-              "@test": "./src/test"
+              "@styles": "./src/styles"
             }
           }
         ]

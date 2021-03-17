@@ -1,23 +1,8 @@
-## Stage 1 (production base)
-# This gets our prod dependencies installed and out of the way
+## Stage 1 (base)
+# This gets our dependencies installed and out of the way
 FROM node:14.16.0-alpine as base
 
-ARG DATABASE_COLLECTION_NAME
-ENV DATABASE_COLLECTION_NAME=$DATABASE_COLLECTION_NAME
-
-ARG DATABASE_NAME
-ENV DATABASE_NAME=$DATABASE_NAME
-
-ARG DATABASE_URL
-ENV DATABASE_URL=$DATABASE_URL
-
-ARG NODE_ENV
-ENV NODE_ENV=$NODE_ENV
-
-ARG PORT
-ENV PORT=$PORT
-
-WORKDIR /app
+WORKDIR /usr
 
 COPY package*.json ./
 
@@ -25,28 +10,55 @@ COPY package*.json ./
 RUN npm ci \
     && npm cache clean --force
 
+#### DEVELOPMENT
+
 ## Stage 2 (development)
 # we don't COPY in this stage because for dev you'll bind-mount anyway
 # this saves time when building locally for dev via docker-compose
 FROM base as dev
 
-ENV NODE_ENV=development
-
-WORKDIR /app
+WORKDIR /usr
 
 RUN npm install --only=development
 
+ENV NODE_ENV=development
+ENV PATH=/usr/node_modules/.bin:$PATH
+
+WORKDIR /usr/app
+
 EXPOSE 3000
 
-CMD ["./node_modules/.bin/next", "dev"]
+CMD ["next", "dev"]
 
-## Stage 3 (copy in source for prod)
-# This gets our source code into builder
-# this stage starts from the first one and skips dev
-FROM base as prod
+#### PRODUCTION
 
-WORKDIR /app
+## Stage 3 (Build)
+FROM base as build
+
+RUN npm install --only=development
+
+# Copy in the rest of the project
+# (include node_modules in a .dockerignore file)
+WORKDIR /usr/app
+
+ENV PATH=/usr/node_modules/.bin:$PATH
 
 COPY . .
 
-CMD ["./node_modules/.bin/next", "build"]
+RUN ["next", "build"]
+
+## Stage 4 (Production)
+FROM base as prod
+
+ENV NODE_ENV=production
+ENV PATH=/usr/node_modules/.bin:$PATH
+
+WORKDIR /usr/app
+
+# Get the built application from the first stage
+COPY --from=build /usr/app/.next .next
+
+EXPOSE 3000
+
+CMD ["next", "start"]
+

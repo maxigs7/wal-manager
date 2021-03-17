@@ -9,7 +9,6 @@ module.exports = {
   testRegex: TEST_REGEX,
   transform: {
     '^.+\\.tsx?$': 'babel-jest',
-    '^.+\\.svg$': 'jest-svg-transformer',
   },
   testPathIgnorePatterns: [
     '<rootDir>/.next/',

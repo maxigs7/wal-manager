@@ -21,6 +21,8 @@
       "@components/*": ["./src/components/*"],
       "@containers": ["./src/containers"],
       "@containers/*": ["./src/containers/*"],
+      "@data": ["./src/data"],
+      "@data/*": ["./src/data/*"],
       "@definitions": ["./src/definitions"],
       "@definitions/*": ["./src/definitions/*"],
       "@redux": ["src/redux"],
@@ -37,7 +39,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "esnext",
-    "typeRoots": ["./node_modules/@types", "./types"]
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "exclude": [
     "dist",
@@ -50,6 +52,9 @@
     "**/*.spec.tsx",
     "**/*.test.ts",
     "**/*.test.tsx",
+    "test/*.js",
+    "test/*.ts",
+    "test/*.tsx",
     "coverage"
   ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
