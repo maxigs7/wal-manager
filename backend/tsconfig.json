@@ -26,7 +26,7 @@
       "@database": ["./src/database"],
       "@database/*": ["./src/database/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./typings"]
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
   "exclude": [
     "build",
@@ -44,5 +44,5 @@
     "test/*.tsx",
     "coverage"
   ],
-  "include": ["typings/global.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["types/global.d.ts", "**/*.ts", "**/*.tsx"]
 }
