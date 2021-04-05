@@ -1,6 +1,0 @@
-**/*.d.ts
-node_modules
-__generated__
-.next
-.docker
-**/.docker
