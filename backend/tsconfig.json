@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "removeComments": true,
+    "noImplicitAny": false,
+    "noLib": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "paths": {
+      "@api": ["./src/api"],
+      "@api/*": ["./src/api/*"],
+      "@config": ["./src/config"],
+      "@config/*": ["./src/config/*"],
+      "@core": ["./src/core"],
+      "@core/*": ["./src/core/*"],
+      "@database": ["./src/database"],
+      "@database/*": ["./src/database/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./typings"]
+  },
+  "exclude": [
+    "build",
+    "dist",
+    "out",
+    "node_modules",
+    "jest.config.js",
+    ".eslintrc.js",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "test/*.js",
+    "test/*.ts",
+    "test/*.tsx",
+    "coverage"
+  ],
+  "include": ["typings/global.d.ts", "**/*.ts", "**/*.tsx"]
+}
