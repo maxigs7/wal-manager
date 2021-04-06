@@ -6,7 +6,7 @@
         "type": "node",
         "request": "attach",
         "address": "localhost",
-        "localRoot": "${workspaceFolder}",
+        "localRoot": "${workspaceFolder}/backend",
         "remoteRoot": "/usr/app",
         "protocol": "inspector",
         "restart": true
@@ -14,7 +14,7 @@
       {
         "type": "node",
         "request": "launch",
-        "name": "Server (local)",
+        "name": "Backend",
         "args": ["${workspaceFolder}/backend/src/main.ts"],
         "runtimeArgs": ["--inspect", "-r", "tsconfig-paths/register", "-r", "ts-node/register"],
         "sourceMaps": true,
@@ -29,17 +29,17 @@
         "protocol": "inspector"
       },
       {
-        "name": "Unit Tests (Local)",
+        "name": "Unit Tests (BE)",
         "type": "node",
         "request": "launch",
-        "program": "${workspaceFolder}/node_modules/.bin/jest",
+        "program": "${workspaceFolder}/backend/node_modules/.bin/jest",
         "console": "integratedTerminal"
       },
       {
-        "name": "Current File as Unit Test (Local)",
+        "name": "Current File as Unit Test (BE)",
         "type": "node",
         "request": "launch",
-        "program": "${workspaceFolder}/node_modules/.bin/jest",
+        "program": "${workspaceFolder}/backend/node_modules/.bin/jest",
         "args": ["${file}"],
         "console": "integratedTerminal"
       }

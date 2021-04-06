@@ -1,6 +1,24 @@
 version: '3.8'
 
 services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: dev
+    env_file:
+      - ./backend/.env
+    ports:
+      - 2500:2500
+      - 9229:9229
+    volumes:
+      - ./backend:/usr/app:delegated
+      - /usr/app/node_modules
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    restart: unless-stopped
   mongodb:
     image: mongo:latest
     env_file:
