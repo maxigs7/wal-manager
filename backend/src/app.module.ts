@@ -1,20 +1,22 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { RouterModule } from 'nest-router';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoreModule } from './core';
 import { AppConfigModule } from './config';
-import { DatabaseModule } from './database/database.module';
 import { ApiModule } from './api/api.module';
 import { apiRoutes } from './api/api.routes';
+import { ApplicationModule } from './application/application.module';
 import { LoggerMiddleware } from './core/middlewares';
-import { RouterModule } from 'nest-router';
+import { PersistenceModule } from './persistence/persistence.module';
 
 @Module({
   imports: [
     RouterModule.forRoutes([...apiRoutes]),
     AppConfigModule,
     CoreModule,
-    DatabaseModule,
+    PersistenceModule,
+    ApplicationModule,
     ApiModule,
   ],
   controllers: [AppController],

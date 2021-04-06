@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -8,13 +9,23 @@ import {
   Param,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
+import {
+  CreateCategoryDTO,
+  CategoryService,
+  UpdateCategoryDTO,
+  CategoryDTO,
+} from '@application/admin/category';
 
 @Controller('/categories')
+@UseInterceptors(ClassSerializerInterceptor)
 export class CategoriesController {
+  constructor(private service: CategoryService) {}
+
   @Get()
-  async getAll(): Promise<any> {
-    return [{ name: 'cat 1' }];
+  async getAll(): Promise<CategoryDTO[]> {
+    return this.service.find();
   }
 
   @Get(':id')
@@ -24,12 +35,12 @@ export class CategoriesController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(@Body() category: any) {
-    return { ...category };
+  async create(@Body() dto: CreateCategoryDTO): Promise<string> {
+    return this.service.create(dto);
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() category: any) {
+  async update(@Param('id') id: string, @Body() category: UpdateCategoryDTO) {
     return { id: id, ...category };
   }
 

@@ -19,12 +19,18 @@
     "paths": {
       "@api": ["./src/api"],
       "@api/*": ["./src/api/*"],
+      "@application": ["./src/application"],
+      "@application/*": ["./src/application/*"],
       "@config": ["./src/config"],
       "@config/*": ["./src/config/*"],
       "@core": ["./src/core"],
       "@core/*": ["./src/core/*"],
       "@database": ["./src/database"],
-      "@database/*": ["./src/database/*"]
+      "@database/*": ["./src/database/*"],
+      "@domain": ["./src/domain"],
+      "@domain/*": ["./src/domain/*"],
+      "@persistence": ["./src/persistence"],
+      "@persistence/*": ["./src/persistence/*"]
     },
     "typeRoots": ["./node_modules/@types", "./types"]
   },
