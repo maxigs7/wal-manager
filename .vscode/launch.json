@@ -1,0 +1,46 @@
+{
+  "configurations": [
+    {
+      "name": "Docker: Attach to Node",
+      "type": "node",
+      "request": "attach",
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/backend",
+      "remoteRoot": "/usr/app",
+      "protocol": "inspector",
+      "restart": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Backend",
+      "args": ["${workspaceFolder}/backend/src/main.ts"],
+      "runtimeArgs": ["--inspect", "-r", "tsconfig-paths/register", "-r", "ts-node/register"],
+      "sourceMaps": true,
+      "envFile": "${workspaceFolder}/backend/.env",
+      "env": {
+        "TS_NODE_PROJECT": "tsconfig.json",
+        "TS_NODE_FILES": "true",
+        "TS_NODE_CACHE": "false"
+      },
+      "cwd": "${workspaceRoot}/backend",
+      "console": "integratedTerminal",
+      "protocol": "inspector"
+    },
+    {
+      "name": "Unit Tests (BE)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/node_modules/.bin/jest",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Current File as Unit Test (BE)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/node_modules/.bin/jest",
+      "args": ["${file}"],
+      "console": "integratedTerminal"
+    }
+  ]
+}
