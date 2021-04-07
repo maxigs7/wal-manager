@@ -34,21 +34,6 @@
     },
     "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "exclude": [
-    "build",
-    "dist",
-    "out",
-    "node_modules",
-    "jest.config.js",
-    ".eslintrc.js",
-    "**/*.spec.ts",
-    "**/*.spec.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "test/*.js",
-    "test/*.ts",
-    "test/*.tsx",
-    "coverage"
-  ],
+  "exclude": ["build", "dist", "out", "node_modules"],
   "include": ["types/global.d.ts", "**/*.ts", "**/*.tsx"]
 }

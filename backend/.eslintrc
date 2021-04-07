@@ -1,0 +1,28 @@
+{
+  "env": {
+    "node": true,
+    "jest": true,
+    "browser": true,
+    "es6": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
+  "settings": {
+    "import/parsers": { "@typescript-eslint/parser": [".ts"] }
+  },
+  "plugins": ["@typescript-eslint/eslint-plugin", "jest"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "root": true,
+  "rules": {
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+}

@@ -32,7 +32,8 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/backend/node_modules/.bin/jest",
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend"
     },
     {
       "name": "Current File as Unit Test (BE)",
@@ -40,7 +41,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/backend/node_modules/.bin/jest",
       "args": ["${file}"],
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend"
     }
   ]
 }
