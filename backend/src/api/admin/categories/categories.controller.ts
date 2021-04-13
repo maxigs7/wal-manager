@@ -17,8 +17,10 @@ import {
   UpdateCategoryDTO,
   CategoryDTO,
 } from '@application/admin/category';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('/categories')
+@ApiBearerAuth('access-token')
 @UseInterceptors(ClassSerializerInterceptor)
 export class CategoriesController {
   constructor(private service: CategoryService) {}

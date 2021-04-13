@@ -1,20 +1,21 @@
-import { Category, ICategoryRepository } from '@domain/category';
+import { PERSISTENCE_CATEGORY_REPOSITORY } from '@constants';
+import { ICategoryRepository } from '@domain/interfaces';
 import { Injectable, Inject } from '@nestjs/common';
 import { CategoryMapper } from './mappers';
 import { CategoryDTO, CreateCategoryDTO } from './models';
 
-const CategoryRepo = () => Inject('CategoryRepo');
+const CategoryRepo = () => Inject(PERSISTENCE_CATEGORY_REPOSITORY);
 
 @Injectable()
 export class CategoryService {
   constructor(@CategoryRepo() private readonly repo: ICategoryRepository) {}
 
   public async create(dto: CreateCategoryDTO): Promise<string> {
-    return this.repo.create(new Category(dto));
+    return this.repo.create(dto.toEntity());
   }
 
   public async find(): Promise<CategoryDTO[]> {
-    const categories = await this.repo.find();
+    const categories = await this.repo.findAll();
     return categories.map((cat) => CategoryMapper.toDTO(cat));
   }
 }
