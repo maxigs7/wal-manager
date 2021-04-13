@@ -1,2 +1,2 @@
-export * from './category.module';
 export * from './category.repository';
+export * from './user.repository';
