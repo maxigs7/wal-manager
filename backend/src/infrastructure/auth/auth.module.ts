@@ -1,4 +1,4 @@
-import { AppConfigModule, AppConfigService } from '@config';
+import { AppConfigModule } from '@config';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PersistenceModule } from '@persistence/persistence.module';

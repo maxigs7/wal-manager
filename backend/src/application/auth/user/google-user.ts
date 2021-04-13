@@ -1,3 +1,3 @@
 import { User } from '@domain/models';
 
-export interface GoogleUser extends Omit<User, '_id'> {}
+export type GoogleUser = Omit<User, '_id'>;

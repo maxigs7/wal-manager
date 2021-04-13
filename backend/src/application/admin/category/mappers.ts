@@ -1,5 +1,5 @@
 import { Category } from '@domain/models';
-import { CategoryDTO, CreateCategoryDTO } from './models';
+import { CategoryDTO } from './models';
 
 export class CategoryMapper {
   static toDTO(entity: Category): CategoryDTO {
@@ -10,6 +10,4 @@ export class CategoryMapper {
       subCategories: [],
     };
   }
-
-  toSubcategoryDTO() {}
 }

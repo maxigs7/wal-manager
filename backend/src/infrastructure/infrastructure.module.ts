@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AuthModule, TokenFactory, UserManager } from './auth';
+import { AuthModule } from './auth';
 
 @Module({
   imports: [AuthModule],

@@ -5,11 +5,10 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller('/google')
 @AllowAnonymous()
 export class GoogleController {
-  constructor() {}
-
   @Get()
   @UseGuards(AuthGuard('google'))
-  async signIn(@Req() req) {}
+  // eslint-disable-next-line
+  async signIn() {}
 
   @Get('callback')
   @UseGuards(AuthGuard('google'))
