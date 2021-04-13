@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { IAppConfig } from './app';
+import { IGoogleConfig } from './auth';
 import { IDatabaseConfig } from './database';
 
 @Injectable()
@@ -15,6 +16,10 @@ export class AppConfigService {
     return this.config.get<IAppConfig>('app');
   }
 
+  get authGoogleConfig(): IGoogleConfig {
+    return this.config.get<IGoogleConfig>('auth.google');
+  }
+
   get databaseConfig(): IDatabaseConfig {
     return this.config.get<IDatabaseConfig>('database');
   }
@@ -23,15 +28,15 @@ export class AppConfigService {
     return this.appConfig.env === 'development';
   }
 
-  get isTest(): boolean {
-    return this.appConfig.env === 'test';
-  }
-
   get isProduction(): boolean {
     return this.appConfig.env === 'production';
   }
 
   get isSwaggerEnabled(): boolean {
     return !this.isProduction;
+  }
+
+  get isTest(): boolean {
+    return this.appConfig.env === 'test';
   }
 }
