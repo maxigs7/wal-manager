@@ -1,4 +1,4 @@
-import { Payload } from '../src/auth/auth.interfaces';
+import { UserAuthDto } from '../src/application/auth/user/user-auth';
 
 declare global {
   namespace Express {
@@ -7,6 +7,6 @@ declare global {
       user?: User;
     }
     // eslint-disable-next-line
-    interface User extends Payload {}
+    interface User extends UserAuthDto {}
   }
 }
