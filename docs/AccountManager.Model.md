@@ -9,10 +9,10 @@ to manage our multiple accounts and set categories for our movements.
 
 - #### Category
   ```
-  Id          NOT NULL  TINYINT
-  Name        NOT NULL  STRING
-  CategoryId  NULL      TINYINT --> CategoryParent
-  IsDeleted   NOT NULL  BOOL
+  _Id           NOT NULL  OBJECTID
+  Name          NOT NULL  STRING
+  IsActive      NOT NULL  BOOL = TRUE
+  SubCategories NULL ARRAY<{_Id, Name, IsActive}>
   ```
 - #### Account
   ```
@@ -20,7 +20,7 @@ to manage our multiple accounts and set categories for our movements.
   Name        NOT NULL STRING
   ImageKey    NOT NULL STRING
   Owner       NOT NULL STRING
-  IsDeleted   NOT NULL BOOL
+  IsActive   NOT NULL BOOL
   ```
 
 ### User
