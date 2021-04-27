@@ -1,22 +1,24 @@
 import React from 'react';
 import classnames from 'classnames';
-import { IReactProps } from 'common/interfaces/react-props';
 import { ButtonSizes, Colors } from 'utils/tailwind-constants';
 
-export interface ButtonProps extends IReactProps {
+export interface ButtonProps {
   size?: ButtonSizes;
   color?: Colors;
   rounded?: boolean;
   outlined?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<
+  ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+> = ({
   size = ButtonSizes.Small,
   color: bgColor = 'lightBlue',
   rounded = false,
   outlined = false,
   className,
   children,
+  ...htmlAttributes
 }) => {
   const commonClasses = [
     'outline-none',
@@ -28,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
     'duration-150',
     'inline-flex',
     'items-center',
+    'justify-center',
     rounded && 'rounded-full',
     !rounded && 'rounded',
   ];
@@ -67,7 +70,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={classnames(className, commonClasses, sizeClasses, btnClasses)}
-      type="button"
+      {...htmlAttributes}
     >
       {children}
     </button>
