@@ -1,34 +1,22 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Switch } from 'react-router';
 import { Redirect } from 'react-router-dom';
 
-import { LoginPage } from '@app/pages/auth/login';
-import DashboardPage from '@app/pages/dashboard/index';
-import { NotFoundPage } from '@app/pages/not-found';
-import CategoriesPage from '@app/pages/settings/categories';
-import { AdminRoute, DefaultRoute } from '@app/routes';
+import { PageLoader } from '@app/components/loaders';
+import { routes } from '@app/routes';
 
-const App: React.FC = () => {
-  return (
+const App: React.FC = () => (
+  <Suspense fallback={<PageLoader />}>
     <Switch>
-      <DefaultRoute path="/auth/login">
-        <LoginPage />
-      </DefaultRoute>
+      {routes.map(({ Route, Component, props }, index) => (
+        <Route {...props} key={index}>
+          <Component />
+        </Route>
+      ))}
 
-      <AdminRoute path="/dashboard">
-        <DashboardPage />
-      </AdminRoute>
-
-      <AdminRoute path="/settings/categories">
-        <CategoriesPage />
-      </AdminRoute>
-
-      <DefaultRoute path="/404">
-        <NotFoundPage />
-      </DefaultRoute>
       <Redirect from="*" to="/404" />
     </Switch>
-  );
-};
+  </Suspense>
+);
 
 export default App;
