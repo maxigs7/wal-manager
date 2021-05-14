@@ -1,4 +1,5 @@
 // .eslintignore
+*.js
 build/*
 public/*
 src/react-app-env.d.ts

@@ -1,6 +1,8 @@
 import React from 'react';
+
 import classnames from 'classnames';
-import { ButtonSizes, Colors } from 'utils/tailwind-constants';
+
+import { ButtonSizes, Colors } from '@app/common/tailwind-constants';
 
 export interface ButtonProps {
   size?: ButtonSizes;
@@ -9,9 +11,7 @@ export interface ButtonProps {
   outlined?: boolean;
 }
 
-const Button: React.FC<
-  ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
-> = ({
+const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
   size = ButtonSizes.Small,
   color: bgColor = 'lightBlue',
   rounded = false,

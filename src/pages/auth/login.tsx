@@ -1,16 +1,15 @@
-import { ReactComponent as GoogleLogo } from 'assets/img/google.svg';
-import bgImage from 'assets/img/auth-bg-final.jpg';
-import Button from 'components/ui/buttons';
-import CardContainer from 'components/ui/card-container';
-import { useApi } from 'providers';
 import { useMutation } from 'react-query';
 
-const Login: React.FC = () => {
-  const api = useApi();
+import { ReactComponent as GoogleLogo } from '@app/assets/images/google.svg';
+import { Button, CardContainer } from '@app/components/ui';
+import { useAuth } from '@lib/auth';
 
-  const { mutate: signIn } = useMutation(() => api.signInWithGoogle(), {
+const LoginPage: React.FC = () => {
+  const { signInWithGoogle } = useAuth();
+
+  const { mutate: signIn } = useMutation(() => signInWithGoogle(), {
     onError: (_error) => {
-      console.log(_error);
+      console.error(_error);
     },
     onSuccess: (_data, id) => {
       console.log(_data, id);
@@ -31,17 +30,18 @@ const Login: React.FC = () => {
           Sign in to use Fin Manager
         </h1>
 
-        <Button color="amber" className="mt-2" onClick={signInHandler}>
-          <GoogleLogo className="w-5 mr-1" /> Sign in with Google
+        <Button className="mt-2" color="amber" onClick={signInHandler}>
+          <GoogleLogo className="w-5 mr-1" height={30} width={30} />
+          Sign in with Google
         </Button>
       </div>
       <img
-        src={bgImage}
         alt="login image"
         className="max-w-sm backdrop-filter backdrop-opacity-80 "
+        src="/images/auth-bg-final.jpg"
       />
     </CardContainer>
   );
 };
 
-export default Login;
+export { LoginPage };

@@ -2,9 +2,10 @@ const colors = require('tailwindcss/colors');
 const theme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  mode: 'jit',
   purge: {
     enabled: process.env.NODE_ENV === 'production',
-    content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+    content: ['./src/**/*.{js,ts,jsx,tsx}'],
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -26,7 +27,11 @@ module.exports = {
     fontSize: {
       ...theme.fontSize,
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['"Montserrat"', ...theme.fontFamily.sans],
+      },
+    },
   },
   variants: {
     extend: {

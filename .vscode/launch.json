@@ -5,44 +5,27 @@
       "type": "node",
       "request": "attach",
       "address": "localhost",
-      "localRoot": "${workspaceFolder}/backend",
+      "localRoot": "${workspaceFolder}",
       "remoteRoot": "/usr/app",
       "protocol": "inspector",
       "restart": true
     },
     {
+      "name": "Run All Unit Tests",
       "type": "node",
       "request": "launch",
-      "name": "Backend",
-      "args": ["${workspaceFolder}/backend/src/main.ts"],
-      "runtimeArgs": ["--inspect", "-r", "tsconfig-paths/register", "-r", "ts-node/register"],
-      "sourceMaps": true,
-      "envFile": "${workspaceFolder}/backend/.env",
-      "env": {
-        "TS_NODE_PROJECT": "tsconfig.json",
-        "TS_NODE_FILES": "true",
-        "TS_NODE_CACHE": "false"
-      },
-      "cwd": "${workspaceRoot}/backend",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
       "console": "integratedTerminal",
-      "protocol": "inspector"
+      "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Unit Tests (BE)",
+      "name": "Run Current Unit Test",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/backend/node_modules/.bin/jest",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": ["${file}", "--coverage=false"],
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}/backend"
-    },
-    {
-      "name": "Current File as Unit Test (BE)",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/backend/node_modules/.bin/jest",
-      "args": ["${file}"],
-      "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}/backend"
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
