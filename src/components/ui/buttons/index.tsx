@@ -4,14 +4,14 @@ import classnames from 'classnames';
 
 import { ButtonSizes, Colors } from '@app/common/tailwind-constants';
 
-export interface ButtonProps {
+export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   size?: ButtonSizes;
   color?: Colors;
   rounded?: boolean;
   outlined?: boolean;
 }
 
-const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
+const Button: React.FC<ButtonProps> = ({
   size = ButtonSizes.Small,
   color: bgColor = 'lightBlue',
   rounded = false,
@@ -63,7 +63,7 @@ const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElemen
       bgColor !== 'white' && bgColor !== 'black' && `bg-${bgColor}-500`,
       bgColor !== 'white' && bgColor !== 'black' && `active:bg-${bgColor}-600`,
       bgColor !== 'white' && 'text-white',
-      bgColor === 'white' && 'text-blueGray',
+      bgColor === 'white' && 'text-blueGray-600',
     ];
   }
 

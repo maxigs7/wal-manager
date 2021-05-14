@@ -10,6 +10,8 @@
       "@app/components/*": ["./components/*"],
       "@app/containers": ["./containers"],
       "@app/containers/*": ["./containers/*"],
+      "@app/hooks": ["./hooks"],
+      "@app/hooks/*": ["./hooks/*"],
       "@app/layouts": ["./layouts"],
       "@app/layouts/*": ["./layouts/*"],
       "@app/routes": ["./routes"],

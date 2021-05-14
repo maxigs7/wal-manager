@@ -14,6 +14,7 @@ const App: React.FC = () => (
         </Route>
       ))}
 
+      <Redirect from="/" to="/dashboard" exact />
       <Redirect from="*" to="/404" />
     </Switch>
   </Suspense>

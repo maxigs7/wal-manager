@@ -1,8 +1,9 @@
+import classNames from 'classnames';
+
 const DefaultLayout: React.FC = ({ children }) => (
-  <>
-    <h1>Default</h1>
-    {children}
-  </>
+  <section className={classNames('bg-indigo-600', 'h-screen')}>
+    <div className="mx-auto flex justify-center lg:items-center h-full">{children}</div>
+  </section>
 );
 
 export default DefaultLayout;

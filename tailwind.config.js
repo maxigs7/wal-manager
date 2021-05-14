@@ -23,6 +23,7 @@ module.exports = {
       lightBlue: colors.lightBlue,
       purple: colors.purple,
       pink: colors.pink,
+      indigo: colors.indigo,
     },
     fontSize: {
       ...theme.fontSize,
