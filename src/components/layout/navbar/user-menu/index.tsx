@@ -33,11 +33,11 @@ export const UserMenu: React.FC = React.memo(() => {
   // });
 
   return (
-    <div className="relative inline-flex">
+    <div className="h-full">
       <button
         // ref={trigger}
         aria-haspopup="true"
-        className="inline-flex justify-center items-center group"
+        className="flex justify-center items-center p-3 h-full focus:outline-none"
         // onClick={() => setDropdownOpen(!dropdownOpen)}
         // aria-expanded={dropdownOpen}
       >
@@ -51,7 +51,7 @@ export const UserMenu: React.FC = React.memo(() => {
           />
         )}
         <div className="flex items-center truncate">
-          <span className="truncate ml-2 text-sm font-medium group-hover:text-gray-800">
+          <span className="truncate ml-2 text-sm font-medium hidden sm:inline">
             {user?.displayName}
           </span>
           <ChevronDownIcon className="w-5 h-5 flex-shrink-0 ml-1 fill-current text-gray-400" />

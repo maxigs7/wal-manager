@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import classnames from 'classnames';
+
 import { IMenuItem } from './menu-data';
 
 export type SidebarMenuItemProps = IMenuItem & {
@@ -11,9 +13,12 @@ export type SidebarMenuItemLinkProps = Omit<SidebarMenuItemProps, 'title' | 'Ico
 
 const SidebarMenuItemLink: React.FC<SidebarMenuItemLinkProps> = ({ isActive, path, children }) => (
   <NavLink
-    className={`block text-gray-200 hover:text-white transition duration-150 ${
-      isActive && 'hover:text-gray-200'
-    }`}
+    className={classnames(
+      `group flex flex-grow items-center`,
+      'text-gray-200 hover:text-white hover:bg-gray-900',
+      'transition duration-150 p-3',
+      isActive && 'bg-gray-900 hover:text-gray-200',
+    )}
     to={path}
     exact
   >
@@ -23,19 +28,17 @@ const SidebarMenuItemLink: React.FC<SidebarMenuItemLinkProps> = ({ isActive, pat
 
 export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = React.memo(
   ({ Icon, isActive, title, path }) => (
-    <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${isActive && 'bg-gray-900'}`}>
+    <li>
       {path && (
         <SidebarMenuItemLink isActive={isActive} path={path}>
-          <div className="flex flex-grow">
-            {Icon && (
-              <Icon
-                className={`flex-shrink-0 h-6 w-6 mr-3 text-gray-600 ${
-                  isActive && 'text-indigo-600'
-                }`}
-              />
-            )}
-            <span className="text-sm font-medium">{title}</span>
-          </div>
+          {Icon && (
+            <Icon
+              className={`h-6 w-6 mr-3 text-gray-600 group-hover:text-indigo-600 ${
+                isActive && 'text-indigo-600'
+              }`}
+            />
+          )}
+          <span className="text-sm font-medium">{title}</span>
         </SidebarMenuItemLink>
       )}
     </li>

@@ -1,5 +1,21 @@
 const colors = require('tailwindcss/colors');
 const theme = require('tailwindcss/defaultTheme');
+const customColors = {
+  transparent: 'transparent',
+  black: colors.black,
+  white: colors.white,
+  gray: colors.trueGray,
+  blueGray: colors.blueGray,
+  red: colors.red,
+  orange: colors.orange,
+  amber: colors.amber,
+  emerald: colors.emerald,
+  teal: colors.teal,
+  lightBlue: colors.lightBlue,
+  purple: colors.purple,
+  pink: colors.pink,
+  indigo: colors.indigo,
+};
 
 module.exports = {
   mode: 'jit',
@@ -10,20 +26,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-      transparent: 'transparent',
-      black: colors.black,
-      white: colors.white,
-      gray: colors.trueGray,
-      blueGray: colors.blueGray,
-      red: colors.red,
-      orange: colors.orange,
-      amber: colors.amber,
-      emerald: colors.emerald,
-      teal: colors.teal,
-      lightBlue: colors.lightBlue,
-      purple: colors.purple,
-      pink: colors.pink,
-      indigo: colors.indigo,
+      ...customColors,
     },
     fontSize: {
       ...theme.fontSize,
