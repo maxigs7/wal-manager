@@ -1,21 +1,22 @@
-import React, { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Switch } from 'react-router';
-import { Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import { PageLoader } from '@app/components/loaders';
-import { routes } from '@app/routes';
 
 const App: React.FC = () => (
   <Suspense fallback={<PageLoader />}>
     <Switch>
-      {routes.map(({ Route, Component, props }, index) => (
-        <Route {...props} key={index}>
-          <Component />
-        </Route>
-      ))}
-
-      <Redirect from="/" to="/dashboard" exact />
-      <Redirect from="*" to="/404" />
+      <Route
+        component={lazy(
+          () => import(/* webpackChunkName: 'default.layout' */ '@app/layouts/default'),
+        )}
+        path="/auth"
+      />
+      <Route
+        component={lazy(() => import(/* webpackChunkName: 'admin.layout' */ '@app/layouts/admin'))}
+        path="/"
+      />
     </Switch>
   </Suspense>
 );

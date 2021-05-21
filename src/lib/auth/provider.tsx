@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import firebase from 'firebase/app';
 
@@ -10,23 +10,23 @@ export const AuthProvider: React.FC = ({ children }) => {
 };
 
 export const useProvideAuth = (): IAuthContextProps => {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser | null | undefined>(null);
   const [initializing, setInitializing] = useState<boolean>(true);
 
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = useCallback(async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     const response = await firebase.auth().signInWithPopup(provider);
     const user = response.user?.toJSON();
     setUser(user as IUser);
     return user;
-  };
+  }, []);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     await firebase.auth().signOut();
     setUser(null);
-  };
+  }, []);
 
   // Subscribe to user on mount
   // Because this sets state in the callback it will cause any ...
@@ -41,5 +41,13 @@ export const useProvideAuth = (): IAuthContextProps => {
     return () => unsubscribe();
   }, []);
 
-  return { user: user || undefined, signOut, signInWithGoogle, initializing };
+  return useMemo(
+    () => ({
+      user,
+      signOut,
+      signInWithGoogle,
+      initializing,
+    }),
+    [initializing, user],
+  );
 };

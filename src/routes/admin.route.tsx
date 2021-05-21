@@ -1,14 +1,27 @@
-import React from 'react';
+import { lazy } from 'react';
 import { RouteProps } from 'react-router-dom';
 
-import AdminLayout from '@app/layouts/admin';
-
-import PrivateRoute from './private.route';
-
-const AdminRoute: React.FC<RouteProps> = (props: RouteProps) => (
-  <AdminLayout>
-    <PrivateRoute {...props} />
-  </AdminLayout>
+const DashboardPage = lazy(
+  () => import(/* webpackChunkName: 'dashboard.page' */ '@app/pages/dashboard'),
+);
+const SettingsCategoriesPage = lazy(
+  () => import(/* webpackChunkName: 'settings.category.page' */ '@app/pages/settings/categories'),
+);
+const NotFoundPage = lazy(
+  () => import(/* webpackChunkName: 'not-found.page' */ '@app/pages/not-found'),
 );
 
-export default AdminRoute;
+export const adminRoutes: RouteProps[] = [
+  {
+    children: <DashboardPage />,
+    path: '/dashboard',
+  },
+  {
+    children: <SettingsCategoriesPage />,
+    path: '/settings/categories',
+  },
+  {
+    children: <NotFoundPage />,
+    path: '/404',
+  },
+];

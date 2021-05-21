@@ -13,7 +13,7 @@ export interface IAuthContextProps {
   initializing: boolean;
   signInWithGoogle: () => Promise<any>;
   signOut: () => Promise<void>;
-  user?: IUser;
+  user?: IUser | null;
 }
 
 export const AuthContext: React.Context<IAuthContextProps> = createContext<IAuthContextProps>(

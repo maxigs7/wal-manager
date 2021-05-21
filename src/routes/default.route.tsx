@@ -1,12 +1,9 @@
-import React from 'react';
-import { Route, RouteProps } from 'react-router-dom';
+import { lazy } from 'react';
+import { RouteProps } from 'react-router-dom';
 
-import DefaultLayout from '@app/layouts/default';
-
-const DefaultRoute: React.FC<RouteProps> = (props: RouteProps) => (
-  <DefaultLayout>
-    <Route {...props} />
-  </DefaultLayout>
-);
-
-export default DefaultRoute;
+export const defaultRoutes: RouteProps[] = [
+  {
+    component: lazy(() => import('@app/pages/auth/login')),
+    path: '/auth/login',
+  },
+];
