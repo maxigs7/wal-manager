@@ -4,14 +4,18 @@ import firebase from 'firebase/app';
 
 import { AuthContext, IAuthContextProps, IUser } from './context';
 
+interface IState {
+  user: IUser | null;
+  initializing: boolean;
+}
+
 export const AuthProvider: React.FC = ({ children }) => {
   const auth = useProvideAuth();
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
 
 export const useProvideAuth = (): IAuthContextProps => {
-  const [user, setUser] = useState<IUser | null | undefined>(null);
-  const [initializing, setInitializing] = useState<boolean>(true);
+  const [state, setState] = useState<IState>({ initializing: true } as IState);
 
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
@@ -19,13 +23,14 @@ export const useProvideAuth = (): IAuthContextProps => {
     const provider = new firebase.auth.GoogleAuthProvider();
     const response = await firebase.auth().signInWithPopup(provider);
     const user = response.user?.toJSON();
-    setUser(user as IUser);
+
+    setState((state) => ({ ...state, user: user as IUser }));
     return user;
   }, []);
 
   const signOut = useCallback(async () => {
     await firebase.auth().signOut();
-    setUser(null);
+    setState((state) => ({ ...state, user: null }));
   }, []);
 
   // Subscribe to user on mount
@@ -34,8 +39,7 @@ export const useProvideAuth = (): IAuthContextProps => {
   // ... latest auth object.
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      setUser(user?.toJSON() as IUser);
-      setInitializing(false);
+      setState({ initializing: false, user: user?.toJSON() as IUser });
     });
     // Cleanup subscription on unmount
     return () => unsubscribe();
@@ -43,11 +47,11 @@ export const useProvideAuth = (): IAuthContextProps => {
 
   return useMemo(
     () => ({
-      user,
+      user: state.user,
       signOut,
       signInWithGoogle,
-      initializing,
+      initializing: state.initializing,
     }),
-    [initializing, user],
+    [state],
   );
 };
