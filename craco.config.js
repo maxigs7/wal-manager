@@ -108,6 +108,19 @@ module.exports = function ({ env }) {
     },
     webpack: {
       plugins,
+      configure: {
+        optimization: {
+          splitChunks: {
+            cacheGroups: {
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                chunks: 'initial',
+                name: 'vendor',
+              },
+            },
+          },
+        },
+      },
     },
   };
 };
