@@ -18,7 +18,7 @@ const customColors = {
 };
 
 module.exports = {
-  mode: 'jit',
+  mode: process.env.NODE_ENV === 'development' ? 'jit' : '',
   purge: {
     enabled: process.env.NODE_ENV === 'production',
     content: ['./src/**/*.{js,ts,jsx,tsx}'],
