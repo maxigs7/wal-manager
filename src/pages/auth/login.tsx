@@ -1,4 +1,4 @@
-import { LoginContainer } from '@app/containers/auth/login.container';
+import { LoginContainer } from '@app/containers/auth/login';
 
 const LoginPage: React.FC = () => (
   <div className="w-full sm:w-4/6 md:w-3/6 lg:w-4/12 xl:w-3/12 text-white py-12 px-2 sm:px-0 flex flex-col text-center">
