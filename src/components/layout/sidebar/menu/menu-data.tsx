@@ -1,8 +1,8 @@
-import { ClipboardListIcon, ChartPieIcon } from '@heroicons/react/solid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export interface IMenuItem {
   exact?: boolean;
-  Icon(props: React.ComponentProps<'svg'>): JSX.Element;
+  Icon(props: React.ComponentProps<any>): JSX.Element;
   path: string;
   title: string;
 }
@@ -10,7 +10,7 @@ export interface IMenuItem {
 export const mainRoutes: IMenuItem[] = [
   {
     exact: true,
-    Icon: ChartPieIcon,
+    Icon: (props) => <FontAwesomeIcon icon="tachometer-alt" {...props} fixedWidth />,
     path: '/dashboard',
     title: 'Dashboard',
   },
@@ -18,7 +18,7 @@ export const mainRoutes: IMenuItem[] = [
 
 export const adminRoutes: IMenuItem[] = [
   {
-    Icon: ClipboardListIcon,
+    Icon: (props) => <FontAwesomeIcon icon="list-alt" {...props} fixedWidth />,
     path: '/settings/categories',
     title: 'Categories',
   },

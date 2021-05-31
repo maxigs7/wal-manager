@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MenuIcon } from '@heroicons/react/solid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import { useSidebar } from '../sidebar';
@@ -27,7 +27,7 @@ export const Navbar: React.FC = React.memo(() => {
           onClick={toggle}
         >
           <span className="sr-only">Open sidebar</span>
-          <MenuIcon className="w-6 h-6 fill-current" />
+          <FontAwesomeIcon className="w-6 h-6 fill-current" icon="bars" />
         </button>
       </div>
       {/* Header: Right side */}

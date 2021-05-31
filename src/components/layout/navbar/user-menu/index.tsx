@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
 import classnames from 'classnames';
 
 import { useAuth } from '@lib/auth';
@@ -27,9 +27,9 @@ export const UserMenu: React.FC = React.memo(() => {
               <span className="truncate ml-2 text-sm font-medium hidden sm:inline">
                 {user?.displayName}
               </span>
-              <ChevronDownIcon
-                aria-hidden="true"
+              <FontAwesomeIcon
                 className="w-5 h-5 flex-shrink-0 ml-1 fill-current text-gray-400"
+                icon="chevron-down"
               />
             </Menu.Button>
           </div>

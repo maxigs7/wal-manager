@@ -10,7 +10,8 @@ export type Colors =
   | 'teal'
   | 'lightBlue'
   | 'purple'
-  | 'pink';
+  | 'pink'
+  | 'indigo';
 
 export enum ButtonSizes {
   Small = 'xs',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { ArrowLeftIcon } from '@heroicons/react/solid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useRouter } from '@app/hooks/useRouter';
 
@@ -35,7 +35,7 @@ export const Sidebar: React.FC = React.memo(() => {
             onClick={close}
           >
             <span className="sr-only">Close sidebar</span>
-            <ArrowLeftIcon className="h-6 w-6" />
+            <FontAwesomeIcon className="h-6 w-6" icon="arrow-left" />
           </button>
           {/* Logo */}
           <NavLink
