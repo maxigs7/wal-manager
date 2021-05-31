@@ -7,12 +7,14 @@ import 'tailwindcss/tailwind.css';
 
 import { AuthProvider } from '@lib/auth';
 import { startFirebase } from '@lib/firebase';
+import { startFontAwesome } from '@lib/font-awesome';
 
 import App from './App';
 
 const queryClient = new QueryClient();
 
 startFirebase();
+startFontAwesome();
 
 ReactDOM.render(
   <BrowserRouter>
