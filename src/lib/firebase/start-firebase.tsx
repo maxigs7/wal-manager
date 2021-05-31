@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+import { getApps, initializeApp } from 'firebase/app';
 
 import {
   FIREBASE_API_KEY,
@@ -20,8 +20,8 @@ export const startFirebase = (): void => {
     appId: FIREBASE_APP_ID,
   };
 
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+  if (!getApps().length) {
+    initializeApp(firebaseConfig);
     // Check that `window` is in scope for the analytics module!
     // if (typeof window !== 'undefined') {
     //   // Enable analytics. https://firebase.google.com/docs/analytics/get-started
