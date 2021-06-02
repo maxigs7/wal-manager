@@ -11,13 +11,13 @@ export type SidebarMenuItemProps = IMenuItem & {
 
 export type SidebarMenuItemLinkProps = Omit<SidebarMenuItemProps, 'title' | 'Icon'>;
 
-const SidebarMenuItemLink: React.FC<SidebarMenuItemLinkProps> = ({ isActive, path, children }) => (
+const SidebarMenuItemLink: React.FC<SidebarMenuItemLinkProps> = ({ path, children }) => (
   <NavLink
+    activeClassName="bg-gray-900 hover:text-gray-200"
     className={classnames(
       `group flex flex-grow items-center`,
       'text-gray-200 hover:text-white hover:bg-gray-900',
       'transition duration-150 p-3',
-      isActive && 'bg-gray-900 hover:text-gray-200',
     )}
     to={path}
     exact
@@ -33,9 +33,12 @@ export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = React.memo(
         <SidebarMenuItemLink isActive={isActive} path={path}>
           {Icon && (
             <Icon
-              className={`h-6 w-6 mr-3 text-gray-600 group-hover:text-indigo-600 ${
-                isActive && 'text-indigo-600'
-              }`}
+              className={classnames(
+                'h-6 w-6 mr-3',
+                'group-hover:text-indigo-600',
+                isActive && 'text-indigo-600',
+                !isActive && 'text-gray-600',
+              )}
             />
           )}
           <span className="text-sm font-medium">{title}</span>
