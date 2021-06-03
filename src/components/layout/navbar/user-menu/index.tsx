@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, Transition } from '@headlessui/react';
 import classnames from 'classnames';
 
+import { Avatar } from '@app/components/ui';
 import { useAuth } from '@lib/auth';
 
 export const UserMenu: React.FC = React.memo(() => {
@@ -15,15 +16,7 @@ export const UserMenu: React.FC = React.memo(() => {
         <>
           <div>
             <Menu.Button className="inline-flex justify-center items-center p-3 focus:outline-none">
-              {user?.photoURL && (
-                <img
-                  alt="User"
-                  className="w-8 h-8 rounded-full"
-                  height="32"
-                  src={user?.photoURL}
-                  width="32"
-                />
-              )}
+              {user?.photoURL && <Avatar alt="User Profile" size="sm" src={user?.photoURL} />}
               <span className="truncate ml-2 text-sm font-medium hidden sm:inline">
                 {user?.displayName}
               </span>
