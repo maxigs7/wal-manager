@@ -14,12 +14,13 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
 const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      size = 'REGULAR',
-      color = 'LIGHTBLUE',
-      rounded = false,
-      outlined = false,
-      className,
       children,
+      className,
+      color = 'LIGHTBLUE',
+      disabled,
+      outlined = false,
+      rounded = false,
+      size = 'REGULAR',
       type = 'button',
       ...htmlAttributes
     },
@@ -43,12 +44,14 @@ const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>
       Sizes[size],
       outlined && OutlineColors[color],
       !outlined && Colors[color],
+      disabled && 'opacity-60 cursor-not-allowed',
     ];
 
     return (
       <button
         {...htmlAttributes}
         className={classnames(className, ...classes)}
+        disabled={disabled}
         ref={ref}
         type={type}
       >
