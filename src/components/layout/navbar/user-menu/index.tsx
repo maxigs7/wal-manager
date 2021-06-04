@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, Transition } from '@headlessui/react';
-import classnames from 'classnames';
 
 import { Avatar } from '@app/components/ui';
 import { useAuth } from '@lib/auth';
+import classnames from 'classnames';
 
 export const UserMenu: React.FC = React.memo(() => {
   const { user, signOut } = useAuth();

@@ -2,6 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "@app/api": ["./api"],
+      "@app/api/*": ["./api/*"],
       "@app/assets": ["./assets"],
       "@app/assets/*": ["./assets/*"],
       "@app/common": ["./common"],
@@ -21,7 +23,8 @@
       "@app/utils": ["./utils"],
       "@app/utils/*": ["./utils/*"],
       "@lib": ["./lib"],
-      "@lib/*": ["./lib/*"]
+      "@lib/*": ["./lib/*"],
+      "classnames": ["./lib/classnames"]
     }
   }
 }

@@ -1,8 +1,7 @@
 import React from 'react';
 
-import classnames from 'classnames';
-
 import { ButtonSizes, Colors } from '@app/common/tailwind-constants';
+import classnames from 'classnames';
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   size?: ButtonSizes;
@@ -69,7 +68,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={classnames(className, commonClasses, sizeClasses, btnClasses)}
+      className={classnames(className, ...commonClasses, ...sizeClasses, ...btnClasses)}
       {...htmlAttributes}
     >
       {children}
