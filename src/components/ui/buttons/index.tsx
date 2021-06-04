@@ -1,79 +1,61 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-import { ButtonSizes, Colors } from '@app/common/tailwind-constants';
 import classnames from 'classnames';
 
+import { ButtonColors, ButtonSizes, Colors, OutlineColors, Sizes } from './types';
+
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
-  size?: ButtonSizes;
-  color?: Colors;
+  size?: keyof ButtonSizes;
+  color?: keyof ButtonColors;
   rounded?: boolean;
   outlined?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  size = ButtonSizes.Small,
-  color: bgColor = 'lightBlue',
-  rounded = false,
-  outlined = false,
-  className,
-  children,
-  ...htmlAttributes
-}) => {
-  const commonClasses = [
-    'outline-none',
-    'focus:outline-none',
-    'uppercase',
-    'font-bold',
-    'ease-linear',
-    'transition-all',
-    'duration-150',
-    'inline-flex',
-    'items-center',
-    'justify-center',
-    rounded && 'rounded-full',
-    !rounded && 'rounded',
-  ];
-  const sizeClasses = [
-    size === ButtonSizes.Small && `px-4 py-2`,
-    size === ButtonSizes.Regular && `px-6 py-3`,
-    size === ButtonSizes.Large && `px-8 py-3`,
-    `text-${size}`,
-  ];
-
-  let btnClasses = [];
-
-  if (outlined) {
-    btnClasses = [
-      'bg-transparent',
-      'border',
-      'border-solid',
-      `border-${bgColor}-500`,
-      `hover:bg-${bgColor}-500`,
-      `active:bg-${bgColor}-600`,
-      'hover:text-white',
-      `text-${bgColor}-500`,
+const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      size = 'REGULAR',
+      color = 'LIGHTBLUE',
+      rounded = false,
+      outlined = false,
+      className,
+      children,
+      type = 'button',
+      ...htmlAttributes
+    },
+    ref,
+  ) => {
+    const classes = [
+      'outline-none',
+      'focus:outline-none',
+      'uppercase',
+      'font-bold',
+      'ease-linear',
+      'transition-all',
+      'duration-150',
+      'inline-flex',
+      'items-center',
+      'justify-center',
+      rounded && 'rounded-full',
+      !rounded && 'rounded',
+      outlined && 'border border-solid',
+      !outlined && 'shadow hover:shadow-md',
+      Sizes[size],
+      outlined && OutlineColors[color],
+      !outlined && Colors[color],
     ];
-  } else {
-    btnClasses = [
-      'shadow hover:shadow-md',
-      bgColor === 'white' && 'bg-white',
-      bgColor === 'black' && 'bg-black',
-      (bgColor === 'white' || bgColor === 'black') && 'active:bg-gray-300',
-      bgColor !== 'white' && bgColor !== 'black' && `bg-${bgColor}-500`,
-      bgColor !== 'white' && bgColor !== 'black' && `active:bg-${bgColor}-600`,
-      bgColor !== 'white' && 'text-white',
-      bgColor === 'white' && 'text-blueGray-600',
-    ];
-  }
 
-  return (
-    <button
-      className={classnames(className, ...commonClasses, ...sizeClasses, ...btnClasses)}
-      {...htmlAttributes}
-    >
-      {children}
-    </button>
-  );
-};
+    return (
+      <button
+        {...htmlAttributes}
+        className={classnames(className, ...classes)}
+        ref={ref}
+        type={type}
+      >
+        {children}
+      </button>
+    );
+  },
+);
 
 export default Button;
