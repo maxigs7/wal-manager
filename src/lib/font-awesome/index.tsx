@@ -1,7 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 
-import * as FasIcons from './fas';
+import { CategoryIcons, CoreIcons } from './fas';
 
 export const startFontAwesome = (): void => {
-  library.add(FasIcons);
+  library.add(...CoreIcons, ...CategoryIcons);
 };
