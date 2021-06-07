@@ -9,8 +9,8 @@ const styles = {
   icon: (isActive: boolean) =>
     classnames(
       'h-6 w-6 mr-3',
-      'group-hover:text-indigo-600',
-      isActive && 'text-indigo-600',
+      'group-hover:text-primary-600',
+      isActive && 'text-primary-600',
       !isActive && 'text-gray-600',
     ),
   link: classnames(

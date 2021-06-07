@@ -1,7 +1,7 @@
 import React from 'react';
 
-// import { CardContainer } from '@app/components/ui';
-// import CategoriesListContainer from '@app/containers/categories/list';
+import { CardContainer, Switch } from '@app/components/ui';
+import CategoriesListContainer from '@app/containers/categories/list';
 
 const CategoriesPage: React.FC = () => {
   // Subscribe to Firestore document
@@ -16,9 +16,10 @@ const CategoriesPage: React.FC = () => {
     <>
       <h1>Categories</h1>
       <p>Categories list here</p>
-      {/* <CardContainer>
+      <CardContainer>
+        <Switch />
         <CategoriesListContainer />
-      </CardContainer> */}
+      </CardContainer>
     </>
   );
 };
