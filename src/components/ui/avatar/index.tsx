@@ -1,6 +1,9 @@
 import React from 'react';
 
+import DefaultProfileImg from '@app/assets/images/default-profile.png';
 import classnames from '@lib/classnames';
+
+import ImageWithFallback from '../image-with-fallback';
 
 export enum AvatarSizes {
   SM = 'sm',
@@ -23,7 +26,13 @@ export interface AvatarProps extends React.ComponentPropsWithoutRef<'img'> {
 }
 
 const Avatar: React.FC<AvatarProps> = ({ size = AvatarSizes.MD, className, ...htmlAttributes }) => {
-  return <img className={classnames(styles.image(size), className)} {...htmlAttributes} />;
+  return (
+    <ImageWithFallback
+      className={classnames(styles.image(size), className)}
+      fallbackSrc={DefaultProfileImg}
+      {...htmlAttributes}
+    />
+  );
 };
 
 export default Avatar;
