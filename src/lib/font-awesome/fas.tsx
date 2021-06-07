@@ -73,6 +73,7 @@ import {
   faPiggyBank,
   faPizzaSlice,
   faPlane,
+  faPlus,
   faPoo,
   faRocket,
   faRunning,
@@ -96,7 +97,7 @@ import {
   faWineGlassAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
-export const CoreIcons = [faArrowLeft, faBars, faChevronDown, faListAlt, faTachometerAlt];
+export const CoreIcons = [faArrowLeft, faBars, faChevronDown, faListAlt, faPlus, faTachometerAlt];
 
 export const CategoryIcons = [
   faAmbulance,

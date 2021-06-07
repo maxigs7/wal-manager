@@ -16,11 +16,11 @@ const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>
     {
       children,
       className,
-      color = 'LIGHTBLUE',
+      color = ButtonColors.PRIMARY,
       disabled,
       outlined = false,
       rounded = false,
-      size = 'REGULAR',
+      size = ButtonSizes.LARGE,
       type = 'button',
       ...htmlAttributes
     },
@@ -41,7 +41,7 @@ const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>
       !rounded && 'rounded',
       outlined && 'border border-solid',
       !outlined && 'shadow hover:shadow-md',
-      Sizes[size],
+      Sizes[size](rounded),
       outlined && OutlineColors[color],
       !outlined && Colors[color],
       disabled && 'opacity-60 cursor-not-allowed',

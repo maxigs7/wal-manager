@@ -9,7 +9,8 @@ import { useAuth } from '@lib/auth';
 
 const styles = {
   navbar: 'border-t',
-  navItem: 'inline-block px-8 py-4 border-r hover:bg-primary-600 hover:text-white',
+  navItem:
+    'inline-block px-8 py-4 border-r hover:bg-primary-600 hover:text-white active:bg-primary-800 active:text-white',
   navItemActive: 'bg-primary-600 text-white',
   profileCard: 'flex align-center p-5',
   profileImage: 'mr-5 w-24 h-24',
@@ -41,14 +42,14 @@ const SettingsPage: React.FC = () => {
             className={styles.navItem}
             to="/settings/profile"
           >
-            Profile
+            Perfil
           </NavLink>
           <NavLink
             activeClassName={styles.navItemActive}
             className={styles.navItem}
             to="/settings/categories"
           >
-            Categories
+            Categorias
           </NavLink>
         </div>
       </CardContainer>

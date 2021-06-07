@@ -1,3 +1,5 @@
+import classnames from '@lib/classnames';
+
 export enum ButtonColors {
   BLACK = 'BLACK',
   WHITE = 'WHITE',
@@ -11,6 +13,7 @@ export enum ButtonColors {
   PURPLE = 'PURPLE',
   PINK = 'PINK',
   INDIGO = 'INDIGO',
+  PRIMARY = 'PRIMARY',
 }
 
 export enum ButtonSizes {
@@ -32,6 +35,7 @@ export const Colors: { [key in ButtonColors | string]: string } = {
   [ButtonColors.PURPLE]: 'bg-purple-500 text-white active:bg-purple-600',
   [ButtonColors.PINK]: 'bg-pink-500 text-white active:bg-pink-600',
   [ButtonColors.INDIGO]: 'bg-indigo-500 text-white active:bg-indigo-600',
+  [ButtonColors.PRIMARY]: 'bg-primary-600 text-white active:bg-primary-700',
 };
 
 export const OutlineColors: { [key in ButtonColors | string]: string } = {
@@ -58,10 +62,15 @@ export const OutlineColors: { [key in ButtonColors | string]: string } = {
     'bg-transparent text-pink-500 border-pink-500 hover:text-white hover:bg-pink-500 active:border-pink-600 active:bg-pink-600',
   [ButtonColors.INDIGO]:
     'bg-transparent text-indigo-500 border-indigo-500 hover:text-white hover:bg-indigo-500 active:border-indigo-600 active:bg-indigo-600',
+  [ButtonColors.PRIMARY]:
+    'bg-transparent text-primary-600 border-primary-600 hover:text-white hover:bg-primary-600 active:border-primary-700 active:bg-primary-700',
 };
 
-export const Sizes: { [key in ButtonSizes | string]: string } = {
-  [ButtonSizes.SMALL]: 'px-6 py-1 text-sm',
-  [ButtonSizes.REGULAR]: 'px-6 py-2',
-  [ButtonSizes.LARGE]: 'px-6 py-3 text-lg',
+export const Sizes: { [key in ButtonSizes | string]: (rounded: boolean) => string } = {
+  [ButtonSizes.SMALL]: (rounded: boolean) =>
+    classnames('text-sm', !rounded && 'px-6 py-1', rounded && 'p-2'),
+  [ButtonSizes.REGULAR]: (rounded: boolean) =>
+    classnames(!rounded && 'px-6 py-2', rounded && 'p-3'),
+  [ButtonSizes.LARGE]: (rounded: boolean) =>
+    classnames('text-lg', !rounded && 'px-6 py-3', rounded && 'p-4'),
 };
