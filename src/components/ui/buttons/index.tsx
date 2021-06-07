@@ -5,8 +5,8 @@ import classnames from 'classnames';
 import { ButtonColors, ButtonSizes, Colors, OutlineColors, Sizes } from './types';
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
-  size?: keyof ButtonSizes;
-  color?: keyof ButtonColors;
+  size?: ButtonSizes;
+  color?: ButtonColors;
   rounded?: boolean;
   outlined?: boolean;
 }
