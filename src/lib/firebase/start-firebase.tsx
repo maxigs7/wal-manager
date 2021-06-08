@@ -9,6 +9,7 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_STORAGE_BUCKET,
 } from './config';
+import setupEmulator from './setup-emulator';
 
 export const startFirebase = (): void => {
   const firebaseConfig = {
@@ -30,5 +31,10 @@ export const startFirebase = (): void => {
     //     firebase.performance();
     //   }
     // }
+  }
+
+  // eslint-disable-next-line no-restricted-globals
+  if (location.hostname === 'localhost') {
+    setupEmulator();
   }
 };
