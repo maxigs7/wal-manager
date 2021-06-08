@@ -8,9 +8,9 @@ import { adminRoutes } from '@app/routes/admin.route';
 import PrivateRoute from '@app/routes/private.route';
 
 const styles = {
-  content: 'px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto bg-gray-100',
+  content: 'px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto ',
   screen: 'flex h-screen overflow-hidden',
-  wrapper: 'relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden',
+  wrapper: 'relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-gray-100',
 };
 
 const AdminLayout: React.FC = () => (

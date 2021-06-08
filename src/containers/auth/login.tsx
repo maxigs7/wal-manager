@@ -1,5 +1,3 @@
-import { useMutation } from 'react-query';
-
 import { ReactComponent as GoogleLogo } from '@app/assets/images/google.svg';
 import { Button } from '@app/components/ui';
 import { ButtonColors } from '@app/components/ui/buttons/types';
@@ -10,18 +8,13 @@ export const LoginContainer: React.FC = () => {
   const { push } = useRouter();
   const { signInWithGoogle } = useAuth();
 
-  const { mutate: signIn } = useMutation(() => signInWithGoogle(), {
-    onError: (_error) => {
-      // TODO: SHOW TOAST
-      console.error(_error);
-    },
-    onSuccess: () => {
+  const signInHandler = async () => {
+    try {
+      await signInWithGoogle();
       push('/');
-    },
-  });
-
-  const signInHandler = () => {
-    signIn();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

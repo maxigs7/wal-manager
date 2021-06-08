@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 
 import 'tailwindcss/tailwind.css';
@@ -11,20 +10,16 @@ import { startFontAwesome } from '@lib/font-awesome';
 
 import App from './App';
 
-const queryClient = new QueryClient();
-
 startFirebase();
 startFontAwesome();
 
 ReactDOM.render(
   <BrowserRouter>
-    <QueryClientProvider client={queryClient}>
-      <React.StrictMode>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </React.StrictMode>
-    </QueryClientProvider>
+    <React.StrictMode>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root'),
 );
