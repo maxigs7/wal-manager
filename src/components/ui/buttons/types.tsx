@@ -1,6 +1,7 @@
 import classnames from '@lib/classnames';
 
 export enum ButtonColors {
+  TRANSPARENT = 'TRANSPARENT',
   BLACK = 'BLACK',
   WHITE = 'WHITE',
   GRAY = 'GRAY',
@@ -16,6 +17,12 @@ export enum ButtonColors {
   PRIMARY = 'PRIMARY',
 }
 
+export enum ButtonShapes {
+  CIRCLE = 'CIRCLE',
+  ROUNDED = 'ROUNDED',
+  SQUARE = 'NOROUNDED',
+}
+
 export enum ButtonSizes {
   SMALL = 'SMALL',
   REGULAR = 'REGULAR',
@@ -23,6 +30,7 @@ export enum ButtonSizes {
 }
 
 export const Colors: { [key in ButtonColors | string]: string } = {
+  [ButtonColors.TRANSPARENT]: '',
   [ButtonColors.BLACK]: 'bg-black text-white active:bg-gray-300',
   [ButtonColors.WHITE]: 'bg-white text-blueGray-600 active:bg-gray-300',
   [ButtonColors.GRAY]: 'bg-gray-500 text-white active:bg-gray-600',
@@ -39,6 +47,7 @@ export const Colors: { [key in ButtonColors | string]: string } = {
 };
 
 export const OutlineColors: { [key in ButtonColors | string]: string } = {
+  [ButtonColors.TRANSPARENT]: '',
   [ButtonColors.BLACK]:
     'bg-transparent text-black border-black hover:text-white hover:bg-black active:bg-black',
   [ButtonColors.WHITE]: '',
@@ -64,6 +73,12 @@ export const OutlineColors: { [key in ButtonColors | string]: string } = {
     'bg-transparent text-indigo-500 border-indigo-500 hover:text-white hover:bg-indigo-500 active:border-indigo-600 active:bg-indigo-600',
   [ButtonColors.PRIMARY]:
     'bg-transparent text-primary-600 border-primary-600 hover:text-white hover:bg-primary-600 active:border-primary-700 active:bg-primary-700',
+};
+
+export const Shapes: { [key in ButtonShapes | string]: string } = {
+  [ButtonShapes.CIRCLE]: 'rounded-full',
+  [ButtonShapes.SQUARE]: '',
+  [ButtonShapes.ROUNDED]: 'rounded',
 };
 
 export const Sizes: { [key in ButtonSizes | string]: (rounded: boolean) => string } = {
