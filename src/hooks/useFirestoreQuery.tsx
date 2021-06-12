@@ -69,6 +69,7 @@ export function useFirestoreQuery<T>(query: any): IFirestoreQueryState<T> {
   const reducer = useMemo(() => createReducer<T>(), []);
   const [state, dispatch] = useReducer(reducer, initialState);
   const isQuery = useCallback(() => query instanceof Query, [query]);
+  const isCollection = useCallback((response) => response instanceof QuerySnapshot, []);
 
   // Get cached Firestore query object with useMemoCompare (https://usehooks.com/useMemoCompare)
   // Needed because firestore.collection("profiles").doc(uid) will always being a new object reference
@@ -80,8 +81,6 @@ export function useFirestoreQuery<T>(query: any): IFirestoreQueryState<T> {
     if (isQuery()) return queryEqual(query, prevQuery);
     return refEqual(query, prevQuery);
   });
-
-  const isCollection = useCallback((response) => response instanceof QuerySnapshot, []);
 
   // Get doc data and merge doc.id
   const getDocData = useCallback(
