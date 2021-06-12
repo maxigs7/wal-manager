@@ -2,13 +2,23 @@ import React, { useMemo, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Category, useCategories } from '@app/api/categories';
+import { Category, useCategoriesByType } from '@app/api/categories';
+import { CategoryType } from '@app/api/common';
 import { CategoriesList, CategoryTitle, SubCategoryList } from '@app/components/category';
+import { CategoriesEmpty } from '@app/components/category/list/empty';
+import { CategoriesSkeleton } from '@app/components/category/list/skeleton';
 import { Button, CardContainer } from '@app/components/ui';
-import { ButtonSizes } from '@app/components/ui/buttons/types';
+import { ButtonColors, ButtonShapes, ButtonSizes } from '@app/components/ui/buttons/types';
 import { FirestoreStatus } from '@app/hooks/useFirestoreQuery';
+import classnames from '@lib/classnames';
 
 const styles = {
+  buttonTypes: (isActive: boolean) =>
+    classnames(
+      'flex-1 p-5 hover:border-b-2 hover:border-primary-500',
+      isActive && 'border-b-2 border-primary-500',
+    ),
+  categoryTypes: 'flex',
   createButton: '',
   subcategories: 'md:col-span-2 bg-gray-200',
   title: 'text-2xl flex-1',
@@ -17,9 +27,11 @@ const styles = {
 };
 
 const CategoriesPage: React.FC = () => {
-  // Subscribe to Firestore document
-  const { data: categories, status } = useCategories();
+  // States
+  const [currentCategoryType, setCategoryType] = useState<CategoryType>(CategoryType.Expense);
   const [selectedCategory, setSelectedCategory] = useState<Category>();
+  // Firestore
+  const { data: categories, status } = useCategoriesByType(currentCategoryType);
   const isLoading = useMemo(() => status === FirestoreStatus.LOADING, [status]);
 
   console.log('CategoriesPage rendering...');
@@ -34,16 +46,44 @@ const CategoriesPage: React.FC = () => {
           <div>
             <div className={styles.titleBar}>
               <h2 className={styles.title}>Categorias</h2>
-              <Button className={styles.createButton} size={ButtonSizes.SMALL} rounded>
+              <Button
+                className={styles.createButton}
+                shape={ButtonShapes.CIRCLE}
+                size={ButtonSizes.SMALL}
+              >
                 <FontAwesomeIcon icon="plus" fixedWidth />
               </Button>
             </div>
-            <CategoriesList
-              categories={categories || []}
-              isLoading={isLoading}
-              onSelected={setSelectedCategory}
-              selectedCategory={selectedCategory}
-            />
+            <div className={styles.categoryTypes}>
+              <Button
+                className={styles.buttonTypes(currentCategoryType === CategoryType.Expense)}
+                color={ButtonColors.TRANSPARENT}
+                onClick={() => setCategoryType(CategoryType.Expense)}
+                shape={ButtonShapes.SQUARE}
+              >
+                Gastos
+              </Button>
+              <Button
+                className={styles.buttonTypes(currentCategoryType === CategoryType.Income)}
+                color={ButtonColors.TRANSPARENT}
+                onClick={() => setCategoryType(CategoryType.Income)}
+                shape={ButtonShapes.SQUARE}
+              >
+                Ingresos
+              </Button>
+            </div>
+
+            {status === FirestoreStatus.LOADING && <CategoriesSkeleton />}
+            {status === FirestoreStatus.SUCCESS && categories && !categories.length && (
+              <CategoriesEmpty />
+            )}
+            {status === FirestoreStatus.SUCCESS && categories && !!categories.length && (
+              <CategoriesList
+                categories={categories}
+                onSelected={setSelectedCategory}
+                selectedCategory={selectedCategory}
+              />
+            )}
           </div>
 
           <div className={styles.subcategories}>

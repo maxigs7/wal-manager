@@ -6,7 +6,7 @@ import { collection, getFirestore, query, where } from 'firebase/firestore';
 import { IFirestoreQueryState, useFirestoreQuery } from '@app/hooks/useFirestoreQuery';
 import { useAuth } from '@lib/auth';
 
-import { BaseModel, TransactionType } from '../common';
+import { BaseModel, CategoryType } from '../common';
 
 type CategoryBase = {
   isActive: boolean;
@@ -17,18 +17,25 @@ export type SubCategory = BaseModel & CategoryBase;
 
 export type Category = BaseModel &
   CategoryBase & {
-    transactionType: TransactionType;
+    categoryType: CategoryType;
     color: string;
     icon: IconName;
     subCategories?: SubCategory[];
     userId: string;
   };
 
-export const useCategories = (): IFirestoreQueryState<Category[]> => {
+export const useCategoriesByType = (
+  categoryType: CategoryType,
+): IFirestoreQueryState<Category[]> => {
   const { user } = useAuth();
   // Subscribe to Firestore document
   const { data, status, error } = useFirestoreQuery<Category[]>(
-    user && query(collection(getFirestore(), 'categories'), where('userId', '==', user.uid)),
+    user &&
+      query(
+        collection(getFirestore(), 'categories'),
+        where('userId', '==', user.uid),
+        where('categoryType', '==', categoryType),
+      ),
   );
 
   return useMemo(

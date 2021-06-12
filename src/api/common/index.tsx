@@ -7,3 +7,8 @@ export enum TransactionType {
   Income = 'incomes',
   Transfer = 'transfer',
 }
+
+export enum CategoryType {
+  Expense = 'expenses',
+  Income = 'incomes',
+}
