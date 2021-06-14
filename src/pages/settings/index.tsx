@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { NavLink, Redirect, Switch } from 'react-router-dom';
 
 import DefaultProfileImg from '@app/assets/images/default-profile.png';
-import { CardContainer, ImageWithFallback } from '@app/components/ui';
+import { CardContainer, ImageWithFallback } from '@app/modules/common';
 import PrivateRoute from '@app/routes/private.route';
 import { settingsRoutes } from '@app/routes/settings.route';
 import { useAuth } from '@lib/auth';

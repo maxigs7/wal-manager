@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, Transition } from '@headlessui/react';
 
-import { Avatar } from '@app/components/ui';
+import { Avatar } from '@app/modules/common';
 import { useAuth } from '@lib/auth';
 import classnames from '@lib/classnames';
 

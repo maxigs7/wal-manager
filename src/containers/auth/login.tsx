@@ -1,7 +1,6 @@
 import { ReactComponent as GoogleLogo } from '@app/assets/images/google.svg';
-import { Button } from '@app/components/ui';
-import { ButtonColors } from '@app/components/ui/buttons/types';
 import { useRouter } from '@app/hooks/useRouter';
+import { Button, ButtonColors } from '@app/modules/common';
 import { useAuth } from '@lib/auth';
 
 export const LoginContainer: React.FC = () => {
