@@ -5,7 +5,7 @@ import { PageLoader } from '@app/modules/common';
 import { defaultRoutes } from '@app/routes/default.route';
 
 const DefaultLayout: React.FC = () => (
-  <section className="bg-indigo-600 h-screen">
+  <section className="bg-primary-900 h-screen">
     <div className="mx-auto flex justify-center lg:items-center h-full">
       <Suspense fallback={<PageLoader />}>
         <Switch>
