@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { NavLink, Redirect, Switch } from 'react-router-dom';
 
 import DefaultProfileImg from '@app/assets/images/default-profile.png';
-import { CardContainer, ImageWithFallback } from '@app/modules/common';
+import { CardContainer, HeaderTags, ImageWithFallback, Text, Title } from '@app/modules/common';
 import PrivateRoute from '@app/routes/private.route';
 import { settingsRoutes } from '@app/routes/settings.route';
 import { useAuth } from '@lib/auth';
@@ -32,8 +32,8 @@ const SettingsPage: React.FC = () => {
             />
           )}
           <div className={styles.profileInfo}>
-            <h2>{user?.displayName}</h2>
-            <p>{user?.email}</p>
+            <Title tag={HeaderTags.H3}>{user?.displayName}</Title>
+            <Text>{user?.email}</Text>
           </div>
         </div>
         <div className={styles.navbar}>

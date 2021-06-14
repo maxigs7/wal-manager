@@ -8,3 +8,4 @@ export { default as ImageWithFallback } from './image-with-fallback';
 export * from './loaders';
 export { default as SkeletonLine } from './skeleton';
 export { default as Switch } from './switch';
+export * from './typography';

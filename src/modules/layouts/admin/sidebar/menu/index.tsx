@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { HeaderTags, Title } from '@app/modules/common';
+
 import { SidebarMenuItem } from './item';
 import { mainRoutes } from './menu-data';
 
@@ -10,7 +12,9 @@ const styles = {
 
 export const SidebarMenu: React.FC<{ pathname: string }> = React.memo(({ pathname }) => (
   <>
-    <h3 className={styles.title}>Main</h3>
+    <Title className={styles.title} tag={HeaderTags.H6}>
+      Principal
+    </Title>
     <ul className={styles.menuWrapper}>
       {mainRoutes.map((item, index) => (
         <SidebarMenuItem {...item} isActive={pathname === item.path} key={index} />

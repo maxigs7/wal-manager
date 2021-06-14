@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { Text, Title } from '@app/modules/common';
+
 const ProfilePage: React.FC = () => (
   <>
-    <h1>Profile</h1>
-    <p>Profile</p>
+    <Title>Profile</Title>
+    <Text>Profile</Text>
   </>
 );
 

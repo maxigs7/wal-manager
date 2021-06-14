@@ -1,4 +1,5 @@
 import { LoginContainer } from '@app/containers/auth/login';
+import { HeaderTags, Title } from '@app/modules/common';
 
 const LoginPage: React.FC = () => (
   <div className="w-full sm:w-4/6 md:w-3/6 lg:w-4/12 xl:w-3/12 text-white py-12 px-2 sm:px-0 flex flex-col text-center">
@@ -20,12 +21,17 @@ const LoginPage: React.FC = () => (
           />
         </g>
       </svg>
-      <h2 className="text-4xl leading-tight pt-8">Wal Manager</h2>
+      <Title className="mt-8" tag={HeaderTags.H2}>
+        Wal Manager
+      </Title>
     </div>
 
-    <h3 className="mt-16 mx-2 text-2xl sm:text-3xl xl:text-2xl font-bold leading-tight">
+    <Title
+      className="mt-16 mx-2 text-2xl sm:text-3xl xl:text-2xl font-bold leading-tight"
+      tag={HeaderTags.H3}
+    >
       Login To Your Account
-    </h3>
+    </Title>
 
     <LoginContainer />
   </div>
