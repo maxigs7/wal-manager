@@ -16,6 +16,8 @@
       "@app/hooks/*": ["./hooks/*"],
       "@app/layouts": ["./layouts"],
       "@app/layouts/*": ["./layouts/*"],
+      "@app/modules": ["./modules"],
+      "@app/modules/*": ["./modules/*"],
       "@app/routes": ["./routes"],
       "@app/routes/*": ["./routes/*"],
       "@app/pages": ["./pages"],

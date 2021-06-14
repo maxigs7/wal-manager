@@ -1,22 +1,15 @@
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Switch } from 'react-router';
 import { Route } from 'react-router-dom';
 
-import { PageLoader } from '@app/components/loaders';
+import { PageLoader } from './modules/common';
+import { LazyAdminLayout, LazyDefaultLayout } from './modules/layouts';
 
 const App: React.FC = () => (
   <Suspense fallback={<PageLoader />}>
     <Switch>
-      <Route
-        component={lazy(
-          () => import(/* webpackChunkName: 'default.layout' */ '@app/layouts/default'),
-        )}
-        path="/auth"
-      />
-      <Route
-        component={lazy(() => import(/* webpackChunkName: 'admin.layout' */ '@app/layouts/admin'))}
-        path="/"
-      />
+      <Route component={LazyDefaultLayout} path="/auth" />
+      <Route component={LazyAdminLayout} path="/" />
     </Switch>
   </Suspense>
 );

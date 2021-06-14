@@ -54,6 +54,7 @@ import {
   faHandHoldingUsd,
   faHome,
   faHospital,
+  faInbox,
   faKey,
   faLandmark,
   faLaptop,
@@ -97,7 +98,15 @@ import {
   faWineGlassAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
-export const CoreIcons = [faArrowLeft, faBars, faChevronDown, faListAlt, faPlus, faTachometerAlt];
+export const CoreIcons = [
+  faArrowLeft,
+  faBars,
+  faChevronDown,
+  faInbox,
+  faListAlt,
+  faPlus,
+  faTachometerAlt,
+];
 
 export const CategoryIcons = [
   faAmbulance,
