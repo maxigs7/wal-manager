@@ -1,0 +1,17 @@
+import React from 'react';
+
+import classnames from '@lib/classnames';
+
+const styles = {
+  wrapper: 'bg-gray-200 text-gray-600',
+};
+
+export const ListWrapper: React.FC<React.ComponentPropsWithoutRef<'div'>> = ({
+  children,
+  className,
+  ...props
+}) => (
+  <div className={classnames(styles.wrapper, className)} {...props}>
+    {children}
+  </div>
+);

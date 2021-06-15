@@ -9,13 +9,17 @@ import { TypesButtons } from '../types-buttons';
 
 interface IProps {
   categories: Category[];
-  categorySelected: Category;
+  categorySelected?: Category;
   categoryTypeSelected: CategoryType;
   isLoading: boolean;
   onCategorySelected: (category: Category) => void;
   onCategoryTypeSelected: (type: CategoryType) => void;
   onCreate: () => void;
 }
+
+const styles = {
+  panel: 'border-r',
+};
 
 const Panel: React.FC<IProps> = ({
   categories = [],
@@ -27,7 +31,7 @@ const Panel: React.FC<IProps> = ({
   onCreate,
 }) => {
   return (
-    <div>
+    <div className={styles.panel}>
       <TitleBar onCreate={onCreate} />
       <TypesButtons onSelected={onCategoryTypeSelected} selectedType={categoryTypeSelected} />
 

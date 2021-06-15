@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, ButtonShapes, ButtonSizes, HeaderTags, Title } from '@app/modules/common';
 
 const styles = {
-  createButton: '',
+  createButton: 'h-8 w-8',
   title: 'flex-1',
-  titleBar: 'p-5 flex border-b',
+  titleBar: 'p-5 flex border-b items-center',
 };
 
 interface IProps {

@@ -1,7 +1,5 @@
-import { useMemo } from 'react';
-
 import classnames from '@lib/classnames';
-import { SizeAlreadyExists } from '@lib/tailwind-css/util';
+import { containsTextSize } from '@lib/tailwind-css/util';
 
 export enum TextTags {
   P = 'p',
@@ -16,17 +14,30 @@ const WeightMap = {
 };
 
 interface IProps extends React.ComponentPropsWithRef<any> {
-  tag?: TextTags;
   color?: string;
+  noStyled?: boolean;
+  tag?: TextTags;
 }
 
-const Text: React.FC<IProps> = ({ tag = TextTags.P, className = '', children, ...props }) => {
+const Text: React.FC<IProps> = ({
+  children,
+  className = '',
+  noStyled: noStyles = false,
+  tag = TextTags.P,
+  ...props
+}) => {
   const Component = tag;
-  const size = useMemo(() => (SizeAlreadyExists(className) ? '' : 'text-base'), [className, tag]);
+
   return (
     <Component
       {...props}
-      className={classnames(className, size, 'leading-relaxed mt-0 mb-4', WeightMap[tag])}
+      className={classnames(
+        className,
+        !containsTextSize(className) && 'text-base',
+        'leading-relaxed',
+        !noStyles && 'mt-0 mb-4',
+        WeightMap[tag],
+      )}
     >
       {children}
     </Component>

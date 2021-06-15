@@ -87,6 +87,7 @@ import {
   faSuitcaseRolling,
   faTabletAlt,
   faTachometerAlt,
+  faTags,
   faTaxi,
   faTheaterMasks,
   faTrophy,
@@ -106,6 +107,7 @@ export const CoreIcons = [
   faListAlt,
   faPlus,
   faTachometerAlt,
+  faTags,
 ];
 
 export const CategoryIcons = [

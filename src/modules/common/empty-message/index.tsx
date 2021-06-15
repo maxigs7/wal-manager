@@ -1,18 +1,26 @@
 import React from 'react';
 
+import { IconProp, SizeProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import classnames from '@lib/classnames';
 
+interface IProps extends React.ComponentPropsWithRef<'div'> {
+  icon?: IconProp;
+  iconSize?: SizeProp;
+}
+
 const styles = {
-  wrapper: 'flex flex-col justify-center items-center h-full w-full',
+  wrapper: 'flex flex-col justify-center items-center h-full',
 };
 
-const Empty: React.FC<React.ComponentPropsWithRef<any>> = React.memo(({ children, className }) => (
-  <div className={classnames(styles.wrapper, className)}>
-    <FontAwesomeIcon icon="inbox" size="5x" />
-    {children}
-  </div>
-));
+const EmptyMessage: React.FC<IProps> = React.memo(
+  ({ icon = 'inbox', iconSize = '5x', children, className, ...props }) => (
+    <div className={classnames(styles.wrapper, className)} {...props}>
+      <FontAwesomeIcon icon={icon} size={iconSize} />
+      {children}
+    </div>
+  ),
+);
 
-export default Empty;
+export default EmptyMessage;

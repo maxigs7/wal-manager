@@ -14,5 +14,5 @@ const TextSizes = [
   'text-9xl',
 ];
 
-export const SizeAlreadyExists = (classNames: string): boolean =>
+export const containsTextSize = (classNames: string): boolean =>
   classNames.split(' ').some((value) => TextSizes.some((size) => size === value));

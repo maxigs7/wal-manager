@@ -1,7 +1,5 @@
-import { useMemo } from 'react';
-
 import classnames from '@lib/classnames';
-import { SizeAlreadyExists } from '@lib/tailwind-css/util';
+import { containsTextSize } from '@lib/tailwind-css/util';
 
 export enum HeaderTags {
   H1 = 'h1',
@@ -28,15 +26,13 @@ interface IProps extends React.ComponentPropsWithRef<any> {
 }
 
 const Title: React.FC<IProps> = ({
-  tag = HeaderTags.H1,
-  className = '',
   children,
+  className = '',
   noStyled = false,
+  tag = HeaderTags.H1,
   ...props
 }) => {
   const Component = tag;
-  const size = useMemo(() => (SizeAlreadyExists(className) ? '' : SizeMap[tag]), [className, tag]);
-
   return (
     <Component
       {...props}
@@ -44,7 +40,7 @@ const Title: React.FC<IProps> = ({
         className,
         'font-normal leading-normal',
         !noStyled && 'mt-0 mb-2',
-        size,
+        !containsTextSize(className) && SizeMap[tag],
       )}
     >
       {children}
