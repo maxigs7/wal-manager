@@ -43,7 +43,7 @@ const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>
       disabled = false,
       outlined = false,
       shape = ButtonShapes.ROUNDED,
-      size = ButtonSizes.LARGE,
+      size = ButtonSizes.REGULAR,
       type = 'button',
       ...htmlAttributes
     },

@@ -4,6 +4,7 @@ import { Category, useCategoriesByType } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 import { FirestoreStatus } from '@app/hooks/useFirestoreQuery';
 import { CategoryPanel } from '@app/modules/category';
+import { GenericDialog } from '@app/modules/common';
 import { SubCategoryPanel } from '@app/modules/sub-category';
 
 const styles = {
@@ -17,7 +18,7 @@ const CategoriesPage: React.FC = () => {
     CategoryType.Expense,
   );
   const [selectedCategory, setSelectedCategory] = useState<Category | undefined>();
-
+  const [isOpen, setIsOpen] = useState(false);
   // Firestore
   const { data: categories, status } = useCategoriesByType(selectedCategoryType);
 
@@ -45,7 +46,7 @@ const CategoriesPage: React.FC = () => {
         isLoading={status === FirestoreStatus.LOADING}
         onCategorySelected={setSelectedCategory}
         onCategoryTypeSelected={onCategoryTypeSelected}
-        onCreate={() => console.log('Creating')}
+        onCreate={() => setIsOpen(true)}
       />
       <SubCategoryPanel
         category={selectedCategory}
@@ -56,6 +57,15 @@ const CategoriesPage: React.FC = () => {
         onDelete={() => console.log('Deleting')}
         onEdit={() => console.log('Editing')}
         subCategories={[]}
+      />
+      <GenericDialog
+        action={() => setIsOpen(false)}
+        actionButtonText="Eliminar"
+        isOpen={isOpen}
+        message="Si elimina la categoria no puede volver atras."
+        title="Estas Seguro?"
+        toggle={setIsOpen}
+        type="danger"
       />
     </div>
   );
