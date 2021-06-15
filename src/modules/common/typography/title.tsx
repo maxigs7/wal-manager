@@ -3,6 +3,8 @@ import React from 'react';
 import classnames from '@lib/classnames';
 import { containsTextSize } from '@lib/tailwind-css/util';
 
+type HTags = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
 export enum HeaderTags {
   H1 = 'h1',
   H2 = 'h2',
@@ -22,7 +24,7 @@ const SizeMap = {
 };
 
 interface IProps extends React.ComponentPropsWithRef<any> {
-  tag?: HeaderTags;
+  tag?: HeaderTags | HTags;
   color?: string;
   noStyled?: boolean;
 }

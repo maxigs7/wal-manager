@@ -21,6 +21,7 @@ import {
   faCat,
   faChalkboardTeacher,
   faChartLine,
+  faCheck,
   faChevronDown,
   faChurch,
   faCity,
@@ -37,6 +38,7 @@ import {
   faDonate,
   faDragon,
   faEuroSign,
+  faExclamationTriangle,
   faFirstAid,
   faFish,
   faFutbol,
@@ -55,6 +57,7 @@ import {
   faHome,
   faHospital,
   faInbox,
+  faInfo,
   faKey,
   faLandmark,
   faLaptop,
@@ -90,6 +93,7 @@ import {
   faTags,
   faTaxi,
   faTheaterMasks,
+  faTimes,
   faTrophy,
   faTv,
   faUmbrellaBeach,
@@ -102,12 +106,16 @@ import {
 export const CoreIcons = [
   faArrowLeft,
   faBars,
+  faCheck,
   faChevronDown,
+  faExclamationTriangle,
   faInbox,
+  faInfo,
   faListAlt,
   faPlus,
   faTachometerAlt,
   faTags,
+  faTimes,
 ];
 
 export const CategoryIcons = [
