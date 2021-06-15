@@ -51,13 +51,13 @@
   },
   "scripts": {
     "analyze": "cross-env REACT_APP_INTERACTIVE_ANALYZE=1 yarn build",
+    "start:firebase": "firebase emulators:start",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "prettier": "prettier  --write src/**/*.{ts,tsx,js}",
-    "lint": "yarn prettier && eslint --fix 'src/**/*.{ts,tsx}'",
-    "firebase:start": "firebase emulators:start"
+    "lint": "yarn prettier && eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "browserslist": {
     "production": [
