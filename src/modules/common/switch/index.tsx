@@ -22,7 +22,7 @@ const styles = {
     ),
 };
 
-const SwitchToggle: React.FC<Props> = React.memo(({ enabled: isEnabled = true, title }) => {
+const SwitchToggle: React.FC<Props> = ({ enabled: isEnabled = true, title }) => {
   const [enabled, setEnabled] = useState(isEnabled);
 
   return (
@@ -31,6 +31,6 @@ const SwitchToggle: React.FC<Props> = React.memo(({ enabled: isEnabled = true, t
       <span className={styles.switchCircle(enabled)} />
     </Switch>
   );
-});
+};
 
-export default SwitchToggle;
+export default React.memo(SwitchToggle);

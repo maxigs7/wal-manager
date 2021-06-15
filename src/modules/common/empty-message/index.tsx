@@ -14,13 +14,17 @@ const styles = {
   wrapper: 'flex flex-col justify-center items-center h-full',
 };
 
-const EmptyMessage: React.FC<IProps> = React.memo(
-  ({ icon = 'inbox', iconSize = '5x', children, className, ...props }) => (
-    <div className={classnames(styles.wrapper, className)} {...props}>
-      <FontAwesomeIcon icon={icon} size={iconSize} />
-      {children}
-    </div>
-  ),
+const EmptyMessage: React.FC<IProps> = ({
+  icon = 'inbox',
+  iconSize = '5x',
+  children,
+  className,
+  ...props
+}) => (
+  <div className={classnames(styles.wrapper, className)} {...props}>
+    <FontAwesomeIcon icon={icon} size={iconSize} />
+    {children}
+  </div>
 );
 
-export default EmptyMessage;
+export default React.memo(EmptyMessage);

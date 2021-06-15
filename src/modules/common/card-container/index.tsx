@@ -1,9 +1,13 @@
 import React from 'react';
 
-import classnames from 'classnames';
+import classnames from '@lib/classnames';
+
+const styles = {
+  card: 'container bg-white rounded shadow-md',
+};
 
 const CardContainer: React.FC<React.ComponentPropsWithoutRef<any>> = ({ className, children }) => (
-  <div className={classnames('container bg-white rounded shadow-md', className)}>{children}</div>
+  <div className={classnames(styles.card, className)}>{children}</div>
 );
 
-export default CardContainer;
+export default React.memo(CardContainer);

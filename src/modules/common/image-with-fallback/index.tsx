@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 interface Props extends React.ComponentPropsWithRef<'img'> {
   fallbackSrc: string;
@@ -7,11 +7,11 @@ interface Props extends React.ComponentPropsWithRef<'img'> {
 const ImageWithFallback: React.FC<Props> = ({ src: externalSrc, fallbackSrc, ...props }) => {
   const [src, setSrc] = useState(externalSrc);
 
-  const onError = () => {
+  const onError = useCallback(() => {
     setSrc(fallbackSrc);
-  };
+  }, []);
 
   return <img onError={onError} src={src} {...props} />;
 };
 
-export default ImageWithFallback;
+export default React.memo(ImageWithFallback);

@@ -21,4 +21,4 @@ const SkeletonLine: React.FC<Props> = ({ lines = 1, color = 'bg-gray-200' }) => 
   </>
 );
 
-export default SkeletonLine;
+export default React.memo(SkeletonLine);

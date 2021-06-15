@@ -1,3 +1,5 @@
+import React from 'react';
+
 import classnames from '@lib/classnames';
 import { containsTextSize } from '@lib/tailwind-css/util';
 
@@ -44,4 +46,4 @@ const Text: React.FC<IProps> = ({
   );
 };
 
-export default Text;
+export default React.memo(Text);
