@@ -1,5 +1,5 @@
 import { ReactComponent as WalletLogo } from '@app/assets/images/wallet.svg';
-import { LoginContainer } from '@app/containers/auth/login';
+import { LoginContainer } from '@app/modules/auth';
 import { HeaderTags, Title } from '@app/modules/common';
 
 const styles = {
