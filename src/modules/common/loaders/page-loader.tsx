@@ -10,7 +10,7 @@ const styles = {
 const PageLoader: React.FC = () => (
   <div className={styles.overlay}>
     <div className={styles.wrapper}>
-      <div className={styles.loader} style={{ borderTopColor: 'rgba(79, 70, 229)' }}></div>
+      <div className={styles.loader} style={{ borderTopColor: 'rgba(220, 38, 38, 1)' }}></div>
     </div>
   </div>
 );
