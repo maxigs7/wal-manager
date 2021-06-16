@@ -7,7 +7,7 @@ describe('<Avatar />', () => {
     it('should be rendered correctly', () => {
       const { getByAltText } = render(<Avatar alt="profile" src="mock-src.jpg" />);
       const expected = getByAltText('profile');
-      expect(expected.classList).toContain('w-12');
+      expect(expected.classList).toContainEqual('w-12');
       expect(expected).toHaveAttribute('src', 'mock-src.jpg');
     });
   });
@@ -18,7 +18,7 @@ describe('<Avatar />', () => {
         <Avatar alt="profile" size={AvatarSizes.SM} src="mock-src.jpg" />,
       );
       const expected = getByAltText('profile');
-      expect(expected.classList).toContain('w-8');
+      expect(expected.classList).toContainEqual('w-8');
     });
   });
 
@@ -26,7 +26,7 @@ describe('<Avatar />', () => {
     it('should rendered correctly with w-8 class', () => {
       const { getByAltText } = render(<Avatar alt="profile" size="sm" src="mock-src.jpg" />);
       const expected = getByAltText('profile');
-      expect(expected.classList).toContain('w-8');
+      expect(expected.classList).toContainEqual('w-8');
     });
   });
 

@@ -33,12 +33,7 @@ module.exports = function ({ env }) {
         coverageDirectory: 'coverage',
 
         // An array of regexp pattern strings used to skip coverage collection
-        coveragePathIgnorePatterns: [
-          '/node_modules/',
-          'src/config',
-          'src/utils/tailwind-constants.tsx',
-          'src/lib/firebase/(index|config).tsx',
-        ],
+        coveragePathIgnorePatterns: ['/node_modules/'],
 
         // Indicates which provider should be used to instrument code for coverage
         coverageProvider: 'v8',
@@ -59,6 +54,7 @@ module.exports = function ({ env }) {
         // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
         moduleNameMapper: {
           '^@app/(.+)': '<rootDir>/src/$1',
+          '^@lib/(.+)': '<rootDir>/src/lib/$1',
         },
 
         // A preset that is used as a base for Jest's configuration

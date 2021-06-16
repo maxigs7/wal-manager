@@ -3,6 +3,8 @@ import React from 'react';
 import classnames from '@lib/classnames';
 import { containsTextSize } from '@lib/tailwind-css/util';
 
+type TTags = 'p' | 'span' | 'strong';
+
 export enum TextTags {
   P = 'p',
   SPAN = 'span',
@@ -16,9 +18,8 @@ const WeightMap = {
 };
 
 interface IProps extends React.ComponentPropsWithRef<any> {
-  color?: string;
   noStyled?: boolean;
-  tag?: TextTags;
+  tag?: TextTags | TTags;
 }
 
 const Text: React.FC<IProps> = ({

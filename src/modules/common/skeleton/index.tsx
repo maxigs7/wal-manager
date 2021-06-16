@@ -16,7 +16,7 @@ const SkeletonLine: React.FC<Props> = ({ lines = 1, color = 'bg-gray-200' }) => 
     {Array(lines)
       .fill(1)
       .map((_value, index) => (
-        <div className={styles.line(color)} key={index}></div>
+        <div className={styles.line(color)} data-testid="skeleton" key={index}></div>
       ))}
   </>
 );
