@@ -2,10 +2,14 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
+import { startFontAwesome } from '@lib/font-awesome';
+
 import '@testing-library/jest-dom';
 import { config } from 'dotenv';
 
 config({ path: '.env.test' });
+
+startFontAwesome();
 
 window.matchMedia = jest.fn().mockImplementation((query) => {
   return {

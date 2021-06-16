@@ -5,6 +5,8 @@ import classnames from '@lib/classnames';
 
 import ImageWithFallback from '../image-with-fallback';
 
+type Sizes = 'sm' | 'md' | 'lg';
+
 export enum AvatarSizes {
   SM = 'sm',
   MD = 'md',
@@ -13,16 +15,17 @@ export enum AvatarSizes {
 
 const SizesMap: { [key in AvatarSizes | string]: string } = {
   [AvatarSizes.SM]: 'w-8 h-8',
-  [AvatarSizes.MD]: 'mr-2w-12 h-12',
+  [AvatarSizes.MD]: 'mr-2 w-12 h-12',
   [AvatarSizes.LG]: 'mr-2 w-16 h-16',
 };
 
 const styles = {
-  image: (size: string) => classnames('inline object-cover rounded-full', SizesMap[size]),
+  image: (size: AvatarSizes | Sizes) =>
+    classnames('inline object-cover rounded-full', SizesMap[size]),
 };
 
 export interface AvatarProps extends React.ComponentPropsWithoutRef<'img'> {
-  size?: AvatarSizes;
+  size?: AvatarSizes | Sizes;
 }
 
 const Avatar: React.FC<AvatarProps> = ({ size = AvatarSizes.MD, className, ...htmlAttributes }) => {
