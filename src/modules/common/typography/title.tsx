@@ -25,7 +25,6 @@ const SizeMap = {
 
 interface IProps extends React.ComponentPropsWithRef<any> {
   tag?: HeaderTags | HTags;
-  color?: string;
   noStyled?: boolean;
 }
 
