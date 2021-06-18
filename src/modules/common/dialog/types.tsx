@@ -1,6 +1,6 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-import { Colors } from '@lib/tailwind-css/colors';
+import { ColorsMap, ColorsType } from '@lib/tailwind-css/colors';
 
 /***********************************
  * Size
@@ -42,11 +42,11 @@ export const DialogTypesBackgroundMap = {
   [DialogTypes.WARNING]: 'bg-yellow-500',
 };
 
-export const DialogTypesButtonColorsMap = {
-  [DialogTypes.DANGER]: Colors.RED,
-  [DialogTypes.INFO]: Colors.BLUE,
-  [DialogTypes.SUCCESS]: Colors.GREEN,
-  [DialogTypes.WARNING]: Colors.YELLOW,
+export const DialogTypesButtonColorsMap: { [key in DialogTypes]: ColorsType } = {
+  [DialogTypes.DANGER]: ColorsMap.red as ColorsType,
+  [DialogTypes.INFO]: ColorsMap.blue as ColorsType,
+  [DialogTypes.SUCCESS]: ColorsMap.green as ColorsType,
+  [DialogTypes.WARNING]: ColorsMap.yellow as ColorsType,
 };
 
 export const DialogTypesIconsMap = {
@@ -62,6 +62,7 @@ export type DialogBase = {
   isOpen: boolean;
   toggle: (isOpen: boolean) => void;
   size?: DialogSizes | Sizes;
+  title?: string;
 };
 
 export type DialogWithPrimaryAction = {
@@ -78,5 +79,4 @@ export type DialogGenericProps = DialogBase &
   DialogWithPrimaryAction &
   DialogWithCancelAction & {
     message?: string;
-    title?: string;
   };

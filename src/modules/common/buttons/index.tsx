@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-import { Colors, ColorsName } from '@lib/tailwind-css/colors';
+import { ColorsType } from '@lib/tailwind-css/colors';
 import classnames from 'classnames';
 
 import {
@@ -14,13 +14,13 @@ import {
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   size?: ButtonSizes;
-  color?: Colors | ColorsName;
+  color?: ColorsType;
   shape?: ButtonShapes;
   outlined?: boolean;
 }
 
 const styles = {
-  color: (outlined: boolean, color: Colors | ColorsName) =>
+  color: (outlined: boolean, color: ColorsType) =>
     outlined ? ButtonOutlineColors[color] : ButtonColors[color],
   common: [
     'outline-none focus:outline-none',
@@ -39,7 +39,7 @@ const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>
     {
       children,
       className,
-      color = Colors.PRIMARY,
+      color = 'primary',
       disabled = false,
       outlined = false,
       shape = ButtonShapes.ROUNDED,

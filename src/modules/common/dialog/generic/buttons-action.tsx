@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { Button } from '@app/modules/common';
 import classnames from '@lib/classnames';
-import { Colors } from '@lib/tailwind-css/colors';
 
 import { DialogTypes, DialogTypesButtonColorsMap, Types } from '../types';
 
@@ -37,12 +36,7 @@ export const ButtonsAction: React.FC<Props> = ({
       </Button>
     )}
     {cancelText && (
-      <Button
-        className={styles.buttons}
-        color={Colors.BLUEGRAY}
-        onClick={() => toggle(false)}
-        outlined
-      >
+      <Button className={styles.buttons} color="bluegray" onClick={() => toggle(false)} outlined>
         {cancelText}
       </Button>
     )}

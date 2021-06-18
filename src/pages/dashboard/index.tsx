@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button, Text, Title } from '@app/modules/common';
-import { Colors } from '@lib/tailwind-css/colors';
+import { ColorsMap, ColorsType } from '@lib/tailwind-css/colors';
 
 const DashboardPage: React.FC = () => (
   <>
@@ -9,8 +9,8 @@ const DashboardPage: React.FC = () => (
     <hr className="my-5" />
     <Text>My Buttons</Text>
     <div>
-      {Object.keys(Colors).map((key) => (
-        <Button className="mr-2 mb-2" color={key as Colors} key={key}>
+      {Object.keys(ColorsMap).map((key) => (
+        <Button className="mr-2 mb-2" color={key as ColorsType} key={key}>
           {key}
         </Button>
       ))}
@@ -18,8 +18,8 @@ const DashboardPage: React.FC = () => (
     <hr className="my-5" />
     <Text>My Outlined Buttons</Text>
     <div>
-      {Object.keys(Colors).map((key) => (
-        <Button className="mr-2 mb-2" color={key as Colors} key={key} outlined>
+      {Object.keys(ColorsMap).map((key) => (
+        <Button className="mr-2 mb-2" color={key as ColorsType} key={key} outlined>
           {key}
         </Button>
       ))}

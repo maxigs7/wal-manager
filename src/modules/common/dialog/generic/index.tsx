@@ -7,15 +7,13 @@ import { Text, Title } from '@app/modules/common';
 import classnames from '@lib/classnames';
 
 import DialogOverlay from '../overlay';
+import commonStyles from '../styles';
 import { DialogGenericProps, DialogSizeMap, DialogSizes, DialogTypes } from '../types';
 import { ButtonsAction } from './buttons-action';
 import { IconHeader } from './icon-header';
 
 const styles = {
-  content: 'bg-white rounded mx-1 md:mx-auto z-20 relative p-8 w-full',
-  dialog: 'fixed z-10 inset-0 overflow-y-auto',
   message: 'text-blueGray-600',
-  overlay: 'fixed inset-0 bg-black bg-opacity-50 transition-opacity',
   title: 'mt-14 mb-4 text-center text-blueGray-600',
 };
 
@@ -31,7 +29,7 @@ const DialogGeneric: React.FC<DialogGenericProps> = ({
   type = DialogTypes.INFO,
 }) => (
   <Transition as={Fragment} show={isOpen}>
-    <Dialog as="div" className={styles.dialog} onClose={toggle} open={isOpen}>
+    <Dialog as="div" className={commonStyles.dialog} onClose={toggle} open={isOpen}>
       <div className="flex items-center justify-center min-h-screen">
         <DialogOverlay />
         <Transition.Child
@@ -43,7 +41,7 @@ const DialogGeneric: React.FC<DialogGenericProps> = ({
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-70"
         >
-          <div className={classnames(styles.content, DialogSizeMap[size])}>
+          <div className={classnames(commonStyles.content, DialogSizeMap[size])}>
             <IconHeader type={type} />
 
             <Dialog.Title as={Title} className={styles.title} tag="h4">

@@ -1,7 +1,6 @@
 import { CategoryType } from '@app/api/common';
 import { Button, ButtonShapes } from '@app/modules/common';
 import classnames from '@lib/classnames';
-import { Colors } from '@lib/tailwind-css/colors';
 
 interface IProps {
   onSelected: (type: CategoryType) => void;
@@ -33,7 +32,7 @@ const TypesButtons: React.FC<IProps> = ({ onSelected, selectedType = CategoryTyp
     {buttons.map((item) => (
       <Button
         className={styles.buttonTypes(selectedType === item.type)}
-        color={Colors.TRANSPARENT}
+        color="transparent"
         key={item.type}
         onClick={() => onSelected(item.type)}
         shape={ButtonShapes.SQUARE}
