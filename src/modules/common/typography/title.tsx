@@ -1,38 +1,22 @@
 import React from 'react';
 
 import classnames from '@lib/classnames';
+import { ColorsType } from '@lib/tailwind-css/colors';
 import { containsTextSize } from '@lib/tailwind-css/util';
 
-type HTags = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-
-export enum HeaderTags {
-  H1 = 'h1',
-  H2 = 'h2',
-  H3 = 'h3',
-  H4 = 'h4',
-  H5 = 'h5',
-  H6 = 'h6',
-}
-
-const SizeMap = {
-  [HeaderTags.H1]: 'text-6xl',
-  [HeaderTags.H2]: 'text-5xl',
-  [HeaderTags.H3]: 'text-4xl',
-  [HeaderTags.H4]: 'text-3xl',
-  [HeaderTags.H5]: 'text-2xl',
-  [HeaderTags.H6]: 'text-1xl',
-};
+import { HeaderSizeMap, HeaderTagsType } from './types';
 
 interface IProps extends React.ComponentPropsWithRef<any> {
-  tag?: HeaderTags | HTags;
+  color?: ColorsType;
   noStyled?: boolean;
+  tag?: HeaderTagsType;
 }
 
 const Title: React.FC<IProps> = ({
   children,
   className = '',
   noStyled = false,
-  tag = HeaderTags.H1,
+  tag = 'h1',
   ...props
 }) => {
   const Component = tag;
@@ -41,9 +25,9 @@ const Title: React.FC<IProps> = ({
       {...props}
       className={classnames(
         className,
-        'font-normal leading-normal',
+        'font-normal leading-normal text-blueGray-600',
         !noStyled && 'mt-0 mb-2',
-        !containsTextSize(className) && SizeMap[tag],
+        !containsTextSize(className) && HeaderSizeMap[tag],
       )}
     >
       {children}

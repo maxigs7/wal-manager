@@ -1,2 +1,2 @@
-export { default as Text, TextTags } from './text';
-export { default as Title, HeaderTags } from './title';
+export { default as Text } from './text';
+export { default as Title } from './title';

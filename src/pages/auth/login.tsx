@@ -1,6 +1,6 @@
 import { ReactComponent as WalletLogo } from '@app/assets/images/wallet.svg';
 import { LoginContainer } from '@app/modules/auth';
-import { HeaderTags, Title } from '@app/modules/common';
+import { Title } from '@app/modules/common';
 
 const styles = {
   container:
@@ -14,12 +14,12 @@ const LoginPage: React.FC = () => (
   <div className={styles.container}>
     <div className={styles.top}>
       <WalletLogo className={styles.logo} height={44} width={44} />
-      <Title className="mt-8" tag={HeaderTags.H2}>
+      <Title className="mt-8" tag="h2">
         Wal Manager
       </Title>
     </div>
 
-    <Title className={styles.title} tag={HeaderTags.H3}>
+    <Title className={styles.title} tag="h3">
       Login To Your Account
     </Title>
 

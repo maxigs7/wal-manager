@@ -3,30 +3,18 @@ import React from 'react';
 import classnames from '@lib/classnames';
 import { containsTextSize } from '@lib/tailwind-css/util';
 
-type TTags = 'p' | 'span' | 'strong';
-
-export enum TextTags {
-  P = 'p',
-  SPAN = 'span',
-  STRONG = 'strong',
-}
-
-const WeightMap = {
-  [TextTags.P]: 'font-light',
-  [TextTags.SPAN]: 'font-light',
-  [TextTags.STRONG]: 'font-bold',
-};
+import { TextTagsType, TextWeightMap } from './types';
 
 interface IProps extends React.ComponentPropsWithRef<any> {
   noStyled?: boolean;
-  tag?: TextTags | TTags;
+  tag?: TextTagsType;
 }
 
 const Text: React.FC<IProps> = ({
   children,
   className = '',
   noStyled: noStyles = false,
-  tag = TextTags.P,
+  tag = 'p',
   ...props
 }) => {
   const Component = tag;
@@ -39,7 +27,7 @@ const Text: React.FC<IProps> = ({
         !containsTextSize(className) && 'text-base',
         'leading-relaxed',
         !noStyles && 'mt-0 mb-4',
-        WeightMap[tag],
+        TextWeightMap[tag],
       )}
     >
       {children}

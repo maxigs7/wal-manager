@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HeaderTags, Title } from '@app/modules/common';
+import { Title } from '@app/modules/common';
 
 import { SidebarMenuItem } from './item';
 import { mainRoutes } from './menu-data';
@@ -12,7 +12,7 @@ const styles = {
 
 export const SidebarMenu: React.FC<{ pathname: string }> = React.memo(({ pathname }) => (
   <>
-    <Title className={styles.title} tag={HeaderTags.H6}>
+    <Title className={styles.title} tag="h6">
       Principal
     </Title>
     <ul className={styles.menuWrapper}>

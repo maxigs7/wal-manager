@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, ButtonShapes, ButtonSizes, HeaderTags, Title } from '@app/modules/common';
+import { Button, ButtonShapes, ButtonSizes, Title } from '@app/modules/common';
 
 const styles = {
   createButton: 'h-8 w-8',
@@ -14,7 +14,7 @@ interface IProps {
 
 const TitleBar: React.FC<IProps> = ({ onCreate }) => (
   <div className={styles.titleBar}>
-    <Title className={styles.title} tag={HeaderTags.H5} noStyled>
+    <Title className={styles.title} tag="h5" noStyled>
       Categorias
     </Title>
     <Button
