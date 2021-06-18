@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classnames from '@lib/classnames';
-import { containsTextSize } from '@lib/tailwind-css/util';
+import { containsTextColor, containsTextSize } from '@lib/tailwind-css/util';
 
 import { TextTagsType, TextWeightMap } from './types';
 
@@ -13,20 +13,22 @@ interface IProps extends React.ComponentPropsWithRef<any> {
 const Text: React.FC<IProps> = ({
   children,
   className = '',
-  noStyled: noStyles = false,
+  noStyled = false,
   tag = 'p',
   ...props
 }) => {
   const Component = tag;
-
+  const shouldAddColorClass = useMemo(() => !containsTextColor(className), [className]);
+  const shouldAddSizeClass = useMemo(() => !containsTextSize(className), [className]);
   return (
     <Component
       {...props}
       className={classnames(
         className,
-        !containsTextSize(className) && 'text-base',
         'leading-relaxed',
-        !noStyles && 'mt-0 mb-4',
+        !noStyled && 'mt-0 mb-4',
+        shouldAddColorClass && 'text-blueGray-600',
+        shouldAddSizeClass && 'text-base',
         TextWeightMap[tag],
       )}
     >

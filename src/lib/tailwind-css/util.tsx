@@ -1,3 +1,5 @@
+import { ColorsMap } from './colors';
+
 const TextSizes = [
   'text-xs',
   'text-sm',
@@ -16,3 +18,9 @@ const TextSizes = [
 
 export const containsTextSize = (classNames: string): boolean =>
   classNames.split(' ').some((value) => TextSizes.some((size) => size === value));
+
+const textColors = Object.keys(ColorsMap);
+export const containsTextColor = (classNames: string): boolean =>
+  classNames
+    .split(' ')
+    .some((value) => textColors.some((color) => value.startsWith(`text-${color}`)));

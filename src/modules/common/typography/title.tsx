@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classnames from '@lib/classnames';
-import { ColorsType } from '@lib/tailwind-css/colors';
-import { containsTextSize } from '@lib/tailwind-css/util';
+import { containsTextColor, containsTextSize } from '@lib/tailwind-css/util';
 
 import { HeaderSizeMap, HeaderTagsType } from './types';
 
 interface IProps extends React.ComponentPropsWithRef<any> {
-  color?: ColorsType;
   noStyled?: boolean;
   tag?: HeaderTagsType;
 }
@@ -20,14 +18,17 @@ const Title: React.FC<IProps> = ({
   ...props
 }) => {
   const Component = tag;
+  const shouldAddColorClass = useMemo(() => !containsTextColor(className), [className]);
+  const shouldAddSizeClass = useMemo(() => !containsTextSize(className), [className]);
   return (
     <Component
       {...props}
       className={classnames(
         className,
-        'font-normal leading-normal text-blueGray-600',
+        'font-normal leading-normal',
         !noStyled && 'mt-0 mb-2',
-        !containsTextSize(className) && HeaderSizeMap[tag],
+        shouldAddColorClass && 'text-blueGray-600',
+        shouldAddSizeClass && HeaderSizeMap[tag],
       )}
     >
       {children}
