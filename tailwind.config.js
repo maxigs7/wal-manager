@@ -18,9 +18,19 @@ module.exports = {
     fontSize: {
       ...theme.fontSize,
     },
+    screens: {
+      xs: '475px',
+      ...theme.screens,
+    },
     extend: {
       fontFamily: {
         sans: ['"Montserrat"', ...theme.fontFamily.sans],
+      },
+      spacing: {
+        xs: '475px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
       },
     },
   },
