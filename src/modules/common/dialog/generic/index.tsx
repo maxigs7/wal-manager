@@ -4,36 +4,28 @@ import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 import { Text, Title } from '@app/modules/common';
+import classnames from '@lib/classnames';
 
+import DialogOverlay from '../overlay';
+import { DialogGenericProps, DialogSizeMap, DialogSizes, DialogTypes } from '../types';
 import { ButtonsAction } from './buttons-action';
 import { IconHeader } from './icon-header';
-import { DialogTypes, Types } from './types';
-
-interface IProps {
-  action?: () => void;
-  actionButtonText?: string;
-  cancelButtonText?: string;
-  isOpen: boolean;
-  message?: string;
-  title?: string;
-  toggle: (isOpen: boolean) => void;
-  type?: DialogTypes | Types;
-}
 
 const styles = {
-  content: 'bg-white rounded max-w-sm mx-1 md:mx-auto z-20 relative p-8',
+  content: 'bg-white rounded mx-1 md:mx-auto z-20 relative p-8 w-full',
   dialog: 'fixed z-10 inset-0 overflow-y-auto',
   message: 'text-blueGray-600',
   overlay: 'fixed inset-0 bg-black bg-opacity-50 transition-opacity',
   title: 'mt-14 mb-4 text-center text-blueGray-600',
 };
 
-const GenericDialog: React.FC<IProps> = ({
+const DialogGeneric: React.FC<DialogGenericProps> = ({
   action,
   actionButtonText,
   cancelButtonText,
   isOpen,
   message = 'Estas seguro?',
+  size = DialogSizes.MD,
   title = 'Confirmacion',
   toggle,
   type = DialogTypes.INFO,
@@ -41,27 +33,17 @@ const GenericDialog: React.FC<IProps> = ({
   <Transition as={Fragment} show={isOpen}>
     <Dialog as="div" className={styles.dialog} onClose={toggle} open={isOpen}>
       <div className="flex items-center justify-center min-h-screen">
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-500"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-500"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Dialog.Overlay className={styles.overlay} />
-        </Transition.Child>
+        <DialogOverlay />
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
-          enterFrom="opacity-0 scale-95"
+          enterFrom="opacity-0 scale-70"
           enterTo="opacity-100 scale-100"
           leave="ease-in duration-200"
           leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
+          leaveTo="opacity-0 scale-70"
         >
-          <div className={styles.content}>
+          <div className={classnames(styles.content, DialogSizeMap[size])}>
             <IconHeader type={type} />
 
             <Dialog.Title as={Title} className={styles.title} tag="h4">
@@ -86,4 +68,4 @@ const GenericDialog: React.FC<IProps> = ({
   </Transition>
 );
 
-export default React.memo(GenericDialog);
+export default React.memo(DialogGeneric);

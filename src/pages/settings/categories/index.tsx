@@ -4,7 +4,7 @@ import { Category, useCategoriesByType } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 import { FirestoreStatus } from '@app/hooks/useFirestoreQuery';
 import { CategoryPanel } from '@app/modules/category';
-import { GenericDialog } from '@app/modules/common';
+import { DeleteDialog } from '@app/modules/common';
 import { SubCategoryPanel } from '@app/modules/sub-category';
 
 const styles = {
@@ -58,14 +58,12 @@ const CategoriesPage: React.FC = () => {
         onEdit={() => console.log('Editing')}
         subCategories={[]}
       />
-      <GenericDialog
+      <DeleteDialog
         action={() => setIsOpen(false)}
-        actionButtonText="Eliminar"
         isOpen={isOpen}
         message="Si elimina la categoria no puede volver atras."
         title="Estas Seguro?"
         toggle={setIsOpen}
-        type="danger"
       />
     </div>
   );
