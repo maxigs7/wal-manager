@@ -1,6 +1,5 @@
 export { default as Avatar } from './avatar';
-export { default as Button } from './buttons';
-export { ButtonShapes, ButtonSizes } from './buttons/types';
+export * from './buttons';
 export { default as CardContainer } from './card-container';
 export * from './dialog';
 export { default as EmptyMessage } from './empty-message';
