@@ -69,4 +69,4 @@ const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>
   ),
 );
 
-export default React.memo(Button);
+export default Button;

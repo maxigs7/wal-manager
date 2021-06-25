@@ -12,8 +12,8 @@ const styles = {
     ),
 };
 
-export const SidebarBackdrop: React.FC = React.memo(() => {
+export const SidebarBackdrop: React.FC = () => {
   const { close, isOpen } = useSidebar();
 
   return <div aria-hidden="true" className={styles.backdrop(isOpen)} onClick={close}></div>;
-});
+};

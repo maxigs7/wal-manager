@@ -5,7 +5,7 @@ import { DialogGenericProps } from '../types';
 
 type Props = Omit<DialogGenericProps, 'actionButtonText' | 'cancelButtonText' | 'type' | 'size'>;
 
-const DeleteDialog: React.FC<Props> = (props) => (
+const DialogDelete: React.FC<Props> = (props) => (
   <DialogGeneric
     {...props}
     actionButtonText="Eliminar"
@@ -15,4 +15,4 @@ const DeleteDialog: React.FC<Props> = (props) => (
   />
 );
 
-export default React.memo(DeleteDialog);
+export default DialogDelete;

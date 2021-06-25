@@ -33,4 +33,4 @@ const SwitchToggle: React.FC<Props> = ({ enabled: isEnabled = true, title }) => 
   );
 };
 
-export default React.memo(SwitchToggle);
+export default SwitchToggle;

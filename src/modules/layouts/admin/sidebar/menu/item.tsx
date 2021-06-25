@@ -34,15 +34,18 @@ const SidebarMenuItemLink: React.FC<SidebarMenuItemLinkProps> = ({ path, childre
   </NavLink>
 );
 
-export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = React.memo(
-  ({ Icon, isActive, title, path }) => (
-    <li>
-      {path && (
-        <SidebarMenuItemLink isActive={isActive} path={path}>
-          {Icon && <Icon className={styles.icon(isActive)} />}
-          <span className={styles.title}>{title}</span>
-        </SidebarMenuItemLink>
-      )}
-    </li>
-  ),
+export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
+  Icon,
+  isActive,
+  title,
+  path,
+}) => (
+  <li>
+    {path && (
+      <SidebarMenuItemLink isActive={isActive} path={path}>
+        {Icon && <Icon className={styles.icon(isActive)} />}
+        <span className={styles.title}>{title}</span>
+      </SidebarMenuItemLink>
+    )}
+  </li>
 );

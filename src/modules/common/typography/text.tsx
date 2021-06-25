@@ -37,4 +37,4 @@ const Text: React.FC<IProps> = ({
   );
 };
 
-export default React.memo(Text);
+export default Text;

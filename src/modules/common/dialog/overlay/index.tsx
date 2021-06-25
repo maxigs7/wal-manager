@@ -20,4 +20,4 @@ const DialogOverlay: React.FC = () => (
   </Transition.Child>
 );
 
-export default React.memo(DialogOverlay);
+export default DialogOverlay;

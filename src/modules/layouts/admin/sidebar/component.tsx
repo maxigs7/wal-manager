@@ -25,7 +25,7 @@ const styles = {
   wrapper: 'lg:w-64',
 };
 
-export const Sidebar: React.FC = React.memo(() => {
+export const Sidebar: React.FC = () => {
   const { pathname } = useRouter();
   const { close, isOpen } = useSidebar();
 
@@ -60,4 +60,4 @@ export const Sidebar: React.FC = React.memo(() => {
       </div>
     </div>
   );
-});
+};

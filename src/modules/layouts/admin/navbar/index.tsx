@@ -19,7 +19,7 @@ const styles = {
   toggleButtonIcon: 'w-6 h-6 fill-current',
 };
 
-export const Navbar: React.FC = React.memo(() => {
+export const Navbar: React.FC = () => {
   const { toggle } = useSidebar();
 
   return (
@@ -42,4 +42,4 @@ export const Navbar: React.FC = React.memo(() => {
       </div>
     </header>
   );
-});
+};

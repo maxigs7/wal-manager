@@ -36,4 +36,4 @@ const Title: React.FC<IProps> = ({
   );
 };
 
-export default React.memo(Title);
+export default Title;

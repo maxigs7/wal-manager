@@ -8,8 +8,8 @@ const styles = {
   wrapper: 'p-5',
 };
 
-export const ListSkeleton: React.FC = React.memo(() => (
+export const ListSkeleton: React.FC = () => (
   <ListWrapper className={styles.wrapper}>
     <SkeletonLine lines={4} />
   </ListWrapper>
-));
+);

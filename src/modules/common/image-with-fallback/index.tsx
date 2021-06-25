@@ -14,4 +14,4 @@ const ImageWithFallback: React.FC<Props> = ({ src: externalSrc, fallbackSrc, ...
   return <img onError={onError} src={src} {...props} />;
 };
 
-export default React.memo(ImageWithFallback);
+export default ImageWithFallback;

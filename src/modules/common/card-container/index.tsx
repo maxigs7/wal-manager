@@ -10,4 +10,4 @@ const CardContainer: React.FC<React.ComponentPropsWithoutRef<any>> = ({ classNam
   <div className={classnames(styles.card, className)}>{children}</div>
 );
 
-export default React.memo(CardContainer);
+export default CardContainer;

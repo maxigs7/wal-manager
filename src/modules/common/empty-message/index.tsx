@@ -27,4 +27,4 @@ const EmptyMessage: React.FC<IProps> = ({
   </div>
 );
 
-export default React.memo(EmptyMessage);
+export default EmptyMessage;

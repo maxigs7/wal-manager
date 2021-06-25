@@ -10,7 +10,7 @@ const styles = {
   title: 'text-xs uppercase text-gray-500 font-semibold pl-3',
 };
 
-export const SidebarMenu: React.FC<{ pathname: string }> = React.memo(({ pathname }) => (
+export const SidebarMenu: React.FC<{ pathname: string }> = ({ pathname }) => (
   <>
     <Title className={styles.title} tag="h6">
       Principal
@@ -28,4 +28,4 @@ export const SidebarMenu: React.FC<{ pathname: string }> = React.memo(({ pathnam
       ))}
     </ul> */}
   </>
-));
+);
