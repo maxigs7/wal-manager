@@ -1,5 +1,5 @@
 import { CategoryType } from '@app/api/common';
-import { Button, ButtonShapes } from '@app/modules/common';
+import { Button } from '@app/modules/common';
 import classnames from '@lib/classnames';
 
 interface IProps {
@@ -35,7 +35,7 @@ const TypesButtons: React.FC<IProps> = ({ onSelected, selectedType = CategoryTyp
         color="transparent"
         key={item.type}
         onClick={() => onSelected(item.type)}
-        shape={ButtonShapes.SQUARE}
+        shape="square"
       >
         {item.label}
       </Button>

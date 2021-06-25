@@ -1,17 +1,22 @@
 import classnames from '@lib/classnames';
 import { Colors } from '@lib/tailwind-css/colors';
 
-export enum ButtonShapes {
-  CIRCLE = 'CIRCLE',
-  ROUNDED = 'ROUNDED',
-  SQUARE = 'NOROUNDED',
-}
+const ButtonSizesMap = {
+  sm: 'sm',
+  md: 'md',
+  lg: 'lg',
+};
 
-export enum ButtonSizes {
-  SMALL = 'SMALL',
-  REGULAR = 'REGULAR',
-  LARGE = 'LARGE',
-}
+const ButtonShapesMap = {
+  circle: 'circle',
+  rounded: 'rounded',
+  square: 'square',
+};
+
+export type ButtonSizes = typeof ButtonSizesMap;
+export type ButtonSizesType = keyof typeof ButtonSizesMap;
+export type ButtonShapes = typeof ButtonShapesMap;
+export type ButtonShapesType = keyof typeof ButtonShapesMap;
 
 // prettier-ignore
 export const ButtonColors: Colors = {
@@ -67,15 +72,15 @@ export const ButtonOutlineColors: Colors = {
   white:        '',
 };
 
-export const Shapes: { [key in ButtonShapes | string]: string } = {
-  [ButtonShapes.CIRCLE]: 'rounded-full',
-  [ButtonShapes.SQUARE]: '',
-  [ButtonShapes.ROUNDED]: 'rounded',
+export const Shapes: ButtonShapes = {
+  circle: 'rounded-full',
+  rounded: 'rounded',
+  square: '',
 };
 
 // prettier-ignore
-export const Sizes: { [key in ButtonSizes | string]: (rounded: boolean) => string } = {
-  [ButtonSizes.SMALL]: (rounded: boolean) => classnames('text-sm', !rounded && 'px-6 py-1', rounded && 'p-2'),
-  [ButtonSizes.REGULAR]: (rounded: boolean) => classnames(!rounded && 'px-6 py-2', rounded && 'p-3'),
-  [ButtonSizes.LARGE]: (rounded: boolean) => classnames('text-lg', !rounded && 'px-6 py-3', rounded && 'p-4'),
+export const Sizes: { [key in ButtonSizesType]: (rounded: boolean) => string } = {
+  sm: (rounded: boolean) => classnames('text-sm', !rounded && 'px-6 py-1', rounded && 'p-2'),
+  md: (rounded: boolean) => classnames(!rounded && 'px-6 py-2', rounded && 'p-3'),
+  lg: (rounded: boolean) => classnames('text-lg', !rounded && 'px-6 py-3', rounded && 'p-4'),
 };

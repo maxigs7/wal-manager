@@ -6,16 +6,16 @@ import classnames from 'classnames';
 import {
   ButtonColors,
   ButtonOutlineColors,
-  ButtonShapes,
-  ButtonSizes,
+  ButtonShapesType,
+  ButtonSizesType,
   Shapes,
   Sizes,
 } from './types';
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
-  size?: ButtonSizes;
+  size?: ButtonSizesType;
   color?: ColorsType;
-  shape?: ButtonShapes;
+  shape?: ButtonShapesType;
   outlined?: boolean;
 }
 
@@ -30,8 +30,8 @@ const styles = {
   ],
   disabled: (disabled: boolean) => disabled && 'opacity-60 cursor-not-allowed',
   outlined: (outlined: boolean) => (outlined ? 'border border-solid' : 'shadow hover:shadow-md'),
-  size: (size: ButtonSizes, shape: ButtonShapes) => Sizes[size](shape === ButtonShapes.CIRCLE),
-  shape: (shape: ButtonShapes) => Shapes[shape],
+  size: (size: ButtonSizesType, shape: ButtonShapesType) => Sizes[size](shape === 'circle'),
+  shape: (shape: ButtonShapesType) => Shapes[shape],
 };
 
 const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -42,8 +42,8 @@ const Button: React.FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>
       color = 'primary',
       disabled = false,
       outlined = false,
-      shape = ButtonShapes.ROUNDED,
-      size = ButtonSizes.REGULAR,
+      shape = 'rounded',
+      size = 'md',
       type = 'button',
       ...htmlAttributes
     },

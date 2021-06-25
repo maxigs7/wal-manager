@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
 
-import Button from '../';
-import { ButtonShapes } from '../types';
+import Button from '../component';
 
 describe('<Button />', () => {
   describe('when default props', () => {
@@ -46,7 +45,7 @@ describe('<Button />', () => {
 
   describe('when shape is used', () => {
     it('square shape should have correct classes', () => {
-      const { getByText } = render(<Button shape={ButtonShapes.SQUARE}>Button</Button>);
+      const { getByText } = render(<Button shape="square">Button</Button>);
       const expected = getByText('Button');
       const classList = [...expected.classList];
       expect(expected).toBeDefined();
@@ -54,7 +53,7 @@ describe('<Button />', () => {
     });
 
     it('circle shape should have correct classes', () => {
-      const { getByText } = render(<Button shape={ButtonShapes.CIRCLE}>Button</Button>);
+      const { getByText } = render(<Button shape="circle">Button</Button>);
       const expected = getByText('Button');
       const classList = [...expected.classList];
       expect(expected).toBeDefined();
