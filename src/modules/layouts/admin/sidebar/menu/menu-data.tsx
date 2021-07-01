@@ -16,6 +16,14 @@ export const mainRoutes: IMenuItem[] = [
   },
 ];
 
+export const uiRoutes: IMenuItem[] = [
+  {
+    Icon: (props) => <FontAwesomeIcon icon="list-alt" {...props} fixedWidth />,
+    path: '/ui/form',
+    title: 'Form',
+  },
+];
+
 export const adminRoutes: IMenuItem[] = [
   {
     Icon: (props) => <FontAwesomeIcon icon="list-alt" {...props} fixedWidth />,

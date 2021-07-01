@@ -3,7 +3,7 @@ import React from 'react';
 import { Title } from '@app/modules/common';
 
 import { SidebarMenuItem } from './item';
-import { mainRoutes } from './menu-data';
+import { mainRoutes, uiRoutes } from './menu-data';
 
 const styles = {
   menuWrapper: 'my-3',
@@ -17,6 +17,15 @@ export const SidebarMenu: React.FC<{ pathname: string }> = ({ pathname }) => (
     </Title>
     <ul className={styles.menuWrapper}>
       {mainRoutes.map((item, index) => (
+        <SidebarMenuItem {...item} isActive={pathname === item.path} key={index} />
+      ))}
+    </ul>
+
+    <Title className={styles.title} tag="h6">
+      UI
+    </Title>
+    <ul className={styles.menuWrapper}>
+      {uiRoutes.map((item, index) => (
         <SidebarMenuItem {...item} isActive={pathname === item.path} key={index} />
       ))}
     </ul>
