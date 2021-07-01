@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     colors: {
       ...colors,
-      primary: colors.red,
+      primary: colors.blue,
       transparent: 'transparent',
       gray: colors.trueGray,
     },
@@ -40,5 +40,5 @@ module.exports = {
       borderWidth: ['hover'],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };
