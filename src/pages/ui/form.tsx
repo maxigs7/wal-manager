@@ -1,7 +1,16 @@
 import React, { useMemo, useState } from 'react';
 
+import { IconName } from '@fortawesome/fontawesome-svg-core';
+
 import { useToggle } from '@app/hooks';
-import { CardContainer, ColorListBox, ListBox, Switch, Title } from '@app/modules/common';
+import {
+  CardContainer,
+  ColorListBox,
+  IconListBox,
+  ListBox,
+  Switch,
+  Title,
+} from '@app/modules/common';
 import { ColorsType } from '@lib/tailwind-css/colors';
 
 const people = [
@@ -16,6 +25,7 @@ const UIFormPage: React.FC = () => {
   const [enabled, { toggle }] = useToggle();
   const [person, setPerson] = useState(people[0]);
   const [color, setColor] = useState<ColorsType>('amber');
+  const [icon, setIcon] = useState<IconName>('trophy');
 
   const options = useMemo(
     () =>
@@ -27,7 +37,7 @@ const UIFormPage: React.FC = () => {
     [],
   );
   return (
-    <div className="flex flex-col gap-2">
+    <div className="grid grid-cols-2 gap-2">
       <CardContainer className="p-5">
         <Title tag="h5">Switch</Title>
         <hr className="my-2" />
@@ -62,14 +72,24 @@ const UIFormPage: React.FC = () => {
           />
         </div>
       </CardContainer>
-      <CardContainer className="p-5">
-        <Title tag="h5">Color List Box</Title>
-        <hr className="my-2" />
-        <div className="flex gap-3">
-          <ColorListBox onChange={setColor} selected={color} />
-          <ColorListBox onChange={setColor} selected={color} disabled />
-        </div>
-      </CardContainer>
+      <div className="grid grid-cols-2 gap-2">
+        <CardContainer className="p-5">
+          <Title tag="h5">Color List Box</Title>
+          <hr className="my-2" />
+          <div className="flex gap-3">
+            <ColorListBox onChange={setColor} selected={color} />
+            <ColorListBox onChange={setColor} selected={color} disabled />
+          </div>
+        </CardContainer>
+        <CardContainer className="p-5">
+          <Title tag="h5">Icons List Box</Title>
+          <hr className="my-2" />
+          <div className="flex gap-3">
+            <IconListBox onChange={setIcon} selected={icon} />
+            <IconListBox onChange={setIcon} selected={icon} disabled />
+          </div>
+        </CardContainer>
+      </div>
     </div>
   );
 };
