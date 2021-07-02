@@ -15,11 +15,14 @@ const DurationMap = {
 
 type DurationType = keyof typeof DurationMap;
 
-export const fadeTransition = (duration: DurationType = 100): TransitionClasses => ({
-  enter: classnames('transition-opacity', DurationMap[duration]),
+export const fadeTransition = (
+  durationIn: DurationType = 100,
+  durationOut?: DurationType,
+): TransitionClasses => ({
+  enter: classnames('transition-opacity', DurationMap[durationIn]),
   enterFrom: 'opacity-0',
   enterTo: 'opacity-100',
-  leave: classnames('transition-opacity', DurationMap[duration]),
+  leave: classnames('transition-opacity', DurationMap[durationOut || durationIn]),
   leaveFrom: 'opacity-100',
   leaveTo: 'opacity-0',
 });
