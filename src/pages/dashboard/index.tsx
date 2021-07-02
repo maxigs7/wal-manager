@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Text, Title } from '@app/modules/common';
+import { FillButton, OutlinedButton, Text, Title } from '@app/modules/common';
 import { ColorsMap, ColorsType } from '@lib/tailwind-css/colors';
 
 const DashboardPage: React.FC = () => (
@@ -10,18 +10,18 @@ const DashboardPage: React.FC = () => (
     <Text>My Buttons</Text>
     <div>
       {Object.keys(ColorsMap).map((key) => (
-        <Button className="mr-2 mb-2" color={key as ColorsType} key={key}>
+        <FillButton className="mr-2 mb-2" color={key as ColorsType} key={key}>
           {key}
-        </Button>
+        </FillButton>
       ))}
     </div>
     <hr className="my-5" />
     <Text>My Outlined Buttons</Text>
     <div>
       {Object.keys(ColorsMap).map((key) => (
-        <Button className="mr-2 mb-2" color={key as ColorsType} key={key} outlined>
+        <OutlinedButton className="mr-2 mb-2" color={key as ColorsType} key={key}>
           {key}
-        </Button>
+        </OutlinedButton>
       ))}
     </div>
   </>

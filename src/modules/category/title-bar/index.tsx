@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Title } from '@app/modules/common';
+import { FillButton, Title } from '@app/modules/common';
 
 const styles = {
   createButton: 'h-8 w-8',
@@ -17,9 +17,9 @@ const TitleBar: React.FC<IProps> = ({ onCreate }) => (
     <Title className={styles.title} tag="h5" noStyled>
       Categorias
     </Title>
-    <Button className={styles.createButton} onClick={() => onCreate()} shape="circle" size="sm">
+    <FillButton className={styles.createButton} onClick={() => onCreate()} shape="circle" size="sm">
       <FontAwesomeIcon icon="plus" fixedWidth />
-    </Button>
+    </FillButton>
   </div>
 );
 

@@ -7,7 +7,13 @@ import { Category, useCategoriesByType } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 import { FirestoreStatus } from '@app/hooks/useFirestoreQuery';
 import { CategoryPanel } from '@app/modules/category';
-import { Button, DialogDelete, DialogOverlay, Title } from '@app/modules/common';
+import {
+  FillButton,
+  DialogDelete,
+  DialogOverlay,
+  OutlinedButton,
+  Title,
+} from '@app/modules/common';
 import { SubCategoryPanel } from '@app/modules/sub-category';
 
 const styles = {
@@ -98,14 +104,14 @@ const CategoriesPage: React.FC = () => {
                   </Suspense>
                 </Dialog.Description>
                 <div className="px-8 py-5 border-t flex justify-end gap-2">
-                  <Button color="primary" onClick={() => setIsOpenForm(false)} outlined>
+                  <OutlinedButton onClick={() => setIsOpenForm(false)}>
                     <FontAwesomeIcon className="mr-1" icon="times-circle" fixedWidth />
                     Cancelar
-                  </Button>
-                  <Button color="primary">
+                  </OutlinedButton>
+                  <FillButton>
                     <FontAwesomeIcon className="mr-1" icon="save" fixedWidth />
                     Guardar
-                  </Button>
+                  </FillButton>
                 </div>
               </div>
             </Transition.Child>

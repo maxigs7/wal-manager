@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '@app/modules/common';
+import { FillButton, OutlinedButton } from '@app/modules/common';
 import classnames from '@lib/classnames';
 
 import { DialogTypes, DialogTypesButtonColorsMap, Types } from '../types';
@@ -27,18 +27,18 @@ export const ButtonsAction: React.FC<Props> = ({
 }) => (
   <div className={classnames(actionText && action && cancelText && styles.wrapper)}>
     {actionText && action && (
-      <Button
+      <FillButton
         className={styles.buttons}
         color={DialogTypesButtonColorsMap[type]}
         onClick={() => action()}
       >
         {actionText}
-      </Button>
+      </FillButton>
     )}
     {cancelText && (
-      <Button className={styles.buttons} color="bluegray" onClick={() => toggle(false)} outlined>
+      <OutlinedButton className={styles.buttons} color="blueGray" onClick={() => toggle(false)}>
         {cancelText}
-      </Button>
+      </OutlinedButton>
     )}
   </div>
 );

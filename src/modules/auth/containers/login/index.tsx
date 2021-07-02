@@ -1,6 +1,6 @@
 import { ReactComponent as GoogleLogo } from '@app/assets/images/google.svg';
 import { useRouter } from '@app/hooks/useRouter';
-import { Button } from '@app/modules/common';
+import { FillButton } from '@app/modules/common';
 import { useAuth } from '@lib/auth';
 
 export const LoginContainer: React.FC = () => {
@@ -17,9 +17,9 @@ export const LoginContainer: React.FC = () => {
   };
 
   return (
-    <Button className="mt-12 mx-2 sm:mx-6" color="white" onClick={signInHandler}>
+    <FillButton className="mt-12 mx-2 sm:mx-6" color="white" onClick={signInHandler}>
       <GoogleLogo className="w-5 mr-1" height={30} width={30} />
       Sign in with Google
-    </Button>
+    </FillButton>
   );
 };

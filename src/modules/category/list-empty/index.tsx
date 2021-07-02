@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, EmptyMessage, Text } from '@app/modules/common';
+import { FillButton, EmptyMessage, Text } from '@app/modules/common';
 
 import { ListWrapper } from '../list-wrapper';
 
@@ -19,9 +19,9 @@ export const ListEmpty: React.FC<Props> = ({ onCreate }) => (
   <ListWrapper className={styles.wrapper}>
     <EmptyMessage className={styles.textMuted}>
       <Text className={styles.message}>No existen categorias</Text>
-      <Button className={styles.callToAction} onClick={onCreate}>
+      <FillButton className={styles.callToAction} onClick={onCreate}>
         Crea una categoria
-      </Button>
+      </FillButton>
     </EmptyMessage>
   </ListWrapper>
 );
