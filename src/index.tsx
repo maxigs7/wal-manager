@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import 'tailwindcss/tailwind.css';
+import '@fontsource/montserrat/300.css';
+import './styles/globals.css';
 
 import { AuthProvider } from '@lib/auth';
 import { startFirebase } from '@lib/firebase';

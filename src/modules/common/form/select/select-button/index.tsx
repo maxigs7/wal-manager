@@ -17,7 +17,7 @@ const styles = {
   label: 'block truncate',
 };
 
-const ListBoxButton: React.FC<React.ComponentProps<any>> = ({ children, disabled }) => (
+const SelectButton: React.FC<React.ComponentProps<any>> = ({ children, disabled }) => (
   <Listbox.Button className={styles.button(disabled)}>
     <span className={styles.label}>{children}</span>
     <span className={styles.arrowIcon}>
@@ -33,4 +33,4 @@ const ListBoxButton: React.FC<React.ComponentProps<any>> = ({ children, disabled
   </Listbox.Button>
 );
 
-export default React.memo(ListBoxButton);
+export default React.memo(SelectButton);
