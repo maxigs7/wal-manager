@@ -1,10 +1,9 @@
 import React from 'react';
 
 import classnames from '@lib/classnames';
-import { ColorsType } from '@lib/tailwind-css/colors';
 
 export interface IColorCircleProps extends React.ComponentProps<'span'> {
-  color: ColorsType;
+  color: string;
 }
 
 const ColorCircle: React.FC<IColorCircleProps> = ({ children, className, color }) => (

@@ -5,7 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 import '@fontsource/montserrat/300.css';
 import './styles/globals.css';
 
+import { ChakraProvider } from '@chakra-ui/react';
+
 import { AuthProvider } from '@lib/auth';
+import { startChakra } from '@lib/chakra-ui';
 import { startFirebase } from '@lib/firebase';
 import { startFontAwesome } from '@lib/font-awesome';
 
@@ -13,13 +16,16 @@ import App from './App';
 
 startFirebase();
 startFontAwesome();
+const theme = startChakra();
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <ChakraProvider theme={theme}>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </ChakraProvider>
     </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root'),

@@ -2,6 +2,8 @@ import React, { Suspense } from 'react';
 import { Switch } from 'react-router';
 import { Redirect } from 'react-router-dom';
 
+import { Flex } from '@chakra-ui/react';
+
 import { PageLoader } from '@app/modules/common';
 import { adminRoutes } from '@app/routes/admin.route';
 import PrivateRoute from '@app/routes/private.route';
@@ -9,33 +11,32 @@ import PrivateRoute from '@app/routes/private.route';
 import { Navbar } from './navbar';
 import { Sidebar, SidebarProvider } from './sidebar';
 
-const styles = {
-  content: 'px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto ',
-  screen: 'flex h-screen overflow-hidden',
-  wrapper: 'relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-gray-100',
-};
-
 const AdminLayout: React.FC = () => (
   <SidebarProvider>
-    <div className={styles.screen}>
+    <Flex minH="100vh" overflow="hidden">
       <Sidebar />
-      <div className={styles.wrapper}>
+      <Flex
+        bg="gray.100"
+        direction="column"
+        flex={1}
+        overflowX="hidden"
+        overflowY="auto"
+        pos="relative"
+      >
         <Navbar />
-        <main>
-          <div className={styles.content}>
-            <Suspense fallback={<PageLoader />}>
-              <Switch>
-                {adminRoutes.map((route, index) => (
-                  <PrivateRoute {...route} key={index} />
-                ))}
-                <Redirect from="/" to="/dashboard" exact />
-                <Redirect from="*" to="/404" />
-              </Switch>
-            </Suspense>
-          </div>
-        </main>
-      </div>
-    </div>
+        <Flex as="main" mx="auto" px={{ base: 4, sm: 6, lg: 8 }} py={8} w="full">
+          <Suspense fallback={<PageLoader />}>
+            <Switch>
+              {adminRoutes.map((route, index) => (
+                <PrivateRoute {...route} key={index} />
+              ))}
+              <Redirect from="/" to="/dashboard" exact />
+              <Redirect from="*" to="/404" />
+            </Switch>
+          </Suspense>
+        </Flex>
+      </Flex>
+    </Flex>
   </SidebarProvider>
 );
 

@@ -1,19 +1,25 @@
 import React from 'react';
 
-import classnames from '@lib/classnames';
+import { Box } from '@chakra-ui/react';
 
 import { useSidebar } from '../context';
 
-const styles = {
-  backdrop: (isOpen: boolean) =>
-    classnames(
-      'fixed inset-0 bg-gray-900 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200',
-      isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none',
-    ),
-};
-
-export const SidebarBackdrop: React.FC = () => {
+export const SidebarBackdrop: React.FC = React.memo(() => {
   const { close, isOpen } = useSidebar();
 
-  return <div aria-hidden="true" className={styles.backdrop(isOpen)} onClick={close}></div>;
-};
+  return (
+    <Box
+      aria-hidden="true"
+      bg="gray.900"
+      display={{ lg: 'none' }}
+      h={isOpen ? 'full' : ''}
+      onClick={close}
+      opacity={isOpen ? 0.3 : 0}
+      pointerEvents={isOpen ? 'auto' : 'none'}
+      position="fixed"
+      transition="opacity 0.2s"
+      w={isOpen ? 'full' : ''}
+      zIndex="40"
+    />
+  );
+});

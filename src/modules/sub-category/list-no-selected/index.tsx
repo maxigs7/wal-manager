@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { EmptyMessage, Text } from '@app/modules/common';
+import { Text } from '@chakra-ui/react';
+
+import { EmptyMessage } from '@app/modules/common';
 
 import { ListWrapper } from '../list-wrapper';
 
@@ -17,9 +19,7 @@ const styles = {
 export const ListNoSelected: React.FC<Props> = () => (
   <ListWrapper className={styles.wrapper}>
     <EmptyMessage icon="tags">
-      <Text className={styles.message} noStyled>
-        Seleccione una categoria
-      </Text>
+      <Text className={styles.message}>Seleccione una categoria</Text>
     </EmptyMessage>
   </ListWrapper>
 );

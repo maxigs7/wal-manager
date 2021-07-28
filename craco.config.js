@@ -97,11 +97,6 @@ module.exports = function ({ env }) {
         },
       },
     ],
-    style: {
-      postcss: {
-        mode: POSTCSS_MODES.file,
-      },
-    },
     webpack: {
       plugins,
       configure: {

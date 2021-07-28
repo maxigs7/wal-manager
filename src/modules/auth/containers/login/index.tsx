@@ -1,6 +1,7 @@
+import { Button, Icon } from '@chakra-ui/react';
+
 import { ReactComponent as GoogleLogo } from '@app/assets/images/google.svg';
 import { useRouter } from '@app/hooks/useRouter';
-import { FillButton } from '@app/modules/common';
 import { useAuth } from '@lib/auth';
 
 export const LoginContainer: React.FC = () => {
@@ -17,9 +18,15 @@ export const LoginContainer: React.FC = () => {
   };
 
   return (
-    <FillButton className="mt-12 mx-2 sm:mx-6" color="white" onClick={signInHandler}>
-      <GoogleLogo className="w-5 mr-1" height={30} width={30} />
+    <Button
+      bg="white"
+      color="gray.900"
+      leftIcon={<Icon as={GoogleLogo} h={30} w={30} />}
+      mt={{ base: 12, sm: 6 }}
+      mx={2}
+      onClick={signInHandler}
+    >
       Sign in with Google
-    </FillButton>
+    </Button>
   );
 };

@@ -1,5 +1,6 @@
+import { Button } from '@chakra-ui/react';
+
 import { CategoryType } from '@app/api/common';
-import { FillButton } from '@app/modules/common';
 import classnames from '@lib/classnames';
 
 interface IProps {
@@ -30,15 +31,13 @@ const buttons = [
 const TypesButtons: React.FC<IProps> = ({ onSelected, selectedType = CategoryType.Expense }) => (
   <div className={styles.categoryTypes}>
     {buttons.map((item) => (
-      <FillButton
+      <Button
         className={styles.buttonTypes(selectedType === item.type)}
-        color="transparent"
         key={item.type}
         onClick={() => onSelected(item.type)}
-        shape="square"
       >
         {item.label}
-      </FillButton>
+      </Button>
     ))}
   </div>
 );

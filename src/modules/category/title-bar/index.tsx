@@ -1,6 +1,5 @@
+import { Button, Heading } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { FillButton, Title } from '@app/modules/common';
 
 const styles = {
   createButton: 'h-8 w-8',
@@ -14,12 +13,12 @@ interface IProps {
 
 const TitleBar: React.FC<IProps> = ({ onCreate }) => (
   <div className={styles.titleBar}>
-    <Title className={styles.title} tag="h5" noStyled>
+    <Heading as="h5" className={styles.title}>
       Categorias
-    </Title>
-    <FillButton className={styles.createButton} onClick={() => onCreate()} shape="circle" size="sm">
+    </Heading>
+    <Button className={styles.createButton} onClick={() => onCreate()} shape="circle" size="sm">
       <FontAwesomeIcon icon="plus" fixedWidth />
-    </FillButton>
+    </Button>
   </div>
 );
 

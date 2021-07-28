@@ -1,51 +1,70 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import classnames from '@lib/classnames';
+import { Link, Text } from '@chakra-ui/react';
+
+import { Icon } from '@lib/chakra-ui';
 
 import { IMenuItem } from './menu-data';
 
 const styles = {
-  icon: (isActive: boolean) =>
-    classnames(
-      'h-6 w-6 mr-3',
-      'group-hover:text-primary-600',
-      isActive && 'text-primary-600',
-      !isActive && 'text-gray-600',
-    ),
-  link: classnames(
-    `group flex flex-grow items-center`,
-    'text-gray-200 hover:text-white hover:bg-gray-900',
-    'transition duration-150 p-3',
-  ),
-  linkActive: 'bg-gray-900 hover:text-gray-200',
-  title: 'text-sm font-medium',
+  active: (isActive: boolean) =>
+    isActive
+      ? {
+          bg: 'gray.900',
+          color: 'blue.400',
+        }
+      : {},
+  iconActive: (isActive: boolean) =>
+    isActive
+      ? {
+          color: 'blue.400',
+        }
+      : {},
 };
 
 export type SidebarMenuItemProps = IMenuItem & {
   isActive: boolean;
 };
 
-export type SidebarMenuItemLinkProps = Omit<SidebarMenuItemProps, 'title' | 'Icon'>;
-
-const SidebarMenuItemLink: React.FC<SidebarMenuItemLinkProps> = ({ path, children }) => (
-  <NavLink activeClassName={styles.linkActive} className={styles.link} to={path} exact>
-    {children}
-  </NavLink>
-);
-
 export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
-  Icon,
+  exact,
+  icon,
   isActive,
   title,
   path,
 }) => (
-  <li>
-    {path && (
-      <SidebarMenuItemLink isActive={isActive} path={path}>
-        {Icon && <Icon className={styles.icon(isActive)} />}
-        <span className={styles.title}>{title}</span>
-      </SidebarMenuItemLink>
-    )}
-  </li>
+  <Link
+    _focus={{ outline: 'none' }}
+    _hover={{
+      textDecor: 'none',
+      color: 'blue.600',
+      bg: 'gray.900',
+      ...styles.active(isActive),
+    }}
+    alignItems="center"
+    as={NavLink}
+    color="gray.200"
+    display="flex"
+    exact={exact}
+    outline="none"
+    p={3}
+    role="group"
+    to={path}
+    transition="all 0.3s"
+    {...styles.active(isActive)}
+  >
+    <Icon
+      _groupHover={{ color: 'blue.600', ...styles.iconActive(isActive) }}
+      h={6}
+      icon={icon}
+      mr={3}
+      w={6}
+      fixedWidth
+      {...styles.iconActive(isActive)}
+    />
+    <Text as="span" fontWeight="medium" size="sm">
+      {title}
+    </Text>
+  </Link>
 );

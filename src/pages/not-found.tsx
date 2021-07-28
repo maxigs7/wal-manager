@@ -1,4 +1,2 @@
-import { Title } from '@app/modules/common';
-
-const NotFoundPage: React.FC = () => <Title>Not Found</Title>;
+const NotFoundPage: React.FC = () => <h1>Not Found</h1>;
 export default NotFoundPage;

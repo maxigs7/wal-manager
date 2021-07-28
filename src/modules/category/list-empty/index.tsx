@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { FillButton, EmptyMessage, Text } from '@app/modules/common';
+import { Button, Text } from '@chakra-ui/react';
+
+import { EmptyMessage } from '@app/modules/common';
 
 import { ListWrapper } from '../list-wrapper';
 
@@ -19,9 +21,9 @@ export const ListEmpty: React.FC<Props> = ({ onCreate }) => (
   <ListWrapper className={styles.wrapper}>
     <EmptyMessage className={styles.textMuted}>
       <Text className={styles.message}>No existen categorias</Text>
-      <FillButton className={styles.callToAction} onClick={onCreate}>
+      <Button className={styles.callToAction} onClick={onCreate}>
         Crea una categoria
-      </FillButton>
+      </Button>
     </EmptyMessage>
   </ListWrapper>
 );

@@ -1,45 +1,48 @@
 import React from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Flex, IconButton } from '@chakra-ui/react';
 
-import classnames from '@lib/classnames';
+import { Icon } from '@lib/chakra-ui';
 
 import { useSidebar } from '../sidebar';
 import { UserMenu } from './user-menu';
-
-const styles = {
-  header: classnames(
-    'sticky top-0 z-10 h-16 bg-white',
-    'shadow-md px-4 sm:px-6 lg:px-8',
-    'border-b border-gray-200',
-    'flex items-center justify-between',
-  ),
-  rightSide: 'flex items-center h-full',
-  toggleButton: 'text-gray-500 hover:text-gray-600 lg:hidden',
-  toggleButtonIcon: 'w-6 h-6 fill-current',
-};
 
 export const Navbar: React.FC = () => {
   const { toggle } = useSidebar();
 
   return (
-    <header className={styles.header}>
+    <Flex
+      align="center"
+      as="header"
+      bg="white"
+      boxShadow="md"
+      h="16"
+      justify="space-between"
+      pos="sticky"
+      px={{ base: 4, sm: 6, lg: 8 }}
+      top="0"
+      zIndex="10"
+    >
       {/* Header: Left side */}
-      <div className="flex">
+      <Flex align="center" h="full">
         {/* Hamburger button */}
-        <button aria-controls="sidebar" className={styles.toggleButton} onClick={toggle}>
-          <span className="sr-only">Open sidebar</span>
-          <FontAwesomeIcon className={styles.toggleButtonIcon} icon="bars" />
-        </button>
-      </div>
+        <IconButton
+          aria-controls="sidebar"
+          aria-label="Open Sidebar"
+          display={{ lg: 'none' }}
+          icon={<Icon fill="current" icon="bars" />}
+          onClick={toggle}
+          variant="ghost"
+        />
+      </Flex>
       {/* Header: Right side */}
-      <div className={styles.rightSide}>
+      <Flex align="center" h="full">
         {/* <SearchModal />
             <Notifications />
             <Help /> */}
         {/*  Divider */}
         <UserMenu />
-      </div>
-    </header>
+      </Flex>
+    </Flex>
   );
 };

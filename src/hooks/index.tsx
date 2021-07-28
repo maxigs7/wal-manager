@@ -1,1 +1,1 @@
-export { useToggle } from './useToggle';
+export { useFirestoreQuery } from './useFirestoreQuery';

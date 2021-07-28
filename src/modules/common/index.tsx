@@ -1,11 +1,6 @@
-export { default as Avatar } from './avatar';
-export * from './buttons';
 export { default as CardContainer } from './card-container';
 export { default as ColorCircle } from './color-circle';
-export * from './dialog';
 export { default as EmptyMessage } from './empty-message';
-export * from './form';
 export { default as ImageWithFallback } from './image-with-fallback';
 export * from './loaders';
 export { default as SkeletonLine } from './skeleton';
-export * from './typography';

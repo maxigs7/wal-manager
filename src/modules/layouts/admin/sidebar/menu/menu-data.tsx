@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export interface IMenuItem {
   exact?: boolean;
-  Icon(props: React.ComponentProps<any>): JSX.Element;
+  icon: IconProp;
   path: string;
   title: string;
 }
@@ -10,7 +10,7 @@ export interface IMenuItem {
 export const mainRoutes: IMenuItem[] = [
   {
     exact: true,
-    Icon: (props) => <FontAwesomeIcon icon="tachometer-alt" {...props} fixedWidth />,
+    icon: 'tachometer-alt',
     path: '/dashboard',
     title: 'Dashboard',
   },
@@ -18,7 +18,7 @@ export const mainRoutes: IMenuItem[] = [
 
 export const uiRoutes: IMenuItem[] = [
   {
-    Icon: (props) => <FontAwesomeIcon icon="list-alt" {...props} fixedWidth />,
+    icon: 'list-alt',
     path: '/ui/form',
     title: 'Form',
   },
@@ -26,7 +26,7 @@ export const uiRoutes: IMenuItem[] = [
 
 export const adminRoutes: IMenuItem[] = [
   {
-    Icon: (props) => <FontAwesomeIcon icon="list-alt" {...props} fixedWidth />,
+    icon: 'list-alt',
     path: '/settings/categories',
     title: 'Categories',
   },
