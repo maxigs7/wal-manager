@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SkeletonLine } from '@app/modules/common';
+import { Skeleton } from '@chakra-ui/react';
 
 import { ListWrapper } from '../list-wrapper';
 
@@ -10,6 +10,8 @@ const styles = {
 
 export const ListSkeleton: React.FC = () => (
   <ListWrapper className={styles.wrapper}>
-    <SkeletonLine lines={10} />
+    <Skeleton height="20px" />
+    <Skeleton height="20px" />
+    <Skeleton height="20px" />
   </ListWrapper>
 );
