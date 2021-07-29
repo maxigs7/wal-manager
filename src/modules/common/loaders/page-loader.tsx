@@ -1,18 +1,13 @@
 import React from 'react';
 
-const styles = {
-  loader:
-    'animate-spin ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4',
-  overlay: 'w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50',
-  wrapper: 'flex justify-center items-center w-full h-full',
-};
+import { Box, Flex, Spinner } from '@chakra-ui/react';
 
 const PageLoader: React.FC = () => (
-  <div className={styles.overlay}>
-    <div className={styles.wrapper}>
-      <div className={styles.loader} style={{ borderTopColor: 'rgba(220, 38, 38, 1)' }}></div>
-    </div>
-  </div>
+  <Box bg="white" h="full" left={0} opacity={0.75} pos="fixed" top={0} w="full" zIndex={50}>
+    <Flex align="center" h="full" justify="center" w="full">
+      <Spinner color="blue.500" emptyColor="gray.200" size="xl" speed="0.65s" thickness="4px" />
+    </Flex>
+  </Box>
 );
 
 export default PageLoader;
