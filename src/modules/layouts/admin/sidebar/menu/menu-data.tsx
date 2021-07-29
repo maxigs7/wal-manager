@@ -1,11 +1,22 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export interface IMenuItem {
+  badge?: string;
   exact?: boolean;
   icon: IconProp;
   path: string;
   title: string;
 }
+
+export const quickRoutes: IMenuItem[] = [
+  {
+    badge: 'soon',
+    exact: true,
+    icon: 'bolt',
+    path: '/',
+    title: 'Crear transaccion',
+  },
+];
 
 export const mainRoutes: IMenuItem[] = [
   {
@@ -14,13 +25,12 @@ export const mainRoutes: IMenuItem[] = [
     path: '/dashboard',
     title: 'Dashboard',
   },
-];
-
-export const uiRoutes: IMenuItem[] = [
   {
-    icon: 'list-alt',
-    path: '/ui/form',
-    title: 'Form',
+    badge: 'soon',
+    exact: true,
+    icon: 'money-check-alt',
+    path: '/',
+    title: 'Transacciones',
   },
 ];
 
@@ -28,6 +38,20 @@ export const adminRoutes: IMenuItem[] = [
   {
     icon: 'list-alt',
     path: '/settings/categories',
-    title: 'Categories',
+    title: 'Categorias',
+  },
+  {
+    badge: 'soon',
+    exact: true,
+    icon: 'university',
+    path: '/',
+    title: 'Cuentas',
+  },
+  {
+    badge: 'soon',
+    exact: true,
+    icon: 'credit-card',
+    path: '/',
+    title: 'Tarjetas',
   },
 ];

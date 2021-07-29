@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Link, Text } from '@chakra-ui/react';
+import { Badge, Link, Text } from '@chakra-ui/react';
 
 import { Icon } from '@lib/chakra-ui';
 
@@ -28,6 +28,7 @@ export type SidebarMenuItemProps = IMenuItem & {
 };
 
 export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
+  badge,
   exact,
   icon,
   isActive,
@@ -65,6 +66,11 @@ export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
     />
     <Text as="span" fontWeight="medium" size="sm">
       {title}
+      {badge && (
+        <Badge colorScheme="green" fontSize="xx-small" ml={2} variant="outline">
+          {badge}
+        </Badge>
+      )}
     </Text>
   </Link>
 );
