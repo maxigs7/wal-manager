@@ -5,10 +5,8 @@ const DashboardPage = lazy(
   () => import(/* webpackChunkName: 'dashboard.page' */ '@app/pages/dashboard'),
 );
 
-const UIFormPage = lazy(() => import(/* webpackChunkName: 'ui.form.page' */ '@app/pages/ui/form'));
-
-const SettingsPage = lazy(
-  () => import(/* webpackChunkName: 'settings.page' */ '@app/pages/settings'),
+const CategoriesPage = lazy(
+  () => import(/* webpackChunkName: 'admin.categories.page' */ '@app/pages/admin/categories'),
 );
 
 const NotFoundPage = lazy(
@@ -21,12 +19,8 @@ export const adminRoutes: RouteProps[] = [
     path: '/dashboard',
   },
   {
-    children: <UIFormPage />,
-    path: '/ui/form',
-  },
-  {
-    children: <SettingsPage />,
-    path: '/settings',
+    children: <CategoriesPage />,
+    path: '/admin/categories',
   },
   {
     children: <NotFoundPage />,

@@ -37,7 +37,7 @@ export const mainRoutes: IMenuItem[] = [
 export const adminRoutes: IMenuItem[] = [
   {
     icon: 'list-alt',
-    path: '/settings/categories',
+    path: '/admin/categories',
     title: 'Categorias',
   },
   {
