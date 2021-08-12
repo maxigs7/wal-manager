@@ -4,7 +4,7 @@ import { Category } from '@app/api/categories';
 
 import { CategoryListItem } from '../list-item';
 
-const CategoryList: React.FC<Props> = ({ categories = [], onSelected, selectedCategory }) => {
+const CategoryList: React.FC<IProps> = ({ categories = [], onSelected, selectedCategory }) => {
   console.log('CategoriesList component rendering...', selectedCategory);
   return (
     <>
@@ -20,7 +20,7 @@ const CategoryList: React.FC<Props> = ({ categories = [], onSelected, selectedCa
   );
 };
 
-interface Props {
+interface IProps {
   categories: Category[];
   onSelected: (category: Category) => void;
   selectedCategory?: Category;

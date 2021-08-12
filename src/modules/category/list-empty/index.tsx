@@ -4,7 +4,7 @@ import { Button, Text } from '@chakra-ui/react';
 
 import { EmptyMessage } from '@app/modules/common';
 
-const CategoryListEmpty: React.FC<Props> = ({ onCreated }) => (
+const CategoryListEmpty: React.FC<IProps> = ({ onCreated }) => (
   <EmptyMessage color="gray.400">
     <Text my={5} size="2xl">
       No existen categorias
@@ -17,7 +17,7 @@ const CategoryListEmpty: React.FC<Props> = ({ onCreated }) => (
   </EmptyMessage>
 );
 
-interface Props {
+interface IProps {
   onCreated?: () => void;
 }
 

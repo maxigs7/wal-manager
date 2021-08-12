@@ -4,7 +4,7 @@ import { Box, Link } from '@chakra-ui/react';
 
 import { Category } from '@app/api/categories';
 
-const CategoryListItem: React.FC<Props> = ({ category, isActive, selectedCategory }) => (
+const CategoryListItem: React.FC<IProps> = ({ category, isActive, selectedCategory }) => (
   <Box
     _hover={{
       bg: 'blue.600',
@@ -23,18 +23,10 @@ const CategoryListItem: React.FC<Props> = ({ category, isActive, selectedCategor
   </Box>
 );
 
-interface Props {
+interface IProps {
   category: Category;
   isActive: boolean;
   selectedCategory: (category: Category) => void;
 }
-
-// const styles = {
-//   listItem: (isActive: boolean) =>
-//     classnames(
-//       'block p-5 active:bg-primary-700 hover:bg-primary-600 active:text-white hover:text-white',
-//       isActive && `bg-primary-600 text-white`,
-//     ),
-// };
 
 export { CategoryListItem };
