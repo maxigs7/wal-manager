@@ -1,7 +1,27 @@
 import React from 'react';
 
+import { Box, Link } from '@chakra-ui/react';
+
 import { Category } from '@app/api/categories';
-import classnames from '@lib/classnames';
+
+const CategoryListItem: React.FC<Props> = ({ category, isActive, selectedCategory }) => (
+  <Box
+    _hover={{
+      bg: 'blue.600',
+      color: 'white',
+      textDecoration: 'none',
+    }}
+    as={Link}
+    bg={isActive ? 'blue.600' : ''}
+    color={isActive ? 'white' : ''}
+    display="block"
+    onClick={() => selectedCategory(category)}
+    p={5}
+    w="full"
+  >
+    {category.name}
+  </Box>
+);
 
 interface Props {
   category: Category;
@@ -9,21 +29,12 @@ interface Props {
   selectedCategory: (category: Category) => void;
 }
 
-const styles = {
-  listItem: (isActive: boolean) =>
-    classnames(
-      'block p-5 active:bg-primary-700 hover:bg-primary-600 active:text-white hover:text-white',
-      isActive && `bg-primary-600 text-white`,
-    ),
-};
+// const styles = {
+//   listItem: (isActive: boolean) =>
+//     classnames(
+//       'block p-5 active:bg-primary-700 hover:bg-primary-600 active:text-white hover:text-white',
+//       isActive && `bg-primary-600 text-white`,
+//     ),
+// };
 
-export const ListItem: React.FC<Props> = ({ category, isActive, selectedCategory }) => (
-  <a
-    className={styles.listItem(isActive)}
-    href="#"
-    key={category.id}
-    onClick={() => selectedCategory(category)}
-  >
-    {category.name}
-  </a>
-);
+export { CategoryListItem };

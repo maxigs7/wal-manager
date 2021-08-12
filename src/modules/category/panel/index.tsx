@@ -1,51 +1,44 @@
-import { Category } from '@app/api/categories';
+import { Box, CircularProgress } from '@chakra-ui/react';
+
 import { CategoryType } from '@app/api/common';
 
-import { List } from '../list';
-import { ListEmpty } from '../list-empty';
-import { ListSkeleton } from '../list-skeleton/index';
-import { TitleBar } from '../title-bar';
-import { TypesButtons } from '../types-buttons';
+import { ActionBar } from './action-bar';
 
-interface IProps {
-  categories: Category[];
-  categorySelected?: Category;
-  categoryTypeSelected: CategoryType;
-  isLoading: boolean;
-  onCategorySelected: (category: Category) => void;
-  onCategoryTypeSelected: (type: CategoryType) => void;
-  onCreate: () => void;
-}
-
-const styles = {
-  panel: 'border-r',
-};
-
-const Panel: React.FC<IProps> = ({
-  categories = [],
-  categorySelected,
+const CategoryPanel: React.FC<IProps> = ({
+  children,
   categoryTypeSelected,
   isLoading = true,
-  onCategorySelected,
   onCategoryTypeSelected,
-  onCreate,
+  onCreated,
 }) => {
   return (
-    <div className={styles.panel}>
-      <TitleBar onCreate={onCreate} />
-      <TypesButtons onSelected={onCategoryTypeSelected} selectedType={categoryTypeSelected} />
-
-      {isLoading && <ListSkeleton />}
-      {!isLoading && !categories.length && <ListEmpty />}
-      {!isLoading && !!categories.length && (
-        <List
-          categories={categories}
-          onSelected={onCategorySelected}
-          selectedCategory={categorySelected}
-        />
-      )}
-    </div>
+    <>
+      <ActionBar
+        onCreated={onCreated}
+        onSelected={onCategoryTypeSelected}
+        selectedType={categoryTypeSelected}
+      />
+      <Box
+        align="center"
+        display="flex"
+        flexDirection="column"
+        justify="center"
+        minH={isLoading ? 'xs' : ''}
+        p={isLoading ? '4' : ''}
+        w="full"
+      >
+        {isLoading && <CircularProgress color="blue.300" isIndeterminate />}
+        {!isLoading && children}
+      </Box>
+    </>
   );
 };
 
-export { Panel };
+interface IProps {
+  categoryTypeSelected: CategoryType;
+  isLoading: boolean;
+  onCategoryTypeSelected: (type: CategoryType) => void;
+  onCreated: () => void;
+}
+
+export { CategoryPanel };

@@ -1,22 +1,11 @@
 import React from 'react';
 
-import classnames from '@lib/classnames';
+import { Box, BoxProps } from '@chakra-ui/react';
 
-export interface IColorCircleProps extends React.ComponentProps<'span'> {
-  color: string;
-}
-
-const ColorCircle: React.FC<IColorCircleProps> = ({ children, className, color }) => (
-  <span
-    className={classnames(
-      className,
-      color !== 'black' && `bg-${color}-600`,
-      color === 'black' && 'bg-black',
-      'rounded-full w-8 h-8 inline-block',
-    )}
-  >
+const ColorCircle: React.FC<BoxProps> = ({ children, ...props }) => (
+  <Box h={8} rounded="full" w={8} {...props}>
     {children}
-  </span>
+  </Box>
 );
 
 export default React.memo(ColorCircle);

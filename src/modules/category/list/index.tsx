@@ -2,8 +2,23 @@ import React from 'react';
 
 import { Category } from '@app/api/categories';
 
-import { ListItem } from '../list-item';
-import { ListWrapper } from '../list-wrapper';
+import { CategoryListItem } from '../list-item';
+
+const CategoryList: React.FC<Props> = ({ categories = [], onSelected, selectedCategory }) => {
+  console.log('CategoriesList component rendering...', selectedCategory);
+  return (
+    <>
+      {categories.map((category) => (
+        <CategoryListItem
+          category={category}
+          isActive={category === selectedCategory}
+          key={category.id}
+          selectedCategory={onSelected}
+        />
+      ))}
+    </>
+  );
+};
 
 interface Props {
   categories: Category[];
@@ -11,18 +26,4 @@ interface Props {
   selectedCategory?: Category;
 }
 
-export const List: React.FC<Props> = ({ categories = [], onSelected, selectedCategory }) => {
-  console.log('CategoriesList component rendering...');
-  return (
-    <ListWrapper>
-      {categories.map((category) => (
-        <ListItem
-          category={category}
-          isActive={category === selectedCategory}
-          key={category.id}
-          selectedCategory={onSelected}
-        />
-      ))}
-    </ListWrapper>
-  );
-};
+export { CategoryList };

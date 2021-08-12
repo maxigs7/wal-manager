@@ -5,8 +5,8 @@ import { Grid } from '@chakra-ui/react';
 import { Category, useCategoriesByType } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 import { FirestoreStatus } from '@app/hooks/useFirestoreQuery';
-import { CategoryPanel } from '@app/modules/category';
-import { Card, Page } from '@app/modules/common';
+import { CategoryPanel, CategoryList, CategoryListEmpty } from '@app/modules/category';
+import { Card, ColorCircle, Page } from '@app/modules/common';
 import { SubCategoryPanel } from '@app/modules/sub-category';
 
 const styles = {
@@ -43,14 +43,21 @@ const CategoriesPage: React.FC = () => {
       <Grid gap={3} templateColumns="repeat(2, 1fr)">
         <Card>
           <CategoryPanel
-            categories={categories || []}
-            categorySelected={selectedCategory}
             categoryTypeSelected={selectedCategoryType}
             isLoading={status === FirestoreStatus.LOADING}
-            onCategorySelected={setSelectedCategory}
             onCategoryTypeSelected={onCategoryTypeSelected}
-            onCreate={() => console.log('Creating')}
-          />
+            onCreated={() => console.log('Creating')}
+          >
+            {!categories?.length && <CategoryListEmpty onCreated={() => console.log('Creating')} />}
+            {!!categories?.length && (
+              <CategoryList
+                categories={categories}
+                onSelected={setSelectedCategory}
+                selectedCategory={selectedCategory}
+              />
+            )}
+            <ColorCircle bg="red.600" />
+          </CategoryPanel>
         </Card>
         <Card>
           <SubCategoryPanel

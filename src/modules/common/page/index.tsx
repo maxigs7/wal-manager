@@ -6,7 +6,7 @@ import { Box, Heading } from '@chakra-ui/react';
 const Page: React.FC<IProps> = ({ children, metaDescription, metaTitle, title }) => (
   <>
     <Helmet>
-      <title>WAL - {metaTitle}</title>
+      <title>{metaTitle} - WAL</title>
       {metaDescription && <meta content={metaDescription} name="description" />}
     </Helmet>
     <Box h="full" w="full">
