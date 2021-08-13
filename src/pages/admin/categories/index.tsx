@@ -6,7 +6,7 @@ import { Category, useCategoriesByType } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 import { FirestoreStatus } from '@app/hooks/useFirestoreQuery';
 import { CategoryPanel, CategoryList, CategoryListEmpty } from '@app/modules/category';
-import { Card, ColorCircle, Page } from '@app/modules/common';
+import { Card, Page } from '@app/modules/common';
 import { SubCategoryPanel } from '@app/modules/sub-category';
 
 const styles = {
@@ -40,23 +40,22 @@ const CategoriesPage: React.FC = () => {
 
   return (
     <Page metaTitle="Mis Categorias" title="Mis Categorias">
-      <Grid gap={3} templateColumns="repeat(2, 1fr)">
+      <Grid gap={3} templateColumns="repeat(2, 1fr 2fr)">
         <Card>
           <CategoryPanel
-            categoryTypeSelected={selectedCategoryType}
             isLoading={status === FirestoreStatus.LOADING}
-            onCategoryTypeSelected={onCategoryTypeSelected}
             onCreated={() => console.log('Creating')}
+            onTypeSelected={onCategoryTypeSelected}
+            selectedType={selectedCategoryType}
           >
             {!categories?.length && <CategoryListEmpty onCreated={() => console.log('Creating')} />}
             {!!categories?.length && (
               <CategoryList
                 categories={categories}
                 onSelected={setSelectedCategory}
-                selectedCategory={selectedCategory}
+                selected={selectedCategory}
               />
             )}
-            <ColorCircle bg="red.600" />
           </CategoryPanel>
         </Card>
         <Card>

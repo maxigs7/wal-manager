@@ -6,18 +6,14 @@ import { ActionBar } from './action-bar';
 
 const CategoryPanel: React.FC<IProps> = ({
   children,
-  categoryTypeSelected,
+  selectedType,
   isLoading = true,
-  onCategoryTypeSelected,
+  onTypeSelected,
   onCreated,
 }) => {
   return (
     <>
-      <ActionBar
-        onCreated={onCreated}
-        onSelected={onCategoryTypeSelected}
-        selectedType={categoryTypeSelected}
-      />
+      <ActionBar onCreated={onCreated} onSelected={onTypeSelected} selectedType={selectedType} />
       <Box
         align="center"
         display="flex"
@@ -35,10 +31,10 @@ const CategoryPanel: React.FC<IProps> = ({
 };
 
 interface IProps {
-  categoryTypeSelected: CategoryType;
   isLoading: boolean;
-  onCategoryTypeSelected: (type: CategoryType) => void;
   onCreated: () => void;
+  onTypeSelected: (type: CategoryType) => void;
+  selectedType: CategoryType;
 }
 
 export { CategoryPanel };
