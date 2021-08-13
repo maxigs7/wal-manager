@@ -11,14 +11,14 @@ const styles = {
   active: (isActive: boolean) =>
     isActive
       ? {
-          bg: 'gray.900',
-          color: 'blue.400',
+          bg: 'crimson.500',
+          color: 'white',
         }
       : {},
   iconActive: (isActive: boolean) =>
     isActive
       ? {
-          color: 'blue.400',
+          color: 'white',
         }
       : {},
 };
@@ -39,13 +39,10 @@ export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
     _focus={{ outline: 'none' }}
     _hover={{
       textDecor: 'none',
-      color: 'blue.600',
-      bg: 'gray.900',
-      ...styles.active(isActive),
+      ...styles.active(true),
     }}
     alignItems="center"
     as={NavLink}
-    color="gray.200"
     display="flex"
     exact={exact}
     outline="none"
@@ -56,7 +53,7 @@ export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
     {...styles.active(isActive)}
   >
     <Icon
-      _groupHover={{ color: 'blue.600', ...styles.iconActive(isActive) }}
+      _groupHover={{ ...styles.iconActive(true) }}
       h={6}
       icon={icon}
       mr={3}
@@ -67,7 +64,7 @@ export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
     <Text as="span" fontWeight="medium" size="sm">
       {title}
       {badge && (
-        <Badge colorScheme="green" fontSize="xx-small" ml={2} variant="outline">
+        <Badge colorScheme="success" fontSize="xx-small" ml={2} variant="subtle">
           {badge}
         </Badge>
       )}

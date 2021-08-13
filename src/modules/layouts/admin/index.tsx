@@ -16,7 +16,7 @@ const AdminLayout: React.FC = () => (
     <Flex minH="100vh" overflow="hidden">
       <Sidebar />
       <Flex
-        bg="gray.100"
+        bg="narvik.100"
         direction="column"
         flex={1}
         overflowX="hidden"

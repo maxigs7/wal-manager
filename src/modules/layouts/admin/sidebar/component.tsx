@@ -20,8 +20,8 @@ export const Sidebar: React.FC = () => {
 
       {/* Sidebar */}
       <VStack
-        bg="gray.800"
-        color="gray.200"
+        bg="cello.700"
+        color="white"
         h="100vh"
         id="sidebar"
         left={{ base: 0, lg: 'auto' }}

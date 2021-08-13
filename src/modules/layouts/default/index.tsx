@@ -7,7 +7,7 @@ import { PageLoader } from '@app/modules/common';
 import { defaultRoutes } from '@app/routes/default.route';
 
 const DefaultLayout: React.FC = () => (
-  <Flex align="center" as="section" bg="blue.900" justify="center" minH="100vh">
+  <Flex align="center" as="section" bg="cello.500" justify="center" minH="100vh">
     <Suspense fallback={<PageLoader />}>
       <Switch>
         {defaultRoutes.map((route, index) => (

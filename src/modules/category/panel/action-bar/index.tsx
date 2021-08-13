@@ -37,6 +37,7 @@ const ActionBar: React.FC<IProps> = ({
 
       <IconButton
         aria-label="Crear categoria"
+        colorScheme="crimson"
         icon={<Icon icon="plus" />}
         ml="auto"
         mr="1"

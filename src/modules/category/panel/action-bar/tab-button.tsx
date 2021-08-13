@@ -6,14 +6,14 @@ const TabButton: React.FC<IProps> = ({ children, isSelected, onSelected, type })
   const onClickHandler = () => onSelected && onSelected(type);
   const hover = isSelected
     ? {
-        bg: 'blue.300',
+        bg: 'crimson.800',
       }
     : undefined;
   return (
     <Button
       _focus={{ outline: 'none' }}
       _hover={hover}
-      bg={isSelected ? 'blue.500' : 'transparent'}
+      bg={isSelected ? 'crimson.500' : 'transparent'}
       borderRadius="0"
       color={isSelected ? 'white' : 'gray.800'}
       onClick={onClickHandler}
