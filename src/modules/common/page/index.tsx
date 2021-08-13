@@ -10,7 +10,9 @@ const Page: React.FC<IProps> = ({ children, metaDescription, metaTitle, title })
       {metaDescription && <meta content={metaDescription} name="description" />}
     </Helmet>
     <Box h="full" w="full">
-      <Heading as="h1">{title}</Heading>
+      <Heading as="h1" mb={3}>
+        {title}
+      </Heading>
       {children}
     </Box>
   </>

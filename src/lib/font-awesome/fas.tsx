@@ -39,6 +39,7 @@ import {
   faDollarSign,
   faDonate,
   faDragon,
+  faEdit,
   faEuroSign,
   faExclamationTriangle,
   faFirstAid,
@@ -99,6 +100,7 @@ import {
   faTheaterMasks,
   faTimes,
   faTimesCircle,
+  faTrashAlt,
   faTrophy,
   faTv,
   faUmbrellaBeach,
@@ -115,6 +117,7 @@ export const CoreIcons = [
   faCheck,
   faChevronDown,
   faChevronUp,
+  faEdit,
   faExclamationTriangle,
   faInbox,
   faInfo,
@@ -126,6 +129,7 @@ export const CoreIcons = [
   faTags,
   faTimes,
   faTimesCircle,
+  faTrashAlt,
 ];
 
 export const CategoryIcons = [

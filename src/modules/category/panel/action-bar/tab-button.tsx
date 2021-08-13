@@ -3,7 +3,7 @@ import { Button } from '@chakra-ui/react';
 import { CategoryType } from '@app/api/common';
 
 const TabButton: React.FC<IProps> = ({ children, isSelected, onSelected, type }) => {
-  const onClickHandler = () => onSelected(type);
+  const onClickHandler = () => onSelected && onSelected(type);
   const hover = isSelected
     ? {
         bg: 'blue.300',
@@ -26,7 +26,7 @@ const TabButton: React.FC<IProps> = ({ children, isSelected, onSelected, type })
 
 interface IProps {
   isSelected: boolean;
-  onSelected(type: CategoryType): void;
+  onSelected?(type: CategoryType): void;
   type: CategoryType;
 }
 

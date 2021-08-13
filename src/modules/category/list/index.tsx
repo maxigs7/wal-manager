@@ -22,7 +22,7 @@ const CategoryList: React.FC<IProps> = ({ categories = [], onSelected, selected 
 
 interface IProps {
   categories: Category[];
-  onSelected: (category: Category) => void;
+  onSelected?(category: Category): void;
   selected?: Category;
 }
 

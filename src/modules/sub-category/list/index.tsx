@@ -1,28 +1,29 @@
 import React from 'react';
 
-import { Category } from '@app/api/categories';
+import { SubCategory } from '@app/api/categories';
 
-import { ListItem } from '../list-item';
-import { ListWrapper } from '../list-wrapper';
+import { SubCategoryListItem } from '../list-item';
 
-interface Props {
-  categories: Category[];
-  onSelected: (category: Category) => void;
-  selectedCategory?: Category;
-}
-
-export const List: React.FC<Props> = ({ categories = [], onSelected, selectedCategory }) => {
+const SubCategoryList: React.FC<IProps> = ({ subCategories = [], onDeleted, onEdited }) => {
   console.log('SubCategoriesList component rendering...');
   return (
-    <ListWrapper>
-      {categories.map((category) => (
-        <ListItem
-          category={category}
-          isActive={category === selectedCategory}
+    <>
+      {subCategories.map((category) => (
+        <SubCategoryListItem
           key={category.id}
-          selectedCategory={onSelected}
+          onDeleted={onDeleted}
+          onEdited={onEdited}
+          subCategory={category}
         />
       ))}
-    </ListWrapper>
+    </>
   );
 };
+
+interface IProps {
+  subCategories: SubCategory[];
+  onDeleted?(subCategory: SubCategory): void;
+  onEdited?(subCategory: SubCategory): void;
+}
+
+export { SubCategoryList };

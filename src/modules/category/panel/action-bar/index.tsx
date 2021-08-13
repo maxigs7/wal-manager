@@ -16,8 +16,12 @@ const buttons = [
   },
 ];
 
-const ActionBar: React.FC<IProps> = ({ onCreated, onSelected, selectedType }) => {
-  const onCreatedHandler = () => onCreated();
+const ActionBar: React.FC<IProps> = ({
+  onCreated,
+  onSelected,
+  selectedType = CategoryType.Expense,
+}) => {
+  const onCreatedHandler = () => onCreated && onCreated();
   return (
     <Flex align="center" borderBottom="1px" borderColor="blackAlpha.500" justify="space-between">
       {buttons.map((item) => (
@@ -45,9 +49,9 @@ const ActionBar: React.FC<IProps> = ({ onCreated, onSelected, selectedType }) =>
 };
 
 interface IProps {
-  onCreated(): void;
-  onSelected(type: CategoryType): void;
-  selectedType: CategoryType;
+  onCreated?(): void;
+  onSelected?(type: CategoryType): void;
+  selectedType?: CategoryType;
 }
 
 export { ActionBar };

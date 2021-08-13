@@ -1,18 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Grid } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 
 import { Category, useCategoriesByType } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 import { FirestoreStatus } from '@app/hooks/useFirestoreQuery';
-import { CategoryPanel, CategoryList, CategoryListEmpty } from '@app/modules/category';
+import { CategoryPanel } from '@app/modules/category';
 import { Card, Page } from '@app/modules/common';
 import { SubCategoryPanel } from '@app/modules/sub-category';
-
-const styles = {
-  subcategories: 'md:col-span-2 bg-gray-200',
-  wrapper: 'grid md:grid-cols-3 h-full',
-};
 
 const CategoriesPage: React.FC = () => {
   // States
@@ -40,37 +35,30 @@ const CategoriesPage: React.FC = () => {
 
   return (
     <Page metaTitle="Mis Categorias" title="Mis Categorias">
-      <Grid gap={3} templateColumns="repeat(2, 1fr 2fr)">
+      <SimpleGrid columns={[1, 1, 2]} spacing={3} templateColumns={['1', '1', '2fr 3fr']}>
         <Card>
           <CategoryPanel
+            categories={categories}
             isLoading={status === FirestoreStatus.LOADING}
             onCreated={() => console.log('Creating')}
+            onSelected={setSelectedCategory}
             onTypeSelected={onCategoryTypeSelected}
+            selected={selectedCategory}
             selectedType={selectedCategoryType}
-          >
-            {!categories?.length && <CategoryListEmpty onCreated={() => console.log('Creating')} />}
-            {!!categories?.length && (
-              <CategoryList
-                categories={categories}
-                onSelected={setSelectedCategory}
-                selected={selectedCategory}
-              />
-            )}
-          </CategoryPanel>
+          />
         </Card>
         <Card>
           <SubCategoryPanel
             category={selectedCategory}
-            className={styles.subcategories}
             isLoading={status === FirestoreStatus.LOADING}
-            onCategoryEdit={() => console.log('Creating')}
-            onCreate={() => console.log('Creating')}
-            onDelete={() => console.log('Deleting')}
-            onEdit={() => console.log('Editing')}
-            subCategories={[]}
+            onCategoryEdited={() => console.log('Editing')}
+            onCreated={() => console.log('Creating')}
+            onDeleted={() => console.log('Deleting')}
+            onEdited={() => console.log('Editing')}
+            subCategories={selectedCategory?.subCategories}
           />
         </Card>
-      </Grid>
+      </SimpleGrid>
     </Page>
   );
 };

@@ -1,40 +1,53 @@
 import { Box, CircularProgress } from '@chakra-ui/react';
 
+import { Category } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 
+import { CategoryList } from '../list';
+import { CategoryListEmpty } from '../list-empty';
 import { ActionBar } from './action-bar';
 
 const CategoryPanel: React.FC<IProps> = ({
-  children,
-  selectedType,
+  categories = [],
   isLoading = true,
-  onTypeSelected,
   onCreated,
+  onSelected,
+  onTypeSelected,
+  selected,
+  selectedType,
 }) => {
   return (
     <>
       <ActionBar onCreated={onCreated} onSelected={onTypeSelected} selectedType={selectedType} />
       <Box
-        align="center"
+        alignItems="center"
         display="flex"
         flexDirection="column"
-        justify="center"
-        minH={isLoading ? 'xs' : ''}
+        justifyContent={isLoading || !categories?.length ? 'center' : ''}
+        minH="xs"
         p={isLoading ? '4' : ''}
         w="full"
       >
         {isLoading && <CircularProgress color="blue.300" isIndeterminate />}
-        {!isLoading && children}
+        {!isLoading && !categories?.length && (
+          <CategoryListEmpty onCreated={() => console.log('Creating')} />
+        )}
+        {!isLoading && !!categories?.length && (
+          <CategoryList categories={categories} onSelected={onSelected} selected={selected} />
+        )}
       </Box>
     </>
   );
 };
 
 interface IProps {
+  categories?: Category[];
   isLoading: boolean;
-  onCreated: () => void;
-  onTypeSelected: (type: CategoryType) => void;
-  selectedType: CategoryType;
+  onCreated?(): void;
+  onSelected?(category: Category): void;
+  onTypeSelected?(type: CategoryType): void;
+  selected?: Category;
+  selectedType?: CategoryType;
 }
 
 export { CategoryPanel };

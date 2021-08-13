@@ -15,7 +15,7 @@ const CategoryListItem: React.FC<IProps> = ({ category, isActive, onSelected }) 
     bg={isActive ? 'blue.600' : ''}
     color={isActive ? 'white' : ''}
     display="block"
-    onClick={() => onSelected(category)}
+    onClick={() => onSelected && onSelected(category)}
     p={5}
     w="full"
   >
@@ -26,7 +26,7 @@ const CategoryListItem: React.FC<IProps> = ({ category, isActive, onSelected }) 
 interface IProps {
   category: Category;
   isActive: boolean;
-  onSelected: (category: Category) => void;
+  onSelected?(category: Category): void;
 }
 
 export { CategoryListItem };
