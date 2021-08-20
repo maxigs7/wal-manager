@@ -31,7 +31,7 @@ const SubCategoryPanel: React.FC<IProps> = ({
         p={isLoading ? '4' : ''}
         w="full"
       >
-        {isLoading && <CircularProgress color="blue.300" isIndeterminate />}
+        {isLoading && <CircularProgress color="crimson.300" isIndeterminate />}
         {noSelected && <SubCategoryListNoSelected />}
         {isEmpty && <SubCategoryListEmpty onCreated={() => console.log('Creating')} />}
         {!isEmpty && <SubCategoryList subCategories={subCategories} />}
@@ -51,27 +51,3 @@ interface IProps {
 }
 
 export { SubCategoryPanel };
-
-// const Panel: React.FC<IProps> = ({
-//   category,
-//   className,
-//   isLoading = true,
-//   onCategoryEdit,
-//   // onCreate,
-//   // onDelete,
-//   // onEdit,
-//   subCategories = [],
-// }) => {
-//   return (
-//     <div className={className}>
-//       {category && <TitleBar category={category} onEdit={onCategoryEdit} />}
-
-//       {isLoading && <ListSkeleton />}
-//       {!isLoading && !category && <ListNoSelected />}
-//       {!isLoading && category && !subCategories.length && <ListEmpty />}
-//       {/* {!isLoading && !!subCategories.length && (
-//         <List categories={subCategories} onCreate={onCreate} onDelete={onDelete} onEdit={onEdit} />
-//       )} */}
-//     </div>
-//   );
-// };
