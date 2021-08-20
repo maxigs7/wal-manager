@@ -28,10 +28,8 @@ const CategoryPanel: React.FC<IProps> = ({
         p={isLoading ? '4' : ''}
         w="full"
       >
-        {isLoading && <CircularProgress color="blue.300" isIndeterminate />}
-        {!isLoading && !categories?.length && (
-          <CategoryListEmpty onCreated={() => console.log('Creating')} />
-        )}
+        {isLoading && <CircularProgress color="crimson.300" isIndeterminate />}
+        {!isLoading && !categories?.length && <CategoryListEmpty onCreated={onCreated} />}
         {!isLoading && !!categories?.length && (
           <CategoryList categories={categories} onSelected={onSelected} selected={selected} />
         )}
