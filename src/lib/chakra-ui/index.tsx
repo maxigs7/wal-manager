@@ -120,3 +120,4 @@ export const startChakra = (): any =>
   });
 
 export * from './icon';
+export * from './color/types';

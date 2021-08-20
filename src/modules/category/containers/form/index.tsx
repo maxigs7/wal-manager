@@ -3,8 +3,9 @@ import { UseFormReturn } from 'react-hook-form';
 import { FormControl, FormErrorMessage, FormLabel, Input, SimpleGrid } from '@chakra-ui/react';
 
 import { Category } from '@app/api/categories';
+import { ColorSelect, IconSelect } from '@app/modules/common/form';
 
-const Form: React.FC<IProps> = ({ formState: { errors }, register }) => {
+const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) => {
   return (
     <SimpleGrid as="form" columns={2} gap={6}>
       <FormControl isInvalid={!!errors.name}>
@@ -33,25 +34,27 @@ const Form: React.FC<IProps> = ({ formState: { errors }, register }) => {
       </FormControl>
       <FormControl isInvalid={!!errors.color}>
         <FormLabel htmlFor="color">Color</FormLabel>
-        <Input
+        <ColorSelect
+          control={control}
           id="color"
+          name="color"
           placeholder="Color"
-          {...register('color', {
+          rules={{
             required: 'Este campo es requerido.',
-            minLength: { value: 4, message: 'Debe contenter al menos 4 caracteres.' },
-          })}
+          }}
         />
         <FormErrorMessage>{errors.color && errors.color.message}</FormErrorMessage>
       </FormControl>
       <FormControl isInvalid={!!errors.icon}>
         <FormLabel htmlFor="icon">Icono</FormLabel>
-        <Input
+        <IconSelect
+          control={control}
           id="icon"
+          name="icon"
           placeholder="Icono"
-          {...register('icon', {
+          rules={{
             required: 'Este campo es requerido.',
-            minLength: { value: 4, message: 'Debe contenter al menos 4 caracteres.' },
-          })}
+          }}
         />
         <FormErrorMessage>{errors.icon && errors.icon.message}</FormErrorMessage>
       </FormControl>
