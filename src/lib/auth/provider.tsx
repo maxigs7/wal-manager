@@ -5,8 +5,9 @@ import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from
 import { AuthContext, IAuthContextProps, IUser } from './context';
 
 interface IState {
-  user: IUser | null;
   initializing: boolean;
+  user: IUser | null;
+  userId: string | null;
 }
 
 export const AuthProvider: React.FC = ({ children }) => {
@@ -23,15 +24,15 @@ export const useProvideAuth = (): IAuthContextProps => {
   const signInWithGoogle = useCallback(async () => {
     const provider = new GoogleAuthProvider();
     const response = await signInWithPopup(auth, provider);
-    const user = response.user?.toJSON();
+    const user = response.user?.toJSON() as IUser;
 
-    setState((state) => ({ ...state, user: user as IUser }));
+    setState((state) => ({ ...state, user: user, userId: user?.uid }));
     return user;
   }, []);
 
   const signOut = useCallback(async () => {
     await auth.signOut();
-    setState((state) => ({ ...state, user: null }));
+    setState((state) => ({ ...state, user: null, userId: null }));
   }, []);
 
   // Subscribe to user on mount
@@ -40,7 +41,8 @@ export const useProvideAuth = (): IAuthContextProps => {
   // ... latest auth object.
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setState({ initializing: false, user: user?.toJSON() as IUser });
+      const userParsed = user?.toJSON() as IUser;
+      setState({ initializing: false, user: userParsed, userId: userParsed?.uid });
     });
     // Cleanup subscription on unmount
     return () => unsubscribe();
@@ -48,10 +50,11 @@ export const useProvideAuth = (): IAuthContextProps => {
 
   return useMemo(
     () => ({
-      user: state.user,
+      initializing: state.initializing,
       signOut,
       signInWithGoogle,
-      initializing: state.initializing,
+      user: state.user,
+      userId: state.userId,
     }),
     [state],
   );

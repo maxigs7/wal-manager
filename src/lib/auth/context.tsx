@@ -14,6 +14,7 @@ export interface IAuthContextProps {
   signInWithGoogle: () => Promise<any>;
   signOut: () => Promise<void>;
   user?: IUser | null;
+  userId?: string | null;
 }
 
 export const AuthContext: React.Context<IAuthContextProps> = createContext<IAuthContextProps>(
