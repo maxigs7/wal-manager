@@ -19,7 +19,7 @@ const IconOption: React.FC<{ label: string; value: IconName }> = ({ value, label
 
 const IconSelect: React.FC<IProps> = ({ control, defaultValue, id, name, placeholder, rules }) => {
   const {
-    field: { ref, ...inputProps },
+    field: { onChange, ref, value, ...inputProps },
   } = useController({
     name,
     control,
@@ -31,10 +31,14 @@ const IconSelect: React.FC<IProps> = ({ control, defaultValue, id, name, placeho
     <Select
       {...inputProps}
       formatOptionLabel={IconOption}
+      getOptionValue={(option) => option.value}
       id={id}
       inputRef={ref}
+      isSearchable={false}
+      onChange={(selected) => onChange(selected?.value)}
       options={options}
       placeholder={placeholder}
+      value={options.find((option) => option.value === value)}
     />
   );
 };

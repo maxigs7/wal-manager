@@ -10,32 +10,37 @@ import { ColorCircle } from '../..';
 
 const options = colors.map(({ key, name }) => ({ value: key, label: name }));
 
-const ColorOption: React.FC<{ label: string; value: string }> = ({ value, label }) => (
-  <HStack>
-    <ColorCircle bg={value} />
-    <Text>{label}</Text>
-  </HStack>
-);
+const ColorOption: React.FC<{ label: string; value: string }> = ({ value, label }) => {
+  return (
+    <HStack>
+      <ColorCircle bg={value} />
+      <Text>{label}</Text>
+    </HStack>
+  );
+};
 
-const ColorSelect: React.FC<IProps> = ({ control, defaultValue, id, name, placeholder, rules }) => {
+const ColorSelect: React.FC<IProps> = ({ control, id, name, placeholder, rules }) => {
   const {
-    field: { ref, ...inputProps },
+    field: { onChange, ref, value, ...inputProps },
   } = useController({
     name,
     control,
     rules,
-    defaultValue,
+    defaultValue: null,
   });
 
   return (
     <Select
       {...inputProps}
       formatOptionLabel={ColorOption}
+      getOptionValue={(option) => option.value}
       id={id}
       inputRef={ref}
       isSearchable={false}
+      onChange={(selected) => onChange(selected?.value)}
       options={options}
       placeholder={placeholder}
+      value={options.find((option) => option.value === value)}
     />
   );
 };
