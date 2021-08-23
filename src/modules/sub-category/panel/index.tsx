@@ -18,6 +18,7 @@ const SubCategoryPanel: React.FC<IProps> = ({
 }) => {
   const noSelected = !isLoading && !category;
   const isEmpty = !isLoading && category && !subCategories.length;
+
   return (
     <>
       {category && <CategoryBar category={category} onEdited={onCategoryEdited} />}
@@ -43,7 +44,7 @@ const SubCategoryPanel: React.FC<IProps> = ({
 interface IProps {
   category?: Category;
   isLoading: boolean;
-  onCategoryEdited?(): void;
+  onCategoryEdited?(category: Category): void;
   onCreated?(): void;
   onDeleted?(): void;
   onEdited?(): void;

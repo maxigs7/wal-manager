@@ -1,36 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { SimpleGrid, useDisclosure } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 
-import { Category, useCategoriesByType } from '@app/api/categories';
-import { CategoryType } from '@app/api/common';
+import { useCategoriesByType } from '@app/api/categories';
 import { CategoryPanel } from '@app/modules/category';
 import { CategoryModalForm } from '@app/modules/category/containers/modal-form';
 import { Card, Page } from '@app/modules/common';
 import { SubCategoryPanel } from '@app/modules/sub-category';
 import { FirestoreStatus } from '@lib/firebase';
 
+import useStore from './store/useStore';
+
 const CategoriesPage: React.FC = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [state, dispatch] = useStore();
 
-  // States
-  const [selectedCategoryType, setSelectedCategoryType] = useState<CategoryType>(
-    CategoryType.Expense,
-  );
-  const [selectedCategory, setSelectedCategory] = useState<Category | undefined>();
   // Firestore
-  const { data: categories, status } = useCategoriesByType(selectedCategoryType);
-
-  // Handlers
-  const onCategoryTypeSelected = useCallback((categoryType: CategoryType) => {
-    setSelectedCategoryType(categoryType);
-    setSelectedCategory(undefined);
-  }, []);
+  const { data: categories, status } = useCategoriesByType(state.selectedType);
 
   // Effects
   useEffect(() => {
-    if (categories && categories.length && !selectedCategory) {
-      setSelectedCategory(categories[0]);
+    if (categories && categories.length && !state.selectedCategory) {
+      dispatch.selectCategory(categories[0]);
     }
   }, [categories]);
 
@@ -44,27 +34,32 @@ const CategoriesPage: React.FC = () => {
             <CategoryPanel
               categories={categories}
               isLoading={status === FirestoreStatus.LOADING}
-              onCreated={() => onOpen()}
-              onSelected={setSelectedCategory}
-              onTypeSelected={onCategoryTypeSelected}
-              selected={selectedCategory}
-              selectedType={selectedCategoryType}
+              onCreated={() => dispatch.createCategory()}
+              onSelected={dispatch.selectCategory}
+              onTypeSelected={dispatch.selectCategoryType}
+              selected={state.selectedCategory}
+              selectedType={state.selectedType}
             />
           </Card>
           <Card>
             <SubCategoryPanel
-              category={selectedCategory}
+              category={state.selectedCategory}
               isLoading={status === FirestoreStatus.LOADING}
-              onCategoryEdited={() => console.log('Editing')}
+              onCategoryEdited={dispatch.editCategory}
               onCreated={() => console.log('Creating')}
               onDeleted={() => console.log('Deleting')}
               onEdited={() => console.log('Editing')}
-              subCategories={selectedCategory?.subCategories}
+              subCategories={state.selectedCategory?.subCategories}
             />
           </Card>
         </SimpleGrid>
       </Page>
-      <CategoryModalForm isOpen={isOpen} onClose={onClose} type={selectedCategoryType} />
+      <CategoryModalForm
+        id={state.selectedCategory?.id}
+        isOpen={state.isOpen}
+        onClose={dispatch.onClose}
+        type={state.selectedType}
+      />
     </>
   );
 };

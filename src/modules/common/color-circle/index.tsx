@@ -1,17 +1,24 @@
 import React from 'react';
 
-import { Box, BoxProps } from '@chakra-ui/react';
+import { Flex, FlexProps } from '@chakra-ui/react';
 
 type Sizes = 'xs' | 'sm' | 'md' | 'lg';
 const SizeMap: { [size in Sizes]: number } = { xs: 2, sm: 4, md: 8, lg: 12 };
 
 const ColorCircle: React.FC<IProps> = ({ children, size = 'sm', ...props }) => (
-  <Box h={SizeMap[size]} rounded="full" w={SizeMap[size]} {...props}>
+  <Flex
+    h={SizeMap[size]}
+    rounded="full"
+    w={SizeMap[size]}
+    {...props}
+    alignItems="center"
+    justifyContent="center"
+  >
     {children}
-  </Box>
+  </Flex>
 );
 
-interface IProps extends BoxProps {
+interface IProps extends FlexProps {
   size?: Sizes;
 }
 
