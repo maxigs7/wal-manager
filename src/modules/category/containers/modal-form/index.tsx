@@ -29,7 +29,7 @@ const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose, type }) => {
       size="3xl"
       title={title}
     >
-      {(props) => <LazyForm {...props} />}
+      {(props) => <LazyForm {...props} id={id} />}
     </ModalForm>
   );
 };

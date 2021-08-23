@@ -1,14 +1,25 @@
 import { UseFormReturn } from 'react-hook-form';
 
-import { FormControl, FormErrorMessage, FormLabel, Input, SimpleGrid } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  GridItem,
+  Input,
+  SimpleGrid,
+} from '@chakra-ui/react';
 
 import { Category } from '@app/api/categories';
+import { isUnique } from '@app/api/categories/isUnique';
 import { ColorSelect, IconSelect } from '@app/modules/common/form';
+import { useAuth } from '@lib/auth';
 
-const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) => {
+const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }) => {
+  const { userId } = useAuth();
+  console.log(errors);
   return (
     <SimpleGrid columns={2} gap={6}>
-      <FormControl isInvalid={!!errors.name}>
+      <FormControl as={GridItem} colSpan={2} isInvalid={!!errors.name}>
         <FormLabel htmlFor="name">Nombre</FormLabel>
         <Input
           id="name"
@@ -16,22 +27,12 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) =>
           {...register('name', {
             required: 'Este campo es requerido.',
             minLength: { value: 4, message: 'Debe contenter al menos 4 caracteres.' },
+            validate: (name) => isUnique(name, userId as string, id),
           })}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
       </FormControl>
-      <FormControl>
-        <FormLabel htmlFor="categoryType">Tipo</FormLabel>
-        <Input
-          id="categoryType"
-          placeholder="Tipo"
-          readOnly
-          {...register('categoryType', {
-            required: 'Este campo es requerido.',
-          })}
-        />
-        <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
-      </FormControl>
+
       <FormControl isInvalid={!!errors.color}>
         <FormLabel htmlFor="color">Color</FormLabel>
         <ColorSelect
@@ -62,6 +63,6 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) =>
   );
 };
 
-type IProps = UseFormReturn<Category>;
+type IProps = UseFormReturn<Category> & { id?: string };
 
 export default Form;

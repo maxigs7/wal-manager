@@ -34,7 +34,6 @@ const IconSelect: React.FC<IProps> = ({ control, defaultValue, id, name, placeho
       getOptionValue={(option) => option.value}
       id={id}
       inputRef={ref}
-      isSearchable={false}
       onChange={(selected) => onChange(selected?.value)}
       options={options}
       placeholder={placeholder}
