@@ -10,56 +10,18 @@ import {
   refEqual,
 } from 'firebase/firestore';
 
-import { useMemoCompare } from './useMemoCompare';
+import { useMemoCompare } from '@app/hooks';
 
-export enum FirestoreStatus {
-  IDLE = 'idle',
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-type FirestoreActionKind = FirestoreStatus;
-
-type FirestoreQueryAction = { type: FirestoreActionKind; payload?: any };
-
-type FirestoreQuerySnapshot = QuerySnapshot<DocumentData> | DocumentSnapshot<DocumentData>;
-
-export interface IFirestoreQueryState<T> {
-  status: FirestoreStatus;
-  data?: T;
-  error?: any;
-}
-
-// Reducer for hook state and actions
-function createReducer<T>() {
-  return (
-    state: IFirestoreQueryState<T>,
-    action: FirestoreQueryAction,
-  ): IFirestoreQueryState<T> => {
-    const { type, payload } = action;
-    switch (type) {
-      case FirestoreStatus.IDLE:
-        return { status: FirestoreStatus.IDLE, data: undefined, error: undefined };
-      case FirestoreStatus.LOADING:
-        return { status: FirestoreStatus.LOADING, data: undefined, error: undefined };
-      case FirestoreStatus.SUCCESS:
-        return { status: FirestoreStatus.SUCCESS, data: payload, error: undefined };
-      case FirestoreStatus.ERROR:
-        return { status: FirestoreStatus.ERROR, data: undefined, error: payload };
-      default:
-        return state;
-    }
-  };
-}
+import { createReducer } from './reducer';
+import { FirestoreQuerySnapshot, FirestoreStatus, IFirestoreState } from './types';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function useFirestoreQuery<T>(query: any): IFirestoreQueryState<T> {
+export function useFirestoreQuery<T>(query: any): IFirestoreState<T> {
   // Our initial state
   // Start with an "idle" status if query is falsy, as that means hook consumer is
   // waiting on required data before creating the query object.
   // Example: useFirestoreQuery(uid && firestore.collection("profiles").doc(uid))
-  const initialState: IFirestoreQueryState<T> = {
+  const initialState: IFirestoreState<T> = {
     status: query ? FirestoreStatus.LOADING : FirestoreStatus.IDLE,
     data: undefined,
     error: undefined,

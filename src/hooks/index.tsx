@@ -1,1 +1,1 @@
-export { useFirestoreQuery } from './useFirestoreQuery';
+export { useMemoCompare } from './useMemoCompare';
