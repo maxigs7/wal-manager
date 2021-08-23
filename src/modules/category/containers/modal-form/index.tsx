@@ -1,9 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { Category } from '@app/api/categories';
+import { Category, useSaveCategory } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 import { ModalForm } from '@app/modules/common';
 import { useAuth } from '@lib/auth';
+import { FirestoreStatus } from '@lib/firebase';
 
 const LazyForm = React.lazy(
   () => import(/* webpackChunkName: 'category.form' */ '@app/modules/category/containers/form'),
@@ -11,14 +12,10 @@ const LazyForm = React.lazy(
 
 const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose, type }) => {
   const { userId } = useAuth();
+  const { handleAdd, status } = useSaveCategory();
   const title = useMemo(() => (id ? 'Editar categoria' : 'Nueva categoria'), [id]);
-  const onConfirm = useCallback(() => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log('Submitted');
-        resolve('WOOOAAHH');
-      }, 3000);
-    });
+  const onConfirm = useCallback((model) => {
+    if (status !== FirestoreStatus.LOADING) return handleAdd(model).then(() => onClose());
   }, []);
 
   return (

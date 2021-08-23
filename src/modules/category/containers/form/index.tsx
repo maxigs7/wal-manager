@@ -7,7 +7,7 @@ import { ColorSelect, IconSelect } from '@app/modules/common/form';
 
 const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) => {
   return (
-    <SimpleGrid as="form" columns={2} gap={6}>
+    <SimpleGrid columns={2} gap={6}>
       <FormControl isInvalid={!!errors.name}>
         <FormLabel htmlFor="name">Nombre</FormLabel>
         <Input

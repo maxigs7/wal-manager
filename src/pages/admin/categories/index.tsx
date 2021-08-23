@@ -4,11 +4,11 @@ import { SimpleGrid, useDisclosure } from '@chakra-ui/react';
 
 import { Category, useCategoriesByType } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
-import { FirestoreStatus } from '@app/hooks/useFirestoreQuery';
 import { CategoryPanel } from '@app/modules/category';
 import { CategoryModalForm } from '@app/modules/category/containers/modal-form';
 import { Card, Page } from '@app/modules/common';
 import { SubCategoryPanel } from '@app/modules/sub-category';
+import { FirestoreStatus } from '@lib/firebase';
 
 const CategoriesPage: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

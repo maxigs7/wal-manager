@@ -7,12 +7,12 @@ import { Category } from '@app/api/categories';
 const CategoryListItem: React.FC<IProps> = ({ category, isActive, onSelected }) => (
   <Box
     _hover={{
-      bg: 'blue.600',
+      bg: 'crimson.500',
       color: 'white',
       textDecoration: 'none',
     }}
     as={Link}
-    bg={isActive ? 'blue.600' : ''}
+    bg={isActive ? 'crimson.500' : ''}
     color={isActive ? 'white' : ''}
     display="block"
     onClick={() => onSelected && onSelected(category)}
