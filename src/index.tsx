@@ -10,6 +10,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { AuthProvider } from '@lib/auth';
 import { startChakra } from '@lib/chakra-ui';
 import { startFirebase } from '@lib/firebase';
+import { FirestoreApiProvider } from '@lib/firebase/api/context';
 import { startFontAwesome } from '@lib/font-awesome';
 
 import App from './App';
@@ -21,11 +22,13 @@ const theme = startChakra();
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
-      <ChakraProvider theme={theme}>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </ChakraProvider>
+      <FirestoreApiProvider>
+        <ChakraProvider theme={theme}>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </ChakraProvider>
+      </FirestoreApiProvider>
     </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root'),

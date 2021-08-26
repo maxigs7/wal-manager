@@ -4,8 +4,9 @@ import { Category } from '@app/api/categories';
 import { ColorCircle } from '@app/modules/common';
 import { Icon } from '@lib/chakra-ui';
 
-const CategoryBar: React.FC<IProps> = ({ category, onEdited }) => {
-  const onEditedHandler = () => onEdited && onEdited(category);
+const CategoryBar: React.FC<IProps> = ({ category, onDeleted, onUpdated }) => {
+  const onDeletedHandler = () => onDeleted && onDeleted(category.id);
+  const onUpdatedHandler = () => onUpdated && onUpdated(category.id);
   return (
     <Flex
       align="center"
@@ -25,7 +26,7 @@ const CategoryBar: React.FC<IProps> = ({ category, onEdited }) => {
         icon={<Icon icon="trash-alt" />}
         ml="auto"
         mr="1"
-        onClick={onEditedHandler}
+        onClick={onDeletedHandler}
         rounded="full"
         size="sm"
       />
@@ -33,7 +34,7 @@ const CategoryBar: React.FC<IProps> = ({ category, onEdited }) => {
         aria-label="Editar categoria"
         icon={<Icon icon="edit" />}
         mr="1"
-        onClick={onEditedHandler}
+        onClick={onUpdatedHandler}
         rounded="full"
         size="sm"
       />
@@ -43,7 +44,8 @@ const CategoryBar: React.FC<IProps> = ({ category, onEdited }) => {
 
 interface IProps {
   category: Category;
-  onEdited?(category: Category): void;
+  onDeleted?(id: string): void;
+  onUpdated?(id: string): void;
 }
 
 export { CategoryBar };

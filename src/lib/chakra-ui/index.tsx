@@ -119,5 +119,6 @@ export const startChakra = (): any =>
     },
   });
 
-export * from './icon';
 export * from './color/types';
+export * from './icon';
+export * from './toast';

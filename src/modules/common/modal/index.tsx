@@ -1,6 +1,8 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   DeepPartial,
+  Path,
+  PathValue,
   SubmitHandler,
   UnpackNestedValue,
   useForm,
@@ -28,6 +30,7 @@ function ModalForm<TModel>({
   children,
   defaultValue,
   isOpen = false,
+  model,
   onClose,
   onConfirm,
   size = '6xl',
@@ -41,6 +44,17 @@ function ModalForm<TModel>({
   };
 
   useEffect(() => {
+    if (model) {
+      (Object.keys(model) as Array<keyof typeof model>).forEach((key): void => {
+        const val = model[key as keyof TModel] as UnpackNestedValue<
+          PathValue<TModel, Path<TModel>>
+        >;
+        useFormProps.setValue(key as Path<TModel>, val);
+      });
+    }
+  }, [model]);
+
+  useEffect(() => {
     if (useFormProps.formState.isSubmitSuccessful) {
       useFormProps.reset(defaultValue);
     }
@@ -52,9 +66,7 @@ function ModalForm<TModel>({
       <ModalContent as="form" onSubmit={handleSubmit}>
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton onClick={handleClose} />
-        <ModalBody>
-          <Suspense fallback="loading...">{children(useFormProps)}</Suspense>
-        </ModalBody>
+        <ModalBody>{children && children(useFormProps)}</ModalBody>
         <ModalFooter>
           <Button
             colorScheme="crimson"
@@ -78,6 +90,7 @@ interface IProps<TModel> {
   children(props: UseFormReturn<TModel>): React.ReactElement;
   defaultValue?: UnpackNestedValue<DeepPartial<TModel>>;
   isOpen: boolean;
+  model?: TModel;
   onClose(): void;
   onConfirm: SubmitHandler<TModel>;
   size?: ThemingProps<'Modal'>['size'];

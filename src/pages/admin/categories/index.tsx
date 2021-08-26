@@ -1,26 +1,35 @@
 import React, { useEffect } from 'react';
 
-import { SimpleGrid } from '@chakra-ui/react';
+import { Portal, SimpleGrid } from '@chakra-ui/react';
 
-import { useCategoriesByType } from '@app/api/categories';
+import { useCategories } from '@app/api/categories';
 import { CategoryPanel } from '@app/modules/category';
+import { CategoryDeleteDialog } from '@app/modules/category/containers';
 import { CategoryModalForm } from '@app/modules/category/containers/modal-form';
 import { Card, Page } from '@app/modules/common';
 import { SubCategoryPanel } from '@app/modules/sub-category';
-import { FirestoreStatus } from '@lib/firebase';
 
 import useStore from './store/useStore';
 
 const CategoriesPage: React.FC = () => {
   const [state, dispatch] = useStore();
+  const [{ data: categories, isLoading }, dispatchList] = useCategories();
 
-  // Firestore
-  const { data: categories, status } = useCategoriesByType(state.selectedType);
+  const request = () => dispatchList.requestList(state.selectedType);
+
+  const onClose = () => {
+    dispatch.onModalClose();
+    request();
+  };
+
+  useEffect(() => {
+    request();
+  }, [state.selectedType]);
 
   // Effects
   useEffect(() => {
-    if (categories && categories.length && !state.selectedCategory) {
-      dispatch.selectCategory(categories[0]);
+    if (categories && categories.length && !state.selected) {
+      dispatch.select(categories[0]);
     }
   }, [categories]);
 
@@ -33,33 +42,45 @@ const CategoriesPage: React.FC = () => {
           <Card>
             <CategoryPanel
               categories={categories}
-              isLoading={status === FirestoreStatus.LOADING}
-              onCreated={() => dispatch.createCategory()}
-              onSelected={dispatch.selectCategory}
-              onTypeSelected={dispatch.selectCategoryType}
-              selected={state.selectedCategory}
+              isLoading={isLoading}
+              onCreated={dispatch.create}
+              onSelected={dispatch.select}
+              onTypeSelected={dispatch.selectType}
+              selected={state.selected}
               selectedType={state.selectedType}
             />
           </Card>
           <Card>
             <SubCategoryPanel
-              category={state.selectedCategory}
-              isLoading={status === FirestoreStatus.LOADING}
-              onCategoryEdited={dispatch.editCategory}
+              category={state.selected}
+              isLoading={isLoading}
+              onCategoryDeleted={dispatch.remove}
+              onCategoryUpdated={dispatch.update}
               onCreated={() => console.log('Creating')}
               onDeleted={() => console.log('Deleting')}
               onEdited={() => console.log('Editing')}
-              subCategories={state.selectedCategory?.subCategories}
+              subCategories={state.selected?.subCategories}
             />
           </Card>
         </SimpleGrid>
       </Page>
-      <CategoryModalForm
-        id={state.selectedCategory?.id}
-        isOpen={state.isOpen}
-        onClose={dispatch.onClose}
-        type={state.selectedType}
-      />
+      <Portal>
+        {state.isModalOpen && (
+          <CategoryModalForm
+            id={state.categoryId}
+            isOpen={state.isModalOpen}
+            onClose={onClose}
+            type={state.selectedType}
+          />
+        )}
+        {state.isDialogOpen && (
+          <CategoryDeleteDialog
+            id={state.categoryId}
+            isOpen={state.isDialogOpen}
+            onClose={dispatch.onDialogClose}
+          />
+        )}
+      </Portal>
     </>
   );
 };

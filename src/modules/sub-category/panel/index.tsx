@@ -10,7 +10,8 @@ import { CategoryBar } from './category-bar';
 const SubCategoryPanel: React.FC<IProps> = ({
   category,
   isLoading = true,
-  onCategoryEdited,
+  onCategoryDeleted,
+  onCategoryUpdated,
   // onCreated,
   // onDeleted,
   // onEdited,
@@ -21,7 +22,13 @@ const SubCategoryPanel: React.FC<IProps> = ({
 
   return (
     <>
-      {category && <CategoryBar category={category} onEdited={onCategoryEdited} />}
+      {category && (
+        <CategoryBar
+          category={category}
+          onDeleted={onCategoryDeleted}
+          onUpdated={onCategoryUpdated}
+        />
+      )}
       <Box
         alignItems="center"
         display="flex"
@@ -44,7 +51,8 @@ const SubCategoryPanel: React.FC<IProps> = ({
 interface IProps {
   category?: Category;
   isLoading: boolean;
-  onCategoryEdited?(category: Category): void;
+  onCategoryDeleted?(id: string): void;
+  onCategoryUpdated?(id: string): void;
   onCreated?(): void;
   onDeleted?(): void;
   onEdited?(): void;

@@ -14,9 +14,9 @@ import { isUnique } from '@app/api/categories/isUnique';
 import { ColorSelect, IconSelect } from '@app/modules/common/form';
 import { useAuth } from '@lib/auth';
 
-const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }) => {
+const Form: React.FC<IProps> = ({ category, control, formState: { errors }, register }) => {
   const { userId } = useAuth();
-  console.log(errors);
+
   return (
     <SimpleGrid columns={2} gap={6}>
       <FormControl as={GridItem} colSpan={2} isInvalid={!!errors.name}>
@@ -27,7 +27,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }
           {...register('name', {
             required: 'Este campo es requerido.',
             minLength: { value: 4, message: 'Debe contenter al menos 4 caracteres.' },
-            validate: (name) => isUnique(name, userId as string, id),
+            validate: (name) => isUnique(name, userId as string, category?.id),
           })}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
@@ -63,6 +63,8 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }
   );
 };
 
-type IProps = UseFormReturn<Category> & { id?: string };
+interface IProps extends UseFormReturn<Category> {
+  category?: Category;
+}
 
-export default Form;
+export { Form as CategoryForm };
