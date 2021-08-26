@@ -3,15 +3,16 @@ import { useMemo } from 'react';
 import { IFirestoreDelete, useFirestoreDelete } from '@lib/firebase';
 
 export const useDeleteCategory = (): IFirestoreDelete => {
-  const { data, status, error, handleDelete } = useFirestoreDelete('categories');
+  const { data, error, handleDelete, isLoading, status } = useFirestoreDelete('categories');
 
   return useMemo(
     () => ({
       data,
-      status,
       error,
       handleDelete,
+      isLoading,
+      status,
     }),
-    [data, status, error],
+    [data, error, handleDelete, isLoading, status],
   );
 };

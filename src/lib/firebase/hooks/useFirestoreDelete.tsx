@@ -2,17 +2,11 @@ import { useMemo, useReducer } from 'react';
 
 import { deleteDoc, getFirestore, doc } from 'firebase/firestore';
 
-import { createReducer } from './reducer';
+import { createInitialState, createReducer } from './reducer';
 import { FirestoreStatus, IFirestoreState } from './types';
 
 function useFirestoreDelete(collectionName: string): IFirestoreDelete {
-  const initialState: IFirestoreState<boolean> = {
-    status: FirestoreStatus.IDLE,
-    data: undefined,
-    error: undefined,
-  };
-
-  // Setup our state and actions
+  const initialState = useMemo(() => createInitialState<boolean>(), []);
   const reducer = useMemo(() => createReducer<boolean>(), []);
   const [state, dispatch] = useReducer(reducer, initialState);
 
