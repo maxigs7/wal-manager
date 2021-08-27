@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { useDeleteCategory } from '@app/api/categories';
+import { useCategory } from '@app/api/categories';
 import { DeleteDialog } from '@app/modules/common';
 
 const CategoryDeleteDialog: React.FC<IProps> = ({ id, isOpen, onClose }) => {
-  const { isLoading, handleDelete } = useDeleteCategory();
+  const [{ isLoading }, { remove }] = useCategory();
 
   const onConfirm = async () => {
-    await handleDelete(id as string);
+    await remove(id as string);
     onClose();
   };
 

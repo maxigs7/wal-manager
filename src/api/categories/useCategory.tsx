@@ -1,20 +1,20 @@
 import { useCallback, useMemo, useReducer } from 'react';
 
 import { useToast } from '@lib/chakra-ui';
-import { useFirestoreApi } from '@lib/firebase';
 import {
+  useFirestoreApi,
   createInitialState,
   createReducer,
   FirestoreStatus,
   IFirestoreState,
-} from '@lib/firebase/store';
+} from '@lib/firebase';
 
 import { Category } from './types';
 
 const COLLECTION_NAME = 'categories';
 
 const useCategory = (): [IFirestoreState<Category>, IDispatch] => {
-  const { get, post, put } = useFirestoreApi();
+  const { get, post, put, remove } = useFirestoreApi();
   const { success, error } = useToast();
   const initialState = useMemo(() => createInitialState<Category>(), []);
   const reducer = useMemo(() => createReducer<Category>(), []);
@@ -59,12 +59,33 @@ const useCategory = (): [IFirestoreState<Category>, IDispatch] => {
     );
   }, []);
 
+  const removeCategory = useCallback((id: string): Promise<void> => {
+    dispatch({ type: FirestoreStatus.LOADING });
+
+    return remove(COLLECTION_NAME, id).then(
+      () => {
+        dispatch({ type: FirestoreStatus.SUCCESS });
+        success({
+          description: 'La categoria ha sido eliminada correctamente.',
+          title: 'Categoria Eliminada',
+        });
+      },
+      (reason) => {
+        dispatch({ type: FirestoreStatus.ERROR, payload: reason });
+        error({
+          title: 'Ha ocurrido un error',
+        });
+      },
+    );
+  }, []);
+
   return useMemo(
     () => [
       state,
       {
         request,
         save,
+        remove: removeCategory,
       },
     ],
     [state],
@@ -72,6 +93,7 @@ const useCategory = (): [IFirestoreState<Category>, IDispatch] => {
 };
 
 interface IDispatch {
+  remove(id: string): Promise<void>;
   request(id: string): void;
   save(model: Category, id?: string): Promise<void>;
 }

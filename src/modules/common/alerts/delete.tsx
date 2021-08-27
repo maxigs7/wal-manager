@@ -10,6 +10,8 @@ import {
   Button,
 } from '@chakra-ui/react';
 
+import { Icon } from '@lib/chakra-ui';
+
 const DeleteDialog: React.FC<IProps> = ({ isLoading, isOpen, onClose, onConfirm, title }) => {
   const cancelRef = useRef(null);
 
@@ -24,11 +26,17 @@ const DeleteDialog: React.FC<IProps> = ({ isLoading, isOpen, onClose, onConfirm,
           <AlertDialogBody>Estas seguro? Esta accion no se puede deshacer.</AlertDialogBody>
 
           <AlertDialogFooter>
+            <Button
+              colorScheme="crimson"
+              isLoading={isLoading}
+              leftIcon={<Icon icon="trash-alt" />}
+              mr={3}
+              onClick={onConfirm}
+            >
+              Delete
+            </Button>
             <Button onClick={onClose} ref={cancelRef}>
               Cancel
-            </Button>
-            <Button colorScheme="crimson" isLoading={isLoading} ml={3} onClick={onConfirm}>
-              Delete
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
