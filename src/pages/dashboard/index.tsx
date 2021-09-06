@@ -1,13 +1,7 @@
 import React from 'react';
 
-import { Divider } from '@chakra-ui/react';
+import { Page } from '@lib/wal-ui';
 
-const DashboardPage: React.FC = () => (
-  <>
-    <h1>Dashboard</h1>
-    <Divider />
-    <p>I'm dashboard page</p>
-  </>
-);
+const DashboardPage: React.FC = () => <Page metaTitle="Dashboard" title="Dashboard"></Page>;
 
 export default DashboardPage;

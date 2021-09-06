@@ -22,12 +22,12 @@ const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal
   const onConfirm = (model: Category) => {
     if (!isLoading)
       return dispatch.save(model, id).then(() => {
-        onCloseModal(true);
+        onCloseModal(id);
       });
   };
 
   const onClose = () => {
-    onCloseModal(false);
+    onCloseModal();
   };
 
   const renderForm = (props: UseFormReturn<Category>) => {
@@ -54,7 +54,7 @@ const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal
 interface IProps {
   id?: string;
   isOpen: boolean;
-  onClose(success: boolean): void;
+  onClose(id?: string): void;
   type: CategoryType;
 }
 

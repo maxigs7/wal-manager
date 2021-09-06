@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { Portal, SimpleGrid } from '@chakra-ui/react';
 
-import { useCategories } from '@app/api/categories';
+import { Category, useCategories } from '@app/api/categories';
 import { CategoryPanel, SubCategoryPanel } from '@app/components';
 import { CategoryDeleteDialog, CategoryModalForm } from '@app/containers';
 import { Card, Page } from '@lib/wal-ui';
@@ -15,16 +15,17 @@ const CategoriesPage: React.FC = () => {
 
   const request = () => dispatchList.requestList(state.selectedType);
 
-  const onClose = (success: boolean) => {
-    if (success) {
-      dispatch.onModalClose();
+  const onClose = (id?: string) => {
+    dispatch.onModalClose();
+    if (id) {
       request();
     }
   };
 
   const onDialogClose = (success: boolean) => {
+    dispatch.onDialogClose();
     if (success) {
-      dispatch.onDialogClose();
+      request();
     }
   };
 
@@ -34,8 +35,11 @@ const CategoriesPage: React.FC = () => {
 
   // Effects
   useEffect(() => {
-    if (categories && categories.length && !state.selected) {
-      dispatch.select(categories[0]);
+    if (categories && categories.length) {
+      const selected = categories.find(
+        (category, index) => state.selected?.id === category.id || (!state.selected && index === 0),
+      );
+      dispatch.select(selected as Category);
     }
   }, [categories]);
 
