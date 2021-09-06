@@ -2,8 +2,8 @@ import React, { Suspense } from 'react';
 import { Switch } from 'react-router';
 import { Route } from 'react-router-dom';
 
-import { PageLoader } from './modules/common';
-import { LazyAdminLayout, LazyDefaultLayout } from './modules/layouts';
+import { LazyAdminLayout, LazyDefaultLayout } from '@app/layouts';
+import { PageLoader } from '@lib/wal-ui';
 
 const App: React.FC = () => (
   <Suspense fallback={<PageLoader />}>

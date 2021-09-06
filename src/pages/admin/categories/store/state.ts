@@ -2,7 +2,7 @@ import { Category } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 
 export interface IState {
-  categoryId?: string;
+  id?: string;
   selected?: Category;
   selectedType: CategoryType;
 }

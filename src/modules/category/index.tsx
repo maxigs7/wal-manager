@@ -1,1 +1,0 @@
-export { CategoryPanel } from './panel';

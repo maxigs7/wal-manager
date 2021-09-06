@@ -34,13 +34,13 @@ const useStore = (): [IExtendedState, IDispatch] => {
   }, [dispatch, isDialogOpen, onCloseDialog]);
 
   const onModalClose = useCallback(() => {
-    if (state.categoryId) {
+    if (state.id) {
       dispatch({ type: UPDATE_CATEGORY_END });
     } else {
       dispatch({ type: CREATE_CATEGORY_END });
     }
     onCloseModal();
-  }, [dispatch, isModalOpen, onCloseModal, state.categoryId]);
+  }, [dispatch, isModalOpen, onCloseModal, state.id]);
 
   const remove = useCallback(
     (id: string) => {

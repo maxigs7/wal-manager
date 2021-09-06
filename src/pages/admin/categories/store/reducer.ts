@@ -18,26 +18,26 @@ export const reducer = (state: IState, action: PageCategoryAction): IState => {
   const { type } = action;
   switch (type) {
     case CREATE_CATEGORY_START:
-      return { ...state, categoryId: undefined };
+      return { ...state, id: undefined };
     case DELETE_CATEGORY_END:
-      return { ...state, categoryId: undefined, selected: undefined };
+      return { ...state, id: undefined, selected: undefined };
     case DELETE_CATEGORY_START: {
       const { id } = action.payload as DeletePayload;
-      return { ...state, categoryId: id };
+      return { ...state, id: id };
     }
     case SELECT_CATEGORY: {
       const { category } = action.payload as SelectPayload;
-      return { ...state, selected: category, categoryId: undefined };
+      return { ...state, selected: category, id: undefined };
     }
     case SELECT_CATEGORY_TYPE: {
       const { type } = action.payload as SelectTypePayload;
-      return { ...state, selectedType: type, selected: undefined, categoryId: undefined };
+      return { ...state, selectedType: type, selected: undefined, id: undefined };
     }
     case UPDATE_CATEGORY_END:
-      return { ...state, categoryId: undefined };
+      return { ...state, id: undefined };
     case UPDATE_CATEGORY_START: {
       const { id } = action.payload as UpdatePayload;
-      return { ...state, categoryId: id };
+      return { ...state, id: id };
     }
     default:
       return state;

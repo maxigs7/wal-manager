@@ -1,8 +1,8 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
-import { PageLoader } from '@app/modules/common';
 import { useAuth } from '@lib/auth';
+import { PageLoader } from '@lib/wal-ui';
 
 const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }: RouteProps) => {
   const { user, initializing } = useAuth();
@@ -29,4 +29,4 @@ const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }: RouteProps) =
   );
 };
 
-export default PrivateRoute;
+export { PrivateRoute };

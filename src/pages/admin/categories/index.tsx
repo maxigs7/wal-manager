@@ -3,11 +3,9 @@ import React, { useEffect } from 'react';
 import { Portal, SimpleGrid } from '@chakra-ui/react';
 
 import { useCategories } from '@app/api/categories';
-import { CategoryPanel } from '@app/modules/category';
-import { CategoryDeleteDialog } from '@app/modules/category/containers';
-import { CategoryModalForm } from '@app/modules/category/containers/modal-form';
-import { Card, Page } from '@app/modules/common';
-import { SubCategoryPanel } from '@app/modules/sub-category';
+import { CategoryPanel, SubCategoryPanel } from '@app/components';
+import { CategoryDeleteDialog, CategoryModalForm } from '@app/containers';
+import { Card, Page } from '@lib/wal-ui';
 
 import useStore from './store/useStore';
 
@@ -17,9 +15,17 @@ const CategoriesPage: React.FC = () => {
 
   const request = () => dispatchList.requestList(state.selectedType);
 
-  const onClose = () => {
-    dispatch.onModalClose();
-    request();
+  const onClose = (success: boolean) => {
+    if (success) {
+      dispatch.onModalClose();
+      request();
+    }
+  };
+
+  const onDialogClose = (success: boolean) => {
+    if (success) {
+      dispatch.onDialogClose();
+    }
   };
 
   useEffect(() => {
@@ -67,18 +73,14 @@ const CategoriesPage: React.FC = () => {
       <Portal>
         {state.isModalOpen && (
           <CategoryModalForm
-            id={state.categoryId}
+            id={state.id}
             isOpen={state.isModalOpen}
             onClose={onClose}
             type={state.selectedType}
           />
         )}
         {state.isDialogOpen && (
-          <CategoryDeleteDialog
-            id={state.categoryId}
-            isOpen={state.isDialogOpen}
-            onClose={dispatch.onDialogClose}
-          />
+          <CategoryDeleteDialog id={state.id} isOpen={state.isDialogOpen} onClose={onDialogClose} />
         )}
       </Portal>
     </>

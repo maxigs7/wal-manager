@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { Divider } from '@chakra-ui/react';
+
 const DashboardPage: React.FC = () => (
   <>
     <h1>Dashboard</h1>
-    <hr className="my-5" />
-    <p>My Buttons</p>
+    <Divider />
+    <p>I'm dashboard page</p>
   </>
 );
 
