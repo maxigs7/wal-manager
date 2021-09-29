@@ -1,6 +1,6 @@
 import { Box, CircularProgress } from '@chakra-ui/react';
 
-import { Category, SubCategory } from '@app/api/categories';
+import { Category } from '@app/api/categories';
 
 import { SubCategoryList } from '../list';
 import { SubCategoryListEmpty } from '../list-empty';
@@ -56,7 +56,7 @@ interface IProps {
   onCreated?(): void;
   onDeleted?(): void;
   onEdited?(): void;
-  subCategories?: SubCategory[];
+  subCategories?: Category[];
 }
 
 export { SubCategoryPanel };

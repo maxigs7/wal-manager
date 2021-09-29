@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box } from '@chakra-ui/react';
 
-import { SubCategory } from '@app/api/categories';
+import { Category } from '@app/api/categories';
 
 const SubCategoryListItem: React.FC<IProps> = ({ subCategory }) => (
   <Box
@@ -19,9 +19,10 @@ const SubCategoryListItem: React.FC<IProps> = ({ subCategory }) => (
 );
 
 interface IProps {
-  subCategory: SubCategory;
-  onDeleted?(category: SubCategory): void;
-  onEdited?(category: SubCategory): void;
+  subCategory: Category;
+  onDeleted?(category: Category): void;
+  onEdited?(category: Category): void;
 }
 
 export { SubCategoryListItem };
+export {};

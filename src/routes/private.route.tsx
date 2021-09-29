@@ -1,14 +1,11 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
-import { useAuth } from '@lib/auth';
-import { PageLoader } from '@lib/wal-ui';
+import { useAppSelector } from '@app/hooks/redux';
+import { selectUser } from '@app/stores';
 
 const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }: RouteProps) => {
-  const { user, initializing } = useAuth();
-  if (initializing) {
-    return <PageLoader />;
-  }
+  const user = useAppSelector(selectUser);
 
   return (
     <Route

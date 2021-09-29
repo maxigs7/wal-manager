@@ -1,17 +1,24 @@
+import { Redirect } from 'react-router';
+
 import { Button, Icon } from '@chakra-ui/react';
 
 import { ReactComponent as GoogleLogo } from '@app/assets/images/google.svg';
+import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
 import { useRouter } from '@app/hooks/useRouter';
-import { useAuth } from '@lib/auth';
+import { LOGIN_REQUEST } from '@app/stores/auth';
 
 export const LoginContainer: React.FC = () => {
-  const { push } = useRouter();
-  const { signInWithGoogle } = useAuth();
+  const { location } = useRouter();
+  const redirectTo = useAppSelector((state) => state.auth.redirectTo);
+  const dispatch = useAppDispatch();
+
+  if (redirectTo) {
+    return <Redirect to={redirectTo} />;
+  }
 
   const signInHandler = async () => {
     try {
-      await signInWithGoogle();
-      push('/');
+      await dispatch(LOGIN_REQUEST(location.state?.from || '/dashboard'));
     } catch (error) {
       console.error(error);
     }

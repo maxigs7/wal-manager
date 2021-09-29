@@ -1,1 +1,0 @@
-export { useMemoCompare } from './useMemoCompare';

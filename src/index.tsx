@@ -1,34 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import '@fontsource/montserrat/300.css';
 import './styles/globals.css';
 
 import { ChakraProvider } from '@chakra-ui/react';
+import { initializeApp } from '@firebase/app';
+import { getAuth } from '@firebase/auth';
+import { getFirestore } from '@firebase/firestore';
 
-import { AuthProvider } from '@lib/auth';
 import { startChakra } from '@lib/chakra-ui';
-import { startFirebase } from '@lib/firebase';
-import { FirestoreApiProvider } from '@lib/firebase/api/context';
+import { WalFirebaseAppProvider } from '@lib/firebase';
+import { FIREBASE_CONFIG } from '@lib/firebase/config';
 import { startFontAwesome } from '@lib/font-awesome';
 
 import App from './App';
+import { runSagas, store } from './stores';
 
-startFirebase();
 startFontAwesome();
 const theme = startChakra();
+const app = initializeApp(FIREBASE_CONFIG);
+const authSdk = getAuth(app);
+const firestoreSdk = getFirestore(app);
+
+runSagas(authSdk, firestoreSdk);
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
-      <FirestoreApiProvider>
-        <ChakraProvider theme={theme}>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </ChakraProvider>
-      </FirestoreApiProvider>
+      <WalFirebaseAppProvider app={app} authSdk={authSdk} firestoreSdk={firestoreSdk}>
+        <Provider store={store}>
+          <HelmetProvider>
+            <ChakraProvider theme={theme}>
+              <App />
+            </ChakraProvider>
+          </HelmetProvider>
+        </Provider>
+      </WalFirebaseAppProvider>
     </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root'),

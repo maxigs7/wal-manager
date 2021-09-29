@@ -1,10 +1,14 @@
 import React from 'react';
 
-import { useCategory } from '@app/api/categories';
+// import { useCategory } from '@app/api/categories';
 import { DeleteDialog } from '@lib/wal-ui';
 
 const CategoryDeleteDialog: React.FC<IProps> = ({ id, isOpen, onClose }) => {
-  const [{ isLoading }, { remove }] = useCategory();
+  // const [{ isLoading }, { remove }] = useCategory();
+  const isLoading = true;
+  const remove = async (id: string) => {
+    console.log(id);
+  };
 
   const onConfirm = async () => {
     await remove(id as string);

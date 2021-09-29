@@ -3,11 +3,18 @@ import { NavLink } from 'react-router-dom';
 
 import { Avatar, HStack, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
 
-import { useAuth } from '@lib/auth';
+import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
+import { selectUser } from '@app/stores';
+import { LOGOUT_REQUEST } from '@app/stores/auth/actions';
 import { Icon } from '@lib/chakra-ui';
 
 export const UserMenu: React.FC = React.memo(() => {
-  const { user, signOut } = useAuth();
+  const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+
+  const signOutHandler = () => {
+    dispatch(LOGOUT_REQUEST());
+  };
 
   return (
     <Menu gutter={0} placement="bottom-end" isLazy>
@@ -24,7 +31,7 @@ export const UserMenu: React.FC = React.memo(() => {
         <MenuItem as={NavLink} to="/settings" exact>
           Profile
         </MenuItem>
-        <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
+        <MenuItem onClick={signOutHandler}>Sign Out</MenuItem>
       </MenuList>
     </Menu>
   );

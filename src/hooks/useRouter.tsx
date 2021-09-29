@@ -6,7 +6,7 @@ import { parse } from 'query-string';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useRouter = () => {
   const params = useParams();
-  const location = useLocation();
+  const location = useLocation<any>();
   const history = useHistory();
   const match = useRouteMatch();
 

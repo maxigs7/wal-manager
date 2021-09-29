@@ -49,3 +49,4 @@ interface IProps {
 }
 
 export { CategoryPanel };
+export type CategoryPanelProps = IProps;

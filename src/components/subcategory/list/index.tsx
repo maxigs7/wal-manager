@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SubCategory } from '@app/api/categories';
+import { Category } from '@app/api/categories';
 
 import { SubCategoryListItem } from '../list-item';
 
@@ -21,9 +21,10 @@ const SubCategoryList: React.FC<IProps> = ({ subCategories = [], onDeleted, onEd
 };
 
 interface IProps {
-  subCategories: SubCategory[];
-  onDeleted?(subCategory: SubCategory): void;
-  onEdited?(subCategory: SubCategory): void;
+  subCategories: Category[];
+  onDeleted?(subCategory: Category): void;
+  onEdited?(subCategory: Category): void;
 }
 
 export { SubCategoryList };
+export {};
