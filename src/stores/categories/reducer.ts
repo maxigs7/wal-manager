@@ -1,5 +1,6 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { ActionReducerMapBuilder, createReducer } from '@reduxjs/toolkit';
 
+import { addFailCase, addLoadingCase, addSuccessCase } from '../util';
 import {
   REQUEST_CATEGORIES,
   REQUEST_CATEGORIES_FAIL,
@@ -10,38 +11,17 @@ import {
   SELECT_CATEGORY,
   SELECT_CATEGORY_TYPE,
 } from './actions';
-import { initialState } from './state';
+import { initialState, IState } from './state';
 
-const reducer = createReducer(initialState, (builder) => {
+const reducer = createReducer(initialState, (builder: ActionReducerMapBuilder<IState>) => {
+  addLoadingCase(builder, REQUEST_CATEGORIES, (state: IState) => state.categories);
+  addFailCase(builder, REQUEST_CATEGORIES_FAIL, (state: IState) => state.categories);
+  addSuccessCase(builder, REQUEST_CATEGORIES_SUCCESS, (state: IState) => state.categories);
+  addLoadingCase(builder, REQUEST_SUBCATEGORIES, (state: IState) => state.subCategories);
+  addFailCase(builder, REQUEST_SUBCATEGORIES_FAIL, (state: IState) => state.subCategories);
+  addSuccessCase(builder, REQUEST_SUBCATEGORIES_SUCCESS, (state: IState) => state.subCategories);
+
   builder
-    .addCase(REQUEST_CATEGORIES, (state) => {
-      state.categories.isLoading = true;
-      state.categories.status = 'loading';
-    })
-    .addCase(REQUEST_CATEGORIES_FAIL, (state, action) => {
-      state.categories.isLoading = false;
-      state.categories.error = action.payload;
-      state.categories.status = 'error';
-    })
-    .addCase(REQUEST_CATEGORIES_SUCCESS, (state, action) => {
-      state.categories.isLoading = false;
-      state.categories.data = action.payload;
-      state.categories.status = 'success';
-    })
-    .addCase(REQUEST_SUBCATEGORIES, (state) => {
-      state.subCategories.isLoading = true;
-      state.subCategories.status = 'loading';
-    })
-    .addCase(REQUEST_SUBCATEGORIES_FAIL, (state, action) => {
-      state.subCategories.isLoading = false;
-      state.subCategories.error = action.payload;
-      state.subCategories.status = 'error';
-    })
-    .addCase(REQUEST_SUBCATEGORIES_SUCCESS, (state, action) => {
-      state.subCategories.isLoading = false;
-      state.subCategories.data = action.payload;
-      state.subCategories.status = 'success';
-    })
     .addCase(SELECT_CATEGORY, (state, action) => {
       state.selected = action.payload;
     })

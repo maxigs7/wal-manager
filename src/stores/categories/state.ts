@@ -19,8 +19,9 @@ export const initialState: IState = {
 };
 
 export interface IState {
-  selected?: Category;
-  type: CategoryType;
   categories: IAsyncState<Category[]>;
+  category?: IAsyncState<Category>;
+  selected?: Category;
   subCategories: IAsyncState<Category[]>;
+  type: CategoryType;
 }
