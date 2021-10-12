@@ -16,8 +16,8 @@ import {
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, select, take, takeLatest } from 'redux-saga/effects';
 
-import { Category } from '@app/api/categories';
-import { CategoryType } from '@app/api/common';
+import { Category } from '@app/models/categories';
+import { CategoryType } from '@app/models/common';
 import { converter } from '@lib/firebase';
 
 import {

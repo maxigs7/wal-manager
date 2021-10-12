@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { Category } from '@app/api/categories';
-import { CategoryType } from '@app/api/common';
+import { Category } from '@app/models/categories';
+import { CategoryType } from '@app/models/common';
 
 import { createAsyncAction } from '../actions';
 

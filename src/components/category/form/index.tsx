@@ -9,9 +9,9 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 
-import { Category, isUnique } from '@app/api/categories';
 import { ColorSelect, IconSelect } from '@app/components';
 import { useAppSelector } from '@app/hooks';
+import { Category, isUnique } from '@app/models/categories';
 import { selectUserId } from '@app/stores/auth';
 
 const Form: React.FC<IProps> = ({ category, control, formState: { errors }, register }) => {

@@ -1,6 +1,6 @@
 import { Flex, IconButton, Text } from '@chakra-ui/react';
 
-import { Category } from '@app/api/categories';
+import { Category } from '@app/models/categories';
 import { Icon } from '@lib/chakra-ui';
 import { ColorCircle } from '@lib/wal-ui';
 

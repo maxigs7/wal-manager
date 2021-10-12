@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from 'react';
 
-import { Category } from '@app/api/categories';
-import { CategoryType } from '@app/api/common';
 import { CategoryPanel } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
+import { Category } from '@app/models/categories';
+import { CategoryType } from '@app/models/common';
 import {
   CATEGORIES_REQUEST,
   selectCategories,

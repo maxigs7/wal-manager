@@ -2,8 +2,6 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@app/api": ["./api"],
-      "@app/api/*": ["./api/*"],
       "@app/assets": ["./assets"],
       "@app/assets/*": ["./assets/*"],
       "@app/common": ["./common"],
@@ -16,6 +14,8 @@
       "@app/hooks/*": ["./hooks/*"],
       "@app/layouts": ["./layouts"],
       "@app/layouts/*": ["./layouts/*"],
+      "@app/models": ["./models"],
+      "@app/models/*": ["./models/*"],
       "@app/pages": ["./pages"],
       "@app/pages/*": ["./pages/*"],
       "@app/routes": ["./routes"],

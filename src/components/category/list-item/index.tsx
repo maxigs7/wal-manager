@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, Link } from '@chakra-ui/react';
 
-import { Category } from '@app/api/categories';
+import { Category } from '@app/models/categories';
 
 const CategoryListItem: React.FC<IProps> = ({ category, isActive, onSelected }) => (
   <Box

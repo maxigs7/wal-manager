@@ -9,6 +9,8 @@ import {
   where,
 } from 'firebase/firestore';
 
+import { CATEGORY_COLLECTION } from '../constants';
+
 export const isUnique = (name: string, userId: string, id?: string): Promise<string | boolean> => {
   const conditions = [
     where('userId', '==', userId),
@@ -19,7 +21,7 @@ export const isUnique = (name: string, userId: string, id?: string): Promise<str
   return new Promise<string | boolean>((resolve, reject) => {
     const unsubscribe = onSnapshot(
       query(
-        collection(getFirestore(), 'categories'),
+        collection(getFirestore(), CATEGORY_COLLECTION),
         ...(conditions.filter((condition) => !!condition) as QueryConstraint[]),
       ),
 

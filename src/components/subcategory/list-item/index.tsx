@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box } from '@chakra-ui/react';
 
-import { Category } from '@app/api/categories';
+import { Category } from '@app/models/categories';
 
 const SubCategoryListItem: React.FC<IProps> = ({ subCategory }) => (
   <Box

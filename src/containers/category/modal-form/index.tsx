@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { Category } from '@app/api/categories';
 import { CategoryForm } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
+import { Category } from '@app/models/categories';
 import { selectUserId } from '@app/stores/auth';
 import {
   CATEGORIES_REQUEST_REFRESH,
