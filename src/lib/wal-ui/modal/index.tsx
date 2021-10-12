@@ -30,6 +30,7 @@ function ModalForm<TModel>({
   children,
   defaultValue,
   isOpen = false,
+  isSubmitting = false,
   model,
   onClose,
   onConfirm,
@@ -70,7 +71,7 @@ function ModalForm<TModel>({
         <ModalFooter>
           <Button
             colorScheme="crimson"
-            isLoading={useFormProps.formState.isSubmitting}
+            isLoading={isSubmitting || useFormProps.formState.isSubmitting}
             leftIcon={actionButtonIcon && <Icon icon={actionButtonIcon} />}
             mr={3}
             type="submit"
@@ -90,6 +91,7 @@ interface IProps<TModel> {
   children(props: UseFormReturn<TModel>): React.ReactElement;
   defaultValue?: UnpackNestedValue<DeepPartial<TModel>>;
   isOpen: boolean;
+  isSubmitting: boolean;
   model?: TModel;
   onClose(): void;
   onConfirm: SubmitHandler<TModel>;

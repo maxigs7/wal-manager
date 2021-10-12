@@ -1,35 +1,39 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { Category } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 import { CategoryPanel } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
 import {
-  REQUEST_CATEGORIES,
+  CATEGORIES_REQUEST,
   selectCategories,
-  SELECT_CATEGORY,
-  SELECT_CATEGORY_TYPE,
+  CATEGORY_SELECTED,
+  CATEGORY_TYPE_SELECTED,
 } from '@app/stores/categories';
 import { Card } from '@lib/wal-ui';
 
-export const CategoriesListCard: React.FC = () => {
+interface IProps {
+  onCreated(): void;
+}
+
+export const CategoriesListCard: React.FC<IProps> = ({ onCreated }) => {
   const { data: categories, isLoading } = useAppSelector(selectCategories);
   const userId = useAppSelector((state) => state.auth.userId);
   const selectedType = useAppSelector((state) => state.categories.type);
   const selected = useAppSelector((state) => state.categories.selected);
   const dispatch = useAppDispatch();
 
-  const onCategorySelected = (category: Category) => {
-    dispatch(SELECT_CATEGORY(category));
-  };
-  const onTypeSelected = (type: CategoryType) => {
-    dispatch(SELECT_CATEGORY_TYPE(type));
-  };
+  const onCategorySelected = useCallback((category: Category) => {
+    dispatch(CATEGORY_SELECTED(category));
+  }, []);
+  const onTypeSelected = useCallback((type: CategoryType) => {
+    dispatch(CATEGORY_TYPE_SELECTED(type));
+  }, []);
 
   useEffect(() => {
     if (userId && selectedType) {
       dispatch(
-        REQUEST_CATEGORIES({
+        CATEGORIES_REQUEST({
           categoryType: selectedType,
           userId: userId,
         }),
@@ -42,7 +46,7 @@ export const CategoriesListCard: React.FC = () => {
       <CategoryPanel
         categories={categories}
         isLoading={isLoading}
-        onCreated={() => console.log('Creating')}
+        onCreated={onCreated}
         onSelected={onCategorySelected}
         onTypeSelected={onTypeSelected}
         selected={selected}

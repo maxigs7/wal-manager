@@ -22,7 +22,7 @@ export const Sidebar: React.FC = () => {
       <VStack
         bg="cello.700"
         color="white"
-        h="100vh"
+        h="100%"
         id="sidebar"
         left={{ base: 0, lg: 'auto' }}
         overflowY="auto"

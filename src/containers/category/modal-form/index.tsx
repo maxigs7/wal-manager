@@ -1,68 +1,97 @@
-// import React, { useEffect, useMemo } from 'react';
-// import { UseFormReturn } from 'react-hook-form';
+import React, { useEffect, useMemo } from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
-// import { Category, useCategory } from '@app/api/categories';
-// import { CategoryType } from '@app/api/common';
-// import { CategoryForm } from '@app/components';
-// import { useAuth } from '@lib/auth';
-// import { ModalForm } from '@lib/wal-ui';
+import { Category } from '@app/api/categories';
+import { CategoryForm } from '@app/components';
+import { useAppDispatch, useAppSelector } from '@app/hooks';
+import { selectUserId } from '@app/stores/auth';
+import {
+  CATEGORIES_REQUEST_REFRESH,
+  CATEGORY_CREATE_REQUEST,
+  CATEGORY_REQUEST,
+  CATEGORY_RESET,
+  CATEGORY_UPDATE_REQUEST,
+  selectSelectedType,
+} from '@app/stores/categories';
+import { ModalForm } from '@lib/wal-ui';
 
-// const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal, type }) => {
-//   const { userId } = useAuth();
-//   // const [{ data: category, isLoading }, dispatch] = useCategory();
-//   const category = {};
-//   const isLoading = true;
-//   const dispatch = {
-//     request: () => null,
-//     save: () => null,
-//   };
+const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal }) => {
+  const dispatch = useAppDispatch();
 
-//   useEffect(() => {
-//     if (id && dispatch) {
-//       dispatch.request(id);
-//     }
-//   }, [id]);
+  /// SELECTORS
+  const userId = useAppSelector(selectUserId);
+  const type = useAppSelector(selectSelectedType);
+  const { data: category } = useAppSelector((state) => state.categories.category);
+  const {
+    data: idSaved,
+    isLoading: isSubmitting,
+    status,
+  } = useAppSelector((state) => state.categories.categoryAction);
 
-//   const title = useMemo(() => (id ? 'Editar categoria' : 'Nueva categoria'), [id]);
-//   const defValue = { categoryType: type, userId: userId as string };
-//   const onConfirm = (model: Category) => {
-//     if (!isLoading)
-//       return dispatch.save(model, id).then(() => {
-//         onCloseModal(id);
-//       });
-//   };
+  const title = useMemo(() => (id ? 'Editar categoria' : 'Nueva categoria'), [id]);
 
-//   const onClose = () => {
-//     onCloseModal();
-//   };
+  const defValue: Partial<Category> = useMemo(
+    () => ({ categoryType: type, userId: userId as string, parentId: null }),
+    [type, userId],
+  );
 
-//   const renderForm = (props: UseFormReturn<Category>) => {
-//     return <CategoryForm {...props} category={category} />;
-//   };
+  /// HANDLERS
+  const onConfirm = (model: Category) => {
+    if (isSubmitting) return;
 
-//   return (
-//     <ModalForm<Category>
-//       actionButtonIcon="save"
-//       actionButtonText="Guardar"
-//       defaultValue={defValue}
-//       isOpen={isOpen}
-//       model={category}
-//       onClose={onClose}
-//       onConfirm={onConfirm}
-//       size="3xl"
-//       title={title}
-//     >
-//       {renderForm}
-//     </ModalForm>
-//   );
-// };
+    if (!id) {
+      return dispatch(CATEGORY_CREATE_REQUEST(model));
+    }
 
-// interface IProps {
-//   id?: string;
-//   isOpen: boolean;
-//   onClose(id?: string): void;
-//   type: CategoryType;
-// }
+    return dispatch(CATEGORY_UPDATE_REQUEST(model));
+  };
 
-// export { CategoryModalForm };
-export {};
+  const onClose = () => {
+    dispatch(CATEGORY_RESET());
+    onCloseModal();
+  };
+
+  const renderForm = (props: UseFormReturn<Category>) => {
+    return <CategoryForm {...props} category={category} />;
+  };
+
+  /// EFFECTS
+  useEffect(() => {
+    if (id) {
+      dispatch(CATEGORY_REQUEST(id));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (status === 'success') {
+      dispatch(CATEGORIES_REQUEST_REFRESH(idSaved));
+      dispatch(CATEGORY_RESET());
+      onCloseModal(idSaved);
+    }
+  }, [status]);
+
+  return (
+    <ModalForm
+      actionButtonIcon="save"
+      actionButtonText="Guardar"
+      defaultValue={defValue}
+      isOpen={isOpen}
+      isSubmitting={isSubmitting}
+      model={category}
+      onClose={onClose}
+      onConfirm={onConfirm}
+      size="3xl"
+      title={title}
+    >
+      {renderForm}
+    </ModalForm>
+  );
+};
+
+interface IProps {
+  id?: string;
+  isOpen: boolean;
+  onClose(id?: string): void;
+}
+
+export { CategoryModalForm };

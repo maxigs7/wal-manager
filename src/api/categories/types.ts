@@ -8,6 +8,6 @@ export type Category = BaseModel & {
   categoryType: CategoryType;
   color: string;
   icon: IconName;
-  parentId?: string;
+  parentId: string | null;
   userId: string;
 };

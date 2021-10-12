@@ -1,14 +1,15 @@
 import { Category } from '@app/api/categories';
 import { CategoryType } from '@app/api/common';
 
-import { IAsyncState } from '../state';
+import { defaultAsync, IAsyncState } from '../state';
 
 export const initialState: IState = {
   categories: {
+    ...defaultAsync,
     data: [],
-    isLoading: false,
-    status: 'idle',
   },
+  categoryAction: { ...defaultAsync },
+  category: { ...defaultAsync },
   selected: undefined,
   subCategories: {
     data: [],
@@ -20,7 +21,8 @@ export const initialState: IState = {
 
 export interface IState {
   categories: IAsyncState<Category[]>;
-  category?: IAsyncState<Category>;
+  categoryAction: IAsyncState<string>;
+  category: IAsyncState<Category>;
   selected?: Category;
   subCategories: IAsyncState<Category[]>;
   type: CategoryType;

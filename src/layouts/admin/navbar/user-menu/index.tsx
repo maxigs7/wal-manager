@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Avatar, HStack, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
 
 import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
-import { selectUser } from '@app/stores';
+import { selectUser } from '@app/stores/auth';
 import { LOGOUT_REQUEST } from '@app/stores/auth/actions';
 import { Icon } from '@lib/chakra-ui';
 

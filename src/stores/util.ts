@@ -24,6 +24,7 @@ export const addLoadingCase = (
     const slice = selectionState(state);
     slice.isLoading = true;
     slice.status = 'loading';
+    slice.params = state.params;
   });
 };
 
