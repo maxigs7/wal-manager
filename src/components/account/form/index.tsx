@@ -35,11 +35,12 @@ const Form: React.FC<IProps> = ({ account, control, formState: { errors }, regis
       </FormControl>
 
       <FormControl isInvalid={!!errors.accountType}>
-        <FormLabel htmlFor="accountType">Tipo de cuenta</FormLabel>
+        <FormLabel htmlFor="accountType">Tipo</FormLabel>
         <AccountTypeRadioGroup
           control={control}
           defaultValue={AccountType.Bank}
-          {...register('accountType')}
+          id="accountType"
+          name="accountType"
         />
         <FormErrorMessage>{errors.accountType && errors.accountType.message}</FormErrorMessage>
       </FormControl>
