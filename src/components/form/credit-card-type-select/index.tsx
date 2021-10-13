@@ -33,6 +33,7 @@ const CreditCardTypeSelect: React.FC<IProps> = ({ control, id, name, placeholder
       id={id}
       inputRef={ref}
       isSearchable={false}
+      menuPortalTarget={document.body}
       onChange={(selected) => onChange(selected?.value)}
       options={creditCardTypes}
       placeholder={placeholder}
