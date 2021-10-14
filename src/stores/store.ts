@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import { reducer as authReducer } from './auth';
 import { reducer as categoriesReducer } from './categories';
+import { reducer as creditCardsReducer } from './credit-cards';
 import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -13,6 +14,7 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     categories: categoriesReducer,
+    creditCards: creditCardsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
