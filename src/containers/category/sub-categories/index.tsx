@@ -20,7 +20,6 @@ export const SubCategoriesListCard: React.FC<IProps> = ({ onCategoryUpdated }) =
       dispatch(
         SUBCATEGORIES_REQUEST({
           categoryId: selected.id,
-          userId: userId,
         }),
       );
     }

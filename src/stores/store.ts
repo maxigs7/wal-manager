@@ -3,6 +3,8 @@ import { Firestore } from '@firebase/firestore';
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 
+import { IUow } from '@app/models/uow';
+
 import { reducer as authReducer } from './auth';
 import { reducer as categoriesReducer } from './categories';
 import { reducer as creditCardsReducer } from './credit-cards';
@@ -20,8 +22,8 @@ export const store = configureStore({
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
 });
 
-export const runSagas = (authSdk: Auth, firestoreSdk: Firestore): void => {
-  sagaMiddleware.run(rootSaga, authSdk, firestoreSdk);
+export const runSagas = (authSdk: Auth, firestoreSdk: Firestore, uow: IUow): void => {
+  sagaMiddleware.run(rootSaga, authSdk, firestoreSdk, uow);
 };
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

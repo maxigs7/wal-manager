@@ -18,6 +18,7 @@ import { FIREBASE_CONFIG } from '@lib/firebase/config';
 import { startFontAwesome } from '@lib/font-awesome';
 
 import App from './App';
+import { getUow } from './models/uow';
 import { runSagas, store } from './stores';
 
 startFontAwesome();
@@ -25,8 +26,9 @@ const theme = startChakra();
 const app = initializeApp(FIREBASE_CONFIG);
 const authSdk = getAuth(app);
 const firestoreSdk = getFirestore(app);
+const uow = getUow(firestoreSdk);
 
-runSagas(authSdk, firestoreSdk);
+runSagas(authSdk, firestoreSdk, uow);
 
 ReactDOM.render(
   <BrowserRouter>

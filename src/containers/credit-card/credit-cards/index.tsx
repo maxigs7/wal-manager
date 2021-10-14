@@ -35,7 +35,6 @@ export const CategoriesListCard: React.FC<IProps> = ({ onCreated }) => {
       dispatch(
         CATEGORIES_REQUEST({
           categoryType: selectedType,
-          userId: userId,
         }),
       );
     }
