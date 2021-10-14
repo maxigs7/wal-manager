@@ -1,15 +1,21 @@
 import React from 'react';
 
-import { HStack } from '@chakra-ui/react';
+import { Flex, FlexProps } from '@chakra-ui/react';
 
 import { CreditCard } from '@app/models/credit-cards';
 
 import { CreditCardListItem } from '../list-item';
 
-const CreditCardList: React.FC<IProps> = ({ children, creditCards = [], onSelected, selected }) => {
+const CreditCardList: React.FC<IProps> = ({
+  children,
+  creditCards = [],
+  onSelected,
+  selected,
+  ...flexProps
+}) => {
   console.log('CreditCardList component rendering...', selected);
   return (
-    <HStack spacing={5} wrap="wrap">
+    <Flex {...flexProps} flexWrap="wrap">
       {creditCards.map((cc) => (
         <CreditCardListItem
           cc={cc}
@@ -19,11 +25,11 @@ const CreditCardList: React.FC<IProps> = ({ children, creditCards = [], onSelect
         />
       ))}
       {children}
-    </HStack>
+    </Flex>
   );
 };
 
-interface IProps {
+interface IProps extends FlexProps {
   creditCards: CreditCard[];
   onSelected?(cc: CreditCard): void;
   selected?: CreditCard;

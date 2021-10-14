@@ -20,6 +20,8 @@ const CreditCardListItem: React.FC<IProps> = ({ cc, isActive, onSelected }) => (
       cursor: 'pointer',
     }}
     h={64}
+    mb={5}
+    mr={5}
     onClick={() => onSelected && onSelected(cc)}
     p={5}
     w={64}
