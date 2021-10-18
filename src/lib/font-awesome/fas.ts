@@ -107,6 +107,7 @@ import {
   faUniversity,
   faUtensils,
   faUtensilSpoon,
+  faWallet,
   faWineGlassAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -130,6 +131,7 @@ export const CoreIcons = [
   faTimes,
   faTimesCircle,
   faTrashAlt,
+  faWallet,
 ];
 
 export const CategoryIcons = [
