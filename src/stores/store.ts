@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import { IUow } from '@app/models/uow';
 
+import { reducer as accountsReducer } from './accounts';
 import { reducer as authReducer } from './auth';
 import { reducer as categoriesReducer } from './categories';
 import { reducer as creditCardsReducer } from './credit-cards';
@@ -14,6 +15,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
+    accounts: accountsReducer,
     auth: authReducer,
     categories: categoriesReducer,
     creditCards: creditCardsReducer,
