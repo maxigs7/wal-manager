@@ -3,12 +3,18 @@ import { Account } from '@app/models/accounts';
 import { defaultAsync, IAsyncState } from '../state';
 
 export const initialState: IState = {
-  accounts: {
+  account: { ...defaultAsync },
+  formSubmission: { ...defaultAsync },
+  list: {
     ...defaultAsync,
     data: [],
   },
+  selected: undefined,
 };
 
 export interface IState {
-  accounts: IAsyncState<Account[]>;
+  account: IAsyncState<Account>;
+  formSubmission: IAsyncState<string>;
+  list: IAsyncState<Account[]>;
+  selected?: Account;
 }
