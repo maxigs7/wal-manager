@@ -33,7 +33,7 @@ const DeleteDialog: React.FC<IProps> = ({ isLoading, isOpen, onClose, onConfirm,
               mr={3}
               onClick={onConfirm}
             >
-              Delete
+              Eliminar
             </Button>
             <Button onClick={onClose} ref={cancelRef}>
               Cancel

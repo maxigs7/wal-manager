@@ -11,6 +11,8 @@ import {
 
 import {
   Button,
+  CircularProgress,
+  Flex,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -30,6 +32,7 @@ function ModalForm<TModel>({
   children,
   defaultValue,
   isOpen = false,
+  isLoading = false,
   isSubmitting = false,
   model,
   onClose,
@@ -42,6 +45,16 @@ function ModalForm<TModel>({
   const handleClose = () => {
     useFormProps.reset(defaultValue);
     onClose();
+  };
+  const renderChildren = () => {
+    if (isLoading) {
+      return (
+        <Flex align="center" justify="center" p={5}>
+          <CircularProgress color="crimson.300" isIndeterminate />
+        </Flex>
+      );
+    }
+    return children && children(useFormProps);
   };
 
   useEffect(() => {
@@ -67,10 +80,10 @@ function ModalForm<TModel>({
       <ModalContent as="form" onSubmit={handleSubmit}>
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton onClick={handleClose} />
-        <ModalBody>{children && children(useFormProps)}</ModalBody>
+        <ModalBody>{renderChildren()}</ModalBody>
         <ModalFooter>
           <Button
-            colorScheme="crimson"
+            colorScheme="info"
             isLoading={isSubmitting || useFormProps.formState.isSubmitting}
             leftIcon={actionButtonIcon && <Icon icon={actionButtonIcon} />}
             mr={3}
@@ -91,6 +104,7 @@ interface IProps<TModel> {
   children(props: UseFormReturn<TModel>): React.ReactElement;
   defaultValue?: UnpackNestedValue<DeepPartial<TModel>>;
   isOpen: boolean;
+  isLoading: boolean;
   isSubmitting: boolean;
   model?: TModel;
   onClose(): void;
