@@ -9,6 +9,10 @@ const CategoriesPage = lazy(
   () => import(/* webpackChunkName: 'admin.categories.page' */ '@app/pages/admin/categories'),
 );
 
+const AccountsPage = lazy(
+  () => import(/* webpackChunkName: 'admin.accounts.page' */ '@app/pages/admin/accounts'),
+);
+
 const NotFoundPage = lazy(
   () => import(/* webpackChunkName: 'not-found.page' */ '@app/pages/not-found'),
 );
@@ -17,6 +21,10 @@ export const adminRoutes: RouteProps[] = [
   {
     children: <DashboardPage />,
     path: '/dashboard',
+  },
+  {
+    children: <AccountsPage />,
+    path: '/admin/accounts',
   },
   {
     children: <CategoriesPage />,

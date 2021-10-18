@@ -41,10 +41,8 @@ export const adminRoutes: IMenuItem[] = [
     title: 'Categorias',
   },
   {
-    badge: 'soon',
-    exact: true,
     icon: 'university',
-    path: '/',
+    path: '/admin/accounts',
     title: 'Cuentas',
   },
   {
