@@ -21,7 +21,7 @@ const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal
   /// SELECTORS
   const userId = useAppSelector(selectUserId);
   const type = useAppSelector(selectSelectedType);
-  const { data: category } = useAppSelector((state) => state.categories.category);
+  const { data: category, isLoading } = useAppSelector((state) => state.categories.category);
   const {
     data: idSaved,
     isLoading: isSubmitting,
@@ -64,17 +64,18 @@ const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal
 
   useEffect(() => {
     if (status === 'success') {
-      dispatch(CATEGORIES_REQUEST_REFRESH(idSaved));
-      dispatch(CATEGORY_RESET());
       onCloseModal(idSaved);
+      dispatch(CATEGORY_RESET());
+      dispatch(CATEGORIES_REQUEST_REFRESH(idSaved));
     }
-  }, [status]);
+  }, [status, idSaved]);
 
   return (
     <ModalForm
       actionButtonIcon="save"
       actionButtonText="Guardar"
       defaultValue={defValue}
+      isLoading={isLoading}
       isOpen={isOpen}
       isSubmitting={isSubmitting}
       model={category}

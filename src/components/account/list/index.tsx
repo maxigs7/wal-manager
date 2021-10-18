@@ -9,6 +9,7 @@ import { AccountListItem } from '../list-item';
 const AccountList: React.FC<IProps> = ({
   children,
   accounts = [],
+  onDelete,
   onSelected,
   selected,
   ...flexProps
@@ -21,6 +22,7 @@ const AccountList: React.FC<IProps> = ({
           account={account}
           isActive={account === selected}
           key={account.id}
+          onDelete={onDelete}
           onSelected={onSelected}
         />
       ))}
@@ -31,6 +33,7 @@ const AccountList: React.FC<IProps> = ({
 
 interface IProps extends FlexProps {
   accounts: Account[];
+  onDelete?(account: Account): void;
   onSelected?(account: Account): void;
   selected?: Account;
 }
