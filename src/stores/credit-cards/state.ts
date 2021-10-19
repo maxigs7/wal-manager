@@ -4,8 +4,8 @@ import { defaultAsync, IAsyncState } from '../state';
 
 export const initialState: IState = {
   creditCard: { ...defaultAsync },
-  creditCardAction: { ...defaultAsync },
-  creditCards: {
+  formSubmission: { ...defaultAsync },
+  list: {
     ...defaultAsync,
     data: [],
   },
@@ -14,7 +14,7 @@ export const initialState: IState = {
 
 export interface IState {
   creditCard: IAsyncState<CreditCard>;
-  creditCardAction: IAsyncState<string>;
-  creditCards: IAsyncState<CreditCard[]>;
+  formSubmission: IAsyncState<string>;
+  list: IAsyncState<CreditCard[]>;
   selected?: CreditCard;
 }
