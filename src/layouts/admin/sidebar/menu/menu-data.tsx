@@ -46,10 +46,8 @@ export const adminRoutes: IMenuItem[] = [
     title: 'Cuentas',
   },
   {
-    badge: 'soon',
-    exact: true,
     icon: 'credit-card',
-    path: '/',
+    path: '/admin/credit-cards',
     title: 'Tarjetas',
   },
 ];

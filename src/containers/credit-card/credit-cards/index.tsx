@@ -1,56 +1,45 @@
-import { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import { CategoryPanel } from '@app/components';
-import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
-import { Category } from '@app/models/categories';
-import { CategoryType } from '@app/models/common';
-import {
-  CATEGORIES_REQUEST,
-  selectCategories,
-  CATEGORY_SELECTED,
-  CATEGORY_TYPE_SELECTED,
-} from '@app/stores/categories';
-import { Card } from '@lib/wal-ui';
+import { CircularProgress, Flex } from '@chakra-ui/react';
 
-interface IProps {
-  onCreated(): void;
-}
+import { CreditCardList, CreditCardNewPlaceholder } from '@app/components';
+import { CreditCard } from '@app/models/credit-cards';
 
-export const CategoriesListCard: React.FC<IProps> = ({ onCreated }) => {
-  const { data: categories, isLoading } = useAppSelector(selectCategories);
-  const userId = useAppSelector((state) => state.auth.userId);
-  const selectedType = useAppSelector((state) => state.categories.type);
-  const selected = useAppSelector((state) => state.categories.selected);
-  const dispatch = useAppDispatch();
+import { useRedux } from './useRedux';
 
-  const onCategorySelected = useCallback((category: Category) => {
-    dispatch(CATEGORY_SELECTED(category));
-  }, []);
-  const onTypeSelected = useCallback((type: CategoryType) => {
-    dispatch(CATEGORY_TYPE_SELECTED(type));
-  }, []);
+const CreditCardsList: React.FC<IProps> = ({ onCreate, onDelete }) => {
+  const { state, dispatch } = useRedux();
 
   useEffect(() => {
-    if (userId && selectedType) {
-      dispatch(
-        CATEGORIES_REQUEST({
-          categoryType: selectedType,
-        }),
-      );
-    }
-  }, [userId, selectedType]);
+    dispatch.onCreditCardsRequest();
+  }, []);
+
+  console.log('CreditCardsPage rendering...');
 
   return (
-    <Card>
-      <CategoryPanel
-        categories={categories}
-        isLoading={isLoading}
-        onCreated={onCreated}
-        onSelected={onCategorySelected}
-        onTypeSelected={onTypeSelected}
-        selected={selected}
-        selectedType={selectedType}
-      />
-    </Card>
+    <>
+      {state.isLoading && (
+        <Flex align="center" justify="center" p={5}>
+          <CircularProgress color="crimson.300" isIndeterminate />
+        </Flex>
+      )}
+      {!state.isLoading && (
+        <CreditCardList
+          creditCards={state.creditCards}
+          onDelete={onDelete}
+          onSelected={dispatch.onCreditCardSelected}
+          selected={state.selected}
+        >
+          <CreditCardNewPlaceholder onSelected={onCreate} />
+        </CreditCardList>
+      )}
+    </>
   );
 };
+
+interface IProps {
+  onCreate?(): void;
+  onDelete?(creditCard: CreditCard): void;
+}
+
+export { CreditCardsList };

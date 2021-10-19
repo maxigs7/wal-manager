@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { CircularProgress } from '@chakra-ui/react';
+import { CircularProgress, Flex } from '@chakra-ui/react';
 
 import { AccountList, AccountNewPlaceholder } from '@app/components';
 import { Account } from '@app/models/accounts';
@@ -18,7 +18,11 @@ const AccountsList: React.FC<IProps> = ({ onCreate, onDelete }) => {
 
   return (
     <>
-      {state.isLoading && <CircularProgress color="crimson.300" isIndeterminate />}
+      {state.isLoading && (
+        <Flex align="center" justify="center" p={5}>
+          <CircularProgress color="crimson.300" isIndeterminate />
+        </Flex>
+      )}
       {!state.isLoading && (
         <AccountList
           accounts={state.accounts}

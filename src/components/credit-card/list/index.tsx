@@ -1,37 +1,37 @@
 import React from 'react';
 
-import { Flex, FlexProps } from '@chakra-ui/react';
-
 import { CreditCard } from '@app/models/credit-cards';
+import { CardsList } from '@lib/wal-ui';
 
 import { CreditCardListItem } from '../list-item';
 
 const CreditCardList: React.FC<IProps> = ({
   children,
   creditCards = [],
+  onDelete,
   onSelected,
   selected,
-  ...flexProps
 }) => {
   console.log('CreditCardList component rendering...', selected);
   return (
-    <Flex {...flexProps} flexWrap="wrap">
-      {creditCards.map((cc) => (
+    <CardsList>
+      {creditCards.map((creditCard) => (
         <CreditCardListItem
-          cc={cc}
-          isActive={cc === selected}
-          key={cc.id}
+          creditCard={creditCard}
+          key={creditCard.id}
+          onDelete={onDelete}
           onSelected={onSelected}
         />
       ))}
       {children}
-    </Flex>
+    </CardsList>
   );
 };
 
-interface IProps extends FlexProps {
+interface IProps {
   creditCards: CreditCard[];
-  onSelected?(cc: CreditCard): void;
+  onDelete?(creditCard: CreditCard): void;
+  onSelected?(creditCard: CreditCard): void;
   selected?: CreditCard;
 }
 
