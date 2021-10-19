@@ -9,16 +9,19 @@ import {
   NumberInputStepper,
 } from '@chakra-ui/react';
 
-const InputNumber: React.FC<IProps> = ({ control, id, name, rules }) => {
+const InputNumber: React.FC<IProps> = ({ control, defaultValue, id, name, rules }) => {
   const { field } = useController({
     name,
     control,
-    rules,
-    defaultValue: 0,
+    rules: {
+      valueAsNumber: true,
+      ...rules,
+    },
+    defaultValue,
   });
 
   return (
-    <NumberInput {...field} id={id} type="numeric">
+    <NumberInput {...field} defaultValue={defaultValue} id={id} type="numeric">
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />
@@ -30,7 +33,7 @@ const InputNumber: React.FC<IProps> = ({ control, id, name, rules }) => {
 
 interface IProps {
   control: Control<any>;
-  defaultValue?: string;
+  defaultValue?: number;
   id?: string;
   name: string;
   placeholder?: string;

@@ -49,6 +49,7 @@ const Form: React.FC<IProps> = ({ cc, control, formState: { errors }, register }
         <FormLabel htmlFor="closedDay">Dia de cierre</FormLabel>
         <InputNumber
           control={control}
+          defaultValue={1}
           id="closedDay"
           name="closedDay"
           rules={{
