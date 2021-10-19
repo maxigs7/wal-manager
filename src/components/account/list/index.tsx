@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { Flex, FlexProps } from '@chakra-ui/react';
-
 import { Account } from '@app/models/accounts';
+import { CardsList } from '@lib/wal-ui';
 
 import { AccountListItem } from '../list-item';
 
@@ -12,26 +11,24 @@ const AccountList: React.FC<IProps> = ({
   onDelete,
   onSelected,
   selected,
-  ...flexProps
 }) => {
   console.log('AccountList component rendering...', selected);
   return (
-    <Flex {...flexProps} flexWrap="wrap">
+    <CardsList>
       {accounts.map((account) => (
         <AccountListItem
           account={account}
-          isActive={account === selected}
           key={account.id}
           onDelete={onDelete}
           onSelected={onSelected}
         />
       ))}
       {children}
-    </Flex>
+    </CardsList>
   );
 };
 
-interface IProps extends FlexProps {
+interface IProps {
   accounts: Account[];
   onDelete?(account: Account): void;
   onSelected?(account: Account): void;
