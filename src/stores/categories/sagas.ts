@@ -71,7 +71,6 @@ function* requestSubCategories(uow: IUow, action: PayloadAction<IRequestSubCateg
       repo.getAll,
       where('parentId', '==', action.payload.categoryId),
       where('userId', '==', userId),
-      where('parentId', '==', null),
       orderBy('name', 'asc'),
     );
     yield put(SUBCATEGORIES_REQUEST_SUCCESS(data));
