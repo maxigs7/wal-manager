@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
-import { useSupabase } from '..';
+import { useSupabase } from '../context';
 import { authInit } from './actions';
 import { reducer } from './reducer';
 import { initialState, IState } from './state';

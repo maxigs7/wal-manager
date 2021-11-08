@@ -5,7 +5,7 @@ import { Portal } from '@chakra-ui/portal';
 
 import { CreditCardsList, CreditCardModalForm, CreditCardDeleteDialog } from '@containers';
 import { Page } from '@lib/wal-ui';
-import { CreditCard } from '@models/credit-cards';
+import { CreditCard } from '@models';
 
 const CreditCardsPage: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();

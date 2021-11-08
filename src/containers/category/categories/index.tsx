@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useCategoryList } from '@api';
 import { CategoryPanel } from '@components';
 import { Card } from '@lib/wal-ui';
-import { Category } from '@models/categories';
+import { Category } from '@models';
 import { CategoryType } from '@models/common';
 
 interface IProps {

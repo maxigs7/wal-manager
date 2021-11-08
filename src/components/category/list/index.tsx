@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Category } from '@models/categories';
+import { Category } from '@models';
 
 import { CategoryListItem } from '../list-item';
 

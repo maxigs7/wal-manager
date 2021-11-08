@@ -1,10 +1,6 @@
 import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
 
-import { Account } from '@models/accounts';
-import { Category } from '@models/categories';
-import { BaseModel } from '@models/common';
-import { CreditCard } from '@models/credit-cards';
-import { Transaction } from '@models/transactions';
+import { Account, BaseModel, Category, CreditCard, Transaction } from '@models';
 
 import { IAuthRepository } from './auth';
 

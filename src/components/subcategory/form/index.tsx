@@ -9,10 +9,10 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 
-import { Category, useIsUnique } from '@models/categories';
+import { Category, useCategoryIsUnique } from '@models';
 
 const Form: React.FC<IProps> = ({ category, formState: { errors }, register }) => {
-  const isUnique = useIsUnique();
+  const isUnique = useCategoryIsUnique();
 
   return (
     <SimpleGrid columns={2} gap={6}>

@@ -5,7 +5,7 @@ import { Portal } from '@chakra-ui/portal';
 
 import { AccountsList, AccountModalForm, AccountDeleteDialog } from '@containers';
 import { Page } from '@lib/wal-ui';
-import { Account } from '@models/accounts';
+import { Account } from '@models';
 
 const AccountsPage: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();

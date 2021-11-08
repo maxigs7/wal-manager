@@ -5,7 +5,7 @@ import { useAccountById, useAccountMutations } from '@api';
 import { AccountForm } from '@components';
 import { useUser } from '@lib/supabase';
 import { ModalForm } from '@lib/wal-ui';
-import { Account } from '@models/accounts';
+import { Account } from '@models';
 import { AccountType } from '@models/common';
 
 const AccountModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal }) => {

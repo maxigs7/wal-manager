@@ -4,7 +4,7 @@ import { CircularProgress, Flex } from '@chakra-ui/react';
 
 import { useAccountList } from '@api';
 import { AccountList, AccountNewPlaceholder } from '@components';
-import { Account } from '@models/accounts';
+import { Account } from '@models';
 
 const AccountsList: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
   const { data: accounts, isLoading, refetch } = useAccountList();

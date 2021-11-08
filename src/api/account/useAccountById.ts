@@ -1,8 +1,7 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
-import { Account } from '@models/accounts';
-
-import { useApi } from '..';
+import { useApi } from '@api';
+import { Account } from '@models';
 
 export const useAccountById = (id?: string): UseQueryResult<Account> => {
   const { accounts } = useApi();

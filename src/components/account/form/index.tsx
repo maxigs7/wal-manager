@@ -10,11 +10,10 @@ import {
 } from '@chakra-ui/react';
 
 import { AccountTypeRadioGroup } from '@components';
-import { Account, useIsUnique } from '@models/accounts';
-import { AccountType } from '@models/common';
+import { Account, AccountType, useAccountIsUnique } from '@models';
 
 const Form: React.FC<IProps> = ({ account, control, formState: { errors }, register }) => {
-  const isUnique = useIsUnique();
+  const isUnique = useAccountIsUnique();
   return (
     <SimpleGrid columns={2} gap={6}>
       <FormControl as={GridItem} colSpan={2} isInvalid={!!errors.name}>

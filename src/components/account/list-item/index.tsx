@@ -4,7 +4,7 @@ import { Flex, Text, IconButton } from '@chakra-ui/react';
 
 import { Icon } from '@lib/chakra-ui';
 import { CardsListItem } from '@lib/wal-ui';
-import { Account } from '@models/accounts';
+import { Account } from '@models';
 
 import { AccountTypeIcon } from '../type-icon';
 

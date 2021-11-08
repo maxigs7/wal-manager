@@ -1,7 +1,7 @@
 import { Flex, IconButton } from '@chakra-ui/react';
 
 import { Icon } from '@lib/chakra-ui';
-import { CategoryType } from '@models/common';
+import { CategoryType } from '@models';
 
 import { TabButton } from './tab-button';
 

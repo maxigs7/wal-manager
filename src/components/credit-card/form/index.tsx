@@ -10,10 +10,10 @@ import {
 } from '@chakra-ui/react';
 
 import { CreditCardTypeSelect } from '@components';
-import { CreditCard, useIsUnique } from '@models/credit-cards';
+import { CreditCard, useCreditCardIsUnique } from '@models';
 
 const Form: React.FC<IProps> = ({ cc, control, formState: { errors }, register }) => {
-  const isUnique = useIsUnique();
+  const isUnique = useCreditCardIsUnique();
   return (
     <SimpleGrid columns={2} gap={6}>
       <FormControl as={GridItem} colSpan={2} isInvalid={!!errors.name}>

@@ -3,7 +3,7 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 
 import { useApi } from '@api';
 import { useToast } from '@lib/chakra-ui';
-import { CreditCard } from '@models/credit-cards';
+import { CreditCard } from '@models';
 
 interface ICreditCardMutation {
   create: UseMutationResult<string, Error, CreditCard>;

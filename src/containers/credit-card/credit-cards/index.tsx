@@ -4,7 +4,7 @@ import { CircularProgress, Flex } from '@chakra-ui/react';
 
 import { useCreditCardList } from '@api';
 import { CreditCardList, CreditCardNewPlaceholder } from '@components';
-import { CreditCard } from '@models/credit-cards';
+import { CreditCard } from '@models';
 
 const CreditCardsList: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
   const { data: creditCards, isLoading, refetch } = useCreditCardList();

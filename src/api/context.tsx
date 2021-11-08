@@ -3,10 +3,7 @@ import { createContext, useContext } from 'react';
 import { SupabaseClient } from '@supabase/supabase-js';
 
 import { useSupabase } from '@lib/supabase';
-import { Account } from '@models/accounts';
-import { Category } from '@models/categories';
-import { CreditCard } from '@models/credit-cards';
-import { Transaction } from '@models/transactions';
+import { Account, Category, CreditCard, Transaction } from '@models';
 
 import { buildAuthRepository } from './auth';
 import { buildRepository } from './repository';

@@ -1,2 +1,2 @@
 export * from './types';
-export * from './useIsUnique';
+export { useIsUnique as useAccountIsUnique } from './useIsUnique';

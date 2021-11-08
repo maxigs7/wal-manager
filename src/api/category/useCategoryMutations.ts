@@ -3,8 +3,7 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 
 import { useApi } from '@api';
 import { useToast } from '@lib/chakra-ui';
-import { Category } from '@models/categories';
-import { CategoryType } from '@models/common';
+import { Category, CategoryType } from '@models';
 
 interface ICategoryMutation {
   create: UseMutationResult<string, Error, Category>;

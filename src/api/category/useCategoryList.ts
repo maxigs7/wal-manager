@@ -1,8 +1,7 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
 import { useApi } from '@api';
-import { Category } from '@models/categories';
-import { CategoryType } from '@models/common';
+import { Category, CategoryType } from '@models';
 
 export const useCategoryList = (categoryType: CategoryType): UseQueryResult<Category[]> => {
   const { categories } = useApi();

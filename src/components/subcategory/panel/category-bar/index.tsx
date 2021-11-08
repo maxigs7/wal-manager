@@ -2,7 +2,7 @@ import { Flex, IconButton, Text } from '@chakra-ui/react';
 
 import { Icon } from '@lib/chakra-ui';
 import { ColorCircle } from '@lib/wal-ui';
-import { Category } from '@models/categories';
+import { Category } from '@models';
 
 const CategoryBar: React.FC<IProps> = ({ category, onDeleted, onUpdated }) => {
   const onDeletedHandler = () => onDeleted && onDeleted(category.id);

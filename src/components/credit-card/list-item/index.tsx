@@ -4,7 +4,7 @@ import { Flex, Text, IconButton } from '@chakra-ui/react';
 
 import { Icon } from '@lib/chakra-ui';
 import { CardsListItem } from '@lib/wal-ui';
-import { CreditCard } from '@models/credit-cards';
+import { CreditCard } from '@models';
 
 import { CreditCardTypeIcon } from '../type-icon';
 

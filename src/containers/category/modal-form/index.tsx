@@ -5,7 +5,7 @@ import { useCategoryById, useCategoryMutations } from '@api';
 import { CategoryForm } from '@components';
 import { useUser } from '@lib/supabase';
 import { ModalForm } from '@lib/wal-ui';
-import { Category } from '@models/categories';
+import { Category } from '@models';
 import { CategoryType } from '@models/common';
 
 const CategoryModalForm: React.FC<IProps> = ({ type, id, isOpen, onClose: onCloseModal }) => {

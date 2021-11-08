@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { BaseModel } from '@models/common';
+import { BaseModel } from '@models';
 
 import { IGetAllOptions, IRepository } from './types';
 import { camelCase, getTableName, snakeCase } from './util';

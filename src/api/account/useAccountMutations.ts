@@ -3,7 +3,7 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 
 import { useApi } from '@api';
 import { useToast } from '@lib/chakra-ui';
-import { Account } from '@models/accounts';
+import { Account } from '@models';
 
 interface IAccountMutation {
   create: UseMutationResult<string, Error, Account>;

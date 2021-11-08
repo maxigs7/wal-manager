@@ -2,7 +2,7 @@ import { useCallback, useMemo, useReducer } from 'react';
 
 import { useDisclosure } from '@chakra-ui/hooks';
 
-import { Category } from '@models/categories';
+import { Category } from '@models';
 import { CategoryType } from '@models/common';
 
 // TODO: MOVE ALL TO STORE FOLDER AFTER REMOVING FIREBASE

@@ -6,8 +6,6 @@
       "@api/*": ["./api/*"],
       "@assets": ["./assets"],
       "@assets/*": ["./assets/*"],
-      "@app/stores": ["./stores"],
-      "@app/stores/*": ["./stores/*"],
       "@components": ["./components"],
       "@components/*": ["./components/*"],
       "@containers": ["./containers"],

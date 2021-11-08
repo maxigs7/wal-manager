@@ -10,10 +10,10 @@ import {
 } from '@chakra-ui/react';
 
 import { ColorSelect, IconSelect } from '@components';
-import { Category, useIsUnique } from '@models/categories';
+import { Category, useCategoryIsUnique } from '@models';
 
 const Form: React.FC<IProps> = ({ category, control, formState: { errors }, register }) => {
-  const isUnique = useIsUnique();
+  const isUnique = useCategoryIsUnique();
 
   return (
     <SimpleGrid columns={2} gap={6}>

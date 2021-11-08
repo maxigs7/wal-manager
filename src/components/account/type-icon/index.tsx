@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Icon, WalIconProps } from '@lib/chakra-ui';
-import { AccountType } from '@models/common';
+import { AccountType } from '@models';
 
 const AccountTypeIcon: React.FC<IProps> = ({ type, ...props }) => (
   <>

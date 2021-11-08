@@ -1,6 +1,6 @@
 import { Box, CircularProgress } from '@chakra-ui/react';
 
-import { Category } from '@models/categories';
+import { Category } from '@models';
 
 import { SubCategoryList } from '../list';
 import { SubCategoryListEmpty } from '../list-empty';

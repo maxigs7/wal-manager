@@ -1,8 +1,7 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
-import { CreditCard } from '@models/credit-cards';
-
-import { useApi } from '..';
+import { useApi } from '@api';
+import { CreditCard } from '@models';
 
 export const useCreditCardById = (id?: string): UseQueryResult<CreditCard> => {
   const { creditCards } = useApi();

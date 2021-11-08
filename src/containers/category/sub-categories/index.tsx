@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useSubCategoryList } from '@api';
 import { SubCategoryPanel } from '@components';
 import { Card } from '@lib/wal-ui';
-import { Category } from '@models/categories';
+import { Category } from '@models';
 
 interface IProps {
   onCategoryDeleted(id: string): void;

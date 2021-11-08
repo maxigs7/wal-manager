@@ -5,8 +5,8 @@ import { useCreditCardById, useCreditCardMutations } from '@api';
 import { CreditCardForm } from '@components';
 import { useUser } from '@lib/supabase';
 import { ModalForm } from '@lib/wal-ui';
+import { CreditCard } from '@models';
 import { CreditCardType } from '@models/common';
-import { CreditCard } from '@models/credit-cards';
 
 const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal }) => {
   // const { state, dispatch } = useRedux();
