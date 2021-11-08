@@ -1,37 +1,36 @@
 import { useEffect } from 'react';
 
-import { SubCategoryPanel } from '@app/components';
-import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
-import { SUBCATEGORIES_REQUEST, selectSubCategories } from '@app/stores/categories';
+import { useSubCategoryList } from '@api';
+import { SubCategoryPanel } from '@components';
 import { Card } from '@lib/wal-ui';
+import { Category } from '@models/categories';
 
 interface IProps {
-  onCategoryUpdated(): void;
+  onCategoryDeleted(id: string): void;
+  onCategoryUpdated(id: string): void;
+  selected?: Category;
 }
 
-export const SubCategoriesListCard: React.FC<IProps> = ({ onCategoryUpdated }) => {
-  const { data: categories, isLoading } = useAppSelector(selectSubCategories);
-  const userId = useAppSelector((state) => state.auth.userId);
-  const selected = useAppSelector((state) => state.categories.selected);
-  const dispatch = useAppDispatch();
+export const SubCategoriesListCard: React.FC<IProps> = ({
+  onCategoryUpdated,
+  onCategoryDeleted,
+  selected,
+}) => {
+  const { data: categories, isLoading, refetch } = useSubCategoryList(selected?.id);
 
   useEffect(() => {
-    if (userId && selected?.id) {
-      dispatch(
-        SUBCATEGORIES_REQUEST({
-          categoryId: selected.id,
-        }),
-      );
+    if (selected?.id) {
+      refetch();
     }
-  }, [userId, selected?.id]);
+  }, [selected?.id]);
 
   return (
     <Card>
       <SubCategoryPanel
         category={selected}
         isLoading={isLoading}
-        onCategoryDeleted={() => console.log('Deleting')}
-        onCategoryUpdated={() => onCategoryUpdated()}
+        onCategoryDeleted={() => onCategoryDeleted(selected?.id as string)}
+        onCategoryUpdated={() => onCategoryUpdated(selected?.id as string)}
         onCreated={() => console.log('Creating')}
         onDeleted={() => console.log('Deleting')}
         onEdited={() => console.log('Editing')}

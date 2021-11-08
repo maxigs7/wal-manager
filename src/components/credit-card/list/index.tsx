@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { CreditCard } from '@app/models/credit-cards';
 import { CardsList } from '@lib/wal-ui';
+import { CreditCard } from '@models/credit-cards';
 
 import { CreditCardListItem } from '../list-item';
 

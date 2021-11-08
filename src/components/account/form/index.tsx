@@ -9,15 +9,12 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 
-import { AccountTypeRadioGroup } from '@app/components';
-import { useAppSelector } from '@app/hooks';
-import { Account, isUnique } from '@app/models/accounts';
-import { AccountType } from '@app/models/common';
-import { selectUserId } from '@app/stores/auth';
+import { AccountTypeRadioGroup } from '@components';
+import { Account, useIsUnique } from '@models/accounts';
+import { AccountType } from '@models/common';
 
 const Form: React.FC<IProps> = ({ account, control, formState: { errors }, register }) => {
-  const userId = useAppSelector(selectUserId);
-
+  const isUnique = useIsUnique();
   return (
     <SimpleGrid columns={2} gap={6}>
       <FormControl as={GridItem} colSpan={2} isInvalid={!!errors.name}>
@@ -27,22 +24,21 @@ const Form: React.FC<IProps> = ({ account, control, formState: { errors }, regis
           placeholder="Nombre"
           {...register('name', {
             required: 'Este campo es requerido.',
-            minLength: { value: 4, message: 'Debe contenter al menos 4 caracteres.' },
-            validate: (name) => isUnique(name, userId as string, account?.id),
+            validate: (name) => isUnique(name, account?.id),
           })}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl isInvalid={!!errors.accountType}>
-        <FormLabel htmlFor="accountType">Tipo</FormLabel>
+      <FormControl isInvalid={!!errors.type}>
+        <FormLabel htmlFor="type">Tipo</FormLabel>
         <AccountTypeRadioGroup
           control={control}
           defaultValue={AccountType.Bank}
-          id="accountType"
-          name="accountType"
+          id="type"
+          name="type"
         />
-        <FormErrorMessage>{errors.accountType && errors.accountType.message}</FormErrorMessage>
+        <FormErrorMessage>{errors.type && errors.type.message}</FormErrorMessage>
       </FormControl>
     </SimpleGrid>
   );

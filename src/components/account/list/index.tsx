@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Account } from '@app/models/accounts';
 import { CardsList } from '@lib/wal-ui';
+import { Account } from '@models/accounts';
 
 import { AccountListItem } from '../list-item';
 

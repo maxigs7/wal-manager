@@ -1,47 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 
 import '@fontsource/montserrat/300.css';
 import './styles/globals.css';
 
 import { ChakraProvider } from '@chakra-ui/react';
-import { initializeApp } from '@firebase/app';
-import { getAuth } from '@firebase/auth';
-import { getFirestore } from '@firebase/firestore';
 
+import { ApiProvider } from '@api';
 import { startChakra } from '@lib/chakra-ui';
-import { WalFirebaseAppProvider } from '@lib/firebase';
-import { FIREBASE_CONFIG } from '@lib/firebase/config';
 import { startFontAwesome } from '@lib/font-awesome';
+import { AuthProvider, createSupabaseClient, SupabaseProvider } from '@lib/supabase';
 
 import App from './App';
-import { getUow } from './models/uow';
-import { runSagas, store } from './stores';
 
 startFontAwesome();
 const theme = startChakra();
-const app = initializeApp(FIREBASE_CONFIG);
-const authSdk = getAuth(app);
-const firestoreSdk = getFirestore(app);
-const uow = getUow(firestoreSdk);
-
-runSagas(authSdk, firestoreSdk, uow);
+const supabase = createSupabaseClient();
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
-      <WalFirebaseAppProvider app={app} authSdk={authSdk} firestoreSdk={firestoreSdk}>
-        <Provider store={store}>
-          <HelmetProvider>
-            <ChakraProvider theme={theme}>
-              <App />
-            </ChakraProvider>
-          </HelmetProvider>
-        </Provider>
-      </WalFirebaseAppProvider>
+      <SupabaseProvider supabase={supabase}>
+        <AuthProvider>
+          <ApiProvider>
+            <QueryClientProvider client={queryClient}>
+              <HelmetProvider>
+                <ChakraProvider theme={theme}>
+                  <App />
+                </ChakraProvider>
+              </HelmetProvider>
+            </QueryClientProvider>
+          </ApiProvider>
+        </AuthProvider>
+      </SupabaseProvider>
     </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root'),

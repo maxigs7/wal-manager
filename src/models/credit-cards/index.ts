@@ -1,2 +1,2 @@
-export * from './isUnique';
 export * from './types';
+export * from './useIsUnique';

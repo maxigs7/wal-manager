@@ -1,44 +1,31 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { CategoryPanel } from '@app/components';
-import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
-import { Category } from '@app/models/categories';
-import { CategoryType } from '@app/models/common';
-import {
-  CATEGORIES_REQUEST,
-  selectCategories,
-  CATEGORY_SELECTED,
-  CATEGORY_TYPE_SELECTED,
-} from '@app/stores/categories';
+import { useCategoryList } from '@api';
+import { CategoryPanel } from '@components';
 import { Card } from '@lib/wal-ui';
+import { Category } from '@models/categories';
+import { CategoryType } from '@models/common';
 
 interface IProps {
   onCreated(): void;
+  onSelected?(category: Category): void;
+  onSelectedType(type: CategoryType): void;
+  selected?: Category;
+  type: CategoryType;
 }
 
-export const CategoriesListCard: React.FC<IProps> = ({ onCreated }) => {
-  const { data: categories, isLoading } = useAppSelector(selectCategories);
-  const userId = useAppSelector((state) => state.auth.userId);
-  const selectedType = useAppSelector((state) => state.categories.type);
-  const selected = useAppSelector((state) => state.categories.selected);
-  const dispatch = useAppDispatch();
-
-  const onCategorySelected = useCallback((category: Category) => {
-    dispatch(CATEGORY_SELECTED(category));
-  }, []);
-  const onTypeSelected = useCallback((type: CategoryType) => {
-    dispatch(CATEGORY_TYPE_SELECTED(type));
-  }, []);
+export const CategoriesListCard: React.FC<IProps> = ({
+  onCreated,
+  onSelected,
+  onSelectedType,
+  selected,
+  type,
+}) => {
+  const { data: categories, isLoading, refetch } = useCategoryList(type);
 
   useEffect(() => {
-    if (userId && selectedType) {
-      dispatch(
-        CATEGORIES_REQUEST({
-          categoryType: selectedType,
-        }),
-      );
-    }
-  }, [userId, selectedType]);
+    refetch();
+  }, [type]);
 
   return (
     <Card>
@@ -46,10 +33,10 @@ export const CategoriesListCard: React.FC<IProps> = ({ onCreated }) => {
         categories={categories}
         isLoading={isLoading}
         onCreated={onCreated}
-        onSelected={onCategorySelected}
-        onTypeSelected={onTypeSelected}
+        onSelected={onSelected}
+        onSelectedType={onSelectedType}
         selected={selected}
-        selectedType={selectedType}
+        selectedType={type}
       />
     </Card>
   );

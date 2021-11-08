@@ -1,27 +1,24 @@
 import React, { useEffect } from 'react';
 
+import { useCreditCardMutations } from '@api';
 import { DeleteDialog } from '@lib/wal-ui';
 
-import { useRedux } from './useRedux';
-
 const CreditCardDeleteDialog: React.FC<IProps> = ({ id, isOpen, onClose }) => {
-  const { state, dispatch } = useRedux();
+  const { remove } = useCreditCardMutations();
 
   const onConfirm = async () => {
-    id && dispatch.onCreditCardRemove(id);
+    id && remove.mutate(id);
   };
 
   useEffect(() => {
-    if (state.status === 'success') {
+    if (remove.isSuccess) {
       onClose();
-      dispatch.onFormReset();
-      dispatch.onCreditCardsRefresh();
     }
-  }, [state.status]);
+  }, [remove.isSuccess]);
 
   return (
     <DeleteDialog
-      isLoading={state.isLoading}
+      isLoading={remove.isLoading}
       isOpen={isOpen}
       onClose={onClose}
       onConfirm={onConfirm}

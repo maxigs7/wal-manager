@@ -1,64 +1,67 @@
 import React, { useEffect, useMemo } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { CreditCardForm } from '@app/components';
-import { CreditCard } from '@app/models/credit-cards';
+import { useCreditCardById, useCreditCardMutations } from '@api';
+import { CreditCardForm } from '@components';
+import { useUser } from '@lib/supabase';
 import { ModalForm } from '@lib/wal-ui';
-
-import { useRedux } from './useRedux';
+import { CreditCardType } from '@models/common';
+import { CreditCard } from '@models/credit-cards';
 
 const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal }) => {
-  const { state, dispatch } = useRedux();
+  // const { state, dispatch } = useRedux();
+  const { user } = useUser();
+  const { data: creditCard, isLoading, refetch } = useCreditCardById(id);
+  const { create, update } = useCreditCardMutations();
+  const { isLoading: isSubmitting, isSuccess } = id ? update : create;
   const title = useMemo(() => (id ? 'Editar Tarjeta' : 'Nueva Tarjeta'), [id]);
 
   const defValue: Partial<CreditCard> = useMemo(
-    () => ({ userId: state.userId as string }),
-    [state.userId],
+    () => ({ userId: user?.id as string, type: CreditCardType.visa }),
+    [user?.id],
   );
 
   /// HANDLERS
   const onConfirm = (model: CreditCard) => {
-    if (state.isSubmitting) return;
+    if (isSubmitting) return;
 
     if (!id) {
-      return dispatch.onCreditCardCreate(model);
+      return create.mutate(model);
     }
-    return dispatch.onCreditCardUpdate(model);
+    return update.mutate(model);
   };
 
   const onClose = () => {
-    dispatch.onFormReset();
+    // dispatch.onFormReset();
     onCloseModal();
   };
 
   const renderForm = (props: UseFormReturn<CreditCard>) => {
-    return <CreditCardForm {...props} cc={state.creditCard} />;
+    return <CreditCardForm {...props} cc={creditCard} />;
   };
 
   /// EFFECTS
   useEffect(() => {
     if (id) {
-      dispatch.onCreditCardRequest(id);
+      refetch();
     }
   }, [id]);
 
   useEffect(() => {
-    if (state.submissionStatus === 'success') {
-      onCloseModal(state.idSaved);
-      dispatch.onCreditCardsRefresh();
-      dispatch.onFormReset();
+    if (isSuccess) {
+      onCloseModal();
     }
-  }, [state.submissionStatus, state.idSaved]);
+  }, [isSuccess]);
 
   return (
     <ModalForm
       actionButtonIcon="save"
       actionButtonText="Guardar"
       defaultValue={defValue}
-      isLoading={state.isLoading}
+      isLoading={isLoading}
       isOpen={isOpen}
-      isSubmitting={state.isSubmitting}
-      model={state.creditCard}
+      isSubmitting={isSubmitting}
+      model={creditCard}
       onClose={onClose}
       onConfirm={onConfirm}
       size="3xl"

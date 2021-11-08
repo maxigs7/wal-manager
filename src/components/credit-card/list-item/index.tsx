@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Flex, Text, IconButton } from '@chakra-ui/react';
 
-import { CreditCard } from '@app/models/credit-cards';
 import { Icon } from '@lib/chakra-ui';
 import { CardsListItem } from '@lib/wal-ui';
+import { CreditCard } from '@models/credit-cards';
 
 import { CreditCardTypeIcon } from '../type-icon';
 

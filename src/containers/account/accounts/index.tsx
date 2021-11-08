@@ -2,34 +2,28 @@ import React, { useEffect } from 'react';
 
 import { CircularProgress, Flex } from '@chakra-ui/react';
 
-import { AccountList, AccountNewPlaceholder } from '@app/components';
-import { Account } from '@app/models/accounts';
+import { useAccountList } from '@api';
+import { AccountList, AccountNewPlaceholder } from '@components';
+import { Account } from '@models/accounts';
 
-import { useRedux } from './useRedux';
-
-const AccountsList: React.FC<IProps> = ({ onCreate, onDelete }) => {
-  const { state, dispatch } = useRedux();
+const AccountsList: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
+  const { data: accounts, isLoading, refetch } = useAccountList();
 
   useEffect(() => {
-    dispatch.onAccountsRequest();
+    refetch();
   }, []);
 
-  console.log('AccountsPage rendering...');
+  console.log('AccountsList rendering...');
 
   return (
     <>
-      {state.isLoading && (
+      {isLoading && (
         <Flex align="center" justify="center" p={5}>
           <CircularProgress color="crimson.300" isIndeterminate />
         </Flex>
       )}
-      {!state.isLoading && (
-        <AccountList
-          accounts={state.accounts}
-          onDelete={onDelete}
-          onSelected={dispatch.onAccountSelected}
-          selected={state.selected}
-        >
+      {!isLoading && (
+        <AccountList accounts={accounts || []} onDelete={onDelete} onSelected={onSelected}>
           <AccountNewPlaceholder onSelected={onCreate} />
         </AccountList>
       )}
@@ -40,6 +34,7 @@ const AccountsList: React.FC<IProps> = ({ onCreate, onDelete }) => {
 interface IProps {
   onCreate?(): void;
   onDelete?(account: Account): void;
+  onSelected?(account: Account): void;
 }
 
 export { AccountsList };

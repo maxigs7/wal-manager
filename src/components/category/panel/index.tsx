@@ -1,7 +1,7 @@
 import { Box, CircularProgress } from '@chakra-ui/react';
 
-import { Category } from '@app/models/categories';
-import { CategoryType } from '@app/models/common';
+import { Category } from '@models/categories';
+import { CategoryType } from '@models/common';
 
 import { CategoryList } from '../list';
 import { CategoryListEmpty } from '../list-empty';
@@ -12,13 +12,13 @@ const CategoryPanel: React.FC<IProps> = ({
   isLoading = true,
   onCreated,
   onSelected,
-  onTypeSelected,
+  onSelectedType,
   selected,
   selectedType,
 }) => {
   return (
     <>
-      <ActionBar onCreated={onCreated} onSelected={onTypeSelected} selectedType={selectedType} />
+      <ActionBar onCreated={onCreated} onSelected={onSelectedType} selectedType={selectedType} />
       <Box
         alignItems="center"
         display="flex"
@@ -43,7 +43,7 @@ interface IProps {
   isLoading: boolean;
   onCreated?(): void;
   onSelected?(category: Category): void;
-  onTypeSelected?(type: CategoryType): void;
+  onSelectedType?(type: CategoryType): void;
   selected?: Category;
   selectedType?: CategoryType;
 }

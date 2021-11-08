@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Portal } from '@chakra-ui/portal';
 
-import { AccountsList, AccountModalForm, AccountDeleteDialog } from '@app/containers';
-import { useAppSelector } from '@app/hooks';
-import { Account } from '@app/models/accounts';
-import { selectSelected } from '@app/stores/accounts';
+import { AccountsList, AccountModalForm, AccountDeleteDialog } from '@containers';
 import { Page } from '@lib/wal-ui';
+import { Account } from '@models/accounts';
 
 const AccountsPage: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { isOpen: isDialogOpen, onClose: onDialogClose, onOpen: onDialogOpen } = useDisclosure();
   const [accountId, setAccountId] = useState<string>();
-  const selected = useAppSelector(selectSelected);
+
+  const onSelected = (account: Account) => {
+    setAccountId(account.id);
+    onOpen();
+  };
+
+  const onModalClose = () => {
+    setAccountId(undefined);
+    onClose();
+  };
 
   const onDeleteOpen = (account: Account) => {
     setAccountId(account.id);
@@ -25,20 +32,14 @@ const AccountsPage: React.FC = () => {
     onDialogClose();
   };
 
-  useEffect(() => {
-    if (selected) {
-      onOpen();
-    }
-  }, [selected]);
-
   console.log('AccountsPage rendering...');
 
   return (
     <>
       <Page metaTitle="Mis Cuentas" title="Mis Cuentas">
-        <AccountsList onCreate={onOpen} onDelete={onDeleteOpen} />
+        <AccountsList onCreate={onOpen} onDelete={onDeleteOpen} onSelected={onSelected} />
         <Portal>
-          {isOpen && <AccountModalForm id={selected?.id} isOpen={isOpen} onClose={onClose} />}
+          {isOpen && <AccountModalForm id={accountId} isOpen={isOpen} onClose={onModalClose} />}
           {isDialogOpen && (
             <AccountDeleteDialog id={accountId} isOpen={isDialogOpen} onClose={onDeleteClose} />
           )}

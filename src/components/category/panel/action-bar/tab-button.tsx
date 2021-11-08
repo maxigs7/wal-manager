@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/react';
 
-import { CategoryType } from '@app/models/common';
+import { CategoryType } from '@models/common';
 
 const TabButton: React.FC<IProps> = ({ children, isSelected, onSelected, type }) => {
   const onClickHandler = () => onSelected && onSelected(type);

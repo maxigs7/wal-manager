@@ -3,7 +3,7 @@ import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 
-import { AccountType } from '@app/models/common';
+import { AccountType } from '@models/common';
 
 const AccountTypeRadioGroup: React.FC<IProps> = ({
   control,

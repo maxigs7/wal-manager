@@ -1,32 +1,19 @@
-// import React, { useEffect } from 'react';
-import React, { useState } from 'react';
+import React from 'react';
 
-// import { Portal, SimpleGrid } from '@chakra-ui/react';
-import { Portal, SimpleGrid, useDisclosure } from '@chakra-ui/react';
+import { Portal, SimpleGrid } from '@chakra-ui/react';
 
-// import { Category, useCategories } from '@app/api/categories';
-// import { CategoryPanel, SubCategoryPanel } from '@app/components';
-// import { CategoryDeleteDialog, CategoryModalForm } from '@app/containers';
-// import { Card, Page } from '@lib/wal-ui';
-import { CategoriesListCard, CategoryModalForm, SubCategoriesListCard } from '@app/containers';
-import { useAppSelector } from '@app/hooks';
-import { selectSelectedCategory } from '@app/stores/categories';
+import {
+  CategoriesListCard,
+  CategoryDeleteDialog,
+  CategoryModalForm,
+  SubCategoriesListCard,
+} from '@containers';
 import { Page } from '@lib/wal-ui';
 
+import { useStore } from './useStore';
+
 const CategoriesPage: React.FC = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const selectedCategory = useAppSelector(selectSelectedCategory);
-  const [categoryId, setCategoryId] = useState<string>();
-
-  const onCategoryClosed = () => {
-    setCategoryId(undefined);
-    onClose();
-  };
-
-  const onCategoryUpdated = () => {
-    setCategoryId(selectedCategory?.id);
-    onOpen();
-  };
+  const [state, dispatch] = useStore();
 
   console.log('CategoriesPage rendering...');
 
@@ -34,15 +21,36 @@ const CategoriesPage: React.FC = () => {
     <>
       <Page metaTitle="Mis Categorias" title="Mis Categorias">
         <SimpleGrid columns={[1, 1, 2]} spacing={3} templateColumns={['1', '1', '2fr 3fr']}>
-          <CategoriesListCard onCreated={onOpen} />
-          <SubCategoriesListCard onCategoryUpdated={onCategoryUpdated} />
+          <CategoriesListCard
+            onCreated={dispatch.formModal.onOpen}
+            onSelected={dispatch.onSelected}
+            onSelectedType={dispatch.onSelectedType}
+            selected={state.selected}
+            type={state.selectedType}
+          />
+          <SubCategoriesListCard
+            onCategoryDeleted={dispatch.removeModal.onOpen}
+            onCategoryUpdated={dispatch.formModal.onOpen}
+            selected={state.selected}
+          />
         </SimpleGrid>
       </Page>
       <Portal>
-        {isOpen && <CategoryModalForm id={categoryId} isOpen={isOpen} onClose={onCategoryClosed} />}
-        {/* {state.isDialogOpen && (
-          <CategoryDeleteDialog id={state.id} isOpen={state.isDialogOpen} onClose={onDialogClose} />
-        )} */}
+        {state.isOpenForm && (
+          <CategoryModalForm
+            id={state.selected?.id}
+            isOpen={state.isOpenForm}
+            onClose={dispatch.formModal.onClose}
+            type={state.selectedType}
+          />
+        )}
+        {state.isOpenRemove && (
+          <CategoryDeleteDialog
+            id={state.id}
+            isOpen={state.isOpenRemove}
+            onClose={dispatch.removeModal.onClose}
+          />
+        )}
       </Portal>
     </>
   );

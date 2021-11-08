@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { ReactComponent as AmexIcon } from '@app/assets/images/cc-amex.svg';
-import { ReactComponent as GenericIcon } from '@app/assets/images/cc-generic.svg';
-import { ReactComponent as MasterCardIcon } from '@app/assets/images/cc-mastercard.svg';
-import { ReactComponent as VisaIcon } from '@app/assets/images/cc-visa.svg';
-import { CreditCardType } from '@app/models/common';
+import { ReactComponent as AmexIcon } from '@assets/images/cc-amex.svg';
+import { ReactComponent as GenericIcon } from '@assets/images/cc-generic.svg';
+import { ReactComponent as MasterCardIcon } from '@assets/images/cc-mastercard.svg';
+import { ReactComponent as VisaIcon } from '@assets/images/cc-visa.svg';
+import { CreditCardType } from '@models/common';
 
 const CreditCardTypeIcon: React.FC<IProps> = ({ type, ...props }) => (
   <>

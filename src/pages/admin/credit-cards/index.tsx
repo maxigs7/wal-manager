@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Portal } from '@chakra-ui/portal';
 
-import { CreditCardDeleteDialog, CreditCardModalForm, CreditCardsList } from '@app/containers';
-import { useAppSelector } from '@app/hooks';
-import { CreditCard } from '@app/models/credit-cards';
-import { selectSelected } from '@app/stores/credit-cards';
+import { CreditCardsList, CreditCardModalForm, CreditCardDeleteDialog } from '@containers';
 import { Page } from '@lib/wal-ui';
+import { CreditCard } from '@models/credit-cards';
 
 const CreditCardsPage: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { isOpen: isDialogOpen, onClose: onDialogClose, onOpen: onDialogOpen } = useDisclosure();
   const [creditCardId, setCreditCardId] = useState<string>();
-  const selected = useAppSelector(selectSelected);
+
+  const onSelected = (creditCard: CreditCard) => {
+    setCreditCardId(creditCard.id);
+    onOpen();
+  };
+
+  const onModalClose = () => {
+    setCreditCardId(undefined);
+    onClose();
+  };
 
   const onDeleteOpen = (creditCard: CreditCard) => {
     setCreditCardId(creditCard.id);
@@ -25,20 +32,16 @@ const CreditCardsPage: React.FC = () => {
     onDialogClose();
   };
 
-  useEffect(() => {
-    if (selected) {
-      onOpen();
-    }
-  }, [selected]);
-
   console.log('CreditCardsPage rendering...');
 
   return (
     <>
       <Page metaTitle="Mis Tarjetas" title="Mis Tarjetas">
-        <CreditCardsList onCreate={onOpen} onDelete={onDeleteOpen} />
+        <CreditCardsList onCreate={onOpen} onDelete={onDeleteOpen} onSelected={onSelected} />
         <Portal>
-          {isOpen && <CreditCardModalForm id={selected?.id} isOpen={isOpen} onClose={onClose} />}
+          {isOpen && (
+            <CreditCardModalForm id={creditCardId} isOpen={isOpen} onClose={onModalClose} />
+          )}
           {isDialogOpen && (
             <CreditCardDeleteDialog
               id={creditCardId}

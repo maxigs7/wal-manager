@@ -2,34 +2,28 @@ import React, { useEffect } from 'react';
 
 import { CircularProgress, Flex } from '@chakra-ui/react';
 
-import { CreditCardList, CreditCardNewPlaceholder } from '@app/components';
-import { CreditCard } from '@app/models/credit-cards';
+import { useCreditCardList } from '@api';
+import { CreditCardList, CreditCardNewPlaceholder } from '@components';
+import { CreditCard } from '@models/credit-cards';
 
-import { useRedux } from './useRedux';
-
-const CreditCardsList: React.FC<IProps> = ({ onCreate, onDelete }) => {
-  const { state, dispatch } = useRedux();
+const CreditCardsList: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
+  const { data: creditCards, isLoading, refetch } = useCreditCardList();
 
   useEffect(() => {
-    dispatch.onCreditCardsRequest();
+    refetch();
   }, []);
 
-  console.log('CreditCardsPage rendering...');
+  console.log('CreditCardsList rendering...');
 
   return (
     <>
-      {state.isLoading && (
+      {isLoading && (
         <Flex align="center" justify="center" p={5}>
           <CircularProgress color="crimson.300" isIndeterminate />
         </Flex>
       )}
-      {!state.isLoading && (
-        <CreditCardList
-          creditCards={state.creditCards}
-          onDelete={onDelete}
-          onSelected={dispatch.onCreditCardSelected}
-          selected={state.selected}
-        >
+      {!isLoading && (
+        <CreditCardList creditCards={creditCards || []} onDelete={onDelete} onSelected={onSelected}>
           <CreditCardNewPlaceholder onSelected={onCreate} />
         </CreditCardList>
       )}
@@ -40,6 +34,7 @@ const CreditCardsList: React.FC<IProps> = ({ onCreate, onDelete }) => {
 interface IProps {
   onCreate?(): void;
   onDelete?(creditCard: CreditCard): void;
+  onSelected?(creditCard: CreditCard): void;
 }
 
 export { CreditCardsList };

@@ -1,38 +1,26 @@
 import React, { useEffect, useMemo } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { CategoryForm } from '@app/components';
-import { useAppDispatch, useAppSelector } from '@app/hooks';
-import { Category } from '@app/models/categories';
-import { selectUserId } from '@app/stores/auth';
-import {
-  CATEGORIES_REQUEST_REFRESH,
-  CATEGORY_CREATE_REQUEST,
-  CATEGORY_REQUEST,
-  CATEGORY_RESET,
-  CATEGORY_UPDATE_REQUEST,
-  selectSelectedType,
-} from '@app/stores/categories';
+import { useCategoryById, useCategoryMutations } from '@api';
+import { CategoryForm } from '@components';
+import { useUser } from '@lib/supabase';
 import { ModalForm } from '@lib/wal-ui';
+import { Category } from '@models/categories';
+import { CategoryType } from '@models/common';
 
-const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal }) => {
-  const dispatch = useAppDispatch();
-
-  /// SELECTORS
-  const userId = useAppSelector(selectUserId);
-  const type = useAppSelector(selectSelectedType);
-  const { data: category, isLoading } = useAppSelector((state) => state.categories.category);
-  const {
-    data: idSaved,
-    isLoading: isSubmitting,
-    status,
-  } = useAppSelector((state) => state.categories.categoryAction);
+const CategoryModalForm: React.FC<IProps> = ({ type, id, isOpen, onClose: onCloseModal }) => {
+  const { user } = useUser();
+  const { data: category, isLoading, refetch } = useCategoryById(id);
+  const { create, update } = useCategoryMutations();
+  const { isLoading: isSubmitting, isSuccess } = id ? update : create;
 
   const title = useMemo(() => (id ? 'Editar categoria' : 'Nueva categoria'), [id]);
-
   const defValue: Partial<Category> = useMemo(
-    () => ({ categoryType: type, userId: userId as string, parentId: null }),
-    [type, userId],
+    () => ({
+      type,
+      userId: user?.id as string,
+    }),
+    [type, user],
   );
 
   /// HANDLERS
@@ -40,14 +28,12 @@ const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal
     if (isSubmitting) return;
 
     if (!id) {
-      return dispatch(CATEGORY_CREATE_REQUEST(model));
+      return create.mutate(model);
     }
-
-    return dispatch(CATEGORY_UPDATE_REQUEST(model));
+    return update.mutate(model);
   };
 
   const onClose = () => {
-    dispatch(CATEGORY_RESET());
     onCloseModal();
   };
 
@@ -58,17 +44,15 @@ const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal
   /// EFFECTS
   useEffect(() => {
     if (id) {
-      dispatch(CATEGORY_REQUEST(id));
+      refetch();
     }
   }, [id]);
 
   useEffect(() => {
-    if (status === 'success') {
-      onCloseModal(idSaved);
-      dispatch(CATEGORY_RESET());
-      dispatch(CATEGORIES_REQUEST_REFRESH(idSaved));
+    if (isSuccess) {
+      onCloseModal();
     }
-  }, [status, idSaved]);
+  }, [isSuccess]);
 
   return (
     <ModalForm
@@ -93,6 +77,7 @@ interface IProps {
   id?: string;
   isOpen: boolean;
   onClose(id?: string): void;
+  type: CategoryType;
 }
 
 export { CategoryModalForm };

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Flex, VStack } from '@chakra-ui/react';
 
-import { useRouter } from '@app/hooks/useRouter';
+import { useRouter } from '@hooks';
 
 import { SidebarBackdrop } from './backdrop';
 import { useSidebar } from './context';

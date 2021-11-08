@@ -1,5 +1,7 @@
 # WalManager
 
+NEED INSTALL SUPABASE CLI
+
 ## Development
 
 This project runs using Firebase Firestore and Firestore Authentication. We're gonna need to install the CLI to run locally.

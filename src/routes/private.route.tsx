@@ -1,11 +1,10 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
-import { useAppSelector } from '@app/hooks/redux';
-import { selectUser } from '@app/stores/auth';
+import { useUser } from '@lib/supabase';
 
 const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }: RouteProps) => {
-  const user = useAppSelector(selectUser);
+  const { user } = useUser();
 
   return (
     <Route
@@ -16,7 +15,7 @@ const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }: RouteProps) =
         ) : (
           <Redirect
             to={{
-              pathname: '/auth/login',
+              pathname: '/auth/sign-in',
               state: { from: location },
             }}
           />

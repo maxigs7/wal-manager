@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom';
 
 import { Flex } from '@chakra-ui/react';
 
-import { adminRoutes, PrivateRoute } from '@app/routes';
 import { PageLoader } from '@lib/wal-ui';
+import { adminRoutes, PrivateRoute } from '@routes';
 
 import { Navbar } from './navbar';
 import { Sidebar, SidebarProvider } from './sidebar';

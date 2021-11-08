@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Flex, Text, IconButton } from '@chakra-ui/react';
 
-import { Account } from '@app/models/accounts';
 import { Icon } from '@lib/chakra-ui';
 import { CardsListItem } from '@lib/wal-ui';
+import { Account } from '@models/accounts';
 
 import { AccountTypeIcon } from '../type-icon';
 
@@ -26,7 +26,7 @@ const AccountListItem: React.FC<IProps> = ({ account, onDelete, onSelected }) =>
         position="relative"
         w="full"
       >
-        <AccountTypeIcon size="5x" type={account.accountType} />
+        <AccountTypeIcon size="5x" type={account.type} />
         <Text textTransform="uppercase">{account.name}</Text>
         <Flex mt={2}>
           <IconButton
