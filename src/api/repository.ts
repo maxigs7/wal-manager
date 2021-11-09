@@ -14,6 +14,7 @@ export const buildRepository = <T extends BaseModel>(
     create: async (model: T): Promise<string> => {
       const { data, error } = await supabase.from(tableName).insert(snakeCase(model));
       if (!error) {
+        console.log(data);
         return data ? data[0].id : 'WEIRD';
       }
       throw new Error(JSON.stringify(error));

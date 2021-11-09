@@ -10,7 +10,7 @@ const CategoryListEmpty: React.FC<IProps> = React.memo(({ onCreated }) => (
       No existen categorias
     </Text>
     {onCreated && (
-      <Button colorScheme="crimson" onClick={onCreated}>
+      <Button colorScheme="crimson" onClick={() => onCreated()}>
         Crea una categoria
       </Button>
     )}

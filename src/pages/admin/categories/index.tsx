@@ -37,7 +37,7 @@ const CategoriesPage: React.FC = () => {
       <Portal>
         {state.isOpenForm && (
           <CategoryModalForm
-            id={state.selected?.id}
+            id={state.id}
             isOpen={state.isOpenForm}
             onClose={dispatch.formModal.onClose}
             type={state.selectedType}
