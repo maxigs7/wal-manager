@@ -9,8 +9,7 @@ import {
   SubCategoriesListCard,
 } from '@containers';
 import { Page } from '@lib/wal-ui';
-
-import { useStore } from './useStore';
+import { useStore } from '@stores/categories';
 
 const CategoriesPage: React.FC = () => {
   const [state, dispatch] = useStore();

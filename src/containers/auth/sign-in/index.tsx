@@ -10,7 +10,7 @@ import { SignInForm, SignInFormType } from '@components';
 import { useRouter } from '@hooks';
 
 export const SignInContainer: React.FC = () => {
-  const { location, match } = useRouter();
+  const { location } = useRouter();
   const { signIn, signInGoogle } = useAuthApi();
   const form = useForm<SignInFormType>();
 
@@ -21,11 +21,9 @@ export const SignInContainer: React.FC = () => {
       console.error(error);
     }
   };
-  console.log(window.origin, location, match);
 
   const signInGoogleHandler = async () => {
     try {
-      console.log(location);
       await signInGoogle.mutate(`${window.origin}/${location.state?.from || 'dashboard'}`);
     } catch (error) {
       console.error(error);
