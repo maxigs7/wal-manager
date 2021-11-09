@@ -1,3 +1,3 @@
 import { IState } from './state';
 
-export type AuthInitPayload = Omit<IState, 'initializing'>;
+export type AuthInitPayload = IState;

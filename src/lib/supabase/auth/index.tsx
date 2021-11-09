@@ -13,10 +13,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const session = auth.session();
-    dispatch(authInit({ session, user: session?.user ?? null }));
-    const { data: authListener } = auth.onAuthStateChange(async (event, session) => {
-      console.log(`Supabase auth event: ${event}`);
-      dispatch(authInit({ session, user: session?.user ?? null }));
+    dispatch(authInit({ session, user: session?.user ?? null, initializing: true }));
+    const { data: authListener } = auth.onAuthStateChange(async (_event, session) => {
+      dispatch(authInit({ session, user: session?.user ?? null, initializing: false }));
     });
 
     return () => {

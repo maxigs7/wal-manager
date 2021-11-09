@@ -6,7 +6,7 @@ export const reducer = (state: IState, action: Action): IState => {
     case AUTH_INIT:
       return {
         ...state,
-        initializing: false,
+        initializing: action.payload.initializing,
         user: action.payload.user,
         session: action.payload.session,
       };
