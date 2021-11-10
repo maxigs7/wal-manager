@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 
 import { useAccountMutations } from '@api';
 import { DeleteDialog } from '@lib/wal-ui';
+import { Account } from '@models';
 
-const AccountDeleteDialog: React.FC<IProps> = ({ id, isOpen, onClose }) => {
+const AccountDeleteDialog: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => {
   const { remove } = useAccountMutations();
 
   const onConfirm = async () => {
@@ -11,16 +12,16 @@ const AccountDeleteDialog: React.FC<IProps> = ({ id, isOpen, onClose }) => {
   };
 
   useEffect(() => {
-    if (remove.isSuccess) {
-      onClose();
+    if (remove.isSuccess && remove.data) {
+      onConfirmed(remove.data);
     }
-  }, [remove.isSuccess]);
+  }, [remove.data, remove.isSuccess]);
 
   return (
     <DeleteDialog
       isLoading={remove.isLoading}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={onDismiss}
       onConfirm={onConfirm}
       title="Eliminar Cuenta"
     />
@@ -30,7 +31,8 @@ const AccountDeleteDialog: React.FC<IProps> = ({ id, isOpen, onClose }) => {
 interface IProps {
   id?: string;
   isOpen: boolean;
-  onClose(success?: boolean): void;
+  onConfirmed(data: Account): void;
+  onDismiss(): void;
 }
 
 export { AccountDeleteDialog };

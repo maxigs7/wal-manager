@@ -10,8 +10,8 @@ import { reducer } from './reducer';
 import { IDispatch, initialState, IState } from './state';
 
 export const useStore = (): [IState, IDispatch] => {
-  const { isOpen: isOpenForm, onClose: _onCloseForm, onOpen: _onOpenForm } = useDisclosure();
-  const { isOpen: isOpenRemove, onClose: _onCloseRemove, onOpen: _onOpenRemove } = useDisclosure();
+  const { isOpen: isOpenForm, onClose: onCloseForm, onOpen: _onOpenForm } = useDisclosure();
+  const { isOpen: isOpenRemove, onClose: onCloseRemove, onOpen: _onOpenRemove } = useDisclosure();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onSelected = useCallback(
@@ -28,9 +28,9 @@ export const useStore = (): [IState, IDispatch] => {
     [dispatch],
   );
 
-  const onCloseForm = () => {
+  const onConfirmedForm = () => {
     dispatch(selectedId());
-    _onCloseForm();
+    onCloseForm();
   };
 
   const onOpenForm = (id: string) => {
@@ -38,9 +38,9 @@ export const useStore = (): [IState, IDispatch] => {
     _onOpenForm();
   };
 
-  const onCloseRemove = () => {
+  const onConfirmedRemove = () => {
     dispatch(selectedId({ deselect: true }));
-    _onCloseRemove();
+    onCloseRemove();
   };
 
   const onOpenRemove = (id: string) => {
@@ -53,13 +53,15 @@ export const useStore = (): [IState, IDispatch] => {
       { ...state, isOpenForm, isOpenRemove },
       {
         formModal: {
-          onClose: onCloseForm,
+          onConfirmed: onConfirmedForm,
+          onDismiss: onCloseForm,
           onOpen: onOpenForm,
         },
         onSelected,
         onSelectedType,
         removeModal: {
-          onClose: onCloseRemove,
+          onConfirmed: onConfirmedRemove,
+          onDismiss: onCloseRemove,
           onOpen: onOpenRemove,
         },
       },

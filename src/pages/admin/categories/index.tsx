@@ -39,7 +39,8 @@ const CategoriesPage: React.FC = () => {
           <CategoryModalForm
             id={state.id}
             isOpen={state.isOpenForm}
-            onClose={dispatch.formModal.onClose}
+            onConfirmed={dispatch.formModal.onConfirmed}
+            onDismiss={dispatch.formModal.onDismiss}
             type={state.selectedType}
           />
         )}
@@ -47,7 +48,8 @@ const CategoriesPage: React.FC = () => {
           <CategoryDeleteDialog
             id={state.id}
             isOpen={state.isOpenRemove}
-            onClose={dispatch.removeModal.onClose}
+            onConfirmed={dispatch.removeModal.onConfirmed}
+            onDismiss={dispatch.removeModal.onDismiss}
           />
         )}
       </Portal>

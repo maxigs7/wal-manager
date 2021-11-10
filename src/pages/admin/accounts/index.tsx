@@ -8,28 +8,28 @@ import { Page } from '@lib/wal-ui';
 import { Account } from '@models';
 
 const AccountsPage: React.FC = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const { isOpen: isDialogOpen, onClose: onDialogClose, onOpen: onDialogOpen } = useDisclosure();
+  const { isOpen: isOpenForm, onClose: onDismissForm, onOpen: onOpenForm } = useDisclosure();
+  const { isOpen: isOpenRemove, onClose: onDismissRemove, onOpen: _onOpenRemove } = useDisclosure();
   const [accountId, setAccountId] = useState<string>();
 
   const onSelected = (account: Account) => {
     setAccountId(account.id);
-    onOpen();
+    onOpenForm();
   };
 
-  const onModalClose = () => {
+  const onConfirmedForm = () => {
     setAccountId(undefined);
-    onClose();
+    onDismissForm();
   };
 
-  const onDeleteOpen = (account: Account) => {
+  const onOpenRemove = (account: Account) => {
     setAccountId(account.id);
-    onDialogOpen();
+    _onOpenRemove();
   };
 
-  const onDeleteClose = () => {
+  const onConfirmedRemove = () => {
     setAccountId(undefined);
-    onDialogClose();
+    onDismissRemove();
   };
 
   console.log('AccountsPage rendering...');
@@ -37,11 +37,23 @@ const AccountsPage: React.FC = () => {
   return (
     <>
       <Page metaTitle="Mis Cuentas" title="Mis Cuentas">
-        <AccountsList onCreate={onOpen} onDelete={onDeleteOpen} onSelected={onSelected} />
+        <AccountsList onCreate={onOpenForm} onDelete={onOpenRemove} onSelected={onSelected} />
         <Portal>
-          {isOpen && <AccountModalForm id={accountId} isOpen={isOpen} onClose={onModalClose} />}
-          {isDialogOpen && (
-            <AccountDeleteDialog id={accountId} isOpen={isDialogOpen} onClose={onDeleteClose} />
+          {isOpenForm && (
+            <AccountModalForm
+              id={accountId}
+              isOpen={isOpenForm}
+              onConfirmed={onConfirmedForm}
+              onDismiss={onDismissForm}
+            />
+          )}
+          {isOpenRemove && (
+            <AccountDeleteDialog
+              id={accountId}
+              isOpen={isOpenRemove}
+              onConfirmed={onConfirmedRemove}
+              onDismiss={onDismissRemove}
+            />
           )}
         </Portal>
       </Page>

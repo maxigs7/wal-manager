@@ -8,11 +8,11 @@ import { ModalForm } from '@lib/wal-ui';
 import { Account } from '@models';
 import { AccountType } from '@models/common';
 
-const AccountModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal }) => {
+const AccountModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => {
   const { user } = useUser();
   const { data: account, isLoading, refetch } = useAccountById(id);
   const { create, update } = useAccountMutations();
-  const { isLoading: isSubmitting, isSuccess } = id ? update : create;
+  const { data, isLoading: isSubmitting, isSuccess } = id ? update : create;
   const title = useMemo(() => (id ? 'Editar cuenta' : 'Nueva cuenta'), [id]);
 
   const defValue: Partial<Account> = useMemo(
@@ -30,10 +30,6 @@ const AccountModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal 
     return update.mutate(model);
   };
 
-  const onClose = () => {
-    onCloseModal();
-  };
-
   const renderForm = (props: UseFormReturn<Account>) => {
     return <AccountForm {...props} account={account} />;
   };
@@ -46,10 +42,10 @@ const AccountModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal 
   }, [id]);
 
   useEffect(() => {
-    if (isSuccess) {
-      onCloseModal();
+    if (isSuccess && data) {
+      onConfirmed(data);
     }
-  }, [isSuccess]);
+  }, [data, isSuccess]);
 
   return (
     <ModalForm
@@ -60,7 +56,7 @@ const AccountModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal 
       isOpen={isOpen}
       isSubmitting={isSubmitting}
       model={account}
-      onClose={onClose}
+      onClose={onDismiss}
       onConfirm={onConfirm}
       size="3xl"
       title={title}
@@ -73,7 +69,8 @@ const AccountModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal 
 interface IProps {
   id?: string;
   isOpen: boolean;
-  onClose(id?: string): void;
+  onConfirmed(account: Account): void;
+  onDismiss(): void;
 }
 
 export { AccountModalForm };

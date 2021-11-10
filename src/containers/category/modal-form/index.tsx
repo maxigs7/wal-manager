@@ -8,11 +8,11 @@ import { ModalForm } from '@lib/wal-ui';
 import { Category } from '@models';
 import { CategoryType } from '@models/common';
 
-const CategoryModalForm: React.FC<IProps> = ({ type, id, isOpen, onClose: onCloseModal }) => {
+const CategoryModalForm: React.FC<IProps> = ({ type, id, isOpen, onConfirmed, onDismiss }) => {
   const { user } = useUser();
   const { data: category, isLoading, refetch } = useCategoryById(id);
   const { create, update } = useCategoryMutations();
-  const { isLoading: isSubmitting, isSuccess } = id ? update : create;
+  const { data, isLoading: isSubmitting, isSuccess } = id ? update : create;
 
   const title = useMemo(() => (id ? 'Editar categoria' : 'Nueva categoria'), [id]);
   const defValue: Partial<Category> = useMemo(
@@ -33,10 +33,6 @@ const CategoryModalForm: React.FC<IProps> = ({ type, id, isOpen, onClose: onClos
     return update.mutate(model);
   };
 
-  const onClose = () => {
-    onCloseModal();
-  };
-
   const renderForm = (props: UseFormReturn<Category>) => {
     return <CategoryForm {...props} category={category} />;
   };
@@ -49,10 +45,10 @@ const CategoryModalForm: React.FC<IProps> = ({ type, id, isOpen, onClose: onClos
   }, [id]);
 
   useEffect(() => {
-    if (isSuccess) {
-      onCloseModal();
+    if (isSuccess && data) {
+      onConfirmed(data);
     }
-  }, [isSuccess]);
+  }, [data, isSuccess]);
 
   return (
     <ModalForm
@@ -63,7 +59,7 @@ const CategoryModalForm: React.FC<IProps> = ({ type, id, isOpen, onClose: onClos
       isOpen={isOpen}
       isSubmitting={isSubmitting}
       model={category}
-      onClose={onClose}
+      onClose={onDismiss}
       onConfirm={onConfirm}
       size="3xl"
       title={title}
@@ -76,7 +72,8 @@ const CategoryModalForm: React.FC<IProps> = ({ type, id, isOpen, onClose: onClos
 interface IProps {
   id?: string;
   isOpen: boolean;
-  onClose(id?: string): void;
+  onConfirmed(category: Category): void;
+  onDismiss(): void;
   type: CategoryType;
 }
 

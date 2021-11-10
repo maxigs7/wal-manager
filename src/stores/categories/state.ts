@@ -11,10 +11,10 @@ export interface IState {
 }
 
 export interface IDispatch {
-  formModal: IModalDispatch;
+  formModal: IModalDispatch<Category>;
   onSelected(category: Category): void;
   onSelectedType(type: CategoryType): void;
-  removeModal: IModalDispatch;
+  removeModal: IModalDispatch<Category>;
 }
 
 export const initialState: IState = {

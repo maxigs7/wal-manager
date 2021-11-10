@@ -8,12 +8,11 @@ import { ModalForm } from '@lib/wal-ui';
 import { CreditCard } from '@models';
 import { CreditCardType } from '@models/common';
 
-const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseModal }) => {
-  // const { state, dispatch } = useRedux();
+const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => {
   const { user } = useUser();
   const { data: creditCard, isLoading, refetch } = useCreditCardById(id);
   const { create, update } = useCreditCardMutations();
-  const { isLoading: isSubmitting, isSuccess } = id ? update : create;
+  const { data, isLoading: isSubmitting, isSuccess } = id ? update : create;
   const title = useMemo(() => (id ? 'Editar Tarjeta' : 'Nueva Tarjeta'), [id]);
 
   const defValue: Partial<CreditCard> = useMemo(
@@ -31,11 +30,6 @@ const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseMod
     return update.mutate(model);
   };
 
-  const onClose = () => {
-    // dispatch.onFormReset();
-    onCloseModal();
-  };
-
   const renderForm = (props: UseFormReturn<CreditCard>) => {
     return <CreditCardForm {...props} cc={creditCard} />;
   };
@@ -48,10 +42,10 @@ const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseMod
   }, [id]);
 
   useEffect(() => {
-    if (isSuccess) {
-      onCloseModal();
+    if (isSuccess && data) {
+      onConfirmed(data);
     }
-  }, [isSuccess]);
+  }, [data, isSuccess]);
 
   return (
     <ModalForm
@@ -62,7 +56,7 @@ const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseMod
       isOpen={isOpen}
       isSubmitting={isSubmitting}
       model={creditCard}
-      onClose={onClose}
+      onClose={onDismiss}
       onConfirm={onConfirm}
       size="3xl"
       title={title}
@@ -75,7 +69,8 @@ const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onClose: onCloseMod
 interface IProps {
   id?: string;
   isOpen: boolean;
-  onClose(id?: string): void;
+  onConfirmed(cc: CreditCard): void;
+  onDismiss(): void;
 }
 
 export { CreditCardModalForm };

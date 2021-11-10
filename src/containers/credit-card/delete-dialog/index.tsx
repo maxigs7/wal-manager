@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 
 import { useCreditCardMutations } from '@api';
 import { DeleteDialog } from '@lib/wal-ui';
+import { CreditCard } from '@models';
 
-const CreditCardDeleteDialog: React.FC<IProps> = ({ id, isOpen, onClose }) => {
+const CreditCardDeleteDialog: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => {
   const { remove } = useCreditCardMutations();
 
   const onConfirm = async () => {
@@ -12,15 +13,15 @@ const CreditCardDeleteDialog: React.FC<IProps> = ({ id, isOpen, onClose }) => {
 
   useEffect(() => {
     if (remove.isSuccess) {
-      onClose();
+      onConfirmed(remove.data);
     }
-  }, [remove.isSuccess]);
+  }, [remove.data, remove.isSuccess]);
 
   return (
     <DeleteDialog
       isLoading={remove.isLoading}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={onDismiss}
       onConfirm={onConfirm}
       title="Eliminar Tarjeta"
     />
@@ -30,7 +31,8 @@ const CreditCardDeleteDialog: React.FC<IProps> = ({ id, isOpen, onClose }) => {
 interface IProps {
   id?: string;
   isOpen: boolean;
-  onClose(success?: boolean): void;
+  onConfirmed(cc: CreditCard): void;
+  onDismiss(): void;
 }
 
 export { CreditCardDeleteDialog };

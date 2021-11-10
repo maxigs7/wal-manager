@@ -8,28 +8,28 @@ import { Page } from '@lib/wal-ui';
 import { CreditCard } from '@models';
 
 const CreditCardsPage: React.FC = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const { isOpen: isDialogOpen, onClose: onDialogClose, onOpen: onDialogOpen } = useDisclosure();
+  const { isOpen: isOpenForm, onClose: onDismissForm, onOpen: onOpenForm } = useDisclosure();
+  const { isOpen: isOpenRemove, onClose: onDismissRemove, onOpen: _onOpenRemove } = useDisclosure();
   const [creditCardId, setCreditCardId] = useState<string>();
 
   const onSelected = (creditCard: CreditCard) => {
     setCreditCardId(creditCard.id);
-    onOpen();
+    onOpenForm();
   };
 
-  const onModalClose = () => {
+  const onConfirmedForm = () => {
     setCreditCardId(undefined);
-    onClose();
+    onDismissForm();
   };
 
-  const onDeleteOpen = (creditCard: CreditCard) => {
+  const onOpenRemove = (creditCard: CreditCard) => {
     setCreditCardId(creditCard.id);
-    onDialogOpen();
+    _onOpenRemove();
   };
 
-  const onDeleteClose = () => {
+  const onConfirmedRemove = () => {
     setCreditCardId(undefined);
-    onDialogClose();
+    onDismissRemove();
   };
 
   console.log('CreditCardsPage rendering...');
@@ -37,16 +37,22 @@ const CreditCardsPage: React.FC = () => {
   return (
     <>
       <Page metaTitle="Mis Tarjetas" title="Mis Tarjetas">
-        <CreditCardsList onCreate={onOpen} onDelete={onDeleteOpen} onSelected={onSelected} />
+        <CreditCardsList onCreate={onOpenForm} onDelete={onOpenRemove} onSelected={onSelected} />
         <Portal>
-          {isOpen && (
-            <CreditCardModalForm id={creditCardId} isOpen={isOpen} onClose={onModalClose} />
+          {isOpenForm && (
+            <CreditCardModalForm
+              id={creditCardId}
+              isOpen={isOpenForm}
+              onConfirmed={onConfirmedForm}
+              onDismiss={onDismissForm}
+            />
           )}
-          {isDialogOpen && (
+          {isOpenRemove && (
             <CreditCardDeleteDialog
               id={creditCardId}
-              isOpen={isDialogOpen}
-              onClose={onDeleteClose}
+              isOpen={isOpenRemove}
+              onConfirmed={onConfirmedRemove}
+              onDismiss={onDismissRemove}
             />
           )}
         </Portal>
