@@ -11,13 +11,12 @@ export const buildRepository = <T extends BaseModel>(
 ): IRepository<T> => {
   const tableName = getTableName(key);
   return {
-    create: async (model: T): Promise<string> => {
+    create: async (model: T): Promise<T> => {
       const { data, error } = await supabase.from(tableName).insert(snakeCase(model));
-      if (!error) {
-        console.log(data);
-        return data ? data[0].id : 'WEIRD';
+      if (error || !data) {
+        throw new Error(JSON.stringify(error));
       }
-      throw new Error(JSON.stringify(error));
+      return camelCase(data[0]) as T;
     },
     getAll: async (options?: IGetAllOptions<T>): Promise<T[]> => {
       const query = supabase.from(tableName).select(options?.columns);
@@ -47,14 +46,15 @@ export const buildRepository = <T extends BaseModel>(
         throw new Error(JSON.stringify(error));
       }
     },
-    update: async (model: T): Promise<void> => {
-      const { error } = await supabase
+    update: async (model: T): Promise<T> => {
+      const { data, error } = await supabase
         .from<T>(tableName)
         .update(snakeCase(model))
         .match({ id: model.id });
-      if (error) {
+      if (error || !data) {
         throw new Error(JSON.stringify(error));
       }
+      return camelCase(data[0]) as T;
     },
   };
 };

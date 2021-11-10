@@ -6,9 +6,9 @@ import { useToast } from '@lib/chakra-ui';
 import { CreditCard } from '@models';
 
 interface ICreditCardMutation {
-  create: UseMutationResult<string, Error, CreditCard>;
+  create: UseMutationResult<CreditCard, Error, CreditCard>;
   remove: UseMutationResult<void, Error, string>;
-  update: UseMutationResult<void, Error, CreditCard>;
+  update: UseMutationResult<CreditCard, Error, CreditCard>;
 }
 
 export const useCreditCardMutations = (): ICreditCardMutation => {
@@ -20,7 +20,7 @@ export const useCreditCardMutations = (): ICreditCardMutation => {
     queryClient.invalidateQueries('creditCards', { exact: true, refetchInactive: true });
   };
 
-  const create = useMutation<string, Error, CreditCard>(creditCards.create, {
+  const create = useMutation<CreditCard, Error, CreditCard>(creditCards.create, {
     onSuccess: () => {
       refetchList();
       toast.success({ title: 'Exito!', description: 'Se ha creado la cuenta correctamente.' });
@@ -40,7 +40,7 @@ export const useCreditCardMutations = (): ICreditCardMutation => {
     },
   });
 
-  const update = useMutation<void, Error, CreditCard>(creditCards.update, {
+  const update = useMutation<CreditCard, Error, CreditCard>(creditCards.update, {
     onSuccess: () => {
       refetchList();
       toast.success({ title: 'Exito!', description: 'Se ha actualizado la cuenta correctamente.' });

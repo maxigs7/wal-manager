@@ -6,9 +6,9 @@ import { useToast } from '@lib/chakra-ui';
 import { Account } from '@models';
 
 interface IAccountMutation {
-  create: UseMutationResult<string, Error, Account>;
+  create: UseMutationResult<Account, Error, Account>;
   remove: UseMutationResult<void, Error, string>;
-  update: UseMutationResult<void, Error, Account>;
+  update: UseMutationResult<Account, Error, Account>;
 }
 
 export const useAccountMutations = (): IAccountMutation => {
@@ -20,7 +20,7 @@ export const useAccountMutations = (): IAccountMutation => {
     queryClient.invalidateQueries('accounts', { exact: true, refetchInactive: true });
   };
 
-  const create = useMutation<string, Error, Account>(accounts.create, {
+  const create = useMutation<Account, Error, Account>(accounts.create, {
     onSuccess: () => {
       refetchList();
       toast.success({ title: 'Exito!', description: 'Se ha creado la cuenta correctamente.' });
@@ -40,7 +40,7 @@ export const useAccountMutations = (): IAccountMutation => {
     },
   });
 
-  const update = useMutation<void, Error, Account>(accounts.update, {
+  const update = useMutation<Account, Error, Account>(accounts.update, {
     onSuccess: () => {
       refetchList();
       toast.success({ title: 'Exito!', description: 'Se ha actualizado la cuenta correctamente.' });

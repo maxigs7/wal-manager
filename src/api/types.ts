@@ -32,9 +32,9 @@ export interface IGetAllOptions<T> {
 }
 
 export interface IRepository<T extends BaseModel> {
-  create(model: T): Promise<string>;
+  create(model: T): Promise<T>;
   getAll(options?: IGetAllOptions<T>): Promise<T[]>;
   getById(id: string): Promise<T | null>;
   remove(id: string): Promise<void>;
-  update(model: T): Promise<void>;
+  update(model: T): Promise<T>;
 }

@@ -6,9 +6,9 @@ import { useToast } from '@lib/chakra-ui';
 import { Category, CategoryType } from '@models';
 
 interface ICategoryMutation {
-  create: UseMutationResult<string, Error, Category>;
+  create: UseMutationResult<Category, Error, Category>;
   remove: UseMutationResult<void, Error, string>;
-  update: UseMutationResult<void, Error, Category>;
+  update: UseMutationResult<Category, Error, Category>;
 }
 
 export const useCategoryMutations = (): ICategoryMutation => {
@@ -20,9 +20,9 @@ export const useCategoryMutations = (): ICategoryMutation => {
     queryClient.invalidateQueries(['categories', type], { exact: true, refetchInactive: true });
   };
 
-  const create = useMutation<string, Error, Category>(categories.create, {
-    onSuccess: () => {
-      refetchList(CategoryType.Expense);
+  const create = useMutation<Category, Error, Category>(categories.create, {
+    onSuccess: (category) => {
+      refetchList(category.type);
       toast.success({ title: 'Exito!', description: 'Se ha creado la categoria correctamente.' });
     },
     onError: (error: Error) => {
@@ -43,9 +43,9 @@ export const useCategoryMutations = (): ICategoryMutation => {
     },
   });
 
-  const update = useMutation<void, Error, Category>(categories.update, {
-    onSuccess: () => {
-      refetchList(CategoryType.Expense);
+  const update = useMutation<Category, Error, Category>(categories.update, {
+    onSuccess: (category) => {
+      refetchList(category.type);
       toast.success({
         title: 'Exito!',
         description: 'Se ha actualizado la categoria correctamente.',
