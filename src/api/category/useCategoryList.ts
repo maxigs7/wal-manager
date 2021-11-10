@@ -21,7 +21,7 @@ export const useCategoryList = (categoryType: CategoryType): UseQueryResult<Cate
   );
 };
 
-export const useSubCategoryList = (parentId?: string): UseQueryResult<Category[]> => {
+export const useSubCategoryList = (parentId: string): UseQueryResult<Category[]> => {
   const { categories } = useApi();
   return useQuery<Category[]>(
     ['categories', parentId],

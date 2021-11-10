@@ -4,7 +4,7 @@ import { Category } from '@models';
 
 import { SubCategoryListItem } from '../list-item';
 
-const SubCategoryList: React.FC<IProps> = ({ subCategories = [], onDeleted, onEdited }) => {
+const SubCategoryList: React.FC<IProps> = ({ subCategories = [], onDeleted, onUpdated }) => {
   console.log('SubCategoriesList component rendering...');
   return (
     <>
@@ -12,7 +12,7 @@ const SubCategoryList: React.FC<IProps> = ({ subCategories = [], onDeleted, onEd
         <SubCategoryListItem
           key={category.id}
           onDeleted={onDeleted}
-          onEdited={onEdited}
+          onUpdated={onUpdated}
           subCategory={category}
         />
       ))}
@@ -22,8 +22,8 @@ const SubCategoryList: React.FC<IProps> = ({ subCategories = [], onDeleted, onEd
 
 interface IProps {
   subCategories: Category[];
-  onDeleted?(subCategory: Category): void;
-  onEdited?(subCategory: Category): void;
+  onDeleted?(id: string): void;
+  onUpdated?(id: string): void;
 }
 
 export { SubCategoryList };

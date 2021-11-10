@@ -1,35 +1,21 @@
 import { useCallback, useMemo, useReducer } from 'react';
 
 import { Category } from '@models';
-import { CategoryType } from '@models/common';
 
-import { openForm, openFormDismiss, openFormSuccess, selected, selectedType } from './actions';
+import { openForm, openFormDismiss, openFormSuccess } from './actions';
 import { reducer } from './reducer';
 import { IDispatch, initialState, IState } from './state';
 
 export const useStore = (): [IState, IDispatch] => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const onSelected = useCallback(
-    (category: Category) => {
-      dispatch(selected(category));
-    },
-    [dispatch],
-  );
-
-  const onSelectedType = useCallback(
-    (type: CategoryType) => {
-      dispatch(selectedType(type));
-    },
-    [dispatch],
-  );
-
-  const onOpenForm = useCallback((type: CategoryType, id?: string, isDeleting = false) => {
-    dispatch(openForm({ isDeleting, id, type }));
+  const onOpenForm = useCallback((id?: string, isDeleting = false) => {
+    dispatch(openForm({ isDeleting, id }));
   }, []);
 
   const onConfirmedForm = useCallback(
     (category: Category) => {
+      console.log(category);
       dispatch(openFormSuccess(category));
     },
     [dispatch],
@@ -46,8 +32,6 @@ export const useStore = (): [IState, IDispatch] => {
         onConfirmedForm,
         onDismissForm,
         onOpenForm,
-        onSelected,
-        onSelectedType,
       },
     ],
     [state],

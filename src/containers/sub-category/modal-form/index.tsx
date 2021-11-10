@@ -6,28 +6,23 @@ import { SubCategoryForm } from '@components';
 import { useUser } from '@lib/supabase';
 import { ModalForm } from '@lib/wal-ui';
 import { Category } from '@models';
-import { CategoryType } from '@models/common';
 
-const SubCategoryModalForm: React.FC<IProps> = ({
-  id,
-  isOpen,
-  parentId,
-  onClose: onCloseModal,
-  type,
-}) => {
+const SubCategoryModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, parent }) => {
   const { user } = useUser();
   const { data: category, isLoading, refetch } = useCategoryById(id);
-  const { create, update } = useCategoryMutations();
-  const { isLoading: isSubmitting, isSuccess } = id ? update : create;
+  const { create, update } = useCategoryMutations('sub-categories');
+  const { data, isLoading: isSubmitting, isSuccess } = id ? update : create;
 
   const title = useMemo(() => (id ? 'Editar categoria' : 'Nueva categoria'), [id]);
   const defValue: Partial<Category> = useMemo(
     () => ({
-      parentId,
-      type,
+      color: parent.color,
+      icon: parent.icon,
+      parentId: parent.id,
+      type: parent.type,
       userId: user?.id as string,
     }),
-    [parentId, type, user],
+    [parent, user],
   );
 
   /// HANDLERS
@@ -38,10 +33,6 @@ const SubCategoryModalForm: React.FC<IProps> = ({
       return create.mutate(model);
     }
     return update.mutate(model);
-  };
-
-  const onClose = () => {
-    onCloseModal();
   };
 
   const renderForm = (props: UseFormReturn<Category>) => {
@@ -56,10 +47,10 @@ const SubCategoryModalForm: React.FC<IProps> = ({
   }, [id]);
 
   useEffect(() => {
-    if (isSuccess) {
-      onCloseModal();
+    if (isSuccess && data) {
+      onConfirmed(data);
     }
-  }, [isSuccess]);
+  }, [data, isSuccess]);
 
   return (
     <ModalForm
@@ -70,7 +61,7 @@ const SubCategoryModalForm: React.FC<IProps> = ({
       isOpen={isOpen}
       isSubmitting={isSubmitting}
       model={category}
-      onClose={onClose}
+      onClose={onDismiss}
       onConfirm={onConfirm}
       size="3xl"
       title={title}
@@ -83,9 +74,9 @@ const SubCategoryModalForm: React.FC<IProps> = ({
 interface IProps {
   id?: string;
   isOpen: boolean;
-  onClose(id?: string): void;
-  parentId: string;
-  type: CategoryType;
+  onConfirmed(category: Category): void;
+  onDismiss(): void;
+  parent: Category;
 }
 
 export { SubCategoryModalForm };

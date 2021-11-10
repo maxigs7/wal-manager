@@ -10,8 +10,8 @@ const SubCategoryListEmpty: React.FC<IProps> = React.memo(({ onCreated }) => (
       No existen sub categorias
     </Text>
     {onCreated && (
-      <Button colorScheme="crimson" onClick={onCreated}>
-        Crea una sub categoria
+      <Button colorScheme="info" onClick={() => onCreated()}>
+        Crear una sub categoria
       </Button>
     )}
   </EmptyMessage>

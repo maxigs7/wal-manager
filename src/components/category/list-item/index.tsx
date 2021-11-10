@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Link } from '@chakra-ui/react';
+import { Box, Link, Text } from '@chakra-ui/react';
 
 import { Icon } from '@lib/chakra-ui';
 import { ColorCircle } from '@lib/wal-ui';
@@ -25,9 +25,9 @@ const CategoryListItem: React.FC<IProps> = ({ category, isActive, onSelected }) 
       borderBottomColor="gray.200"
       borderBottomStyle="solid"
       display="flex"
+      height="16"
       onClick={() => onSelected && onSelected(category)}
       px={3}
-      py={5}
       transition="border-left 0.3s ease-out"
       w="full"
     >
@@ -42,7 +42,7 @@ const CategoryListItem: React.FC<IProps> = ({ category, isActive, onSelected }) 
       >
         <Icon icon={category.icon} />
       </ColorCircle>
-      {category.name}
+      <Text isTruncated>{category.name}</Text>
     </Box>
   );
 };

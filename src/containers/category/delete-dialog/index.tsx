@@ -1,11 +1,17 @@
 import React, { useEffect } from 'react';
 
-import { useCategoryMutations } from '@api';
+import { CategoryKeys, useCategoryMutations } from '@api';
 import { DeleteDialog } from '@lib/wal-ui';
 import { Category } from '@models';
 
-const CategoryDeleteDialog: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => {
-  const { remove } = useCategoryMutations();
+const CategoryDeleteDialog: React.FC<IProps> = ({
+  id,
+  isOpen,
+  mutationKey = 'categories',
+  onConfirmed,
+  onDismiss,
+}) => {
+  const { remove } = useCategoryMutations(mutationKey);
 
   const onConfirm = async () => {
     id && remove.mutate(id);
@@ -31,6 +37,7 @@ const CategoryDeleteDialog: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDis
 interface IProps {
   id?: string;
   isOpen: boolean;
+  mutationKey?: CategoryKeys;
   onConfirmed(data: Category): void;
   onDismiss(): void;
 }

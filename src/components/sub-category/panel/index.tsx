@@ -12,9 +12,9 @@ const SubCategoryPanel: React.FC<IProps> = ({
   isLoading = true,
   onCategoryDeleted,
   onCategoryUpdated,
-  // onCreated,
-  // onDeleted,
-  // onEdited,
+  onCreated,
+  onDeleted,
+  onUpdated,
   subCategories = [],
 }) => {
   const noSelected = !isLoading && !category;
@@ -25,6 +25,7 @@ const SubCategoryPanel: React.FC<IProps> = ({
       {category && (
         <CategoryBar
           category={category}
+          onCreated={onCreated}
           onDeleted={onCategoryDeleted}
           onUpdated={onCategoryUpdated}
         />
@@ -41,8 +42,14 @@ const SubCategoryPanel: React.FC<IProps> = ({
       >
         {isLoading && <CircularProgress color="crimson.300" isIndeterminate />}
         {noSelected && <SubCategoryListNoSelected />}
-        {isEmpty && <SubCategoryListEmpty onCreated={() => console.log('Creating')} />}
-        {!isEmpty && <SubCategoryList subCategories={subCategories} />}
+        {isEmpty && <SubCategoryListEmpty onCreated={onCreated} />}
+        {!isEmpty && (
+          <SubCategoryList
+            onDeleted={onDeleted}
+            onUpdated={onUpdated}
+            subCategories={subCategories}
+          />
+        )}
       </Box>
     </>
   );
@@ -54,8 +61,8 @@ interface IProps {
   onCategoryDeleted?(id: string): void;
   onCategoryUpdated?(id: string): void;
   onCreated?(): void;
-  onDeleted?(): void;
-  onEdited?(): void;
+  onDeleted?(id: string): void;
+  onUpdated?(id: string): void;
   subCategories?: Category[];
 }
 

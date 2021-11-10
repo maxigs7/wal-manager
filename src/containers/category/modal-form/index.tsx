@@ -8,7 +8,7 @@ import { ModalForm } from '@lib/wal-ui';
 import { Category } from '@models';
 import { CategoryType } from '@models/common';
 
-const CategoryModalForm: React.FC<IProps> = ({ type, id, isOpen, onConfirmed, onDismiss }) => {
+const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type }) => {
   const { user } = useUser();
   const { data: category, isLoading, refetch } = useCategoryById(id);
   const { create, update } = useCategoryMutations();
