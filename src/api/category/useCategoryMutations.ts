@@ -7,7 +7,7 @@ import { Category, CategoryType } from '@models';
 
 interface ICategoryMutation {
   create: UseMutationResult<Category, Error, Category>;
-  remove: UseMutationResult<void, Error, string>;
+  remove: UseMutationResult<Category, Error, string>;
   update: UseMutationResult<Category, Error, Category>;
 }
 
@@ -30,9 +30,9 @@ export const useCategoryMutations = (): ICategoryMutation => {
     },
   });
 
-  const remove = useMutation<void, Error, string>(categories.remove, {
-    onSuccess: () => {
-      refetchList(CategoryType.Expense);
+  const remove = useMutation<Category, Error, string>(categories.remove, {
+    onSuccess: (category) => {
+      refetchList(category.type);
       toast.success({
         title: 'Exito!',
         description: 'Se ha eliminado la categoria correctamente.',

@@ -35,6 +35,6 @@ export interface IRepository<T extends BaseModel> {
   create(model: T): Promise<T>;
   getAll(options?: IGetAllOptions<T>): Promise<T[]>;
   getById(id: string): Promise<T | null>;
-  remove(id: string): Promise<void>;
+  remove(id: string): Promise<T>;
   update(model: T): Promise<T>;
 }

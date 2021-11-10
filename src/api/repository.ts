@@ -40,11 +40,12 @@ export const buildRepository = <T extends BaseModel>(
       }
       return null;
     },
-    remove: async (id: string): Promise<void> => {
-      const { error } = await supabase.from<T>(tableName).delete().match({ id });
-      if (error) {
+    remove: async (id: string): Promise<T> => {
+      const { data, error } = await supabase.from<T>(tableName).delete().match({ id });
+      if (error || !data) {
         throw new Error(JSON.stringify(error));
       }
+      return camelCase(data[0]) as T;
     },
     update: async (model: T): Promise<T> => {
       const { data, error } = await supabase

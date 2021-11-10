@@ -7,7 +7,7 @@ import { Account } from '@models';
 
 interface IAccountMutation {
   create: UseMutationResult<Account, Error, Account>;
-  remove: UseMutationResult<void, Error, string>;
+  remove: UseMutationResult<Account, Error, string>;
   update: UseMutationResult<Account, Error, Account>;
 }
 
@@ -30,7 +30,7 @@ export const useAccountMutations = (): IAccountMutation => {
     },
   });
 
-  const remove = useMutation<void, Error, string>(accounts.remove, {
+  const remove = useMutation<Account, Error, string>(accounts.remove, {
     onSuccess: () => {
       refetchList();
       toast.success({ title: 'Exito!', description: 'Se ha eliminado la cuenta correctamente.' });

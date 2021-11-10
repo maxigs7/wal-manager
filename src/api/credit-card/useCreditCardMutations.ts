@@ -7,7 +7,7 @@ import { CreditCard } from '@models';
 
 interface ICreditCardMutation {
   create: UseMutationResult<CreditCard, Error, CreditCard>;
-  remove: UseMutationResult<void, Error, string>;
+  remove: UseMutationResult<CreditCard, Error, string>;
   update: UseMutationResult<CreditCard, Error, CreditCard>;
 }
 
@@ -30,7 +30,7 @@ export const useCreditCardMutations = (): ICreditCardMutation => {
     },
   });
 
-  const remove = useMutation<void, Error, string>(creditCards.remove, {
+  const remove = useMutation<CreditCard, Error, string>(creditCards.remove, {
     onSuccess: () => {
       refetchList();
       toast.success({ title: 'Exito!', description: 'Se ha eliminado la cuenta correctamente.' });
