@@ -1,4 +1,4 @@
-import { Flex, FlexProps } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { CategoryType } from '@models';
 
@@ -17,18 +17,14 @@ const buttons = [
   },
 ];
 
-const ActionBar: React.FC<IProps> = ({
-  onSelected,
-  selectedType = CategoryType.Expense,
-  ...flexProps
-}) => {
+const ActionBar: React.FC<IProps> = ({ onSelected, selectedType = CategoryType.Expense }) => {
   return (
     <Flex
       align="center"
-      {...flexProps}
       borderBottom={1}
       borderBottomColor="gray.200"
       borderBottomStyle="solid"
+      justifyContent={['center', 'flex-start']}
     >
       {buttons.map((item) => (
         <TabButton
@@ -45,7 +41,7 @@ const ActionBar: React.FC<IProps> = ({
   );
 };
 
-interface IProps extends FlexProps {
+interface IProps {
   onCreated?(): void;
   onSelected?(type: CategoryType): void;
   selectedType?: CategoryType;
