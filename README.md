@@ -1,65 +1,25 @@
 # WalManager
 
-NEED INSTALL SUPABASE CLI
-
 ## Development
 
-This project runs using Firebase Firestore and Firestore Authentication. We're gonna need to install the CLI to run locally.
+This project runs using [Supabase](https://supabase.io/). We're gonna need to create the project and set the env variables:
 
-`cp .env.example .env.local`
+- Copy env file: `cp .env.example .env.local`
+- Replace variables with the supabase project
 
-### Configure Firebase
-
-#### Get the CLI
-
-The Emulator Suite is part of the Firebase CLI (command-line interface) which can be installed on your machine with the following command:
-
-```bash
-yarn global add firebase-tools
-```
-
-### Connect to your Firebase project
-
-If you don't have a Firebase project, in the [Firebase console](https://console.firebase.google.com/), create a new Firebase project. Make a note of the Project ID you choose, you will need it later.
-
-Now we need to connect this code to your Firebase project. First run the following command to log in to the Firebase CLI:
-
-```bash
-firebase login
-```
-
-Next run the following command to create a project alias. Replace `$YOUR_PROJECT_ID` with the ID of your Firebase project.
-
-```bash
-firebase use $YOUR_PROJECT_ID
-```
-
-Create `.firebaserc` with the following format. Replace `$YOUR_PROJECT_ID` with the ID of your Firebase project.
-
-```json
-{
-  "projects": {
-    "default": $YOUR_PROJECT_ID
-  }
-}
-```
-
-### Start the emulators
-
-From inside the source directory, run the following command to start the emulators:
-
-```bash
-yarn firebase:start
-```
+  ```
+  REACT_APP_SUPABASE_API_URL='insert url'
+  REACT_APP_SUPABASE_ANON_KEY='insert api key'
+  ```
 
 ### Application
 
-Once firebase emulator is running, run the app in the development mode.
+Once you have supabase configured, run the app in the development mode.
 The page will reload if you make edits.\
 _You will also see any lint errors in the console._
 
 ```bash
-yarn start
+yarn start:dev
 ```
 
 ### Run Production Mode
@@ -67,7 +27,7 @@ yarn start
 Builds the app for production and test it locally.
 
 ```bash
-yarn build && npx serve -s build
+yarn start:prod
 ```
 
 ## Deploying Your App
@@ -80,12 +40,6 @@ Your app is ready to be deployed!
 
 ```bash
 yarn build
-```
-
-Now that everything is set up, you can go ahead and deploy your app! All you need to do now is run:
-
-```bash
-firebase deploy
 ```
 
 ## Testing
