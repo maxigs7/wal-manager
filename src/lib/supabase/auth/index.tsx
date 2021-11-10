@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
 import { useSupabase } from '../context';
-import { authInit } from './actions';
+import { authStart } from './actions';
 import { reducer } from './reducer';
 import { initialState, IState } from './state';
 
@@ -12,18 +12,18 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const session = auth.session();
-    dispatch(authInit({ session, user: session?.user ?? null, initializing: true }));
-    const { data: authListener } = auth.onAuthStateChange(async (_event, session) => {
-      dispatch(authInit({ session, user: session?.user ?? null, initializing: false }));
+    const user = auth.user();
+    dispatch(authStart(user));
+
+    const { data: listener } = auth.onAuthStateChange(async (_event, session) => {
+      const user = session?.user || null;
+      dispatch(authStart(user));
     });
 
     return () => {
-      if (authListener) {
-        authListener.unsubscribe();
-      }
+      listener?.unsubscribe();
     };
-  }, [auth]);
+  }, []);
 
   return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
 };

@@ -3,6 +3,7 @@ import { Link as ReactLink } from 'react-router-dom';
 import { Heading, Icon, Flex, Link } from '@chakra-ui/react';
 
 import { ReactComponent as WalletLogo } from '@assets/images/wallet.svg';
+import { AUTH_SIGN_UP_ENABLED } from '@constants';
 import { SignInContainer } from '@containers';
 
 const SignInPage: React.FC = () => (
@@ -19,9 +20,11 @@ const SignInPage: React.FC = () => (
 
     <SignInContainer />
 
-    <Link as={ReactLink} colorScheme="cello" mt={5} to="/auth/sign-up">
-      No tienes una cuenta? Crea una aqui
-    </Link>
+    {AUTH_SIGN_UP_ENABLED && (
+      <Link as={ReactLink} colorScheme="cello" mt={5} to="/auth/sign-up">
+        No tienes una cuenta? Crea una aqui
+      </Link>
+    )}
   </Flex>
 );
 

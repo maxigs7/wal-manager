@@ -1,7 +1,7 @@
-import { AuthInitPayload } from './types';
+import { User } from '@supabase/supabase-js';
 
-export const AUTH_INIT = '[AUTH] Init';
+export const AUTH_START = '[AUTH] Start';
 
-export type Action = { type: typeof AUTH_INIT; payload: AuthInitPayload };
+export type Actions = { type: typeof AUTH_START; payload: User | null };
 
-export const authInit = (payload: AuthInitPayload): Action => ({ type: AUTH_INIT, payload });
+export const authStart = (payload: User | null): Actions => ({ type: AUTH_START, payload });

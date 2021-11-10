@@ -27,6 +27,9 @@ export const useAuthApi = (): IAuthMutation => {
   });
 
   const signInGoogle = useMutation<ISignInReturn, Error, string>(auth.signInGoogle, {
+    onSuccess: (user) => {
+      console.log(user);
+    },
     onError: () => {
       console.log('error');
     },

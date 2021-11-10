@@ -8,6 +8,7 @@
       "@assets/*": ["./assets/*"],
       "@components": ["./components"],
       "@components/*": ["./components/*"],
+      "@constants": ["./constants"],
       "@containers": ["./containers"],
       "@containers/*": ["./containers/*"],
       "@hooks": ["./hooks"],

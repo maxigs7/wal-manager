@@ -1,14 +1,13 @@
-import { Action, AUTH_INIT } from './actions';
+import { Actions, AUTH_START } from './actions';
 import { IState } from './state';
 
-export const reducer = (state: IState, action: Action): IState => {
+export const reducer = (state: IState, action: Actions): IState => {
   switch (action.type) {
-    case AUTH_INIT:
+    case AUTH_START:
       return {
         ...state,
-        initializing: action.payload.initializing,
-        user: action.payload.user,
-        session: action.payload.session,
+        initializing: false,
+        user: action.payload,
       };
     default:
       return state;
