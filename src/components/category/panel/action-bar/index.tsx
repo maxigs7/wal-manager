@@ -1,31 +1,38 @@
-import { Flex, IconButton } from '@chakra-ui/react';
+import { Flex, FlexProps } from '@chakra-ui/react';
 
-import { Icon } from '@lib/chakra-ui';
 import { CategoryType } from '@models';
 
 import { TabButton } from './tab-button';
 
 const buttons = [
   {
+    color: 'red.500',
     label: 'Gastos',
     type: CategoryType.Expense,
   },
   {
+    color: 'green.500',
     label: 'Ingresos',
     type: CategoryType.Income,
   },
 ];
 
 const ActionBar: React.FC<IProps> = ({
-  onCreated,
   onSelected,
   selectedType = CategoryType.Expense,
+  ...flexProps
 }) => {
-  const onCreatedHandler = () => onCreated && onCreated();
   return (
-    <Flex align="center" borderBottom="1px" borderColor="blackAlpha.500" justify="space-between">
+    <Flex
+      align="center"
+      {...flexProps}
+      borderBottom={1}
+      borderBottomColor="gray.200"
+      borderBottomStyle="solid"
+    >
       {buttons.map((item) => (
         <TabButton
+          color={item.color}
           isSelected={selectedType === item.type}
           key={item.type}
           onSelected={onSelected}
@@ -34,22 +41,11 @@ const ActionBar: React.FC<IProps> = ({
           {item.label}
         </TabButton>
       ))}
-
-      <IconButton
-        aria-label="Crear categoria"
-        colorScheme="crimson"
-        icon={<Icon icon="plus" />}
-        ml="auto"
-        mr="1"
-        onClick={onCreatedHandler}
-        rounded="full"
-        size="sm"
-      />
     </Flex>
   );
 };
 
-interface IProps {
+interface IProps extends FlexProps {
   onCreated?(): void;
   onSelected?(type: CategoryType): void;
   selectedType?: CategoryType;

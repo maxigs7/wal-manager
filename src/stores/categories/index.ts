@@ -1,1 +1,1 @@
-export * from './store';
+export { useStore as useCategoriesStore } from './store';

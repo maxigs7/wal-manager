@@ -10,7 +10,7 @@ export const useCategoryList = (categoryType: CategoryType): UseQueryResult<Cate
     () =>
       categories.getAll({
         filtering: (q) => {
-          return q.eq('type', categoryType);
+          return q.eq('type', categoryType).is('parent_id', null);
         },
         sort: { field: 'name' },
       }),

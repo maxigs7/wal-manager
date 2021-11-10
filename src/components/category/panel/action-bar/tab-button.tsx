@@ -2,22 +2,25 @@ import { Button } from '@chakra-ui/react';
 
 import { CategoryType } from '@models';
 
-const TabButton: React.FC<IProps> = ({ children, isSelected, onSelected, type }) => {
+const borderActive = (color: string) => ({
+  borderBottom: 3,
+  borderBottomColor: color,
+  borderBottomStyle: 'solid',
+});
+
+const TabButton: React.FC<IProps> = ({ children, color, isSelected, onSelected, type }) => {
   const onClickHandler = () => onSelected && onSelected(type);
-  const hover = isSelected
-    ? {
-        bg: 'crimson.800',
-      }
-    : undefined;
+  const props = isSelected ? borderActive(color) : {};
   return (
     <Button
+      {...props}
       _focus={{ outline: 'none' }}
-      _hover={hover}
-      bg={isSelected ? 'crimson.500' : 'transparent'}
+      _hover={borderActive(color)}
+      bg="transparent"
       borderRadius="0"
-      color={isSelected ? 'white' : 'gray.800'}
       onClick={onClickHandler}
       size="lg"
+      transition="border-bottom 0.3s ease-out"
     >
       {children}
     </Button>
@@ -25,6 +28,7 @@ const TabButton: React.FC<IProps> = ({ children, isSelected, onSelected, type })
 };
 
 interface IProps {
+  color: string;
   isSelected: boolean;
   onSelected?(type: CategoryType): void;
   type: CategoryType;

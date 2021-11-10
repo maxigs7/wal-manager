@@ -15,9 +15,13 @@ const CategoryPanel: React.FC<IProps> = ({
   selected,
   selectedType,
 }) => {
+  const isEmpty = !isLoading && !categories?.length;
+  const hasData = !isLoading && !!categories?.length;
+
   return (
     <>
-      <ActionBar onCreated={onCreated} onSelected={onSelectedType} selectedType={selectedType} />
+      <ActionBar onSelected={onSelectedType} selectedType={selectedType} />
+
       <Box
         alignItems="center"
         display="flex"
@@ -28,8 +32,8 @@ const CategoryPanel: React.FC<IProps> = ({
         w="full"
       >
         {isLoading && <CircularProgress color="crimson.300" isIndeterminate />}
-        {!isLoading && !categories?.length && <CategoryListEmpty onCreated={onCreated} />}
-        {!isLoading && !!categories?.length && (
+        {isEmpty && <CategoryListEmpty onCreated={onCreated} type={selectedType} />}
+        {hasData && (
           <CategoryList categories={categories} onSelected={onSelected} selected={selected} />
         )}
       </Box>
@@ -44,7 +48,7 @@ interface IProps {
   onSelected?(category: Category): void;
   onSelectedType?(type: CategoryType): void;
   selected?: Category;
-  selectedType?: CategoryType;
+  selectedType: CategoryType;
 }
 
 export { CategoryPanel };

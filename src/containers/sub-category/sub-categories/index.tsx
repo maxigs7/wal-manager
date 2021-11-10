@@ -30,8 +30,8 @@ export const SubCategoriesListCard: React.FC<IProps> = ({
         <SubCategoryPanel
           category={selected}
           isLoading={isLoading}
-          onCategoryDeleted={() => onCategoryDeleted(selected?.id as string)}
-          onCategoryUpdated={() => onCategoryUpdated(selected?.id as string)}
+          onCategoryDeleted={onCategoryDeleted}
+          onCategoryUpdated={onCategoryUpdated}
           onCreated={() => console.log('Creating')}
           onDeleted={() => console.log('Deleting')}
           onEdited={() => console.log('Editing')}
