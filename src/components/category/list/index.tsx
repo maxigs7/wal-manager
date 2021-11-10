@@ -11,7 +11,7 @@ const CategoryList: React.FC<IProps> = ({ categories = [], onSelected, selected 
       {categories.map((category) => (
         <CategoryListItem
           category={category}
-          isActive={category === selected}
+          isActive={category.id === selected?.id}
           key={category.id}
           onSelected={onSelected}
         />

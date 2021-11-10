@@ -28,25 +28,35 @@ export const useStore = (): [IState, IDispatch] => {
     [dispatch],
   );
 
-  const onConfirmedForm = () => {
-    dispatch(selectedId());
-    onCloseForm();
-  };
+  const onConfirmedForm = useCallback(
+    (category: Category) => {
+      dispatch(selectedId());
+      onSelected(category);
+      onCloseForm();
+    },
+    [dispatch, onSelected, onCloseForm],
+  );
 
-  const onOpenForm = (id: string) => {
-    dispatch(selectedId({ id }));
-    _onOpenForm();
-  };
+  const onOpenForm = useCallback(
+    (id: string) => {
+      dispatch(selectedId({ id }));
+      _onOpenForm();
+    },
+    [dispatch, _onOpenForm],
+  );
 
-  const onConfirmedRemove = () => {
+  const onConfirmedRemove = useCallback(() => {
     dispatch(selectedId({ deselect: true }));
     onCloseRemove();
-  };
+  }, [dispatch, onCloseRemove]);
 
-  const onOpenRemove = (id: string) => {
-    dispatch(selectedId({ id }));
-    _onOpenRemove();
-  };
+  const onOpenRemove = useCallback(
+    (id: string) => {
+      dispatch(selectedId({ id }));
+      _onOpenRemove();
+    },
+    [dispatch, _onOpenRemove],
+  );
 
   return useMemo(
     () => [
