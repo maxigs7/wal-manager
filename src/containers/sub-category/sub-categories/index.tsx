@@ -57,7 +57,7 @@ export const SubCategoriesListCard: React.FC<IProps> = ({
           <CategoryDeleteDialog
             id={state.id}
             isOpen={state.isOpenRemove}
-            key="sub-categories"
+            mutationKey="sub-categories"
             onConfirmed={dispatch.onConfirmedForm}
             onDismiss={dispatch.onDismissForm}
           />

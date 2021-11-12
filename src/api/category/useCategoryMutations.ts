@@ -5,13 +5,13 @@ import { useApi } from '@api';
 import { useToast } from '@lib/chakra-ui';
 import { Category } from '@models';
 
+import { CategoryKeys } from './types';
+
 interface ICategoryMutation {
   create: UseMutationResult<Category, Error, Category>;
   remove: UseMutationResult<Category, Error, string>;
   update: UseMutationResult<Category, Error, Category>;
 }
-
-export type CategoryKeys = 'categories' | 'sub-categories';
 
 export const useCategoryMutations = (key: CategoryKeys = 'categories'): ICategoryMutation => {
   const { categories } = useApi();
