@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
+import { UseMutationResult } from 'react-query';
 
 import { useApi } from '@api';
 import { useToast } from '@lib/chakra-ui';
 import { Account } from '@models';
+
+import { useMutations } from '../mutations';
 
 interface IAccountMutation {
   create: UseMutationResult<Account, Error, Account>;
@@ -13,16 +15,11 @@ interface IAccountMutation {
 
 export const useAccountMutations = (): IAccountMutation => {
   const { accounts } = useApi();
-  const queryClient = useQueryClient();
+  const mutations = useMutations<Account>(accounts);
   const toast = useToast();
 
-  const refetchList = () => {
-    queryClient.invalidateQueries('accounts', { exact: true, refetchInactive: true });
-  };
-
-  const create = useMutation<Account, Error, Account>(accounts.create, {
+  const create = mutations.create({
     onSuccess: () => {
-      refetchList();
       toast.success({ title: 'Exito!', description: 'Se ha creado la cuenta correctamente.' });
     },
     onError: (error: Error) => {
@@ -30,9 +27,8 @@ export const useAccountMutations = (): IAccountMutation => {
     },
   });
 
-  const remove = useMutation<Account, Error, string>(accounts.remove, {
+  const remove = mutations.remove({
     onSuccess: () => {
-      refetchList();
       toast.success({ title: 'Exito!', description: 'Se ha eliminado la cuenta correctamente.' });
     },
     onError: (error: Error) => {
@@ -40,9 +36,8 @@ export const useAccountMutations = (): IAccountMutation => {
     },
   });
 
-  const update = useMutation<Account, Error, Account>(accounts.update, {
+  const update = mutations.update({
     onSuccess: () => {
-      refetchList();
       toast.success({ title: 'Exito!', description: 'Se ha actualizado la cuenta correctamente.' });
     },
     onError: (error: Error) => {

@@ -13,21 +13,18 @@ const AccountsList: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
     refetch();
   }, []);
 
-  console.log('AccountsList rendering...');
+  if (isLoading) {
+    return (
+      <Flex align="center" justify="center" p={5}>
+        <CircularProgress color="crimson.300" isIndeterminate />
+      </Flex>
+    );
+  }
 
   return (
-    <>
-      {isLoading && (
-        <Flex align="center" justify="center" p={5}>
-          <CircularProgress color="crimson.300" isIndeterminate />
-        </Flex>
-      )}
-      {!isLoading && (
-        <AccountList accounts={accounts || []} onDelete={onDelete} onSelected={onSelected}>
-          <AccountNewPlaceholder onSelected={onCreate} />
-        </AccountList>
-      )}
-    </>
+    <AccountList accounts={accounts || []} onDelete={onDelete} onSelected={onSelected}>
+      <AccountNewPlaceholder onSelected={onCreate} />
+    </AccountList>
   );
 };
 

@@ -1,61 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { useDisclosure } from '@chakra-ui/hooks';
-import { Portal } from '@chakra-ui/portal';
-
-import { AccountsList, AccountModalForm, AccountDeleteDialog } from '@containers';
+import { AccountsList, AccountPortalModal } from '@containers';
 import { Page } from '@lib/wal-ui';
-import { Account } from '@models';
+import { useAccountStore } from '@stores';
 
 const AccountsPage: React.FC = () => {
-  const { isOpen: isOpenForm, onClose: onDismissForm, onOpen: onOpenForm } = useDisclosure();
-  const { isOpen: isOpenRemove, onClose: onDismissRemove, onOpen: _onOpenRemove } = useDisclosure();
-  const [accountId, setAccountId] = useState<string>();
-
-  const onSelected = (account: Account) => {
-    setAccountId(account.id);
-    onOpenForm();
-  };
-
-  const onConfirmedForm = () => {
-    setAccountId(undefined);
-    onDismissForm();
-  };
-
-  const onOpenRemove = (account: Account) => {
-    setAccountId(account.id);
-    _onOpenRemove();
-  };
-
-  const onConfirmedRemove = () => {
-    setAccountId(undefined);
-    onDismissRemove();
-  };
-
-  console.log('AccountsPage rendering...');
+  const [state, dispatch] = useAccountStore();
 
   return (
     <>
-      <Page metaTitle="Mis Cuentas" title="Mis Cuentas">
-        <AccountsList onCreate={onOpenForm} onDelete={onOpenRemove} onSelected={onSelected} />
-        <Portal>
-          {isOpenForm && (
-            <AccountModalForm
-              id={accountId}
-              isOpen={isOpenForm}
-              onConfirmed={onConfirmedForm}
-              onDismiss={onDismissForm}
-            />
-          )}
-          {isOpenRemove && (
-            <AccountDeleteDialog
-              id={accountId}
-              isOpen={isOpenRemove}
-              onConfirmed={onConfirmedRemove}
-              onDismiss={onDismissRemove}
-            />
-          )}
-        </Portal>
+      <Page metaTitle="Mis Tarjetas" title="Mis Tarjetas">
+        <AccountsList
+          onCreate={dispatch.onOpenForm}
+          onDelete={(account) => dispatch.onOpenForm(account, true)}
+          onSelected={(account) => dispatch.onOpenForm(account)}
+        />
+        <AccountPortalModal
+          id={state.id}
+          isOpenForm={state.isOpenForm}
+          isOpenRemove={state.isOpenRemove}
+          onConfirmed={dispatch.onConfirmedForm}
+          onDismiss={dispatch.onDismissForm}
+        />
       </Page>
     </>
   );
