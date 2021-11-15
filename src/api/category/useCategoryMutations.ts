@@ -20,7 +20,6 @@ export const useCategoryMutations = (key: CategoryKeys = 'categories'): ICategor
 
   const refetchList = (category: Category) => {
     const subKey = key === 'categories' ? category.type : category.parentId;
-    console.log(key, subKey);
     queryClient.invalidateQueries([key, subKey], {
       exact: true,
       refetchInactive: true,

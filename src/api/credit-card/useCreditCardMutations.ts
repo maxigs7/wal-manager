@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
+import { UseMutationResult } from 'react-query';
 
 import { useApi } from '@api';
 import { useToast } from '@lib/chakra-ui';
 import { CreditCard } from '@models';
+
+import { useMutations } from '../mutations';
 
 interface ICreditCardMutation {
   create: UseMutationResult<CreditCard, Error, CreditCard>;
@@ -13,37 +15,33 @@ interface ICreditCardMutation {
 
 export const useCreditCardMutations = (): ICreditCardMutation => {
   const { creditCards } = useApi();
-  const queryClient = useQueryClient();
+  const mutations = useMutations<CreditCard>(creditCards);
   const toast = useToast();
 
-  const refetchList = () => {
-    queryClient.invalidateQueries('creditCards', { exact: true, refetchInactive: true });
-  };
-
-  const create = useMutation<CreditCard, Error, CreditCard>(creditCards.create, {
+  const create = mutations.create({
     onSuccess: () => {
-      refetchList();
-      toast.success({ title: 'Exito!', description: 'Se ha creado la cuenta correctamente.' });
+      toast.success({ title: 'Exito!', description: 'Se ha creado la tarjeta correctamente.' });
     },
     onError: (error: Error) => {
       toast.error({ title: 'Error!', description: error.message });
     },
   });
 
-  const remove = useMutation<CreditCard, Error, string>(creditCards.remove, {
+  const remove = mutations.remove({
     onSuccess: () => {
-      refetchList();
-      toast.success({ title: 'Exito!', description: 'Se ha eliminado la cuenta correctamente.' });
+      toast.success({ title: 'Exito!', description: 'Se ha eliminado la tarjeta correctamente.' });
     },
     onError: (error: Error) => {
       toast.error({ title: 'Error!', description: error.message });
     },
   });
 
-  const update = useMutation<CreditCard, Error, CreditCard>(creditCards.update, {
+  const update = mutations.update({
     onSuccess: () => {
-      refetchList();
-      toast.success({ title: 'Exito!', description: 'Se ha actualizado la cuenta correctamente.' });
+      toast.success({
+        title: 'Exito!',
+        description: 'Se ha actualizado la tarjeta correctamente.',
+      });
     },
     onError: (error: Error) => {
       toast.error({ title: 'Error!', description: error.message });

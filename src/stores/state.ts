@@ -1,5 +1,5 @@
-export interface IModalDispatch<T> {
-  onConfirmed(data: T): void;
-  onDismiss(): void;
-  onOpen(id?: string): void;
+export interface IModalState {
+  id?: string;
+  isOpenForm: boolean;
+  isOpenRemove: boolean;
 }

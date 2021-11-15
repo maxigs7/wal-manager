@@ -13,21 +13,18 @@ const CreditCardsList: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) =
     refetch();
   }, []);
 
-  console.log('CreditCardsList rendering...');
+  if (isLoading) {
+    return (
+      <Flex align="center" justify="center" p={5}>
+        <CircularProgress color="crimson.300" isIndeterminate />
+      </Flex>
+    );
+  }
 
   return (
-    <>
-      {isLoading && (
-        <Flex align="center" justify="center" p={5}>
-          <CircularProgress color="crimson.300" isIndeterminate />
-        </Flex>
-      )}
-      {!isLoading && (
-        <CreditCardList creditCards={creditCards || []} onDelete={onDelete} onSelected={onSelected}>
-          <CreditCardNewPlaceholder onSelected={onCreate} />
-        </CreditCardList>
-      )}
-    </>
+    <CreditCardList creditCards={creditCards || []} onDelete={onDelete} onSelected={onSelected}>
+      <CreditCardNewPlaceholder onSelected={onCreate} />
+    </CreditCardList>
   );
 };
 
