@@ -10,14 +10,12 @@ import { Category } from '@models';
 const SubCategoryModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, parent }) => {
   const { user } = useUser();
   const { data: category, isLoading, refetch } = useCategoryById(id);
-  const { create, update } = useCategoryMutations('sub-categories');
+  const { create, update } = useCategoryMutations();
   const { data, isLoading: isSubmitting, isSuccess } = id ? update : create;
 
   const title = useMemo(() => (id ? 'Editar categoria' : 'Nueva categoria'), [id]);
   const defValue: Partial<Category> = useMemo(
     () => ({
-      color: parent.color,
-      icon: parent.icon,
       parentId: parent.id,
       type: parent.type,
       userId: user?.id as string,

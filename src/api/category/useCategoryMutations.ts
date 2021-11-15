@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
+import { UseMutationResult } from 'react-query';
 
 import { useApi } from '@api';
 import { useToast } from '@lib/chakra-ui';
 import { Category } from '@models';
 
-import { CategoryKeys } from './types';
+import { useMutations } from '../mutations';
 
 interface ICategoryMutation {
   create: UseMutationResult<Category, Error, Category>;
@@ -13,22 +13,13 @@ interface ICategoryMutation {
   update: UseMutationResult<Category, Error, Category>;
 }
 
-export const useCategoryMutations = (key: CategoryKeys = 'categories'): ICategoryMutation => {
+export const useCategoryMutations = (): ICategoryMutation => {
   const { categories } = useApi();
-  const queryClient = useQueryClient();
+  const mutations = useMutations<Category>(categories);
   const toast = useToast();
 
-  const refetchList = (category: Category) => {
-    const subKey = key === 'categories' ? category.type : category.parentId;
-    queryClient.invalidateQueries([key, subKey], {
-      exact: true,
-      refetchInactive: true,
-    });
-  };
-
-  const create = useMutation<Category, Error, Category>(categories.create, {
-    onSuccess: (category) => {
-      refetchList(category);
+  const create = mutations.create({
+    onSuccess: () => {
       toast.success({ title: 'Exito!', description: 'Se ha creado la categoria correctamente.' });
     },
     onError: (error: Error) => {
@@ -36,9 +27,8 @@ export const useCategoryMutations = (key: CategoryKeys = 'categories'): ICategor
     },
   });
 
-  const remove = useMutation<Category, Error, string>(categories.remove, {
-    onSuccess: (category) => {
-      refetchList(category);
+  const remove = mutations.remove({
+    onSuccess: () => {
       toast.success({
         title: 'Exito!',
         description: 'Se ha eliminado la categoria correctamente.',
@@ -49,9 +39,8 @@ export const useCategoryMutations = (key: CategoryKeys = 'categories'): ICategor
     },
   });
 
-  const update = useMutation<Category, Error, Category>(categories.update, {
-    onSuccess: (category) => {
-      refetchList(category);
+  const update = mutations.update({
+    onSuccess: () => {
       toast.success({
         title: 'Exito!',
         description: 'Se ha actualizado la categoria correctamente.',

@@ -1,40 +1,58 @@
-import { useQuery, UseQueryResult } from 'react-query';
+import { useQuery, useQueryClient, UseQueryResult } from 'react-query';
 
 import { useApi } from '@api';
 import { Category, CategoryType } from '@models';
 
+import { CATEGORIES_KEY, SUB_CATEGORIES_KEY } from './constants';
+
+const useList = (key: string, subKey: any, promise: () => Promise<Category[]>) =>
+  useQuery<Category[]>([key, subKey], promise, {
+    refetchOnWindowFocus: false,
+    enabled: false, // turned off by default, manual refetch is needed
+  });
+
 export const useCategoryList = (categoryType: CategoryType): UseQueryResult<Category[]> => {
   const { categories } = useApi();
-  return useQuery<Category[]>(
-    ['categories', categoryType],
-    () =>
-      categories.getAll({
-        filtering: (q) => {
-          return q.eq('type', categoryType).is('parent_id', null);
-        },
-        sort: { field: 'name' },
-      }),
-    {
-      refetchOnWindowFocus: false,
-      enabled: false, // turned off by default, manual refetch is needed
-    },
+  return useList(CATEGORIES_KEY, categoryType, () =>
+    categories.getAll({
+      filtering: (q) => {
+        return q.eq('type', categoryType).is('parent_id', null);
+      },
+      sort: { field: 'name' },
+    }),
   );
 };
 
 export const useSubCategoryList = (parentId: string): UseQueryResult<Category[]> => {
   const { categories } = useApi();
-  return useQuery<Category[]>(
-    ['sub-categories', parentId],
-    () =>
-      categories.getAll({
-        filtering: (q) => {
-          return q.eq('parent_id', parentId);
-        },
-        sort: { field: 'name' },
-      }),
-    {
-      refetchOnWindowFocus: false,
-      enabled: false, // turned off by default, manual refetch is needed
-    },
+  return useList(SUB_CATEGORIES_KEY, parentId, () =>
+    categories.getAll({
+      filtering: (q) => {
+        return q.eq('parent_id', parentId);
+      },
+      sort: { field: 'name' },
+    }),
   );
+};
+
+export const useCategoriesRefresh = (): ((category: Category) => void) => {
+  const queryClient = useQueryClient();
+
+  return (category) => {
+    queryClient.invalidateQueries([CATEGORIES_KEY, category.type], {
+      exact: true,
+      refetchInactive: true,
+    });
+  };
+};
+
+export const useSubCategoriesRefresh = (): ((category: Category) => void) => {
+  const queryClient = useQueryClient();
+
+  return (category) => {
+    queryClient.invalidateQueries([SUB_CATEGORIES_KEY, category.parentId], {
+      exact: true,
+      refetchInactive: true,
+    });
+  };
 };

@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useReducer } from 'react';
 
+import { useSubCategoriesRefresh } from '@api';
 import { Category } from '@models';
 
 import { openForm, openFormDismiss, openFormSuccess } from './actions';
@@ -8,6 +9,7 @@ import { IDispatch, initialState, IState } from './state';
 
 export const useStore = (): [IState, IDispatch] => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const refresh = useSubCategoriesRefresh();
 
   const onOpenForm = useCallback((id?: string, isDeleting = false) => {
     dispatch(openForm({ isDeleting, id }));
@@ -15,8 +17,8 @@ export const useStore = (): [IState, IDispatch] => {
 
   const onConfirmedForm = useCallback(
     (category: Category) => {
-      console.log(category);
       dispatch(openFormSuccess(category));
+      refresh(category);
     },
     [dispatch],
   );

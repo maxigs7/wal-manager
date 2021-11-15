@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useReducer } from 'react';
 
+import { useCategoriesRefresh } from '@api';
 import { Category } from '@models';
 import { CategoryType } from '@models/common';
 
@@ -9,6 +10,7 @@ import { IDispatch, initialState, IState } from './state';
 
 export const useStore = (): [IState, IDispatch] => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const refresh = useCategoriesRefresh();
 
   const onSelected = useCallback(
     (category: Category) => {
@@ -31,6 +33,7 @@ export const useStore = (): [IState, IDispatch] => {
   const onConfirmedForm = useCallback(
     (category: Category) => {
       dispatch(openFormSuccess(category));
+      refresh(category);
     },
     [dispatch],
   );

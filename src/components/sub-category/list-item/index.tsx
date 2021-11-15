@@ -12,13 +12,13 @@ const borderActive = (color: string) => ({
   textDecoration: 'none',
 });
 
-const SubCategoryListItem: React.FC<IProps> = ({ onUpdated, onDeleted, subCategory }) => {
+const SubCategoryListItem: React.FC<IProps> = ({ onUpdated, onDeleted, parent, subCategory }) => {
   const onDeletedHandler = () => onDeleted && onDeleted(subCategory.id);
   const onUpdatedHandler = () => onUpdated && onUpdated(subCategory.id);
 
   return (
     <Flex
-      _hover={borderActive(subCategory.color)}
+      _hover={borderActive(parent.color)}
       align="center"
       borderBottom={1}
       borderBottomColor="gray.200"
@@ -56,10 +56,10 @@ const SubCategoryListItem: React.FC<IProps> = ({ onUpdated, onDeleted, subCatego
 };
 
 interface IProps {
-  subCategory: Category;
   onDeleted?(id: string): void;
   onUpdated?(id: string): void;
+  parent: Category;
+  subCategory: Category;
 }
 
 export { SubCategoryListItem };
-export {};

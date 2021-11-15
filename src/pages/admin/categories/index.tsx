@@ -1,13 +1,9 @@
 import React from 'react';
 
-import { HStack, Button, Portal, SimpleGrid } from '@chakra-ui/react';
+import { HStack, Button, SimpleGrid } from '@chakra-ui/react';
 
-import {
-  CategoriesListCard,
-  CategoryDeleteDialog,
-  CategoryModalForm,
-  SubCategoriesListCard,
-} from '@containers';
+import { CategoriesListCard, SubCategoriesListCard } from '@containers';
+import { CategoryPortalModal } from '@containers/category/portal-modal';
 import { Icon } from '@lib/chakra-ui';
 import { Page } from '@lib/wal-ui';
 import { CategoryType } from '@models';
@@ -56,25 +52,14 @@ const CategoriesPage: React.FC = () => {
           />
         </SimpleGrid>
       </Page>
-      <Portal>
-        {state.isOpenForm && (
-          <CategoryModalForm
-            id={state.id}
-            isOpen={state.isOpenForm}
-            onConfirmed={dispatch.onConfirmedForm}
-            onDismiss={dispatch.onDismissForm}
-            type={state.selectedTypeForm as CategoryType}
-          />
-        )}
-        {state.isOpenRemove && (
-          <CategoryDeleteDialog
-            id={state.id}
-            isOpen={state.isOpenRemove}
-            onConfirmed={dispatch.onConfirmedForm}
-            onDismiss={dispatch.onDismissForm}
-          />
-        )}
-      </Portal>
+      <CategoryPortalModal
+        id={state.id}
+        isOpenForm={state.isOpenForm}
+        isOpenRemove={state.isOpenRemove}
+        onConfirmed={dispatch.onConfirmedForm}
+        onDismiss={dispatch.onDismissForm}
+        selectedType={state.selectedTypeForm as CategoryType}
+      />
     </>
   );
 };

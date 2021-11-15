@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 
-import { Portal } from '@chakra-ui/react';
-
 import { useSubCategoryList } from '@api';
 import { SubCategoryPanel } from '@components';
-import { CategoryDeleteDialog, SubCategoryModalForm } from '@containers';
 import { Card } from '@lib/wal-ui';
 import { Category } from '@models';
 import { useSubCategoriesStore } from '@stores';
+
+import { SubCategoryPortalModal } from '../portal-modal';
 
 interface IProps {
   onCategoryDeleted(id: string): void;
@@ -43,26 +42,14 @@ export const SubCategoriesListCard: React.FC<IProps> = ({
           subCategories={categories}
         />
       </Card>
-      <Portal>
-        {state.isOpenForm && (
-          <SubCategoryModalForm
-            id={state.id}
-            isOpen={state.isOpenForm}
-            onConfirmed={dispatch.onConfirmedForm}
-            onDismiss={dispatch.onDismissForm}
-            parent={selected as Category}
-          />
-        )}
-        {state.isOpenRemove && (
-          <CategoryDeleteDialog
-            id={state.id}
-            isOpen={state.isOpenRemove}
-            mutationKey="sub-categories"
-            onConfirmed={dispatch.onConfirmedForm}
-            onDismiss={dispatch.onDismissForm}
-          />
-        )}
-      </Portal>
+      <SubCategoryPortalModal
+        id={state.id}
+        isOpenForm={state.isOpenForm}
+        isOpenRemove={state.isOpenRemove}
+        onConfirmed={dispatch.onConfirmedForm}
+        onDismiss={dispatch.onDismissForm}
+        parent={selected as Category}
+      />
     </>
   );
 };

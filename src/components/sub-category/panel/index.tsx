@@ -47,6 +47,7 @@ const SubCategoryPanel: React.FC<IProps> = ({
           <SubCategoryList
             onDeleted={onDeleted}
             onUpdated={onUpdated}
+            parent={category as Category}
             subCategories={subCategories}
           />
         )}
