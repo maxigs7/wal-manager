@@ -2,23 +2,15 @@ import React, { useMemo } from 'react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 import Select from 'react-select';
 
-import { Tag, TagLabel, TagLeftIcon } from '@chakra-ui/react';
-
-import { Icon } from '@lib/chakra-ui';
+import { CategoryInline } from '@components';
 import { CategoryLookup } from '@models';
 
 const CategoryOption: React.FC<{ label: string; value: string } & CategoryLookup> = ({
   color,
   icon,
-  label,
-}) => {
-  return (
-    <Tag bg={color} color="white" size="md" variant="subtle">
-      <TagLeftIcon as={Icon} boxSize="12px" icon={icon} />
-      <TagLabel>{label}</TagLabel>
-    </Tag>
-  );
-};
+  subName,
+  rootName,
+}) => <CategoryInline color={color} icon={icon} name={rootName} subName={subName} />;
 
 const CategorySelect: React.FC<ICategorySelectProps> = ({
   categories,
@@ -42,7 +34,7 @@ const CategorySelect: React.FC<ICategorySelectProps> = ({
     () =>
       categories?.map((category) => ({
         ...category,
-        label: `${category.rootName}${category.subName ? ` > ${category.subName}` : ''}`,
+        label: category.rootName,
         value: category.id,
       })),
     [categories],
