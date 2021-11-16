@@ -1,9 +1,10 @@
 import { useQuery, useQueryClient, UseQueryResult } from 'react-query';
 
 import { useApi } from '@api';
-import { Category, CategoryType } from '@models';
+import { Category, CategoryLookup, CategoryType } from '@models';
 
 import { CATEGORIES_KEY, SUB_CATEGORIES_KEY } from './constants';
+import { convertToCategoryLookupArray } from './converter';
 
 const useList = (key: string, subKey: any, promise: () => Promise<Category[]>) =>
   useQuery<Category[]>([key, subKey], promise, {
@@ -55,4 +56,23 @@ export const useSubCategoriesRefresh = (): ((category: Category) => void) => {
       refetchInactive: true,
     });
   };
+};
+
+export const useCategoryLookup = (type: CategoryType): UseQueryResult<CategoryLookup[]> => {
+  const { categories } = useApi();
+
+  const promise = async () => {
+    const list = await categories.getAll({
+      filtering: (q) => {
+        return q.eq('type', type);
+      },
+    });
+
+    return convertToCategoryLookupArray(list);
+  };
+
+  return useQuery<CategoryLookup[]>([CATEGORIES_KEY, type, 'lookup'], promise, {
+    refetchOnWindowFocus: false,
+    enabled: false, // turned off by default, manual refetch is needed
+  });
 };
