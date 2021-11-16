@@ -12,3 +12,10 @@ export type Category = BaseModel & {
   type: CategoryType;
   userId: string;
 };
+
+export type CategoryLookup = BaseModel & {
+  color: string;
+  icon: IconName;
+  rootName: string;
+  subName?: string;
+};
