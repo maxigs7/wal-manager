@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { Flex, Text, IconButton } from '@chakra-ui/react';
+import { Flex, IconButton } from '@chakra-ui/react';
 
+import { CreditCardInline } from '@components';
 import { Icon } from '@lib/chakra-ui';
 import { CardsListItem } from '@lib/wal-ui';
 import { CreditCard } from '@models';
-
-import { CreditCardTypeIcon } from '../type-icon';
 
 const CreditCardListItem: React.FC<IProps> = ({ creditCard, onDelete, onSelected }) => {
   const onSelectedHandler = () => {
@@ -26,8 +25,7 @@ const CreditCardListItem: React.FC<IProps> = ({ creditCard, onDelete, onSelected
         position="relative"
         w="full"
       >
-        <CreditCardTypeIcon type={creditCard.type} width={100} />
-        <Text textTransform="uppercase">{creditCard.name}</Text>
+        <CreditCardInline name={creditCard.name} textTransform="uppercase" type={creditCard.type} />
         <Flex mt={2}>
           <IconButton
             aria-label="Editar tarjeta"

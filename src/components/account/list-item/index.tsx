@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Flex, Text, IconButton } from '@chakra-ui/react';
+import { Flex, IconButton } from '@chakra-ui/react';
 
 import { Icon } from '@lib/chakra-ui';
 import { CardsListItem } from '@lib/wal-ui';
 import { Account } from '@models';
 
-import { AccountTypeIcon } from '../type-icon';
+import { AccountInline } from '../item-inline';
 
 const AccountListItem: React.FC<IProps> = ({ account, onDelete, onSelected }) => {
   const onSelectedHandler = () => {
@@ -26,8 +26,12 @@ const AccountListItem: React.FC<IProps> = ({ account, onDelete, onSelected }) =>
         position="relative"
         w="full"
       >
-        <AccountTypeIcon size="5x" type={account.type} />
-        <Text textTransform="uppercase">{account.name}</Text>
+        <AccountInline
+          iconSize="5x"
+          name={account.name}
+          textTransform="uppercase"
+          type={account.type}
+        />
         <Flex mt={2}>
           <IconButton
             aria-label="Editar cuenta"
