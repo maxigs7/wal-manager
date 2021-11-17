@@ -16,8 +16,8 @@ const Form: React.FC<IProps> = ({ category, control, formState: { errors }, regi
   const isUnique = useCategoryIsUnique();
 
   return (
-    <SimpleGrid columns={2} gap={6}>
-      <FormControl as={GridItem} colSpan={2} isInvalid={!!errors.name}>
+    <SimpleGrid columns={[1, 2]} gap={6}>
+      <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.name}>
         <FormLabel htmlFor="name">Nombre</FormLabel>
         <Input
           id="name"

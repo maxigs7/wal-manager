@@ -15,8 +15,8 @@ import { CreditCard, useCreditCardIsUnique } from '@models';
 const Form: React.FC<IProps> = ({ cc, control, formState: { errors }, register }) => {
   const isUnique = useCreditCardIsUnique();
   return (
-    <SimpleGrid columns={2} gap={6}>
-      <FormControl as={GridItem} colSpan={2} isInvalid={!!errors.name}>
+    <SimpleGrid columns={[1, 2]} gap={6}>
+      <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.name}>
         <FormLabel htmlFor="name">Nombre</FormLabel>
         <Input
           id="name"

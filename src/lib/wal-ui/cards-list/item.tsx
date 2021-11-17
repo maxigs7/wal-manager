@@ -4,8 +4,16 @@ import { BoxProps } from '@chakra-ui/react';
 
 import { Card } from '@lib/wal-ui';
 
-const CardsListItem: React.FC<BoxProps> = ({ children, onClick, ...boxProps }) => (
-  <Card h={64} mb={5} mr={5} onClick={onClick} p={5} w={64} {...boxProps}>
+const CardsListItem: React.FC<BoxProps> = ({
+  children,
+  onClick,
+  mb = 5,
+  h = 64,
+  w = 64,
+  mr = 5,
+  ...boxProps
+}) => (
+  <Card {...boxProps} h={h} mb={mb} mr={mr} onClick={onClick} p={5} w={w}>
     {children}
   </Card>
 );

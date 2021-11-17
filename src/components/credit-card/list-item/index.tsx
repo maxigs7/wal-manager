@@ -16,7 +16,7 @@ const CreditCardListItem: React.FC<IProps> = ({ creditCard, onDelete, onSelected
   };
 
   return (
-    <CardsListItem>
+    <CardsListItem mr={[0, 5]} w={['full', 64]}>
       <Flex
         align="center"
         direction="column"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Category } from '@models';
 
@@ -10,13 +10,15 @@ const SubCategoryList: React.FC<IProps> = ({
   parent,
   subCategories = [],
 }) => {
-  console.log('SubCategoriesList component rendering...');
+  const [selected, setSelected] = useState<string>();
   return (
     <>
       {subCategories.map((category) => (
         <SubCategoryListItem
+          isSelected={selected === category.id}
           key={category.id}
           onDeleted={onDeleted}
+          onSelected={setSelected}
           onUpdated={onUpdated}
           parent={parent}
           subCategory={category}

@@ -7,7 +7,15 @@ import { PageLoader } from '@lib/wal-ui';
 import { defaultRoutes } from '@routes';
 
 const DefaultLayout: React.FC = () => (
-  <Flex align="center" as="section" bg="cello.500" justify="center" minH="100vh">
+  <Flex
+    align="center"
+    as="section"
+    bg="cello.500"
+    justify="center"
+    minH="100vh"
+    p={5}
+    textAlign="center"
+  >
     <Suspense fallback={<PageLoader />}>
       <Switch>
         {defaultRoutes.map((route, index) => (

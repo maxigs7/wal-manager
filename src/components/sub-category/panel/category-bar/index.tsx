@@ -15,27 +15,29 @@ const CategoryBar: React.FC<IProps> = ({ category, onCreated, onDeleted, onUpdat
       borderBottom={1}
       borderBottomColor="gray.200"
       borderBottomStyle="solid"
-      justify="space-between"
+      flexWrap={['wrap', 'nowrap']}
+      justify={['center', 'space-between']}
       p={2}
     >
-      <ColorCircle
-        border={1}
-        borderColor={category.color}
-        borderStyle="solid"
-        color={category.color}
-        ml={1}
-        mr={3}
-        size="md"
-      >
-        <Icon icon={category.icon} />
-      </ColorCircle>
-      <Text>{category.name}</Text>
-
+      <Flex align="center" flexBasis={['100%', 'auto']} justify={['center', 'normal']} mb={[5, 0]}>
+        <ColorCircle
+          border={1}
+          borderColor={category.color}
+          borderStyle="solid"
+          color={category.color}
+          ml={1}
+          mr={3}
+          size="md"
+        >
+          <Icon icon={category.icon} />
+        </ColorCircle>
+        <Text isTruncated>{category.name}</Text>
+      </Flex>
       <Button
         aria-label="Editar categoria"
         colorScheme="info"
         leftIcon={<Icon icon="plus" size="sm" />}
-        ml="auto"
+        ml={[0, 'auto']}
         mr={1}
         onClick={onCreatedHandler}
         size="xs"

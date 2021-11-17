@@ -19,7 +19,7 @@ const CreditCardNewPlaceholder: React.FC<IProps> = ({ onSelected }) => (
     onClick={onSelected}
     p={5}
     textTransform="uppercase"
-    w={64}
+    w={['full', 64]}
   >
     <Icon icon="plus" mb={3} size="3x" />
     Añadir Tarjeta
