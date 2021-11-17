@@ -1,6 +1,8 @@
 import {
   faAmbulance,
+  faAngleDoubleDown,
   faAngleDoubleRight,
+  faAngleDoubleUp,
   faArchive,
   faArrowLeft,
   faAward,
@@ -113,7 +115,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export const CoreIcons = [
+  faAngleDoubleDown,
   faAngleDoubleRight,
+  faAngleDoubleUp,
   faArrowLeft,
   faBars,
   faBolt,
