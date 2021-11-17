@@ -26,8 +26,8 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) =>
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <SimpleGrid columns={3} gap={6}>
-      <FormControl as={GridItem} isInvalid={!!errors.accountId}>
+    <SimpleGrid columns={[1, 2, 3]} gap={6}>
+      <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.accountId}>
         <FormLabel htmlFor="accountId">Cuenta</FormLabel>
         <AccountSelectContainer
           control={control}
@@ -38,7 +38,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) =>
         />
         <FormErrorMessage>{errors.accountId && errors.accountId.message}</FormErrorMessage>
       </FormControl>
-      <FormControl as={GridItem} isInvalid={!!errors.accountId}>
+      <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.accountId}>
         <FormLabel htmlFor="categoryId">Categoria</FormLabel>
         <CategorySelectContainer
           control={control}
@@ -69,12 +69,12 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) =>
         <FormErrorMessage>{errors.date && errors.date.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl as={GridItem} colSpan={2} isInvalid={!!errors.description}>
+      <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.description}>
         <FormLabel htmlFor="description">Descripcion</FormLabel>
         <Input id="description" placeholder="Descripcion" {...register('description')} />
       </FormControl>
 
-      <Box as={GridItem} colSpan={3}>
+      <Box as={GridItem} colSpan={[1, 2, 3]}>
         <Button
           leftIcon={<Icon icon={isOpen ? 'angle-double-up' : 'angle-double-down'} />}
           mb={6}
@@ -85,8 +85,8 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) =>
           {isOpen ? 'Ocultar' : 'Ver mas'}
         </Button>
         <Collapse in={isOpen}>
-          <SimpleGrid columns={3} gap={6}>
-            <FormControl as={GridItem} isInvalid={!!errors.creditCardId}>
+          <SimpleGrid columns={[1, 2, 3]} gap={6}>
+            <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.creditCardId}>
               <FormLabel htmlFor="creditCardId">Tarjeta</FormLabel>
               <CreditCardSelectContainer
                 control={control}
