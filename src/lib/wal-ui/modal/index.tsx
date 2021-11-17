@@ -103,9 +103,9 @@ interface IProps<TModel> {
   actionButtonIcon?: IconName;
   children(props: UseFormReturn<TModel>): React.ReactElement;
   defaultValue?: UnpackNestedValue<DeepPartial<TModel>>;
-  isOpen: boolean;
-  isLoading: boolean;
-  isSubmitting: boolean;
+  isOpen?: boolean;
+  isLoading?: boolean;
+  isSubmitting?: boolean;
   model?: TModel;
   onClose(): void;
   onConfirm: SubmitHandler<TModel>;

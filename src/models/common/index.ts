@@ -27,13 +27,13 @@ export enum TransactionType {
   Transfer = 'transfer',
 }
 
-export const toTransactionType = (categoryType: CategoryType): TransactionType | undefined => {
-  switch (categoryType) {
-    case CategoryType.Expense:
-      return TransactionType.Expense;
-    case CategoryType.Income:
-      return TransactionType.Income;
+export const toCategoryType = (transactionType: TransactionType): CategoryType => {
+  switch (transactionType) {
+    case TransactionType.Expense:
+      return CategoryType.Expense;
+    case TransactionType.Income:
+      return CategoryType.Income;
     default:
-      return undefined;
+      return CategoryType.Expense;
   }
 };

@@ -20,9 +20,9 @@ import {
   CreditCardSelectContainer,
 } from '@containers';
 import { Icon } from '@lib/chakra-ui';
-import { CategoryType, Transaction } from '@models';
+import { toCategoryType, Transaction, TransactionType } from '@models';
 
-const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) => {
+const Form: React.FC<IProps> = ({ control, formState: { errors }, register, type }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -46,7 +46,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) =>
           name="categoryId"
           placeholder="Seleccione una categoria"
           rules={{ required: 'Este campo es requerido' }}
-          type={CategoryType.Expense}
+          type={toCategoryType(type)}
         />
         <FormErrorMessage>{errors.categoryId && errors.categoryId.message}</FormErrorMessage>
       </FormControl>
@@ -116,7 +116,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register }) =>
 };
 
 interface IProps extends UseFormReturn<Transaction> {
-  transaction?: Transaction;
+  type: TransactionType;
 }
 
 export { Form as TransactionCreateForm };
