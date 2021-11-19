@@ -1,10 +1,7 @@
-import React, { Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { Flex } from '@chakra-ui/react';
-
-import { PageLoader } from '@lib/wal-ui';
-import { defaultRoutes } from '@routes';
 
 const DefaultLayout: React.FC = () => (
   <Flex
@@ -16,14 +13,7 @@ const DefaultLayout: React.FC = () => (
     p={5}
     textAlign="center"
   >
-    <Suspense fallback={<PageLoader />}>
-      <Switch>
-        {defaultRoutes.map((route, index) => (
-          <Route {...route} key={index} />
-        ))}
-        <Redirect from="*" to="/auth/sign-in" />
-      </Switch>
-    </Suspense>
+    <Outlet />
   </Flex>
 );
 

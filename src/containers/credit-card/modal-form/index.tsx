@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import React, { useMemo } from 'react';
+import { SubmitHandler, UseFormReturn } from 'react-hook-form';
 
 import { useCreditCardById, useCreditCardMutations } from '@api';
 import { CreditCardForm } from '@components';
@@ -10,9 +10,9 @@ import { CreditCardType } from '@models/common';
 
 const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => {
   const { user } = useUser();
-  const { data: creditCard, isLoading, refetch } = useCreditCardById(id);
+  const { data: creditCard, isLoading } = useCreditCardById(id);
   const { create, update } = useCreditCardMutations();
-  const { data, isLoading: isSubmitting, isSuccess } = id ? update : create;
+  const { isLoading: isSubmitting } = id ? update : create;
   const title = useMemo(() => (id ? 'Editar Tarjeta' : 'Nueva Tarjeta'), [id]);
 
   const defValue: Partial<CreditCard> = useMemo(
@@ -21,31 +21,22 @@ const CreditCardModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDism
   );
 
   /// HANDLERS
-  const onConfirm = (model: CreditCard) => {
+  const onConfirm: SubmitHandler<CreditCard> = (model) => {
     if (isSubmitting) return;
 
     if (!id) {
-      return create.mutate(model);
+      return create.mutateAsync(model, {
+        onSuccess: onConfirmed,
+      });
     }
-    return update.mutate(model);
+    return update.mutateAsync(model, {
+      onSuccess: onConfirmed,
+    });
   };
 
   const renderForm = (props: UseFormReturn<CreditCard>) => {
     return <CreditCardForm {...props} cc={creditCard} />;
   };
-
-  /// EFFECTS
-  useEffect(() => {
-    if (id) {
-      refetch();
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      onConfirmed(data);
-    }
-  }, [data, isSuccess]);
 
   return (
     <ModalForm

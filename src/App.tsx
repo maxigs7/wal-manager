@@ -1,10 +1,9 @@
 import React, { Suspense } from 'react';
-import { Switch } from 'react-router';
-import { Route } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 
-import { LazyAdminLayout, LazyDefaultLayout } from '@layouts';
 import { useUser } from '@lib/supabase';
 import { PageLoader } from '@lib/wal-ui';
+import { adminRoutes, defaultRoutes } from '@routes';
 
 const AuthWrapper: React.FC = ({ children }) => {
   const { initializing } = useUser();
@@ -16,15 +15,13 @@ const AuthWrapper: React.FC = ({ children }) => {
   return <>{children}</>;
 };
 
-const App: React.FC = () => (
-  <AuthWrapper>
-    <Suspense fallback={<PageLoader />}>
-      <Switch>
-        <Route component={LazyDefaultLayout} path="/auth" />
-        <Route component={LazyAdminLayout} path="/" />
-      </Switch>
-    </Suspense>
-  </AuthWrapper>
-);
+const App: React.FC = () => {
+  const element = useRoutes([...defaultRoutes, ...adminRoutes]);
+  return (
+    <AuthWrapper>
+      <Suspense fallback={<PageLoader />}>{element}</Suspense>
+    </AuthWrapper>
+  );
+};
 
 export default App;

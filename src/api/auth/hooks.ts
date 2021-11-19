@@ -5,21 +5,21 @@ import { useApi } from '@api';
 import { useRouter } from '@hooks';
 
 import { ISignInReturn, ISignUpParam } from '.';
-import { ISignInParam } from './types';
+import { IAuthError, ISignInParam } from './types';
 
 interface IAuthMutation {
   signIn: UseMutationResult<ISignInReturn, Error, ISignInParam>;
   signInGoogle: UseMutationResult<ISignInReturn, Error, string>;
-  signOut: UseMutationResult<{ error: Error | null }, unknown, void>;
+  signOut: UseMutationResult<IAuthError, unknown, void>;
   signUp: UseMutationResult<ISignInReturn, Error, ISignInParam>;
 }
 
 export const useAuthApi = (): IAuthMutation => {
   const { auth } = useApi();
-  const { push } = useRouter();
+  const { navigate } = useRouter();
   const signIn = useMutation<ISignInReturn, Error, ISignInParam>(auth.signIn, {
     onSuccess: () => {
-      push('/dashboard');
+      navigate('/dashboard');
     },
     onError: () => {
       console.log('error');
@@ -27,7 +27,7 @@ export const useAuthApi = (): IAuthMutation => {
   });
 
   const signInGoogle = useMutation<ISignInReturn, Error, string>(auth.signInGoogle, {
-    onSuccess: (user) => {
+    onSuccess: (user: any) => {
       console.log(user);
     },
     onError: () => {
@@ -37,16 +37,16 @@ export const useAuthApi = (): IAuthMutation => {
 
   const signUp = useMutation<ISignInReturn, Error, ISignUpParam>(auth.signUp, {
     onSuccess: () => {
-      push('/dashboard');
+      navigate('/dashboard');
     },
     onError: () => {
       console.log('error');
     },
   });
 
-  const signOut = useMutation<{ error: Error | null }>(auth.signOut, {
+  const signOut = useMutation<IAuthError>(auth.signOut, {
     onSuccess: () => {
-      push('/auth/sign-in');
+      navigate('/auth');
     },
     onError: () => {
       console.log('error');

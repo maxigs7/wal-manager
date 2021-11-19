@@ -1,5 +1,9 @@
 import { lazy } from 'react';
-import { RouteProps } from 'react-router-dom';
+import { RouteObject } from 'react-router-dom';
+
+import { LazyAdminLayout } from '@layouts';
+
+import { PrivateRoute } from './private.route';
 
 const DashboardPage = lazy(
   () => import(/* webpackChunkName: 'dashboard.page' */ '@pages/dashboard'),
@@ -21,25 +25,38 @@ const NotFoundPage = lazy(
   () => import(/* webpackChunkName: 'not-found.page' */ '@pages/not-found'),
 );
 
-export const adminRoutes: RouteProps[] = [
+const PrivateWrapper: React.FC = () => (
+  <PrivateRoute>
+    <LazyAdminLayout />
+  </PrivateRoute>
+);
+
+export const adminRoutes: RouteObject[] = [
   {
-    children: <DashboardPage />,
-    path: '/dashboard',
-  },
-  {
-    children: <AccountsPage />,
-    path: '/admin/accounts',
-  },
-  {
-    children: <CategoriesPage />,
-    path: '/admin/categories',
-  },
-  {
-    children: <CreditCardsPage />,
-    path: '/admin/credit-cards',
-  },
-  {
-    children: <NotFoundPage />,
-    path: '/404',
+    path: '/',
+    element: <PrivateWrapper />,
+    children: [
+      {
+        element: <AccountsPage />,
+        path: 'admin/accounts',
+      },
+      {
+        element: <CategoriesPage />,
+        path: 'admin/categories',
+      },
+      {
+        element: <CreditCardsPage />,
+        path: 'admin/credit-cards',
+      },
+      {
+        element: <DashboardPage />,
+        path: 'dashboard',
+        index: true,
+      },
+      {
+        element: <NotFoundPage />,
+        path: '*',
+      },
+    ],
   },
 ];

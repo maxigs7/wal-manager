@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { IAuthRepository, ISignInReturn } from './types';
+import { IAuthError, IAuthRepository, ISignInReturn } from './types';
 
 export const buildAuthRepository = ({ auth }: SupabaseClient): IAuthRepository => {
   return {
@@ -13,7 +13,7 @@ export const buildAuthRepository = ({ auth }: SupabaseClient): IAuthRepository =
     signUp: ({ email, password, redirectTo }): Promise<ISignInReturn> => {
       return auth.signUp({ email, password }, { redirectTo });
     },
-    signOut: (): Promise<{ error: Error | null }> => {
+    signOut: (): Promise<IAuthError> => {
       return auth.signOut();
     },
   };

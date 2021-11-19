@@ -50,12 +50,12 @@ const CreditCardSelect: React.FC<ICreditCardSelectProps> = ({
       formatOptionLabel={CreditCardOption}
       getOptionValue={(option) => option.value}
       id={id}
-      inputRef={ref}
       isLoading={isLoading}
       isSearchable={false}
       onChange={(selected) => onChange(selected?.value)}
       options={options}
       placeholder={placeholder}
+      ref={ref}
       value={options?.find((option) => option.value === value)}
     />
   );

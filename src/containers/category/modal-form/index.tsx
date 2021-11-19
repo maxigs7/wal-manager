@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import React, { useMemo } from 'react';
+import { SubmitHandler, UseFormReturn } from 'react-hook-form';
 
 import { useCategoryById, useCategoryMutations } from '@api';
 import { CategoryForm } from '@components';
@@ -10,9 +10,9 @@ import { CategoryType } from '@models/common';
 
 const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type }) => {
   const { user } = useUser();
-  const { data: category, isLoading, refetch } = useCategoryById(id);
+  const { data: category, isLoading } = useCategoryById(id);
   const { create, update } = useCategoryMutations();
-  const { data, isLoading: isSubmitting, isSuccess } = id ? update : create;
+  const { isLoading: isSubmitting } = id ? update : create;
 
   const title = useMemo(() => (id ? 'Editar categoria' : 'Nueva categoria'), [id]);
   const defValue: Partial<Category> = useMemo(
@@ -24,31 +24,22 @@ const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismis
   );
 
   /// HANDLERS
-  const onConfirm = (model: Category) => {
+  const onConfirm: SubmitHandler<Category> = (model) => {
     if (isSubmitting) return;
 
     if (!id) {
-      return create.mutate(model);
+      return create.mutateAsync(model, {
+        onSuccess: onConfirmed,
+      });
     }
-    return update.mutate(model);
+    return update.mutateAsync(model, {
+      onSuccess: onConfirmed,
+    });
   };
 
   const renderForm = (props: UseFormReturn<Category>) => {
     return <CategoryForm {...props} category={category} />;
   };
-
-  /// EFFECTS
-  useEffect(() => {
-    if (id) {
-      refetch();
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      onConfirmed(data);
-    }
-  }, [data, isSuccess]);
 
   return (
     <ModalForm

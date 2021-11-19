@@ -1,23 +1,24 @@
 import { lazy } from 'react';
-import { RouteProps } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 
 import { AUTH_SIGN_UP_ENABLED } from '@constants';
+import { LazyDefaultLayout } from '@layouts';
 
-export const defaultRoutes: RouteProps[] = [
+const SignIn = lazy(
+  () => import(/* webpackChunkName: 'auth.sign-in.page' */ '@pages/auth/sign-in'),
+);
+const SignUp = lazy(
+  () => import(/* webpackChunkName: 'auth.sign-up.page' */ '@pages/auth/sign-up'),
+);
+
+export const defaultRoutes: RouteObject[] = [
   {
-    component: lazy(
-      () => import(/* webpackChunkName: 'auth.sign-in.page' */ '@pages/auth/sign-in'),
-    ),
-    path: '/auth/sign-in',
+    path: '/auth',
+    element: <LazyDefaultLayout />,
+    children: [
+      ...(AUTH_SIGN_UP_ENABLED ? [{ element: <SignUp />, path: 'sign-up' }] : []),
+      { path: 'sign-in', element: <SignIn />, index: true },
+      { path: '', element: <Navigate to="/auth/sign-in" /> },
+    ],
   },
-  ...(AUTH_SIGN_UP_ENABLED
-    ? [
-        {
-          component: lazy(
-            () => import(/* webpackChunkName: 'auth.sign-up.page' */ '@pages/auth/sign-up'),
-          ),
-          path: '/auth/sign-up',
-        },
-      ]
-    : []),
 ];

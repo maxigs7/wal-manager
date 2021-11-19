@@ -27,7 +27,7 @@ export const UserMenu: React.FC = React.memo(() => {
         </HStack>
       </MenuButton>
       <MenuList top={-10}>
-        <MenuItem as={NavLink} to="/settings" exact>
+        <MenuItem as={NavLink} to="/settings" end>
           Profile
         </MenuItem>
         <MenuItem onClick={signOutHandler}>Sign Out</MenuItem>

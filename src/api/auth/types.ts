@@ -1,9 +1,10 @@
-import { Session, User } from '@supabase/supabase-js';
+import { Session, User, ApiError } from '@supabase/supabase-js';
 
-export interface ISignInReturn {
+export type IAuthError = { error: ApiError | null };
+
+export interface ISignInReturn extends IAuthError {
   session: Session | null;
   user: User | null;
-  error: Error | null;
 }
 
 export interface ISignInParam {
@@ -18,5 +19,5 @@ export interface IAuthRepository {
   signIn(data: ISignInParam): Promise<ISignInReturn>;
   signInGoogle(redirectTo: string): Promise<ISignInReturn>;
   signUp(data: ISignUpParam): Promise<ISignInReturn>;
-  signOut(): Promise<{ error: Error | null }>;
+  signOut(): Promise<IAuthError>;
 }

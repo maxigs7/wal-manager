@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import { SubmitHandler, UseFormReturn } from 'react-hook-form';
 
 import { useTransactionMutations } from '@api';
 import { TransactionCreateForm } from '@components';
@@ -18,7 +18,7 @@ const TransactionModalCreateForm: React.FC<IProps> = ({ isOpen, onConfirmed, onD
   );
 
   /// HANDLERS
-  const onConfirm = (model: Transaction) => {
+  const onConfirm: SubmitHandler<Transaction> = (model) => {
     if (isSubmitting) return;
 
     return create.mutate(model);

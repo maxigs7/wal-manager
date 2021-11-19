@@ -8,8 +8,7 @@ import { CATEGORIES_KEY, SUB_CATEGORIES_KEY } from './constants';
 const useById = (key: string, id?: string): UseQueryResult<Category> => {
   const { categories } = useApi();
   return useQuery([key, id], () => categories.getById(id as string), {
-    refetchOnWindowFocus: false,
-    enabled: false, // turned off by default, manual refetch is needed
+    enabled: !!id, // turned off by default, manual refetch is needed
   });
 };
 

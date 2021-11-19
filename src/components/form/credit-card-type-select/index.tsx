@@ -31,11 +31,11 @@ const CreditCardTypeSelect: React.FC<IProps> = ({ control, id, name, placeholder
       formatOptionLabel={CreditCardTypeOption}
       getOptionValue={(option) => option.value}
       id={id}
-      inputRef={ref}
       isSearchable={false}
       onChange={(selected) => onChange(selected?.value)}
       options={creditCardTypes}
       placeholder={placeholder}
+      ref={ref}
       value={creditCardTypes.find((option) => option.value === value)}
     />
   );

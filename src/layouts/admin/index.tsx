@@ -1,11 +1,7 @@
-import React, { Suspense } from 'react';
-import { Switch } from 'react-router';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { Flex } from '@chakra-ui/react';
-
-import { PageLoader } from '@lib/wal-ui';
-import { adminRoutes, PrivateRoute } from '@routes';
 
 import { Navbar } from './navbar';
 import { Sidebar, SidebarProvider } from './sidebar';
@@ -24,15 +20,7 @@ const AdminLayout: React.FC = () => (
       >
         <Navbar />
         <Flex as="main" mx="auto" px={{ base: 4, sm: 6, lg: 8 }} py={8} w="full">
-          <Suspense fallback={<PageLoader />}>
-            <Switch>
-              {adminRoutes.map((route, index) => (
-                <PrivateRoute {...route} key={index} />
-              ))}
-              <Redirect from="/" to="/dashboard" exact />
-              <Redirect from="*" to="/404" />
-            </Switch>
-          </Suspense>
+          <Outlet />
         </Flex>
       </Flex>
     </Flex>

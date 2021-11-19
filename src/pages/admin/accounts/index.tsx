@@ -9,7 +9,7 @@ const AccountsPage: React.FC = () => {
 
   return (
     <>
-      <Page metaTitle="Mis Tarjetas" title="Mis Tarjetas">
+      <Page metaTitle="Mis Cuentas" title="Mis Cuentas">
         <AccountsList
           onCreate={dispatch.onOpenForm}
           onDelete={(account) => dispatch.onOpenForm(account, true)}

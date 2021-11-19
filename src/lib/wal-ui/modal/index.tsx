@@ -43,8 +43,8 @@ function ModalForm<TModel>({
   const useFormProps = useForm<TModel>({ defaultValues: defaultValue });
   const handleSubmit = useFormProps.handleSubmit(onConfirm);
   const handleClose = () => {
-    useFormProps.reset(defaultValue);
     onClose();
+    useFormProps.reset(defaultValue);
   };
   const renderChildren = () => {
     if (isLoading) {
@@ -59,11 +59,9 @@ function ModalForm<TModel>({
 
   useEffect(() => {
     if (model) {
-      (Object.keys(model) as Array<keyof typeof model>).forEach((key): void => {
-        const val = model[key as keyof TModel] as UnpackNestedValue<
-          PathValue<TModel, Path<TModel>>
-        >;
-        useFormProps.setValue(key as Path<TModel>, val);
+      (Object.keys(model) as Array<keyof TModel>).forEach((key): void => {
+        const val = model[key] as UnpackNestedValue<PathValue<TModel, Path<TModel>>>;
+        useFormProps.setValue(key as unknown as Path<TModel>, val);
       });
     }
   }, [model]);

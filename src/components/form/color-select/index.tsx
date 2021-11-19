@@ -34,11 +34,11 @@ const ColorSelect: React.FC<IProps> = ({ control, id, name, placeholder, rules }
       formatOptionLabel={ColorOption}
       getOptionValue={(option) => option.value}
       id={id}
-      inputRef={ref}
       isSearchable={false}
       onChange={(selected) => onChange(selected?.value)}
       options={options}
       placeholder={placeholder}
+      ref={ref}
       value={options.find((option) => option.value === value)}
     />
   );

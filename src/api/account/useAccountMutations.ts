@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
-import { UseMutationResult } from 'react-query';
+import { UseMutationResult, useQueryClient } from 'react-query';
 
 import { useApi } from '@api';
 import { useToast } from '@lib/chakra-ui';
 import { Account } from '@models';
 
 import { useMutations } from '../mutations';
+import { ACCOUNTS_KEY } from './constants';
 
 interface IAccountMutation {
   create: UseMutationResult<Account, Error, Account>;
@@ -17,6 +18,7 @@ export const useAccountMutations = (): IAccountMutation => {
   const { accounts } = useApi();
   const mutations = useMutations<Account>(accounts);
   const toast = useToast();
+  const queryClient = useQueryClient();
 
   const create = mutations.create({
     onSuccess: () => {
@@ -37,7 +39,8 @@ export const useAccountMutations = (): IAccountMutation => {
   });
 
   const update = mutations.update({
-    onSuccess: () => {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries([ACCOUNTS_KEY, data.id], { exact: true });
       toast.success({ title: 'Exito!', description: 'Se ha actualizado la cuenta correctamente.' });
     },
     onError: (error: Error) => {

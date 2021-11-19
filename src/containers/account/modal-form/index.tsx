@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import React, { useMemo } from 'react';
+import { SubmitHandler, UseFormReturn } from 'react-hook-form';
 
 import { useAccountById, useAccountMutations } from '@api';
 import { AccountForm } from '@components';
@@ -10,9 +10,9 @@ import { AccountType } from '@models/common';
 
 const AccountModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => {
   const { user } = useUser();
-  const { data: account, isLoading, refetch } = useAccountById(id);
+  const { data: account, isLoading } = useAccountById(id);
   const { create, update } = useAccountMutations();
-  const { data, isLoading: isSubmitting, isSuccess } = id ? update : create;
+  const { isLoading: isSubmitting } = id ? update : create;
   const title = useMemo(() => (id ? 'Editar cuenta' : 'Nueva cuenta'), [id]);
 
   const defValue: Partial<Account> = useMemo(
@@ -21,31 +21,22 @@ const AccountModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss
   );
 
   /// HANDLERS
-  const onConfirm = (model: Account) => {
+  const onConfirm: SubmitHandler<Account> = (model) => {
     if (isSubmitting) return;
 
     if (!id) {
-      return create.mutate(model);
+      return create.mutateAsync(model, {
+        onSuccess: onConfirmed,
+      });
     }
-    return update.mutate(model);
+    return update.mutateAsync(model, {
+      onSuccess: onConfirmed,
+    });
   };
 
   const renderForm = (props: UseFormReturn<Account>) => {
     return <AccountForm {...props} account={account} />;
   };
-
-  /// EFFECTS
-  useEffect(() => {
-    if (id) {
-      refetch();
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      onConfirmed(data);
-    }
-  }, [data, isSuccess]);
 
   return (
     <ModalForm

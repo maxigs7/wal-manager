@@ -33,10 +33,10 @@ const IconSelect: React.FC<IProps> = ({ control, defaultValue, id, name, placeho
       formatOptionLabel={IconOption}
       getOptionValue={(option) => option.value}
       id={id}
-      inputRef={ref}
       onChange={(selected) => onChange(selected?.value)}
       options={options}
       placeholder={placeholder}
+      ref={ref}
       value={options.find((option) => option.value === value)}
     />
   );

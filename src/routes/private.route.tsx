@@ -1,28 +1,11 @@
 import React from 'react';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { useUser } from '@lib/supabase';
 
-const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }: RouteProps) => {
+const PrivateRoute: React.FC = ({ children }) => {
   const { user } = useUser();
-
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        user ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/auth/sign-in',
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    ></Route>
-  );
+  return user ? <>{children}</> : <Navigate to="/auth/sign-in" />;
 };
 
 export { PrivateRoute };

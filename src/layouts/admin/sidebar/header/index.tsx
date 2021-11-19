@@ -23,7 +23,7 @@ export const SidebarHeader: React.FC = React.memo(() => {
         variant="link"
         w={6}
       />
-      <Heading as={NavLink} flex="1" size="md" textAlign={{ lg: 'center' }} to="/" exact>
+      <Heading as={NavLink} flex="1" size="md" textAlign={{ lg: 'center' }} to="/" end>
         Wal Manager
       </Heading>
     </Flex>
