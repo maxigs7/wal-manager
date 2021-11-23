@@ -9,6 +9,10 @@ const DashboardPage = lazy(
   () => import(/* webpackChunkName: 'dashboard.page' */ '@pages/dashboard'),
 );
 
+const TransactionsPage = lazy(
+  () => import(/* webpackChunkName: 'transactions.page' */ '@pages/transactions'),
+);
+
 const CategoriesPage = lazy(
   () => import(/* webpackChunkName: 'admin.categories.page' */ '@pages/admin/categories'),
 );
@@ -47,6 +51,10 @@ export const adminRoutes: RouteObject[] = [
       {
         element: <CreditCardsPage />,
         path: 'admin/credit-cards',
+      },
+      {
+        element: <TransactionsPage />,
+        path: '/transactions',
       },
       {
         element: <DashboardPage />,

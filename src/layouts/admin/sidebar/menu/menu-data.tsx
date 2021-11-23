@@ -26,11 +26,10 @@ export const mainRoutes: IMenuItem[] = [
     title: 'Dashboard',
   },
   {
-    badge: 'soon',
     exact: true,
     icon: 'money-check-alt',
-    path: '/',
-    title: 'Transacciones',
+    path: '/transactions',
+    title: 'Movimientos',
   },
 ];
 
