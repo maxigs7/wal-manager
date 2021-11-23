@@ -23,10 +23,7 @@ const InputCurrency: React.FC<IProps> = ({
   const { field } = useController({
     name,
     control,
-    rules: {
-      valueAsNumber: true,
-      ...rules,
-    },
+    rules,
     defaultValue,
   });
 
@@ -57,7 +54,7 @@ interface IProps extends NumberInputProps {
   id?: string;
   name: string;
   placeholder?: string;
-  rules?: RegisterOptions;
+  rules?: Omit<Partial<RegisterOptions>, 'valueAsNumber'>;
 }
 
 export { InputCurrency };
