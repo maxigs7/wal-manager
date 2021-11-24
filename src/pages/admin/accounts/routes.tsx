@@ -1,4 +1,4 @@
-import { useRoutes as useReactRoutes } from 'react-router-dom';
+import { Navigate, useRoutes as useReactRoutes } from 'react-router-dom';
 
 import { CreatePage } from './create';
 import { DeletePage } from './delete';
@@ -22,6 +22,10 @@ export const useRoutes = (): React.ReactElement | null => {
     {
       path: remove(':id'),
       element: <DeletePage />,
+    },
+    {
+      path: '*',
+      element: <Navigate to="/admin/accounts" />,
     },
   ]);
 };
