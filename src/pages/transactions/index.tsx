@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { Button } from '@chakra-ui/react';
+import { Button, HStack } from '@chakra-ui/react';
 
 import { TransactionPortalModal, TransactionsList } from '@containers';
+import { Icon } from '@lib/chakra-ui';
 import { Page } from '@lib/wal-ui';
 import { TransactionType } from '@models';
 import { useTransactionsStore } from '@stores';
@@ -12,8 +13,26 @@ const TransactionsPage: React.FC = () => {
 
   return (
     <Page metaTitle="Movimientos" title="Movimientos">
-      <Button onClick={() => dispatch.onOpenForm(TransactionType.Income)}>Nuevo Ingreso</Button>
-      <Button onClick={() => dispatch.onOpenForm(TransactionType.Expense)}>Nuevo Gasto</Button>
+      <HStack mb={2}>
+        <Button
+          aria-label="Nuevo gasto"
+          colorScheme="red"
+          leftIcon={<Icon icon="plus" />}
+          onClick={() => dispatch.onOpenForm(TransactionType.Expense)}
+          size="sm"
+        >
+          Nuevo Gasto
+        </Button>
+        <Button
+          aria-label="Nuevo ingreso"
+          colorScheme="green"
+          leftIcon={<Icon icon="plus" />}
+          onClick={() => dispatch.onOpenForm(TransactionType.Income)}
+          size="sm"
+        >
+          Nuevo Ingreso
+        </Button>
+      </HStack>
       <TransactionPortalModal
         isOpenForm={state.isOpenForm}
         isOpenRemove={state.isOpenRemove}

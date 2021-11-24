@@ -32,9 +32,9 @@ const CategorySelect: React.FC<ICategorySelectProps> = ({
 
   const options = useMemo(
     () =>
-      categories?.map((category) => ({
+      categories?.map((category: CategoryLookup) => ({
         ...category,
-        label: category.rootName,
+        label: `${category.rootName} ${category.subName}`,
         value: category.id,
       })),
     [categories],
@@ -47,7 +47,6 @@ const CategorySelect: React.FC<ICategorySelectProps> = ({
       getOptionValue={(option) => option.value}
       id={id}
       isLoading={isLoading}
-      isSearchable={false}
       onChange={(selected) => onChange(selected?.value)}
       options={options}
       placeholder={placeholder}

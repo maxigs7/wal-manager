@@ -65,7 +65,13 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register, type
 
       <FormControl as={GridItem} isInvalid={!!errors.date}>
         <FormLabel htmlFor="date">Fecha</FormLabel>
-        <InputDate id="date" name="date" placeholder="Fecha" register={register} />
+        <InputDate
+          id="date"
+          name="date"
+          placeholder="Fecha"
+          register={register}
+          rules={{ required: 'Este campo es requerido' }}
+        />
         <FormErrorMessage>{errors.date && errors.date.message}</FormErrorMessage>
       </FormControl>
 
