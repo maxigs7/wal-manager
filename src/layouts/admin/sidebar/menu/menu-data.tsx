@@ -13,7 +13,7 @@ export const quickRoutes: IMenuItem[] = [
     badge: 'soon',
     exact: true,
     icon: 'bolt',
-    path: '/',
+    path: '/transactions/create',
     title: 'Crear transaccion',
   },
 ];

@@ -2,15 +2,12 @@ import React from 'react';
 
 import { Flex, VStack } from '@chakra-ui/react';
 
-import { useRouter } from '@hooks';
-
 import { SidebarBackdrop } from './backdrop';
 import { useSidebar } from './context';
 import { SidebarHeader } from './header';
 import { SidebarMenu } from './menu';
 
 export const Sidebar: React.FC = () => {
-  const { pathname } = useRouter();
   const { isOpen } = useSidebar();
 
   return (
@@ -38,7 +35,7 @@ export const Sidebar: React.FC = () => {
       >
         {/* Sidebar header */}
         <SidebarHeader />
-        <SidebarMenu pathname={pathname} />
+        <SidebarMenu />
       </VStack>
     </Flex>
   );

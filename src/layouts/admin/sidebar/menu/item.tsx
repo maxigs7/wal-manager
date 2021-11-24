@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { Badge, Link, Text } from '@chakra-ui/react';
 
+import { useRouter } from '@hooks';
 import { Icon } from '@lib/chakra-ui';
 
 import { useSidebar } from '../context';
@@ -24,19 +25,20 @@ const styles = {
       : {},
 };
 
-export type SidebarMenuItemProps = IMenuItem & {
-  isActive: boolean;
-};
+export type SidebarMenuItemProps = IMenuItem;
 
 export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
   badge,
   exact,
   icon,
-  isActive,
   title,
   path,
 }) => {
   const { close } = useSidebar();
+  const { useResolvedPath, useMatch } = useRouter();
+  const resolved = useResolvedPath(path);
+  const match = useMatch({ path: resolved.pathname, end: true });
+  const isActive = !!match;
 
   return (
     <Link

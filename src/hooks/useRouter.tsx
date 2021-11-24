@@ -1,5 +1,12 @@
 import { useMemo } from 'react';
-import { useParams, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  useParams,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+  useResolvedPath,
+  useMatch,
+} from 'react-router-dom';
 
 import { parse } from 'query-string';
 
@@ -27,6 +34,8 @@ export const useRouter = () => {
       // Include match, location, history objects so we have
       // access to extra React Router functionality if needed.
       location,
+      useResolvedPath: useResolvedPath,
+      useMatch: useMatch,
     };
   }, [location, navigate, params, searchParams]);
 };
