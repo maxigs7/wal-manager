@@ -38,7 +38,7 @@ const CategoryModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismis
   };
 
   const renderForm = (props: UseFormReturn<Category>) => {
-    return <CategoryForm {...props} category={category} />;
+    return <CategoryForm {...props} category={category || defValue} />;
   };
 
   return (

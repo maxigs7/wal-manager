@@ -9,9 +9,9 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 
-import { Category, useCategoryIsUnique } from '@models';
+import { Category, CategoryType, useCategoryIsUnique } from '@models';
 
-const Form: React.FC<IProps> = ({ category, formState: { errors }, register, parentId }) => {
+const Form: React.FC<IProps> = ({ category, formState: { errors }, register }) => {
   const isUnique = useCategoryIsUnique();
 
   return (
@@ -23,7 +23,8 @@ const Form: React.FC<IProps> = ({ category, formState: { errors }, register, par
           placeholder="Nombre"
           {...register('name', {
             required: 'Este campo es requerido.',
-            validate: (name) => isUnique(name, category?.id, parentId),
+            validate: (name) =>
+              isUnique(category?.type as CategoryType, name, category?.id, category?.parentId),
           })}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
@@ -33,8 +34,7 @@ const Form: React.FC<IProps> = ({ category, formState: { errors }, register, par
 };
 
 interface IProps extends UseFormReturn<Category> {
-  category?: Category;
-  parentId: string;
+  category?: Partial<Category>;
 }
 
 export { Form as SubCategoryForm };

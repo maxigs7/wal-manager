@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import { ColorSelect, IconSelect } from '@components';
-import { Category, useCategoryIsUnique } from '@models';
+import { Category, CategoryType, useCategoryIsUnique } from '@models';
 
 const Form: React.FC<IProps> = ({ category, control, formState: { errors }, register }) => {
   const isUnique = useCategoryIsUnique();
@@ -24,7 +24,7 @@ const Form: React.FC<IProps> = ({ category, control, formState: { errors }, regi
           placeholder="Nombre"
           {...register('name', {
             required: 'Este campo es requerido.',
-            validate: (name) => isUnique(name, category?.id),
+            validate: (name) => isUnique(category?.type as CategoryType, name, category?.id),
           })}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
@@ -61,7 +61,7 @@ const Form: React.FC<IProps> = ({ category, control, formState: { errors }, regi
 };
 
 interface IProps extends UseFormReturn<Category> {
-  category?: Category;
+  category?: Partial<Category>;
 }
 
 export { Form as CategoryForm };
