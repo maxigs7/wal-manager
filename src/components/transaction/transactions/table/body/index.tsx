@@ -5,7 +5,7 @@ import { Tbody, Td, Tr } from '@chakra-ui/table';
 
 import { TransactionDto } from '@models';
 
-const Body: React.FC<TableInstance<TransactionDto>> = ({ prepareRow, rows }) => (
+const Body: React.FC<TableInstance<TransactionDto>> = ({ columns, prepareRow, rows }) => (
   <Tbody>
     {rows.map((row) => {
       prepareRow(row);
@@ -19,6 +19,13 @@ const Body: React.FC<TableInstance<TransactionDto>> = ({ prepareRow, rows }) => 
         </Tr>
       );
     })}
+    {!rows.length && (
+      <Tr>
+        <Td colSpan={columns.length} p={10} textAlign="center">
+          No hay movimientos...
+        </Td>
+      </Tr>
+    )}
   </Tbody>
 );
 
