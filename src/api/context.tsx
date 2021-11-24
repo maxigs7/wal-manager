@@ -3,10 +3,11 @@ import { createContext, useContext } from 'react';
 import { SupabaseClient } from '@supabase/supabase-js';
 
 import { useSupabase } from '@lib/supabase';
-import { Account, Category, CreditCard, Transaction } from '@models';
+import { Account, Category, CreditCard } from '@models';
 
 import { buildAuthRepository } from './auth';
 import { buildRepository } from './repository';
+import { buildTransactionRepository } from './transaction';
 import { IApi } from './types';
 
 const createApi = (db: SupabaseClient): IApi => ({
@@ -23,7 +24,7 @@ const createApi = (db: SupabaseClient): IApi => ({
     ...buildRepository<CreditCard>(db, 'CREDIT_CARD'),
   },
   transactions: {
-    ...buildRepository<Transaction>(db, 'TRANSACTION'),
+    ...buildTransactionRepository(db),
   },
 });
 

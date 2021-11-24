@@ -1,8 +1,9 @@
 import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
 
-import { Account, BaseModel, Category, CreditCard, Transaction } from '@models';
+import { Account, BaseModel, Category, CreditCard } from '@models';
 
 import { IAuthRepository } from './auth';
+import { ITransactionRepository } from './transaction';
 
 type CamelToSnake<T extends string, P extends string = ''> = string extends T
   ? string
@@ -20,7 +21,7 @@ export interface IApi {
   auth: IAuthRepository;
   categories: IRepository<Category>;
   creditCards: IRepository<CreditCard>;
-  transactions: IRepository<Transaction>;
+  transactions: ITransactionRepository;
 }
 
 export interface IGetAllOptions<T> {

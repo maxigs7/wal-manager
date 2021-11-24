@@ -22,8 +22,8 @@ export type TransactionDto = BaseModel & {
   rootCategoryColor: string;
   rootCategoryIcon: IconName;
   subCategory?: string;
-  creditCard: string;
-  date: Date;
+  creditCard?: string;
+  date: string;
   description?: string;
   feeNumber?: number;
   isPaid: boolean;

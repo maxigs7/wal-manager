@@ -1,5 +1,7 @@
 import { CellProps, Column, Row } from 'react-table';
 
+import { format, parseJSON } from 'date-fns';
+
 import { CategoryInline } from '@components';
 import { dateSortType } from '@lib/react-table';
 import { TransactionDto } from '@models';
@@ -8,14 +10,15 @@ export const columns: Column<TransactionDto>[] = [
   {
     Header: 'Categoria',
     accessor: 'rootCategory',
-    Cell: (props: CellProps<TransactionDto, string>) => (
-      <CategoryInline
-        color={props.row.original.rootCategoryColor}
-        icon={props.row.original.rootCategoryIcon}
-        name={props.row.original.rootCategory}
-        subName={props.row.original.subCategory}
-      />
-    ),
+    Cell: (props: CellProps<TransactionDto, string>) =>
+      props.row.original.id && (
+        <CategoryInline
+          color={props.row.original.rootCategoryColor}
+          icon={props.row.original.rootCategoryIcon}
+          name={props.row.original.rootCategory}
+          subName={props.row.original.subCategory}
+        />
+      ),
     sortType: (rowA: Row<TransactionDto>, rowB: Row<TransactionDto>): number => {
       if (rowA.original.rootCategory > rowB.original.rootCategory) return 1;
       if (rowB.original.rootCategory > rowA.original.rootCategory) return -1;
@@ -32,10 +35,11 @@ export const columns: Column<TransactionDto>[] = [
   },
   {
     Header: 'Fecha',
-    Cell: (props: CellProps<TransactionDto, Date>) => props.cell.value.toLocaleDateString('es-AR'),
+    Cell: (props: CellProps<TransactionDto, string>) =>
+      format(parseJSON(props.cell.value), 'dd/MM/yyyy'),
     accessor: 'date',
     sortType: (rowA: Row<TransactionDto>, rowB: Row<TransactionDto>): number =>
-      dateSortType(rowA.original.date, rowB.original.date),
+      dateSortType(parseJSON(rowA.original.date), parseJSON(rowB.original.date)),
   },
   {
     Header: 'Detalle',
@@ -44,7 +48,7 @@ export const columns: Column<TransactionDto>[] = [
   {
     Header: 'Importe',
     accessor: 'amount',
-    Cell: (props: CellProps<TransactionDto, number>) => props.cell.value.toLocaleString('es-AR'),
+    Cell: (props: CellProps<TransactionDto, number>) => props.cell.value?.toLocaleString('es-AR'),
     isNumeric: true,
   },
 ];
