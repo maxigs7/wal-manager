@@ -7,16 +7,16 @@ import { CREDIT_CARDS_KEY } from './constants';
 
 export const useCreditCardList = (): UseQueryResult<CreditCard[]> => {
   const { creditCards } = useApi();
-  return useQuery(CREDIT_CARDS_KEY, () => creditCards.getAll({ sort: { field: 'name' } }), {
+  return useQuery([CREDIT_CARDS_KEY], () => creditCards.getAll({ sort: { field: 'name' } }), {
     refetchOnWindowFocus: false,
-    enabled: false, // turned off by default, manual refetch is needed
   });
 };
 
-export const useCreditCardRefresh = (): (() => void) => {
+export const useCreditCardRefresh = (): ((id?: string) => void) => {
   const queryClient = useQueryClient();
 
-  return () => {
-    queryClient.invalidateQueries(CREDIT_CARDS_KEY, { exact: true, refetchInactive: true });
+  return (id?: string) => {
+    queryClient.resetQueries([CREDIT_CARDS_KEY], { exact: true }, { cancelRefetch: true });
+    id && queryClient.removeQueries([CREDIT_CARDS_KEY, id], { exact: true });
   };
 };

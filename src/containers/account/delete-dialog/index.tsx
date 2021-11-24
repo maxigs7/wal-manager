@@ -7,7 +7,7 @@ import { Account } from '@models';
 const AccountDeleteDialog: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => {
   const { remove } = useAccountMutations();
 
-  const onConfirm = async () => {
+  const onConfirm = () => {
     id && remove.mutate(id);
   };
 

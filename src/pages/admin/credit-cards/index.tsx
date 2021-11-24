@@ -1,27 +1,32 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-import { CreditCardsList, CreditCardPortalModal } from '@containers';
+import { Portal } from '@chakra-ui/react';
+
+import { CreditCardsList } from '@containers';
+import { useRouter } from '@hooks';
 import { Page } from '@lib/wal-ui';
-import { useCreditCardStore } from '@stores';
+
+import { create, edit, remove, useRoutes } from './routes';
 
 const CreditCardsPage: React.FC = () => {
-  const [state, dispatch] = useCreditCardStore();
+  const { navigate } = useRouter();
+  const routes = useRoutes();
 
   return (
     <>
       <Page metaTitle="Mis Tarjetas" title="Mis Tarjetas">
         <CreditCardsList
-          onCreate={dispatch.onOpenForm}
-          onDelete={(cc) => dispatch.onOpenForm(cc, true)}
-          onSelected={(cc) => dispatch.onOpenForm(cc)}
+          onCreate={() => navigate(create)}
+          onDelete={(cc) => navigate(remove(cc.id))}
+          onSelected={(cc) => navigate(edit(cc.id))}
         />
-        <CreditCardPortalModal
-          id={state.id}
-          isOpenForm={state.isOpenForm}
-          isOpenRemove={state.isOpenRemove}
-          onConfirmed={dispatch.onConfirmedForm}
-          onDismiss={dispatch.onDismissForm}
-        />
+
+        {routes}
+
+        <Portal>
+          <Outlet />
+        </Portal>
       </Page>
     </>
   );

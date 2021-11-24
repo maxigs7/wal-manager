@@ -7,7 +7,7 @@ import { CreditCard } from '@models';
 const CreditCardDeleteDialog: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => {
   const { remove } = useCreditCardMutations();
 
-  const onConfirm = async () => {
+  const onConfirm = () => {
     id && remove.mutate(id);
   };
 

@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
-import { UseMutationResult, useQueryClient } from 'react-query';
+import { UseMutationResult } from 'react-query';
 
 import { useApi } from '@api';
 import { useToast } from '@lib/chakra-ui';
 import { CreditCard } from '@models';
 
 import { useMutations } from '../mutations';
-import { CREDIT_CARDS_KEY } from './constants';
 
 interface ICreditCardMutation {
   create: UseMutationResult<CreditCard, Error, CreditCard>;
@@ -18,7 +17,6 @@ export const useCreditCardMutations = (): ICreditCardMutation => {
   const { creditCards } = useApi();
   const mutations = useMutations<CreditCard>(creditCards);
   const toast = useToast();
-  const queryClient = useQueryClient();
 
   const create = mutations.create({
     onSuccess: () => {
@@ -39,8 +37,7 @@ export const useCreditCardMutations = (): ICreditCardMutation => {
   });
 
   const update = mutations.update({
-    onSuccess: (data) => {
-      queryClient.invalidateQueries([CREDIT_CARDS_KEY, data.id], { exact: true });
+    onSuccess: () => {
       toast.success({
         title: 'Exito!',
         description: 'Se ha actualizado la tarjeta correctamente.',

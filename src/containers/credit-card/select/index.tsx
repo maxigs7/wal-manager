@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useCreditCardList } from '@api';
 import { CreditCardSelect, ICreditCardSelectProps } from '@components';
@@ -6,11 +6,7 @@ import { CreditCardSelect, ICreditCardSelectProps } from '@components';
 const CreditCardSelectContainer: React.FC<Omit<ICreditCardSelectProps, 'ccs' | 'isLoading'>> = (
   props,
 ) => {
-  const { data: ccs, isLoading, refetch } = useCreditCardList();
-
-  useEffect(() => {
-    refetch();
-  }, []);
+  const { data: ccs, isLoading } = useCreditCardList();
 
   return <CreditCardSelect ccs={ccs} isLoading={isLoading} {...props} />;
 };

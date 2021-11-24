@@ -4,7 +4,7 @@ import { CreatePage } from './create';
 import { DeletePage } from './delete';
 import { EditPage } from './edit';
 
-export const index = '/admin/accounts';
+export const index = '/admin/credit-cards';
 export const create = 'create';
 export const edit = (id: string): string => `edit/${id}`;
 export const remove = (id: string): string => `remove/${id}`;
@@ -25,7 +25,7 @@ export const useRoutes = (): React.ReactElement | null => {
     },
     // {
     //   path: '*',
-    //   element: <Navigate to="/admin/accounts" />,
+    //   element: <Navigate to="/admin/credit-cards" />,
     // },
   ]);
 };

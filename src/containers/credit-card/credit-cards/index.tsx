@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { CircularProgress, Flex } from '@chakra-ui/react';
 
@@ -7,11 +7,7 @@ import { CreditCardList, CreditCardNewPlaceholder } from '@components';
 import { CreditCard } from '@models';
 
 const CreditCardsList: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
-  const { data: creditCards, isLoading, refetch } = useCreditCardList();
-
-  useEffect(() => {
-    refetch();
-  }, []);
+  const { data: creditCards, isLoading } = useCreditCardList();
 
   if (isLoading) {
     return (
