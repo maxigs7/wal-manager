@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { CircularProgress, Flex } from '@chakra-ui/react';
 
@@ -7,12 +7,8 @@ import { AccountList, AccountNewPlaceholder } from '@components';
 import { Account } from '@models';
 
 const AccountsList: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
-  const { data: accounts, isLoading, refetch } = useAccountList();
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
+  const { data: accounts, isLoading, ...all } = useAccountList();
+  console.log(isLoading, all);
   if (isLoading) {
     return (
       <Flex align="center" justify="center" p={5}>

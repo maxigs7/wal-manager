@@ -27,10 +27,8 @@ export const useRouter = () => {
       // Merge params and parsed query string into single "query" object
       // so that they can be used interchangeably.
       // Example: /:topic?sort=popular -> { topic: "react", sort: "popular" }
-      query: {
-        ...parse(searchParams.toString()), // Convert string to object
-        ...params,
-      },
+      params,
+      query: parse(searchParams.toString()), // Convert string to object
       // Include match, location, history objects so we have
       // access to extra React Router functionality if needed.
       location,

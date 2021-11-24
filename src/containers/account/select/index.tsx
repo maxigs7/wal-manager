@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useAccountList } from '@api';
 import { AccountSelect, IAccountSelectProps } from '@components';
@@ -6,12 +6,7 @@ import { AccountSelect, IAccountSelectProps } from '@components';
 const AccountSelectContainer: React.FC<Omit<IAccountSelectProps, 'accounts' | 'isLoading'>> = (
   props,
 ) => {
-  const { data: accounts, isLoading, refetch } = useAccountList();
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
+  const { data: accounts, isLoading } = useAccountList();
   return <AccountSelect accounts={accounts} isLoading={isLoading} {...props} />;
 };
 

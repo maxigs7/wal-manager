@@ -41,16 +41,21 @@ export const adminRoutes: RouteObject[] = [
     element: <PrivateWrapper />,
     children: [
       {
-        element: <AccountsPage />,
-        path: 'admin/accounts',
-      },
-      {
-        element: <CategoriesPage />,
-        path: 'admin/categories',
-      },
-      {
-        element: <CreditCardsPage />,
-        path: 'admin/credit-cards',
+        path: 'admin',
+        children: [
+          {
+            element: <AccountsPage />,
+            path: 'accounts/*',
+          },
+          {
+            element: <CategoriesPage />,
+            path: 'categories/*',
+          },
+          {
+            element: <CreditCardsPage />,
+            path: 'credit-cards/*',
+          },
+        ],
       },
       {
         element: <TransactionsPage />,

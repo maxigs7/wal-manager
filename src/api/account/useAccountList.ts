@@ -7,16 +7,16 @@ import { ACCOUNTS_KEY } from './constants';
 
 export const useAccountList = (): UseQueryResult<Account[]> => {
   const { accounts } = useApi();
-  return useQuery(ACCOUNTS_KEY, () => accounts.getAll({ sort: { field: 'name' } }), {
+  return useQuery([ACCOUNTS_KEY], () => accounts.getAll({ sort: { field: 'name' } }), {
     refetchOnWindowFocus: false,
-    enabled: false, // turned off by default, manual refetch is needed
   });
 };
 
-export const useAccountRefresh = (): (() => void) => {
+export const useAccountRefresh = (): ((id?: string) => void) => {
   const queryClient = useQueryClient();
 
-  return () => {
-    queryClient.invalidateQueries(ACCOUNTS_KEY, { exact: true, refetchInactive: true });
+  return (id?: string) => {
+    queryClient.resetQueries([ACCOUNTS_KEY], { exact: true }, { cancelRefetch: true });
+    id && queryClient.removeQueries([ACCOUNTS_KEY, id], { exact: true });
   };
 };

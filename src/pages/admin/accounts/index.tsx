@@ -1,27 +1,32 @@
 import React from 'react';
+import { Outlet } from 'react-router';
 
-import { AccountsList, AccountPortalModal } from '@containers';
+import { Portal } from '@chakra-ui/react';
+
+import { AccountsList } from '@containers';
+import { useRouter } from '@hooks';
 import { Page } from '@lib/wal-ui';
-import { useAccountStore } from '@stores';
+
+import { create, edit, remove, useRoutes } from './routes';
 
 const AccountsPage: React.FC = () => {
-  const [state, dispatch] = useAccountStore();
+  const { navigate } = useRouter();
+  const routes = useRoutes();
 
   return (
     <>
       <Page metaTitle="Mis Cuentas" title="Mis Cuentas">
         <AccountsList
-          onCreate={dispatch.onOpenForm}
-          onDelete={(account) => dispatch.onOpenForm(account, true)}
-          onSelected={(account) => dispatch.onOpenForm(account)}
+          onCreate={() => navigate(create)}
+          onDelete={(account) => navigate(remove(account.id))}
+          onSelected={(account) => navigate(edit(account.id))}
         />
-        <AccountPortalModal
-          id={state.id}
-          isOpenForm={state.isOpenForm}
-          isOpenRemove={state.isOpenRemove}
-          onConfirmed={dispatch.onConfirmedForm}
-          onDismiss={dispatch.onDismissForm}
-        />
+
+        {routes}
+
+        <Portal>
+          <Outlet />
+        </Portal>
       </Page>
     </>
   );
