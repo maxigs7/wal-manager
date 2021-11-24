@@ -4,21 +4,18 @@ import { Category } from '@models';
 
 import { CategoryListItem } from '../list-item';
 
-const CategoryList: React.FC<IProps> = ({ categories = [], onSelected, selected }) => {
-  console.log('CategoriesList component rendering...', selected);
-  return (
-    <>
-      {categories.map((category) => (
-        <CategoryListItem
-          category={category}
-          isActive={category.id === selected?.id}
-          key={category.id}
-          onSelected={onSelected}
-        />
-      ))}
-    </>
-  );
-};
+const CategoryList: React.FC<IProps> = ({ categories = [], onSelected, selected }) => (
+  <>
+    {categories.map((category) => (
+      <CategoryListItem
+        category={category}
+        isActive={category.id === selected?.id}
+        key={category.id}
+        onSelected={onSelected}
+      />
+    ))}
+  </>
+);
 
 interface IProps {
   categories: Category[];
