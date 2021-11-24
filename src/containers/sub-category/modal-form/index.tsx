@@ -38,7 +38,7 @@ const SubCategoryModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDis
   };
 
   const renderForm = (props: UseFormReturn<Category>) => {
-    return <SubCategoryForm {...props} category={category} />;
+    return <SubCategoryForm {...props} category={category} parentId={parent.id} />;
   };
 
   return (

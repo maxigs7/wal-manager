@@ -2,15 +2,25 @@ import { useCallback } from 'react';
 
 import { useApi } from '@api';
 
-export const useIsUnique = (): ((name: string, id?: string) => Promise<string | boolean>) => {
+export const useIsUnique = (): ((
+  name: string,
+  id?: string,
+  parentId?: string,
+) => Promise<string | boolean>) => {
   const { categories } = useApi();
 
   return useCallback(
-    async (name: string, id?: string) => {
+    async (name: string, id?: string, parentId?: string) => {
       const data = await categories.getAll({
         filtering: (q) => {
-          const filtered = q.eq('name', name);
-          return id ? filtered.neq('id', id) : filtered;
+          let filtered = q.eq('name', name);
+          if (parentId) {
+            filtered = filtered.eq('parent_id', parentId);
+          }
+          if (id) {
+            filtered.neq('id', id);
+          }
+          return filtered;
         },
       });
 

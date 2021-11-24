@@ -11,7 +11,7 @@ import {
 
 import { Category, useCategoryIsUnique } from '@models';
 
-const Form: React.FC<IProps> = ({ category, formState: { errors }, register }) => {
+const Form: React.FC<IProps> = ({ category, formState: { errors }, register, parentId }) => {
   const isUnique = useCategoryIsUnique();
 
   return (
@@ -23,7 +23,7 @@ const Form: React.FC<IProps> = ({ category, formState: { errors }, register }) =
           placeholder="Nombre"
           {...register('name', {
             required: 'Este campo es requerido.',
-            validate: (name) => isUnique(name, category?.id),
+            validate: (name) => isUnique(name, category?.id, parentId),
           })}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
@@ -34,6 +34,7 @@ const Form: React.FC<IProps> = ({ category, formState: { errors }, register }) =
 
 interface IProps extends UseFormReturn<Category> {
   category?: Category;
+  parentId: string;
 }
 
 export { Form as SubCategoryForm };
