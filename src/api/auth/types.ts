@@ -10,7 +10,6 @@ export interface ISignInReturn extends IAuthError {
 export interface ISignInParam {
   email: string;
   password: string;
-  redirectTo: string;
 }
 
 export type ISignUpParam = ISignInParam;

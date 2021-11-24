@@ -17,14 +17,7 @@ interface IAuthMutation {
 export const useAuthApi = (): IAuthMutation => {
   const { auth } = useApi();
   const { navigate } = useRouter();
-  const signIn = useMutation<ISignInReturn, Error, ISignInParam>(auth.signIn, {
-    onSuccess: () => {
-      navigate('/dashboard');
-    },
-    onError: () => {
-      console.log('error');
-    },
-  });
+  const signIn = useMutation<ISignInReturn, Error, ISignInParam>(auth.signIn);
 
   const signInGoogle = useMutation<ISignInReturn, Error, string>(auth.signInGoogle, {
     onSuccess: (user: any) => {
@@ -35,14 +28,7 @@ export const useAuthApi = (): IAuthMutation => {
     },
   });
 
-  const signUp = useMutation<ISignInReturn, Error, ISignUpParam>(auth.signUp, {
-    onSuccess: () => {
-      navigate('/dashboard');
-    },
-    onError: () => {
-      console.log('error');
-    },
-  });
+  const signUp = useMutation<ISignInReturn, Error, ISignUpParam>(auth.signUp);
 
   const signOut = useMutation<IAuthError>(auth.signOut, {
     onSuccess: () => {
