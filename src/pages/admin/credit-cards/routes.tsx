@@ -1,31 +1,52 @@
+import { useCallback } from 'react';
 import { useRoutes as useReactRoutes } from 'react-router-dom';
+
+import { useRouter } from '@hooks';
 
 import { CreatePage } from './create';
 import { DeletePage } from './delete';
 import { EditPage } from './edit';
 
-export const index = '/admin/credit-cards';
-export const create = 'create';
-export const edit = (id: string): string => `edit/${id}`;
-export const remove = (id: string): string => `remove/${id}`;
+const PREFIX = '/admin/credit-cards';
+const ROUTES = {
+  create: 'create',
+  index: '',
+  edit: 'edit',
+  remove: 'remove',
+};
+
+type RouteType = 'create' | 'edit' | 'index' | 'remove';
+type Options = { type: RouteType; id?: string; full?: boolean; state?: any };
+
+export const useNavigate = (): { nav(opt: Options): void; to(opt: Options): string } => {
+  const { navigate } = useRouter();
+
+  const nav = useCallback(({ state, ...options }: Options) => {
+    const url = to(options);
+    navigate(url, { state });
+  }, []);
+
+  const to = useCallback(({ type, id, full = false }: Options) => {
+    return [full && PREFIX, ROUTES[type], id].filter(Boolean).join('/');
+  }, []);
+
+  return { nav, to };
+};
 
 export const useRoutes = (): React.ReactElement | null => {
+  const { to } = useNavigate();
   return useReactRoutes([
     {
-      path: create,
+      path: to({ type: 'create' }),
       element: <CreatePage />,
     },
     {
-      path: edit(':id'),
+      path: to({ type: 'edit', id: ':id' }),
       element: <EditPage />,
     },
     {
-      path: remove(':id'),
+      path: to({ type: 'remove', id: ':id' }),
       element: <DeletePage />,
     },
-    // {
-    //   path: '*',
-    //   element: <Navigate to="/admin/credit-cards" />,
-    // },
   ]);
 };

@@ -6,19 +6,20 @@ import { AccountModalForm } from '@containers';
 import { useRouter } from '@hooks';
 import { Account } from '@models';
 
-import { index } from './routes';
+import { useNavigate } from './routes';
 
 const EditPage: React.FC = () => {
-  const { navigate, params } = useRouter();
+  const { params } = useRouter();
+  const { nav } = useNavigate();
   const refresh = useAccountRefresh();
 
   const onConfirmed = (account: Account) => {
     refresh(account.id);
-    navigate(index);
+    onDismiss();
   };
 
   const onDismiss = () => {
-    navigate(index);
+    nav({ type: 'index', full: true });
   };
 
   return (

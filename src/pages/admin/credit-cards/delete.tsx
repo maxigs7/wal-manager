@@ -6,19 +6,20 @@ import { CreditCardDeleteDialog } from '@containers';
 import { useRouter } from '@hooks';
 import { CreditCard } from '@models';
 
-import { index } from './routes';
+import { useNavigate } from './routes';
 
 const DeletePage: React.FC = () => {
-  const { navigate, params } = useRouter();
+  const { params } = useRouter();
+  const { nav } = useNavigate();
   const refresh = useCreditCardRefresh();
 
-  const onConfirmed = (cc: CreditCard) => {
-    refresh(cc.id);
-    navigate(index);
+  const onConfirmed = (account: CreditCard) => {
+    refresh(account.id);
+    onDismiss();
   };
 
   const onDismiss = () => {
-    navigate(index);
+    nav({ type: 'index', full: true });
   };
 
   return (

@@ -3,21 +3,20 @@ import { Helmet } from 'react-helmet-async';
 
 import { useAccountRefresh } from '@api';
 import { AccountModalForm } from '@containers';
-import { useRouter } from '@hooks';
 
-import { index } from './routes';
+import { useNavigate } from './routes';
 
 const CreatePage: React.FC = () => {
-  const { navigate } = useRouter();
+  const { nav } = useNavigate();
   const refresh = useAccountRefresh();
 
   const onConfirmed = () => {
     refresh();
-    navigate(index);
+    onDismiss();
   };
 
   const onDismiss = () => {
-    navigate(index);
+    nav({ type: 'index', full: true });
   };
 
   return (

@@ -7,8 +7,8 @@ import { AccountList, AccountNewPlaceholder } from '@components';
 import { Account } from '@models';
 
 const AccountsList: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
-  const { data: accounts, isLoading, ...all } = useAccountList();
-  console.log(isLoading, all);
+  const { data: accounts, isLoading } = useAccountList();
+
   if (isLoading) {
     return (
       <Flex align="center" justify="center" p={5}>

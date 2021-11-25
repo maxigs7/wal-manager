@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { RouteObject } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 
 import { LazyAdminLayout } from '@layouts';
 
@@ -41,6 +41,11 @@ export const adminRoutes: RouteObject[] = [
     element: <PrivateWrapper />,
     children: [
       {
+        element: <DashboardPage />,
+        path: 'dashboard',
+        index: true,
+      },
+      {
         path: 'admin',
         children: [
           {
@@ -55,21 +60,20 @@ export const adminRoutes: RouteObject[] = [
             element: <CreditCardsPage />,
             path: 'credit-cards/*',
           },
+          { path: '*', index: true, element: <Navigate to="/404" /> },
         ],
       },
       {
         element: <TransactionsPage />,
-        path: '/transactions',
+        path: 'transactions',
       },
-      {
-        element: <DashboardPage />,
-        path: 'dashboard',
-        index: true,
-      },
+
       {
         element: <NotFoundPage />,
-        path: '*',
+        path: '404',
       },
+      { path: '', index: true, element: <Navigate to="/dashboard" /> },
+      { path: '*', element: <Navigate to="/404" /> },
     ],
   },
 ];

@@ -37,7 +37,8 @@ export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
   const { close } = useSidebar();
   const { useResolvedPath, useMatch } = useRouter();
   const resolved = useResolvedPath(path);
-  const match = useMatch({ path: resolved.pathname, end: true });
+  const match = useMatch({ path: resolved.pathname, end: false });
+  console.log(resolved, match);
   const isActive = !!match;
 
   return (

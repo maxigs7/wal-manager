@@ -3,21 +3,20 @@ import { Helmet } from 'react-helmet-async';
 
 import { useCreditCardRefresh } from '@api';
 import { CreditCardModalForm } from '@containers';
-import { useRouter } from '@hooks';
 
-import { index } from './routes';
+import { useNavigate } from './routes';
 
 const CreatePage: React.FC = () => {
-  const { navigate } = useRouter();
+  const { nav } = useNavigate();
   const refresh = useCreditCardRefresh();
 
   const onConfirmed = () => {
     refresh();
-    navigate(index);
+    onDismiss();
   };
 
   const onDismiss = () => {
-    navigate(index);
+    nav({ type: 'index', full: true });
   };
 
   return (
