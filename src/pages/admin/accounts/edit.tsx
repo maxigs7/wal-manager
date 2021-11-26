@@ -5,12 +5,11 @@ import { useAccountRefresh } from '@api';
 import { AccountModalForm } from '@containers';
 import { useRouter } from '@hooks';
 import { Account } from '@models';
-
-import { useNavigate } from './routes';
+import { useAccountsNav } from '@routes';
 
 const EditPage: React.FC = () => {
   const { params } = useRouter();
-  const { nav } = useNavigate();
+  const { nav } = useAccountsNav();
   const refresh = useAccountRefresh();
 
   const onConfirmed = (account: Account) => {

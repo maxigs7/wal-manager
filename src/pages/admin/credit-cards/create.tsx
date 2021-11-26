@@ -3,11 +3,10 @@ import { Helmet } from 'react-helmet-async';
 
 import { useCreditCardRefresh } from '@api';
 import { CreditCardModalForm } from '@containers';
-
-import { useNavigate } from './routes';
+import { useCreditCardsNav } from '@routes';
 
 const CreatePage: React.FC = () => {
-  const { nav } = useNavigate();
+  const { nav } = useCreditCardsNav();
   const refresh = useCreditCardRefresh();
 
   const onConfirmed = () => {

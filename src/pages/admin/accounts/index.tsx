@@ -5,12 +5,11 @@ import { Portal } from '@chakra-ui/react';
 
 import { AccountsList } from '@containers';
 import { Page } from '@lib/wal-ui';
-
-import { useNavigate, useRoutes } from './routes';
+import { useAccountsNav, useAccountsRoutes } from '@routes';
 
 const AccountsPage: React.FC = () => {
-  const { nav } = useNavigate();
-  const routes = useRoutes();
+  const { nav } = useAccountsNav();
+  const routes = useAccountsRoutes();
 
   return (
     <>

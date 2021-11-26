@@ -5,12 +5,11 @@ import { useCreditCardRefresh } from '@api';
 import { CreditCardModalForm } from '@containers';
 import { useRouter } from '@hooks';
 import { CreditCard } from '@models';
-
-import { useNavigate } from './routes';
+import { useCreditCardsNav } from '@routes';
 
 const EditPage: React.FC = () => {
   const { params } = useRouter();
-  const { nav } = useNavigate();
+  const { nav } = useCreditCardsNav();
   const refresh = useCreditCardRefresh();
 
   const onConfirmed = (account: CreditCard) => {

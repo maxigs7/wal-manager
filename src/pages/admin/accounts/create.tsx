@@ -3,11 +3,10 @@ import { Helmet } from 'react-helmet-async';
 
 import { useAccountRefresh } from '@api';
 import { AccountModalForm } from '@containers';
-
-import { useNavigate } from './routes';
+import { useAccountsNav } from '@routes';
 
 const CreatePage: React.FC = () => {
-  const { nav } = useNavigate();
+  const { nav } = useAccountsNav();
   const refresh = useAccountRefresh();
 
   const onConfirmed = () => {

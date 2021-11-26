@@ -5,12 +5,11 @@ import { Portal } from '@chakra-ui/react';
 
 import { CreditCardsList } from '@containers';
 import { Page } from '@lib/wal-ui';
-
-import { useNavigate, useRoutes } from './routes';
+import { useCreditCardsNav, useCreditCardsRoutes } from '@routes';
 
 const CreditCardsPage: React.FC = () => {
-  const { nav } = useNavigate();
-  const routes = useRoutes();
+  const { nav } = useCreditCardsNav();
+  const routes = useCreditCardsRoutes();
 
   return (
     <>
