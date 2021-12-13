@@ -29,7 +29,7 @@ const Option: React.FC<{ label: string; type: CreditCardType; value: string }> =
 );
 
 const Select: React.FC<ISelectProps> = ({
-  creditCards,
+  creditCards = [],
   control,
   id,
   isLoading,
@@ -37,18 +37,19 @@ const Select: React.FC<ISelectProps> = ({
   placeholder,
   rules,
 }) => {
+  const def = creditCards.find((cc) => cc.isDefault);
   const {
     field: { onChange, ref, value, ...inputProps },
   } = useController({
     name,
     control,
     rules,
-    defaultValue: null,
+    defaultValue: def?.id,
   });
 
   const options = useMemo(
     () =>
-      creditCards?.map((cc) => ({
+      creditCards.map((cc) => ({
         label: cc.name,
         type: cc.type,
         value: cc.id,

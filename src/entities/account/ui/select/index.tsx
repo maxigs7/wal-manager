@@ -26,7 +26,7 @@ const Option: React.FC<{ label: string; type: AccountType; value: string }> = ({
 );
 
 const Select: React.FC<ISelectProps> = ({
-  accounts,
+  accounts = [],
   control,
   id,
   isLoading,
@@ -34,13 +34,14 @@ const Select: React.FC<ISelectProps> = ({
   placeholder,
   rules,
 }) => {
+  const def = accounts.find((account) => account.isDefault);
   const {
     field: { onChange, ref, value, ...inputProps },
   } = useController({
     name,
     control,
     rules,
-    defaultValue: null,
+    defaultValue: def?.id,
   });
 
   const options = useMemo(
