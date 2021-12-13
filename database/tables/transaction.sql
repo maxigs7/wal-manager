@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS public.transaction
     category_id uuid NOT NULL,
     amount decimal(11,4) NOT NULL,
     date timestamp with time zone NULL,
+    billed_date timestamp with time zone NULL,
     description character varying(100) COLLATE pg_catalog."default" NOT NULL,
     credit_card_id uuid NULL,
     fee_number smallint NULL,

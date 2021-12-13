@@ -1,7 +1,7 @@
 import { useRoutes } from 'react-router-dom';
 
 import { CreatePage } from '../create';
-// import { RemovePage } from '../remove';
+import { RemovePage } from '../remove';
 // import { UpdatePage } from '../update';
 
 export const useTransactionRoutes = (): React.ReactElement | null => {
@@ -14,9 +14,9 @@ export const useTransactionRoutes = (): React.ReactElement | null => {
     //   path: 'update/:id',
     //   element: <UpdatePage />,
     // },
-    // {
-    //   path: 'remove/:id',
-    //   element: <RemovePage />,
-    // },
+    {
+      path: 'remove/:id',
+      element: <RemovePage />,
+    },
   ]);
 };

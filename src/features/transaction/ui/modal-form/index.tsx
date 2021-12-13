@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
-  Transaction,
+  CreateTransaction,
   TransactionType,
   useTransactionCreate,
   useTransactionGetById,
@@ -23,7 +23,7 @@ import TransactionCreateForm from '../create-form';
 interface IProps {
   id?: string;
   isOpen: boolean;
-  onConfirmed(transaction: Transaction): void;
+  onConfirmed(transaction: CreateTransaction): void;
   onDismiss(): void;
   type: TransactionType;
 }
@@ -35,7 +35,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type 
   const { data: transaction, isLoading } = useTransactionGetById(id);
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
-  const useFormProps = useForm<Transaction>({
+  const useFormProps = useForm<CreateTransaction>({
     defaultValues: { userId: user?.id as string, type },
   });
   const {
@@ -46,7 +46,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type 
 
   const onSubmit = handleSubmit((model) => {
     return mutateAsync(model, {
-      onSuccess: onConfirmed,
+      onSuccess: (transaction) => onConfirmed(transaction as CreateTransaction),
     });
   });
 

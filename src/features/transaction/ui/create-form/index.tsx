@@ -13,11 +13,15 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { toCategoryType, Transaction, TransactionType } from '@entities';
+import { toCategoryType, CreateTransaction, TransactionType } from '@entities';
 import { AccountSelect, CategorySelect, CreditCardSelect } from '@features';
-import { Icon, InputCurrency, InputDate, InputNumber } from '@shared';
+import { Checkbox, Icon, InputCurrency, InputDate, InputNumber } from '@shared';
 
-const Form: React.FC<IProps> = ({ control, formState: { errors }, register, type }) => {
+interface IProps extends UseFormReturn<CreateTransaction> {
+  type: TransactionType;
+}
+
+const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, register, type }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -109,15 +113,33 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, register, type
               />
               <FormErrorMessage>{errors.feeNumber && errors.feeNumber.message}</FormErrorMessage>
             </FormControl>
+            <FormControl as={GridItem} isInvalid={!!errors.billedDate}>
+              <FormLabel htmlFor="billedDate">Fecha</FormLabel>
+              <InputDate
+                id="billedDate"
+                name="billedDate"
+                placeholder="Fecha de inicio"
+                register={register}
+                rules={{
+                  validate: {
+                    required: (): string | boolean =>
+                      getValues('creditCardId') ? 'Este campo es requerido' : true,
+                  },
+                }}
+              />
+              <FormErrorMessage>{errors.billedDate && errors.billedDate.message}</FormErrorMessage>
+            </FormControl>
+            <FormControl as={GridItem} isInvalid={!!errors.createAll}>
+              <Checkbox control={control} defaultChecked={true} id="createAll" name="createAll">
+                Crear todas las cuotas
+              </Checkbox>
+              <FormErrorMessage>{errors.createAll && errors.createAll.message}</FormErrorMessage>
+            </FormControl>
           </SimpleGrid>
         </Collapse>
       </Box>
     </SimpleGrid>
   );
 };
-
-interface IProps extends UseFormReturn<Transaction> {
-  type: TransactionType;
-}
 
 export default Form;

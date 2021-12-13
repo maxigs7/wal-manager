@@ -5,9 +5,21 @@ import { parseJSON } from 'date-fns';
 import { TransactionDto } from '@entities';
 import { DateCell, dateSortType } from '@shared';
 
-import { AccountableCell, CategoryCell } from './cells';
+import { AccountableCell, ActionsCell, CategoryCell } from './cells';
 
-export const columns: Column<TransactionDto>[] = [
+interface IProps {
+  onRemove(id: string): void;
+  onUpdate(id: string): void;
+}
+
+type GetColumnsType = (props: IProps) => Column<TransactionDto>[];
+
+export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
+  {
+    Header: '...',
+    accessor: 'id',
+    Cell: (props) => <ActionsCell {...props} onRemove={onRemove} onUpdate={onUpdate} />,
+  },
   {
     Header: 'Categoria',
     accessor: 'rootCategory',

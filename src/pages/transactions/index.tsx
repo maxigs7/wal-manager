@@ -12,13 +12,20 @@ import { useTransactionNav, useTransactionRoutes } from './hooks';
 const TransactionsPage: React.FC = () => {
   const [state, dispatch] = useTransactionStore();
   const routes = useTransactionRoutes();
-  const { goCreate } = useTransactionNav();
+  const { goCreate, goRemove } = useTransactionNav();
 
   const onCreate = useCallback(
     (type: TransactionType) => {
       goCreate(type);
     },
     [goCreate],
+  );
+
+  const onRemove = useCallback(
+    (id: string) => {
+      goRemove(id);
+    },
+    [goRemove],
   );
 
   return (
@@ -47,7 +54,7 @@ const TransactionsPage: React.FC = () => {
       <Card>
         <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
         <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
-        <TransactionTable month={state.month} year={state.year} />
+        <TransactionTable month={state.month} onRemove={onRemove} year={state.year} />
       </Card>
 
       {routes}

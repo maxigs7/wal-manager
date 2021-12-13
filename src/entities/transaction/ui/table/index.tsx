@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSortBy, useTable } from 'react-table';
 
 import { Box, Table } from '@chakra-ui/react';
@@ -6,13 +6,16 @@ import { Box, Table } from '@chakra-ui/react';
 import { TransactionDto } from '@entities';
 import { TableBody, TableHeader } from '@shared';
 
-import { columns } from './columns';
+import { getColumns } from './columns';
 
 interface IProps {
   data: TransactionDto[];
+  onRemove(id: string): void;
+  onUpdate(id: string): void;
 }
 
-const TransactionTable: React.FC<IProps> = ({ data }) => {
+const TransactionTable: React.FC<IProps> = ({ data, onRemove, onUpdate }) => {
+  const columns = useMemo(() => getColumns({ onRemove, onUpdate }), [onRemove, onUpdate]);
   const tableInstance = useTable(
     {
       columns,

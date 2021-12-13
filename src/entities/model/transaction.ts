@@ -8,9 +8,14 @@ export type Transaction = BaseModel & {
   categoryId: string;
   creditCardId?: string;
   date: Date;
+  billedDate?: Date;
   description?: string;
   feeNumber?: number;
   isPaid: boolean;
   type: TransactionType;
   userId: string;
+};
+
+export type CreateTransaction = Transaction & {
+  createAll: boolean;
 };

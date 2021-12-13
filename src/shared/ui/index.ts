@@ -1,6 +1,7 @@
 export { default as Card } from './card';
 export { default as CardItem } from './card-list/item';
 export { default as CardList } from './card-list/list';
+export { default as Checkbox } from './checkbox';
 export { default as ColorCircle } from './color-circle';
 export { default as ColorSelect } from './color-select';
 export { default as DialogRemove } from './dialog-remove';

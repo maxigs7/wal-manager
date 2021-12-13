@@ -1,6 +1,6 @@
 import { CellProps } from 'react-table';
 
-import { Flex } from '@chakra-ui/react';
+import { ButtonGroup, Flex, IconButton } from '@chakra-ui/react';
 
 import { CategoryTag, TransactionDto } from '@entities';
 import { Icon } from '@shared';
@@ -33,5 +33,36 @@ export const AccountableCell: React.FC<CellProps<TransactionDto, number>> = ({
       <Icon icon="dollar-sign" mr="auto" />
       {formatted}
     </Flex>
+  );
+};
+
+type ActionsCellType = CellProps<TransactionDto, string> & {
+  onRemove(id: string): void;
+  onUpdate(id: string): void;
+};
+
+export const ActionsCell: React.FC<ActionsCellType> = ({
+  row: { original },
+  onRemove,
+  onUpdate,
+}) => {
+  if (!original.id) return null;
+
+  return (
+    <ButtonGroup size="xs" variant="outline" isAttached>
+      <IconButton
+        aria-label="Remove transaction"
+        colorScheme="danger"
+        icon={<Icon icon="trash-alt" />}
+        onClick={() => onRemove(original.id)}
+        variant="solid"
+      />
+      <IconButton
+        aria-label="Edit transaction"
+        icon={<Icon icon="edit" />}
+        onClick={() => onUpdate(original.id)}
+        variant="solid"
+      />
+    </ButtonGroup>
   );
 };

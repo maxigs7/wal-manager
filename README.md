@@ -1,5 +1,7 @@
 # WalManager
 
+This web application was built to manage your expenses and incomes, being able of tagging, create accounts, associate transactions to credit cards, etc.
+
 ## Development
 
 This project runs using [Supabase](https://supabase.io/). We're gonna need to create the project and set the env variables:

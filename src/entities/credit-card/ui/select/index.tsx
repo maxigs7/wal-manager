@@ -70,6 +70,7 @@ const Select: React.FC<ISelectProps> = ({
       placeholder={placeholder}
       ref={ref}
       value={options?.find((option) => option.value === value)}
+      isClearable
     />
   );
 };
