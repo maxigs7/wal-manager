@@ -2,9 +2,8 @@ import { Link as ReactLink } from 'react-router-dom';
 
 import { Heading, Icon, Flex, Link } from '@chakra-ui/react';
 
-import { ReactComponent as WalletLogo } from '@assets/images/wallet.svg';
-import { AUTH_SIGN_UP_ENABLED } from '@constants';
-import { SignInContainer } from '@containers';
+import { SignInByEmail } from '@features';
+import { AUTH_SIGN_UP_ENABLED, WalletLogo } from '@shared';
 
 const SignInPage: React.FC = () => (
   <Flex align="center" color="white" direction="column" mb={5}>
@@ -18,7 +17,7 @@ const SignInPage: React.FC = () => (
       Inicia sesion en tu cuenta
     </Heading>
 
-    <SignInContainer />
+    <SignInByEmail />
 
     {AUTH_SIGN_UP_ENABLED && (
       <Link as={ReactLink} colorScheme="cello" mt={5} to="/auth/sign-up">

@@ -1,18 +1,48 @@
-const { ESLINT_MODES, POSTCSS_MODES } = require('@craco/craco');
+const { ESLINT_MODES, when, whenDev, whenProd } = require('@craco/craco');
 const CracoAlias = require('craco-alias');
 const { defaults: tsjPreset } = require('ts-jest/presets');
 const webpack = require('webpack');
+const WebpackBar = require('webpackbar');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = function ({ env }) {
-  const isProductionBuild = process.env.NODE_ENV === 'production';
-  const analyzerMode = process.env.REACT_APP_INTERACTIVE_ANALYZE ? 'server' : 'json';
+  const isAnalyzerEnabled = process.env.ANALYZER_ENABLED === 'true';
 
-  const plugins = [];
+  const plugins = [
+    //Webpack build progress bar
+    new WebpackBar({
+      profile: true,
+    }),
 
-  if (isProductionBuild) {
-    plugins.push(new BundleAnalyzerPlugin({ analyzerMode }));
-  }
+    ...whenDev(
+      () => [
+        //Webpack dev server enhancement plug-in
+        new DashboardPlugin(),
+      ],
+      [],
+    ),
+    ...when(isAnalyzerEnabled, () => [new BundleAnalyzerPlugin({ analyzerMode: 'server' })], []),
+    ...whenProd(
+      () => [
+        new TerserPlugin({
+          // sourceMap: true, // Must be set to true if using source-maps in production
+          terserOptions: {
+            extractComments: true,
+            parallel: true,
+            compress: {
+              warnings: false,
+              drop_console: true, // remove all contents of the console in the production environment
+              drop_debugger: true, // remove breakpoints
+              pure_funcs: [' console.log '], // remove the console in the production environment
+            },
+          },
+        }),
+      ],
+      [],
+    ),
+  ];
 
   return {
     eslint: {
@@ -99,19 +129,20 @@ module.exports = function ({ env }) {
     ],
     webpack: {
       plugins,
-      configure: {
-        optimization: {
-          splitChunks: {
-            cacheGroups: {
-              vendor: {
-                test: /[\\/]node_modules[\\/]/,
-                chunks: 'initial',
-                name: 'vendor',
-              },
+      optimization: {
+        splitChunks: {
+          cacheGroups: {
+            vendor: {
+              test: /node_modules/,
+              chunks: 'initial',
+              name: 'vendor',
+              priority: 10,
+              enforce: true,
             },
           },
         },
       },
+      configure: {},
     },
   };
 };

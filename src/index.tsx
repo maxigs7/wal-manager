@@ -1,44 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { BrowserRouter } from 'react-router-dom';
 
 import '@fontsource/montserrat/300.css';
 import './styles/globals.css';
 
-import { ChakraProvider } from '@chakra-ui/react';
+import { startFontAwesome } from '@shared';
 
-import { ApiProvider } from '@api';
-import { startChakra } from '@lib/chakra-ui';
-import { startFontAwesome } from '@lib/font-awesome';
-import { AuthProvider, createSupabaseClient, SupabaseProvider } from '@lib/supabase';
-
-import App from './App';
+import App from './app';
 
 startFontAwesome();
-const theme = startChakra();
-const supabase = createSupabaseClient();
-const queryClient = new QueryClient();
 
 ReactDOM.render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <SupabaseProvider supabase={supabase}>
-        <AuthProvider>
-          <ApiProvider>
-            <QueryClientProvider client={queryClient}>
-              <HelmetProvider>
-                <ChakraProvider theme={theme}>
-                  <App />
-                </ChakraProvider>
-              </HelmetProvider>
-            </QueryClientProvider>
-          </ApiProvider>
-        </AuthProvider>
-      </SupabaseProvider>
-    </React.StrictMode>
-  </BrowserRouter>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
   document.getElementById('root'),
 );
 

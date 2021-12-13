@@ -1,13 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { useCreditCardRefresh } from '@api';
-import { CreditCardModalForm } from '@containers';
-import { useCreditCardsNav } from '@routes';
+import { useCreditCardListRefresh } from '@entities';
+import { CreditCardModalForm } from '@features';
+
+import { useCreditCardNav } from './hooks';
 
 const CreatePage: React.FC = () => {
-  const { nav } = useCreditCardsNav();
-  const refresh = useCreditCardRefresh();
+  const { goIndex } = useCreditCardNav();
+  const refresh = useCreditCardListRefresh();
 
   const onConfirmed = () => {
     refresh();
@@ -15,7 +16,7 @@ const CreatePage: React.FC = () => {
   };
 
   const onDismiss = () => {
-    nav({ type: 'index', full: true });
+    goIndex();
   };
 
   return (

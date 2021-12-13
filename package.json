@@ -12,6 +12,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.16",
     "@supabase/supabase-js": "^1.28.0",
+    "compose-function": "^3.0.3",
     "date-fns": "^2.26.0",
     "framer-motion": "^4",
     "lodash.camelcase": "^4.3.0",
@@ -32,6 +33,7 @@
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@types/compose-function": "^0.0.30",
     "@types/jest": "^27.0.3",
     "@types/lodash.camelcase": "^4.3.6",
     "@types/lodash.snakecase": "^4.1.6",
@@ -56,12 +58,15 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.4.1",
     "react-scripts": "4.0.3",
+    "terser-webpack-plugin": "^4",
     "ts-jest": "^27.0.7",
     "typescript": "^4.5.2",
-    "webpack-bundle-analyzer": "^4.5.0"
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-dashboard": "^3.3.6",
+    "webpackbar": "^5.0.2"
   },
   "scripts": {
-    "analyze": "cross-env REACT_APP_INTERACTIVE_ANALYZE=1 yarn build",
+    "analyze": "cross-env ANALYZER_ENABLED=true yarn build",
     "start:dev": "craco start",
     "start:prod": "yarn build && npx serve -s build",
     "build": "craco build",

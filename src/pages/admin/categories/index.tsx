@@ -1,26 +1,78 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { Outlet } from 'react-router-dom';
 
-import { HStack, Button, SimpleGrid } from '@chakra-ui/react';
+import { Button, HStack, Portal, SimpleGrid } from '@chakra-ui/react';
 
-import { CategoriesListCard, SubCategoriesListCard } from '@containers';
-import { CategoryPortalModal } from '@containers/category/portal-modal';
-import { Icon } from '@lib/chakra-ui';
-import { Page } from '@lib/wal-ui';
-import { CategoryType } from '@models';
-import { useCategoriesStore } from '@stores';
+import { CategoryType } from '@entities';
+import { CategoryList, SubCategoryList, useCategoryStore } from '@features';
+import { Icon, Page, useRouter } from '@shared';
+
+import { useCategoryNav, useCategoryRoutes } from './hooks';
 
 const CategoriesPage: React.FC = () => {
-  const [state, dispatch] = useCategoriesStore();
+  const routes = useCategoryRoutes();
+  const {
+    params: { type },
+  } = useRouter();
+  const { goCreate, goIndex, goRemove, goSubCreate, goSubRemove, goSubUpdate, goUpdate } =
+    useCategoryNav();
+  const [state, dispatch] = useCategoryStore();
+
+  const onCreate = useCallback(
+    (pType?: CategoryType) => {
+      goCreate(pType || (type as CategoryType));
+    },
+    [goCreate],
+  );
+
+  const onSelectedType = useCallback(
+    (type: CategoryType) => {
+      goIndex(type);
+    },
+    [goIndex],
+  );
+
+  const onRemove = useCallback(
+    (id: string) => {
+      goRemove(type as CategoryType, id);
+    },
+    [goRemove],
+  );
+
+  const onSubCreate = useCallback(() => {
+    goSubCreate(type as CategoryType, state.selected?.id as string);
+  }, [goSubCreate]);
+
+  const onSubRemove = useCallback(
+    (id: string) => {
+      goSubRemove(type as CategoryType, state.selected?.id as string, id);
+    },
+    [goSubRemove],
+  );
+
+  const onSubUpdate = useCallback(
+    (id: string) => {
+      goSubUpdate(type as CategoryType, state.selected?.id as string, id);
+    },
+    [goSubUpdate],
+  );
+
+  const onUpdate = useCallback(
+    (id: string) => {
+      goUpdate(type as CategoryType, id);
+    },
+    [goUpdate],
+  );
 
   return (
     <>
       <Page metaTitle="Mis Categorias" title="Mis Categorias">
         <HStack mb={2}>
           <Button
-            aria-label="Nuevo gast"
+            aria-label="Nuevo gasto"
             colorScheme="red"
             leftIcon={<Icon icon="plus" />}
-            onClick={() => dispatch.onOpenForm(CategoryType.Expense)}
+            onClick={() => onCreate(CategoryType.Expense)}
             size="sm"
           >
             Nuevo Gasto
@@ -29,37 +81,36 @@ const CategoriesPage: React.FC = () => {
             aria-label="Nuevo ingreso"
             colorScheme="green"
             leftIcon={<Icon icon="plus" />}
-            onClick={() => dispatch.onOpenForm(CategoryType.Income)}
+            onClick={() => onCreate(CategoryType.Income)}
             size="sm"
           >
             Nuevo Ingreso
           </Button>
         </HStack>
         <SimpleGrid columns={[1, 1, 2]} spacing={3} templateColumns={['1', '1', '2fr 3fr']}>
-          <CategoriesListCard
-            onCreated={() => dispatch.onOpenForm(state.selectedType)}
+          <CategoryList
+            onCreated={onCreate}
             onSelected={dispatch.onSelected}
-            onSelectedType={dispatch.onSelectedType}
-            selected={state.selected}
-            type={state.selectedType}
+            onSelectedType={onSelectedType}
+            selectedId={state.selected?.id}
+            type={type as CategoryType}
           />
-          <SubCategoriesListCard
-            onCategoryDeleted={() =>
-              dispatch.onOpenForm(state.selectedType, state.selected?.id, true)
-            }
-            onCategoryUpdated={() => dispatch.onOpenForm(state.selectedType, state.selected?.id)}
+          <SubCategoryList
+            onCategoryDeleted={onRemove}
+            onCategoryUpdated={onUpdate}
+            onCreated={onSubCreate}
+            onDeleted={onSubRemove}
+            onUpdated={onSubUpdate}
             selected={state.selected}
           />
         </SimpleGrid>
+
+        {routes}
+
+        <Portal>
+          <Outlet />
+        </Portal>
       </Page>
-      <CategoryPortalModal
-        id={state.id}
-        isOpenForm={state.isOpenForm}
-        isOpenRemove={state.isOpenRemove}
-        onConfirmed={dispatch.onConfirmedForm}
-        onDismiss={dispatch.onDismissForm}
-        selectedType={state.selectedTypeForm as CategoryType}
-      />
     </>
   );
 };

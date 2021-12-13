@@ -1,13 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { useAccountRefresh } from '@api';
-import { AccountModalForm } from '@containers';
-import { useAccountsNav } from '@routes';
+import { useAccountListRefresh } from '@entities';
+import { AccountModalForm } from '@features';
+
+import { useAccountNav } from './hooks';
 
 const CreatePage: React.FC = () => {
-  const { nav } = useAccountsNav();
-  const refresh = useAccountRefresh();
+  const { goIndex } = useAccountNav();
+  const refresh = useAccountListRefresh();
 
   const onConfirmed = () => {
     refresh();
@@ -15,7 +16,7 @@ const CreatePage: React.FC = () => {
   };
 
   const onDismiss = () => {
-    nav({ type: 'index', full: true });
+    goIndex();
   };
 
   return (

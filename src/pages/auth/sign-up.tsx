@@ -2,8 +2,8 @@ import { Link as ReactLink } from 'react-router-dom';
 
 import { Heading, Icon, Flex, Link } from '@chakra-ui/react';
 
-import { ReactComponent as WalletLogo } from '@assets/images/wallet.svg';
-import { SignUpContainer } from '@containers';
+import { SignUpByEmail } from '@features';
+import { WalletLogo } from '@shared';
 
 const SignUpPage: React.FC = () => (
   <Flex align="center" color="white" direction="column" mb={5}>
@@ -17,7 +17,7 @@ const SignUpPage: React.FC = () => (
       Registre una nueva cuenta
     </Heading>
 
-    <SignUpContainer />
+    <SignUpByEmail />
 
     <Link as={ReactLink} colorScheme="cello" mt={5} to="/auth/sign-in">
       Ya tienes una cuenta? Inicia sesion

@@ -64,7 +64,7 @@
             "position": "before"
           },
           {
-            "pattern": "@(api|component|containers|hooks|layouts|lib|models|pages|stores|util)/**",
+            "pattern": "@(api|component|containers|entities|features|hooks|layouts|lib|models|pages|shared|stores|util)/**",
             "group": "internal",
             "position": "after"
           }

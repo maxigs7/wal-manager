@@ -2,30 +2,11 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@api": ["./api"],
-      "@api/*": ["./api/*"],
-      "@assets": ["./assets"],
-      "@assets/*": ["./assets/*"],
-      "@components": ["./components"],
-      "@components/*": ["./components/*"],
       "@constants": ["./constants"],
-      "@containers": ["./containers"],
-      "@containers/*": ["./containers/*"],
-      "@hooks": ["./hooks"],
-      "@hooks/*": ["./hooks/*"],
-      "@layouts": ["./layouts"],
-      "@layouts/*": ["./layouts/*"],
-      "@lib": ["./lib"],
-      "@lib/*": ["./lib/*"],
-      "@models": ["./models"],
-      "@models/*": ["./models/*"],
+      "@entities": ["./entities"],
+      "@features": ["./features"],
       "@pages": ["./pages"],
-      "@pages/*": ["./pages/*"],
-      "@routes": ["./routes"],
-      "@routes/*": ["./routes/*"],
-      "@stores": ["./stores"],
-      "@stores/*": ["./stores/*"],
-      "classnames": ["./lib/classnames"]
+      "@shared": ["./shared"]
     }
   }
 }

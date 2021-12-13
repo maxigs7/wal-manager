@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { Button, HStack } from '@chakra-ui/react';
 
-import { TransactionPortalModal, TransactionsList } from '@containers';
-import { Icon } from '@lib/chakra-ui';
-import { Page } from '@lib/wal-ui';
-import { TransactionType } from '@models';
-import { useTransactionsStore } from '@stores';
+import { TransactionType } from '@entities';
+import { TransactionTable, useTransactionStore } from '@features';
+import { Card, Icon, MonthTabs, Page, YearBar } from '@shared';
+
+import { useTransactionNav, useTransactionRoutes } from './hooks';
 
 const TransactionsPage: React.FC = () => {
-  const [state, dispatch] = useTransactionsStore();
+  const [state, dispatch] = useTransactionStore();
+  const routes = useTransactionRoutes();
+  const { goCreate } = useTransactionNav();
+
+  const onCreate = useCallback(
+    (type: TransactionType) => {
+      goCreate(type);
+    },
+    [goCreate],
+  );
 
   return (
     <Page metaTitle="Movimientos" title="Movimientos">
@@ -18,7 +28,7 @@ const TransactionsPage: React.FC = () => {
           aria-label="Nuevo gasto"
           colorScheme="red"
           leftIcon={<Icon icon="plus" />}
-          onClick={() => dispatch.onOpenForm(TransactionType.Expense)}
+          onClick={() => onCreate(TransactionType.Expense)}
           size="sm"
         >
           Nuevo Gasto
@@ -27,26 +37,22 @@ const TransactionsPage: React.FC = () => {
           aria-label="Nuevo ingreso"
           colorScheme="green"
           leftIcon={<Icon icon="plus" />}
-          onClick={() => dispatch.onOpenForm(TransactionType.Income)}
+          onClick={() => onCreate(TransactionType.Income)}
           size="sm"
         >
           Nuevo Ingreso
         </Button>
       </HStack>
-      <TransactionPortalModal
-        isOpenForm={state.isOpenForm}
-        isOpenRemove={state.isOpenRemove}
-        onConfirmed={dispatch.onConfirmedForm}
-        onDismiss={dispatch.onDismissForm}
-        type={state.selectedType}
-      />
 
-      <TransactionsList
-        month={state.month}
-        setMonth={dispatch.onChangedMonth}
-        setYear={dispatch.onChangedYear}
-        year={state.year}
-      />
+      <Card>
+        <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
+        <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
+        <TransactionTable month={state.month} year={state.year} />
+      </Card>
+
+      {routes}
+
+      <Outlet />
     </Page>
   );
 };

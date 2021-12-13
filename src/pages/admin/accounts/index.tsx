@@ -1,32 +1,46 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Outlet } from 'react-router';
 
 import { Portal } from '@chakra-ui/react';
 
-import { AccountsList } from '@containers';
-import { Page } from '@lib/wal-ui';
-import { useAccountsNav, useAccountsRoutes } from '@routes';
+import { Account } from '@entities';
+import { AccountList } from '@features';
+import { Page } from '@shared';
+
+import { useAccountNav, useAccountRoutes } from './hooks';
 
 const AccountsPage: React.FC = () => {
-  const { nav } = useAccountsNav();
-  const routes = useAccountsRoutes();
+  const routes = useAccountRoutes();
+  const { goCreate, goRemove, goUpdate } = useAccountNav();
+
+  const onCreate = useCallback(() => {
+    goCreate();
+  }, [goCreate]);
+
+  const onUpdate = useCallback(
+    (account: Account) => {
+      goUpdate(account.id);
+    },
+    [goUpdate],
+  );
+
+  const onRemove = useCallback(
+    (account: Account) => {
+      goRemove(account.id);
+    },
+    [goRemove],
+  );
 
   return (
-    <>
-      <Page metaTitle="Mis Cuentas" title="Mis Cuentas">
-        <AccountsList
-          onCreate={() => nav({ type: 'create' })}
-          onDelete={(account) => nav({ type: 'remove', id: account.id })}
-          onSelected={(account) => nav({ type: 'edit', id: account.id })}
-        />
+    <Page metaTitle="Mis Cuentas" title="Mis Cuentas">
+      <AccountList onCreate={onCreate} onDelete={onRemove} onSelected={onUpdate} />
 
-        {routes}
+      {routes}
 
-        <Portal>
-          <Outlet />
-        </Portal>
-      </Page>
-    </>
+      <Portal>
+        <Outlet />
+      </Portal>
+    </Page>
   );
 };
 
