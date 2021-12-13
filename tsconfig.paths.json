@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@constants": ["./constants"],
       "@entities": ["./entities"],
       "@features": ["./features"],
       "@pages": ["./pages"],
