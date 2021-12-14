@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS public.category
     color character varying(50),
     parent_id uuid,
     is_active boolean NOT NULL DEFAULT true,
-    created_at timestamp with time zone NOT NULL DEFAULT now(),
-    archived_at timestamp with time zone,
+    created_at timestamp without time zone NOT NULL DEFAULT now(),
+    archived_at timestamp without time zone,
     user_id uuid NOT NULL,
     CONSTRAINT category_pkey PRIMARY KEY (id),
     CONSTRAINT fk_category_user FOREIGN KEY (user_id)

@@ -1,10 +1,10 @@
 
-create or replace function get_transactions(start_date date, end_date date)
+create or replace function get_transactions(start_date timestamp without time zone, end_date timestamp without time zone)
 returns table (
   account character varying(100) ,
   amount decimal(13,4),
   credit_card character varying(100),
-  date timestamp with time zone,
+  date timestamp without time zone,
   description character varying(100),
   fee_number smallint,
   id uuid,
@@ -32,16 +32,21 @@ as $$
     null as root_category_icon,
     null as sub_category,
     null as type
-  from public.get_balance(start_date)
+  from public.get_balance(start_date - interval '1 seconds')
   where amount > 0
 
   union all
 
   select
     a.name as account,
-    (CASE WHEN t.type = 'expenses' THEN t.amount * (-1) ELSE t.amount END) as amount,
+    case
+      -- when t.is_paid = false then 0
+      when t.type = 'expenses' then t.amount * (-1)
+      when t.type = 'incomes' then t.amount
+      else 0
+    end as amount,
     cc.name as credit_card,
-    t.date,
+    COALESCE(t.billed_date, o.date, t.date) as date,
     t.description,
     t.fee_number,
     t.id,
@@ -62,7 +67,13 @@ as $$
     left join category as parent_cat
       on cat.parent_id = parent_cat.id
 
-  where date >= start_date and date <= end_date
+    left join public.get_ocurrences(t.id) as o
+      on o.id = t.id and o.date >= start_date and o.date <= end_date
+
+  where
+        COALESCE(o.date, t.date) >= start_date
+    and COALESCE(o.date, t.date) <= end_date
+
   order by date asc
 
 
