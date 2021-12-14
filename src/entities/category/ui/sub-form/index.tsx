@@ -13,7 +13,7 @@ import { Category, CategoryType, useCategoryIsUnique } from '@entities';
 
 interface IProps extends UseFormReturn<Category> {
   id?: string;
-  parentId?: string;
+  parentId: string;
   type: CategoryType;
 }
 

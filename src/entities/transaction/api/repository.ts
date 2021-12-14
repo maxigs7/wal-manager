@@ -1,4 +1,5 @@
 import { SupabaseClient } from '@supabase/supabase-js';
+import { format } from 'date-fns';
 
 import { Transaction, TransactionDto } from '@entities';
 import { camelCase, genericRepository } from '@shared';
@@ -10,8 +11,8 @@ export const transactionRepository = (db: SupabaseClient): ITransactionRepositor
     ...genericRepository<Transaction>(db, 'transaction'),
     getTransactions: async (startDate: Date, endDate: Date): Promise<TransactionDto[]> => {
       const { data, error } = await db.rpc('get_transactions', {
-        start_date: startDate,
-        end_date: endDate,
+        start_date: format(startDate, 'yyyy-MM-dd') + 'T00:00:00.000Z',
+        end_date: format(endDate, 'yyyy-MM-dd') + 'T23:59:59.999Z',
       });
       if (error) {
         throw new Error(JSON.stringify(error));

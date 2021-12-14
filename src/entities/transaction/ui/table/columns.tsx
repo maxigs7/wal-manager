@@ -1,11 +1,11 @@
 import { Column, Row } from 'react-table';
 
-import { parseJSON } from 'date-fns';
+import { parseISO } from 'date-fns';
 
 import { TransactionDto } from '@entities';
 import { DateCell, dateSortType } from '@shared';
 
-import { AccountableCell, ActionsCell, CategoryCell } from './cells';
+import { AccountableCell, AccountCell, ActionsCell, CategoryCell, DescriptionCell } from './cells';
 
 interface IProps {
   onRemove(id: string): void;
@@ -37,17 +37,19 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
   {
     Header: 'Cuenta',
     accessor: 'account',
+    Cell: AccountCell,
   },
   {
     Header: 'Fecha',
     Cell: DateCell,
     accessor: 'date',
     sortType: (rowA: Row<TransactionDto>, rowB: Row<TransactionDto>): number =>
-      dateSortType(parseJSON(rowA.original.date), parseJSON(rowB.original.date)),
+      dateSortType(parseISO(rowA.original.date), parseISO(rowB.original.date)),
   },
   {
     Header: 'Detalle',
     accessor: 'description',
+    Cell: DescriptionCell,
   },
   {
     Header: 'Importe',

@@ -6,6 +6,7 @@ export type Transaction = BaseModel & {
   accountId: string;
   amount: number;
   categoryId: string;
+  createdAt?: Date;
   creditCardId?: string;
   date: Date;
   billedDate?: Date;

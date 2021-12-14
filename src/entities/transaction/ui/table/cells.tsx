@@ -5,21 +5,6 @@ import { ButtonGroup, Flex, IconButton } from '@chakra-ui/react';
 import { CategoryTag, TransactionDto } from '@entities';
 import { Icon } from '@shared';
 
-export const CategoryCell: React.FC<CellProps<TransactionDto, string>> = ({
-  row: { original },
-}) => {
-  if (!original.id) return null;
-
-  return (
-    <CategoryTag
-      color={original.rootCategoryColor}
-      icon={original.rootCategoryIcon}
-      name={original.rootCategory}
-      subName={original.subCategory}
-    />
-  );
-};
-
 export const AccountableCell: React.FC<CellProps<TransactionDto, number>> = ({
   cell: { value },
 }) => {
@@ -35,6 +20,10 @@ export const AccountableCell: React.FC<CellProps<TransactionDto, number>> = ({
     </Flex>
   );
 };
+
+export const AccountCell: React.FC<CellProps<TransactionDto, string>> = ({ row: { original } }) => (
+  <>{original.creditCard || original.account}</>
+);
 
 type ActionsCellType = CellProps<TransactionDto, string> & {
   onRemove(id: string): void;
@@ -65,4 +54,28 @@ export const ActionsCell: React.FC<ActionsCellType> = ({
       />
     </ButtonGroup>
   );
+};
+
+export const CategoryCell: React.FC<CellProps<TransactionDto, string>> = ({
+  row: { original },
+}) => {
+  if (!original.id) return null;
+
+  return (
+    <CategoryTag
+      color={original.rootCategoryColor}
+      icon={original.rootCategoryIcon}
+      name={original.rootCategory}
+      subName={original.subCategory}
+    />
+  );
+};
+
+export const DescriptionCell: React.FC<CellProps<TransactionDto, string>> = ({
+  row: { original },
+  value,
+}) => {
+  if (!original.id) return <>{'BALANCE ACTUAL'}</>;
+
+  return <>{value}</>;
 };

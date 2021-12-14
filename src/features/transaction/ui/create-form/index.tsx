@@ -122,8 +122,8 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, reg
                 register={register}
                 rules={{
                   validate: {
-                    required: (): string | boolean =>
-                      getValues('creditCardId') ? 'Este campo es requerido' : true,
+                    required: (value): string | boolean =>
+                      getValues('creditCardId') && !value ? 'Este campo es requerido' : true,
                   },
                 }}
               />

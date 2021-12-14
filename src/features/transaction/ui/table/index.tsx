@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const Table: React.FC<IProps> = ({ month, onRemove, year }) => {
-  const startDate = useMemo(() => new Date(year, month, 1), [year, month]);
+  const startDate = useMemo(() => new Date(year, month, 1, 0, 0, 0), [year, month]);
   const endDate = useMemo(() => addMilliseconds(addMonths(startDate, 1), -1), [startDate]);
   const { data, isLoading } = useTransactionList(startDate, endDate);
 

@@ -41,20 +41,20 @@ const CategoriesPage: React.FC = () => {
 
   const onSubCreate = useCallback(() => {
     goSubCreate(type as CategoryType, state.selected?.id as string);
-  }, [goSubCreate]);
+  }, [goSubCreate, state.selected?.id]);
 
   const onSubRemove = useCallback(
     (id: string) => {
       goSubRemove(type as CategoryType, state.selected?.id as string, id);
     },
-    [goSubRemove],
+    [goSubRemove, state.selected?.id],
   );
 
   const onSubUpdate = useCallback(
     (id: string) => {
       goSubUpdate(type as CategoryType, state.selected?.id as string, id);
     },
-    [goSubUpdate],
+    [goSubUpdate, state.selected?.id],
   );
 
   const onUpdate = useCallback(
