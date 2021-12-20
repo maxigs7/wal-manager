@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
-  CreateTransaction,
+  TransactionForm,
   TransactionType,
   useTransactionCreate,
   useTransactionGetById,
@@ -18,12 +18,12 @@ import {
   SubmitButton,
 } from '@shared';
 
-import TransactionCreateForm from '../create-form';
+import TransactionFormComponent from '../form';
 
 interface IProps {
   id?: string;
   isOpen: boolean;
-  onConfirmed(transaction: CreateTransaction): void;
+  onConfirmed(transaction: TransactionForm): void;
   onDismiss(): void;
   type: TransactionType;
 }
@@ -35,8 +35,8 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type 
   const { data: transaction, isLoading } = useTransactionGetById(id);
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
-  const useFormProps = useForm<CreateTransaction>({
-    defaultValues: { userId: user?.id as string, type },
+  const useFormProps = useForm<TransactionForm>({
+    defaultValues: { createAll: true, date: new Date(), type, userId: user?.id as string },
   });
   const {
     formState: { isSubmitting: isFormSubmitting },
@@ -46,7 +46,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type 
 
   const onSubmit = handleSubmit((model) => {
     return mutateAsync(model, {
-      onSuccess: (transaction) => onConfirmed(transaction as CreateTransaction),
+      onSuccess: (transaction) => onConfirmed(transaction as TransactionForm),
     });
   });
 
@@ -54,6 +54,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type 
 
   useEffect(() => {
     if (transaction) {
+      console.log(transaction);
       reset(transaction);
     }
   }, [transaction]);
@@ -62,7 +63,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type 
     <ModalFormContainer isOpen={isOpen} onClose={onDismiss} onSubmit={onSubmit} size="5xl">
       <ModalFormHeader onClose={onDismiss}>{title}</ModalFormHeader>
       <ModalFormBody isLoading={isLoading}>
-        {!id && <TransactionCreateForm {...useFormProps} type={type} />}
+        <TransactionFormComponent {...useFormProps} type={type} />
       </ModalFormBody>
       <ModalFormFooter>
         <SubmitButton icon="save" isSubmitting={isFormSubmitting || isSubmitting}>

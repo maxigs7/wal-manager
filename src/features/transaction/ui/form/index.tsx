@@ -13,16 +13,17 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { toCategoryType, CreateTransaction, TransactionType } from '@entities';
+import { toCategoryType, TransactionForm, TransactionType } from '@entities';
 import { AccountSelect, CategorySelect, CreditCardSelect } from '@features';
 import { Checkbox, Icon, InputCurrency, InputDate, InputNumber } from '@shared';
 
-interface IProps extends UseFormReturn<CreateTransaction> {
+interface IProps extends UseFormReturn<TransactionForm> {
   type: TransactionType;
 }
 
 const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, register, type }) => {
   const { isOpen, onToggle } = useDisclosure();
+  console.log('[getValues]', getValues());
 
   return (
     <SimpleGrid columns={[1, 2, 3]} gap={6}>
@@ -65,10 +66,9 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, reg
       <FormControl as={GridItem} isInvalid={!!errors.date}>
         <FormLabel htmlFor="date">Fecha</FormLabel>
         <InputDate
+          control={control}
           id="date"
           name="date"
-          placeholder="Fecha"
-          register={register}
           rules={{ required: 'Este campo es requerido' }}
         />
         <FormErrorMessage>{errors.date && errors.date.message}</FormErrorMessage>
@@ -114,12 +114,11 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, reg
               <FormErrorMessage>{errors.feeNumber && errors.feeNumber.message}</FormErrorMessage>
             </FormControl>
             <FormControl as={GridItem} isInvalid={!!errors.billedDate}>
-              <FormLabel htmlFor="billedDate">Fecha</FormLabel>
+              <FormLabel htmlFor="billedDate">Fecha de Cobro</FormLabel>
               <InputDate
+                control={control}
                 id="billedDate"
                 name="billedDate"
-                placeholder="Fecha de inicio"
-                register={register}
                 rules={{
                   validate: {
                     required: (value): string | boolean =>
@@ -129,12 +128,15 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, reg
               />
               <FormErrorMessage>{errors.billedDate && errors.billedDate.message}</FormErrorMessage>
             </FormControl>
-            <FormControl as={GridItem} isInvalid={!!errors.createAll}>
-              <Checkbox control={control} defaultChecked={true} id="createAll" name="createAll">
-                Crear todas las cuotas
-              </Checkbox>
-              <FormErrorMessage>{errors.createAll && errors.createAll.message}</FormErrorMessage>
-            </FormControl>
+
+            {!getValues('id') && (
+              <FormControl as={GridItem} isInvalid={!!errors.createAll}>
+                <Checkbox control={control} defaultChecked={true} id="createAll" name="createAll">
+                  Crear todas las cuotas
+                </Checkbox>
+                <FormErrorMessage>{errors.createAll && errors.createAll.message}</FormErrorMessage>
+              </FormControl>
+            )}
           </SimpleGrid>
         </Collapse>
       </Box>

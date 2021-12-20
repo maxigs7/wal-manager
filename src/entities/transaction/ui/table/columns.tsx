@@ -1,7 +1,5 @@
 import { Column, Row } from 'react-table';
 
-import { parseISO } from 'date-fns';
-
 import { TransactionDto } from '@entities';
 import { DateCell, dateSortType } from '@shared';
 
@@ -44,7 +42,7 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
     Cell: DateCell,
     accessor: 'date',
     sortType: (rowA: Row<TransactionDto>, rowB: Row<TransactionDto>): number =>
-      dateSortType(parseISO(rowA.original.date), parseISO(rowB.original.date)),
+      dateSortType(rowA.original.date, rowB.original.date),
   },
   {
     Header: 'Detalle',

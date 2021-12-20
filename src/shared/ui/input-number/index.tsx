@@ -19,18 +19,23 @@ interface IProps {
 }
 
 const InputNumber: React.FC<IProps> = ({ control, defaultValue, id, name, rules }) => {
-  const { field } = useController({
+  const {
+    field: { onChange, ...field },
+  } = useController({
     name,
     control,
-    rules: {
-      valueAsNumber: true,
-      ...rules,
-    },
+    rules,
     defaultValue,
   });
 
   return (
-    <NumberInput {...field} defaultValue={defaultValue} id={id} type="numeric">
+    <NumberInput
+      {...field}
+      defaultValue={defaultValue}
+      id={id}
+      onChange={(_valueAsString, valueAsNumber) => onChange(valueAsNumber)}
+      type="numeric"
+    >
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />

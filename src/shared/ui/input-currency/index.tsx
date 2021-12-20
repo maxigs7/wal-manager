@@ -29,7 +29,9 @@ const InputCurrency: React.FC<IProps> = ({
   rules,
   ...inputProps
 }) => {
-  const { field } = useController({
+  const {
+    field: { onChange, ...field },
+  } = useController({
     name,
     control,
     rules,
@@ -43,6 +45,7 @@ const InputCurrency: React.FC<IProps> = ({
       as={InputGroup}
       defaultValue={defaultValue}
       id={id}
+      onChange={(_valueAsString, valueAsNumber) => onChange(valueAsNumber)}
       precision={2}
       type="numeric"
     >
