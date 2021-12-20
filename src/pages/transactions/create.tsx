@@ -12,6 +12,7 @@ import { useTransactionNav } from './hooks';
 const CreatePage: React.FC = () => {
   const {
     params: { type },
+    state: { defaultDate },
   } = useRouter();
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
@@ -32,6 +33,7 @@ const CreatePage: React.FC = () => {
       </Helmet>
       <Portal>
         <TransactionModalForm
+          date={defaultDate}
           isOpen={true}
           onConfirmed={onConfirmed}
           onDismiss={onDismiss}

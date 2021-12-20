@@ -16,9 +16,9 @@ const TransactionsPage: React.FC = () => {
 
   const onCreate = useCallback(
     (type: TransactionType) => {
-      goCreate(type);
+      goCreate(type, new Date(state.year, state.month));
     },
-    [goCreate],
+    [goCreate, state.year, state.month],
   );
 
   const onRemove = useCallback(

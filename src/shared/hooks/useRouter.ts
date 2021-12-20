@@ -29,6 +29,7 @@ export default () => {
       // Example: /:topic?sort=popular -> { topic: "react", sort: "popular" }
       params,
       query: parse(searchParams.toString()), // Convert string to object
+      state: location.state,
       // Include match, location, history objects so we have
       // access to extra React Router functionality if needed.
       location,

@@ -12,6 +12,7 @@ export const reducer = (state: IState, action: Actions): IState => {
     case CHANGE_YEAR: {
       return {
         ...state,
+        month: state.year > action.payload ? 11 : 0,
         year: action.payload,
       };
     }

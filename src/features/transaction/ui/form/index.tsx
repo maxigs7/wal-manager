@@ -23,7 +23,6 @@ interface IProps extends UseFormReturn<TransactionForm> {
 
 const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, register, type }) => {
   const { isOpen, onToggle } = useDisclosure();
-  console.log('[getValues]', getValues());
 
   return (
     <SimpleGrid columns={[1, 2, 3]} gap={6}>

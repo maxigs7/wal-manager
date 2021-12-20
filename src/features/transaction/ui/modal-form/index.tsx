@@ -21,6 +21,7 @@ import {
 import TransactionFormComponent from '../form';
 
 interface IProps {
+  date?: Date;
   id?: string;
   isOpen: boolean;
   onConfirmed(transaction: TransactionForm): void;
@@ -28,7 +29,14 @@ interface IProps {
   type: TransactionType;
 }
 
-const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type }) => {
+const ModalForm: React.FC<IProps> = ({
+  date = new Date(),
+  id,
+  isOpen,
+  onConfirmed,
+  onDismiss,
+  type,
+}) => {
   const { user } = useUser();
   const create = useTransactionCreate();
   const update = useTransactionUpdate();
@@ -36,7 +44,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type 
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
   const useFormProps = useForm<TransactionForm>({
-    defaultValues: { createAll: true, date: new Date(), type, userId: user?.id as string },
+    defaultValues: { createAll: true, date, type, userId: user?.id as string },
   });
   const {
     formState: { isSubmitting: isFormSubmitting },
@@ -54,7 +62,6 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type 
 
   useEffect(() => {
     if (transaction) {
-      console.log(transaction);
       reset(transaction);
     }
   }, [transaction]);
