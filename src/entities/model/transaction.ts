@@ -5,18 +5,20 @@ import { TransactionType } from './transaction-type';
 export type Transaction = BaseModel & {
   accountId: string;
   amount: number;
+  billedDate?: string;
   categoryId: string;
-  createdAt?: Date;
+  createdAt?: string;
   creditCardId?: string;
-  date: Date;
-  billedDate?: Date;
+  date: string;
   description?: string;
   feeNumber?: number;
   isPaid: boolean;
+  isRecurring: boolean;
+  parentTransactionId?: string;
   type: TransactionType;
   userId: string;
 };
 
-export type CreateTransaction = Transaction & {
+export type TransactionForm = Transaction & {
   createAll: boolean;
 };
