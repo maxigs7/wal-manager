@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
   TransactionForm,
   TransactionType,
-  useTransactionCreate,
   useTransactionGetById,
-  useTransactionUpdate,
+  useTransactionMapping,
+  useTransactionUpsert,
   useUser,
 } from '@entities';
 import {
@@ -38,13 +38,19 @@ const ModalForm: React.FC<IProps> = ({
   type,
 }) => {
   const { user } = useUser();
-  const create = useTransactionCreate();
-  const update = useTransactionUpdate();
   const { data: transaction, isLoading } = useTransactionGetById(id);
-  const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
+  const mapper = useTransactionMapping(date);
+  const { isLoading: isSubmitting, mutateAsync } = useTransactionUpsert();
 
   const useFormProps = useForm<TransactionForm>({
-    defaultValues: { createAll: true, date, type, userId: user?.id as string },
+    defaultValues: {
+      createAll: true,
+      date,
+      isPaid: false,
+      isRecurring: false,
+      type,
+      userId: user?.id as string,
+    },
   });
   const {
     formState: { isSubmitting: isFormSubmitting },
@@ -52,22 +58,29 @@ const ModalForm: React.FC<IProps> = ({
     reset,
   } = useFormProps;
 
-  const onSubmit = handleSubmit((model) => {
-    return mutateAsync(model, {
-      onSuccess: (transaction) => onConfirmed(transaction as TransactionForm),
-    });
-  });
+  const onSubmit = useCallback(
+    () =>
+      handleSubmit((model) => {
+        console.log(model, id);
+        return mutateAsync(model, {
+          onSuccess: (transaction) => onConfirmed(transaction as TransactionForm),
+        });
+      }),
+    [mutateAsync, onConfirmed],
+  );
 
   const title = useMemo(() => (id ? 'Editar movimiento' : 'Nueva movimiento'), [id]);
 
   useEffect(() => {
     if (transaction) {
-      reset(transaction);
+      const model = mapper(transaction);
+      console.log(model, transaction);
+      reset(model);
     }
   }, [transaction]);
 
   return (
-    <ModalFormContainer isOpen={isOpen} onClose={onDismiss} onSubmit={onSubmit} size="5xl">
+    <ModalFormContainer isOpen={isOpen} onClose={onDismiss} onSubmit={onSubmit()} size="5xl">
       <ModalFormHeader onClose={onDismiss}>{title}</ModalFormHeader>
       <ModalFormBody isLoading={isLoading}>
         <TransactionFormComponent {...useFormProps} type={type} />

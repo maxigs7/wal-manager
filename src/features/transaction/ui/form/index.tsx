@@ -23,6 +23,7 @@ interface IProps extends UseFormReturn<TransactionForm> {
 
 const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, register, type }) => {
   const { isOpen, onToggle } = useDisclosure();
+  const isEditing = !!getValues('id') || !!getValues('parentTransactionId');
 
   return (
     <SimpleGrid columns={[1, 2, 3]} gap={6}>
@@ -78,6 +79,24 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, reg
         <Input id="description" placeholder="Descripcion" {...register('description')} />
       </FormControl>
 
+      {!isEditing && (
+        <FormControl as={GridItem} isInvalid={!!errors.isRecurring}>
+          <Checkbox control={control} id="isRecurring" name="isRecurring">
+            Es recurrente
+          </Checkbox>
+          <FormErrorMessage>{errors.isRecurring && errors.isRecurring.message}</FormErrorMessage>
+        </FormControl>
+      )}
+
+      {isEditing && (
+        <FormControl as={GridItem} isInvalid={!!errors.isPaid}>
+          <Checkbox control={control} id="isPaid" name="isPaid">
+            Esta pago
+          </Checkbox>
+          <FormErrorMessage>{errors.isPaid && errors.isPaid.message}</FormErrorMessage>
+        </FormControl>
+      )}
+
       <Box as={GridItem} colSpan={[1, 2, 3]}>
         <Button
           leftIcon={<Icon icon={isOpen ? 'angle-double-up' : 'angle-double-down'} />}
@@ -128,7 +147,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, reg
               <FormErrorMessage>{errors.billedDate && errors.billedDate.message}</FormErrorMessage>
             </FormControl>
 
-            {!getValues('id') && (
+            {!isEditing && (
               <FormControl as={GridItem} isInvalid={!!errors.createAll}>
                 <Checkbox control={control} defaultChecked={true} id="createAll" name="createAll">
                   Crear todas las cuotas

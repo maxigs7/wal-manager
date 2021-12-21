@@ -10,6 +10,7 @@ import { useTransactionNav } from './hooks';
 const UpdatePage: React.FC = () => {
   const {
     params: { id, type },
+    state: { defaultDate },
   } = useRouter();
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
@@ -29,6 +30,7 @@ const UpdatePage: React.FC = () => {
         <title>Actualizar Movimiento - WAL</title>
       </Helmet>
       <TransactionModalForm
+        date={defaultDate}
         id={id}
         isOpen={true}
         onConfirmed={onConfirmed}

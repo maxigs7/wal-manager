@@ -3,6 +3,10 @@ import * as React from 'react';
 import camelcase from 'lodash.camelcase';
 import snakecase from 'lodash.snakecase';
 
+const isUndefinedSafe = (obj: any, key: string) =>
+  typeof obj[key] === 'undefined' || obj[key] === '';
+const isNullSafe = (obj: any, key: string) => obj[key] === null;
+
 export const dateSortType = (dateRowA: Date, dateRowB: Date): number => {
   if (dateRowA > dateRowB) return 1;
   if (dateRowB > dateRowA) return -1;
@@ -21,14 +25,14 @@ export function lazyImport<
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const camelCase = (obj: any): any => {
+export const camelCase = (obj: any, cleanNull = true): any => {
   if (Array.isArray(obj)) {
     return obj.map((v) => camelCase(v));
   } else if (obj != null && obj.constructor === Object) {
     return Object.keys(obj).reduce(
       (result, key) => ({
         ...result,
-        [camelcase(key)]: camelCase(obj[key]),
+        [camelcase(key)]: cleanNull && isNullSafe(obj, key) ? undefined : camelCase(obj[key]),
       }),
       {},
     );
@@ -44,7 +48,7 @@ export const snakeCase = (obj: any): any => {
     return Object.keys(obj).reduce(
       (result, key) => ({
         ...result,
-        [snakecase(key)]: snakeCase(obj[key]),
+        [snakecase(key)]: isUndefinedSafe(obj, key) ? null : snakeCase(obj[key]),
       }),
       {},
     );

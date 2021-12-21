@@ -9,37 +9,65 @@ import { ITransactionRepository } from './types';
 
 const tableName = 'transaction';
 
-export const transactionRepository = (db: SupabaseClient): ITransactionRepository => {
-  const generic = genericRepository<Transaction>(db, tableName);
-  return {
-    ...generic,
-    create: async ({ createAll, ...transaction }: TransactionForm): Promise<Transaction> => {
-      const transactions: Transaction[] = [];
-      if (createAll && transaction.feeNumber && transaction.feeNumber > 1) {
-        for (let i = 0; i < transaction.feeNumber; i++) {
-          const feeText = `${i + 1}/${transaction.feeNumber}`;
-          transactions.push({
-            ...transaction,
-            description: transaction.description
-              ? `${transaction.description} ${feeText}`
-              : feeText,
-            date: addMonths(transaction.date, i),
-            feeNumber: i + 1,
-          });
-        }
-      } else {
-        transactions.push(transaction);
-      }
+const builder = ({ createAll, ...transaction }: TransactionForm): any[] => {
+  if (!createAll || transaction.id || !transaction.feeNumber || transaction.feeNumber === 1) {
+    if (!transaction.id) {
+      delete (transaction as any).id;
+    }
+    return [transaction];
+  }
 
-      const { data, error } = await db.from(tableName).insert(snakeCase(transactions));
-      if (error) {
-        throw new ApiError(error);
-      }
-      if (!data) {
-        throw new Error('Not Found');
-      }
-      return serializer(data)[0];
-    },
+  return [
+    ...Array(transaction.feeNumber).map((_v, i) => {
+      const feeText = `${i + 1}/${transaction.feeNumber}`;
+      const t: any = {
+        ...transaction,
+        description: transaction.description ? `${transaction.description} ${feeText}` : feeText,
+        date: addMonths(transaction.date, i),
+        feeNumber: i + 1,
+      };
+      delete t.id;
+      return t;
+    }),
+  ];
+};
+
+export const transactionRepository = (db: SupabaseClient): ITransactionRepository => {
+  const { getAll, remove } = genericRepository<Transaction>(db, tableName);
+
+  const create = async (form: TransactionForm): Promise<Transaction> => {
+    const transactions = builder(form);
+    const { data, error } = await db.from(tableName).insert(snakeCase(transactions));
+    if (error) {
+      throw new ApiError(error);
+    }
+    if (!data) {
+      throw new Error('Not Found');
+    }
+    return serializer(data)[0];
+  };
+  const update = async ({
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    createAll: _createAll,
+    ...transaction
+  }: TransactionForm): Promise<Transaction> => {
+    const { data, error } = await db
+      .from(tableName)
+      .update(snakeCase(transaction))
+      .match({ id: transaction.id });
+
+    if (error) {
+      throw new ApiError(error);
+    }
+    if (!data) {
+      throw new Error('Not Found');
+    }
+    return serializer(data)[0];
+  };
+
+  return {
+    create,
+    getAll,
     getById: async (id: string, columns?: string): Promise<Transaction> => {
       const { data, error } = await db.from(tableName).select(columns).match({ id });
       if (error) {
@@ -60,23 +88,16 @@ export const transactionRepository = (db: SupabaseClient): ITransactionRepositor
       }
       return dtoSerializer(data);
     },
-    update: async ({
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      createAll: _createAll,
-      ...transaction
-    }: TransactionForm): Promise<Transaction> => {
-      const { data, error } = await db
-        .from(tableName)
-        .update(snakeCase(transaction))
-        .match({ id: transaction.id });
 
-      if (error) {
-        throw new ApiError(error);
+    remove,
+    update,
+
+    upsert: (form: TransactionForm): Promise<Transaction> => {
+      if (!form.id) {
+        return create(form);
       }
-      if (!data) {
-        throw new Error('Not Found');
-      }
-      return serializer(data)[0];
+
+      return update(form);
     },
   };
 };

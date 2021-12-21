@@ -30,9 +30,9 @@ const TransactionsPage: React.FC = () => {
 
   const onUpdate = useCallback(
     (id: string) => {
-      goUpdate(id);
+      goUpdate(id, new Date(state.year, state.month));
     },
-    [goUpdate],
+    [goUpdate, state.year, state.month],
   );
 
   return (
