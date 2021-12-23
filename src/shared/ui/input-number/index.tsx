@@ -28,12 +28,17 @@ const InputNumber: React.FC<IProps> = ({ control, defaultValue, id, name, rules 
     defaultValue,
   });
 
+  const handleWithPrecision = (valueAsString: string, valueAsNumber: number) => {
+    if (valueAsString === '' || valueAsString.includes('.')) return onChange(valueAsString);
+    return onChange(valueAsNumber);
+  };
+
   return (
     <NumberInput
       {...field}
       defaultValue={defaultValue}
       id={id}
-      onChange={(_valueAsString, valueAsNumber) => onChange(valueAsNumber)}
+      onChange={handleWithPrecision}
       type="numeric"
     >
       <NumberInputField />

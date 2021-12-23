@@ -38,6 +38,11 @@ const InputCurrency: React.FC<IProps> = ({
     defaultValue,
   });
 
+  const handleWithPrecision = (valueAsString: string, valueAsNumber: number) => {
+    if (valueAsString === '' || valueAsString.includes('.')) return onChange(valueAsString);
+    return onChange(valueAsNumber);
+  };
+
   return (
     <NumberInput
       {...inputProps}
@@ -45,7 +50,7 @@ const InputCurrency: React.FC<IProps> = ({
       as={InputGroup}
       defaultValue={defaultValue}
       id={id}
-      onChange={(_valueAsString, valueAsNumber) => onChange(valueAsNumber)}
+      onChange={handleWithPrecision}
       precision={2}
       type="numeric"
     >

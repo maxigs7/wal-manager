@@ -17,19 +17,17 @@ const builder = ({ createAll, ...transaction }: TransactionForm): any[] => {
     return [transaction];
   }
 
-  return [
-    ...Array(transaction.feeNumber).map((_v, i) => {
-      const feeText = `${i + 1}/${transaction.feeNumber}`;
-      const t: any = {
-        ...transaction,
-        description: transaction.description ? `${transaction.description} ${feeText}` : feeText,
-        date: addMonths(transaction.date, i),
-        feeNumber: i + 1,
-      };
-      delete t.id;
-      return t;
-    }),
-  ];
+  return [...Array(transaction.feeNumber)].map((_v, i) => {
+    const feeText = `${i + 1}/${transaction.feeNumber}`;
+    const t: any = {
+      ...transaction,
+      description: transaction.description ? `${transaction.description} ${feeText}` : feeText,
+      date: addMonths(transaction.date, i),
+      feeNumber: i + 1,
+    };
+    delete t.id;
+    return t;
+  });
 };
 
 export const transactionRepository = (db: SupabaseClient): ITransactionRepository => {
