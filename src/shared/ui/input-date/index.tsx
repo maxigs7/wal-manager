@@ -142,6 +142,7 @@ const Datepicker: FC<IProps> = ({ control, defaultValue, name, rules }) => {
           renderCustomHeader={CustomHeader}
           selected={value}
           showPopperArrow={false}
+          showYearDropdown
         />
       );
     },

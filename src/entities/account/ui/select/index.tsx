@@ -62,10 +62,13 @@ const Select: React.FC<ISelectProps> = ({
       id={id}
       isLoading={isLoading}
       isSearchable={false}
+      menuPlacement="auto"
+      menuPortalTarget={document.body}
       onChange={(selected) => onChange(selected?.value)}
       options={options}
       placeholder={placeholder}
       ref={ref}
+      styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
       value={options?.find((option) => option.value === value)}
     />
   );

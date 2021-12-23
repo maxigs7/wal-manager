@@ -70,8 +70,7 @@ const CategoriesPage: React.FC = () => {
         <HStack mb={2}>
           <Button
             aria-label="Nuevo gasto"
-            bg="red.400"
-            color="white"
+            colorScheme="red"
             leftIcon={<Icon icon="plus" />}
             onClick={() => onCreate(CategoryType.Expense)}
             size="sm"
@@ -80,8 +79,7 @@ const CategoriesPage: React.FC = () => {
           </Button>
           <Button
             aria-label="Nuevo ingreso"
-            bg="green.400"
-            color="white"
+            colorScheme="green"
             leftIcon={<Icon icon="plus" />}
             onClick={() => onCreate(CategoryType.Income)}
             size="sm"
