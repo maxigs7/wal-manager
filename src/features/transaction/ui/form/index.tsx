@@ -15,7 +15,14 @@ import {
 
 import { toCategoryType, TransactionForm, TransactionType } from '@entities';
 import { AccountSelect, CategorySelect, CreditCardSelect } from '@features';
-import { Checkbox, Icon, InputCurrency, InputDate, InputNumber } from '@shared';
+import {
+  Checkbox,
+  Icon,
+  InputCurrency,
+  InputDate,
+  InputNumber,
+  IS_RECURRING_ENABLED,
+} from '@shared';
 
 interface IProps extends UseFormReturn<TransactionForm> {
   type: TransactionType;
@@ -79,7 +86,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, reg
         <Input id="description" placeholder="Descripcion" {...register('description')} />
       </FormControl>
 
-      {!isEditing && (
+      {IS_RECURRING_ENABLED && !isEditing && (
         <FormControl as={GridItem} isInvalid={!!errors.isRecurring}>
           <Checkbox control={control} id="isRecurring" name="isRecurring">
             Es recurrente

@@ -1,6 +1,7 @@
-import { Box, CircularProgress } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 import { Category } from '@entities';
+import { ContentLoader } from '@shared';
 
 import SubCategoryList from '../sub-list';
 import EmptyList from '../sub-list-empty';
@@ -51,7 +52,7 @@ const Panel: React.FC<IProps> = ({
         minH="xs"
         w="full"
       >
-        {isLoading && <CircularProgress color="crimson.300" isIndeterminate />}
+        {isLoading && <ContentLoader />}
         {noSelected && <NoSelectedList />}
         {isEmpty && <EmptyList onCreated={onCreated} />}
         {!isEmpty && (

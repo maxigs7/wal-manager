@@ -3,7 +3,7 @@ import React from 'react';
 import { Spinner, SpinnerProps } from '@chakra-ui/react';
 
 const Loader: React.FC<SpinnerProps> = ({
-  color = 'blue.500',
+  color = 'accent.400',
   emptyColor = 'gray.200',
   label = 'loading...',
   size = 'xl',

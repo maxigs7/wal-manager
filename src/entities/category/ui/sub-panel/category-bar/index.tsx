@@ -41,7 +41,7 @@ const CategoryBar: React.FC<IProps> = ({ category, onCreated, onDeleted, onUpdat
       </Flex>
       <Button
         aria-label="Editar categoria"
-        colorScheme="info"
+        colorScheme="primary"
         leftIcon={<Icon icon="plus" size="sm" />}
         ml={[0, 'auto']}
         mr={1}
@@ -53,6 +53,7 @@ const CategoryBar: React.FC<IProps> = ({ category, onCreated, onDeleted, onUpdat
 
       <Button
         aria-label="Editar categoria"
+        colorScheme="primary"
         leftIcon={<Icon icon="edit" size="sm" />}
         mr={1}
         onClick={onUpdatedHandler}

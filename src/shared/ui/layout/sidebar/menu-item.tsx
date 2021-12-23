@@ -11,7 +11,7 @@ const styles = {
   active: (isActive: boolean) =>
     isActive
       ? {
-          bg: 'crimson.500',
+          bg: 'accent.400',
           color: 'white',
         }
       : {},

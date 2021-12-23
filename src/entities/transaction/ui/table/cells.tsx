@@ -40,16 +40,17 @@ export const ActionsCell: React.FC<ActionsCellType> = ({
   return (
     <ButtonGroup size="xs" variant="outline" isAttached>
       <IconButton
+        aria-label="Edit transaction"
+        colorScheme="primary"
+        icon={<Icon icon="edit" />}
+        onClick={() => onUpdate(original.id)}
+        variant="solid"
+      />
+      <IconButton
         aria-label="Remove transaction"
         colorScheme="danger"
         icon={<Icon icon="trash-alt" />}
         onClick={() => onRemove(original.id)}
-        variant="solid"
-      />
-      <IconButton
-        aria-label="Edit transaction"
-        icon={<Icon icon="edit" />}
-        onClick={() => onUpdate(original.id)}
         variant="solid"
       />
     </ButtonGroup>

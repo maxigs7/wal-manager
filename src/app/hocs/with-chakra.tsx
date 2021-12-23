@@ -1,8 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 
-import { startChakra } from '@shared';
-
-const theme = startChakra();
+import { theme } from '@shared';
 
 export const withChakra = <T,>(WrappedComponent: React.ComponentType<T>): React.FC<T> => {
   // Try to create a nice displayName for React Dev Tools.

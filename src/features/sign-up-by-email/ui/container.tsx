@@ -32,7 +32,7 @@ const Container: React.FC = () => {
     <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(signUpHandler)} w="full">
       <Form {...form} />
       <Button
-        colorScheme="crimson"
+        colorScheme="accent"
         isLoading={isLoading}
         mt={{ base: 12, sm: 6 }}
         mx={2}

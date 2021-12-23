@@ -10,12 +10,12 @@ const ActionBar: React.FC<IProps> = ({ onSelected, selectedType = CategoryType.E
   const buttons = useMemo(
     () => [
       {
-        color: 'red.500',
+        color: 'red.400',
         label: 'Gastos',
         type: CategoryType.Expense,
       },
       {
-        color: 'green.500',
+        color: 'green.400',
         label: 'Ingresos',
         type: CategoryType.Income,
       },

@@ -1,6 +1,7 @@
-import { Box, CircularProgress } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 import { Category, CategoryType } from '@entities';
+import { ContentLoader } from '@shared';
 
 import CategoryRootList from '../root-list';
 import CategoryRootListEmpty from '../root-list-empty';
@@ -41,7 +42,7 @@ const Panel: React.FC<IProps> = ({
         p={isLoading ? '4' : ''}
         w="full"
       >
-        {isLoading && <CircularProgress color="crimson.300" isIndeterminate />}
+        {isLoading && <ContentLoader />}
         {isEmpty && <CategoryRootListEmpty onCreated={onCreated} type={selectedType} />}
         {hasData && (
           <CategoryRootList

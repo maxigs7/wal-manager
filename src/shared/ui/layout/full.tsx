@@ -25,14 +25,7 @@ const FullLayout: React.FC<IProps> = ({
 }) => (
   <Flex minH="100vh" overflow="hidden">
     <Sidebar closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
-    <Flex
-      bg="narvik.100"
-      direction="column"
-      flex={1}
-      overflowX="hidden"
-      overflowY="auto"
-      pos="relative"
-    >
+    <Flex direction="column" flex={1} overflowX="hidden" overflowY="auto" pos="relative">
       <Navbar
         signOut={signOut}
         toggleSidebar={toggleSidebar}

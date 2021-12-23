@@ -17,7 +17,7 @@ const activeStyle = (isSelected: boolean): Partial<ButtonProps> =>
     ? {
         borderBottom: 2,
         borderBottomStyle: 'solid',
-        borderBottomColor: 'crimson.500',
+        borderBottomColor: 'accent.400',
       }
     : {};
 

@@ -35,7 +35,7 @@ const ListItem: React.FC<IProps> = ({ account, onDelete, onSelected }) => {
         <Flex mt={2}>
           <IconButton
             aria-label="Editar cuenta"
-            colorScheme="cello"
+            colorScheme="primary"
             icon={<Icon icon="edit" />}
             isRound={true}
             mr={1}
@@ -44,7 +44,7 @@ const ListItem: React.FC<IProps> = ({ account, onDelete, onSelected }) => {
           />
           <IconButton
             aria-label="Eliminar cuenta"
-            colorScheme="crimson"
+            colorScheme="danger"
             icon={<Icon icon="trash-alt" />}
             isRound={true}
             onClick={onDeleteHandler}

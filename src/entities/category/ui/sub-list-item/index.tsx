@@ -65,6 +65,7 @@ const ListItem: React.FC<IProps> = ({
       >
         <Button
           aria-label="Editar categoria"
+          colorScheme="primary"
           leftIcon={<Icon icon="edit" size="sm" />}
           mr={1}
           onClick={onUpdatedHandler}
@@ -75,7 +76,7 @@ const ListItem: React.FC<IProps> = ({
 
         <Button
           aria-label="Eliminar categoria"
-          colorScheme="red"
+          colorScheme="danger"
           leftIcon={<Icon icon="trash-alt" size="sm" />}
           onClick={onDeletedHandler}
           size="xs"

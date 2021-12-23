@@ -40,7 +40,8 @@ const TransactionsPage: React.FC = () => {
       <HStack mb={2}>
         <Button
           aria-label="Nuevo gasto"
-          colorScheme="red"
+          bg="red.400"
+          color="white"
           leftIcon={<Icon icon="plus" />}
           onClick={() => onCreate(TransactionType.Expense)}
           size="sm"
@@ -49,7 +50,8 @@ const TransactionsPage: React.FC = () => {
         </Button>
         <Button
           aria-label="Nuevo ingreso"
-          colorScheme="green"
+          bg="green.400"
+          color="white"
           leftIcon={<Icon icon="plus" />}
           onClick={() => onCreate(TransactionType.Income)}
           size="sm"
