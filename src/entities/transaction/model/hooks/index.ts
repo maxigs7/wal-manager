@@ -1,3 +1,4 @@
+export { default as useTransactionBalance } from './useBalance';
 export { default as useTransactionCreate } from './useCreate';
 export { default as useTransactionGetById } from './useGetById';
 export { default as useTransactionList } from './useList';

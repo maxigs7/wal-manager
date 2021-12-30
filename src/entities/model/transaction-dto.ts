@@ -16,5 +16,5 @@ export type TransactionDto = BaseModel & {
   description?: string;
   feeNumber?: number;
   isPaid: boolean;
-  transactionType: TransactionType;
+  type: TransactionType;
 };

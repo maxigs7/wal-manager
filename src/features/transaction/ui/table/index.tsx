@@ -1,20 +1,16 @@
-import React, { useMemo } from 'react';
-
-import { addMilliseconds, addMonths } from 'date-fns';
+import React from 'react';
 
 import { TransactionTable, useTransactionList } from '@entities';
 import { ContentLoader } from '@shared';
 
 interface IProps {
-  month: number;
+  endDate: Date;
   onRemove(id: string): void;
   onUpdate(id: string): void;
-  year: number;
+  startDate: Date;
 }
 
-const Table: React.FC<IProps> = ({ month, onRemove, onUpdate, year }) => {
-  const startDate = useMemo(() => new Date(year, month, 1, 0, 0, 0), [year, month]);
-  const endDate = useMemo(() => addMilliseconds(addMonths(startDate, 1), -1), [startDate]);
+const Table: React.FC<IProps> = ({ endDate, onRemove, onUpdate, startDate }) => {
   const { data, isLoading } = useTransactionList(startDate, endDate);
 
   if (isLoading) {

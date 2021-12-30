@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { addMilliseconds, addMonths } from 'date-fns';
 import camelcase from 'lodash.camelcase';
 import snakecase from 'lodash.snakecase';
 
@@ -55,3 +56,17 @@ export const snakeCase = (obj: any): any => {
   }
   return obj;
 };
+
+export const getRangeFromDate = (date: Date): { endDate: Date; startDate: Date } => {
+  const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
+  return {
+    endDate: addMilliseconds(addMonths(startDate, 1), -1),
+    startDate,
+  };
+};
+
+export const formatToCurrency = (val: number): string =>
+  val.toLocaleString('es-AR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
