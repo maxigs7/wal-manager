@@ -5,19 +5,19 @@ import { TransactionType } from '@entities';
 
 import useList from './useList';
 
-interface IBalance {
+export interface IAccountBalance {
   account: string;
   incomes: number;
   expenses: number;
 }
 
-export default (startDate?: Date, endDate?: Date): UseQueryResult<IBalance[]> => {
+export default (startDate?: Date, endDate?: Date): UseQueryResult<IAccountBalance[]> => {
   const { data, ...rest } = useList(startDate, endDate);
   const balance = useMemo(() => {
     if (!data) return undefined;
     const prev = data.find((t) => !t.id && !t.account);
     const prevAmount = prev?.amount || 0;
-    const balances = data.reduce<IBalance[]>((balances, t) => {
+    const balances = data.reduce<IAccountBalance[]>((balances, t) => {
       balances = balances || [];
       if (!t.id && !t.account) {
         return balances;
@@ -40,5 +40,5 @@ export default (startDate?: Date, endDate?: Date): UseQueryResult<IBalance[]> =>
     return balances;
   }, [data]);
 
-  return { data: balance, ...rest } as UseQueryResult<IBalance[]>;
+  return { data: balance, ...rest } as UseQueryResult<IAccountBalance[]>;
 };

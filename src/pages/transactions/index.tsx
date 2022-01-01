@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Button, HStack } from '@chakra-ui/react';
 
 import { TransactionType } from '@entities';
-import { TransactionBalance, TransactionTable, useTransactionStore } from '@features';
+import { TransactionSummary, TransactionTable, useTransactionStore } from '@features';
 import { Card, Icon, MonthTabs, Page, YearBar } from '@shared';
 
 import { useTransactionNav, useTransactionRoutes } from './hooks';
@@ -61,7 +61,7 @@ const TransactionsPage: React.FC = () => {
       <Card>
         <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
         <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
-        <TransactionBalance endDate={state.endDate} startDate={state.startDate} />
+        <TransactionSummary endDate={state.endDate} startDate={state.startDate} />
         <TransactionTable
           endDate={state.endDate}
           onRemove={onRemove}
