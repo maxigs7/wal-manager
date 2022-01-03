@@ -1,13 +1,16 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useRoutes } from 'react-router-dom';
 
-import { lazyImport } from '@shared';
+import { LayoutDefault } from '@shared';
 
-const { LayoutDefault } = lazyImport(
-  () => import(/* webpackChunkName: 'default.layout' */ '@shared'),
-  'LayoutDefault',
-);
-export const LayoutDefaultWrapper: React.FC = () => (
-  <LayoutDefault>
-    <Outlet />
-  </LayoutDefault>
-);
+import { routes } from './routing/auth';
+
+export default () => {
+  const element = useRoutes(routes);
+
+  return (
+    <LayoutDefault>
+      {element}
+      <Outlet />
+    </LayoutDefault>
+  );
+};

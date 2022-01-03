@@ -53,7 +53,7 @@ import { ComponentWithAs, TableColumnHeaderProps } from '@chakra-ui/react';
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
 
-  export interface TableOptions<D extends Record<string, unknown>>
+  export interface TableOptions<D extends object>
     extends UseExpandedOptions<D>,
       UseFiltersOptions<D>,
       UseGlobalFiltersOptions<D>,
@@ -68,13 +68,13 @@ declare module 'react-table' {
       // feature set, this is a safe default.
       Record<string, any> {}
 
-  export interface Hooks<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface Hooks<D extends object = {}>
     extends UseExpandedHooks<D>,
       UseGroupByHooks<D>,
       UseRowSelectHooks<D>,
       UseSortByHooks<D> {}
 
-  export interface TableInstance<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface TableInstance<D extends object = {}>
     extends UseColumnOrderInstanceProps<D>,
       UseExpandedInstanceProps<D>,
       UseFiltersInstanceProps<D>,
@@ -85,7 +85,7 @@ declare module 'react-table' {
       UseRowStateInstanceProps<D>,
       UseSortByInstanceProps<D> {}
 
-  export interface TableState<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface TableState<D extends object = {}>
     extends UseColumnOrderState<D>,
       UseExpandedState<D>,
       UseFiltersState<D>,
@@ -97,7 +97,7 @@ declare module 'react-table' {
       UseRowStateState<D>,
       UseSortByState<D> {}
 
-  export interface ColumnInterface<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface ColumnInterface<D extends object = {}>
     extends UseFiltersColumnOptions<D>,
       UseGlobalFiltersColumnOptions<D>,
       UseGroupByColumnOptions<D>,
@@ -107,7 +107,7 @@ declare module 'react-table' {
       isNumeric?: boolean;
   }
 
-  export interface ColumnInstance<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface ColumnInstance<D extends object = {}>
     extends UseFiltersColumnProps<D>,
       UseGroupByColumnProps<D>,
       UseResizeColumnsColumnProps<D>,
@@ -117,11 +117,11 @@ declare module 'react-table' {
   }
 
 
-  export interface Cell<D extends Record<string, unknown> = Record<string, unknown>, V = any>
+  export interface Cell<D extends object = {}, V = any>
     extends UseGroupByCellProps<D>,
       UseRowStateCellProps<D> {}
 
-  export interface Row<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface Row<D extends object = {}>
     extends UseExpandedRowProps<D>,
       UseGroupByRowProps<D>,
       UseRowSelectRowProps<D>,

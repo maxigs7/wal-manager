@@ -2,13 +2,13 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import { config } from 'dotenv';
+import dotenv from 'dotenv';
 
 import { startFontAwesome } from '@shared';
 
 import '@testing-library/jest-dom';
 
-config({ path: '.env.test' });
+dotenv.config({ path: '.env.test' });
 
 startFontAwesome();
 

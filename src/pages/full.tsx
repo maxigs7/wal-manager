@@ -1,17 +1,15 @@
 import { useCallback } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useRoutes } from 'react-router-dom';
 
 import { useDisclosure } from '@chakra-ui/hooks';
 
 import { PrivateRoute, useSignOut, useUser } from '@entities';
-import { lazyImport } from '@shared';
+import { LayoutFull } from '@shared';
 
-const { LayoutFull } = lazyImport(
-  () => import(/* webpackChunkName: 'full.layout' */ '@shared'),
-  'LayoutFull',
-);
+import { routes } from './routing/admin';
 
-export const LayoutFullWrapper: React.FC = () => {
+export default () => {
+  const element = useRoutes(routes);
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { user } = useUser();
   const { mutateAsync } = useSignOut();
@@ -29,6 +27,7 @@ export const LayoutFullWrapper: React.FC = () => {
         userName={user?.email || ''}
         userPhotoUrl={user?.user_metadata?.photoURL}
       >
+        {element}
         <Outlet />
       </LayoutFull>
     </PrivateRoute>
