@@ -61,7 +61,6 @@ const ModalForm: React.FC<IProps> = ({
   const onSubmit = useCallback(
     () =>
       handleSubmit((model) => {
-        console.log(model, id);
         return mutateAsync(model, {
           onSuccess: (transaction) => onConfirmed(transaction as TransactionForm),
         });
@@ -74,7 +73,6 @@ const ModalForm: React.FC<IProps> = ({
   useEffect(() => {
     if (transaction) {
       const model = mapper(transaction);
-      console.log(model, transaction);
       reset(model);
     }
   }, [transaction]);
@@ -83,7 +81,7 @@ const ModalForm: React.FC<IProps> = ({
     <ModalFormContainer isOpen={isOpen} onClose={onDismiss} onSubmit={onSubmit()} size="5xl">
       <ModalFormHeader onClose={onDismiss}>{title}</ModalFormHeader>
       <ModalFormBody isLoading={isLoading}>
-        <TransactionFormComponent {...useFormProps} type={type} />
+        <TransactionFormComponent {...useFormProps} type={transaction?.type || type} />
       </ModalFormBody>
       <ModalFormFooter>
         <SubmitButton icon="save" isSubmitting={isFormSubmitting || isSubmitting}>
