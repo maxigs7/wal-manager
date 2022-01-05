@@ -26,7 +26,7 @@ const convertToCategoryLookupArray = (categories: Category[]): CategoryLookup[] 
       return [...accum, rootLookup, ...children];
     }, [] as CategoryLookup[]);
 
-export default (type?: CategoryType): UseQueryResult<CategoryLookup[]> => {
+const hook = (type?: CategoryType): UseQueryResult<CategoryLookup[]> => {
   const { categories } = useApi();
 
   const promise = async () => {
@@ -48,3 +48,5 @@ export default (type?: CategoryType): UseQueryResult<CategoryLookup[]> => {
     },
   );
 };
+
+export default hook;

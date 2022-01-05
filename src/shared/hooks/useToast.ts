@@ -34,8 +34,7 @@ interface IToast {
   success(options?: UseToastOptions): string | number | undefined;
   warning(options?: UseToastOptions): string | number | undefined;
 }
-
-export default (): IToast => {
+const hook = (): IToast => {
   const toast = useChakraToast({
     duration: 3000,
     isClosable: true,
@@ -51,3 +50,5 @@ export default (): IToast => {
     warning: (options?: UseToastOptions | undefined) => toast({ ...options, status: 'warning' }),
   };
 };
+
+export default hook;

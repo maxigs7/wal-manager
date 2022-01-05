@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, BoxProps, useColorModeValue } from '@chakra-ui/react';
 
-const Card: React.FC<BoxProps> = ({ children, ...props }) => {
+const Card: React.FC<BoxProps> = React.memo(({ children, ...props }) => {
   const bg = useColorModeValue('white', 'cello.700');
 
   return (
@@ -10,6 +10,6 @@ const Card: React.FC<BoxProps> = ({ children, ...props }) => {
       {children}
     </Box>
   );
-};
+});
 
-export default React.memo(Card);
+export default Card;

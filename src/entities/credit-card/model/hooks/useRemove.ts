@@ -3,7 +3,7 @@ import { useMutation, UseMutationResult } from 'react-query';
 import { CreditCard, useApi } from '@entities';
 import { ApiError, useToast } from '@shared';
 
-export default (showToast = true): UseMutationResult<CreditCard, ApiError, string> => {
+const hook = (showToast = true): UseMutationResult<CreditCard, ApiError, string> => {
   const { creditCards } = useApi();
   const toast = useToast();
 
@@ -17,3 +17,5 @@ export default (showToast = true): UseMutationResult<CreditCard, ApiError, strin
     },
   });
 };
+
+export default hook;

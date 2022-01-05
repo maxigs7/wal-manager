@@ -9,7 +9,7 @@ type UseIsUniqueReturn = (
   parentId?: string,
 ) => Promise<string | boolean>;
 
-export default (): UseIsUniqueReturn => {
+const hook = (): UseIsUniqueReturn => {
   const { categories } = useApi();
 
   return useCallback(
@@ -35,3 +35,5 @@ export default (): UseIsUniqueReturn => {
     [categories],
   );
 };
+
+export default hook;

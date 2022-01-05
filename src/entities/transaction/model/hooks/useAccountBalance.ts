@@ -11,7 +11,7 @@ export interface IAccountBalance {
   expenses: number;
 }
 
-export default (startDate?: Date, endDate?: Date): UseQueryResult<IAccountBalance[]> => {
+const hook = (startDate?: Date, endDate?: Date): UseQueryResult<IAccountBalance[]> => {
   const { data, ...rest } = useList(startDate, endDate);
   const balance = useMemo(() => {
     if (!data) return undefined;
@@ -42,3 +42,5 @@ export default (startDate?: Date, endDate?: Date): UseQueryResult<IAccountBalanc
 
   return { data: balance, ...rest } as UseQueryResult<IAccountBalance[]>;
 };
+
+export default hook;

@@ -8,7 +8,7 @@ import { LayoutFull } from '@shared';
 
 import { routes } from './routing/admin';
 
-export default () => {
+const Layout: React.FC = () => {
   const element = useRoutes(routes);
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { user } = useUser();
@@ -33,3 +33,5 @@ export default () => {
     </PrivateRoute>
   );
 };
+
+export default Layout;

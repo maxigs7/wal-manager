@@ -3,7 +3,7 @@ import { useQueryClient } from 'react-query';
 
 import { CREDIT_CARDS_KEY } from '../../config/constants';
 
-export default (): ((id?: string) => void) => {
+const hook = (): ((id?: string) => void) => {
   const queryClient = useQueryClient();
 
   return useCallback(
@@ -14,3 +14,5 @@ export default (): ((id?: string) => void) => {
     [queryClient],
   );
 };
+
+export default hook;

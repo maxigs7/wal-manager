@@ -4,7 +4,7 @@ import { useApi } from '@entities';
 
 type UseIsUniqueReturn = (name: string, id?: string) => Promise<string | boolean>;
 
-export default (): UseIsUniqueReturn => {
+const hook = (): UseIsUniqueReturn => {
   const { creditCards } = useApi();
 
   return useCallback(
@@ -22,3 +22,5 @@ export default (): UseIsUniqueReturn => {
     [creditCards],
   );
 };
+
+export default hook;

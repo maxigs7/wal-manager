@@ -4,7 +4,7 @@ import { TransactionDto, useApi } from '@entities';
 
 import { TRANSACTIONS_KEY } from '../../config/constants';
 
-export default (startDate?: Date, endDate?: Date): UseQueryResult<TransactionDto[]> => {
+const hook = (startDate?: Date, endDate?: Date): UseQueryResult<TransactionDto[]> => {
   const { transactions } = useApi();
   return useQuery(
     [TRANSACTIONS_KEY, startDate, endDate],
@@ -12,3 +12,5 @@ export default (startDate?: Date, endDate?: Date): UseQueryResult<TransactionDto
     { enabled: !!startDate && !!endDate },
   );
 };
+
+export default hook;

@@ -5,7 +5,7 @@ type GlobalProps = {
   theme: Theme;
 };
 
-export default {
+const styles = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   global: ({ colorMode }: GlobalProps): any => {
     return {
@@ -16,3 +16,5 @@ export default {
     };
   },
 };
+
+export default styles;

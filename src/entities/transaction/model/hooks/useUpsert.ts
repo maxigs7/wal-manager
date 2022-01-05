@@ -3,7 +3,7 @@ import { useMutation, UseMutationResult } from 'react-query';
 import { Transaction, TransactionForm, useApi } from '@entities';
 import { ApiError, useToast } from '@shared';
 
-export default (showToast = true): UseMutationResult<Transaction, ApiError, TransactionForm> => {
+const hook = (showToast = true): UseMutationResult<Transaction, ApiError, TransactionForm> => {
   const { transactions } = useApi();
   const toast = useToast();
 
@@ -20,3 +20,5 @@ export default (showToast = true): UseMutationResult<Transaction, ApiError, Tran
     },
   });
 };
+
+export default hook;

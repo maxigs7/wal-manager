@@ -5,6 +5,8 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontaw
 
 export type WalIconProps = IconProps & FontAwesomeIconProps & React.ComponentProps<'svg'>;
 
-const Icon: React.FC<WalIconProps> = (props) => <IconChakra as={FontAwesomeIcon} {...props} />;
+const Icon: React.FC<WalIconProps> = React.memo((props) => (
+  <IconChakra as={FontAwesomeIcon} {...props} />
+));
 
-export default React.memo(Icon);
+export default Icon;

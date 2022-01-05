@@ -4,7 +4,7 @@ import { Category, CategoryType, useApi } from '@entities';
 
 import { CATEGORIES_KEY } from '../../config/constants';
 
-export default (type?: CategoryType): UseQueryResult<Category[]> => {
+const hook = (type?: CategoryType): UseQueryResult<Category[]> => {
   const { categories } = useApi();
   return useQuery(
     [CATEGORIES_KEY, 'root', type],
@@ -20,3 +20,5 @@ export default (type?: CategoryType): UseQueryResult<Category[]> => {
     },
   );
 };
+
+export default hook;

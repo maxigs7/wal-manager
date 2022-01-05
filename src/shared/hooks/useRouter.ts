@@ -11,7 +11,7 @@ import {
 import { parse } from 'query-string';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default () => {
+const hook = () => {
   const params = useParams();
   const [searchParams] = useSearchParams();
   const location = useLocation();
@@ -38,3 +38,5 @@ export default () => {
     };
   }, [location, navigate, params, searchParams]);
 };
+
+export default hook;

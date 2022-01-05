@@ -4,7 +4,9 @@ import { Account, useApi } from '@entities';
 
 import { ACCOUNTS_KEY } from '../../config/constants';
 
-export default (): UseQueryResult<Account[]> => {
+const hook = (): UseQueryResult<Account[]> => {
   const { accounts } = useApi();
   return useQuery([ACCOUNTS_KEY], () => accounts.getAll({ sort: { field: 'name' } }));
 };
+
+export default hook;

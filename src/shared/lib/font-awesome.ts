@@ -241,6 +241,9 @@ const CategoryIcons = [
 ];
 
 export const CategoryIconsName = CategoryIcons.map((icon) => icon.iconName);
-export default (): void => {
+
+const start = (): void => {
   library.add(...CoreIcons, ...CategoryIcons);
 };
+
+export default start;

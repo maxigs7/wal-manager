@@ -8,7 +8,7 @@ export interface ICreditCardSummary {
   amount: number;
 }
 
-export default (startDate?: Date, endDate?: Date): UseQueryResult<ICreditCardSummary[]> => {
+const hook = (startDate?: Date, endDate?: Date): UseQueryResult<ICreditCardSummary[]> => {
   const { data, ...rest } = useList(startDate, endDate);
   const balance = useMemo(() => {
     if (!data) return undefined;
@@ -40,3 +40,5 @@ export default (startDate?: Date, endDate?: Date): UseQueryResult<ICreditCardSum
 
   return { data: balance, ...rest } as UseQueryResult<ICreditCardSummary[]>;
 };
+
+export default hook;

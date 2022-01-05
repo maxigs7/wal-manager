@@ -5,7 +5,7 @@ import { CategoryType } from '@entities';
 
 import { CATEGORIES_KEY } from '../../config/constants';
 
-export default (): ((type: CategoryType, id?: string) => void) => {
+const hook = (): ((type: CategoryType, id?: string) => void) => {
   const queryClient = useQueryClient();
 
   return useCallback(
@@ -20,3 +20,5 @@ export default (): ((type: CategoryType, id?: string) => void) => {
     [queryClient],
   );
 };
+
+export default hook;

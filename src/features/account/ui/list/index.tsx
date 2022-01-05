@@ -3,6 +3,12 @@ import React from 'react';
 import { Account, AccountList, AccountNewPlaceholder, useAccountList } from '@entities';
 import { ContentLoader } from '@shared';
 
+interface IProps {
+  onCreate?(): void;
+  onDelete?(account: Account): void;
+  onSelected?(account: Account): void;
+}
+
 const List: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
   const { data: accounts, isLoading } = useAccountList();
 
@@ -16,11 +22,5 @@ const List: React.FC<IProps> = ({ onCreate, onDelete, onSelected }) => {
     </AccountList>
   );
 };
-
-interface IProps {
-  onCreate?(): void;
-  onDelete?(account: Account): void;
-  onSelected?(account: Account): void;
-}
 
 export default List;

@@ -4,7 +4,7 @@ import { LayoutDefault } from '@shared';
 
 import { routes } from './routing/auth';
 
-export default () => {
+const Layout: React.FC = () => {
   const element = useRoutes(routes);
 
   return (
@@ -14,3 +14,5 @@ export default () => {
     </LayoutDefault>
   );
 };
+
+export default Layout;

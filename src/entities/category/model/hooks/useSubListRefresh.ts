@@ -3,7 +3,7 @@ import { useQueryClient } from 'react-query';
 
 import { CATEGORIES_KEY, SUB_CATEGORIES_KEY } from '../../config/constants';
 
-export default (): ((parentId: string, id?: string) => void) => {
+const hook = (): ((parentId: string, id?: string) => void) => {
   const queryClient = useQueryClient();
 
   return useCallback(
@@ -18,3 +18,5 @@ export default (): ((parentId: string, id?: string) => void) => {
     [queryClient],
   );
 };
+
+export default hook;

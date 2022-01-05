@@ -66,7 +66,7 @@ const pallete = {
   },
 };
 
-export default {
+const colors = {
   ...pallete,
 
   success: {
@@ -91,3 +91,5 @@ export default {
     ...pallete.crimson,
   },
 };
+
+export default colors;

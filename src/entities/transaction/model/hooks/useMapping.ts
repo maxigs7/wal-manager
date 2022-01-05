@@ -6,7 +6,7 @@ import { Transaction, TransactionForm } from '@entities';
 
 type UseMappingReturn = (transaction: Transaction) => Partial<TransactionForm>;
 
-export default (defaultDate: Date): UseMappingReturn => {
+const hook = (defaultDate: Date): UseMappingReturn => {
   return useCallback(
     (transaction: Transaction): Partial<TransactionForm> => {
       const { date, id, isRecurring, parentTransactionId } = transaction;
@@ -24,3 +24,5 @@ export default (defaultDate: Date): UseMappingReturn => {
     [defaultDate],
   );
 };
+
+export default hook;

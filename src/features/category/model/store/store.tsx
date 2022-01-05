@@ -6,7 +6,7 @@ import { selected } from './actions';
 import { reducer } from './reducer';
 import { IDispatch, initialState, IState } from './state';
 
-export default (): [IState, IDispatch] => {
+const hook = (): [IState, IDispatch] => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onSelected = useCallback(
@@ -26,3 +26,5 @@ export default (): [IState, IDispatch] => {
     [state],
   );
 };
+
+export default hook;

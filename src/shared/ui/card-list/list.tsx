@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Flex, FlexProps } from '@chakra-ui/react';
 
-const CardsList: React.FC<FlexProps> = ({ children, ...flexProps }) => (
+const CardList: React.FC<FlexProps> = React.memo(({ children, ...flexProps }) => (
   <Flex {...flexProps} flexWrap="wrap">
     {children}
   </Flex>
-);
+));
 
-export default React.memo(CardsList);
+export default CardList;

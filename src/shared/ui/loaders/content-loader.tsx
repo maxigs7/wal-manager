@@ -6,16 +6,12 @@ import Loader from './loader';
 
 type Props = FlexProps & { spinner?: SpinnerProps };
 
-const ContentLoader: React.FC<Props> = ({
-  align = 'center',
-  justify = 'center',
-  p = 5,
-  spinner,
-  ...props
-}) => (
-  <Flex align={align} justify={justify} p={p} {...props}>
-    <Loader {...spinner} />
-  </Flex>
+const ContentLoader: React.FC<Props> = React.memo(
+  ({ align = 'center', justify = 'center', p = 5, spinner, ...props }) => (
+    <Flex align={align} justify={justify} p={p} {...props}>
+      <Loader {...spinner} />
+    </Flex>
+  ),
 );
 
-export default React.memo(ContentLoader);
+export default ContentLoader;

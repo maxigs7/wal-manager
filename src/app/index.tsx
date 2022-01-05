@@ -5,12 +5,12 @@ import { PageLoader } from '@shared';
 
 import { withProviders } from './hocs';
 
-const App: React.FC = () => {
+const App: React.FC = withProviders(() => {
   return (
     <Suspense fallback={<PageLoader />}>
       <Routing />
     </Suspense>
   );
-};
+});
 
-export default withProviders(App);
+export default App;

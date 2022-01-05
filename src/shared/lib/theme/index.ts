@@ -5,7 +5,7 @@ import colors from './foundations/colors';
 import fonts from './foundations/fonts';
 import styles from './styles';
 
-export default extendTheme({
+const theme = extendTheme({
   colors,
   components: {
     Heading,
@@ -13,3 +13,5 @@ export default extendTheme({
   fonts,
   styles,
 });
+
+export default theme;

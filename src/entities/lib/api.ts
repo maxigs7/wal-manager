@@ -19,7 +19,7 @@ export interface IApi {
   transactions: ITransactionRepository;
 }
 
-export default (db: SupabaseClient): IApi => ({
+const api = (db: SupabaseClient): IApi => ({
   accounts: {
     ...genericRepository<Account>(db, 'account'),
   },
@@ -36,3 +36,5 @@ export default (db: SupabaseClient): IApi => ({
     ...transactionRepository(db),
   },
 });
+
+export default api;
