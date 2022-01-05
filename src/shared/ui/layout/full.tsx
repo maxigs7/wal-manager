@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Flex } from '@chakra-ui/react';
 
+import { NAVBAR_HEIGHT, SIDEBAR_WIDTH } from './constants';
 import { Navbar } from './navbar';
 import { Sidebar } from './sidebar';
 
@@ -25,7 +26,14 @@ const FullLayout: React.FC<IProps> = ({
 }) => (
   <Flex minH="100vh" overflow="hidden">
     <Sidebar closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
-    <Flex direction="column" flex={1} overflowX="hidden" overflowY="auto" pos="relative">
+    <Flex
+      direction="column"
+      flex={1}
+      overflowX="hidden"
+      overflowY="auto"
+      pl={{ lg: SIDEBAR_WIDTH }}
+      pt={NAVBAR_HEIGHT}
+    >
       <Navbar
         signOut={signOut}
         toggleSidebar={toggleSidebar}

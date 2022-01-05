@@ -19,6 +19,5 @@ export const Backdrop: React.FC<IProps> = React.memo(({ closeSidebar, isSidebarO
     position="fixed"
     transition="opacity 0.2s"
     w={isSidebarOpen ? 'full' : ''}
-    zIndex="40"
   />
 ));

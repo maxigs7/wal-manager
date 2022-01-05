@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Flex, useColorModeValue, VStack } from '@chakra-ui/react';
 
+import { SIDEBAR_WIDTH, SIDEBAR_Z_INDEX } from '../constants';
 import { Backdrop } from './backdrop';
 import { Header } from './header';
 import { Menu } from './menu';
@@ -15,7 +16,14 @@ export const Sidebar: React.FC<IProps> = React.memo(({ closeSidebar, isSidebarOp
   const bg = useColorModeValue('primary.700', 'primary.900');
 
   return (
-    <Flex w={{ lg: '64' }}>
+    <Flex
+      bottom="0"
+      left="0"
+      position="fixed"
+      top="0"
+      w={{ lg: SIDEBAR_WIDTH }}
+      zIndex={SIDEBAR_Z_INDEX}
+    >
       {/* Sidebar backdrop (mobile only) */}
       <Backdrop closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
 
@@ -34,8 +42,7 @@ export const Sidebar: React.FC<IProps> = React.memo(({ closeSidebar, isSidebarOp
           lg: 'translateX(0)',
         }}
         transition="transform 0.2s ease-in-out"
-        w="64"
-        zIndex={40}
+        w={SIDEBAR_WIDTH}
       >
         {/* Sidebar header */}
         <Header closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />

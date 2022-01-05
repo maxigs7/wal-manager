@@ -4,6 +4,7 @@ import { Flex, IconButton, useColorModeValue } from '@chakra-ui/react';
 
 import { Icon } from '@shared';
 
+import { NAVBAR_HEIGHT, NAVBAR_Z_INDEX } from '../constants';
 import { UserMenu } from './user-menu';
 
 interface IProps {
@@ -21,12 +22,14 @@ export const Navbar: React.FC<IProps> = ({ signOut, toggleSidebar, userName, use
       as="header"
       bg={bg}
       boxShadow="md"
-      h="16"
+      h={NAVBAR_HEIGHT}
       justify="space-between"
-      pos="sticky"
+      left="0"
+      position="fixed"
       px={{ base: 4, sm: 6, lg: 8 }}
+      right="0"
       top="0"
-      zIndex="10"
+      zIndex={NAVBAR_Z_INDEX}
     >
       {/* Header: Left side */}
       <Flex align="center" h="full">
