@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { ScaleFade } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { Account } from '@entities';
-import { CardList } from '@shared';
 
 import ListItem from '../list-item';
 
@@ -14,16 +13,21 @@ interface IProps {
 }
 
 const List: React.FC<IProps> = ({ children, accounts = [], onDelete, onSelected }) => (
-  <CardList>
+  <Flex direction={['column', 'row']} wrap="wrap">
     {accounts.map((account) => (
-      <ScaleFade in={true} initialScale={0.5} key={account.id} unmountOnExit={true}>
-        <ListItem account={account} onDelete={onDelete} onSelected={onSelected} />
-      </ScaleFade>
+      <ListItem
+        account={account}
+        h="64"
+        key={account.id}
+        mb="5"
+        mr="5"
+        onDelete={onDelete}
+        onSelected={onSelected}
+        w={['full', '64']}
+      />
     ))}
-    <ScaleFade in={true} initialScale={0.5}>
-      {children}
-    </ScaleFade>
-  </CardList>
+    {children}
+  </Flex>
 );
 
 export default List;

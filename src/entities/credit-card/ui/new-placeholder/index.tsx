@@ -19,9 +19,7 @@ const NewPlaceholder: React.FC<IProps> = ({ onSelected }) => (
     flexDir="column"
     h={64}
     justifyContent="center"
-    mb={5}
     onClick={onSelected}
-    p={5}
     textTransform="uppercase"
     w={['full', 64]}
   >
