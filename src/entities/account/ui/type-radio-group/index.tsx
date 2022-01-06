@@ -32,8 +32,8 @@ const TypeRadioGroup: React.FC<IProps> = ({
   return (
     <RadioGroup {...field} defaultValue={defaultValue} id={id} placeholder={placeholder}>
       <Stack direction="row">
-        <Radio value={AccountType.Bank}>Banco</Radio>
-        <Radio value={AccountType.Wallet}>Efectivo</Radio>
+        <Radio value="bank">Banco</Radio>
+        <Radio value="wallet">Efectivo</Radio>
       </Stack>
     </RadioGroup>
   );

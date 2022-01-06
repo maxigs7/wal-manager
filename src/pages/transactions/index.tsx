@@ -42,7 +42,7 @@ const TransactionsPage: React.FC = () => {
           aria-label="Nuevo gasto"
           colorScheme="red"
           leftIcon={<Icon icon="plus" />}
-          onClick={() => onCreate(TransactionType.Expense)}
+          onClick={() => onCreate('expenses')}
           size="sm"
         >
           Nuevo Gasto
@@ -51,7 +51,7 @@ const TransactionsPage: React.FC = () => {
           aria-label="Nuevo ingreso"
           colorScheme="green"
           leftIcon={<Icon icon="plus" />}
-          onClick={() => onCreate(TransactionType.Income)}
+          onClick={() => onCreate('incomes')}
           size="sm"
         >
           Nuevo Ingreso

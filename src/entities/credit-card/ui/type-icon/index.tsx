@@ -9,11 +9,11 @@ interface IProps extends React.SVGProps<SVGSVGElement> {
 
 const TypeIcon: React.FC<IProps> = ({ type, ...props }) => {
   switch (type) {
-    case CreditCardType.Amex:
+    case 'amex':
       return <AmexIcon {...props} />;
-    case CreditCardType.Mastercard:
+    case 'mastercard':
       return <MasterCardIcon {...props} />;
-    case CreditCardType.Visa:
+    case 'visa':
       return <VisaIcon {...props} />;
     default:
       return <GenericIcon {...props} />;

@@ -1,7 +1,2 @@
-export enum CreditCardType {
-  Amex = 'amex',
-  Carrefour = 'carrefour',
-  Mastercard = 'mastercard',
-  Naranja = 'naranja',
-  Visa = 'visa',
-}
+export type CreditCardType = 'amex' | 'carrefour' | 'mastercard' | 'naranja' | 'visa';
+export const DEFAULT_CREDIT_CARD_TYPE: CreditCardType = 'visa';

@@ -1,4 +1,2 @@
-export enum CategoryType {
-  Expense = 'expenses',
-  Income = 'incomes',
-}
+export type CategoryType = 'expenses' | 'incomes';
+export const DEFAULT_CATEGORY_TYPE: CategoryType = 'expenses';

@@ -24,13 +24,13 @@ const hook = (startDate?: Date, endDate?: Date): UseQueryResult<IAccountBalance[
       }
       const account = balances.find((b) => b.account === t.account);
       if (account) {
-        account.incomes += t.type === TransactionType.Income ? t.amount : 0;
-        account.expenses += t.type === TransactionType.Expense ? t.amount : 0;
+        account.incomes += t.type === 'incomes' ? t.amount : 0;
+        account.expenses += t.type === 'expenses' ? t.amount : 0;
       } else {
         balances.push({
           account: t.account,
-          incomes: t.type === TransactionType.Income ? prevAmount + t.amount : prevAmount,
-          expenses: t.type === TransactionType.Expense ? t.amount : 0,
+          incomes: t.type === 'incomes' ? prevAmount + t.amount : prevAmount,
+          expenses: t.type === 'expenses' ? t.amount : 0,
         });
       }
 

@@ -1,5 +1,3 @@
-export enum TransactionType {
-  Expense = 'expenses',
-  Income = 'incomes',
-  Transfer = 'transfer',
-}
+import { CategoryType } from './category-type';
+
+export type TransactionType = CategoryType | 'transfer';

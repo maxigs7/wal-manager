@@ -9,7 +9,7 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 
-import { Account, AccountType } from '@entities';
+import { Account, DEFAULT_ACCOUNT_TYPE } from '@entities';
 
 import { useAccountIsUnique } from '../../model/hooks';
 import AccountTypeRadioGroup from '../type-radio-group';
@@ -39,7 +39,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }
         <FormLabel htmlFor="type">Tipo</FormLabel>
         <AccountTypeRadioGroup
           control={control}
-          defaultValue={AccountType.Bank}
+          defaultValue={DEFAULT_ACCOUNT_TYPE}
           id="type"
           name="type"
         />

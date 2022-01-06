@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import {
   CreditCard,
   CreditCardForm,
-  CreditCardType,
+  DEFAULT_CREDIT_CARD_TYPE,
   useCreditCardCreate,
   useCreditCardGetById,
   useCreditCardUpdate,
@@ -34,7 +34,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => 
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
   const useFormProps = useForm<CreditCard>({
-    defaultValues: { userId: user?.id as string, type: CreditCardType.Visa },
+    defaultValues: { userId: user?.id as string, type: DEFAULT_CREDIT_CARD_TYPE },
   });
   const {
     formState: { isSubmitting: isFormSubmitting },

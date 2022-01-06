@@ -72,7 +72,7 @@ const CategoriesPage: React.FC = () => {
             aria-label="Nuevo gasto"
             colorScheme="red"
             leftIcon={<Icon icon="plus" />}
-            onClick={() => onCreate(CategoryType.Expense)}
+            onClick={() => onCreate('expenses')}
             size="sm"
           >
             Nuevo Gasto
@@ -81,7 +81,7 @@ const CategoriesPage: React.FC = () => {
             aria-label="Nuevo ingreso"
             colorScheme="green"
             leftIcon={<Icon icon="plus" />}
-            onClick={() => onCreate(CategoryType.Income)}
+            onClick={() => onCreate('incomes')}
             size="sm"
           >
             Nuevo Ingreso

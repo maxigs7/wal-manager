@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import {
   Account,
   AccountForm,
-  AccountType,
+  DEFAULT_ACCOUNT_TYPE,
   useAccountCreate,
   useAccountGetById,
   useAccountUpdate,
@@ -34,7 +34,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => 
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
   const useFormProps = useForm<Account>({
-    defaultValues: { userId: user?.id as string, type: AccountType.Bank },
+    defaultValues: { userId: user?.id as string, type: DEFAULT_ACCOUNT_TYPE },
   });
   const {
     formState: { isSubmitting: isFormSubmitting },

@@ -2,22 +2,28 @@ import { useMemo } from 'react';
 
 import { Flex } from '@chakra-ui/react';
 
-import { CategoryType } from '@entities';
+import { CategoryType, DEFAULT_CATEGORY_TYPE } from '@entities';
 
 import { TabButton } from './tab-button';
 
-const ActionBar: React.FC<IProps> = ({ onSelected, selectedType = CategoryType.Expense }) => {
-  const buttons = useMemo(
+interface IButton {
+  color: string;
+  label: string;
+  type: CategoryType;
+}
+
+const ActionBar: React.FC<IProps> = ({ onSelected, selectedType = DEFAULT_CATEGORY_TYPE }) => {
+  const buttons: IButton[] = useMemo(
     () => [
       {
         color: 'red.400',
         label: 'Gastos',
-        type: CategoryType.Expense,
+        type: 'expenses',
       },
       {
         color: 'green.400',
         label: 'Ingresos',
-        type: CategoryType.Income,
+        type: 'incomes',
       },
     ],
     [],

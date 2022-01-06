@@ -36,29 +36,29 @@ const Select: React.FC<IProps> = ({ control, id, name, placeholder, rules }) => 
   const options: IOption[] = useMemo(
     () => [
       {
-        icon: <TypeIcon height={30} type={CreditCardType.Amex} />,
+        icon: <TypeIcon height={30} type={'amex'} />,
         label: 'American Express',
-        value: CreditCardType.Amex,
+        value: 'amex',
       },
       {
-        icon: <TypeIcon height={30} type={CreditCardType.Carrefour} />,
+        icon: <TypeIcon height={30} type={'carrefour'} />,
         label: 'Carrefour',
-        value: CreditCardType.Carrefour,
+        value: 'carrefour',
       },
       {
-        icon: <TypeIcon height={30} type={CreditCardType.Mastercard} />,
+        icon: <TypeIcon height={30} type={'mastercard'} />,
         label: 'Mastercard',
-        value: CreditCardType.Mastercard,
+        value: 'mastercard',
       },
       {
-        icon: <TypeIcon height={30} type={CreditCardType.Naranja} />,
+        icon: <TypeIcon height={30} type={'naranja'} />,
         label: 'Naranja',
-        value: CreditCardType.Naranja,
+        value: 'naranja',
       },
       {
-        icon: <TypeIcon height={30} type={CreditCardType.Visa} />,
+        icon: <TypeIcon height={30} type={'visa'} />,
         label: 'VISA',
-        value: CreditCardType.Visa,
+        value: 'visa',
       },
     ],
     [],

@@ -16,11 +16,8 @@ const EmptyList: React.FC<IProps> = React.memo(({ onCreated, type }) => (
       No existen categorias
     </Text>
     {onCreated && (
-      <Button
-        colorScheme={type === CategoryType.Expense ? 'red' : 'green'}
-        onClick={() => onCreated()}
-      >
-        Crear una categoria de {type === CategoryType.Expense ? 'gasto' : 'ingreso'}
+      <Button colorScheme={type === 'expenses' ? 'red' : 'green'} onClick={() => onCreated()}>
+        Crear una categoria de {type === 'expenses' ? 'gasto' : 'ingreso'}
       </Button>
     )}
   </EmptyMessage>
