@@ -1,21 +1,32 @@
 import React from 'react';
 
-import { Button } from '@chakra-ui/react';
+import { Button, ButtonProps } from '@chakra-ui/react';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 import { Icon } from '@shared';
 
-interface IProps {
-  icon: IconName;
+interface IProps extends ButtonProps {
+  icon?: IconName;
   isSubmitting: boolean;
 }
 
-const SubmitButton: React.FC<IProps> = ({ children, icon, isSubmitting }) => (
+const SubmitButton: React.FC<IProps> = ({
+  children,
+  colorScheme = 'primary',
+  flex = { base: '1', md: 'initial' },
+  icon = 'save',
+  isSubmitting,
+  leftIcon = <Icon icon={icon} />,
+  rounded = { base: 'none', md: 'md' },
+  ...buttonProps
+}) => (
   <Button
-    colorScheme="primary"
+    {...buttonProps}
+    colorScheme={colorScheme}
+    flex={flex}
     isLoading={isSubmitting}
-    leftIcon={<Icon icon={icon} />}
-    mr={3}
+    leftIcon={leftIcon}
+    rounded={rounded}
     type="submit"
   >
     {children}

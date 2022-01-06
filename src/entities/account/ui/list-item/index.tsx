@@ -14,7 +14,7 @@ interface IProps extends BoxProps {
 }
 
 const ListItem: React.FC<IProps> = ({ account, onDelete, onSelected, ...cardProps }) => {
-  const size = useBreakpointValue({ xs: 'md', md: 'sm' });
+  const size = useBreakpointValue({ base: 'md', md: 'sm' });
   const onSelectedHandler = () => {
     onSelected && onSelected(account);
   };

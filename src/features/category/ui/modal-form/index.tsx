@@ -64,9 +64,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss, type 
         <CategoryRootForm {...useFormProps} id={id} type={type} />
       </ModalFormBody>
       <ModalFormFooter>
-        <SubmitButton icon="save" isSubmitting={isFormSubmitting || isSubmitting}>
-          Guardar
-        </SubmitButton>
+        <SubmitButton isSubmitting={isFormSubmitting || isSubmitting}>Guardar</SubmitButton>
         <CancelButton onClick={onDismiss} />
       </ModalFormFooter>
     </ModalFormContainer>

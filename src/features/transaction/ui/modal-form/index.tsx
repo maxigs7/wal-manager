@@ -84,9 +84,7 @@ const ModalForm: React.FC<IProps> = ({
         <TransactionFormComponent {...useFormProps} type={transaction?.type || type} />
       </ModalFormBody>
       <ModalFormFooter>
-        <SubmitButton icon="save" isSubmitting={isFormSubmitting || isSubmitting}>
-          Guardar
-        </SubmitButton>
+        <SubmitButton isSubmitting={isFormSubmitting || isSubmitting}>Guardar</SubmitButton>
         <CancelButton onClick={onDismiss} />
       </ModalFormFooter>
     </ModalFormContainer>
