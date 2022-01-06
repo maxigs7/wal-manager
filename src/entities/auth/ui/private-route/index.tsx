@@ -3,9 +3,9 @@ import { Navigate } from 'react-router-dom';
 
 import { useRouter } from '@shared';
 
-import { useUser } from './hooks';
+import { useUser } from '../../hooks';
 
-export const PrivateRoute: React.FC = ({ children }) => {
+const PrivateRoute: React.FC = ({ children }) => {
   const { user } = useUser();
   const { location } = useRouter();
 
@@ -15,3 +15,5 @@ export const PrivateRoute: React.FC = ({ children }) => {
   // than dropping them off on the home page.
   return user ? <>{children}</> : <Navigate state={{ from: location }} to="/auth/sign-in" />;
 };
+
+export default PrivateRoute;

@@ -2,14 +2,14 @@ import { useForm } from 'react-hook-form';
 
 import { VStack, Button } from '@chakra-ui/react';
 
-import { useSignIn } from '@entities';
+import { AuthError, useSignIn } from '@entities';
 import { useRouter } from '@shared';
 
 import { Form, SignInFormType } from './form';
 
 const Container: React.FC = () => {
   const { location, navigate } = useRouter();
-  const { isLoading, mutateAsync } = useSignIn();
+  const { isError, isLoading, mutateAsync } = useSignIn();
   const form = useForm<SignInFormType>();
 
   const signInHandler = async (user: SignInFormType) => {
@@ -30,6 +30,7 @@ const Container: React.FC = () => {
 
   return (
     <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(signInHandler)} w="full">
+      {isError && <AuthError>Usuario o contraseña incorrecta</AuthError>}
       <Form {...form} />
       <Button
         colorScheme="accent"

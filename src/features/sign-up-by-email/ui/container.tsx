@@ -2,14 +2,14 @@ import { useForm } from 'react-hook-form';
 
 import { VStack, Button } from '@chakra-ui/react';
 
-import { useSignUp } from '@entities';
+import { AuthError, useSignUp } from '@entities';
 import { useRouter } from '@shared';
 
 import { Form, SignUpFormType } from './form';
 
 const Container: React.FC = () => {
   const { location, navigate } = useRouter();
-  const { isLoading, mutateAsync } = useSignUp();
+  const { isError, isLoading, mutateAsync } = useSignUp();
   const form = useForm<SignUpFormType>();
 
   const signUpHandler = async (user: SignUpFormType) => {
@@ -30,6 +30,7 @@ const Container: React.FC = () => {
 
   return (
     <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(signUpHandler)} w="full">
+      {isError && <AuthError>{form.getValues('email')} ya se encuentra registrado</AuthError>}
       <Form {...form} />
       <Button
         colorScheme="accent"
