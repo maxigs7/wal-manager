@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex } from '@chakra-ui/react';
+import { Flex, ScaleFade } from '@chakra-ui/react';
 
 import { CreditCard } from '@entities';
 
@@ -15,18 +15,21 @@ interface IProps {
 const List: React.FC<IProps> = ({ children, creditCards = [], onDelete, onSelected }) => (
   <Flex direction={['column', 'row']} wrap="wrap">
     {creditCards.map((creditCard) => (
-      <ListItem
-        creditCard={creditCard}
-        h="64"
-        key={creditCard.id}
-        mb="5"
-        mr="5"
-        onDelete={onDelete}
-        onSelected={onSelected}
-        w={['full', '64']}
-      />
+      <ScaleFade in={true} initialScale={0.5} key={creditCard.id}>
+        <ListItem
+          creditCard={creditCard}
+          h="64"
+          mb="5"
+          mr="5"
+          onDelete={onDelete}
+          onSelected={onSelected}
+          w={['full', '64']}
+        />
+      </ScaleFade>
     ))}
-    {children}
+    <ScaleFade in={true} initialScale={0.5}>
+      {children}
+    </ScaleFade>
   </Flex>
 );
 
