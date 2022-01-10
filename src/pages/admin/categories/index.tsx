@@ -1,22 +1,24 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Button, HStack, Portal, SimpleGrid } from '@chakra-ui/react';
 
-import { CategoryType } from '@entities';
+import { Category, CategoryType } from '@entities';
 import { CategoryList, SubCategoryList, useCategoryStore } from '@features';
-import { Icon, Page, useRouter } from '@shared';
+import { Icon, Page, useMedia, useRouter } from '@shared';
 
 import { useCategoryNav, useCategoryRoutes } from './hooks';
 
 const CategoriesPage: React.FC = () => {
   const routes = useCategoryRoutes();
+  const { xs, sm } = useMedia();
   const {
     params: { type },
   } = useRouter();
   const { goCreate, goIndex, goRemove, goSubCreate, goSubRemove, goSubUpdate, goUpdate } =
     useCategoryNav();
   const [state, dispatch] = useCategoryStore();
+  const subPanelRef = useRef<HTMLDivElement>(null);
 
   const onCreate = useCallback(
     (pType?: CategoryType) => {
@@ -64,6 +66,16 @@ const CategoriesPage: React.FC = () => {
     [goUpdate],
   );
 
+  const onRootSelected = useCallback(
+    (category: Category) => {
+      if (subPanelRef.current && (xs || sm)) {
+        subPanelRef.current.scrollIntoView();
+      }
+      dispatch.onSelected(category);
+    },
+    [dispatch, sm, subPanelRef, xs],
+  );
+
   return (
     <>
       <Page metaTitle="Mis Categorias" title="Mis Categorias">
@@ -90,7 +102,7 @@ const CategoriesPage: React.FC = () => {
         <SimpleGrid columns={[1, 1, 2]} spacing={3} templateColumns={['1', '1', '2fr 3fr']}>
           <CategoryList
             onCreated={onCreate}
-            onSelected={dispatch.onSelected}
+            onSelected={onRootSelected}
             onSelectedType={onSelectedType}
             selectedId={state.selected?.id}
             type={type as CategoryType}
@@ -101,6 +113,7 @@ const CategoriesPage: React.FC = () => {
             onCreated={onSubCreate}
             onDeleted={onSubRemove}
             onUpdated={onSubUpdate}
+            ref={subPanelRef}
             selected={state.selected}
           />
         </SimpleGrid>

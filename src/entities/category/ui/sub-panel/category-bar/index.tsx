@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from '@chakra-ui/react';
+import { Button, ButtonGroup, Flex, IconButton, Text } from '@chakra-ui/react';
 
 import { Category } from '@entities';
 import { ColorCircle, Icon } from '@shared';
@@ -25,7 +25,7 @@ const CategoryBar: React.FC<IProps> = ({ category, onCreated, onDeleted, onUpdat
       justify={['center', 'space-between']}
       p={2}
     >
-      <Flex align="center" flexBasis={['100%', 'auto']} justify={['center', 'normal']} mb={[5, 0]}>
+      <Flex align="center" flexBasis={['100%', 'auto']} justify={['center', 'normal']} mb={[3, 0]}>
         <ColorCircle
           border={1}
           borderColor={category.color}
@@ -39,39 +39,73 @@ const CategoryBar: React.FC<IProps> = ({ category, onCreated, onDeleted, onUpdat
         </ColorCircle>
         <Text isTruncated>{category.name}</Text>
       </Flex>
-      <Button
-        aria-label="Editar categoria"
-        colorScheme="primary"
-        leftIcon={<Icon icon="plus" size="sm" />}
-        ml={[0, 'auto']}
-        mr={1}
-        onClick={onCreatedHandler}
-        size="xs"
+      <ButtonGroup
+        display={{ base: 'inline-flex', lg: 'none' }}
+        size="sm"
+        w={['full', 'initial']}
+        isAttached
       >
-        Agregar
-      </Button>
+        <IconButton
+          aria-label="Agregar categoria"
+          colorScheme="success"
+          flex="1"
+          icon={<Icon icon="plus" size="sm" />}
+          onClick={onCreatedHandler}
+        />
 
-      <Button
-        aria-label="Editar categoria"
-        colorScheme="primary"
-        leftIcon={<Icon icon="edit" size="sm" />}
-        mr={1}
-        onClick={onUpdatedHandler}
-        size="xs"
-      >
-        Editar
-      </Button>
+        <IconButton
+          aria-label="Editar categoria"
+          colorScheme="info"
+          flex="1"
+          icon={<Icon icon="edit" size="sm" />}
+          onClick={onUpdatedHandler}
+        />
 
-      <Button
-        aria-label="Eliminar categoria"
-        colorScheme="red"
-        leftIcon={<Icon icon="trash-alt" size="sm" />}
-        mr={3}
-        onClick={onDeletedHandler}
+        <IconButton
+          aria-label="Eliminar categoria"
+          colorScheme="danger"
+          flex="1"
+          icon={<Icon icon="trash-alt" size="sm" />}
+          onClick={onDeletedHandler}
+        />
+      </ButtonGroup>
+
+      <ButtonGroup
+        display={{ base: 'none', lg: 'inline-flex' }}
         size="xs"
+        w={['full', 'initial']}
+        isAttached
       >
-        Eliminar
-      </Button>
+        <Button
+          aria-label="Agregar categoria"
+          colorScheme="success"
+          flex="1"
+          leftIcon={<Icon icon="plus" size="sm" />}
+          onClick={onCreatedHandler}
+        >
+          Agregar
+        </Button>
+
+        <Button
+          aria-label="Editar categoria"
+          colorScheme="info"
+          flex="1"
+          leftIcon={<Icon icon="edit" size="sm" />}
+          onClick={onUpdatedHandler}
+        >
+          Editar
+        </Button>
+
+        <Button
+          aria-label="Eliminar categoria"
+          colorScheme="danger"
+          flex="1"
+          leftIcon={<Icon icon="trash-alt" size="sm" />}
+          onClick={onDeletedHandler}
+        >
+          Eliminar
+        </Button>
+      </ButtonGroup>
     </Flex>
   );
 };

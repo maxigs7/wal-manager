@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Flex, Text } from '@chakra-ui/react';
+import { Button, ButtonGroup, Fade, Flex, IconButton, Text } from '@chakra-ui/react';
 
 import { Category } from '@entities';
 import { Icon } from '@shared';
@@ -63,26 +63,57 @@ const ListItem: React.FC<IProps> = ({
         right={[0, 'auto']}
         visibility={[isSelected ? 'visible' : 'hidden', 'visible']}
       >
-        <Button
-          aria-label="Editar categoria"
-          colorScheme="primary"
-          leftIcon={<Icon icon="edit" size="sm" />}
-          mr={1}
-          onClick={onUpdatedHandler}
-          size="xs"
-        >
-          Editar
-        </Button>
+        <Fade in={isSelected}>
+          <ButtonGroup
+            display={{ base: 'inline-flex', lg: 'none' }}
+            size="sm"
+            w={['full', 'initial']}
+            isAttached
+          >
+            <IconButton
+              aria-label="Editar categoria"
+              colorScheme="info"
+              flex="1"
+              icon={<Icon icon="edit" size="sm" />}
+              onClick={onUpdatedHandler}
+            />
 
-        <Button
-          aria-label="Eliminar categoria"
-          colorScheme="danger"
-          leftIcon={<Icon icon="trash-alt" size="sm" />}
-          onClick={onDeletedHandler}
+            <IconButton
+              aria-label="Eliminar categoria"
+              colorScheme="danger"
+              flex="1"
+              icon={<Icon icon="trash-alt" size="sm" />}
+              onClick={onDeletedHandler}
+            />
+          </ButtonGroup>
+        </Fade>
+
+        <ButtonGroup
+          display={{ base: 'none', lg: 'inline-flex' }}
           size="xs"
+          w={['full', 'initial']}
+          isAttached
         >
-          Eliminar
-        </Button>
+          <Button
+            aria-label="Editar categoria"
+            colorScheme="info"
+            flex="1"
+            leftIcon={<Icon icon="edit" size="sm" />}
+            onClick={onUpdatedHandler}
+          >
+            Editar
+          </Button>
+
+          <Button
+            aria-label="Eliminar categoria"
+            colorScheme="danger"
+            flex="1"
+            leftIcon={<Icon icon="trash-alt" size="sm" />}
+            onClick={onDeletedHandler}
+          >
+            Eliminar
+          </Button>
+        </ButtonGroup>
       </Flex>
     </Flex>
   );
