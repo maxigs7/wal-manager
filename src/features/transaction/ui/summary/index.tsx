@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Box, Collapse, HStack, IconButton, useDisclosure } from '@chakra-ui/react';
+import { Box, Collapse, Stack, IconButton, useDisclosure } from '@chakra-ui/react';
 
 import {
   AccountBalance,
@@ -41,15 +41,16 @@ const Summary: React.FC<IProps> = ({ endDate, startDate }) => {
           icon={<Icon icon={icon} />}
           onClick={onToggle}
           position="absolute"
-          right="3"
-          top="3"
+          right="1"
+          top="50%"
+          transform="translateY(-50%)"
           variant="link"
         />
       </Box>
       <Collapse in={isOpen} animateOpacity>
-        <HStack gap="5" justify="center" p="3">
+        <Stack direction={['column', 'column', 'row']} gap="5" justify="center" p="3" wrap="wrap">
           <CreditCardSummary creditCards={creditCards || []} />
-        </HStack>
+        </Stack>
       </Collapse>
     </>
   );

@@ -1,23 +1,16 @@
 import React from 'react';
 
-import { Text, Flex, FlexProps } from '@chakra-ui/react';
-
-import { formatToCurrency } from '@shared';
-
 import { ICreditCardSummary } from '../../model/hooks/useCreditCardSummary';
+import SummaryItem from '../summary-item';
 
-interface IProps extends FlexProps {
+interface IProps {
   creditCards: ICreditCardSummary[];
 }
 
-const Summary: React.FC<IProps> = ({ creditCards, ...props }) => (
+const Summary: React.FC<IProps> = ({ creditCards }) => (
   <>
     {creditCards.map((s) => (
-      <Flex {...props} align="center" justify="space-around" key={s.cc}>
-        <Text>
-          <Text as="strong">{s.cc}:</Text> $ {formatToCurrency(s.amount)}
-        </Text>
-      </Flex>
+      <SummaryItem amount={s.amount} key={s.cc} label={s.cc} />
     ))}
   </>
 );

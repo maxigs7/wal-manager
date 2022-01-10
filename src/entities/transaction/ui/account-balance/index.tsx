@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { Text, Flex } from '@chakra-ui/react';
-
-import { formatToCurrency } from '@shared';
+import { Flex } from '@chakra-ui/react';
 
 import { IAccountBalance } from '../../model/hooks/useAccountBalance';
+import SummaryItem from '../summary-item';
 
 interface IProps {
   balances: IAccountBalance[];
@@ -13,13 +12,15 @@ interface IProps {
 const Balance: React.FC<IProps> = ({ balances }) => (
   <>
     {balances.map((b) => (
-      <Flex align="center" justify="space-around" key={b.account} p={3}>
-        <Text>
-          <Text as="strong">{b.account}:</Text> $ {formatToCurrency(b.incomes)}
-        </Text>
-        <Text>
-          <Text as="strong">Balance:</Text> $ {formatToCurrency(b.incomes + b.expenses)}
-        </Text>
+      <Flex
+        align={['flex-start', 'center']}
+        direction={['column', 'row']}
+        justify="space-around"
+        key={b.account}
+        p={3}
+      >
+        <SummaryItem amount={b.incomes} label={b.account} />
+        <SummaryItem amount={b.incomes + b.expenses} label="Balance" />
       </Flex>
     ))}
   </>
