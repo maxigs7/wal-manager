@@ -10,12 +10,16 @@ import { getColumns } from './columns';
 
 interface IProps {
   data: TransactionDto[];
+  onMoreActions(id: string): void;
   onRemove(id: string): void;
   onUpdate(id: string): void;
 }
 
-const TransactionTable: React.FC<IProps> = ({ data, onRemove, onUpdate }) => {
-  const columns = useMemo(() => getColumns({ onRemove, onUpdate }), [onRemove, onUpdate]);
+const TransactionTable: React.FC<IProps> = ({ data, onMoreActions, onRemove, onUpdate }) => {
+  const columns = useMemo(
+    () => getColumns({ onMoreActions, onRemove, onUpdate }),
+    [onRemove, onUpdate],
+  );
   const tableInstance = useTable(
     {
       columns,

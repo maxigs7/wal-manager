@@ -1,3 +1,4 @@
+export { default as ActionsDrawer } from './actions-drawer';
 export { default as Card } from './card';
 export { default as CardItem } from './card-list/item';
 export { default as CardList } from './card-list/list';
@@ -29,4 +30,5 @@ export { default as TableHeader } from './table/header';
 export { default as YearBar } from './year-bar';
 export { DateCell } from './table/cells';
 
+export type { IActionDrawer } from './actions-drawer';
 export type { WalIconProps } from './icon';

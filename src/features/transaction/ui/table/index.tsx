@@ -5,19 +5,27 @@ import { ContentLoader } from '@shared';
 
 interface IProps {
   endDate: Date;
+  onMoreActions(id: string): void;
   onRemove(id: string): void;
   onUpdate(id: string): void;
   startDate: Date;
 }
 
-const Table: React.FC<IProps> = ({ endDate, onRemove, onUpdate, startDate }) => {
+const Table: React.FC<IProps> = ({ endDate, onMoreActions, onRemove, onUpdate, startDate }) => {
   const { data, isLoading } = useTransactionList(startDate, endDate);
 
   if (isLoading) {
     return <ContentLoader />;
   }
 
-  return <TransactionTable data={data || []} onRemove={onRemove} onUpdate={onUpdate} />;
+  return (
+    <TransactionTable
+      data={data || []}
+      onMoreActions={onMoreActions}
+      onRemove={onRemove}
+      onUpdate={onUpdate}
+    />
+  );
 };
 
 export default Table;

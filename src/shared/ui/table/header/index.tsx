@@ -10,16 +10,18 @@ const Header = <T extends Record<string, unknown>>({
   <Thead>
     {headerGroups.map((headerGroup) => (
       <Tr {...headerGroup.getHeaderGroupProps()}>
-        {headerGroup.headers.map((column) => (
-          <Th
-            maxW="20"
-            {...column.getHeaderProps(column.getSortByToggleProps())}
-            isNumeric={column.isNumeric}
-          >
-            {column.render('Header')}
-            {column.isSorted && <SortingColumn isSortedDesc={column.isSortedDesc} />}
-          </Th>
-        ))}
+        {headerGroup.headers.map((column) => {
+          console.log(column.getHeaderProps(column.getSortByToggleProps()));
+          return (
+            <Th
+              {...column.getHeaderProps(column.getSortByToggleProps())}
+              isNumeric={column.isNumeric}
+            >
+              {column.render('Header')}
+              {column.isSorted && <SortingColumn isSortedDesc={column.isSortedDesc} />}
+            </Th>
+          );
+        })}
       </Tr>
     ))}
   </Thead>

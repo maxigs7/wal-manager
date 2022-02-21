@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Button, HStack } from '@chakra-ui/react';
 
 import { TransactionType } from '@entities';
 import { TransactionSummary, TransactionTable, useTransactionStore } from '@features';
-import { Card, Icon, MonthTabs, Page, YearBar } from '@shared';
+import { ActionsDrawer, Card, IActionDrawer, Icon, MonthTabs, Page, YearBar } from '@shared';
 
 import { useTransactionNav, useTransactionRoutes } from './hooks';
 
@@ -13,6 +13,7 @@ const TransactionsPage: React.FC = () => {
   const [state, dispatch] = useTransactionStore();
   const routes = useTransactionRoutes();
   const { goCreate, goRemove, goUpdate } = useTransactionNav();
+  const [currentActionId, setCurrentActionId] = useState<string>();
 
   const onCreate = useCallback(
     (type: TransactionType) => {
@@ -20,6 +21,10 @@ const TransactionsPage: React.FC = () => {
     },
     [goCreate, state.year, state.month],
   );
+
+  const onMoreActions = useCallback((id: string) => {
+    setCurrentActionId(id);
+  }, []);
 
   const onRemove = useCallback(
     (id: string) => {
@@ -33,6 +38,24 @@ const TransactionsPage: React.FC = () => {
       goUpdate(id, new Date(state.year, state.month));
     },
     [goUpdate, state.year, state.month],
+  );
+
+  const actions: IActionDrawer[] = useMemo(
+    () => [
+      {
+        colorScheme: 'primary',
+        label: 'Modificar',
+        icon: 'edit',
+        onClick: () => onUpdate(currentActionId as string),
+      },
+      {
+        colorScheme: 'danger',
+        label: 'Eliminar',
+        icon: 'trash-alt',
+        onClick: () => onRemove(currentActionId as string),
+      },
+    ],
+    [currentActionId],
   );
 
   return (
@@ -64,6 +87,7 @@ const TransactionsPage: React.FC = () => {
         <TransactionSummary endDate={state.endDate} startDate={state.startDate} />
         <TransactionTable
           endDate={state.endDate}
+          onMoreActions={onMoreActions}
           onRemove={onRemove}
           onUpdate={onUpdate}
           startDate={state.startDate}
@@ -73,6 +97,12 @@ const TransactionsPage: React.FC = () => {
       {routes}
 
       <Outlet />
+
+      <ActionsDrawer
+        actions={actions}
+        isOpen={!!currentActionId}
+        onClose={() => setCurrentActionId(undefined)}
+      />
     </Page>
   );
 };

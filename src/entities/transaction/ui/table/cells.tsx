@@ -1,6 +1,6 @@
 import { CellProps } from 'react-table';
 
-import { ButtonGroup, Flex, IconButton } from '@chakra-ui/react';
+import { Flex, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 
 import { CategoryTag, TransactionDto } from '@entities';
 import { Icon } from '@shared';
@@ -26,34 +26,51 @@ export const AccountCell: React.FC<CellProps<TransactionDto, string>> = ({ row: 
 );
 
 type ActionsCellType = CellProps<TransactionDto, string> & {
+  onMoreActions(id: string): void;
   onRemove(id: string): void;
   onUpdate(id: string): void;
 };
 
 export const ActionsCell: React.FC<ActionsCellType> = ({
-  row: { original },
+  onMoreActions,
   onRemove,
   onUpdate,
+  row: { original },
 }) => {
   if (!original.id) return null;
 
   return (
-    <ButtonGroup size="xs" variant="outline" isAttached>
+    <>
       <IconButton
-        aria-label="Edit transaction"
-        colorScheme="primary"
-        icon={<Icon icon="edit" />}
-        onClick={() => onUpdate(original.id)}
-        variant="solid"
+        aria-label="More Actions"
+        display={['inline-flex', 'none']}
+        icon={<Icon icon="ellipsis-h" />}
+        onClick={() => onMoreActions(original.id)}
+        size="xs"
+        variant="outline"
       />
-      <IconButton
-        aria-label="Remove transaction"
-        colorScheme="danger"
-        icon={<Icon icon="trash-alt" />}
-        onClick={() => onRemove(original.id)}
-        variant="solid"
-      />
-    </ButtonGroup>
+      <Menu>
+        <MenuButton
+          aria-label="More Actions"
+          as={IconButton}
+          display={['none', 'inline-flex']}
+          icon={<Icon icon="ellipsis-h" />}
+          size="xs"
+          variant="outline"
+        />
+        <MenuList>
+          <MenuItem icon={<Icon icon="edit" fixedWidth />} onClick={() => onUpdate(original.id)}>
+            Modificar
+          </MenuItem>
+          <MenuItem
+            icon={<Icon icon="trash-alt" fixedWidth />}
+            onClick={() => onRemove(original.id)}
+          >
+            Eliminar
+          </MenuItem>
+        </MenuList>
+      </Menu>
+    </>
   );
 };
 

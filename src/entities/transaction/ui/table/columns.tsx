@@ -6,22 +6,30 @@ import { DateCell, dateSortType } from '@shared';
 import { AccountableCell, AccountCell, ActionsCell, CategoryCell, DescriptionCell } from './cells';
 
 interface IProps {
+  onMoreActions(id: string): void;
   onRemove(id: string): void;
   onUpdate(id: string): void;
 }
 
 type GetColumnsType = (props: IProps) => Column<TransactionDto>[];
 
-export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
+export const getColumns: GetColumnsType = ({ onMoreActions, onRemove, onUpdate }) => [
   {
-    Header: '...',
     accessor: 'id',
-    Cell: (props) => <ActionsCell {...props} onRemove={onRemove} onUpdate={onUpdate} />,
+    Cell: (props) => (
+      <ActionsCell
+        {...props}
+        onMoreActions={onMoreActions}
+        onRemove={onRemove}
+        onUpdate={onUpdate}
+      />
+    ),
+    Header: '...',
   },
   {
-    Header: 'Categoria',
     accessor: 'rootCategory',
     Cell: CategoryCell,
+    Header: 'Categoria',
     sortType: (rowA: Row<TransactionDto>, rowB: Row<TransactionDto>): number => {
       if (rowA.original.rootCategory > rowB.original.rootCategory) return 1;
       if (rowB.original.rootCategory > rowA.original.rootCategory) return -1;
@@ -33,26 +41,26 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
     },
   },
   {
-    Header: 'Cuenta',
     accessor: 'account',
     Cell: AccountCell,
+    Header: 'Cuenta',
   },
   {
-    Header: 'Fecha',
-    Cell: DateCell,
     accessor: 'date',
+    Cell: DateCell,
+    Header: 'Fecha',
     sortType: (rowA: Row<TransactionDto>, rowB: Row<TransactionDto>): number =>
       dateSortType(rowA.original.date, rowB.original.date),
   },
   {
-    Header: 'Detalle',
     accessor: 'description',
     Cell: DescriptionCell,
+    Header: 'Detalle',
   },
   {
-    Header: 'Importe',
     accessor: 'amount',
     Cell: AccountableCell,
+    Header: 'Importe',
     isNumeric: true,
   },
 ];
