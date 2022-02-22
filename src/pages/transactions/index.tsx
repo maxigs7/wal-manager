@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Button, HStack } from '@chakra-ui/react';
+import { Button, Flex, HStack } from '@chakra-ui/react';
 
 import { TransactionType } from '@entities';
 import { TransactionSummary, TransactionTable, useTransactionStore } from '@features';
@@ -81,18 +81,28 @@ const TransactionsPage: React.FC = () => {
         </Button>
       </HStack>
 
-      <Card>
-        <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
-        <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
-        <TransactionSummary endDate={state.endDate} startDate={state.startDate} />
-        <TransactionTable
+      <Flex flexDirection={['column', 'row']}>
+        <Card>
+          <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
+          <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
+          <TransactionTable
+            endDate={state.endDate}
+            onMoreActions={onMoreActions}
+            onRemove={onRemove}
+            onUpdate={onUpdate}
+            startDate={state.startDate}
+          />
+        </Card>
+
+        <TransactionSummary
           endDate={state.endDate}
-          onMoreActions={onMoreActions}
-          onRemove={onRemove}
-          onUpdate={onUpdate}
+          mb={['2', '0']}
+          ml={['0', '2']}
+          order={[-1, 'initial']}
           startDate={state.startDate}
+          textAlign={['center', 'left']}
         />
-      </Card>
+      </Flex>
 
       {routes}
 

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { Box, Collapse, Stack, IconButton, useDisclosure } from '@chakra-ui/react';
+import { VStack, StackProps } from '@chakra-ui/react';
 
 import {
   AccountBalance,
@@ -8,51 +8,31 @@ import {
   useAccountBalance,
   useCreditCardSummary,
 } from '@entities';
-import { ContentLoader, Icon } from '@shared';
+import { Card, ContentLoader } from '@shared';
 
-interface IProps {
+interface IProps extends StackProps {
   endDate: Date;
   startDate: Date;
 }
 
-const Summary: React.FC<IProps> = ({ endDate, startDate }) => {
+const Summary: React.FC<IProps> = ({ endDate, startDate, ...stackProps }) => {
   const { data: balances, isLoading: isLoadingBalance } = useAccountBalance(startDate, endDate);
   const { data: creditCards, isLoading: isLoadingCreditCards } = useCreditCardSummary(
     startDate,
     endDate,
   );
-  const { isOpen, onClose, onToggle } = useDisclosure();
-  const icon = isOpen ? 'angle-double-up' : 'angle-double-down';
-
-  useEffect(() => {
-    onClose();
-  }, [startDate]);
-
-  if (isLoadingBalance || isLoadingCreditCards) {
-    return <ContentLoader />;
-  }
 
   return (
-    <>
-      <Box position="relative">
-        <AccountBalance balances={balances || []} />
-        <IconButton
-          aria-label="Ver resumen"
-          icon={<Icon icon={icon} />}
-          onClick={onToggle}
-          position="absolute"
-          right="1"
-          top="50%"
-          transform="translateY(-50%)"
-          variant="link"
-        />
-      </Box>
-      <Collapse in={isOpen} animateOpacity>
-        <Stack direction={['column', 'column', 'row']} gap="5" justify="center" p="3" wrap="wrap">
-          <CreditCardSummary creditCards={creditCards || []} />
-        </Stack>
-      </Collapse>
-    </>
+    <VStack {...stackProps}>
+      <Card alignItems={isLoadingBalance ? 'center' : 'flex-start'} as={VStack} p="5" w="full">
+        {isLoadingBalance && <ContentLoader />}
+        {!isLoadingBalance && <AccountBalance balances={balances || []} />}
+      </Card>
+      <Card alignItems={isLoadingBalance ? 'center' : 'flex-start'} as={VStack} p="5" w="full">
+        {isLoadingCreditCards && <ContentLoader />}
+        {!isLoadingCreditCards && <CreditCardSummary creditCards={creditCards || []} />}
+      </Card>
+    </VStack>
   );
 };
 
