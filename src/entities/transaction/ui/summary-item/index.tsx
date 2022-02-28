@@ -13,7 +13,7 @@ interface IProps {
 const Item: React.FC<IProps> = ({ amount, label, useColors = false }) => {
   const color = useMemo(
     () => (useColors ? (amount > 0 ? 'green.500' : 'red.500') : ''),
-    [useColors],
+    [amount, useColors],
   );
   return (
     <Stat w="full">
