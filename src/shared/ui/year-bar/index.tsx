@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Button, Flex, IconButton } from '@chakra-ui/react';
 
 import { Icon } from '@shared';
@@ -39,4 +41,4 @@ const YearBar: React.FC<IProps> = ({ currentYear, onUpdateYear }) => {
   );
 };
 
-export default YearBar;
+export default React.memo(YearBar);

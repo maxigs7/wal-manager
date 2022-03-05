@@ -1,25 +1,18 @@
 import React from 'react';
 
-import { Button, ButtonProps, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { es } from 'date-fns/locale';
+
+import MonthButton from './button';
 
 interface IProps {
   currentMonth: number;
-  onUpdateMonth?(index: number): void;
+  onUpdateMonth(index: number): void;
 }
 
 const months = [...Array(12)].map((_v, index) =>
   es.localize?.month(index, { width: 'abbreviated' }),
 );
-
-const activeStyle = (isSelected: boolean): Partial<ButtonProps> =>
-  isSelected
-    ? {
-        borderBottom: 2,
-        borderBottomStyle: 'solid',
-        borderBottomColor: 'accent.400',
-      }
-    : {};
 
 const MonthsTab: React.FC<IProps> = ({ currentMonth, onUpdateMonth }) => {
   return (
@@ -39,22 +32,16 @@ const MonthsTab: React.FC<IProps> = ({ currentMonth, onUpdateMonth }) => {
       overflowY="hidden"
     >
       {months.map((month, index) => (
-        <Button
-          {...activeStyle(currentMonth === index)}
-          _focus={{ outline: 'none' }}
-          borderRadius={0}
-          flexBasis="100%"
+        <MonthButton
+          index={index}
+          isActive={currentMonth === index}
           key={month}
-          onClick={() => onUpdateMonth && onUpdateMonth(index)}
-          px={10}
-          textTransform="uppercase"
-          variant="ghost"
-        >
-          {month}
-        </Button>
+          month={month}
+          onUpdateMonth={onUpdateMonth}
+        />
       ))}
     </Flex>
   );
 };
 
-export default MonthsTab;
+export default React.memo(MonthsTab);

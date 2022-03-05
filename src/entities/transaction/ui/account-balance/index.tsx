@@ -20,4 +20,4 @@ const Balance: React.FC<IProps> = ({ balances }) => (
   </>
 );
 
-export default Balance;
+export default React.memo(Balance);

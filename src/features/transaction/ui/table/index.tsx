@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useWhyDidYouUpdate } from '@chakra-ui/react';
+
 import { TransactionTable, useTransactionList } from '@entities';
 import { ContentLoader } from '@shared';
 
@@ -28,4 +30,4 @@ const Table: React.FC<IProps> = ({ endDate, onMoreActions, onRemove, onUpdate, s
   );
 };
 
-export default Table;
+export default React.memo(Table);

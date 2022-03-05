@@ -36,4 +36,4 @@ const Summary: React.FC<IProps> = ({ endDate, startDate, ...stackProps }) => {
   );
 };
 
-export default Summary;
+export default React.memo(Summary);

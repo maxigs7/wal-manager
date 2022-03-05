@@ -1,12 +1,13 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Button, Flex, HStack } from '@chakra-ui/react';
+import { Flex, HStack, useWhyDidYouUpdate } from '@chakra-ui/react';
 
-import { TransactionType } from '@entities';
-import { TransactionSummary, TransactionTable, useTransactionStore } from '@features';
-import { ActionsDrawer, Card, IActionDrawer, Icon, MonthTabs, Page, YearBar } from '@shared';
+import { useTransactionStore } from '@entities';
+import { CreateTransactionButton, TransactionSummary, TransactionTable } from '@features';
+import { ActionsDrawer, Card, IActionDrawer, MonthTabs, Page, YearBar } from '@shared';
 
+import { withTransactionStore } from './hocs/withProvider';
 import { useTransactionNav, useTransactionRoutes } from './hooks';
 
 const TransactionsPage: React.FC = () => {
@@ -14,13 +15,6 @@ const TransactionsPage: React.FC = () => {
   const routes = useTransactionRoutes();
   const { goCreate, goRemove, goUpdate } = useTransactionNav();
   const [currentActionId, setCurrentActionId] = useState<string>();
-
-  const onCreate = useCallback(
-    (type: TransactionType) => {
-      goCreate(type, new Date(state.year, state.month));
-    },
-    [goCreate, state.year, state.month],
-  );
 
   const onMoreActions = useCallback((id: string) => {
     setCurrentActionId(id);
@@ -58,27 +52,25 @@ const TransactionsPage: React.FC = () => {
     [currentActionId],
   );
 
+  const onCloseDrawer = useCallback(() => {
+    setCurrentActionId(undefined);
+  }, []);
+
   return (
     <Page metaTitle="Movimientos" title="Movimientos">
-      <HStack mb={2}>
-        <Button
-          aria-label="Nuevo gasto"
-          colorScheme="red"
-          leftIcon={<Icon icon="plus" />}
-          onClick={() => onCreate('expenses')}
-          size="sm"
-        >
-          Nuevo Gasto
-        </Button>
-        <Button
-          aria-label="Nuevo ingreso"
-          colorScheme="green"
-          leftIcon={<Icon icon="plus" />}
-          onClick={() => onCreate('incomes')}
-          size="sm"
-        >
-          Nuevo Ingreso
-        </Button>
+      <HStack mb="2">
+        <CreateTransactionButton
+          goCreate={goCreate}
+          icon="plus"
+          label="Nuevo gasto"
+          type="expenses"
+        />
+        <CreateTransactionButton
+          goCreate={goCreate}
+          icon="plus"
+          label="Nuevo ingreso"
+          type="incomes"
+        />
       </HStack>
 
       <Flex flexDirection={['column', 'row']}>
@@ -108,13 +100,9 @@ const TransactionsPage: React.FC = () => {
 
       <Outlet />
 
-      <ActionsDrawer
-        actions={actions}
-        isOpen={!!currentActionId}
-        onClose={() => setCurrentActionId(undefined)}
-      />
+      <ActionsDrawer actions={actions} isOpen={!!currentActionId} onClose={onCloseDrawer} />
     </Page>
   );
 };
 
-export default TransactionsPage;
+export default withTransactionStore(TransactionsPage);

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useSortBy, useTable } from 'react-table';
 
-import { Box, Table } from '@chakra-ui/react';
+import { Box, Table, useWhyDidYouUpdate } from '@chakra-ui/react';
 
 import { TransactionDto } from '@entities';
 import { TableBody, TableHeader } from '@shared';
@@ -18,7 +18,7 @@ interface IProps {
 const TransactionTable: React.FC<IProps> = ({ data, onMoreActions, onRemove, onUpdate }) => {
   const columns = useMemo(
     () => getColumns({ onMoreActions, onRemove, onUpdate }),
-    [onRemove, onUpdate],
+    [onMoreActions, onRemove, onUpdate],
   );
   const tableInstance = useTable(
     {

@@ -1,10 +1,11 @@
-import { getRangeFromDate } from '@shared';
-
 export interface IState {
-  endDate: Date;
   month: number;
-  startDate: Date;
   year: number;
+}
+
+interface IExtendedState extends IState {
+  endDate: Date;
+  startDate: Date;
 }
 
 export interface IDispatch {
@@ -13,11 +14,10 @@ export interface IDispatch {
 }
 
 const currentDate = new Date();
-const { endDate, startDate } = getRangeFromDate(currentDate);
 
 export const initialState: IState = {
-  endDate,
   month: currentDate.getMonth(),
-  startDate,
   year: currentDate.getFullYear(),
 };
+
+export type Store = [IExtendedState, IDispatch];

@@ -17,4 +17,4 @@ const Summary: React.FC<IProps> = ({ creditCards }) => (
   </StatGroup>
 );
 
-export default Summary;
+export default React.memo(Summary);

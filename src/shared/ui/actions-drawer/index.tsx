@@ -56,4 +56,4 @@ const ActionsDrawer: React.FC<IProps> = React.memo(({ actions, isOpen, onClose, 
   );
 });
 
-export default ActionsDrawer;
+export default React.memo(ActionsDrawer);
