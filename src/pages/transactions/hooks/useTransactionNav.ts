@@ -4,6 +4,7 @@ import { TransactionType } from '@entities';
 import { useRouter } from '@shared';
 
 interface IUseTransactionNavReturn {
+  goClone(id: string): void;
   goCreate(type: TransactionType, date: Date): void;
   goIndex(): void;
   goRemove(id: string): void;
@@ -14,6 +15,7 @@ export const useTransactionNav = (): IUseTransactionNavReturn => {
   const { navigate } = useRouter();
   return useMemo(
     () => ({
+      goClone: (id: string) => navigate(`/transactions/clone/${id}`),
       goCreate: (type: TransactionType, date: Date) =>
         navigate(`/transactions/${type}/create`, { state: { defaultDate: date } }),
       goIndex: () => navigate('/transactions'),
