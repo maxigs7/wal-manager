@@ -1,4 +1,4 @@
-import { useUser } from '@entities';
+import { useUser } from '@m/auth';
 import { PageLoader } from '@shared';
 
 export const withAuthCheck = <T extends object>(

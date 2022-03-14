@@ -60,7 +60,7 @@
             "position": "before"
           },
           {
-            "pattern": "@(api|component|containers|entities|features|hooks|layouts|lib|models|pages|shared|stores|util)/**",
+            "pattern": "@(api|app|layout|lib|models|m|pages|routes|shared|theme)/**",
             "group": "internal",
             "position": "after"
           }

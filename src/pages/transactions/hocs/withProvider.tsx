@@ -1,4 +1,4 @@
-import { TransactionStoreProvider } from '@entities';
+import { TransactionStoreProvider } from '@m/transaction';
 
 export const withTransactionStore = <T extends object>(
   WrappedComponent: React.ComponentType<T>,

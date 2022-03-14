@@ -9,7 +9,7 @@ import '@fontsource/montserrat/700.css';
 
 import './styles/globals.css';
 
-import { startFontAwesome } from '@shared';
+import { startFontAwesome } from '@lib';
 
 import App from './app';
 

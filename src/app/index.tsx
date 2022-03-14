@@ -1,16 +1,14 @@
 import React, { Suspense } from 'react';
+import { useRoutes } from 'react-router-dom';
 
-import Routing from '@pages';
+import { mainRoutes } from '@routes';
 import { PageLoader } from '@shared';
 
 import { withProviders } from './hocs';
 
 const App: React.FC = withProviders(() => {
-  return (
-    <Suspense fallback={<PageLoader />}>
-      <Routing />
-    </Suspense>
-  );
+  const element = useRoutes(mainRoutes);
+  return <Suspense fallback={<PageLoader />}>{element}</Suspense>;
 });
 
 export default App;

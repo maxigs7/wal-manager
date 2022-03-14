@@ -1,4 +1,4 @@
-import { ApiProvider } from '@entities';
+import { ApiProvider } from '@api';
 
 export const withApi = <T extends object>(
   WrappedComponent: React.ComponentType<T>,

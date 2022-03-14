@@ -1,6 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 
-import { theme } from '@shared';
+import theme from '@theme';
 
 export const withChakra = <T extends object>(
   WrappedComponent: React.ComponentType<T>,

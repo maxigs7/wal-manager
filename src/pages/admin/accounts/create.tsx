@@ -1,8 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { useAccountListRefresh } from '@entities';
-import { AccountModalForm } from '@features';
+import { AccountModalFormContainer, useAccountListRefresh } from '@m/account';
 
 import { useAccountNav } from './hooks';
 
@@ -24,7 +23,7 @@ const CreatePage: React.FC = () => {
       <Helmet>
         <title>Crear Cuenta - WAL</title>
       </Helmet>
-      <AccountModalForm isOpen={true} onConfirmed={onConfirmed} onDismiss={onDismiss} />
+      <AccountModalFormContainer isOpen={true} onConfirmed={onConfirmed} onDismiss={onDismiss} />
     </>
   );
 };

@@ -4,7 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import dotenv from 'dotenv';
 
-import { startFontAwesome } from '@shared';
+import { startFontAwesome } from '@lib/font-awesome';
 
 import '@testing-library/jest-dom';
 

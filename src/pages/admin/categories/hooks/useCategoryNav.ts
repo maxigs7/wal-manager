@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
-import { CategoryType } from '@entities';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { CategoryType } from '@models';
 
 interface IUseCategoryNavReturn {
   goCreate(type: CategoryType): void;

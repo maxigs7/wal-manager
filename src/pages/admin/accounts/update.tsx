@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { Account, useAccountListRefresh } from '@entities';
-import { AccountModalForm } from '@features';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { AccountModalFormContainer, useAccountListRefresh } from '@m/account';
+import { Account } from '@models';
 
 import { useAccountNav } from './hooks';
 
@@ -28,7 +28,12 @@ const UpdatePage: React.FC = () => {
       <Helmet>
         <title>Actualizar Cuenta - WAL</title>
       </Helmet>
-      <AccountModalForm id={id} isOpen={true} onConfirmed={onConfirmed} onDismiss={onDismiss} />
+      <AccountModalFormContainer
+        id={id}
+        isOpen={true}
+        onConfirmed={onConfirmed}
+        onDismiss={onDismiss}
+      />
     </>
   );
 };

@@ -1,6 +1,9 @@
-import { createSupabaseClient, SupabaseProvider } from '@shared';
+import { createClient } from '@supabase/supabase-js';
 
-const supabase = createSupabaseClient();
+import { SupabaseProvider } from '@lib';
+import { SUPABASE_ANON_KEY, SUPABASE_API_URL } from '@shared';
+
+const supabase = createClient(SUPABASE_API_URL, SUPABASE_ANON_KEY);
 
 export const withSupabase = <T extends object>(
   WrappedComponent: React.ComponentType<T>,

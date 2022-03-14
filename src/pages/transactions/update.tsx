@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { TransactionType, useTransactionListRefresh } from '@entities';
-import { TransactionModalForm } from '@features';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { TransactionModalFormContainer, useTransactionListRefresh } from '@m/transaction';
+import { TransactionType } from '@models';
 
 import { useTransactionNav } from './hooks';
 
@@ -29,7 +29,7 @@ const UpdatePage: React.FC = () => {
       <Helmet>
         <title>Actualizar Movimiento - WAL</title>
       </Helmet>
-      <TransactionModalForm
+      <TransactionModalFormContainer
         date={defaultDate}
         id={id}
         isOpen={true}

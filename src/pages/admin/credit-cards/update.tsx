@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { CreditCard, useCreditCardListRefresh } from '@entities';
-import { CreditCardModalForm } from '@features';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { CreditCardModalFormContainer, useCreditCardListRefresh } from '@m/credit-card';
+import { CreditCard } from '@models';
 
 import { useCreditCardNav } from './hooks';
 
@@ -28,7 +28,12 @@ const UpdatePage: React.FC = () => {
       <Helmet>
         <title>Actualizar Cuenta - WAL</title>
       </Helmet>
-      <CreditCardModalForm id={id} isOpen={true} onConfirmed={onConfirmed} onDismiss={onDismiss} />
+      <CreditCardModalFormContainer
+        id={id}
+        isOpen={true}
+        onConfirmed={onConfirmed}
+        onDismiss={onDismiss}
+      />
     </>
   );
 };

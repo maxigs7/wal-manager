@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { CategoryType, useCategorySubListRefresh } from '@entities';
-import { SubCategoryModalForm } from '@features';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { SubCategoryModalFormContainer, useCategorySubListRefresh } from '@m/category';
+import { CategoryType } from '@models';
 
 import { useCategoryNav } from '../hooks';
 
@@ -28,7 +28,7 @@ const CreatePage: React.FC = () => {
       <Helmet>
         <title>Crear Categoria - WAL</title>
       </Helmet>
-      <SubCategoryModalForm
+      <SubCategoryModalFormContainer
         isOpen={true}
         onConfirmed={onConfirmed}
         onDismiss={onDismiss}

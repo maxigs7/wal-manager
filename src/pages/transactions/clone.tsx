@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { TransactionType, useTransactionListRefresh } from '@entities';
-import { TransactionModalForm } from '@features';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { useTransactionListRefresh, TransactionModalFormContainer } from '@m/transaction';
+import { TransactionType } from '@models';
 
 import { useTransactionNav } from './hooks';
 
@@ -28,7 +28,7 @@ const ClonePage: React.FC = () => {
       <Helmet>
         <title>Clonar Movimiento - WAL</title>
       </Helmet>
-      <TransactionModalForm
+      <TransactionModalFormContainer
         id={id}
         isOpen={true}
         onConfirmed={onConfirmed}

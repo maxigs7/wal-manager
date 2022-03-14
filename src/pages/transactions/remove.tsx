@@ -1,9 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { useTransactionListRefresh } from '@entities';
-import { TransactionDialogRemove } from '@features';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { useTransactionListRefresh, TransactionDialogRemoveContainer } from '@m/transaction';
 
 import { useTransactionNav } from './hooks';
 
@@ -28,7 +27,7 @@ const RemovePage: React.FC = () => {
       <Helmet>
         <title>Eliminar Movimiento - WAL</title>
       </Helmet>
-      <TransactionDialogRemove
+      <TransactionDialogRemoveContainer
         id={id}
         isOpen={true}
         onConfirmed={onConfirmed}

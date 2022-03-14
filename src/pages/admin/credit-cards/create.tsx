@@ -1,8 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { useCreditCardListRefresh } from '@entities';
-import { CreditCardModalForm } from '@features';
+import { CreditCardModalFormContainer, useCreditCardListRefresh } from '@m/credit-card';
 
 import { useCreditCardNav } from './hooks';
 
@@ -24,7 +23,7 @@ const CreatePage: React.FC = () => {
       <Helmet>
         <title>Crear Tarjeta - WAL</title>
       </Helmet>
-      <CreditCardModalForm isOpen={true} onConfirmed={onConfirmed} onDismiss={onDismiss} />
+      <CreditCardModalFormContainer isOpen={true} onConfirmed={onConfirmed} onDismiss={onDismiss} />
     </>
   );
 };

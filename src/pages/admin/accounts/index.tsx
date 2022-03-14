@@ -3,8 +3,8 @@ import { Outlet } from 'react-router';
 
 import { Portal } from '@chakra-ui/react';
 
-import { Account } from '@entities';
-import { AccountList } from '@features';
+import { AccountListContainer } from '@m/account';
+import { Account } from '@models';
 import { Page } from '@shared';
 
 import { useAccountNav, useAccountRoutes } from './hooks';
@@ -33,7 +33,7 @@ const AccountsPage: React.FC = () => {
 
   return (
     <Page metaTitle="Mis Cuentas" title="Mis Cuentas">
-      <AccountList onCreate={onCreate} onDelete={onRemove} onSelected={onUpdate} />
+      <AccountListContainer onCreate={onCreate} onDelete={onRemove} onSelected={onUpdate} />
 
       {routes}
 

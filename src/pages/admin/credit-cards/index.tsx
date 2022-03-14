@@ -3,8 +3,8 @@ import { Outlet } from 'react-router';
 
 import { Portal } from '@chakra-ui/react';
 
-import { CreditCard } from '@entities';
-import { CreditCardList } from '@features';
+import { CreditCardListContainer } from '@m/credit-card';
+import { CreditCard } from '@models';
 import { Page } from '@shared';
 
 import { useCreditCardNav, useCreditCardRoutes } from './hooks';
@@ -33,7 +33,7 @@ const CreditCardsPage: React.FC = () => {
 
   return (
     <Page metaTitle="Mis Tarjetas" title="Mis Tarjetas">
-      <CreditCardList onCreate={onCreate} onDelete={onRemove} onSelected={onUpdate} />
+      <CreditCardListContainer onCreate={onCreate} onDelete={onRemove} onSelected={onUpdate} />
 
       {routes}
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { Account, useAccountListRefresh } from '@entities';
-import { AccountDialogRemove } from '@features';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { AccountDialogRemoveContainer, useAccountListRefresh } from '@m/account';
+import { Account } from '@models';
 
 import { useAccountNav } from './hooks';
 
@@ -28,7 +28,12 @@ const RemovePage: React.FC = () => {
       <Helmet>
         <title>Eliminar Cuenta - WAL</title>
       </Helmet>
-      <AccountDialogRemove id={id} isOpen={true} onConfirmed={onConfirmed} onDismiss={onDismiss} />
+      <AccountDialogRemoveContainer
+        id={id}
+        isOpen={true}
+        onConfirmed={onConfirmed}
+        onDismiss={onDismiss}
+      />
     </>
   );
 };

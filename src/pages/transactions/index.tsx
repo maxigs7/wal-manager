@@ -1,10 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Flex, HStack, useWhyDidYouUpdate } from '@chakra-ui/react';
+import { Flex, HStack } from '@chakra-ui/react';
 
-import { useTransactionStore } from '@entities';
-import { CreateTransactionButton, TransactionSummary, TransactionTable } from '@features';
+import {
+  CreateTransactionButtonContainer,
+  TransactionSummaryContainer,
+  TransactionTableContainer,
+  useTransactionStore,
+} from '@m/transaction';
 import { ActionsDrawer, Card, IActionDrawer, MonthTabs, Page, YearBar } from '@shared';
 
 import { withTransactionStore } from './hocs/withProvider';
@@ -59,13 +63,13 @@ const TransactionsPage: React.FC = () => {
   return (
     <Page metaTitle="Movimientos" title="Movimientos">
       <HStack mb="2">
-        <CreateTransactionButton
+        <CreateTransactionButtonContainer
           goCreate={goCreate}
           icon="plus"
           label="Nuevo gasto"
           type="expenses"
         />
-        <CreateTransactionButton
+        <CreateTransactionButtonContainer
           goCreate={goCreate}
           icon="plus"
           label="Nuevo ingreso"
@@ -77,7 +81,7 @@ const TransactionsPage: React.FC = () => {
         <Card>
           <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
           <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
-          <TransactionTable
+          <TransactionTableContainer
             endDate={state.endDate}
             onMoreActions={onMoreActions}
             onRemove={onRemove}
@@ -86,7 +90,7 @@ const TransactionsPage: React.FC = () => {
           />
         </Card>
 
-        <TransactionSummary
+        <TransactionSummaryContainer
           endDate={state.endDate}
           mb={['2', '0']}
           ml={['0', '2']}

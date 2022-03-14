@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { Category, CategoryType, useCategorySubListRefresh } from '@entities';
-import { SubCategoryModalForm } from '@features';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { SubCategoryModalFormContainer, useCategorySubListRefresh } from '@m/category';
+import { Category, CategoryType } from '@models';
 
 import { useCategoryNav } from '../hooks';
 
@@ -28,7 +28,7 @@ const UpdatePage: React.FC = () => {
       <Helmet>
         <title>Actualizar Categoria - WAL</title>
       </Helmet>
-      <SubCategoryModalForm
+      <SubCategoryModalFormContainer
         id={id}
         isOpen={true}
         onConfirmed={onConfirmed}

@@ -13,10 +13,20 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@entities": ["./entities"],
-      "@features": ["./features"],
+      "@api": ["./api"],
+      "@app": ["./app"],
+      "@assets": ["./assets"],
+      "@assets/*": ["./assets/*"],
+      "@layout": ["./layout"],
+      "@lib": ["./lib"],
+      "@lib/*": ["./lib/*"],
+      "@models": ["./models"],
+      "@m/*": ["./modules/*"],
       "@pages": ["./pages"],
-      "@shared": ["./shared"]
+      "@pages/*": ["./pages/*"],
+      "@routes": ["./routes"],
+      "@shared": ["./shared"],
+      "@theme": ["./theme"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,

@@ -3,9 +3,10 @@ import { Outlet } from 'react-router-dom';
 
 import { Button, HStack, Portal, SimpleGrid } from '@chakra-ui/react';
 
-import { Category, CategoryType } from '@entities';
-import { CategoryList, SubCategoryList, useCategoryStore } from '@features';
-import { Icon, Page, useMedia, useRouter } from '@shared';
+import { useMedia, useRouter } from '@lib';
+import { CategoryListContainer, SubCategoryListContainer, useCategoryStore } from '@m/category';
+import { Category, CategoryType } from '@models';
+import { Icon, Page } from '@shared';
 
 import { useCategoryNav, useCategoryRoutes } from './hooks';
 
@@ -100,14 +101,14 @@ const CategoriesPage: React.FC = () => {
           </Button>
         </HStack>
         <SimpleGrid columns={[1, 1, 2]} spacing={3} templateColumns={['1', '1', '2fr 3fr']}>
-          <CategoryList
+          <CategoryListContainer
             onCreated={onCreate}
             onSelected={onRootSelected}
             onSelectedType={onSelectedType}
             selectedId={state.selected?.id}
             type={type as CategoryType}
           />
-          <SubCategoryList
+          <SubCategoryListContainer
             onCategoryDeleted={onRemove}
             onCategoryUpdated={onUpdate}
             onCreated={onSubCreate}

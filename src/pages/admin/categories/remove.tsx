@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { Category, CategoryType, useCategoryRootListRefresh } from '@entities';
-import { CategoryDialogRemove } from '@features';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { CategoryDialogRemoveContainer, useCategoryRootListRefresh } from '@m/category';
+import { Category, CategoryType } from '@models';
 
 import { useCategoryNav } from './hooks';
 
@@ -28,7 +28,12 @@ const RemovePage: React.FC = () => {
       <Helmet>
         <title>Eliminar Categoria - WAL</title>
       </Helmet>
-      <CategoryDialogRemove id={id} isOpen={true} onConfirmed={onConfirmed} onDismiss={onDismiss} />
+      <CategoryDialogRemoveContainer
+        id={id}
+        isOpen={true}
+        onConfirmed={onConfirmed}
+        onDismiss={onDismiss}
+      />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
-import { TransactionType } from '@entities';
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
+import { TransactionType } from '@models';
 
 interface IUseTransactionNavReturn {
   goClone(id: string): void;

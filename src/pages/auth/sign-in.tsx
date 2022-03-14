@@ -2,7 +2,7 @@ import { Link as ReactLink } from 'react-router-dom';
 
 import { Heading, Icon, Flex, Link } from '@chakra-ui/react';
 
-import { SignInByEmail } from '@features';
+import { SignInByEmail } from '@m/auth';
 import { AUTH_SIGN_UP_ENABLED, WalletLogo } from '@shared';
 
 const SignInPage: React.FC = () => (

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useRouter } from '@shared';
+import { useRouter } from '@lib';
 
 interface IUseCreditCardNavReturn {
   goCreate(): void;
