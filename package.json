@@ -30,6 +30,7 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

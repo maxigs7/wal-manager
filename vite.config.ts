@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
@@ -15,8 +16,6 @@ export default defineConfig({
           if (id.includes('node_modules')) {
             if (id.includes('react-table')) {
               return 'vendor-react-table';
-            } else if (id.includes('@chakra')) {
-              return 'vendor-chakra';
             }
             return 'vendor';
           }
@@ -24,7 +23,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react(), svgr()],
+  plugins: [viteCommonjs(), react(), svgr()],
   resolve: {
     alias: {
       '@api': resolve(__dirname, './src/api'),
