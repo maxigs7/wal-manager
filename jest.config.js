@@ -34,10 +34,17 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^@entities/(.+)': '<rootDir>/src/entities/$1',
-    '^@features/(.+)': '<rootDir>/src/features/$1',
+    '^@api/(.+)': '<rootDir>/src/api/$1',
+    '^@app/(.+)': '<rootDir>/src/app/$1',
+    '^@assets/(.+)': '<rootDir>/src/assets/$1',
+    '^@layout/(.+)': '<rootDir>/src/layout/$1',
+    '^@lib/(.+)': '<rootDir>/src/lib/$1',
+    '^@models/(.+)': '<rootDir>/src/models/$1',
+    '^@m/(.+)': '<rootDir>/src/modules/$1',
     '^@pages/(.+)': '<rootDir>/src/pages/$1',
+    '^@routes/(.+)': '<rootDir>/src/routes/$1',
     '^@shared/(.+)': '<rootDir>/src/shared/$1',
+    '^@theme/(.+)': '<rootDir>/src/theme/$1',
   },
 
   // A preset that is used as a base for Jest's configuration

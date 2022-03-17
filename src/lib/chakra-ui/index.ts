@@ -1,2 +1,2 @@
-export * from './useMedia';
+export * from './useMediaQuery';
 export * from './useToast';

@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import { Button, HStack, Portal, SimpleGrid } from '@chakra-ui/react';
 
-import { useMedia, useRouter } from '@lib';
+import { useMediaQuery, useRouter } from '@lib';
 import { CategoryListContainer, SubCategoryListContainer, useCategoryStore } from '@m/category';
 import { Category, CategoryType } from '@models';
 import { Icon, Page } from '@shared';
@@ -12,7 +12,7 @@ import { useCategoryNav, useCategoryRoutes } from './hooks';
 
 const CategoriesPage: React.FC = () => {
   const routes = useCategoryRoutes();
-  const { xs, sm } = useMedia();
+  const { xs, sm } = useMediaQuery();
   const {
     params: { type },
   } = useRouter();
