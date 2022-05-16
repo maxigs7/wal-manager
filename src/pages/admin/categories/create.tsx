@@ -1,16 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
-import { useRouter } from '@lib';
 import { CategoryModalFormContainer, useCategoryRootListRefresh } from '@m/category';
 import { CategoryType } from '@models';
 
 import { useCategoryNav } from './hooks';
 
 const CreatePage: React.FC = () => {
-  const {
-    params: { type },
-  } = useRouter();
+  const { type } = useParams();
   const { goIndex } = useCategoryNav();
   const refresh = useCategoryRootListRefresh();
 

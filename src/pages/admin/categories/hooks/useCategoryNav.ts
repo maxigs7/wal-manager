@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { useRouter } from '@lib';
 import { CategoryType } from '@models';
 
 interface IUseCategoryNavReturn {
@@ -14,7 +14,7 @@ interface IUseCategoryNavReturn {
 }
 
 export const useCategoryNav = (): IUseCategoryNavReturn => {
-  const { navigate } = useRouter();
+  const navigate = useNavigate();
   return useMemo(
     () => ({
       goCreate: (type: CategoryType) => navigate(`/admin/categories/${type}/create`),

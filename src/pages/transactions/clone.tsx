@@ -1,16 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
-import { useRouter } from '@lib';
 import { useTransactionListRefresh, TransactionModalFormContainer } from '@m/transaction';
 import { TransactionType } from '@models';
 
 import { useTransactionNav } from './hooks';
 
 const ClonePage: React.FC = () => {
-  const {
-    params: { id, type },
-  } = useRouter();
+  const { id, type } = useParams();
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
 

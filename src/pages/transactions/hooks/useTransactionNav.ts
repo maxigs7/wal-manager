@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { useRouter } from '@lib';
 import { TransactionType } from '@models';
 
 interface IUseTransactionNavReturn {
@@ -12,7 +12,7 @@ interface IUseTransactionNavReturn {
 }
 
 export const useTransactionNav = (): IUseTransactionNavReturn => {
-  const { navigate } = useRouter();
+  const navigate = useNavigate();
   return useMemo(
     () => ({
       goClone: (id: string) => navigate(`/transactions/clone/${id}`),

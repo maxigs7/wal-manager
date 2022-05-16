@@ -1,17 +1,21 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
-import { useRouter } from '@lib';
+import { useLocationState } from '@lib';
 import { TransactionModalFormContainer, useTransactionListRefresh } from '@m/transaction';
 import { TransactionType } from '@models';
 
 import { useTransactionNav } from './hooks';
 
+interface IState {
+  defaultDate?: Date | undefined;
+}
+
 const UpdatePage: React.FC = () => {
-  const {
-    params: { id, type },
-    state: { defaultDate },
-  } = useRouter();
+  const { id, type } = useParams();
+  const { defaultDate } = useLocationState<IState>() || {};
+
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
 

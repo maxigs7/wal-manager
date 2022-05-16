@@ -1,9 +1,9 @@
 import React, { useCallback, useRef } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
 import { Button, HStack, Portal, SimpleGrid } from '@chakra-ui/react';
 
-import { useMediaQuery, useRouter } from '@lib';
+import { useMediaQuery } from '@lib';
 import { CategoryListContainer, SubCategoryListContainer, useCategoryStore } from '@m/category';
 import { Category, CategoryType } from '@models';
 import { Icon, Page } from '@shared';
@@ -13,9 +13,7 @@ import { useCategoryNav, useCategoryRoutes } from './hooks';
 const CategoriesPage: React.FC = () => {
   const routes = useCategoryRoutes();
   const { xs, sm } = useMediaQuery();
-  const {
-    params: { type },
-  } = useRouter();
+  const { type } = useParams();
   const { goCreate, goIndex, goRemove, goSubCreate, goSubRemove, goSubUpdate, goUpdate } =
     useCategoryNav();
   const [state, dispatch] = useCategoryStore();

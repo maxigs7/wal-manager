@@ -34,13 +34,7 @@ const InputNumber: React.FC<IProps> = ({ control, defaultValue, id, name, rules 
   };
 
   return (
-    <NumberInput
-      {...field}
-      defaultValue={defaultValue}
-      id={id}
-      onChange={handleWithPrecision}
-      type="numeric"
-    >
+    <NumberInput {...field} defaultValue={defaultValue} id={id} onChange={handleWithPrecision}>
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />

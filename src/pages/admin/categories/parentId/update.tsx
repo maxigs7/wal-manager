@@ -1,16 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
-import { useRouter } from '@lib';
 import { SubCategoryModalFormContainer, useCategorySubListRefresh } from '@m/category';
 import { Category, CategoryType } from '@models';
 
 import { useCategoryNav } from '../hooks';
 
 const UpdatePage: React.FC = () => {
-  const {
-    params: { id, parentId, type },
-  } = useRouter();
+  const { id, parentId, type } = useParams();
   const { goIndex } = useCategoryNav();
   const refresh = useCategorySubListRefresh();
 

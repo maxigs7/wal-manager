@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-
-import { useRouter } from '@lib';
+import { useNavigate } from 'react-router-dom';
 
 interface IUseAccountNavReturn {
   goCreate(): void;
@@ -10,7 +9,7 @@ interface IUseAccountNavReturn {
 }
 
 export const useAccountNav = (): IUseAccountNavReturn => {
-  const { navigate } = useRouter();
+  const navigate = useNavigate();
   return useMemo(
     () => ({
       goCreate: () => navigate('/admin/accounts/create'),

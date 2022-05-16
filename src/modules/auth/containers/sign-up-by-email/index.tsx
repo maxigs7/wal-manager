@@ -1,14 +1,20 @@
 import { useForm } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { VStack, Button } from '@chakra-ui/react';
 
-import { useRouter } from '@lib';
+import { useLocationState } from '@lib';
 
 import { AuthError, SignUpForm, SignUpFormType } from '../../components';
 import { useSignUp } from '../../hooks';
 
+interface IState {
+  from?: { pathname: string };
+}
+
 const Container: React.FC = () => {
-  const { location, navigate } = useRouter();
+  const state = useLocationState<IState>();
+  const navigate = useNavigate();
   const { isError, isLoading, mutateAsync } = useSignUp();
   const form = useForm<SignUpFormType>();
 
@@ -21,7 +27,7 @@ const Container: React.FC = () => {
       // when they get to the protected page and click the back button, they
       // won't end up back on the login page, which is also really nice for the
       // user experience.
-      const from = location.state?.from?.pathname || '/dashboard';
+      const from = state?.from?.pathname || '/dashboard';
       navigate(from, { replace: true });
     } catch (error) {
       console.error(error);

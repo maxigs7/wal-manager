@@ -1,16 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
-import { useRouter } from '@lib';
 import { CreditCardModalFormContainer, useCreditCardListRefresh } from '@m/credit-card';
 import { CreditCard } from '@models';
 
 import { useCreditCardNav } from './hooks';
 
 const UpdatePage: React.FC = () => {
-  const {
-    params: { id },
-  } = useRouter();
+  const { id } = useParams();
   const { goIndex } = useCreditCardNav();
   const refresh = useCreditCardListRefresh();
 

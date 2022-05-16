@@ -1,16 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
-import { useRouter } from '@lib';
 import { CategoryDialogRemoveContainer, useCategoryRootListRefresh } from '@m/category';
 import { Category, CategoryType } from '@models';
 
 import { useCategoryNav } from './hooks';
 
 const RemovePage: React.FC = () => {
-  const {
-    params: { id, type },
-  } = useRouter();
+  const { id, type } = useParams();
   const { goIndex } = useCategoryNav();
   const refresh = useCategoryRootListRefresh();
 

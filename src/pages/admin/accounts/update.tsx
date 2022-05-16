@@ -1,16 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
-import { useRouter } from '@lib';
 import { AccountModalFormContainer, useAccountListRefresh } from '@m/account';
 import { Account } from '@models';
 
 import { useAccountNav } from './hooks';
 
 const UpdatePage: React.FC = () => {
-  const {
-    params: { id },
-  } = useRouter();
+  const { id } = useParams();
   const { goIndex } = useAccountNav();
   const refresh = useAccountListRefresh();
 

@@ -29,7 +29,7 @@ const CreateButton: React.FC<IProps> = ({ goCreate, icon, label, type }) => {
 
   const onCreateHandler = useCallback(() => {
     goCreate(type, new Date(state.year, state.month));
-  }, [goCreate, type]);
+  }, [goCreate, state.month, state.year, type]);
 
   return (
     <Button

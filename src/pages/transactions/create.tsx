@@ -1,19 +1,23 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
 import { Portal } from '@chakra-ui/react';
 
-import { useRouter } from '@lib';
+import { useLocationState } from '@lib';
 import { TransactionModalFormContainer, useTransactionListRefresh } from '@m/transaction';
 import { TransactionType } from '@models';
 
 import { useTransactionNav } from './hooks';
 
+interface IState {
+  defaultDate?: Date;
+}
+
 const CreatePage: React.FC = () => {
-  const {
-    params: { type },
-    state: { defaultDate },
-  } = useRouter();
+  const { type } = useParams();
+  const { defaultDate } = useLocationState<IState>() || {};
+
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
 

@@ -1,9 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useMatch, useResolvedPath } from 'react-router-dom';
 
 import { Badge, Link, Text } from '@chakra-ui/react';
 
-import { useRouter } from '@lib';
 import { Icon } from '@shared';
 
 import { IMenuItem } from './menu-data';
@@ -29,7 +28,6 @@ interface IProps extends IMenuItem {
 }
 
 export const MenuItem: React.FC<IProps> = ({ badge, closeSidebar, exact, icon, title, path }) => {
-  const { useResolvedPath, useMatch } = useRouter();
   const resolved = useResolvedPath(path);
   const match = useMatch({ path: resolved.pathname, end: false });
   const isActive = !!match;

@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-
-import { useRouter } from '@lib';
+import { useNavigate } from 'react-router-dom';
 
 interface IUseCreditCardNavReturn {
   goCreate(): void;
@@ -10,7 +9,7 @@ interface IUseCreditCardNavReturn {
 }
 
 export const useCreditCardNav = (): IUseCreditCardNavReturn => {
-  const { navigate } = useRouter();
+  const navigate = useNavigate();
   return useMemo(
     () => ({
       goCreate: () => navigate('/admin/credit-cards/create'),

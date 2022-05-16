@@ -1,13 +1,11 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
-
-import { useRouter } from '@lib';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import { useUser } from '../../providers';
 
 const PrivateRoute: React.FC = ({ children }) => {
   const { user } = useUser();
-  const { location } = useRouter();
+  const location = useLocation();
 
   // Redirect them to the /sign-in page, but save the current location they were
   // trying to go to when they were redirected. This allows us to send them

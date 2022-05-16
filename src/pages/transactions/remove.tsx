@@ -1,15 +1,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
-import { useRouter } from '@lib';
 import { useTransactionListRefresh, TransactionDialogRemoveContainer } from '@m/transaction';
 
 import { useTransactionNav } from './hooks';
 
 const RemovePage: React.FC = () => {
-  const {
-    params: { id },
-  } = useRouter();
+  const { id } = useParams();
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
 
