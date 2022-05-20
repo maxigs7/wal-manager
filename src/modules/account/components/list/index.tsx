@@ -13,14 +13,12 @@ interface IProps {
 }
 
 const List: React.FC<IProps> = ({ children, accounts = [], onDelete, onSelected }) => (
-  <Flex direction={['column', 'row']} wrap="wrap">
+  <Flex direction={['column', 'row']} gap="5" wrap="wrap">
     {accounts.map((account) => (
       <ScaleFade in={true} initialScale={0.5} key={account.id}>
         <ListItem
           account={account}
           h="64"
-          mb="5"
-          mr="5"
           onDelete={onDelete}
           onSelected={onSelected}
           w={['full', '64']}

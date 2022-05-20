@@ -77,7 +77,7 @@ const TransactionsPage: React.FC = () => {
         />
       </HStack>
 
-      <Flex flexDirection={['column', 'row']}>
+      <Flex direction={{ base: 'column', md: 'row' }}>
         <Card>
           <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
           <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
@@ -91,10 +91,11 @@ const TransactionsPage: React.FC = () => {
         </Card>
 
         <TransactionSummaryContainer
+          direction={{ base: 'column', sm: 'row', md: 'column' }}
           endDate={state.endDate}
-          mb={['2', '0']}
-          ml={['0', '2']}
-          order={[-1, 'initial']}
+          mb={{ base: 2, md: 0 }}
+          ml={{ base: 0, md: 2 }}
+          order={{ base: -1, md: 'initial' }}
           startDate={state.startDate}
           textAlign={['center', 'left']}
         />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { VStack, StackProps } from '@chakra-ui/react';
+import { Stack, StackProps, VStack } from '@chakra-ui/react';
 
 import { Card, ContentLoader } from '@shared';
 
@@ -20,7 +20,7 @@ const Summary: React.FC<IProps> = ({ endDate, startDate, ...stackProps }) => {
   );
 
   return (
-    <VStack {...stackProps}>
+    <Stack {...stackProps}>
       <Card alignItems={isLoadingBalance ? 'center' : 'flex-start'} as={VStack} p="5" w="full">
         {isLoadingBalance && <ContentLoader />}
         {!isLoadingBalance && <AccountBalance balances={balances || []} />}
@@ -29,7 +29,7 @@ const Summary: React.FC<IProps> = ({ endDate, startDate, ...stackProps }) => {
         {isLoadingCreditCards && <ContentLoader />}
         {!isLoadingCreditCards && <CreditCardSummary creditCards={creditCards || []} />}
       </Card>
-    </VStack>
+    </Stack>
   );
 };
 

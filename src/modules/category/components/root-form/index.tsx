@@ -37,7 +37,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register, 
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl isInvalid={!!errors.color}>
+      <FormControl as={GridItem} colSpan={[2, 1]} isInvalid={!!errors.color}>
         <FormLabel htmlFor="color">Color</FormLabel>
         <ColorSelect
           control={control}
@@ -50,7 +50,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register, 
         />
         <FormErrorMessage>{errors.color && errors.color.message}</FormErrorMessage>
       </FormControl>
-      <FormControl isInvalid={!!errors.icon}>
+      <FormControl as={GridItem} colSpan={[2, 1]} isInvalid={!!errors.icon}>
         <FormLabel htmlFor="icon">Icono</FormLabel>
         <IconSelect
           control={control}
