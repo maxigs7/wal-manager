@@ -4,7 +4,7 @@ import { Flex, IconButton, useColorModeValue } from '@chakra-ui/react';
 
 import { Icon } from '@shared';
 
-import { NAVBAR_HEIGHT, NAVBAR_Z_INDEX } from '../constants';
+import { NAVBAR_HEIGHT, NAVBAR_Z_INDEX, SIDEBAR_WIDTH } from '../constants';
 import { UserMenu } from './user-menu';
 
 interface IProps {
@@ -24,7 +24,7 @@ export const Navbar: React.FC<IProps> = ({ signOut, toggleSidebar, userName, use
       boxShadow="md"
       h={NAVBAR_HEIGHT}
       justify="space-between"
-      left="0"
+      left={{ base: 0, lg: SIDEBAR_WIDTH }}
       position="fixed"
       px={{ base: 4, sm: 6, lg: 8 }}
       right="0"

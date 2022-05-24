@@ -118,3 +118,7 @@ dist
 **/supabase/.temp
 **/supabase/.env
 **/supabase/.globals.sql
+
+# Supabase
+**/supabase/.branches
+**/supabase/.temp
