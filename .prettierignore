@@ -6,3 +6,5 @@ dist
 *.ico
 *.jpg
 *.jpeg
+package-lock.json
+yarn.lock

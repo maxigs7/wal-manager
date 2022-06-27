@@ -14,6 +14,21 @@ This project runs using [Supabase](https://supabase.io/). We're gonna need to cr
   REACT_APP_SUPABASE_ANON_KEY='insert api key'
   ```
 
+### Database
+
+If you are running Supabase CLI you can update your local instance using these commands:
+
+```
+supabase link
+# Use "supabase link --project-ref your-project-ref" to link your project in one step.
+
+supabase db remote set 'postgresql://postgres:<your_password>@db.<your_project_ref>.supabase.co:5432/postgres'
+# Use the connection string from your Supabase project here.
+
+supabase db remote commit
+# capture any changes that you have made to your database before setting up the CLI
+```
+
 ### Application
 
 Once you have supabase configured, run the app in the development mode.
