@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { ApiError } from '@api';
+import { ApiError } from '@lib';
 
 import { IAuthRepository, ISignInReturn } from './types';
 

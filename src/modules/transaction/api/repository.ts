@@ -1,8 +1,8 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { addMonths, format } from 'date-fns';
 
-import { ApiError, genericRepository } from '@api';
-import { snakeCase } from '@lib';
+import { genericRepository } from '@api';
+import { ApiError } from '@lib';
 import { Transaction, TransactionDto, TransactionForm } from '@models';
 
 import { dtoSerializer, serializer } from './serializer';
@@ -36,7 +36,7 @@ export const transactionRepository = (db: SupabaseClient): ITransactionRepositor
 
   const create = async (form: TransactionForm): Promise<Transaction> => {
     const transactions = builder(form);
-    const { data, error } = await db.from(tableName).insert(snakeCase(transactions));
+    const { data, error } = await db.from(tableName).insert(transactions);
     if (error) {
       throw new ApiError(error);
     }
@@ -52,7 +52,7 @@ export const transactionRepository = (db: SupabaseClient): ITransactionRepositor
   }: TransactionForm): Promise<Transaction> => {
     const { data, error } = await db
       .from(tableName)
-      .update(snakeCase(transaction))
+      .update(transaction)
       .match({ id: transaction.id });
 
     if (error) {

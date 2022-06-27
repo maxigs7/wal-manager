@@ -5,18 +5,6 @@ export type BaseModel = {
   id: string;
 };
 
-type CamelToSnake<T extends string, P extends string = ''> = string extends T
-  ? string
-  : T extends `${infer C0}${infer R}`
-  ? CamelToSnake<R, `${P}${C0 extends Uppercase<C0> ? '_' : ''}${Lowercase<C0>}`>
-  : P;
-
-type CamelToSnakeNested<T> = T extends Record<string, unknown>
-  ? {
-      [K in keyof T as CamelToSnake<K & string>]: CamelToSnakeNested<T[K]>;
-    }
-  : T;
-
 export class ApiError extends Error {
   public code: string;
   public details: string;
@@ -34,9 +22,7 @@ export class ApiError extends Error {
 export interface IGetAllOptions<T> {
   columns?: string;
   sort?: { field: string; ascending?: boolean };
-  filtering?: (
-    query: PostgrestFilterBuilder<CamelToSnakeNested<T>>,
-  ) => PostgrestFilterBuilder<CamelToSnakeNested<T>>;
+  filtering?: (query: PostgrestFilterBuilder<T>) => PostgrestFilterBuilder<T>;
 }
 
 export interface IRepository<T extends BaseModel> {

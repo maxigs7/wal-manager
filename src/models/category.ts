@@ -1,6 +1,6 @@
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 
-import { BaseModel } from '@api';
+import { BaseModel } from '@lib';
 
 import { CategoryType } from './category-type';
 

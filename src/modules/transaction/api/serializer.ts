@@ -1,13 +1,11 @@
 import { parseISO } from 'date-fns';
 
-import { camelCase } from '@lib';
 import { Transaction, TransactionDto } from '@models';
 
 export const serializer = (data: any[] | null): Transaction[] => {
   if (!data) return [];
 
-  const camelCasedData = camelCase(data);
-  return camelCasedData.map(
+  return data.map(
     (t: any) =>
       ({
         ...t,
@@ -20,8 +18,7 @@ export const serializer = (data: any[] | null): Transaction[] => {
 export const dtoSerializer = (data: any[] | null): TransactionDto[] => {
   if (!data) return [];
 
-  const camelCasedData = camelCase(data);
-  return camelCasedData.map(
+  return data.map(
     (t: any) =>
       ({
         ...t,

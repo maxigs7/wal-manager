@@ -1,4 +1,4 @@
-import { BaseModel } from '@api';
+import { BaseModel } from '@lib';
 
 import { CreditCardType } from './credit-card-type';
 

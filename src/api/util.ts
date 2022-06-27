@@ -1,7 +1,7 @@
 const types = new Map([
   ['ACCOUNT', 'account'],
   ['CATEGORY', 'category'],
-  ['CREDIT_CARD', 'credit_card'],
+  ['CREDIT_CARD', 'creditCard'],
   ['TRANSACTION', 'transaction'],
 ]);
 

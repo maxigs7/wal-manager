@@ -1,6 +1,6 @@
 import { IconName } from '@fortawesome/fontawesome-common-types';
 
-import { BaseModel } from '@api';
+import { BaseModel } from '@lib';
 
 import { TransactionType } from './transaction-type';
 

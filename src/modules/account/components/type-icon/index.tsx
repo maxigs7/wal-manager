@@ -14,7 +14,7 @@ const TypeIcon: React.FC<IProps> = ({ type, ...props }) => {
     switch (type) {
       case 'bank':
         return 'university';
-      case 'wallet':
+      case 'cash':
         return 'wallet';
       default:
         return 'university';

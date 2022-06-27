@@ -1,4 +1,4 @@
-import { IRepository } from '@api';
+import { IRepository } from '@lib';
 import { Transaction, TransactionDto, TransactionForm } from '@models';
 
 export interface ITransactionRepository extends IRepository<Transaction> {
