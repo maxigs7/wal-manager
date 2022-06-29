@@ -5,24 +5,39 @@
 
 CREATE OR REPLACE FUNCTION public.delete_account(
 	id uuid)
-    RETURNS SETOF "creditCard" 
+    RETURNS SETOF "account"
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE PARALLEL UNSAFE
     ROWS 1000
-
 AS $BODY$
+DECLARE
+  _id uuid = id;
 begin
-  if exists(select 1 from transaction where "accountId" = id) then
-    update "account"
-    set "archivedAt" = now()
-    where "accountId" = id
-    returning *;
+  if exists(select 1 from transaction where "accountId" = _id) then
+    return query (
+      with cte as (
+        update "account" as a
+        set "archivedAt" = now()
+        where a."id" = _id
+        returning *
+      )
+      select *
+      from cte
+    );
   else
-    delete from "account"
-    where "accountId" = id
-    returning *;
+    return query (
+      with cte as (
+        delete from "account" as a
+        where a."id" = _id
+        returning *
+      )
+      select *
+      from cte
+    );
   end if;
+
+  return;
 end;
 $BODY$;
 
@@ -41,24 +56,39 @@ GRANT EXECUTE ON FUNCTION public.delete_account(uuid) TO service_role;
 
 CREATE OR REPLACE FUNCTION public.delete_creditcard(
 	id uuid)
-    RETURNS SETOF "creditCard" 
+    RETURNS SETOF "creditCard"
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE PARALLEL UNSAFE
     ROWS 1000
-
 AS $BODY$
+DECLARE
+  _id uuid = id;
 begin
-  if exists(select 1 from transaction where "creditCardId" = id) then
-    update "creditCard"
-    set "archivedAt" = now()
-    where "creditCardId" = id
-    returning *;
+  if exists(select 1 from transaction where "creditCardId" = _id) then
+    return query (
+      with cte as (
+        update "creditCard" as cc
+        set "archivedAt" = now()
+        where cc."id" = _id
+        returning *
+      )
+      select *
+      from cte
+    );
   else
-    delete from "creditCard"
-    where "creditCardId" = id
-    returning *;
+    return query (
+      with cte as (
+        delete from "creditCard" as cc
+        where cc."id" = _id
+        returning *
+      )
+      select *
+      from cte
+    );
   end if;
+
+  return;
 end;
 $BODY$;
 
