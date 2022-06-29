@@ -93,7 +93,6 @@ import {
   faRocket,
   faRunning,
   faSave,
-  faShippingFast,
   faShoppingBasket,
   faShoppingCart,
   faShuttleVan,
@@ -109,7 +108,6 @@ import {
   faTimesCircle,
   faTrashAlt,
   faTrophy,
-  faTruckFast,
   faTv,
   faUmbrellaBeach,
   faUniversity,
@@ -223,7 +221,6 @@ export const CategoryIcons = [
   faPoo,
   faRocket,
   faRunning,
-  faShippingFast,
   faShoppingBasket,
   faShoppingCart,
   faShuttleVan,
@@ -234,7 +231,6 @@ export const CategoryIcons = [
   faTaxi,
   faTheaterMasks,
   faTrophy,
-  faTruckFast,
   faTv,
   faUmbrellaBeach,
   faUniversity,
@@ -243,4 +239,4 @@ export const CategoryIcons = [
   faWineGlassAlt,
 ];
 
-export const CategoryIconsName = CategoryIcons.map((icon) => icon.iconName);
+export const CategoryIconsName = CategoryIcons.map((icon) => icon.iconName).sort();
