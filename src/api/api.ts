@@ -1,6 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
 import { IRepository } from '@lib';
+import { accountRepository } from '@m/account';
 import { authRepository, IAuthRepository } from '@m/auth';
 import { creditCardRepository } from '@m/credit-card';
 import { ITransactionRepository, transactionRepository } from '@m/transaction';
@@ -17,7 +18,7 @@ export interface IApi {
 }
 
 const createApi = (db: SupabaseClient): IApi => ({
-  accounts: genericRepository<Account>(db, 'account'),
+  accounts: accountRepository(db),
   auth: authRepository(db),
   categories: genericRepository<Category>(db, 'category'),
   creditCards: creditCardRepository(db),
