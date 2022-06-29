@@ -19,9 +19,9 @@ const hook = (): UseIsUniqueReturn => {
         filtering: (q) => {
           let filtered = q.eq('type', type).eq('name', name);
           if (parentId) {
-            filtered = filtered.eq('parent_id', parentId);
+            filtered = filtered.eq('parentId', parentId);
           } else {
-            filtered = filtered.is('parent_id', null);
+            filtered = filtered.is('parentId', null);
           }
           if (id) {
             filtered.neq('id', id);

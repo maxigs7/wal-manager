@@ -12,7 +12,7 @@ const hook = (type?: CategoryType): UseQueryResult<Category[]> => {
     () =>
       categories.getAll({
         filtering: (q) => {
-          return q.eq('type', type).is('parent_id', null);
+          return q.eq('type', type).is('parentId', null);
         },
         sort: { field: 'name' },
       }),
