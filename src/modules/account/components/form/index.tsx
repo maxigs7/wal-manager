@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import { Account, DEFAULT_ACCOUNT_TYPE } from '@models';
+import { Checkbox } from '@shared';
 
 import { useAccountIsUnique } from '../../hooks';
 import AccountTypeRadioGroup from '../type-radio-group';
@@ -35,7 +36,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl isInvalid={!!errors.type}>
+      <FormControl as={GridItem} isInvalid={!!errors.type}>
         <FormLabel htmlFor="type">Tipo</FormLabel>
         <AccountTypeRadioGroup
           control={control}
@@ -44,6 +45,13 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }
           name="type"
         />
         <FormErrorMessage>{errors.type && errors.type.message}</FormErrorMessage>
+      </FormControl>
+
+      <FormControl as={GridItem} isInvalid={!!errors.isDefault}>
+        <Checkbox control={control} id="isDefault" name="isDefault">
+          Seleccionar por defecto
+        </Checkbox>
+        <FormErrorMessage>{errors.isDefault && errors.isDefault.message}</FormErrorMessage>
       </FormControl>
     </SimpleGrid>
   );

@@ -15,7 +15,7 @@ const TypeIcon: React.FC<IProps> = ({ type, ...props }) => {
       case 'bank':
         return 'university';
       case 'cash':
-        return 'wallet';
+        return 'money-bill-1';
       default:
         return 'university';
     }
