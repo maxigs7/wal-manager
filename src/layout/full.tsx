@@ -40,7 +40,7 @@ const FullLayout: React.FC<IProps> = ({
         userName={userName}
         userPhotoUrl={userPhotoUrl}
       />
-      <Flex as="main" mx="auto" px={{ base: 4, sm: 6, lg: 8 }} py={8} w="full">
+      <Flex as="main" mx="auto" w="full">
         {children}
       </Flex>
     </Flex>

@@ -27,7 +27,7 @@ const InputCheckbox: React.FC<IProps> = ({
   });
 
   return (
-    <Checkbox {...field} {...props} defaultChecked={defaultChecked} id={id}>
+    <Checkbox {...field} {...props} defaultChecked={defaultChecked} id={id} isChecked={field.value}>
       {children}
     </Checkbox>
   );

@@ -16,8 +16,12 @@ const Page: React.FC<IProps> = ({ children, metaDescription, metaTitle, title })
       {metaDescription && <meta content={metaDescription} name="description" />}
     </Helmet>
     <Box h="full" w="full">
-      <Title title={title} />
-      {children}
+      <Box bg="primary.600" color="white" pb="32" pt="8" px={{ base: 4, sm: 6, lg: 8 }}>
+        <Title title={title} />
+      </Box>
+      <Box mt="-32" mx={{ base: 4, sm: 6, lg: 8 }}>
+        {children}
+      </Box>
     </Box>
   </>
 );
