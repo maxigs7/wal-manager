@@ -1,6 +1,5 @@
 export { default as AccountInline } from './inline';
 export { default as AccountForm } from './form';
-export { default as AccountList } from './list';
 export { default as AccountSelect } from './select';
 export { default as AccountTable } from './table';
 export { default as AccountTypeIcon } from './type-icon';
