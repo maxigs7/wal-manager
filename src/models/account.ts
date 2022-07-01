@@ -3,8 +3,8 @@ import { BaseModel } from '@lib';
 import { AccountType } from './account-type';
 
 export type Account = BaseModel & {
-  archivedDate?: Date;
-  createdDate: Date;
+  archivedAt?: Date;
+  createdAt: Date;
   isDefault: boolean;
   name: string;
   type: AccountType;

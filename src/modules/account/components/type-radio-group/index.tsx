@@ -3,7 +3,7 @@ import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 
-import { AccountType } from '@models';
+import { AccountType, getAccountTypeName } from '@models';
 
 interface IProps {
   control: Control<any>;
@@ -32,8 +32,8 @@ const TypeRadioGroup: React.FC<IProps> = ({
   return (
     <RadioGroup {...field} defaultValue={defaultValue} id={id} placeholder={placeholder}>
       <Stack direction="row">
-        <Radio value="bank">Banco</Radio>
-        <Radio value="cash">Efectivo</Radio>
+        <Radio value="bank">{getAccountTypeName('bank')}</Radio>
+        <Radio value="cash">{getAccountTypeName('cash')}</Radio>
       </Stack>
     </RadioGroup>
   );

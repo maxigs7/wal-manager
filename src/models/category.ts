@@ -6,7 +6,7 @@ import { CategoryType } from './category-type';
 
 export type Category = BaseModel & {
   color: string;
-  createdDate: Date;
+  createdAt: Date;
   icon: IconName;
   isActive: boolean;
   name: string;

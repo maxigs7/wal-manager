@@ -1,7 +1,8 @@
 import { Column } from 'react-table';
 
-import { CreditCard } from '@models';
-import { BooleanCell } from '@shared';
+import { Flex } from '@chakra-ui/react';
+
+import { CreditCard, getCreditCardTypeName } from '@models';
 
 import TypeIcon from '../type-icon';
 import { ActionsCell } from './cells';
@@ -16,19 +17,17 @@ type GetColumnsType = (props: IProps) => Column<CreditCard>[];
 export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
   {
     accessor: 'type',
-    Cell: (props) => <TypeIcon type={props.value} width="24" />,
+    Cell: (props) => (
+      <Flex align="center" gap="3">
+        <TypeIcon type={props.value} width="32" /> {getCreditCardTypeName(props.value)}
+      </Flex>
+    ),
     disableSortBy: true,
     Header: 'Tipo',
   },
   {
     accessor: 'name',
     Header: 'Nombre',
-  },
-  {
-    accessor: 'isDefault',
-    Cell: BooleanCell,
-    disableSortBy: true,
-    Header: 'Por Defecto',
   },
   {
     accessor: 'id',

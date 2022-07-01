@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS public."creditCard"
     "createdAt" timestamp without time zone NOT NULL DEFAULT now(),
     "archivedAt" timestamp without time zone,
     "userId" uuid NOT NULL,
-    "isDefault" boolean NOT NULL DEFAULT false,
     CONSTRAINT "creditCard_pkey" PRIMARY KEY (id),
     CONSTRAINT "fk_creditCard_user" FOREIGN KEY ("userId")
         REFERENCES auth.users (id) MATCH SIMPLE

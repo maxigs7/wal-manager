@@ -1,6 +1,8 @@
 import { Column } from 'react-table';
 
-import { Account } from '@models';
+import { Flex } from '@chakra-ui/react';
+
+import { Account, getAccountTypeName } from '@models';
 import { BooleanCell } from '@shared';
 
 import TypeIcon from '../type-icon';
@@ -16,7 +18,11 @@ type GetColumnsType = (props: IProps) => Column<Account>[];
 export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
   {
     accessor: 'type',
-    Cell: (props) => <TypeIcon size="2x" type={props.value} />,
+    Cell: (props) => (
+      <Flex align="center" gap="3">
+        <TypeIcon size="2x" type={props.value} /> {getAccountTypeName(props.value)}
+      </Flex>
+    ),
     disableSortBy: true,
     Header: 'Tipo',
   },

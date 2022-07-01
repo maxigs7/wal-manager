@@ -11,7 +11,7 @@ const hook = (): UseIsUniqueReturn => {
     async (name: string, id?: string) => {
       const data = await creditCards.getAll({
         filtering: (q) => {
-          const filtered = q.eq('name', name);
+          const filtered = q.eq('name', name).is('archivedAt', null);
           return id ? filtered.neq('id', id) : filtered;
         },
       });

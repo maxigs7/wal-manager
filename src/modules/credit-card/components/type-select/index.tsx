@@ -4,7 +4,7 @@ import ReactSelect from 'react-select';
 
 import { HStack, Text } from '@chakra-ui/react';
 
-import { CreditCardType } from '@models';
+import { CreditCardType, getCreditCardTypeName } from '@models';
 
 import TypeIcon from '../type-icon';
 
@@ -37,27 +37,27 @@ const Select: React.FC<IProps> = ({ control, id, name, placeholder, rules }) => 
     () => [
       {
         icon: <TypeIcon height={30} type={'amex'} />,
-        label: 'American Express',
+        label: getCreditCardTypeName('amex'),
         value: 'amex',
       },
       {
         icon: <TypeIcon height={30} type={'carrefour'} />,
-        label: 'Carrefour',
+        label: getCreditCardTypeName('carrefour'),
         value: 'carrefour',
       },
       {
         icon: <TypeIcon height={30} type={'mastercard'} />,
-        label: 'Mastercard',
+        label: getCreditCardTypeName('mastercard'),
         value: 'mastercard',
       },
       {
         icon: <TypeIcon height={30} type={'naranja'} />,
-        label: 'Naranja',
+        label: getCreditCardTypeName('naranja'),
         value: 'naranja',
       },
       {
         icon: <TypeIcon height={30} type={'visa'} />,
-        label: 'VISA',
+        label: getCreditCardTypeName('visa'),
         value: 'visa',
       },
     ],
