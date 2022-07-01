@@ -1,16 +1,17 @@
 import React, { useCallback } from 'react';
 import { Outlet } from 'react-router';
 
-import { Portal } from '@chakra-ui/react';
+import { Button, Portal } from '@chakra-ui/react';
 
-import { CreditCardListContainer } from '@m/credit-card';
+import { CreditCardListContainer, CreditCardTableContainer } from '@m/credit-card';
 import { CreditCard } from '@models';
-import { Page } from '@shared';
+import { Card, ExpandableFilter, Icon, Page, useTextFilter, withTextFilter } from '@shared';
 
 import { useCreditCardNav, useCreditCardRoutes } from './hooks';
 
 const CreditCardsPage: React.FC = () => {
   const routes = useCreditCardRoutes();
+  const [filters, dispatchFilters] = useTextFilter();
   const { goCreate, goRemove, goUpdate } = useCreditCardNav();
 
   const onCreate = useCallback(() => {
@@ -18,22 +19,33 @@ const CreditCardsPage: React.FC = () => {
   }, [goCreate]);
 
   const onUpdate = useCallback(
-    (creditCard: CreditCard) => {
-      goUpdate(creditCard.id);
+    (id: string) => {
+      goUpdate(id);
     },
     [goUpdate],
   );
 
   const onRemove = useCallback(
-    (creditCard: CreditCard) => {
-      goRemove(creditCard.id);
+    (id: string) => {
+      goRemove(id);
     },
     [goRemove],
   );
 
   return (
     <Page metaTitle="Mis Tarjetas" title="Mis Tarjetas">
-      <CreditCardListContainer onCreate={onCreate} onDelete={onRemove} onSelected={onUpdate} />
+      <Card>
+        <ExpandableFilter
+          actions={
+            <Button colorScheme="accent" leftIcon={<Icon icon="plus" />} onClick={onCreate}>
+              Nuevo
+            </Button>
+          }
+          onChangedText={dispatchFilters.onChangedText}
+          text={filters.text}
+        />
+        <CreditCardTableContainer onRemove={onRemove} onUpdate={onUpdate} />
+      </Card>
 
       {routes}
 
@@ -44,4 +56,4 @@ const CreditCardsPage: React.FC = () => {
   );
 };
 
-export default CreditCardsPage;
+export default withTextFilter(CreditCardsPage);
