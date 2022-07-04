@@ -1,20 +1,16 @@
-import React, { useCallback, useRef } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import React, { useCallback } from 'react';
+import { Outlet } from 'react-router-dom';
 
-import { Button, HStack, Portal, SimpleGrid } from '@chakra-ui/react';
+import { Button, Portal } from '@chakra-ui/react';
 import compose from 'compose-function';
 
-import { useMediaQuery } from '@lib';
 import {
-  CategoryListContainer,
   CategoryTableContainer,
   CategoryTypeTabs,
-  SubCategoryListContainer,
   useCategoryFilter,
-  useCategoryStore,
   withCategoryFilter,
 } from '@m/category';
-import { Category, CategoryType } from '@models';
+import { CategoryType } from '@models';
 import { Card, ExpandableFilter, Icon, Page, withTextFilter } from '@shared';
 
 import { useCategoryNav, useCategoryRoutes } from './hooks';
@@ -101,24 +97,6 @@ const CategoriesPage: React.FC = () => {
             onUpdate={onUpdate}
           />
         </Card>
-        {/* <SimpleGrid columns={[1, 1, 2]} spacing={3} templateColumns={['1', '1', '2fr 3fr']}>
-          <CategoryListContainer
-            onCreated={onCreate}
-            onSelected={onRootSelected}
-            onSelectedType={onSelectedType}
-            selectedId={state.selected?.id}
-            type={type as CategoryType}
-          />
-          <SubCategoryListContainer
-            onCategoryDeleted={onRemove}
-            onCategoryUpdated={onUpdate}
-            onCreated={onSubCreate}
-            onDeleted={onSubRemove}
-            onUpdated={onSubUpdate}
-            ref={subPanelRef}
-            selected={state.selected}
-          />
-        </SimpleGrid> */}
 
         {routes}
 
