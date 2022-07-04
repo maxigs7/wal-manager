@@ -8,3 +8,11 @@ export type CategoryLookup = BaseModel & {
   rootName: string;
   subName?: string;
 };
+
+export type CategoryRow = BaseModel & {
+  color: string;
+  icon: IconName;
+  name: string;
+  parentId?: string;
+  subRows: CategoryRow[];
+};

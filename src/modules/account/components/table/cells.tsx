@@ -1,6 +1,6 @@
 import { CellProps } from 'react-table';
 
-import { IconButton } from '@chakra-ui/react';
+import { ButtonGroup, IconButton } from '@chakra-ui/react';
 
 import { Account } from '@models';
 import { Icon } from '@shared';
@@ -18,9 +18,10 @@ export const ActionsCell: React.FC<ActionsCellType> = ({
   if (!original.id) return null;
 
   return (
-    <>
+    <ButtonGroup size="sm" variant="outline" isAttached>
       <IconButton
         aria-label="Edit"
+        colorScheme="info"
         icon={<Icon icon="edit" fixedWidth />}
         onClick={() => onUpdate(original.id)}
         size="sm"
@@ -32,6 +33,6 @@ export const ActionsCell: React.FC<ActionsCellType> = ({
         onClick={() => onRemove(original.id)}
         size="sm"
       />
-    </>
+    </ButtonGroup>
   );
 };

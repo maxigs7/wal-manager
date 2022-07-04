@@ -25,7 +25,7 @@ export { default as ModalFormFooter } from './modal-form/footer';
 export { default as ModalFormHeader } from './modal-form/header';
 export { default as SubmitButton } from './modal-form/submit-button';
 export { default as Page } from './page';
-export { BooleanCell, DateCell } from './table/cells';
+export * from './table/cells';
 export { default as TableBody } from './table/body';
 export { default as TableHeader } from './table/header';
 export { default as YearBar } from './year-bar';

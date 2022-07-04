@@ -14,6 +14,7 @@ const Header = <T extends Record<string, unknown>>({
           <Th
             {...column.getHeaderProps(column.getSortByToggleProps())}
             isNumeric={column.isNumeric}
+            whiteSpace="nowrap"
           >
             {column.render('Header')}
             {column.isSorted && <SortingColumn isSortedDesc={column.isSortedDesc} />}

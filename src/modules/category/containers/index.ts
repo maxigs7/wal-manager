@@ -4,3 +4,4 @@ export { default as CategoryModalFormContainer } from './modal-form';
 export { default as SubCategoryModalFormContainer } from './modal-sub-form';
 export { default as CategorySelectContainer } from './select';
 export { default as SubCategoryListContainer } from './sub-list';
+export { default as CategoryTableContainer } from './table';

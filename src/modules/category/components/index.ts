@@ -7,6 +7,8 @@ export { default as SubCategoryForm } from './sub-form';
 export { default as SubCategoryList } from './sub-list';
 export { default as SubCategoryEmptyList } from './sub-list-empty';
 export { default as SubCategoryPanel } from './sub-panel';
+export { default as CategoryTable } from './table';
 export { default as CategoryTag } from './tag';
+export { default as CategoryTypeTabs } from './type-filter-tabs';
 
 export type { ISelectProps as ICategorySelectProps } from './select';

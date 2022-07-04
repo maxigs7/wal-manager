@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
-import { SubCategoryModalFormContainer, useCategorySubListRefresh } from '@m/category';
+import { SubCategoryModalFormContainer, useCategoryRowsRefresh } from '@m/category';
 import { Category, CategoryType } from '@models';
 
 import { useCategoryNav } from '../hooks';
@@ -10,10 +10,10 @@ import { useCategoryNav } from '../hooks';
 const UpdatePage: React.FC = () => {
   const { id, parentId, type } = useParams();
   const { goIndex } = useCategoryNav();
-  const refresh = useCategorySubListRefresh();
+  const refresh = useCategoryRowsRefresh();
 
   const onConfirmed = (category: Category) => {
-    refresh(parentId as string, category.id);
+    refresh(type as CategoryType, category.id);
     onDismiss();
   };
 

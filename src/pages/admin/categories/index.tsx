@@ -2,103 +2,106 @@ import React, { useCallback, useRef } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 
 import { Button, HStack, Portal, SimpleGrid } from '@chakra-ui/react';
+import compose from 'compose-function';
 
 import { useMediaQuery } from '@lib';
-import { CategoryListContainer, SubCategoryListContainer, useCategoryStore } from '@m/category';
+import {
+  CategoryListContainer,
+  CategoryTableContainer,
+  CategoryTypeTabs,
+  SubCategoryListContainer,
+  useCategoryFilter,
+  useCategoryStore,
+  withCategoryFilter,
+} from '@m/category';
 import { Category, CategoryType } from '@models';
-import { Icon, Page } from '@shared';
+import { Card, ExpandableFilter, Icon, Page, withTextFilter } from '@shared';
 
 import { useCategoryNav, useCategoryRoutes } from './hooks';
 
 const CategoriesPage: React.FC = () => {
   const routes = useCategoryRoutes();
-  const { xs, sm } = useMediaQuery();
-  const { type } = useParams();
+  const [filters, dispatchFilters] = useCategoryFilter();
   const { goCreate, goIndex, goRemove, goSubCreate, goSubRemove, goSubUpdate, goUpdate } =
     useCategoryNav();
-  const [state, dispatch] = useCategoryStore();
-  const subPanelRef = useRef<HTMLDivElement>(null);
 
-  const onCreate = useCallback(
-    (pType?: CategoryType) => {
-      goCreate(pType || (type as CategoryType));
-    },
-    [goCreate],
-  );
-
-  const onSelectedType = useCallback(
+  const onChangedTypeHandler = useCallback(
     (type: CategoryType) => {
+      dispatchFilters.onChangedType(type);
       goIndex(type);
     },
-    [goIndex],
+    [dispatchFilters],
   );
+
+  const onCreate = useCallback(() => {
+    goCreate(filters.type);
+  }, [goCreate]);
 
   const onRemove = useCallback(
     (id: string) => {
-      goRemove(type as CategoryType, id);
+      goRemove(filters.type, id);
     },
     [goRemove],
   );
 
-  const onSubCreate = useCallback(() => {
-    goSubCreate(type as CategoryType, state.selected?.id as string);
-  }, [goSubCreate, state.selected?.id]);
+  const onSubCreate = useCallback(
+    (id: string) => {
+      goSubCreate(filters.type, id);
+    },
+    [goSubCreate, filters.type],
+  );
 
   const onSubRemove = useCallback(
-    (id: string) => {
-      goSubRemove(type as CategoryType, state.selected?.id as string, id);
+    (parentId: string, id: string) => {
+      goSubRemove(filters.type, parentId, id);
     },
-    [goSubRemove, state.selected?.id],
+    [goSubRemove, filters.type],
   );
 
   const onSubUpdate = useCallback(
-    (id: string) => {
-      goSubUpdate(type as CategoryType, state.selected?.id as string, id);
+    (parentId: string, id: string) => {
+      goSubUpdate(filters.type, parentId, id);
     },
-    [goSubUpdate, state.selected?.id],
+    [goSubUpdate, filters.type],
   );
 
   const onUpdate = useCallback(
     (id: string) => {
-      goUpdate(type as CategoryType, id);
+      goUpdate(filters.type, id);
     },
-    [goUpdate],
-  );
-
-  const onRootSelected = useCallback(
-    (category: Category) => {
-      if (subPanelRef.current && (xs || sm)) {
-        subPanelRef.current.scrollIntoView();
-      }
-      dispatch.onSelected(category);
-    },
-    [dispatch, sm, subPanelRef, xs],
+    [goUpdate, filters.type],
   );
 
   return (
     <>
       <Page metaTitle="Mis Categorias" title="Mis Categorias">
-        <HStack mb={2}>
-          <Button
-            aria-label="Nuevo gasto"
-            colorScheme="red"
-            leftIcon={<Icon icon="plus" />}
-            onClick={() => onCreate('expenses')}
-            size="sm"
-          >
-            Nuevo Gasto
-          </Button>
-          <Button
-            aria-label="Nuevo ingreso"
-            colorScheme="green"
-            leftIcon={<Icon icon="plus" />}
-            onClick={() => onCreate('incomes')}
-            size="sm"
-          >
-            Nuevo Ingreso
-          </Button>
-        </HStack>
-        <SimpleGrid columns={[1, 1, 2]} spacing={3} templateColumns={['1', '1', '2fr 3fr']}>
+        <Card>
+          <CategoryTypeTabs onSelected={onChangedTypeHandler} selectedType={filters.type} />
+          <ExpandableFilter
+            actions={
+              <Button
+                aria-label="Nuevo gasto"
+                colorScheme={filters.type === 'expenses' ? 'red' : 'green'}
+                leftIcon={<Icon icon="plus" />}
+                onClick={onCreate}
+                size="sm"
+                w={['full', null]}
+              >
+                Nuevo {filters.type === 'expenses' ? 'Gasto' : 'Ingreso'}
+              </Button>
+            }
+            onChangedText={dispatchFilters.onChangedText}
+            text={filters.text}
+          />
+          <CategoryTableContainer
+            onRemove={onRemove}
+            onSubCreate={onSubCreate}
+            onSubRemove={onSubRemove}
+            onSubUpdate={onSubUpdate}
+            onUpdate={onUpdate}
+          />
+        </Card>
+        {/* <SimpleGrid columns={[1, 1, 2]} spacing={3} templateColumns={['1', '1', '2fr 3fr']}>
           <CategoryListContainer
             onCreated={onCreate}
             onSelected={onRootSelected}
@@ -115,7 +118,7 @@ const CategoriesPage: React.FC = () => {
             ref={subPanelRef}
             selected={state.selected}
           />
-        </SimpleGrid>
+        </SimpleGrid> */}
 
         {routes}
 
@@ -127,4 +130,4 @@ const CategoriesPage: React.FC = () => {
   );
 };
 
-export default CategoriesPage;
+export default compose(withTextFilter, withCategoryFilter)(CategoriesPage);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
-import { CategoryDialogRemoveContainer, useCategoryRootListRefresh } from '@m/category';
+import { CategoryDialogRemoveContainer, useCategoryRowsRefresh } from '@m/category';
 import { Category, CategoryType } from '@models';
 
 import { useCategoryNav } from './hooks';
@@ -10,7 +10,7 @@ import { useCategoryNav } from './hooks';
 const RemovePage: React.FC = () => {
   const { id, type } = useParams();
   const { goIndex } = useCategoryNav();
-  const refresh = useCategoryRootListRefresh();
+  const refresh = useCategoryRowsRefresh();
 
   const onConfirmed = (category: Category) => {
     refresh(type as CategoryType, category.id);

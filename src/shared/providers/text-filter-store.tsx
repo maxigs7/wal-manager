@@ -19,7 +19,7 @@ export const initialState: IState = {
 
 ///////////////////////////////////////////////
 // Actions
-export const CHANGE_TEXT = '[ACCOUNT][Filter] Change Text';
+export const CHANGE_TEXT = '[SHARED][Filter] Change Text';
 
 export type Actions = { type: typeof CHANGE_TEXT; payload: string };
 

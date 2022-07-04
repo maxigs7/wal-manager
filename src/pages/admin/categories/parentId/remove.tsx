@@ -2,18 +2,18 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
-import { CategoryDialogRemoveContainer, useCategorySubListRefresh } from '@m/category';
+import { CategoryDialogRemoveContainer, useCategoryRowsRefresh } from '@m/category';
 import { Category, CategoryType } from '@models';
 
 import { useCategoryNav } from '../hooks';
 
 const RemovePage: React.FC = () => {
-  const { id, parentId, type } = useParams();
+  const { id, type } = useParams();
   const { goIndex } = useCategoryNav();
-  const refresh = useCategorySubListRefresh();
+  const refresh = useCategoryRowsRefresh();
 
   const onConfirmed = (category: Category) => {
-    refresh(parentId as string, category.id);
+    refresh(type as CategoryType, category.id);
     onDismiss();
   };
 
