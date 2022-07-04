@@ -1,6 +1,7 @@
 import { useMutation, UseMutationResult } from 'react-query';
 
-import { ApiError, useApi } from '@api';
+import { useApi } from '@api';
+import { ApiError } from '@lib';
 
 export const useSignOut = (): UseMutationResult<void, ApiError, void> => {
   const { auth } = useApi();

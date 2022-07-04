@@ -1,7 +1,7 @@
 import { useMutation, UseMutationResult } from 'react-query';
 
-import { ApiError, useApi } from '@api';
-import { useToast } from '@lib';
+import { useApi } from '@api';
+import { ApiError, useToast } from '@lib';
 import { Category } from '@models';
 
 const hook = (showToast = true): UseMutationResult<Category, ApiError, Category> => {

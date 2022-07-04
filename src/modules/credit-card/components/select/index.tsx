@@ -37,14 +37,12 @@ const Select: React.FC<ISelectProps> = ({
   placeholder,
   rules,
 }) => {
-  const def = creditCards.find((cc) => cc.isDefault);
   const {
     field: { onChange, ref, value, ...inputProps },
   } = useController({
     name,
     control,
     rules,
-    defaultValue: def?.id,
   });
 
   const options = useMemo(

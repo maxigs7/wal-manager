@@ -1,6 +1,7 @@
 import { useMutation, UseMutationResult } from 'react-query';
 
-import { ApiError, useApi } from '@api';
+import { useApi } from '@api';
+import { ApiError } from '@lib';
 
 import { ISignInParam, ISignInReturn } from '../api/types';
 
