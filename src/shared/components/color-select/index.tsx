@@ -2,7 +2,8 @@ import React from 'react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { HStack, Text } from '@chakra-ui/react';
-import { Select as ReactSelect } from 'chakra-react-select';
+
+import { Select as ReactSelect } from '@lib';
 
 import ColorCircle from '../color-circle';
 import { colors } from './colors';

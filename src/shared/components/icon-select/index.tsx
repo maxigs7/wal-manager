@@ -3,8 +3,8 @@ import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { HStack, Text } from '@chakra-ui/react';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
-import { Select as ReactSelect } from 'chakra-react-select';
 
+import { Select as ReactSelect } from '@lib';
 import { CategoryIconsName } from '@lib/font-awesome';
 
 import Icon from '../icon';
@@ -47,7 +47,6 @@ const IconSelect: React.FC<IProps> = ({ control, defaultValue, id, name, placeho
       options={options}
       placeholder={placeholder}
       ref={ref}
-      selectedOptionColor="accent"
       value={options.find((option) => option.value === value)}
     />
   );

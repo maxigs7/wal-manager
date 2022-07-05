@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
-import { Select as ReactSelect } from 'chakra-react-select';
-
+import { Select as ReactSelect } from '@lib';
 import { CategoryLookup } from '@models';
 
 import Tag from '../tag';
@@ -64,7 +63,6 @@ const Select: React.FC<ISelectProps> = ({
       options={options}
       placeholder={placeholder}
       ref={ref}
-      selectedOptionColor="accent"
       value={options?.find((option) => option.value === value)}
     />
   );
