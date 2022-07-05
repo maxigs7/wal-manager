@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { AccountSelectContainer } from '@m/account';
+import { AccountSelectControlContainer } from '@m/account';
 import { CategorySelectContainer } from '@m/category';
 import { CreditCardSelectContainer } from '@m/credit-card';
 import { toCategoryType, TransactionForm, TransactionType } from '@models';
@@ -38,7 +38,7 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, reg
     <SimpleGrid columns={[1, 2, 3]} gap={6}>
       <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.accountId}>
         <FormLabel htmlFor="accountId">Cuenta</FormLabel>
-        <AccountSelectContainer
+        <AccountSelectControlContainer
           control={control}
           id="accountId"
           name="accountId"

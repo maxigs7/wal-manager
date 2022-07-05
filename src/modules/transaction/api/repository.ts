@@ -79,8 +79,8 @@ export const transactionRepository = (db: SupabaseClient): ITransactionRepositor
     },
     getTransactions: async (startDate: Date, endDate: Date): Promise<TransactionDto[]> => {
       const { data, error } = await db.rpc('get_transactions', {
-        start_date: format(startDate, 'yyyy-MM-dd') + 'T00:00:00.000Z',
-        end_date: format(endDate, 'yyyy-MM-dd') + 'T23:59:59.999Z',
+        startDate: format(startDate, 'yyyy-MM-dd') + 'T00:00:00.000Z',
+        endDate: format(endDate, 'yyyy-MM-dd') + 'T23:59:59.999Z',
       });
       if (error) {
         throw new Error(JSON.stringify(error));

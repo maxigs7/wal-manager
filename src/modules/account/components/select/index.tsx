@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { Control, RegisterOptions, useController } from 'react-hook-form';
 import ReactSelect from 'react-select';
 
 import { HStack } from '@chakra-ui/react';
@@ -8,15 +7,21 @@ import { Account, AccountType } from '@models';
 
 import AccountInline from '../inline';
 
+type SelectOption = {
+  label: string;
+  type: AccountType;
+  value: string;
+};
+
 export interface ISelectProps {
   accounts?: Account[];
-  control: Control<any>;
-  defaultValue?: string;
   id?: string;
   isLoading: boolean;
   name: string;
+  onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
+  onChange?(value?: string): void;
   placeholder?: string;
-  rules?: RegisterOptions;
+  value?: string;
 }
 
 const Option: React.FC<{ label: string; type: AccountType; value: string }> = ({ label, type }) => (
@@ -25,53 +30,38 @@ const Option: React.FC<{ label: string; type: AccountType; value: string }> = ({
   </HStack>
 );
 
-const Select: React.FC<ISelectProps> = ({
-  accounts = [],
-  control,
-  id,
-  isLoading,
-  name,
-  placeholder,
-  rules,
-}) => {
-  const def = accounts.find((account) => account.isDefault);
-  const {
-    field: { onChange, ref, value, ...inputProps },
-  } = useController({
-    name,
-    control,
-    rules,
-    defaultValue: def?.id,
-  });
+const Select = React.forwardRef<any, ISelectProps>(
+  ({ accounts = [], id, isLoading, name, onBlur, onChange, placeholder, value }, ref) => {
+    const options: SelectOption[] = useMemo(
+      () =>
+        accounts?.map((acc) => ({
+          label: acc.name,
+          type: acc.type,
+          value: acc.id,
+        })),
+      [accounts],
+    );
 
-  const options = useMemo(
-    () =>
-      accounts?.map((acc) => ({
-        label: acc.name,
-        type: acc.type,
-        value: acc.id,
-      })),
-    [accounts],
-  );
-
-  return (
-    <ReactSelect
-      {...inputProps}
-      formatOptionLabel={Option}
-      getOptionValue={(option) => option.value}
-      id={id}
-      isLoading={isLoading}
-      isSearchable={false}
-      menuPlacement="auto"
-      menuPortalTarget={document.body}
-      onChange={(selected) => onChange(selected?.value)}
-      options={options}
-      placeholder={placeholder}
-      ref={ref}
-      styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-      value={options?.find((option) => option.value === value)}
-    />
-  );
-};
+    return (
+      <ReactSelect
+        formatOptionLabel={Option}
+        getOptionValue={(option) => option.value}
+        id={id}
+        isLoading={isLoading}
+        isSearchable={false}
+        menuPlacement="auto"
+        menuPortalTarget={document.body}
+        name={name}
+        onBlur={onBlur}
+        onChange={(selected) => onChange && onChange(selected?.value)}
+        options={options}
+        placeholder={placeholder}
+        ref={ref}
+        styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+        value={options?.find((option) => option.value === value)}
+      />
+    );
+  },
+);
 
 export default Select;
