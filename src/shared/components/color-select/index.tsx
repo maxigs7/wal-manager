@@ -1,8 +1,8 @@
 import React from 'react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
-import Select from 'react-select';
 
 import { HStack, Text } from '@chakra-ui/react';
+import { Select as ReactSelect } from 'chakra-react-select';
 
 import ColorCircle from '../color-circle';
 import { colors } from './colors';
@@ -38,7 +38,7 @@ const ColorSelect: React.FC<IProps> = ({ control, id, name, placeholder, rules }
   });
 
   return (
-    <Select
+    <ReactSelect
       {...inputProps}
       formatOptionLabel={ColorOption}
       getOptionValue={(option) => option.value}
@@ -48,6 +48,7 @@ const ColorSelect: React.FC<IProps> = ({ control, id, name, placeholder, rules }
       options={options}
       placeholder={placeholder}
       ref={ref}
+      selectedOptionColor="accent"
       value={options.find((option) => option.value === value)}
     />
   );

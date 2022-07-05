@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
-import ReactSelect from 'react-select';
 
 import { HStack } from '@chakra-ui/react';
+import { Select as ReactSelect } from 'chakra-react-select';
 
 import { CreditCard, CreditCardType } from '@models';
 
@@ -63,10 +63,14 @@ const Select: React.FC<ISelectProps> = ({
       id={id}
       isLoading={isLoading}
       isSearchable={false}
+      menuPlacement="auto"
+      menuPortalTarget={document.body}
       onChange={(selected) => onChange(selected?.value)}
       options={options}
       placeholder={placeholder}
       ref={ref}
+      selectedOptionColor="accent"
+      styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
       value={options?.find((option) => option.value === value)}
       isClearable
     />

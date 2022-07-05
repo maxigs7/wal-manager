@@ -1,8 +1,8 @@
 import React, { useMemo, ReactElement } from 'react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
-import ReactSelect from 'react-select';
 
 import { HStack, Text } from '@chakra-ui/react';
+import { Select as ReactSelect } from 'chakra-react-select';
 
 import { CreditCardType, getCreditCardTypeName } from '@models';
 
@@ -75,6 +75,7 @@ const Select: React.FC<IProps> = ({ control, id, name, placeholder, rules }) => 
       options={options}
       placeholder={placeholder}
       ref={ref}
+      selectedOptionColor="accent"
       value={options.find((option) => option.value === value)}
     />
   );

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import ReactSelect from 'react-select';
 
 import { HStack } from '@chakra-ui/react';
+import { Select as ReactSelect } from 'chakra-react-select';
 
 import { Account, AccountType } from '@models';
 
@@ -57,6 +57,7 @@ const Select = React.forwardRef<any, ISelectProps>(
         options={options}
         placeholder={placeholder}
         ref={ref}
+        selectedOptionColor="accent"
         styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
         value={options?.find((option) => option.value === value)}
       />

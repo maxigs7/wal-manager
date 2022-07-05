@@ -17,8 +17,10 @@ const hook = (q?: string): UseQueryResult<Account[]> => {
         sort: { field: 'name' },
       }),
     {
-      select: (data) =>
-        data.filter((account) => !q || account.name.toLowerCase().includes(q.toLowerCase())),
+      select: (data: Account[]) =>
+        data.filter(
+          (account: Account) => !q || account.name.toLowerCase().includes(q.toLowerCase()),
+        ),
     },
   );
 };

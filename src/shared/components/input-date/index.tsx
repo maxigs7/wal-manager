@@ -138,7 +138,8 @@ const Datepicker: FC<IProps> = ({ control, defaultValue, name, rules }) => {
           calendarClassName={css(styles)}
           customInput={<CustomInput />}
           onChange={(date) => (Array.isArray(date) ? onChange(date[0]) : onChange(date))}
-          popperClassName={css()}
+          popperClassName={css({ zIndex: 9999 })}
+          portalId="calendarPortal"
           renderCustomHeader={CustomHeader}
           selected={value}
           showPopperArrow={false}
