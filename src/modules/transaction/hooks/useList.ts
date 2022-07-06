@@ -5,12 +5,16 @@ import { TransactionDto } from '@models';
 
 import { TRANSACTIONS_KEY } from '../constants';
 
-const hook = (startDate?: Date, endDate?: Date): UseQueryResult<TransactionDto[]> => {
+const hook = (
+  accountId?: string,
+  startDate?: Date,
+  endDate?: Date,
+): UseQueryResult<TransactionDto[]> => {
   const { transactions } = useApi();
   return useQuery(
-    [TRANSACTIONS_KEY, startDate, endDate],
-    () => transactions.getTransactions(startDate as Date, endDate as Date),
-    { enabled: !!startDate && !!endDate },
+    [TRANSACTIONS_KEY, accountId, startDate, endDate],
+    () => transactions.getTransactions(accountId as string, startDate as Date, endDate as Date),
+    { enabled: !!startDate && !!endDate && !!accountId },
   );
 };
 

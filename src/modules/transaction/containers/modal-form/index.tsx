@@ -16,6 +16,7 @@ import { useTransactionGetById, useTransactionMapping, useTransactionUpsert } fr
 import TransactionFormComponent from '../form';
 
 interface IProps {
+  accountId?: string;
   date?: Date;
   id?: string;
   isOpen: boolean;
@@ -25,6 +26,7 @@ interface IProps {
 }
 
 const ModalForm: React.FC<IProps> = ({
+  accountId,
   date = new Date(),
   id,
   isOpen,
@@ -39,6 +41,7 @@ const ModalForm: React.FC<IProps> = ({
 
   const useFormProps = useForm<TransactionForm>({
     defaultValues: {
+      accountId,
       createAll: true,
       date,
       isPaid: false,
@@ -68,6 +71,7 @@ const ModalForm: React.FC<IProps> = ({
   useEffect(() => {
     if (transaction) {
       const model = mapper(transaction);
+      console.log(model, transaction);
       reset(model);
     }
   }, [transaction]);
@@ -76,7 +80,11 @@ const ModalForm: React.FC<IProps> = ({
     <ModalFormContainer isOpen={isOpen} onClose={onDismiss} onSubmit={onSubmit()} size="5xl">
       <ModalFormHeader onClose={onDismiss}>{title}</ModalFormHeader>
       <ModalFormBody isLoading={isLoading}>
-        <TransactionFormComponent {...useFormProps} type={transaction?.type || type} />
+        <TransactionFormComponent
+          {...useFormProps}
+          accountId={accountId}
+          type={transaction?.type || type}
+        />
       </ModalFormBody>
       <ModalFormFooter>
         <SubmitButton isSubmitting={isFormSubmitting || isSubmitting}>Guardar</SubmitButton>

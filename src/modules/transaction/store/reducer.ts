@@ -1,10 +1,16 @@
-import { Actions, CHANGE_MONTH, CHANGE_YEAR } from './actions';
+import { Actions, CHANGE_ACCOUNT, CHANGE_MONTH, CHANGE_YEAR } from './actions';
 import { IState } from './state';
 
 export type Reducer = (state: IState, actions: Actions) => IState;
 
 export const reducer = (state: IState, action: Actions): IState => {
   switch (action.type) {
+    case CHANGE_ACCOUNT: {
+      return {
+        ...state,
+        accountId: action.payload,
+      };
+    }
     case CHANGE_MONTH: {
       return {
         ...state,

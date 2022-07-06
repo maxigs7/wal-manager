@@ -5,7 +5,11 @@ import { useParams } from 'react-router-dom';
 import { Portal } from '@chakra-ui/react';
 
 import { useLocationState } from '@lib';
-import { TransactionModalFormContainer, useTransactionListRefresh } from '@m/transaction';
+import {
+  TransactionModalFormContainer,
+  useTransactionListRefresh,
+  useTransactionStore,
+} from '@m/transaction';
 import { TransactionType } from '@models';
 
 import { useTransactionNav } from './hooks';
@@ -17,6 +21,7 @@ interface IState {
 const CreatePage: React.FC = () => {
   const { type } = useParams();
   const { defaultDate } = useLocationState<IState>() || {};
+  const [{ accountId }] = useTransactionStore();
 
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
@@ -37,6 +42,7 @@ const CreatePage: React.FC = () => {
       </Helmet>
       <Portal>
         <TransactionModalFormContainer
+          accountId={accountId}
           date={defaultDate}
           isOpen={true}
           onConfirmed={onConfirmed}

@@ -1,8 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Flex, HStack } from '@chakra-ui/react';
+import { Box, Flex, Stack } from '@chakra-ui/react';
 
+import { AccountSelectContainer } from '@m/account';
 import {
   CreateTransactionButtonContainer,
   TransactionSummaryContainer,
@@ -62,7 +63,14 @@ const TransactionsPage: React.FC = () => {
 
   return (
     <Page metaTitle="Movimientos" title="Movimientos">
-      <HStack mb="2">
+      <Stack direction={{ base: 'column', md: 'row' }} mb="2">
+        <Box minW={['full', 'full', '96']}>
+          <AccountSelectContainer
+            name="accountSelectedId"
+            onChange={dispatch.onChangedAccount}
+            value={state.accountId}
+          />
+        </Box>
         <CreateTransactionButtonContainer
           goCreate={goCreate}
           icon="plus"
@@ -75,13 +83,14 @@ const TransactionsPage: React.FC = () => {
           label="Nuevo ingreso"
           type="incomes"
         />
-      </HStack>
+      </Stack>
 
       <Flex direction={{ base: 'column', md: 'row' }}>
         <Card>
           <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
           <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
           <TransactionTableContainer
+            accountId={state.accountId}
             endDate={state.endDate}
             onMoreActions={onMoreActions}
             onRemove={onRemove}
@@ -91,6 +100,7 @@ const TransactionsPage: React.FC = () => {
         </Card>
 
         <TransactionSummaryContainer
+          accountId={state.accountId}
           direction={{ base: 'column', sm: 'row', md: 'column' }}
           endDate={state.endDate}
           mb={{ base: 2, md: 0 }}

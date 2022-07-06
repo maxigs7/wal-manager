@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useMemo, useReducer } from 'rea
 
 import { getRangeFromDate } from '@lib';
 
-import { changeMonth, changeYear } from '../store/actions';
+import { changeAccount, changeMonth, changeYear } from '../store/actions';
 import { reducer } from '../store/reducer';
 import { initialState, Store } from '../store/state';
 
@@ -12,6 +12,13 @@ export const useStore = () => useContext(StoreContext);
 
 export const StoreProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const onChangedAccount = useCallback(
+    (id: string) => {
+      dispatch(changeAccount(id));
+    },
+    [dispatch],
+  );
 
   const onChangedMonth = useCallback(
     (month: number) => {
@@ -29,6 +36,7 @@ export const StoreProvider: React.FC = ({ children }) => {
 
   const storeDispatch = useMemo(
     () => ({
+      onChangedAccount,
       onChangedMonth,
       onChangedYear,
     }),
@@ -42,7 +50,7 @@ export const StoreProvider: React.FC = ({ children }) => {
 
   const extendedState = useMemo(
     () => ({ ...state, endDate, startDate }),
-    [endDate, startDate, state.month, state.year],
+    [endDate, startDate, state.accountId, state.month, state.year],
   );
 
   return (

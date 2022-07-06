@@ -3,7 +3,11 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
 import { useLocationState } from '@lib';
-import { TransactionModalFormContainer, useTransactionListRefresh } from '@m/transaction';
+import {
+  TransactionModalFormContainer,
+  useTransactionListRefresh,
+  useTransactionStore,
+} from '@m/transaction';
 import { TransactionType } from '@models';
 
 import { useTransactionNav } from './hooks';
@@ -15,6 +19,7 @@ interface IState {
 const UpdatePage: React.FC = () => {
   const { id, type } = useParams();
   const { defaultDate } = useLocationState<IState>() || {};
+  const [{ accountId }] = useTransactionStore();
 
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
@@ -34,6 +39,7 @@ const UpdatePage: React.FC = () => {
         <title>Actualizar Movimiento - WAL</title>
       </Helmet>
       <TransactionModalFormContainer
+        accountId={accountId}
         date={defaultDate}
         id={id}
         isOpen={true}

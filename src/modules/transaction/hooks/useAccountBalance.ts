@@ -9,8 +9,12 @@ export interface IAccountBalance {
   expenses: number;
 }
 
-const hook = (startDate?: Date, endDate?: Date): UseQueryResult<IAccountBalance[]> => {
-  const { data, ...rest } = useList(startDate, endDate);
+const hook = (
+  accountId?: string,
+  startDate?: Date,
+  endDate?: Date,
+): UseQueryResult<IAccountBalance[]> => {
+  const { data, ...rest } = useList(accountId, startDate, endDate);
   const balance = useMemo(() => {
     if (!data) return undefined;
     const prev = data.find((t) => !t.id && !t.account);

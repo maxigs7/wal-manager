@@ -6,6 +6,7 @@ import { TransactionTable } from '../../components';
 import { useTransactionList } from '../../hooks';
 
 interface IProps {
+  accountId?: string;
   endDate: Date;
   onMoreActions(id: string): void;
   onRemove(id: string): void;
@@ -13,8 +14,15 @@ interface IProps {
   startDate: Date;
 }
 
-const Table: React.FC<IProps> = ({ endDate, onMoreActions, onRemove, onUpdate, startDate }) => {
-  const { data, isLoading } = useTransactionList(startDate, endDate);
+const Table: React.FC<IProps> = ({
+  accountId,
+  endDate,
+  onMoreActions,
+  onRemove,
+  onUpdate,
+  startDate,
+}) => {
+  const { data, isLoading } = useTransactionList(accountId, startDate, endDate);
 
   if (isLoading) {
     return <ContentLoader />;

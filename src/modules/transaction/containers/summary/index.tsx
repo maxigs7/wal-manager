@@ -8,16 +8,26 @@ import { AccountBalance, CreditCardSummary } from '../../components';
 import { useAccountBalance, useCreditCardSummary } from '../../hooks';
 
 interface IProps extends StackProps {
+  accountId: string;
   endDate: Date;
   startDate: Date;
 }
 
-const Summary: React.FC<IProps> = ({ endDate, startDate, ...stackProps }) => {
-  const { data: balances, isLoading: isLoadingBalance } = useAccountBalance(startDate, endDate);
-  const { data: creditCards, isLoading: isLoadingCreditCards } = useCreditCardSummary(
+const Summary: React.FC<IProps> = ({ accountId, endDate, startDate, ...stackProps }) => {
+  const { data: balances, isLoading: isLoadingBalance } = useAccountBalance(
+    accountId,
     startDate,
     endDate,
   );
+  const { data: creditCards, isLoading: isLoadingCreditCards } = useCreditCardSummary(
+    accountId,
+    startDate,
+    endDate,
+  );
+
+  if (!accountId) {
+    return null;
+  }
 
   return (
     <Stack {...stackProps}>

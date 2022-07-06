@@ -1,7 +1,13 @@
 import React from 'react';
 
 import { useColorModeValue } from '@chakra-ui/react';
-import { GroupBase, Props, Select as ReactSelect, SelectInstance } from 'chakra-react-select';
+import {
+  GroupBase,
+  Props,
+  Select as ReactSelect,
+  SelectComponent,
+  SelectInstance,
+} from 'chakra-react-select';
 
 export const Select = React.forwardRef(
   <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
@@ -28,4 +34,4 @@ export const Select = React.forwardRef(
       />
     );
   },
-);
+) as SelectComponent;

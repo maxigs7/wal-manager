@@ -27,26 +27,48 @@ import {
 } from '@shared';
 
 interface IProps extends UseFormReturn<TransactionForm> {
+  accountId?: string;
   type: TransactionType;
 }
 
-const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, register, type }) => {
+const Form: React.FC<IProps> = ({
+  accountId,
+  control,
+  formState: { errors },
+  getValues,
+  register,
+  type,
+}) => {
   const { isOpen, onToggle } = useDisclosure();
   const isEditing = !!getValues('id') || !!getValues('parentTransactionId');
 
   return (
     <SimpleGrid columns={[1, 2, 3]} gap={6}>
-      <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.accountId}>
-        <FormLabel htmlFor="accountId">Cuenta</FormLabel>
-        <AccountSelectControlContainer
+      {!accountId && (
+        <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.accountId}>
+          <FormLabel htmlFor="accountId">Cuenta</FormLabel>
+          <AccountSelectControlContainer
+            control={control}
+            id="accountId"
+            name="accountId"
+            placeholder="Seleccione una cuenta"
+            rules={{ required: 'Este campo es requerido' }}
+          />
+          <FormErrorMessage>{errors.accountId && errors.accountId.message}</FormErrorMessage>
+        </FormControl>
+      )}
+
+      <FormControl as={GridItem} isInvalid={!!errors.date}>
+        <FormLabel htmlFor="date">Fecha</FormLabel>
+        <InputDate
           control={control}
-          id="accountId"
-          name="accountId"
-          placeholder="Seleccione una cuenta"
+          id="date"
+          name="date"
           rules={{ required: 'Este campo es requerido' }}
         />
-        <FormErrorMessage>{errors.accountId && errors.accountId.message}</FormErrorMessage>
+        <FormErrorMessage>{errors.date && errors.date.message}</FormErrorMessage>
       </FormControl>
+
       <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.accountId}>
         <FormLabel htmlFor="categoryId">Categoria</FormLabel>
         <CategorySelectContainer
@@ -70,17 +92,6 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, getValues, reg
           rules={{ required: 'Este campo es requerido' }}
         />
         <FormErrorMessage>{errors.amount && errors.amount.message}</FormErrorMessage>
-      </FormControl>
-
-      <FormControl as={GridItem} isInvalid={!!errors.date}>
-        <FormLabel htmlFor="date">Fecha</FormLabel>
-        <InputDate
-          control={control}
-          id="date"
-          name="date"
-          rules={{ required: 'Este campo es requerido' }}
-        />
-        <FormErrorMessage>{errors.date && errors.date.message}</FormErrorMessage>
       </FormControl>
 
       <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.description}>

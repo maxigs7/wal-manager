@@ -8,8 +8,12 @@ export interface ICreditCardSummary {
   amount: number;
 }
 
-const hook = (startDate?: Date, endDate?: Date): UseQueryResult<ICreditCardSummary[]> => {
-  const { data, ...rest } = useList(startDate, endDate);
+const hook = (
+  accountId?: string,
+  startDate?: Date,
+  endDate?: Date,
+): UseQueryResult<ICreditCardSummary[]> => {
+  const { data, ...rest } = useList(accountId, startDate, endDate);
   const balance = useMemo(() => {
     if (!data) return undefined;
 

@@ -37,7 +37,6 @@ const CreateButton: React.FC<IProps> = ({ goCreate, icon, label, type }) => {
       colorScheme={colorScheme}
       leftIcon={<ButtonIcon icon={icon} />}
       onClick={onCreateHandler}
-      size="sm"
     >
       {label}
     </Button>
