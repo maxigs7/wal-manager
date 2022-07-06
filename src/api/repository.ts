@@ -1,6 +1,13 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { ApiError, BaseModel, IGetAllOptions, IRepository } from '@lib';
+import {
+  ApiError,
+  BaseModel,
+  cleanFromServer,
+  cleanToServer,
+  IGetAllOptions,
+  IRepository,
+} from '@lib';
 
 export const genericRepository = <T extends BaseModel>(
   supabase: SupabaseClient,
@@ -8,14 +15,14 @@ export const genericRepository = <T extends BaseModel>(
 ): IRepository<T> => {
   return {
     create: async (model: T): Promise<T> => {
-      const { data, error } = await supabase.from(tableName).insert(model);
+      const { data, error } = await supabase.from(tableName).insert(cleanToServer(model));
       if (error) {
         throw new ApiError(error);
       }
       if (!data) {
         throw new Error('Not Found');
       }
-      return data[0] as T;
+      return cleanFromServer(data[0]) as T;
     },
     getAll: async (options?: IGetAllOptions<T>): Promise<T[]> => {
       const query = supabase.from(tableName).select(options?.columns);
@@ -27,7 +34,7 @@ export const genericRepository = <T extends BaseModel>(
       if (error) {
         throw new ApiError(error);
       }
-      return data ? (data as T[]) : [];
+      return data ? (cleanFromServer(data) as T[]) : [];
     },
     getById: async (id: string, columns?: string): Promise<T> => {
       const { data, error } = await supabase.from(tableName).select(columns).match({ id });
@@ -37,7 +44,7 @@ export const genericRepository = <T extends BaseModel>(
       if (!data) {
         throw new Error('Not Found');
       }
-      return data[0] as T;
+      return cleanFromServer(data[0]) as T;
     },
     remove: async (id: string): Promise<T> => {
       const { data, error } = await supabase.from<T>(tableName).delete().match({ id });
@@ -47,12 +54,12 @@ export const genericRepository = <T extends BaseModel>(
       if (!data) {
         throw new Error('Not Found');
       }
-      return data[0] as T;
+      return cleanFromServer(data[0]) as T;
     },
     update: async (model: T): Promise<T> => {
       const { data, error } = await supabase
         .from<T>(tableName)
-        .update(model)
+        .update(cleanToServer(model))
         .match({ id: model.id });
       if (error) {
         throw new ApiError(error);
@@ -60,7 +67,7 @@ export const genericRepository = <T extends BaseModel>(
       if (!data) {
         throw new Error('Not Found');
       }
-      return data[0] as T;
+      return cleanFromServer(data[0]) as T;
     },
   };
 };

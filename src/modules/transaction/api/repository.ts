@@ -2,7 +2,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { addMonths, format } from 'date-fns';
 
 import { genericRepository } from '@api';
-import { ApiError } from '@lib';
+import { ApiError, cleanToServer } from '@lib';
 import { Transaction, TransactionDto, TransactionForm } from '@models';
 
 import { dtoSerializer, serializer } from './serializer';
@@ -36,7 +36,7 @@ export const transactionRepository = (db: SupabaseClient): ITransactionRepositor
 
   const create = async (form: TransactionForm): Promise<Transaction> => {
     const transactions = builder(form);
-    const { data, error } = await db.from(tableName).insert(transactions);
+    const { data, error } = await db.from(tableName).insert(cleanToServer(transactions));
     if (error) {
       throw new ApiError(error);
     }
@@ -52,7 +52,7 @@ export const transactionRepository = (db: SupabaseClient): ITransactionRepositor
   }: TransactionForm): Promise<Transaction> => {
     const { data, error } = await db
       .from(tableName)
-      .update(transaction)
+      .update(cleanToServer(transaction))
       .match({ id: transaction.id });
 
     if (error) {
@@ -77,8 +77,13 @@ export const transactionRepository = (db: SupabaseClient): ITransactionRepositor
       }
       return serializer(data)[0];
     },
-    getTransactions: async (startDate: Date, endDate: Date): Promise<TransactionDto[]> => {
+    getTransactions: async (
+      accountId: string,
+      startDate: Date,
+      endDate: Date,
+    ): Promise<TransactionDto[]> => {
       const { data, error } = await db.rpc('get_transactions', {
+        accId: accountId,
         startDate: format(startDate, 'yyyy-MM-dd') + 'T00:00:00.000Z',
         endDate: format(endDate, 'yyyy-MM-dd') + 'T23:59:59.999Z',
       });
