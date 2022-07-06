@@ -1,19 +1,18 @@
 import React from 'react';
 
-import { Stack, StackProps, VStack } from '@chakra-ui/react';
+import { SimpleGrid, SimpleGridProps } from '@chakra-ui/react';
 
-import { Card, ContentLoader } from '@shared';
+import { ContentLoader, StatMoney } from '@shared';
 
-import { AccountBalance, CreditCardSummary } from '../../components';
 import { useAccountBalance, useCreditCardSummary } from '../../hooks';
 
-interface IProps extends StackProps {
+interface IProps extends SimpleGridProps {
   accountId: string;
   endDate: Date;
   startDate: Date;
 }
 
-const Summary: React.FC<IProps> = ({ accountId, endDate, startDate, ...stackProps }) => {
+const Summary: React.FC<IProps> = ({ accountId, endDate, startDate, ...simpleGridProps }) => {
   const { data: balances, isLoading: isLoadingBalance } = useAccountBalance(
     accountId,
     startDate,
@@ -28,18 +27,45 @@ const Summary: React.FC<IProps> = ({ accountId, endDate, startDate, ...stackProp
   if (!accountId) {
     return null;
   }
+  if (isLoadingBalance || isLoadingCreditCards) return <ContentLoader />;
+  if (!balances) {
+    return null;
+  }
 
   return (
-    <Stack {...stackProps}>
-      <Card alignItems={isLoadingBalance ? 'center' : 'flex-start'} as={VStack} p="5" w="full">
-        {isLoadingBalance && <ContentLoader />}
-        {!isLoadingBalance && <AccountBalance balances={balances || []} />}
-      </Card>
-      <Card alignItems={isLoadingBalance ? 'center' : 'flex-start'} as={VStack} p="5" w="full">
+    <SimpleGrid columns={[1, null, 2, 4]} gap={3} {...simpleGridProps}>
+      <StatMoney
+        amount={balances.current}
+        icon="bank"
+        iconProps={{ bg: 'orange.600' }}
+        label="Actual"
+        useColors={true}
+      />
+      <StatMoney
+        amount={balances.incomes}
+        icon="sack-dollar"
+        iconProps={{ bg: 'green.600' }}
+        label="Ingresos"
+      />
+      <StatMoney
+        amount={balances.expenses}
+        icon="sack-xmark"
+        iconProps={{ bg: 'red.600' }}
+        label="Gastos"
+      />
+      <StatMoney
+        amount={balances.balance}
+        icon="balance-scale"
+        iconProps={{ bg: 'blue.600' }}
+        label="Balance"
+        useColors={true}
+      />
+
+      {/* <Card alignItems={isLoadingBalance ? 'center' : 'flex-start'} as={VStack} p="5" w="full">
         {isLoadingCreditCards && <ContentLoader />}
         {!isLoadingCreditCards && <CreditCardSummary creditCards={creditCards || []} />}
-      </Card>
-    </Stack>
+      </Card> */}
+    </SimpleGrid>
   );
 };
 

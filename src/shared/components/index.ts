@@ -25,6 +25,7 @@ export { default as ModalFormFooter } from './modal-form/footer';
 export { default as ModalFormHeader } from './modal-form/header';
 export { default as SubmitButton } from './modal-form/submit-button';
 export { default as Page } from './page';
+export { default as StatMoney } from './stat-money';
 export * from './table/cells';
 export { default as TableBody } from './table/body';
 export { default as TableHeader } from './table/header';

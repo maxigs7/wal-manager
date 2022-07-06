@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Flex } from '@chakra-ui/react';
 
+import { PagePortalsProvider } from '@shared';
+
 import { NAVBAR_HEIGHT, SIDEBAR_WIDTH } from './constants';
 import { Navbar } from './navbar';
 import { Sidebar } from './sidebar';
@@ -40,9 +42,11 @@ const FullLayout: React.FC<IProps> = ({
         userName={userName}
         userPhotoUrl={userPhotoUrl}
       />
-      <Flex as="main" mx="auto" w="full">
-        {children}
-      </Flex>
+      <PagePortalsProvider>
+        <Flex as="main" mx="auto" w="full">
+          {children}
+        </Flex>
+      </PagePortalsProvider>
     </Flex>
   </Flex>
 );

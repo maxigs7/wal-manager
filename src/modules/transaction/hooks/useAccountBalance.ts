@@ -3,46 +3,53 @@ import { UseQueryResult } from 'react-query';
 
 import useList from './useList';
 
-export interface IAccountBalance {
-  account: string;
-  incomes: number;
+export interface IAccountMoney {
+  balance: number;
+  current: number;
   expenses: number;
+  incomes: number;
 }
 
 const hook = (
   accountId?: string,
   startDate?: Date,
   endDate?: Date,
-): UseQueryResult<IAccountBalance[]> => {
+): UseQueryResult<IAccountMoney> => {
   const { data, ...rest } = useList(accountId, startDate, endDate);
-  const balance = useMemo(() => {
-    if (!data) return undefined;
+  const balance: IAccountMoney = useMemo(() => {
+    if (!data)
+      return {
+        balance: 0,
+        current: 0,
+        expenses: 0,
+        incomes: 0,
+      };
+
     const prev = data.find((t) => !t.id && !t.account);
     const prevAmount = prev?.amount || 0;
-    const balances = data.reduce<IAccountBalance[]>((balances, t) => {
-      balances = balances || [];
-      if (!t.id && !t.account) {
-        return balances;
-      }
-      const account = balances.find((b) => b.account === t.account);
-      if (account) {
-        account.incomes += t.type === 'incomes' ? t.amount : 0;
-        account.expenses += t.type === 'expenses' ? t.amount : 0;
-      } else {
-        balances.push({
-          account: t.account,
-          incomes: t.type === 'incomes' ? prevAmount + t.amount : prevAmount,
-          expenses: t.type === 'expenses' ? t.amount : 0,
-        });
-      }
 
-      return balances;
-    }, []);
+    const accountMoney = data.reduce<{ expenses: number; incomes: number }>(
+      (money = { expenses: 0, incomes: 0 }, t) => {
+        if (!t.id && !t.account) {
+          return money;
+        }
 
-    return balances;
+        return {
+          incomes: money.incomes || 0 + (t.type === 'incomes' ? t.amount : 0),
+          expenses: money.expenses || 0 + (t.type === 'expenses' ? t.amount * -1 : 0),
+        };
+      },
+      { expenses: 0, incomes: 0 },
+    );
+
+    return {
+      ...accountMoney,
+      balance: prevAmount + accountMoney.incomes - accountMoney.expenses,
+      current: prevAmount,
+    };
   }, [data]);
 
-  return { data: balance, ...rest } as UseQueryResult<IAccountBalance[]>;
+  return { data: balance, ...rest } as UseQueryResult<IAccountMoney>;
 };
 
 export default hook;

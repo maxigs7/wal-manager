@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Box, Flex, Stack } from '@chakra-ui/react';
+import { Box, Flex, Portal, Stack } from '@chakra-ui/react';
 
 import { AccountSelectContainer } from '@m/account';
 import {
@@ -10,12 +10,21 @@ import {
   TransactionTableContainer,
   useTransactionStore,
 } from '@m/transaction';
-import { ActionsDrawer, Card, IActionDrawer, MonthTabs, Page, YearBar } from '@shared';
+import {
+  ActionsDrawer,
+  Card,
+  IActionDrawer,
+  MonthTabs,
+  Page,
+  usePagePortals,
+  YearBar,
+} from '@shared';
 
 import { withTransactionStore } from './hocs/withProvider';
 import { useTransactionNav, useTransactionRoutes } from './hooks';
 
 const TransactionsPage: React.FC = () => {
+  const { titleBoxRef } = usePagePortals();
   const [state, dispatch] = useTransactionStore();
   const routes = useTransactionRoutes();
   const { goCreate, goRemove, goUpdate } = useTransactionNav();
@@ -62,54 +71,48 @@ const TransactionsPage: React.FC = () => {
   }, []);
 
   return (
-    <Page metaTitle="Movimientos" title="Movimientos">
-      <Stack direction={{ base: 'column', md: 'row' }} mb="2">
-        <Box minW={['full', 'full', '96']}>
-          <AccountSelectContainer
-            name="accountSelectedId"
-            onChange={dispatch.onChangedAccount}
-            value={state.accountId}
+    <Page metaTitle="Movimientos">
+      <Portal containerRef={titleBoxRef}>
+        <Stack direction={{ base: 'column', md: 'row' }} gap="2" mb="3">
+          <Box minW={['full', 'full', '96']}>
+            <AccountSelectContainer
+              name="accountSelectedId"
+              onChange={dispatch.onChangedAccount}
+              value={state.accountId}
+            />
+          </Box>
+          <CreateTransactionButtonContainer
+            goCreate={goCreate}
+            icon="plus"
+            label="Nuevo gasto"
+            type="expenses"
           />
-        </Box>
-        <CreateTransactionButtonContainer
-          goCreate={goCreate}
-          icon="plus"
-          label="Nuevo gasto"
-          type="expenses"
-        />
-        <CreateTransactionButtonContainer
-          goCreate={goCreate}
-          icon="plus"
-          label="Nuevo ingreso"
-          type="incomes"
-        />
-      </Stack>
-
-      <Flex direction={{ base: 'column', md: 'row' }}>
-        <Card>
-          <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
-          <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
-          <TransactionTableContainer
-            accountId={state.accountId}
-            endDate={state.endDate}
-            onMoreActions={onMoreActions}
-            onRemove={onRemove}
-            onUpdate={onUpdate}
-            startDate={state.startDate}
+          <CreateTransactionButtonContainer
+            goCreate={goCreate}
+            icon="plus"
+            label="Nuevo ingreso"
+            type="incomes"
           />
-        </Card>
-
+        </Stack>
         <TransactionSummaryContainer
           accountId={state.accountId}
-          direction={{ base: 'column', sm: 'row', md: 'column' }}
           endDate={state.endDate}
-          mb={{ base: 2, md: 0 }}
-          ml={{ base: 0, md: 2 }}
-          order={{ base: -1, md: 'initial' }}
           startDate={state.startDate}
-          textAlign={['center', 'left']}
         />
-      </Flex>
+      </Portal>
+
+      <Card>
+        <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
+        <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
+        <TransactionTableContainer
+          accountId={state.accountId}
+          endDate={state.endDate}
+          onMoreActions={onMoreActions}
+          onRemove={onRemove}
+          onUpdate={onUpdate}
+          startDate={state.startDate}
+        />
+      </Card>
 
       {routes}
 
