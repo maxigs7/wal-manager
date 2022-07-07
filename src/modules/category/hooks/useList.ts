@@ -27,12 +27,13 @@ const convertToCategoryLookupArray = (categories: Category[]): CategoryLookup[] 
       return [...accum, rootLookup, ...children];
     }, [] as CategoryLookup[]);
 
-const hook = (type?: CategoryType): UseQueryResult<CategoryLookup[]> => {
+const hook = (type?: CategoryType, force = false): UseQueryResult<CategoryLookup[]> => {
   const { categories } = useApi();
 
   const promise = async () => {
     const list = await categories.getAll({
       filtering: (q) => {
+        if (!type) return q;
         return q.eq('type', type);
       },
     });
@@ -41,11 +42,11 @@ const hook = (type?: CategoryType): UseQueryResult<CategoryLookup[]> => {
   };
 
   return useQuery(
-    [CATEGORIES_KEY, 'lookup', type],
+    [CATEGORIES_KEY, 'lookup', { force, type }],
     promise,
     // TODO: Add mapping to lookup
     {
-      enabled: !!type,
+      enabled: !!type || force,
     },
   );
 };

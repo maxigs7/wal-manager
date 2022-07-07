@@ -19,6 +19,7 @@ const MainFilterActions: React.FC<IProps> = ({ goCreate, ...stackProps }) => {
         <AccountSelectContainer
           name="accountSelectedId"
           onChange={dispatch.onChangedAccount}
+          placeholder="Seleccione una cuenta"
           value={state.accountId}
         />
       </Box>

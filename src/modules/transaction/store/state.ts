@@ -1,5 +1,7 @@
 export interface IState {
   accountId: string;
+  categoryId?: string;
+  creditCardId?: string;
   month: number;
   year: number;
 }
@@ -13,6 +15,8 @@ export interface IDispatch {
   onChangedAccount(id: string): void;
   onChangedMonth(month: number): void;
   onChangedYear(year: number): void;
+  onFilterByCategory(id: string): void;
+  onFilterByCreditCard(id: string): void;
   onNextMonth(): void;
   onPreviousMonth(): void;
 }

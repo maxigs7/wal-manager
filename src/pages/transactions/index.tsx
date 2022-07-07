@@ -2,22 +2,23 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Portal } from '@chakra-ui/react';
+import compose from 'compose-function';
 
 import {
+  TransactionExtraFilter,
   TransactionMainFilterActions,
-  TransactionMonthYearSelector,
   TransactionSummaryContainer,
   TransactionTableContainer,
   useTransactionStore,
 } from '@m/transaction';
-import { ActionsDrawer, Card, IActionDrawer, Page, usePagePortals } from '@shared';
+import { ActionsDrawer, Card, IActionDrawer, Page, usePagePortals, withTextFilter } from '@shared';
 
 import { withTransactionStore } from './hocs/withProvider';
 import { useTransactionNav, useTransactionRoutes } from './hooks';
 
 const TransactionsPage: React.FC = () => {
   const { titleBoxRef } = usePagePortals();
-  const [state, dispatch] = useTransactionStore();
+  const [state] = useTransactionStore();
   const routes = useTransactionRoutes();
   const { goCreate, goRemove, goUpdate } = useTransactionNav();
   const [currentActionId, setCurrentActionId] = useState<string>();
@@ -66,7 +67,7 @@ const TransactionsPage: React.FC = () => {
     <Page metaTitle="Movimientos">
       <Portal containerRef={titleBoxRef}>
         <TransactionMainFilterActions goCreate={goCreate} mb="3" />
-        <TransactionMonthYearSelector display={['flex', 'flex', 'inline-flex']} mb="3" />
+        <TransactionExtraFilter />
         <TransactionSummaryContainer
           accountId={state.accountId}
           endDate={state.endDate}
@@ -76,12 +77,9 @@ const TransactionsPage: React.FC = () => {
 
       <Card>
         <TransactionTableContainer
-          accountId={state.accountId}
-          endDate={state.endDate}
           onMoreActions={onMoreActions}
           onRemove={onRemove}
           onUpdate={onUpdate}
-          startDate={state.startDate}
         />
       </Card>
 
@@ -94,4 +92,4 @@ const TransactionsPage: React.FC = () => {
   );
 };
 
-export default withTransactionStore(TransactionsPage);
+export default compose(withTextFilter, withTransactionStore)(TransactionsPage);

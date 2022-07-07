@@ -29,7 +29,7 @@ const MonthYearSelector: React.FC<ButtonGroupProps> = (props) => {
         onClick={previousMonthHandler}
       />
       <Button textTransform="uppercase" w="full">
-        {state.year} - {monthAbbr}
+        {monthAbbr} / {state.year}
       </Button>
       <IconButton
         aria-label="next month"

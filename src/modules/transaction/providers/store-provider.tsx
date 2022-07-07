@@ -2,7 +2,15 @@ import { createContext, useCallback, useContext, useMemo, useReducer } from 'rea
 
 import { getRangeFromDate } from '@lib';
 
-import { changeAccount, changeMonth, changeYear, nextMonth, previousMonth } from '../store/actions';
+import {
+  changeAccount,
+  changeMonth,
+  changeYear,
+  filterByCategory,
+  filterByCreditCard,
+  nextMonth,
+  previousMonth,
+} from '../store/actions';
 import { reducer } from '../store/reducer';
 import { initialState, Store } from '../store/state';
 
@@ -34,6 +42,20 @@ export const StoreProvider: React.FC = ({ children }) => {
     [dispatch],
   );
 
+  const onFilterByCategory = useCallback(
+    (id: string) => {
+      dispatch(filterByCategory(id));
+    },
+    [dispatch],
+  );
+
+  const onFilterByCreditCard = useCallback(
+    (id: string) => {
+      dispatch(filterByCreditCard(id));
+    },
+    [dispatch],
+  );
+
   const onNextMonth = useCallback(() => {
     dispatch(nextMonth());
   }, [dispatch]);
@@ -47,6 +69,8 @@ export const StoreProvider: React.FC = ({ children }) => {
       onChangedAccount,
       onChangedMonth,
       onChangedYear,
+      onFilterByCategory,
+      onFilterByCreditCard,
       onNextMonth,
       onPreviousMonth,
     }),
@@ -60,7 +84,7 @@ export const StoreProvider: React.FC = ({ children }) => {
 
   const extendedState = useMemo(
     () => ({ ...state, endDate, startDate }),
-    [endDate, startDate, state.accountId, state.month, state.year],
+    [endDate, startDate, state],
   );
 
   return (

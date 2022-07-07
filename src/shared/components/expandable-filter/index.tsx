@@ -8,6 +8,7 @@ import Icon from '../icon';
 
 interface IProps extends BoxProps {
   actions?: React.ReactNode;
+  mainBar?: React.ReactNode;
   onChangedText?(text: string): void;
   text?: string;
 }
@@ -15,6 +16,7 @@ interface IProps extends BoxProps {
 const ExpandableFilter: React.FC<IProps> = ({
   actions,
   children,
+  mainBar,
   onChangedText,
   text,
   ...props
@@ -39,9 +41,17 @@ const ExpandableFilter: React.FC<IProps> = ({
             onClick={() => onToggle()}
           />
         )}
-        <Input maxW="md" mb={['3', '0']} onChange={onChange} placeholder="Buscar..." value={text} />
-
-        {actions && (
+        {mainBar && <Box mb={['3', '0']}>{mainBar}</Box>}
+        {!mainBar && (
+          <Input
+            maxW="md"
+            mb={['3', '0']}
+            onChange={onChange}
+            placeholder="Buscar..."
+            value={text}
+          />
+        )}
+        {!mainBar && actions && (
           <Box mb={['3', '0']} ml={['0', 'auto']}>
             {actions}
           </Box>

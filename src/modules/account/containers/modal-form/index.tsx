@@ -30,7 +30,7 @@ const ModalForm: React.FC<IProps> = ({ id, isOpen, onConfirmed, onDismiss }) => 
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
   const useFormProps = useForm<Account>({
-    defaultValues: { userId: user?.id as string, type: DEFAULT_ACCOUNT_TYPE },
+    defaultValues: { userId: user?.id as string, type: DEFAULT_ACCOUNT_TYPE, isDefault: false },
   });
   const {
     formState: { isSubmitting: isFormSubmitting },

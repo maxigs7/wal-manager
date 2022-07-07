@@ -4,25 +4,21 @@ import { ContentLoader } from '@shared';
 
 import { TransactionTable } from '../../components';
 import { useTransactionList } from '../../hooks';
+import { useTransactionStore } from '../../providers';
 
 interface IProps {
-  accountId?: string;
-  endDate: Date;
   onMoreActions(id: string): void;
   onRemove(id: string): void;
   onUpdate(id: string): void;
-  startDate: Date;
 }
 
-const Table: React.FC<IProps> = ({
-  accountId,
-  endDate,
-  onMoreActions,
-  onRemove,
-  onUpdate,
-  startDate,
-}) => {
-  const { data, isLoading } = useTransactionList(accountId, startDate, endDate);
+const Table: React.FC<IProps> = ({ onMoreActions, onRemove, onUpdate }) => {
+  const [{ accountId, startDate, endDate, creditCardId, categoryId }] = useTransactionStore();
+
+  const { data, isLoading } = useTransactionList(accountId, startDate, endDate, {
+    categories: categoryId ? [categoryId] : [],
+    creditCards: creditCardId ? [creditCardId] : [],
+  });
 
   if (isLoading) {
     return <ContentLoader />;
@@ -38,4 +34,4 @@ const Table: React.FC<IProps> = ({
   );
 };
 
-export default React.memo(Table);
+export default Table;
