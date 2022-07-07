@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS public.transaction
     amount numeric(11,4) NOT NULL,
     date timestamp without time zone,
     "billedDate" timestamp without time zone,
-    description character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    description character varying(100) COLLATE pg_catalog."default",
     "creditCardId" uuid,
     "feeNumber" smallint,
     "isRecurring" boolean NOT NULL DEFAULT false,

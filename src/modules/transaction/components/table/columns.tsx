@@ -4,7 +4,14 @@ import { dateSortType } from '@lib';
 import { TransactionDto } from '@models';
 import { DateCell } from '@shared';
 
-import { AccountableCell, AccountCell, ActionsCell, CategoryCell, DescriptionCell } from './cells';
+import {
+  AccountableCell,
+  AccountCell,
+  ActionsCell,
+  CategoryCell,
+  CreditCardCell,
+  DescriptionCell,
+} from './cells';
 
 interface IProps {
   onMoreActions(id: string): void;
@@ -25,6 +32,7 @@ export const getColumns: GetColumnsType = ({ onMoreActions, onRemove, onUpdate }
         onUpdate={onUpdate}
       />
     ),
+    disableSortBy: true,
     Header: '...',
   },
   {
@@ -42,16 +50,16 @@ export const getColumns: GetColumnsType = ({ onMoreActions, onRemove, onUpdate }
     },
   },
   {
-    accessor: 'account',
-    Cell: AccountCell,
-    Header: 'Cuenta',
-  },
-  {
     accessor: 'date',
     Cell: DateCell,
     Header: 'Fecha',
     sortType: (rowA: Row<TransactionDto>, rowB: Row<TransactionDto>): number =>
       dateSortType(rowA.original.date, rowB.original.date),
+  },
+  {
+    accessor: 'creditCard',
+    Cell: CreditCardCell,
+    Header: 'Tarjeta',
   },
   {
     accessor: 'description',

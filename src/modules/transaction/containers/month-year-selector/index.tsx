@@ -22,23 +22,21 @@ const MonthYearSelector: React.FC<ButtonGroupProps> = (props) => {
   };
 
   return (
-    <>
-      <ButtonGroup colorScheme="accent" variant="solid" isAttached {...props}>
-        <IconButton
-          aria-label="previous month"
-          icon={<Icon icon="angle-double-left" fixedWidth />}
-          onClick={previousMonthHandler}
-        />
-        <Button textTransform="uppercase" w="full">
-          {state.year} - {monthAbbr}
-        </Button>
-        <IconButton
-          aria-label="next month"
-          icon={<Icon icon="angle-double-right" fixedWidth />}
-          onClick={nextMonthHandler}
-        />
-      </ButtonGroup>
-    </>
+    <ButtonGroup colorScheme="accent" variant="solid" isAttached {...props}>
+      <IconButton
+        aria-label="previous month"
+        icon={<Icon icon="angle-double-left" fixedWidth />}
+        onClick={previousMonthHandler}
+      />
+      <Button textTransform="uppercase" w="full">
+        {state.year} - {monthAbbr}
+      </Button>
+      <IconButton
+        aria-label="next month"
+        icon={<Icon icon="angle-double-right" fixedWidth />}
+        onClick={nextMonthHandler}
+      />
+    </ButtonGroup>
   );
 };
 

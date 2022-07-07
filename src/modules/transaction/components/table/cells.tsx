@@ -1,8 +1,9 @@
 import { CellProps } from 'react-table';
 
-import { Flex, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Flex, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 
 import { CategoryTag } from '@m/category';
+import { CreditCardInline } from '@m/credit-card';
 import { TransactionDto } from '@models';
 import { Icon } from '@shared';
 
@@ -87,6 +88,19 @@ export const CategoryCell: React.FC<CellProps<TransactionDto, string>> = ({
       name={original.rootCategory}
       subName={original.subCategory}
     />
+  );
+};
+
+export const CreditCardCell: React.FC<CellProps<TransactionDto, string>> = ({
+  row: { original },
+  value,
+}) => {
+  if (!original.creditCardType) return null;
+
+  return (
+    <HStack align="center">
+      <CreditCardInline iconWidth={25} name={value} type={original.creditCardType} />
+    </HStack>
   );
 };
 
