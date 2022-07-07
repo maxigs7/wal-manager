@@ -47,7 +47,7 @@ AS $BODY$
     end as amount,
     cc.id as "creditCardId",
     cc.name as "creditCard",
-    cc.type as "creditCardType"
+    cc.type as "creditCardType",
     COALESCE(t."billedDate", o.date, t.date) as date,
     t.description,
     t."feeNumber",

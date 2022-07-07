@@ -38,7 +38,7 @@ const Summary: React.FC<IProps> = ({ accountId, endDate, startDate, ...simpleGri
         amount={balances.current}
         icon="bank"
         iconProps={{ bg: 'orange.600' }}
-        label="Actual"
+        label="Anterior"
         useColors={true}
       />
       <StatMoney

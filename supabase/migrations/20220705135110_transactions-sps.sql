@@ -5,7 +5,7 @@
 
 CREATE OR REPLACE FUNCTION public.get_ocurrences(
 	id uuid)
-    RETURNS TABLE(id uuid, date timestamp without time zone) 
+    RETURNS TABLE(id uuid, date timestamp without time zone)
     LANGUAGE 'sql'
     COST 100
     VOLATILE PARALLEL UNSAFE
@@ -48,7 +48,7 @@ GRANT EXECUTE ON FUNCTION public.get_ocurrences(uuid) TO service_role;
 
 CREATE OR REPLACE FUNCTION public.get_balance(
 	"endDate" timestamp without time zone)
-    RETURNS TABLE(amount numeric, date timestamp without time zone) 
+    RETURNS TABLE(amount numeric, date timestamp without time zone)
     LANGUAGE 'sql'
     COST 100
     VOLATILE PARALLEL UNSAFE
@@ -89,7 +89,7 @@ GRANT EXECUTE ON FUNCTION public.get_balance(timestamp without time zone) TO ser
 CREATE OR REPLACE FUNCTION public.get_transactions(
 	"startDate" timestamp without time zone,
 	"endDate" timestamp without time zone)
-    RETURNS TABLE(account character varying, amount numeric, "creditCard" character varying, date timestamp without time zone, description character varying, "feeNumber" smallint, id uuid, "isPaid" boolean, "rootCategory" character varying, "rootCategoryColor" character varying, "rootCategoryIcon" character varying, "subCategory" character varying, type "transactionType") 
+    RETURNS TABLE(account character varying, amount numeric, "creditCard" character varying, date timestamp without time zone, description character varying, "feeNumber" smallint, id uuid, "isPaid" boolean, "rootCategory" character varying, "rootCategoryColor" character varying, "rootCategoryIcon" character varying, "subCategory" character varying, type "transactionType")
     LANGUAGE 'sql'
     COST 100
     VOLATILE PARALLEL UNSAFE
@@ -170,5 +170,3 @@ GRANT EXECUTE ON FUNCTION public.get_transactions(timestamp without time zone, t
 
 GRANT EXECUTE ON FUNCTION public.get_transactions(timestamp without time zone, timestamp without time zone) TO service_role;
 
-ALTER TABLE IF EXISTS public."creditCard"
-    ADD COLUMN "isDefault" boolean NOT NULL DEFAULT false;
