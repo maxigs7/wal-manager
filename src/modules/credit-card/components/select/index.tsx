@@ -16,7 +16,9 @@ type SelectOption = {
 export interface ISelectProps {
   creditCards?: CreditCard[];
   id?: string;
+  isClearable?: boolean;
   isLoading: boolean;
+  isSearchable?: boolean;
   name: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
   onChange?(value?: string): void;
@@ -31,7 +33,21 @@ const Option: React.FC<SelectOption> = ({ label, type }) => (
 );
 
 const Select = React.forwardRef<any, ISelectProps>(
-  ({ creditCards = [], id, isLoading, name, onBlur, onChange, placeholder, value }, ref) => {
+  (
+    {
+      creditCards = [],
+      id,
+      isClearable = true,
+      isLoading = false,
+      isSearchable = false,
+      name,
+      onBlur,
+      onChange,
+      placeholder,
+      value,
+    },
+    ref,
+  ) => {
     const options = useMemo(
       () =>
         creditCards.map((cc) => ({
@@ -47,8 +63,9 @@ const Select = React.forwardRef<any, ISelectProps>(
         formatOptionLabel={Option}
         getOptionValue={(option) => option.value}
         id={id}
+        isClearable={isClearable}
         isLoading={isLoading}
-        isSearchable={false}
+        isSearchable={isSearchable}
         menuPlacement="auto"
         menuPortalTarget={document.body}
         name={name}
@@ -59,7 +76,6 @@ const Select = React.forwardRef<any, ISelectProps>(
         ref={ref}
         styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
         value={options?.find((option) => option.value === value)}
-        isClearable
       />
     );
   },

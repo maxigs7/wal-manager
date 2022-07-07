@@ -10,7 +10,9 @@ type SelectOption = { label: string; value: string } & CategoryLookup;
 export interface ISelectProps {
   categories?: CategoryLookup[];
   id?: string;
-  isLoading: boolean;
+  isClearable?: boolean;
+  isLoading?: boolean;
+  isSearchable?: boolean;
   name: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
   onChange?(value?: string): void;
@@ -23,7 +25,21 @@ const Option: React.FC<SelectOption> = ({ color, icon, subName, rootName }) => (
 );
 
 const Select = React.forwardRef<any, ISelectProps>(
-  ({ categories = [], id, isLoading, name, onBlur, onChange, placeholder, value }, ref) => {
+  (
+    {
+      categories = [],
+      id,
+      isClearable = false,
+      isLoading = false,
+      isSearchable = true,
+      name,
+      onBlur,
+      onChange,
+      placeholder,
+      value,
+    },
+    ref,
+  ) => {
     const options = useMemo(
       () =>
         categories?.map((category: CategoryLookup) => ({
@@ -39,7 +55,9 @@ const Select = React.forwardRef<any, ISelectProps>(
         formatOptionLabel={Option}
         getOptionValue={(option) => option.value}
         id={id}
+        isClearable={isClearable}
         isLoading={isLoading}
+        isSearchable={isSearchable}
         menuPlacement="auto"
         menuPortalTarget={document.body}
         name={name}
@@ -50,7 +68,6 @@ const Select = React.forwardRef<any, ISelectProps>(
         ref={ref}
         styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
         value={options?.find((option) => option.value === value)}
-        isSearchable
       />
     );
   },
