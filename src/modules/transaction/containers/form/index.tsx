@@ -43,9 +43,9 @@ const Form: React.FC<IProps> = ({
   const isEditing = !!getValues('id') || !!getValues('parentTransactionId');
 
   return (
-    <SimpleGrid columns={[1, 2, 3]} gap={6}>
+    <SimpleGrid columns={[1, null, 2, 3]} gap={6}>
       {!accountId && (
-        <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.accountId}>
+        <FormControl as={GridItem} isInvalid={!!errors.accountId}>
           <FormLabel htmlFor="accountId">Cuenta</FormLabel>
           <AccountSelectControlContainer
             control={control}
@@ -69,7 +69,7 @@ const Form: React.FC<IProps> = ({
         <FormErrorMessage>{errors.date && errors.date.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.accountId}>
+      <FormControl as={GridItem} isInvalid={!!errors.categoryId}>
         <FormLabel htmlFor="categoryId">Categoria</FormLabel>
         <CategorySelectControlContainer
           control={control}
@@ -94,7 +94,7 @@ const Form: React.FC<IProps> = ({
         <FormErrorMessage>{errors.amount && errors.amount.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.description}>
+      <FormControl as={GridItem} colSpan={[null, null, 2]} isInvalid={!!errors.description}>
         <FormLabel htmlFor="description">Descripcion</FormLabel>
         <Input id="description" placeholder="Descripcion" {...register('description')} />
       </FormControl>
@@ -117,7 +117,7 @@ const Form: React.FC<IProps> = ({
         </FormControl>
       )}
 
-      <Box as={GridItem} colSpan={[1, 2, 3]}>
+      <Box as={GridItem} colSpan={[1, null, 2, 3]}>
         <Button
           leftIcon={<Icon icon={isOpen ? 'angle-double-up' : 'angle-double-down'} />}
           mb={6}
