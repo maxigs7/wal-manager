@@ -1,24 +1,16 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Box, Flex, Portal, Stack } from '@chakra-ui/react';
+import { Portal } from '@chakra-ui/react';
 
-import { AccountSelectContainer } from '@m/account';
 import {
-  CreateTransactionButtonContainer,
+  TransactionMainFilterActions,
+  TransactionMonthYearSelector,
   TransactionSummaryContainer,
   TransactionTableContainer,
   useTransactionStore,
 } from '@m/transaction';
-import {
-  ActionsDrawer,
-  Card,
-  IActionDrawer,
-  MonthTabs,
-  Page,
-  usePagePortals,
-  YearBar,
-} from '@shared';
+import { ActionsDrawer, Card, IActionDrawer, Page, usePagePortals } from '@shared';
 
 import { withTransactionStore } from './hocs/withProvider';
 import { useTransactionNav, useTransactionRoutes } from './hooks';
@@ -73,27 +65,8 @@ const TransactionsPage: React.FC = () => {
   return (
     <Page metaTitle="Movimientos">
       <Portal containerRef={titleBoxRef}>
-        <Stack direction={{ base: 'column', md: 'row' }} gap="2" mb="3">
-          <Box minW={['full', 'full', '96']}>
-            <AccountSelectContainer
-              name="accountSelectedId"
-              onChange={dispatch.onChangedAccount}
-              value={state.accountId}
-            />
-          </Box>
-          <CreateTransactionButtonContainer
-            goCreate={goCreate}
-            icon="plus"
-            label="Nuevo gasto"
-            type="expenses"
-          />
-          <CreateTransactionButtonContainer
-            goCreate={goCreate}
-            icon="plus"
-            label="Nuevo ingreso"
-            type="incomes"
-          />
-        </Stack>
+        <TransactionMainFilterActions goCreate={goCreate} mb="3" />
+        <TransactionMonthYearSelector display={['flex', 'flex', 'inline-flex']} mb="3" />
         <TransactionSummaryContainer
           accountId={state.accountId}
           endDate={state.endDate}
@@ -102,8 +75,6 @@ const TransactionsPage: React.FC = () => {
       </Portal>
 
       <Card>
-        <YearBar currentYear={state.year} onUpdateYear={dispatch.onChangedYear} />
-        <MonthTabs currentMonth={state.month} onUpdateMonth={dispatch.onChangedMonth} />
         <TransactionTableContainer
           accountId={state.accountId}
           endDate={state.endDate}

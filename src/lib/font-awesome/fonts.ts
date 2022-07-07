@@ -1,6 +1,7 @@
 import {
   faAmbulance,
   faAngleDoubleDown,
+  faAngleDoubleLeft,
   faAngleDoubleRight,
   faAngleDoubleUp,
   faAngleDown,
@@ -126,6 +127,7 @@ import {
 
 export const CoreIcons = [
   faAngleDoubleDown,
+  faAngleDoubleLeft,
   faAngleDoubleRight,
   faAngleDoubleUp,
   faAngleDown,

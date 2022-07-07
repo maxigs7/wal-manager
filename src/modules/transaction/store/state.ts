@@ -13,6 +13,8 @@ export interface IDispatch {
   onChangedAccount(id: string): void;
   onChangedMonth(month: number): void;
   onChangedYear(year: number): void;
+  onNextMonth(): void;
+  onPreviousMonth(): void;
 }
 
 const currentDate = new Date();
