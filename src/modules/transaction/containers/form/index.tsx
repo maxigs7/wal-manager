@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 
 import { AccountSelectControlContainer } from '@m/account';
-import { CategorySelectContainer } from '@m/category';
+import { CategorySelectControlContainer } from '@m/category';
 import { CreditCardSelectContainer } from '@m/credit-card';
 import { toCategoryType, TransactionForm, TransactionType } from '@models';
 import {
@@ -71,7 +71,7 @@ const Form: React.FC<IProps> = ({
 
       <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.accountId}>
         <FormLabel htmlFor="categoryId">Categoria</FormLabel>
-        <CategorySelectContainer
+        <CategorySelectControlContainer
           control={control}
           id="categoryId"
           name="categoryId"

@@ -11,6 +11,7 @@ interface IProps extends Omit<ICategorySelectProps, 'categories' | 'isLoading'> 
 
 const Select: React.FC<IProps> = ({ type, ...props }) => {
   const { data: categories, isLoading } = useCategoryList(type);
+
   return <CategorySelect categories={categories} isLoading={isLoading} {...props} />;
 };
 
