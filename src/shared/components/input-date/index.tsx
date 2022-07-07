@@ -16,6 +16,8 @@ import {
 } from '@chakra-ui/react';
 import { ClassNames } from '@emotion/react';
 
+import { useMediaQuery } from '@lib';
+
 import Icon from '../icon';
 
 const CustomInput = forwardRef<any, any>((props, ref) => {
@@ -130,6 +132,8 @@ const Datepicker: FC<IProps> = ({ control, defaultValue, name, rules }) => {
     defaultValue,
   });
   const styles = useDatePickerStyles();
+  const { xs, sm, md } = useMediaQuery();
+  const withPortal = useMemo(() => xs || sm || md, [xs, sm, md]);
 
   const render = useCallback(
     ({ css }) => {
@@ -143,11 +147,12 @@ const Datepicker: FC<IProps> = ({ control, defaultValue, name, rules }) => {
           renderCustomHeader={CustomHeader}
           selected={value}
           showPopperArrow={false}
+          withPortal={withPortal}
           showYearDropdown
         />
       );
     },
-    [styles, value],
+    [styles, value, withPortal],
   );
 
   return <ClassNames>{render}</ClassNames>;
