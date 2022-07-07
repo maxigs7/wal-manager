@@ -3,8 +3,7 @@ import { Outlet } from 'react-router';
 
 import { Button, Portal } from '@chakra-ui/react';
 
-import { CreditCardListContainer, CreditCardTableContainer } from '@m/credit-card';
-import { CreditCard } from '@models';
+import { CreditCardTableContainer } from '@m/credit-card';
 import { Card, ExpandableFilter, Icon, Page, useTextFilter, withTextFilter } from '@shared';
 
 import { useCreditCardNav, useCreditCardRoutes } from './hooks';
