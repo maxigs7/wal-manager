@@ -40,7 +40,6 @@ const Select = React.forwardRef<any, ISelectProps>(
         getOptionValue={(option) => option.value}
         id={id}
         isLoading={isLoading}
-        isSearchable={false}
         menuPlacement="auto"
         menuPortalTarget={document.body}
         name={name}
@@ -51,6 +50,7 @@ const Select = React.forwardRef<any, ISelectProps>(
         ref={ref}
         styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
         value={options?.find((option) => option.value === value)}
+        isSearchable
       />
     );
   },
