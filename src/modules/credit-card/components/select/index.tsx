@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { HStack } from '@chakra-ui/react';
 
@@ -8,72 +7,62 @@ import { CreditCard, CreditCardType } from '@models';
 
 import CreditCardInline from '../inline';
 
+type SelectOption = {
+  label: string;
+  type: CreditCardType;
+  value: string;
+};
+
 export interface ISelectProps {
   creditCards?: CreditCard[];
-  control: Control<any>;
-  defaultValue?: string;
   id?: string;
   isLoading: boolean;
   name: string;
+  onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
+  onChange?(value?: string): void;
   placeholder?: string;
-  rules?: RegisterOptions;
+  value?: string;
 }
 
-const Option: React.FC<{ label: string; type: CreditCardType; value: string }> = ({
-  label,
-  type,
-}) => (
+const Option: React.FC<SelectOption> = ({ label, type }) => (
   <HStack align="center">
     <CreditCardInline iconWidth={25} name={label} type={type} />
   </HStack>
 );
 
-const Select: React.FC<ISelectProps> = ({
-  creditCards = [],
-  control,
-  id,
-  isLoading,
-  name,
-  placeholder,
-  rules,
-}) => {
-  const {
-    field: { onChange, ref, value, ...inputProps },
-  } = useController({
-    name,
-    control,
-    rules,
-  });
-
-  const options = useMemo(
-    () =>
-      creditCards.map((cc) => ({
-        label: cc.name,
-        type: cc.type,
-        value: cc.id,
-      })),
-    [creditCards],
-  );
-
-  return (
-    <ReactSelect
-      {...inputProps}
-      formatOptionLabel={Option}
-      getOptionValue={(option) => option.value}
-      id={id}
-      isLoading={isLoading}
-      isSearchable={false}
-      menuPlacement="auto"
-      menuPortalTarget={document.body}
-      onChange={(selected) => onChange(selected?.value)}
-      options={options}
-      placeholder={placeholder}
-      ref={ref}
-      styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-      value={options?.find((option) => option.value === value)}
-      isClearable
-    />
-  );
-};
+const Select = React.forwardRef<any, ISelectProps>(
+  ({ creditCards = [], id, isLoading, name, onBlur, onChange, placeholder, value }, ref) => {
+    const options = useMemo(
+      () =>
+        creditCards.map((cc) => ({
+          label: cc.name,
+          type: cc.type,
+          value: cc.id,
+        })),
+      [creditCards],
+    );
+    return (
+      <ReactSelect
+        colorScheme="accent"
+        formatOptionLabel={Option}
+        getOptionValue={(option) => option.value}
+        id={id}
+        isLoading={isLoading}
+        isSearchable={false}
+        menuPlacement="auto"
+        menuPortalTarget={document.body}
+        name={name}
+        onBlur={onBlur}
+        onChange={(selected) => onChange && onChange(selected?.value)}
+        options={options}
+        placeholder={placeholder}
+        ref={ref}
+        styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+        value={options?.find((option) => option.value === value)}
+        isClearable
+      />
+    );
+  },
+);
 
 export default Select;

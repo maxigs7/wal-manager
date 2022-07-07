@@ -15,7 +15,7 @@ import {
 
 import { AccountSelectControlContainer } from '@m/account';
 import { CategorySelectControlContainer } from '@m/category';
-import { CreditCardSelectContainer } from '@m/credit-card';
+import { CreditCardSelectControlContainer } from '@m/credit-card';
 import { toCategoryType, TransactionForm, TransactionType } from '@models';
 import {
   Checkbox,
@@ -131,7 +131,7 @@ const Form: React.FC<IProps> = ({
           <SimpleGrid columns={[1, 2, 3]} gap={6}>
             <FormControl as={GridItem} colSpan={[1, 2, 1]} isInvalid={!!errors.creditCardId}>
               <FormLabel htmlFor="creditCardId">Tarjeta</FormLabel>
-              <CreditCardSelectContainer
+              <CreditCardSelectControlContainer
                 control={control}
                 id="creditCardId"
                 name="creditCardId"
