@@ -5,6 +5,7 @@ import {
   CHANGE_YEAR,
   FILTER_BY_CATEGORY_ID,
   FILTER_BY_CREDIT_CARD_ID,
+  HIGHLIGHT_TYPE,
   NEXT_MONTH,
   PREVIOUS_MONTH,
 } from './actions';
@@ -43,6 +44,12 @@ export const reducer = (state: IState, action: Actions): IState => {
       return {
         ...state,
         creditCardId: action.payload,
+      };
+    }
+    case HIGHLIGHT_TYPE: {
+      return {
+        ...state,
+        highlightType: action.payload,
       };
     }
     case NEXT_MONTH: {

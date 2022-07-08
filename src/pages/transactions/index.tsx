@@ -68,11 +68,7 @@ const TransactionsPage: React.FC = () => {
       <Portal containerRef={titleBoxRef}>
         <TransactionMainFilterActions goCreate={goCreate} mb="3" />
         <TransactionExtraFilter />
-        <TransactionSummaryContainer
-          accountId={state.accountId}
-          endDate={state.endDate}
-          startDate={state.startDate}
-        />
+        <TransactionSummaryContainer />
       </Portal>
 
       <Card>

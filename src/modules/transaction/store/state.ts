@@ -1,7 +1,10 @@
+import { TransactionType } from '@models';
+
 export interface IState {
   accountId: string;
   categoryId?: string;
   creditCardId?: string;
+  highlightType?: TransactionType;
   month: number;
   year: number;
 }
@@ -17,6 +20,7 @@ export interface IDispatch {
   onChangedYear(year: number): void;
   onFilterByCategory(id: string): void;
   onFilterByCreditCard(id: string): void;
+  onHighlightType(type?: TransactionType): void;
   onNextMonth(): void;
   onPreviousMonth(): void;
 }

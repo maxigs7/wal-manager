@@ -3,19 +3,26 @@ import { useSortBy, useTable } from 'react-table';
 
 import { Box, Table } from '@chakra-ui/react';
 
-import { TransactionDto } from '@models';
+import { TransactionDto, TransactionType } from '@models';
 import { TableBody, TableHeader } from '@shared';
 
 import { getColumns } from './columns';
 
 interface IProps {
   data: TransactionDto[];
+  highlightType?: TransactionType;
   onMoreActions(id: string): void;
   onRemove(id: string): void;
   onUpdate(id: string): void;
 }
 
-const TransactionTable: React.FC<IProps> = ({ data, onMoreActions, onRemove, onUpdate }) => {
+const TransactionTable: React.FC<IProps> = ({
+  data,
+  highlightType,
+  onMoreActions,
+  onRemove,
+  onUpdate,
+}) => {
   const columns = useMemo(
     () => getColumns({ onMoreActions, onRemove, onUpdate }),
     [onMoreActions, onRemove, onUpdate],
@@ -41,7 +48,16 @@ const TransactionTable: React.FC<IProps> = ({ data, onMoreActions, onRemove, onU
     <Box overflowX="auto" overflowY="hidden">
       <Table {...getTableProps()} size="sm">
         <TableHeader {...tableInstance} />
-        <TableBody {...tableInstance} emptyText="No existen movimientos..." />
+        <TableBody
+          {...tableInstance}
+          emptyText="No existen movimientos..."
+          getRowProps={(row) => ({
+            key: row.original.id,
+            style: {
+              opacity: highlightType && row.original.type !== highlightType ? '0.5' : '1',
+            },
+          })}
+        />
       </Table>
     </Box>
   );

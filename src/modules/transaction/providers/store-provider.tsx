@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
 
 import { getRangeFromDate } from '@lib';
+import { TransactionType } from '@models';
 
 import {
   changeAccount,
@@ -8,6 +9,7 @@ import {
   changeYear,
   filterByCategory,
   filterByCreditCard,
+  highlightType,
   nextMonth,
   previousMonth,
 } from '../store/actions';
@@ -56,6 +58,13 @@ export const StoreProvider: React.FC = ({ children }) => {
     [dispatch],
   );
 
+  const onHighlightType = useCallback(
+    (type?: TransactionType) => {
+      dispatch(highlightType(type));
+    },
+    [dispatch],
+  );
+
   const onNextMonth = useCallback(() => {
     dispatch(nextMonth());
   }, [dispatch]);
@@ -71,6 +80,7 @@ export const StoreProvider: React.FC = ({ children }) => {
       onChangedYear,
       onFilterByCategory,
       onFilterByCreditCard,
+      onHighlightType,
       onNextMonth,
       onPreviousMonth,
     }),

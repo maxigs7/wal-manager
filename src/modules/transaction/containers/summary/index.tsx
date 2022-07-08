@@ -5,14 +5,10 @@ import { SimpleGrid, SimpleGridProps } from '@chakra-ui/react';
 import { ContentLoader, StatMoney } from '@shared';
 
 import { useAccountBalance, useCreditCardSummary } from '../../hooks';
+import { useTransactionStore } from '../../providers';
 
-interface IProps extends SimpleGridProps {
-  accountId: string;
-  endDate: Date;
-  startDate: Date;
-}
-
-const Summary: React.FC<IProps> = ({ accountId, endDate, startDate, ...simpleGridProps }) => {
+const Summary: React.FC<SimpleGridProps> = ({ ...simpleGridProps }) => {
+  const [{ accountId, startDate, endDate }, { onHighlightType }] = useTransactionStore();
   const { data: balances, isLoading: isLoadingBalance } = useAccountBalance(
     accountId,
     startDate,
@@ -46,12 +42,20 @@ const Summary: React.FC<IProps> = ({ accountId, endDate, startDate, ...simpleGri
         icon="sack-dollar"
         iconProps={{ bg: 'green.600' }}
         label="Ingresos"
+        onMouseEnter={() => onHighlightType('incomes')}
+        onMouseLeave={() => onHighlightType()}
+        onTouchEnd={() => onHighlightType()}
+        onTouchStart={() => onHighlightType('incomes')}
       />
       <StatMoney
         amount={balances.expenses}
         icon="sack-xmark"
         iconProps={{ bg: 'red.600' }}
         label="Gastos"
+        onMouseEnter={() => onHighlightType('expenses')}
+        onMouseLeave={() => onHighlightType()}
+        onTouchEnd={() => onHighlightType()}
+        onTouchStart={() => onHighlightType('expenses')}
       />
       <StatMoney
         amount={balances.balance}

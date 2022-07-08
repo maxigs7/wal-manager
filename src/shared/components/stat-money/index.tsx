@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { Box, Text } from '@chakra-ui/react';
+import { Box, BoxProps, Text } from '@chakra-ui/react';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 
 import { formatToCurrency } from '@lib';
@@ -8,7 +8,7 @@ import { formatToCurrency } from '@lib';
 import Card from '../card';
 import Icon, { WalIconProps } from '../icon';
 
-interface IProps {
+interface IProps extends BoxProps {
   amount: number;
   icon: IconName;
   iconProps?: Omit<WalIconProps, 'icon'>;
@@ -22,6 +22,7 @@ const StatMoney: React.FC<IProps> = ({
   iconProps: { color: iconColor = 'white', bg: iconBg = 'primary.800', ...iconProps } = {},
   label,
   useColors = false,
+  ...boxProps
 }) => {
   const color = useMemo(
     () => (useColors ? (!amount ? undefined : amount > 0 ? 'green.500' : 'red.500') : ''),
@@ -29,7 +30,7 @@ const StatMoney: React.FC<IProps> = ({
   );
 
   return (
-    <Card display="inline-flex" justifyContent="center" px="4" py="2">
+    <Card display="inline-flex" justifyContent="center" px="4" py="2" {...boxProps}>
       <Box>
         {label && (
           <Text color="gray.400" fontSize="md" textTransform="uppercase">
