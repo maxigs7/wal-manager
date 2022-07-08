@@ -41,7 +41,6 @@ const ExtraFilters: React.FC<IProps> = ({ ...boxProps }) => {
             onChange={dispatch.onFilterByCategory}
             placeholder="Seleccione una categoria"
             value={state.categoryId}
-            fullSearch
             isClearable
           />
           <CreditCardSelectContainer
