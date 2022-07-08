@@ -10,6 +10,7 @@ import { useCategoryFilter } from '../../providers';
 const Table: React.FC<Actions> = ({
   onRemove,
   onSubCreate,
+  onSubMove,
   onSubRemove,
   onSubUpdate,
   onUpdate,
@@ -27,6 +28,7 @@ const Table: React.FC<Actions> = ({
       minH="80"
       onRemove={onRemove}
       onSubCreate={onSubCreate}
+      onSubMove={onSubMove}
       onSubRemove={onSubRemove}
       onSubUpdate={onSubUpdate}
       onUpdate={onUpdate}

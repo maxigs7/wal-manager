@@ -56,7 +56,7 @@ export const genericRepository = <T extends BaseModel>(
       }
       return cleanFromServer(data[0]) as T;
     },
-    update: async (model: T): Promise<T> => {
+    update: async (model: Partial<T>): Promise<T> => {
       const { data, error } = await supabase
         .from<T>(tableName)
         .update(cleanToServer(model))

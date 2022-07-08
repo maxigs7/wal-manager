@@ -8,6 +8,7 @@ interface IUseCategoryNavReturn {
   goIndex(type: CategoryType): void;
   goRemove(type: CategoryType, id: string): void;
   goSubCreate(type: CategoryType, parentId: string): void;
+  goSubMove(type: CategoryType, parentId: string, id: string): void;
   goSubRemove(type: CategoryType, parentId: string, id: string): void;
   goSubUpdate(type: CategoryType, parentId: string, id: string): void;
   goUpdate(type: CategoryType, id: string): void;
@@ -23,6 +24,8 @@ export const useCategoryNav = (): IUseCategoryNavReturn => {
         navigate(`/admin/categories/${type}/remove/${id}`),
       goSubCreate: (type: CategoryType, parentId: string) =>
         navigate(`/admin/categories/${type}/${parentId}/create`),
+      goSubMove: (type: CategoryType, parentId: string, id: string) =>
+        navigate(`/admin/categories/${type}/${parentId}/move/${id}`),
       goSubRemove: (type: CategoryType, parentId: string, id: string) =>
         navigate(`/admin/categories/${type}/${parentId}/remove/${id}`),
       goSubUpdate: (type: CategoryType, parentId: string, id: string) =>

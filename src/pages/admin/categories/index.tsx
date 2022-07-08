@@ -18,8 +18,16 @@ import { useCategoryNav, useCategoryRoutes } from './hooks';
 const CategoriesPage: React.FC = () => {
   const routes = useCategoryRoutes();
   const [filters, dispatchFilters] = useCategoryFilter();
-  const { goCreate, goIndex, goRemove, goSubCreate, goSubRemove, goSubUpdate, goUpdate } =
-    useCategoryNav();
+  const {
+    goCreate,
+    goIndex,
+    goRemove,
+    goSubCreate,
+    goSubMove,
+    goSubRemove,
+    goSubUpdate,
+    goUpdate,
+  } = useCategoryNav();
 
   const onChangedTypeHandler = useCallback(
     (type: CategoryType) => {
@@ -43,6 +51,13 @@ const CategoriesPage: React.FC = () => {
   const onSubCreate = useCallback(
     (id: string) => {
       goSubCreate(filters.type, id);
+    },
+    [goSubCreate, filters.type],
+  );
+
+  const onSubMove = useCallback(
+    (parentId: string, id: string) => {
+      goSubMove(filters.type, parentId, id);
     },
     [goSubCreate, filters.type],
   );
@@ -92,6 +107,7 @@ const CategoriesPage: React.FC = () => {
           <CategoryTableContainer
             onRemove={onRemove}
             onSubCreate={onSubCreate}
+            onSubMove={onSubMove}
             onSubRemove={onSubRemove}
             onSubUpdate={onSubUpdate}
             onUpdate={onUpdate}

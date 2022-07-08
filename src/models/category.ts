@@ -14,3 +14,7 @@ export type Category = BaseModel & {
   type: CategoryType;
   userId: string;
 };
+
+export type CategoryMoveForm = BaseModel & {
+  parentId: string;
+};

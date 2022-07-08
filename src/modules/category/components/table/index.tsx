@@ -6,28 +6,26 @@ import { Box, BoxProps, Table } from '@chakra-ui/react';
 import { CategoryRow } from '@models';
 import { TableBody, TableHeader } from '@shared';
 
+import { Actions } from './cells';
 import { getColumns } from './columns';
 
-interface IProps extends BoxProps {
-  data: CategoryRow[];
-  onRemove(id: string): void;
-  onSubCreate(parentId: string): void;
-  onSubRemove(parentId: string, id: string): void;
-  onSubUpdate(parentId: string, id: string): void;
-  onUpdate(id: string): void;
-}
+type Props = BoxProps &
+  Actions & {
+    data: CategoryRow[];
+  };
 
-const CategoryTable: React.FC<IProps> = ({
+const CategoryTable: React.FC<Props> = ({
   data,
   onRemove,
   onSubCreate,
+  onSubMove,
   onSubRemove,
   onSubUpdate,
   onUpdate,
   ...props
 }) => {
   const columns = useMemo(
-    () => getColumns({ onRemove, onSubCreate, onSubRemove, onSubUpdate, onUpdate }),
+    () => getColumns({ onRemove, onSubCreate, onSubMove, onSubRemove, onSubUpdate, onUpdate }),
     [onRemove, onSubRemove, onSubUpdate, onUpdate],
   );
   const tableInstance = useTable<CategoryRow>(

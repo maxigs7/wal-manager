@@ -2,6 +2,7 @@ import { useRoutes } from 'react-router-dom';
 
 import { CreatePage } from '../create';
 import { CreatePage as SubCreatePage } from '../parentId/create';
+import { MovePage } from '../parentId/move';
 import { RemovePage as SubRemovePage } from '../parentId/remove';
 import { UpdatePage as SubUpdatePage } from '../parentId/update';
 import { RemovePage } from '../remove';
@@ -35,6 +36,10 @@ export const useCategoryRoutes = (): React.ReactElement | null => {
         {
           path: 'update/:id',
           element: <SubUpdatePage />,
+        },
+        {
+          path: 'move/:id',
+          element: <MovePage />,
         },
       ],
     },

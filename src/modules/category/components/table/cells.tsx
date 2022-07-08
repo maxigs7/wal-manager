@@ -9,6 +9,7 @@ import { Icon } from '@shared';
 export type Actions = {
   onRemove(id: string): void;
   onSubCreate(parentId: string): void;
+  onSubMove(parentId: string, id: string): void;
   onSubRemove(parentId: string, id: string): void;
   onSubUpdate(parentId: string, id: string): void;
   onUpdate(id: string): void;
@@ -19,6 +20,7 @@ export type ActionsCellType = CellProps<CategoryRow, string> & Actions;
 export const ActionsCell: React.FC<ActionsCellType> = ({
   onRemove,
   onSubCreate,
+  onSubMove,
   onSubRemove,
   onSubUpdate,
   onUpdate,
@@ -67,6 +69,15 @@ export const ActionsCell: React.FC<ActionsCellType> = ({
         onClick={onRemoveHandler}
         size="sm"
       />
+      {original.parentId && (
+        <IconButton
+          aria-label="Add new sub category"
+          colorScheme="teal"
+          icon={<Icon icon="arrow-right-arrow-left" fixedWidth />}
+          onClick={() => onSubMove(original.parentId as string, original.id)}
+          size="sm"
+        />
+      )}
     </ButtonGroup>
   );
 };

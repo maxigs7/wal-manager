@@ -5,12 +5,19 @@ import { Category, CategoryLookup, CategoryType } from '@models';
 
 import { CATEGORIES_KEY } from '../constants';
 
+export type GetCategoryFilters = {
+  excludeChildren?: boolean;
+  excludeId?: string[];
+  type?: CategoryType;
+};
+
 const convertToCategoryLookup = (root: Category, sub?: Category): CategoryLookup => ({
-  rootName: root.name,
   color: root.color,
   icon: root.icon,
   id: sub?.id || root.id,
+  rootName: root.name,
   subName: sub?.name,
+  type: root.type,
 });
 
 const convertToCategoryLookupArray = (categories: Category[]): CategoryLookup[] =>
@@ -27,26 +34,30 @@ const convertToCategoryLookupArray = (categories: Category[]): CategoryLookup[] 
       return [...accum, rootLookup, ...children];
     }, [] as CategoryLookup[]);
 
-const hook = (type?: CategoryType, force = false): UseQueryResult<CategoryLookup[]> => {
+const hook = (filters: GetCategoryFilters = {}): UseQueryResult<CategoryLookup[]> => {
   const { categories } = useApi();
 
-  const promise = async () => {
-    const list = await categories.getAll({
-      filtering: (q) => {
-        if (!type) return q;
-        return q.eq('type', type);
-      },
-    });
-
-    return convertToCategoryLookupArray(list);
-  };
-
   return useQuery(
-    [CATEGORIES_KEY, 'lookup', { force, type }],
-    promise,
-    // TODO: Add mapping to lookup
+    [CATEGORIES_KEY, 'lookup'],
+    () => categories.getAll().then(convertToCategoryLookupArray),
     {
-      enabled: !!type || force,
+      select: (data) => {
+        let filteredData = data;
+
+        if (filters.type) {
+          filteredData = filteredData.filter((c) => c.type === filters.type);
+        }
+
+        if (filters.excludeId) {
+          filteredData = filteredData.filter((c) => !filters.excludeId?.includes(c.id));
+        }
+
+        if (filters.excludeChildren) {
+          filteredData = filteredData.filter((c) => !c.subName);
+        }
+
+        return filteredData;
+      },
     },
   );
 };
