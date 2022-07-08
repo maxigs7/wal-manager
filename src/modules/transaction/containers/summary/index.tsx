@@ -1,24 +1,49 @@
 import React from 'react';
 
-import { SimpleGrid, SimpleGridProps } from '@chakra-ui/react';
+import { SimpleGrid, SimpleGridProps, useColorModeValue } from '@chakra-ui/react';
 
+import { TransactionType } from '@models';
 import { ContentLoader, StatMoney } from '@shared';
 
 import { useAccountBalance, useCreditCardSummary } from '../../hooks';
 import { useTransactionStore } from '../../providers';
 
 const Summary: React.FC<SimpleGridProps> = ({ ...simpleGridProps }) => {
-  const [{ accountId, startDate, endDate }, { onHighlightType }] = useTransactionStore();
+  const [{ accountId, startDate, endDate, highlightType }, { onHighlightType }] =
+    useTransactionStore();
   const { data: balances, isLoading: isLoadingBalance } = useAccountBalance(
     accountId,
     startDate,
     endDate,
   );
+
+  const bgIconCurrent = useColorModeValue('orange.600', 'orange.200');
+  const colorIconCurrent = useColorModeValue('white', 'gray.800');
+  const bgIconIncomes = useColorModeValue('green.600', 'green.200');
+  const colorIconIncomes = useColorModeValue('white', 'gray.800');
+  const bgIconExpenses = useColorModeValue('red.600', 'red.200');
+  const colorIconExpenses = useColorModeValue('white', 'gray.800');
+  const bgIconBalance = useColorModeValue('blue.600', 'blue.200');
+  const colorIconBalance = useColorModeValue('white', 'gray.800');
+
+  const bgCardIncomes = useColorModeValue('green.200', 'green.800');
+  // const colorCardIncomes = useColorModeValue('white', 'gray.800');
+  const bgCardExpenses = useColorModeValue('red.200', 'red.800');
+  // const colorCardExpenses = useColorModeValue('white', 'gray.800');
+
   const { data: creditCards, isLoading: isLoadingCreditCards } = useCreditCardSummary(
     accountId,
     startDate,
     endDate,
   );
+
+  const toggleHightlight = (type: TransactionType) => {
+    if (highlightType === type) {
+      onHighlightType();
+      return;
+    }
+    onHighlightType(type);
+  };
 
   if (!accountId) {
     return null;
@@ -33,34 +58,32 @@ const Summary: React.FC<SimpleGridProps> = ({ ...simpleGridProps }) => {
       <StatMoney
         amount={balances.current}
         icon="bank"
-        iconProps={{ bg: 'orange.600' }}
+        iconProps={{ bg: bgIconCurrent, color: colorIconCurrent }}
         label="Anterior"
         useColors={true}
       />
       <StatMoney
         amount={balances.incomes}
+        cursor="pointer"
         icon="sack-dollar"
-        iconProps={{ bg: 'green.600' }}
+        iconProps={{ bg: bgIconIncomes, color: colorIconIncomes }}
         label="Ingresos"
-        onMouseEnter={() => onHighlightType('incomes')}
-        onMouseLeave={() => onHighlightType()}
-        onTouchEnd={() => onHighlightType()}
-        onTouchStart={() => onHighlightType('incomes')}
+        onClick={() => toggleHightlight('incomes')}
+        {...(highlightType === 'incomes' ? { bg: bgCardIncomes } : {})}
       />
       <StatMoney
         amount={balances.expenses}
+        cursor="pointer"
         icon="sack-xmark"
-        iconProps={{ bg: 'red.600' }}
+        iconProps={{ bg: bgIconExpenses, color: colorIconExpenses }}
         label="Gastos"
-        onMouseEnter={() => onHighlightType('expenses')}
-        onMouseLeave={() => onHighlightType()}
-        onTouchEnd={() => onHighlightType()}
-        onTouchStart={() => onHighlightType('expenses')}
+        onClick={() => toggleHightlight('expenses')}
+        {...(highlightType === 'expenses' ? { bg: bgCardExpenses } : {})}
       />
       <StatMoney
         amount={balances.balance}
         icon="balance-scale"
-        iconProps={{ bg: 'blue.600' }}
+        iconProps={{ bg: bgIconBalance, color: colorIconBalance }}
         label="Balance"
         useColors={true}
       />
