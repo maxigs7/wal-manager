@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, useColorModeValue } from '@chakra-ui/react';
 
 import { usePagePortals } from '@shared';
 
@@ -19,6 +19,7 @@ const Title: React.FC<{ title: string }> = React.memo(({ title }) => (
 
 const Page: React.FC<IProps> = ({ children, metaDescription, metaTitle, title }) => {
   const { titleBoxRef } = usePagePortals();
+  const bg = useColorModeValue('primary.600', 'primary.400');
   return (
     <>
       <Helmet>
@@ -26,14 +27,7 @@ const Page: React.FC<IProps> = ({ children, metaDescription, metaTitle, title })
         {metaDescription && <meta content={metaDescription} name="description" />}
       </Helmet>
       <Box h="full" w="full">
-        <Box
-          bg="primary.600"
-          mb={3}
-          pb="32"
-          pt="8"
-          px={{ base: 4, sm: 6, lg: 8 }}
-          ref={titleBoxRef}
-        >
+        <Box bg={bg} mb={3} pb="32" pt="8" px={{ base: 4, sm: 6, lg: 8 }} ref={titleBoxRef}>
           {title && <Title title={title} />}
         </Box>
 

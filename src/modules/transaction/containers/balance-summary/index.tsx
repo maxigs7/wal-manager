@@ -5,7 +5,7 @@ import { SimpleGrid, SimpleGridProps, useColorModeValue } from '@chakra-ui/react
 import { TransactionType } from '@models';
 import { ContentLoader, StatMoney } from '@shared';
 
-import { useAccountBalance, useCreditCardSummary } from '../../hooks';
+import { useAccountBalance } from '../../hooks';
 import { useTransactionStore } from '../../providers';
 
 const Summary: React.FC<SimpleGridProps> = ({ ...simpleGridProps }) => {
@@ -27,15 +27,7 @@ const Summary: React.FC<SimpleGridProps> = ({ ...simpleGridProps }) => {
   const colorIconBalance = useColorModeValue('white', 'gray.800');
 
   const bgCardIncomes = useColorModeValue('green.200', 'green.800');
-  // const colorCardIncomes = useColorModeValue('white', 'gray.800');
   const bgCardExpenses = useColorModeValue('red.200', 'red.800');
-  // const colorCardExpenses = useColorModeValue('white', 'gray.800');
-
-  const { data: creditCards, isLoading: isLoadingCreditCards } = useCreditCardSummary(
-    accountId,
-    startDate,
-    endDate,
-  );
 
   const toggleHightlight = (type: TransactionType) => {
     if (highlightType === type) {
@@ -48,7 +40,7 @@ const Summary: React.FC<SimpleGridProps> = ({ ...simpleGridProps }) => {
   if (!accountId) {
     return null;
   }
-  if (isLoadingBalance || isLoadingCreditCards) return <ContentLoader />;
+  if (isLoadingBalance) return <ContentLoader />;
   if (!balances) {
     return null;
   }
@@ -87,11 +79,6 @@ const Summary: React.FC<SimpleGridProps> = ({ ...simpleGridProps }) => {
         label="Balance"
         useColors={true}
       />
-
-      {/* <Card alignItems={isLoadingBalance ? 'center' : 'flex-start'} as={VStack} p="5" w="full">
-        {isLoadingCreditCards && <ContentLoader />}
-        {!isLoadingCreditCards && <CreditCardSummary creditCards={creditCards || []} />}
-      </Card> */}
     </SimpleGrid>
   );
 };

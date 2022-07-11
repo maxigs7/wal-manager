@@ -35,7 +35,7 @@ const ExtraFilters: React.FC<IProps> = ({ ...boxProps }) => {
         <MonthYearSelector display={['flex', 'flex', 'inline-flex']} w={['full', 'full', 'auto']} />
       </Flex>
       <Collapse in={isOpen}>
-        <SimpleGrid columns={[1, 2, 2, 4]} gap="3">
+        <SimpleGrid columns={[1, 1, 2, 4]} gap="3">
           <CategorySelectContainer
             name="categorySelectedId"
             onChange={dispatch.onFilterByCategory}

@@ -1,11 +1,14 @@
 import { useMemo } from 'react';
 import { UseQueryResult } from 'react-query';
 
+import { CreditCardType } from '@models';
+
 import useList from './useList';
 
 export interface ICreditCardSummary {
-  cc: string;
   amount: number;
+  cc: string;
+  type: CreditCardType;
 }
 
 const hook = (
@@ -27,8 +30,9 @@ const hook = (
         cc.amount += t.amount * -1;
       } else {
         summary.push({
-          cc: t.creditCard,
           amount: t.amount * -1,
+          cc: t.creditCard,
+          type: t.creditCardType as CreditCardType,
         });
       }
 

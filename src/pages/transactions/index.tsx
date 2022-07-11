@@ -1,13 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Portal } from '@chakra-ui/react';
+import { Flex, Portal, VStack } from '@chakra-ui/react';
 import compose from 'compose-function';
 
 import {
+  TransactionBalanceSummaryContainer,
+  TransactionCreditCardSummaryContainer,
   TransactionExtraFilter,
   TransactionMainFilterActions,
-  TransactionSummaryContainer,
   TransactionTableContainer,
   useTransactionStore,
 } from '@m/transaction';
@@ -68,17 +69,21 @@ const TransactionsPage: React.FC = () => {
       <Portal containerRef={titleBoxRef}>
         <TransactionMainFilterActions goCreate={goCreate} mb="3" />
         <TransactionExtraFilter />
-        <TransactionSummaryContainer />
+        <TransactionBalanceSummaryContainer />
       </Portal>
 
-      <Card>
-        <TransactionTableContainer
-          onMoreActions={onMoreActions}
-          onRemove={onRemove}
-          onUpdate={onUpdate}
-        />
-      </Card>
-
+      <Flex flexDirection={['column-reverse', null, 'row']} gap="3">
+        <Card w="100%">
+          <TransactionTableContainer
+            onMoreActions={onMoreActions}
+            onRemove={onRemove}
+            onUpdate={onUpdate}
+          />
+        </Card>
+        <VStack flexBasis={['100%', null, '20%']} spacing="3">
+          <TransactionCreditCardSummaryContainer />
+        </VStack>
+      </Flex>
       {routes}
 
       <Outlet />
