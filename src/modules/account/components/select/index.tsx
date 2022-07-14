@@ -7,9 +7,8 @@ import { Account, AccountType } from '@models';
 
 import AccountInline from '../inline';
 
-type SelectOption = {
+type SelectOption = Account & {
   label: string;
-  type: AccountType;
   value: string;
 };
 
@@ -24,9 +23,9 @@ export interface ISelectProps {
   value?: string;
 }
 
-const Option: React.FC<{ label: string; type: AccountType; value: string }> = ({ label, type }) => (
+const Option: React.FC<SelectOption> = ({ currency, label, type }) => (
   <HStack align="center">
-    <AccountInline name={label} type={type} />
+    <AccountInline currency={currency} name={label} type={type} />
   </HStack>
 );
 
@@ -35,8 +34,8 @@ const Select = React.forwardRef<any, ISelectProps>(
     const options: SelectOption[] = useMemo(
       () =>
         accounts?.map((acc) => ({
+          ...acc,
           label: acc.name,
-          type: acc.type,
           value: acc.id,
         })),
       [accounts],
