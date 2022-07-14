@@ -3,16 +3,18 @@ import React, { useEffect } from 'react';
 import { AccountSelect, IAccountSelectProps } from '../../components';
 import { useAccountList } from '../../hooks';
 
-const Select: React.FC<Omit<IAccountSelectProps, 'accounts' | 'isLoading'>> = ({
-  onChange,
-  ...props
-}) => {
+type Props = Omit<IAccountSelectProps, 'accounts' | 'isLoading'> & {
+  firstAsDefault?: boolean;
+};
+
+const Select: React.FC<Props> = ({ firstAsDefault = true, onChange, ...props }) => {
   const { data: accounts, isLoading } = useAccountList();
 
   useEffect(() => {
     if (accounts && accounts.length) {
       const defaultAccount = accounts.find((a) => a.isDefault)?.id;
       defaultAccount && onChange && onChange(defaultAccount);
+      !defaultAccount && firstAsDefault && onChange && onChange(accounts[0].id);
     }
   }, [accounts, onChange]);
 

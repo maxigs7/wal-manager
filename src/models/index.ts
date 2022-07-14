@@ -2,6 +2,7 @@ export * from './account';
 export * from './account-type';
 export * from './category';
 export * from './category-lookup';
+export * from './currency';
 export * from './category-type';
 export * from './credit-card';
 export * from './credit-card-type';

@@ -2,7 +2,7 @@ import { Column } from 'react-table';
 
 import { Flex } from '@chakra-ui/react';
 
-import { Account, getAccountTypeName } from '@models';
+import { Account, getAccountTypeName, getCurrencyName } from '@models';
 import { BooleanCell } from '@shared';
 
 import TypeIcon from '../type-icon';
@@ -29,6 +29,12 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
   {
     accessor: 'name',
     Header: 'Nombre',
+  },
+  {
+    accessor: 'currency',
+    Cell: (props) => getCurrencyName(props.value),
+    disableSortBy: true,
+    Header: 'Moneda',
   },
   {
     accessor: 'isDefault',

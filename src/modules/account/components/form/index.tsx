@@ -9,10 +9,11 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 
-import { Account, DEFAULT_ACCOUNT_TYPE } from '@models';
+import { Account, DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@models';
 import { Checkbox } from '@shared';
 
 import { useAccountIsUnique } from '../../hooks';
+import CurrencySelectControl from '../currency-select-control';
 import AccountTypeRadioGroup from '../type-radio-group';
 
 interface IProps extends UseFormReturn<Account> {
@@ -45,6 +46,17 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }
           name="type"
         />
         <FormErrorMessage>{errors.type && errors.type.message}</FormErrorMessage>
+      </FormControl>
+
+      <FormControl as={GridItem} isInvalid={!!errors.currency}>
+        <FormLabel htmlFor="currency">Moneda</FormLabel>
+        <CurrencySelectControl
+          control={control}
+          defaultValue={DEFAULT_CURRENCY}
+          id="currency"
+          name="currency"
+        />
+        <FormErrorMessage>{errors.currency && errors.currency.message}</FormErrorMessage>
       </FormControl>
 
       <FormControl as={GridItem} isInvalid={!!errors.isDefault}>
