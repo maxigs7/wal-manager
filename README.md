@@ -16,17 +16,22 @@ This project runs using [Supabase](https://supabase.io/). We're gonna need to cr
 
 ### Database
 
-If you are running Supabase CLI you can update your local instance using these commands:
+You need [`supabase cli`](https://supabase.com/docs/reference/cli/installing-and-updating) to run a local instance of supabase. Then you have to login:
 
 ```
-supabase link
-# Use "supabase link --project-ref your-project-ref" to link your project in one step.
+supabase login
+```
 
-supabase db remote set 'postgresql://postgres:<your_password>@db.<your_project_ref>.supabase.co:5432/postgres'
-# Use the connection string from your Supabase project here.
+Initialize the instance:
 
-supabase db remote commit
-# capture any changes that you have made to your database before setting up the CLI
+```
+supabase start
+```
+
+If you have modified your database schema you can get the migrations using the next command:
+
+```
+supabase db commit name-of-migration
 ```
 
 ### Application
