@@ -9,12 +9,13 @@ import { useAccountBalance } from '../../hooks';
 import { useTransactionStore } from '../../providers';
 
 const Summary: React.FC<SimpleGridProps> = ({ ...simpleGridProps }) => {
-  const [{ accountId, startDate, endDate, highlightType }, { onHighlightType }] =
+  const [{ account, startDate, endDate, highlightType, quotation }, { onHighlightType }] =
     useTransactionStore();
   const { data: balances, isLoading: isLoadingBalance } = useAccountBalance(
-    accountId,
+    account?.id,
     startDate,
     endDate,
+    quotation?.price,
   );
 
   const bgIconCurrent = useColorModeValue('orange.600', 'orange.200');
@@ -37,7 +38,7 @@ const Summary: React.FC<SimpleGridProps> = ({ ...simpleGridProps }) => {
     onHighlightType(type);
   };
 
-  if (!accountId) {
+  if (!account) {
     return null;
   }
   if (isLoadingBalance) return <ContentLoader />;

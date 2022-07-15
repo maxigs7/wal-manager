@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Flex, Portal, VStack } from '@chakra-ui/react';
 import compose from 'compose-function';
 
+import { withDolarsi } from '@api';
 import {
   TransactionBalanceSummaryContainer,
   TransactionCreditCardSummaryContainer,
@@ -11,10 +12,10 @@ import {
   TransactionMainFilterActions,
   TransactionTableContainer,
   useTransactionStore,
+  withTransactionStore,
 } from '@m/transaction';
 import { ActionsDrawer, Card, IActionDrawer, Page, usePagePortals, withTextFilter } from '@shared';
 
-import { withTransactionStore } from './hocs/withProvider';
 import { useTransactionNav, useTransactionRoutes } from './hooks';
 
 const TransactionsPage: React.FC = () => {
@@ -93,4 +94,4 @@ const TransactionsPage: React.FC = () => {
   );
 };
 
-export default compose(withTextFilter, withTransactionStore)(TransactionsPage);
+export default compose(withTextFilter, withDolarsi, withTransactionStore)(TransactionsPage);

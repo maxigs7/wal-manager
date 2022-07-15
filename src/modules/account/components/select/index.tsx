@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { HStack } from '@chakra-ui/react';
 
 import { Select as ReactSelect } from '@lib';
-import { Account, AccountType } from '@models';
+import { Account } from '@models';
 
 import AccountInline from '../inline';
 
@@ -43,7 +43,6 @@ const Select = React.forwardRef<any, ISelectProps>(
 
     return (
       <ReactSelect
-        colorScheme="accent"
         formatOptionLabel={Option}
         getOptionValue={(option) => option.value}
         id={id}

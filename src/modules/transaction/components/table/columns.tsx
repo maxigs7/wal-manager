@@ -1,12 +1,12 @@
 import { Column, Row } from 'react-table';
 
+import { IDolarsi } from '@api';
 import { dateSortType } from '@lib';
 import { TransactionDto } from '@models';
 import { DateCell } from '@shared';
 
 import {
   AccountableCell,
-  AccountCell,
   ActionsCell,
   CategoryCell,
   CreditCardCell,
@@ -17,11 +17,12 @@ interface IProps {
   onMoreActions(id: string): void;
   onRemove(id: string): void;
   onUpdate(id: string): void;
+  quotation?: IDolarsi;
 }
 
 type GetColumnsType = (props: IProps) => Column<TransactionDto>[];
 
-export const getColumns: GetColumnsType = ({ onMoreActions, onRemove, onUpdate }) => [
+export const getColumns: GetColumnsType = ({ onMoreActions, onRemove, onUpdate, quotation }) => [
   {
     accessor: 'id',
     Cell: (props) => (
@@ -68,7 +69,12 @@ export const getColumns: GetColumnsType = ({ onMoreActions, onRemove, onUpdate }
   },
   {
     accessor: 'amount',
-    Cell: AccountableCell,
+    Cell: ({ cell: { value, ...cell }, ...props }) => (
+      <AccountableCell
+        {...props}
+        cell={{ ...cell, value: quotation ? value * quotation.price : value }}
+      />
+    ),
     Header: 'Importe',
     isNumeric: true,
   },

@@ -21,7 +21,7 @@ interface IState {
 const CreatePage: React.FC = () => {
   const { type } = useParams();
   const { defaultDate } = useLocationState<IState>() || {};
-  const [{ accountId }] = useTransactionStore();
+  const [{ account }] = useTransactionStore();
 
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
@@ -42,7 +42,7 @@ const CreatePage: React.FC = () => {
       </Helmet>
       <Portal>
         <TransactionModalFormContainer
-          accountId={accountId}
+          accountId={account?.id}
           date={defaultDate}
           isOpen={true}
           onConfirmed={onConfirmed}

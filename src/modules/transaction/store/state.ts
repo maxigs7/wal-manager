@@ -1,11 +1,13 @@
-import { TransactionType } from '@models';
+import { IDolarsi } from '@api';
+import { Account, TransactionType } from '@models';
 
 export interface IState {
-  accountId: string;
+  account?: Account;
   categoryId?: string;
   creditCardId?: string;
   highlightType?: TransactionType;
   month: number;
+  quotation?: IDolarsi;
   year: number;
 }
 
@@ -15,8 +17,9 @@ interface IExtendedState extends IState {
 }
 
 export interface IDispatch {
-  onChangedAccount(id: string): void;
+  onChangedAccount(account?: Account): void;
   onChangedMonth(month: number): void;
+  onChangedQuotation(quotation?: IDolarsi): void;
   onChangedYear(year: number): void;
   onFilterByCategory(id: string): void;
   onFilterByCreditCard(id: string): void;
@@ -28,7 +31,6 @@ export interface IDispatch {
 const currentDate = new Date();
 
 export const initialState: IState = {
-  accountId: '',
   month: currentDate.getMonth(),
   year: currentDate.getFullYear(),
 };

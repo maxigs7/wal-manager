@@ -19,7 +19,7 @@ interface IState {
 const UpdatePage: React.FC = () => {
   const { id, type } = useParams();
   const { defaultDate } = useLocationState<IState>() || {};
-  const [{ accountId }] = useTransactionStore();
+  const [{ account }] = useTransactionStore();
 
   const { goIndex } = useTransactionNav();
   const refresh = useTransactionListRefresh();
@@ -39,7 +39,7 @@ const UpdatePage: React.FC = () => {
         <title>Actualizar Movimiento - WAL</title>
       </Helmet>
       <TransactionModalFormContainer
-        accountId={accountId}
+        accountId={account?.id}
         date={defaultDate}
         id={id}
         isOpen={true}

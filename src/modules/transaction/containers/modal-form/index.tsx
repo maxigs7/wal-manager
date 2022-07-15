@@ -71,7 +71,6 @@ const ModalForm: React.FC<IProps> = ({
   useEffect(() => {
     if (transaction) {
       const model = mapper(transaction);
-      console.log(model, transaction);
       reset(model);
     }
   }, [transaction]);

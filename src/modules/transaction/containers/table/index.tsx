@@ -13,10 +13,10 @@ interface IProps {
 }
 
 const Table: React.FC<IProps> = ({ onMoreActions, onRemove, onUpdate }) => {
-  const [{ accountId, startDate, endDate, creditCardId, categoryId, highlightType }] =
+  const [{ account, startDate, endDate, creditCardId, categoryId, highlightType, quotation }] =
     useTransactionStore();
 
-  const { data, isLoading } = useTransactionList(accountId, startDate, endDate, {
+  const { data, isLoading } = useTransactionList(account?.id, startDate, endDate, {
     categories: categoryId ? [categoryId] : [],
     creditCards: creditCardId ? [creditCardId] : [],
   });
@@ -32,6 +32,7 @@ const Table: React.FC<IProps> = ({ onMoreActions, onRemove, onUpdate }) => {
       onMoreActions={onMoreActions}
       onRemove={onRemove}
       onUpdate={onUpdate}
+      quotation={quotation}
     />
   );
 };

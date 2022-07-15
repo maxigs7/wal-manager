@@ -7,15 +7,15 @@ import { useCreditCardSummary } from '../../hooks';
 import { useTransactionStore } from '../../providers';
 
 const Summary: React.FC = () => {
-  const [{ accountId, startDate, endDate }] = useTransactionStore();
+  const [{ account, startDate, endDate }] = useTransactionStore();
 
   const { data: creditCards, isLoading: isLoadingCreditCards } = useCreditCardSummary(
-    accountId,
+    account?.id,
     startDate,
     endDate,
   );
 
-  if (!accountId) {
+  if (!account) {
     return null;
   }
   if (isLoadingCreditCards) return <ContentLoader />;

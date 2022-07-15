@@ -3,6 +3,7 @@ import { useSortBy, useTable } from 'react-table';
 
 import { Box, Table } from '@chakra-ui/react';
 
+import { IDolarsi } from '@api';
 import { TransactionDto, TransactionType } from '@models';
 import { TableBody, TableHeader } from '@shared';
 
@@ -14,6 +15,7 @@ interface IProps {
   onMoreActions(id: string): void;
   onRemove(id: string): void;
   onUpdate(id: string): void;
+  quotation?: IDolarsi;
 }
 
 const TransactionTable: React.FC<IProps> = ({
@@ -22,10 +24,11 @@ const TransactionTable: React.FC<IProps> = ({
   onMoreActions,
   onRemove,
   onUpdate,
+  quotation,
 }) => {
   const columns = useMemo(
-    () => getColumns({ onMoreActions, onRemove, onUpdate }),
-    [onMoreActions, onRemove, onUpdate],
+    () => getColumns({ onMoreActions, onRemove, onUpdate, quotation }),
+    [onMoreActions, onRemove, onUpdate, quotation],
   );
   const tableInstance = useTable<TransactionDto>(
     {

@@ -14,6 +14,7 @@ const hook = (
   accountId?: string,
   startDate?: Date,
   endDate?: Date,
+  quotationPrice = 1,
 ): UseQueryResult<IAccountMoney> => {
   const { data, ...rest } = useList(accountId, startDate, endDate);
   const balance: IAccountMoney = useMemo(() => {
@@ -43,11 +44,12 @@ const hook = (
     );
 
     return {
-      ...accountMoney,
-      balance: prevAmount + accountMoney.incomes - accountMoney.expenses,
-      current: prevAmount,
+      expenses: accountMoney.expenses * quotationPrice,
+      incomes: accountMoney.incomes * quotationPrice,
+      balance: (prevAmount + accountMoney.incomes - accountMoney.expenses) * quotationPrice,
+      current: prevAmount * quotationPrice,
     };
-  }, [data]);
+  }, [data, quotationPrice]);
 
   return { data: balance, ...rest } as UseQueryResult<IAccountMoney>;
 };
