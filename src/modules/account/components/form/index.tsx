@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import { Account, DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@models';
-import { Checkbox } from '@shared';
+import { InputCurrency, Switch } from '@shared';
 
 import { useAccountIsUnique } from '../../hooks';
 import CurrencySelectControl from '../currency-select-control';
@@ -37,17 +37,6 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl as={GridItem} isInvalid={!!errors.type}>
-        <FormLabel htmlFor="type">Tipo</FormLabel>
-        <AccountTypeRadioGroup
-          control={control}
-          defaultValue={DEFAULT_ACCOUNT_TYPE}
-          id="type"
-          name="type"
-        />
-        <FormErrorMessage>{errors.type && errors.type.message}</FormErrorMessage>
-      </FormControl>
-
       <FormControl as={GridItem} isInvalid={!!errors.currency}>
         <FormLabel htmlFor="currency">Moneda</FormLabel>
         <CurrencySelectControl
@@ -59,10 +48,32 @@ const Form: React.FC<IProps> = ({ control, formState: { errors }, id, register }
         <FormErrorMessage>{errors.currency && errors.currency.message}</FormErrorMessage>
       </FormControl>
 
+      <FormControl as={GridItem} isInvalid={!!errors.initialAmount}>
+        <FormLabel htmlFor="initialAmount">Monto</FormLabel>
+        <InputCurrency
+          control={control}
+          id="initialAmount"
+          name="initialAmount"
+          placeholder="Ingrese un monto inicial"
+        />
+        <FormErrorMessage>{errors.initialAmount && errors.initialAmount.message}</FormErrorMessage>
+      </FormControl>
+
+      <FormControl as={GridItem} isInvalid={!!errors.type}>
+        <FormLabel htmlFor="type">Tipo</FormLabel>
+        <AccountTypeRadioGroup
+          control={control}
+          defaultValue={DEFAULT_ACCOUNT_TYPE}
+          id="type"
+          name="type"
+        />
+        <FormErrorMessage>{errors.type && errors.type.message}</FormErrorMessage>
+      </FormControl>
+
       <FormControl as={GridItem} isInvalid={!!errors.isDefault}>
-        <Checkbox control={control} id="isDefault" name="isDefault">
+        <Switch control={control} id="isDefault" name="isDefault">
           Seleccionar por defecto
-        </Checkbox>
+        </Switch>
         <FormErrorMessage>{errors.isDefault && errors.isDefault.message}</FormErrorMessage>
       </FormControl>
     </SimpleGrid>

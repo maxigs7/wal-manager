@@ -2,6 +2,7 @@ import { CellProps } from 'react-table';
 
 import { Flex, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 
+import { formatToCurrency } from '@lib';
 import { CategoryTag } from '@m/category';
 import { CreditCardInline } from '@m/credit-card';
 import { TransactionDto } from '@models';
@@ -10,10 +11,7 @@ import { Icon } from '@shared';
 export const AccountableCell: React.FC<CellProps<TransactionDto, number>> = ({
   cell: { value },
 }) => {
-  const valueFormatted = Math.abs(value).toLocaleString('es-AR', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+  const valueFormatted = formatToCurrency(Math.abs(value));
   const formatted = value < 0 ? `(${valueFormatted})` : valueFormatted;
   return (
     <Flex>

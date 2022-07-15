@@ -2,6 +2,7 @@ import { Column } from 'react-table';
 
 import { Flex } from '@chakra-ui/react';
 
+import { formatToCurrency } from '@lib';
 import { Account, getAccountTypeName, getCurrencyName } from '@models';
 import { BooleanCell } from '@shared';
 
@@ -35,6 +36,12 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
     Cell: (props) => getCurrencyName(props.value),
     disableSortBy: true,
     Header: 'Moneda',
+  },
+  {
+    accessor: 'initialAmount',
+    Cell: (props) => <>{props.value && formatToCurrency(props.value)}</>,
+    Header: 'Monto Inicial',
+    isNumeric: true,
   },
   {
     accessor: 'isDefault',

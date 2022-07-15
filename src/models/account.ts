@@ -7,6 +7,7 @@ export type Account = BaseModel & {
   archivedAt?: Date;
   createdAt: Date;
   currency: Currency;
+  initialAmount?: number;
   isDefault: boolean;
   name: string;
   type: AccountType;
