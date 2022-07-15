@@ -11,6 +11,7 @@ import {
   TransactionExtraFilter,
   TransactionMainFilterActions,
   TransactionTableContainer,
+  useCreditCardSummary,
   useTransactionStore,
   withTransactionStore,
 } from '@m/transaction';
@@ -24,6 +25,13 @@ const TransactionsPage: React.FC = () => {
   const routes = useTransactionRoutes();
   const { goCreate, goRemove, goUpdate } = useTransactionNav();
   const [currentActionId, setCurrentActionId] = useState<string>();
+
+  const { data: creditCards } = useCreditCardSummary(
+    state.account?.id,
+    state.startDate,
+    state.endDate,
+  );
+  const hasCreditCards = useMemo(() => !!creditCards?.length, [creditCards]);
 
   const onMoreActions = useCallback((id: string) => {
     setCurrentActionId(id);
@@ -81,9 +89,11 @@ const TransactionsPage: React.FC = () => {
             onUpdate={onUpdate}
           />
         </Card>
-        <VStack flexBasis={['100%', null, '20%']} spacing="3">
-          <TransactionCreditCardSummaryContainer />
-        </VStack>
+        {hasCreditCards && (
+          <VStack flexBasis={['100%', null, '20%']} spacing="3">
+            <TransactionCreditCardSummaryContainer />
+          </VStack>
+        )}
       </Flex>
       {routes}
 
