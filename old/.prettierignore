@@ -1,0 +1,10 @@
+**/*.d.ts
+node_modules
+build
+dist
+*.png
+*.ico
+*.jpg
+*.jpeg
+package-lock.json
+yarn.lock

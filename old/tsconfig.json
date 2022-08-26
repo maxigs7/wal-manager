@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
     "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "incremental": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
     "paths": {
       "@api": ["./api"],
       "@app": ["./app"],
@@ -29,10 +31,12 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es5",
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "target": "esnext",
+    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "typeRoots": ["./src/types", "./node_modules/@types"],
+    "useDefineForClassFields": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./src/types"],
+  "include": ["**/*.ts", "**/*.tsx", "./src/types"],
   "exclude": [
     "dist",
     "out",
