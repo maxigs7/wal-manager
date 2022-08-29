@@ -16,6 +16,7 @@
       "@app": ["./app"],
       "@assets": ["./assets"],
       "@assets/*": ["./assets/*"],
+      "@i18n": ["./i18n"],
       "@layout": ["./layout"],
       "@lib": ["./lib"],
       "@lib/*": ["./lib/*"],
