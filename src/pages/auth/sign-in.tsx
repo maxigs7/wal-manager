@@ -1,14 +1,11 @@
 import { getDefaultLayout, NextPageWithLayout } from '@layout';
-
-import NextLink from 'next/link';
-
 import { Heading, Icon, Flex, Link } from '@chakra-ui/react';
-
-// import { SignInByEmail } from '@m/auth';
+import NextLink from 'next/link';
 import { AUTH_SIGN_UP_ENABLED, WalletLogo } from '@shared';
+import { SignInByEmail } from '@m/auth';
 import { es } from '@i18n';
 
-const Page: NextPageWithLayout = () => (
+const SignInPage: NextPageWithLayout = () => (
   <Flex align="center" color="white" direction="column" mb={5}>
     <Icon as={WalletLogo} h={24} w={24} />
 
@@ -20,7 +17,7 @@ const Page: NextPageWithLayout = () => (
       {es.auth.signIn.title}
     </Heading>
 
-    {/* <SignInByEmail /> */}
+    <SignInByEmail />
 
     {AUTH_SIGN_UP_ENABLED && (
       <Link as={NextLink} colorScheme="cello" mt={5} href="/auth/sign-up">
@@ -30,6 +27,6 @@ const Page: NextPageWithLayout = () => (
   </Flex>
 );
 
-Page.getLayout = getDefaultLayout;
+SignInPage.getLayout = getDefaultLayout;
 
-export default Page;
+export default SignInPage;
