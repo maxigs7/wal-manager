@@ -1,11 +1,11 @@
+import { Heading, Icon, Flex, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-import { Heading, Icon, Flex, Link } from '@chakra-ui/react';
 
+import { es } from '@i18n';
+import { getDefaultLayout, NextPageWithLayout } from '@layout';
 import { SignUpByEmail } from '@m/auth';
 import { WalletLogo } from '@shared';
-import { getDefaultLayout, NextPageWithLayout } from '@layout';
-import { es } from '@i18n';
 
 const SignUpPage: NextPageWithLayout = () => (
   <Flex align="center" color="white" direction="column" mb={5}>

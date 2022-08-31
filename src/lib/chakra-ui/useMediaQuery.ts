@@ -1,6 +1,6 @@
+import { useMediaQuery as useChakraMediaQuery, useTheme } from '@chakra-ui/react';
 import { useMemo } from 'react';
 
-import { useMediaQuery as useChakraMediaQuery, useTheme } from '@chakra-ui/react';
 
 interface IMediaQueryReturn {
   xs: boolean;

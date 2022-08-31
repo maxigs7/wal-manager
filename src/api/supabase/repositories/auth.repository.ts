@@ -1,5 +1,7 @@
-import { ApiError } from '@lib';
 import { SupabaseClient } from '@supabase/supabase-js';
+
+import { ApiError } from '@lib';
+
 import {
   IAuthRepository,
   ISignInParam,

@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { FlexProps, Flex, SpinnerProps } from '@chakra-ui/react';
+import React from 'react';
 
 import Loader from './loader';
 

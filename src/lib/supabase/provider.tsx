@@ -1,6 +1,6 @@
+import { SupabaseClient } from '@supabase/supabase-js';
 import { createContext, PropsWithChildren, useContext } from 'react';
 
-import { SupabaseClient } from '@supabase/supabase-js';
 
 interface IProps extends PropsWithChildren {
   supabase: SupabaseClient;

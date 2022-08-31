@@ -1,6 +1,6 @@
+import { Flex } from '@chakra-ui/react';
 import React, { PropsWithChildren } from 'react';
 
-import { Flex } from '@chakra-ui/react';
 
 const DefaultLayout: React.FC<PropsWithChildren> = ({ children }) => (
   <Flex

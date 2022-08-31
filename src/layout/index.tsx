@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { ReactElement, ReactNode } from 'react';
+
 import { default as LayoutDefault } from './default';
 // export { default as LayoutFull } from './full';
 

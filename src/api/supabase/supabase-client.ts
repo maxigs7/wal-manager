@@ -2,6 +2,7 @@ import { SupabaseClient as OrigSupabaseClient } from '@supabase/supabase-js';
 
 import { GenericRepository, IGenericRepository } from '@lib';
 import { Category } from '@models';
+
 import { AuthRepository, IAuthRepository } from './repositories';
 
 export interface ISupabaseClient {

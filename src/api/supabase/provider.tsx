@@ -1,5 +1,6 @@
-import { useSupabase } from '@lib';
 import { createContext, PropsWithChildren, useContext, useMemo } from 'react';
+
+import { useSupabase } from '@lib';
 
 import { ISupabaseClient, SupabaseClient } from './supabase-client';
 

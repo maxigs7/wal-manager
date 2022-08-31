@@ -1,12 +1,13 @@
-import { useForm } from 'react-hook-form';
 
 import { VStack, Button } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { es } from '@i18n';
 
 import { AuthError, SignUpForm, SignUpFormType } from '../../components';
 import { useSignUp } from '../../hooks';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { es } from '@i18n';
 
 interface IState {
   from?: { pathname: string };

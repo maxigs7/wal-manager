@@ -1,4 +1,5 @@
 import { SupabaseClient } from '@supabase/supabase-js';
+
 import { ApiError } from './api-error';
 import { BaseModel, IGenericRepository, IGetAllOptions } from './types';
 

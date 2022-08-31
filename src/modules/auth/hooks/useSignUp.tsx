@@ -1,6 +1,7 @@
-import { ApiError } from '@lib';
-import { ISignUpParam, ISignUpReturn, useSupabaseApi } from '@api';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
+
+import { ISignUpParam, ISignUpReturn, useSupabaseApi } from '@api';
+import { ApiError } from '@lib';
 
 export const useSignUp = (): UseMutationResult<ISignUpReturn, Error, ISignUpParam> => {
   const { auth } = useSupabaseApi();

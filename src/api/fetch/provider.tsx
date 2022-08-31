@@ -1,4 +1,5 @@
 import { createContext, PropsWithChildren, useContext, useMemo } from 'react';
+
 import { FetchClient, IFetchClient } from './fetch-client';
 
 export const FetchApiContext = createContext<IFetchClient>({} as IFetchClient);

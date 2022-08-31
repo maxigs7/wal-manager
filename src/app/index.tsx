@@ -1,8 +1,9 @@
+import { AppProps } from 'next/app';
 import React from 'react';
 
-import { withProviders } from './hocs';
-import { AppProps } from 'next/app';
 import { NextPageWithLayout } from '@layout';
+
+import { withProviders } from './hocs';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;

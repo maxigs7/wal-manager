@@ -1,7 +1,7 @@
+import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { es } from '@i18n';
 
 export type SignUpFormType = { email: string; password: string; confirmPassword: string };
