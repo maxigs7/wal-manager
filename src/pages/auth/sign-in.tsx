@@ -1,33 +1,44 @@
-import { Heading, Icon, Flex, Link } from '@chakra-ui/react';
+import { Heading, Flex, Link, Box } from '@chakra-ui/react';
+import Head from 'next/head';
 import NextLink from 'next/link';
 
 import { es } from '@i18n';
-import { getDefaultLayout, NextPageWithLayout } from '@layout';
+import { getAuthLayout, NextPageWithLayout } from '@layout';
 import { SignInByEmail } from '@m/auth';
-import { AUTH_SIGN_UP_ENABLED, WalletLogo } from '@shared';
+import { AUTH_SIGN_UP_ENABLED } from '@shared';
 
 const SignInPage: NextPageWithLayout = () => (
-  <Flex align="center" color="white" direction="column" mb={5}>
-    <Icon as={WalletLogo} h={24} w={24} />
+  <>
+    <Head>
+      <title>{es.auth.signIn.title} - WAL</title>
+    </Head>
+    <Flex
+      align="center"
+      color="primary.700"
+      direction="column"
+      justify="center"
+      maxW={[null, null, null, 'md', 'xl']}
+      mb={5}
+      minW={[null, null, null, 'md', 'xl']}
+      p="5"
+    >
+      <Heading as="h3" mb={['4', '8', '10']} size="xl" textAlign="center" textTransform="uppercase">
+        {es.auth.signIn.title}
+      </Heading>
 
-    <Heading as="h2" mb={16} mt={8} size="3xl">
-      {es.common.appName}
-    </Heading>
+      <SignInByEmail />
 
-    <Heading as="h3" mb={16} size="2xl">
-      {es.auth.signIn.title}
-    </Heading>
-
-    <SignInByEmail />
-
-    {AUTH_SIGN_UP_ENABLED && (
-      <Link as={NextLink} colorScheme="cello" mt={5} href="/auth/sign-up">
-        {es.auth.signIn.registrationLink}
-      </Link>
-    )}
-  </Flex>
+      {AUTH_SIGN_UP_ENABLED && (
+        <Box mt="3">
+          <Link as={NextLink} href="/auth/sign-up">
+            {es.auth.signIn.registrationLink}
+          </Link>
+        </Box>
+      )}
+    </Flex>
+  </>
 );
 
-SignInPage.getLayout = getDefaultLayout;
+SignInPage.getLayout = getAuthLayout;
 
 export default SignInPage;

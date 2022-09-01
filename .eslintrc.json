@@ -1,8 +1,17 @@
 {
   "extends": ["next/core-web-vitals", "prettier"],
   "rules": {
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "ignoreCase": true,
+        "multiline": "last",
+        "reservedFirst": ["key"],
+        "shorthandLast": true
+      }
+    ],
     "import/order": [
-      "error",
+      "warn",
       {
         "groups": [["external", "builtin"], "internal", ["parent", "index", "sibling", "object"]],
         "pathGroups": [

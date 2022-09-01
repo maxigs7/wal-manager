@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 
 const Error: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <Box bg="danger.200" color="danger.700" py="3" rounded="md" w="full">
+    <Box bg="danger.200" color="danger.700" px="4" py="2" rounded="md" w="full">
       {children}
     </Box>
   );
