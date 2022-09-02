@@ -1,0 +1,26 @@
+import { Box } from '@chakra-ui/react';
+import React from 'react';
+
+interface IProps {
+  closeSidebar(): void;
+  isSidebarOpen: boolean;
+}
+
+const Backdrop: React.FC<IProps> = React.memo(({ closeSidebar, isSidebarOpen }) => (
+  <Box
+    aria-hidden="true"
+    bg="gray.900"
+    display={{ lg: 'none' }}
+    h={isSidebarOpen ? 'full' : ''}
+    onClick={closeSidebar}
+    opacity={isSidebarOpen ? 0.3 : 0}
+    pointerEvents={isSidebarOpen ? 'auto' : 'none'}
+    position="fixed"
+    transition="opacity 0.2s"
+    w={isSidebarOpen ? 'full' : ''}
+  />
+));
+
+Backdrop.displayName = 'Backdrop';
+
+export { Backdrop };

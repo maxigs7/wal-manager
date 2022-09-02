@@ -1,18 +1,22 @@
 import { NextPage } from 'next';
 import { ReactElement, ReactNode } from 'react';
 
-import { default as LayoutAuth } from './auth';
-import { default as LayoutDefault } from './default';
-// export { default as LayoutFull } from './full';
+import { default as AuthLayout } from './auth';
+import { default as DefaultLayout } from './default';
+import { default as FullLayout } from './full';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
 export const getAuthLayout = (page: ReactElement) => {
-  return <LayoutAuth>{page}</LayoutAuth>;
+  return <AuthLayout>{page}</AuthLayout>;
 };
 
 export const getDefaultLayout = (page: ReactElement) => {
-  return <LayoutDefault>{page}</LayoutDefault>;
+  return <DefaultLayout>{page}</DefaultLayout>;
+};
+
+export const getFullLayout = (page: ReactElement) => {
+  return <FullLayout>{page}</FullLayout>;
 };
