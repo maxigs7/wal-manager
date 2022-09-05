@@ -4,7 +4,7 @@ import { ApiError } from './api-error';
 import { BaseModel, IGenericRepository, IGetAllOptions } from './types';
 
 export class GenericRepository<T extends BaseModel> implements IGenericRepository<T> {
-  constructor(private supabase: SupabaseClient, private table: string) {}
+  constructor(protected supabase: SupabaseClient, private table: string) {}
 
   private get from() {
     return this.supabase.from(this.table);
