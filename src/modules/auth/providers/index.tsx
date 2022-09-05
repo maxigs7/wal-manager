@@ -24,7 +24,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       if (mounted) {
         if (session) {
           const user = session.user;
-          console.log('[mounted]', session);
           dispatch(authStart(user));
         }
 
@@ -38,7 +37,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       data: { subscription },
     } = auth.onAuthStateChange((_event, session) => {
       if (session) {
-        console.log('[onAuthStateChange]', session);
         const user = session.user;
         dispatch(authStart(user));
       }

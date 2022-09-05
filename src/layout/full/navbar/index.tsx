@@ -3,13 +3,12 @@ import React from 'react';
 
 import { ColorModeToggle, Icon } from '@shared';
 
+import { Breadcrumb } from '../breadcrumb';
 import { NAVBAR_HEIGHT, NAVBAR_Z_INDEX, SIDEBAR_WIDTH } from '../constants';
+import { useLayout } from '../provider';
 
-interface IProps {
-  toggleSidebar(): void;
-}
-
-export const Navbar: React.FC<IProps> = ({ toggleSidebar }) => {
+export const Navbar: React.FC = () => {
+  const { toggleSidebar } = useLayout();
   const bg = useColorModeValue('white', 'cello.700');
   return (
     <Flex
@@ -18,7 +17,6 @@ export const Navbar: React.FC<IProps> = ({ toggleSidebar }) => {
       bg={bg}
       boxShadow="md"
       h={NAVBAR_HEIGHT}
-      justify="space-between"
       left={{ base: 0, lg: SIDEBAR_WIDTH }}
       position="fixed"
       px={{ base: 4, sm: 6, lg: 8 }}
@@ -38,8 +36,9 @@ export const Navbar: React.FC<IProps> = ({ toggleSidebar }) => {
           variant="ghost"
         />
       </Flex>
+      <Breadcrumb />
       {/* Header: Right side */}
-      <Flex align="center" h="full">
+      <Flex align="center" h="full" ml="auto">
         <ColorModeToggle />
       </Flex>
     </Flex>

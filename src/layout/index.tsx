@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from 'react';
 
 import { default as AuthLayout } from './auth';
 import { default as DefaultLayout } from './default';
-import { default as FullLayout } from './full';
+import { default as FullLayout, useLayout as useFullLayout } from './full';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,3 +20,5 @@ export const getDefaultLayout = (page: ReactElement) => {
 export const getFullLayout = (page: ReactElement) => {
   return <FullLayout>{page}</FullLayout>;
 };
+
+export { useFullLayout };

@@ -4,17 +4,16 @@ import { PropsWithChildren } from 'react';
 import { PrivateRoute } from '@m/auth';
 
 import Layout from './layout';
+import { LayoutProvider } from './provider';
 
-const FullLayout: React.FC<PropsWithChildren> = ({ children }) => {
-  const { isOpen, onClose, onToggle } = useDisclosure();
-
-  return (
+const FullLayout: React.FC<PropsWithChildren> = ({ children }) => (
+  <LayoutProvider>
     <PrivateRoute>
-      <Layout closeSidebar={onClose} isSidebarOpen={isOpen} toggleSidebar={onToggle}>
-        {children}
-      </Layout>
+      <Layout>{children}</Layout>
     </PrivateRoute>
-  );
-};
+  </LayoutProvider>
+);
+
+export { useLayout } from './provider';
 
 export default FullLayout;
