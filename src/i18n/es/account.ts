@@ -1,4 +1,12 @@
 export const account = {
+  headers: {
+    actions: '...',
+    currency: 'Moneda',
+    initialAmount: 'Monto Inicial',
+    isDefault: 'Por Defecto',
+    name: 'Nombre',
+    type: 'Tipo',
+  },
   meta: {
     title: 'Mis Cuentas',
   },

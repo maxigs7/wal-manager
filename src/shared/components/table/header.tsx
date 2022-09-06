@@ -30,6 +30,9 @@ const Header = <T extends object>({ headerGroups }: IProps<T>): React.ReactEleme
               borderBottom="solid"
               borderBottomColor="gray.300"
               borderBottomWidth="thin"
+              borderTop="solid"
+              borderTopColor="gray.300"
+              borderTopWidth="thin"
               onClick={header.column.getToggleSortingHandler()}
               whiteSpace="nowrap"
               {...conditinalProps}
