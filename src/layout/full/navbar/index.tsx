@@ -9,7 +9,7 @@ import { useLayout } from '../provider';
 
 export const Navbar: React.FC = () => {
   const { toggleSidebar } = useLayout();
-  const bg = useColorModeValue('white', 'cello.700');
+  const bg = useColorModeValue('white', 'primary.700');
   return (
     <Flex
       align="center"

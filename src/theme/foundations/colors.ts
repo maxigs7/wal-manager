@@ -82,7 +82,7 @@ const colors = {
     ...defaultColors.blue,
   },
   primary: {
-    ...pallete.wedgewood,
+    ...pallete.cello,
   },
   secondary: {
     ...pallete.powderBlue,

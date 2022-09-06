@@ -7,7 +7,7 @@ import { WalletLogo } from '@shared';
 const AuthLayout: React.FC<PropsWithChildren> = ({ children }) => (
   <Flex
     as="section"
-    bg="cello.500"
+    bg="primary.500"
     direction={['column', 'row']}
     minH={[null, '100vh']}
     minW={[null, '100vw']}
@@ -31,7 +31,7 @@ const AuthLayout: React.FC<PropsWithChildren> = ({ children }) => (
         {es.common.description}
       </Heading>
     </Flex>
-    <Flex bg="white" color="cello.500" ml={[null, 'auto']}>
+    <Flex bg="white" color="primary.500" ml={[null, 'auto']}>
       {children}
     </Flex>
   </Flex>

@@ -10,7 +10,7 @@ import { Menu } from './menu';
 
 const Sidebar: React.FC = React.memo(() => {
   const { closeSidebar, isSidebarOpen } = useLayout();
-  const bg = useColorModeValue('cello.600', 'cello.800');
+  const bg = useColorModeValue('primary.600', 'primary.800');
 
   return (
     <Flex

@@ -8,7 +8,7 @@ import { User } from './user';
 const Footer: React.FC = () => {
   return (
     <Flex
-      bg="cello.500"
+      bg="primary.500"
       bottom="0"
       direction="column"
       left="0"

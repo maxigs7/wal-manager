@@ -3,8 +3,8 @@ import { Box, Icon, useColorModeValue } from '@chakra-ui/react';
 import { WalletLogo } from '../../assets';
 
 const Logo: React.FC = () => {
-  const bg = useColorModeValue('cello.800', 'white');
-  const color = useColorModeValue('white', 'cello.800');
+  const bg = useColorModeValue('primary.800', 'white');
+  const color = useColorModeValue('white', 'primary.800');
 
   return (
     <Box
