@@ -49,20 +49,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     };
   }, [auth]);
 
-  // useEffect(() => {
-  //   const user = auth.user();
-  //   dispatch(authStart(user));
-
-  //   const { data: listener } = auth.onAuthStateChange(async (_event, session) => {
-  //     const user = session?.user || null;
-  //     dispatch(authStart(user));
-  //   });
-
-  //   return () => {
-  //     listener?.unsubscribe();
-  //   };
-  // }, []);
-
   return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
 };
 

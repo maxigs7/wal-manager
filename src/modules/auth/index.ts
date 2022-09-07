@@ -1,5 +1,3 @@
-export { authRepository } from './api/repository';
-export type { IAuthRepository } from './api/types';
 export * from './components';
 export * from './containers';
 export * from './hooks';
