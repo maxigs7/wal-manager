@@ -12,7 +12,13 @@ const AccountsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [idToRemove, setIdToRemove] = useState<string>();
   const { setBreadcrumb } = useFullLayout();
-  const breadcrumb = useMemo(() => [{ label: 'Admin', link: '/admin' }, { label: 'Cuentas' }], []);
+  const breadcrumb = useMemo(
+    () => [
+      { label: es.common.breadcrumbs.admin, link: '/admin' },
+      { label: es.common.breadcrumbs.accounts },
+    ],
+    [],
+  );
 
   const onUpdate = useCallback(
     (id: string) => {
@@ -40,7 +46,7 @@ const AccountsPage: NextPageWithLayout = () => {
             size="sm"
             textTransform="uppercase"
           >
-            CREAR
+            {es.common.create}
           </Button>
         </NextLink>
       </PageHeader>

@@ -15,9 +15,9 @@ const CreatePage: NextPageWithLayout = () => {
 
   const breadcrumb = useMemo(
     () => [
-      { label: 'Admin', link: '/admin' },
-      { label: 'Cuentas', link: '/admin/accounts' },
-      { label: 'Crear' },
+      { label: es.common.breadcrumbs.admin, link: '/admin' },
+      { label: es.common.breadcrumbs.accounts, link: '/admin/accounts' },
+      { label: es.common.breadcrumbs.create },
     ],
     [],
   );

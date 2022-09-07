@@ -1,6 +1,5 @@
 import { Flex } from '@chakra-ui/react';
 import { CellContext, ColumnDef, createColumnHelper } from '@tanstack/react-table';
-import { useMemo } from 'react';
 
 import { es } from '@i18n';
 import { formatToCurrency } from '@lib';
@@ -66,6 +65,6 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
       ];
       return <ActionsCell actions={actions} row={props.row.original} />;
     },
-    header: es.account.headers.actions,
+    header: es.common.headers.actions,
   }),
 ];
