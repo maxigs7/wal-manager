@@ -1,6 +1,13 @@
 export const common = {
   appName: 'Wal Manager',
+  breadcrumbs: {
+    accounts: 'Cuentas',
+    admin: 'Admin',
+    create: 'Crear',
+    creditCards: 'Tarjetas',
+  },
   cancel: 'Cancelar',
+  create: 'Crear',
   defaultEmptyText: 'No se encontraron datos...',
   description: 'Maneje sus finanzas de manera organizada',
   dialog: {
@@ -8,6 +15,9 @@ export const common = {
   },
   globalFilterPlaceholder: 'Buscar...',
   goBack: 'Volver',
+  headers: {
+    actions: '...',
+  },
   remove: 'Eliminar',
   save: 'Guardar',
   toast: {
