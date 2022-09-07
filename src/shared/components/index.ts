@@ -1,5 +1,6 @@
 export * from './color-mode-toggle';
 export * from './controls';
+export * from './dialog-remove';
 export * from './form';
 export * from './icon';
 export * from './loaders';

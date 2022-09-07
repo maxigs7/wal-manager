@@ -1,19 +1,29 @@
 import { Button } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { es } from '@i18n';
 import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
-import { AccountTableContainer } from '@m/account';
+import { AccountDialogRemove, AccountTableContainer } from '@m/account';
 import { Icon, Page, PageHeader } from '@shared';
 
 const AccountsPage: NextPageWithLayout = () => {
+  const router = useRouter();
+  const [idToRemove, setIdToRemove] = useState<string>();
   const { setBreadcrumb } = useFullLayout();
   const breadcrumb = useMemo(() => [{ label: 'Admin', link: '/admin' }, { label: 'Cuentas' }], []);
 
-  const onUpdate = useCallback((id: string) => {}, []);
+  const onUpdate = useCallback(
+    (id: string) => {
+      router.push(`/admin/accounts/${id}`);
+    },
+    [router],
+  );
 
-  const onRemove = useCallback((id: string) => {}, []);
+  const onRemove = useCallback((id: string) => {
+    setIdToRemove(id);
+  }, []);
 
   useEffect(() => {
     setBreadcrumb(breadcrumb);
@@ -36,6 +46,11 @@ const AccountsPage: NextPageWithLayout = () => {
       </PageHeader>
 
       <AccountTableContainer onRemove={onRemove} onUpdate={onUpdate} />
+      <AccountDialogRemove
+        id={idToRemove}
+        isOpen={!!idToRemove}
+        onDismiss={() => setIdToRemove(undefined)}
+      />
     </Page>
   );
 };

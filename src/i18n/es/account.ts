@@ -25,6 +25,13 @@ export const account = {
       metaTitle: 'Mis Cuentas',
       title: 'Mis Cuentas',
     },
+    remove: {
+      title: 'Eliminar Cuenta',
+    },
+    update: {
+      metaTitle: 'Editar Cuenta',
+      title: 'Editar Cuenta',
+    },
   },
   toast: {
     createSuccess: 'Se ha creado la cuenta correctamente.',
