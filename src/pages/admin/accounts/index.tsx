@@ -8,20 +8,20 @@ import { AccountTableContainer } from '@m/account';
 import { Icon, Page, PageHeader } from '@shared';
 
 const AccountsPage: NextPageWithLayout = () => {
-  const breadcrumb = useMemo(() => [{ label: 'Admin', link: '/admin' }, { label: 'Cuentas' }], []);
   const { setBreadcrumb } = useFullLayout();
-
-  useEffect(() => {
-    setBreadcrumb(breadcrumb);
-  }, [breadcrumb, setBreadcrumb]);
+  const breadcrumb = useMemo(() => [{ label: 'Admin', link: '/admin' }, { label: 'Cuentas' }], []);
 
   const onUpdate = useCallback((id: string) => {}, []);
 
   const onRemove = useCallback((id: string) => {}, []);
 
+  useEffect(() => {
+    setBreadcrumb(breadcrumb);
+  }, [breadcrumb, setBreadcrumb]);
+
   return (
     <Page>
-      <PageHeader metaTitle={es.account.meta.title} title={es.account.title}>
+      <PageHeader metaTitle={es.account.pages.index.metaTitle} title={es.account.pages.index.title}>
         <NextLink href="/admin/accounts/create" passHref>
           <Button
             as="a"

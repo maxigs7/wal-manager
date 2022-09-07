@@ -5,9 +5,9 @@ import { useMemo } from 'react';
 import { es } from '@i18n';
 import { formatToCurrency } from '@lib';
 import { Account, AccountType, Currency, getAccountTypeName, getCurrencyName } from '@models';
-import { ActionButton, ActionsCell } from '@shared';
+import { ActionButton, ActionsCell, BooleanCell } from '@shared';
 
-import TypeIcon from '../type-icon';
+import { AccountTypeIcon } from '../type-icon';
 
 interface IProps {
   onRemove(id: string): void;
@@ -23,7 +23,7 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
   columnHelper.accessor('type', {
     cell: (props: CellContext<Account, AccountType>) => (
       <Flex align="center" gap="3">
-        <TypeIcon size="2x" type={props.getValue()} /> {getAccountTypeName(props.getValue())}
+        <AccountTypeIcon size="2x" type={props.getValue()} /> {getAccountTypeName(props.getValue())}
       </Flex>
     ),
     enableSorting: false,
@@ -43,7 +43,7 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
     header: es.account.headers.initialAmount,
   }),
   columnHelper.accessor('isDefault', {
-    cell: (props: CellContext<Account, boolean>) => props.getValue(),
+    cell: BooleanCell,
     header: es.account.headers.isDefault,
     enableSorting: false,
   }),

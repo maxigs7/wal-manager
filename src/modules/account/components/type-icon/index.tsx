@@ -8,7 +8,7 @@ interface IProps extends Omit<WalIconProps, 'icon'> {
   type: AccountType;
 }
 
-const TypeIcon: React.FC<IProps> = ({ type, ...props }) => {
+const AccountTypeIcon: React.FC<IProps> = ({ type, ...props }) => {
   const icon: IconName = useMemo(() => {
     switch (type) {
       case 'bank':
@@ -26,4 +26,4 @@ const TypeIcon: React.FC<IProps> = ({ type, ...props }) => {
   );
 };
 
-export default TypeIcon;
+export { AccountTypeIcon };
