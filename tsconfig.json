@@ -44,6 +44,7 @@
     "**/*.spec.tsx",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "coverage"
+    "coverage",
+    "old"
   ]
 }
