@@ -29,7 +29,7 @@ interface IProps extends IMenuItem {
 
 export const MenuItem: React.FC<IProps> = ({ badge, closeSidebar, icon, title, path }) => {
   const router = useRouter();
-  const isActive = router.asPath === path;
+  const isActive = router.asPath.startsWith(path);
 
   return (
     <NavLink href={path} passHref>

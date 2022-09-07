@@ -11,7 +11,8 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
   }
 
   create = async (model: T): Promise<T> => {
-    const { data, error } = await this.from.insert(this.cleanToServer(model));
+    const { data, error, ...etc } = await this.from.insert<T>(this.cleanToServer(model)).select();
+
     if (error) {
       throw new ApiError(error);
     }
@@ -46,7 +47,7 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
   };
 
   remove = async (id: string): Promise<T> => {
-    const { data, error } = await this.from.delete().match({ id });
+    const { data, error } = await this.from.delete().match({ id }).select();
     if (error) {
       throw new ApiError(error);
     }
@@ -59,7 +60,8 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
   update = async (model: Partial<T>): Promise<T> => {
     const { data, error } = await this.from
       .update(this.cleanToServer(model))
-      .match({ id: model.id });
+      .match({ id: model.id })
+      .select();
     if (error) {
       throw new ApiError(error);
     }

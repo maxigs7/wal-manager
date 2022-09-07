@@ -7,10 +7,25 @@ export const account = {
     name: 'Nombre',
     type: 'Tipo',
   },
-  meta: {
-    title: 'Mis Cuentas',
+  form: {
+    currency: 'Moneda',
+    initialAmount: 'Monto inicial',
+    initialAmountPlaceholder: 'Ingrese un monto inicial',
+    isDefault: 'Seleccionar por defecto',
+    name: 'Nombre',
+    namePlaceholder: 'Ingrese el nombre de la cuenta',
+    type: 'Tipo',
   },
-  title: 'Mis Cuentas',
+  pages: {
+    create: {
+      metaTitle: 'Nueva Cuenta',
+      title: 'Nueva Cuenta',
+    },
+    index: {
+      metaTitle: 'Mis Cuentas',
+      title: 'Mis Cuentas',
+    },
+  },
   toast: {
     createSuccess: 'Se ha creado la cuenta correctamente.',
     removeSuccess: 'Se ha eliminado la cuenta correctamente.',

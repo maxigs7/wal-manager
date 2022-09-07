@@ -21,7 +21,7 @@ export const Breadcrumb: React.FC = () => {
     <ChakraBreadcrumb separator={<Icon icon="chevron-right" />} spacing="8px">
       {breadcrumb.map((item) => (
         <BreadcrumbItem key={item.label}>
-          <BreadcrumbLink href={item.link || '#'} isCurrentPage={!item.link}>
+          <BreadcrumbLink href={item.link} isCurrentPage={!item.link}>
             {item.label}
           </BreadcrumbLink>
         </BreadcrumbItem>
