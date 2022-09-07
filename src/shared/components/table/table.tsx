@@ -1,7 +1,9 @@
 import { Table as ChakraTable, TableContainer } from '@chakra-ui/react';
 import {
   ColumnDef,
+  ExpandedState,
   getCoreRowModel,
+  getExpandedRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -22,18 +24,18 @@ interface IProps<T extends object> {
   data?: T[];
   defaultPageSize?: number;
   emptyText?: string;
-  globalFilter?: string;
+  isExpandable?: boolean;
   isLoading?: boolean;
-  onChangedGlobalFilter?(value: string): void;
 }
 
 export const Table = <T extends object>({
   columns,
   data = [],
   emptyText = es.common.defaultEmptyText,
+  isExpandable = false,
   isLoading = false,
-  onChangedGlobalFilter,
 }: IProps<T>): React.ReactElement => {
+  const [expanded, setExpanded] = useState<ExpandedState>({});
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
 
@@ -53,12 +55,16 @@ export const Table = <T extends object>({
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel: isExpandable ? getExpandedRowModel() : undefined,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getSubRows: isExpandable ? (row) => (row as { subRows: T[] }).subRows : undefined,
+    onExpandedChange: isExpandable ? setExpanded : undefined,
     onGlobalFilterChange: setGlobalFilter,
     onSortingChange: setSorting,
     state: {
+      expanded: isExpandable ? expanded : undefined,
       globalFilter,
       sorting,
     },

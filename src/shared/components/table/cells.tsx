@@ -1,6 +1,6 @@
 import { ButtonGroup, IconButton } from '@chakra-ui/react';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
-import { CellContext } from '@tanstack/react-table';
+import { CellContext, HeaderContext } from '@tanstack/react-table';
 import { format } from 'date-fns';
 
 import { Icon } from '../icon';
@@ -17,15 +17,25 @@ export const ExpandedCell = <T extends Record<string, unknown>, D>({
   row,
 }: CellContext<T, D>): React.ReactElement | null =>
   row.getCanExpand() ? (
-    <Icon icon={row.getIsExpanded() ? 'angle-down' : 'angle-right'} pl={row.depth * 2} />
+    <IconButton
+      aria-label="expander"
+      icon={<Icon icon={row.getIsExpanded() ? 'angle-down' : 'angle-right'} />}
+      onClick={row.getToggleExpandedHandler()}
+      pl={row.depth * 2}
+      size="xs"
+      variant="ghost"
+    />
   ) : null;
 
 export const ExpandedAllCell = <T extends Record<string, unknown>, D>({
   table: { getIsAllRowsExpanded, getToggleAllRowsExpandedHandler },
-}: CellContext<T, D>): React.ReactElement | null => (
-  <Icon
-    icon={getIsAllRowsExpanded() ? 'angle-down' : 'angle-right'}
-    onClick={getToggleAllRowsExpandedHandler}
+}: HeaderContext<T, D>): React.ReactElement | null => (
+  <IconButton
+    aria-label="expander"
+    icon={<Icon icon={getIsAllRowsExpanded() ? 'angle-down' : 'angle-right'} />}
+    onClick={getToggleAllRowsExpandedHandler()}
+    size="xs"
+    variant="ghost"
   />
 );
 

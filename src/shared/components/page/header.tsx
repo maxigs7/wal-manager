@@ -1,8 +1,6 @@
-import { Box, Flex, FlexProps, Heading, useColorModeValue } from '@chakra-ui/react';
+import { Flex, FlexProps, Heading, useColorModeValue } from '@chakra-ui/react';
 import Head from 'next/head';
-import React, { PropsWithChildren, ReactNode } from 'react';
-
-// import { usePagePortals } from '@shared';
+import React, { PropsWithChildren } from 'react';
 
 interface IProps extends PropsWithChildren {
   metaDescription?: string;
@@ -18,6 +16,7 @@ const PageHeader: React.FC<IProps & Omit<FlexProps, 'bg'>> = ({
   align = 'center',
   gap = '3',
   p = '5',
+  wrap = 'wrap',
   ...props
 }) => {
   const bg = useColorModeValue('primary.400', 'primary.600');
@@ -27,7 +26,7 @@ const PageHeader: React.FC<IProps & Omit<FlexProps, 'bg'>> = ({
         <title>{metaTitle} - WAL</title>
         {metaDescription && <meta content={metaDescription} name="description" />}
       </Head>
-      <Flex align={align} bg={bg} gap={gap} p={p} {...props}>
+      <Flex align={align} bg={bg} gap={gap} p={p} wrap={wrap} {...props}>
         {title && (
           <Heading as="h1" color="white">
             {title}

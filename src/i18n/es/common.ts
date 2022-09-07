@@ -3,6 +3,7 @@ export const common = {
   breadcrumbs: {
     accounts: 'Cuentas',
     admin: 'Admin',
+    categories: 'Categorías',
     create: 'Crear',
     creditCards: 'Tarjetas',
   },

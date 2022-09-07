@@ -1,5 +1,7 @@
 // import { IconName } from '@fortawesome/fontawesome-svg-core';
 
+import { IconName } from '@fortawesome/free-solid-svg-icons';
+
 import { BaseModel } from '@lib';
 
 import { CategoryType } from './category-type';
@@ -7,8 +9,7 @@ import { CategoryType } from './category-type';
 export type Category = BaseModel & {
   color: string;
   createdAt: Date;
-  // TODO: MATCH WITH ICON NAME
-  icon: string;
+  icon: IconName;
   isActive: boolean;
   name: string;
   parentId?: string;
