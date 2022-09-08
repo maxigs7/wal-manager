@@ -1,4 +1,14 @@
 export const auth = {
+  resetPassword: {
+    confirmAction: 'Cambiar contraseña',
+    error: 'Email incorrecto',
+    form: {
+      email: 'Email',
+    },
+    requestAction: 'Enviar email',
+    signInLink: 'Volver a iniciar sesión',
+    title: 'Vamos a recuperar tus credenciales',
+  },
   signIn: {
     action: 'Iniciar sesión',
     error: 'Usuario o contraseña incorrecta',
@@ -6,6 +16,7 @@ export const auth = {
       email: 'Email',
       password: 'Password',
     },
+    resetPasswordLink: 'Olvidaste tu contraseña?',
     registrationLink: 'No tienes una cuenta? Crea una aquí',
     title: 'Inicia sesión en tu cuenta',
   },
@@ -19,5 +30,8 @@ export const auth = {
     },
     signInLink: 'Ya tienes una cuenta? Inicia sesión',
     title: 'Registre una nueva cuenta',
+  },
+  validation: {
+    passwordMismatch: 'Las contraseñas no coinciden',
   },
 };

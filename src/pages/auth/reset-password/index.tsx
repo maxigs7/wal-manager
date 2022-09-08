@@ -1,16 +1,15 @@
-import { Heading, Flex, Link, VStack } from '@chakra-ui/react';
+import { Heading, Flex, Link, Box } from '@chakra-ui/react';
 import Head from 'next/head';
 import NextLink from 'next/link';
 
 import { es } from '@i18n';
 import { getAuthLayout, NextPageWithLayout } from '@layout';
-import { SignInByEmail } from '@m/auth';
-import { AUTH_SIGN_UP_ENABLED } from '@shared';
+import { ResetPasswordRequest } from '@m/auth';
 
 const SignInPage: NextPageWithLayout = () => (
   <>
     <Head>
-      <title>{es.auth.signIn.title} - WAL</title>
+      <title>{es.auth.resetPassword.title} - WAL</title>
     </Head>
     <Flex
       align="center"
@@ -23,21 +22,16 @@ const SignInPage: NextPageWithLayout = () => (
       p="5"
     >
       <Heading as="h3" mb={['4', '8', '10']} size="xl" textAlign="center" textTransform="uppercase">
-        {es.auth.signIn.title}
+        {es.auth.resetPassword.title}
       </Heading>
 
-      <SignInByEmail />
+      <ResetPasswordRequest />
 
-      <VStack mt="3">
-        {AUTH_SIGN_UP_ENABLED && (
-          <Link as={NextLink} href="/auth/sign-up">
-            {es.auth.signIn.registrationLink}
-          </Link>
-        )}
-        <Link as={NextLink} href="/auth/reset-password">
-          {es.auth.signIn.resetPasswordLink}
+      <Box mt="3">
+        <Link as={NextLink} href="/auth/sign-in">
+          {es.auth.resetPassword.signInLink}
         </Link>
-      </VStack>
+      </Box>
     </Flex>
   </>
 );

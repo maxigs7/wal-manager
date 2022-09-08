@@ -1,6 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
 import { ApiError } from '@lib';
+import { BASE_URL } from '@shared';
 
 import {
   IAuthRepository,
@@ -16,6 +17,16 @@ export class AuthRepository implements IAuthRepository {
   private get auth() {
     return this.supabase.auth;
   }
+
+  resetPasswordRequest = async (email: string): Promise<void> => {
+    const { error } = await this.auth.resetPasswordForEmail(email, {
+      redirectTo: `${BASE_URL}/auth/reset-password/confirm`,
+    });
+    if (error) {
+      throw new ApiError(error);
+    }
+  };
+
   signIn = async ({ email, password }: ISignInParam): Promise<ISignInReturn> => {
     const {
       data: { session, user },
@@ -49,6 +60,15 @@ export class AuthRepository implements IAuthRepository {
 
   signOut = async (): Promise<void> => {
     const { error } = await this.auth.signOut();
+    if (error) {
+      throw new ApiError(error);
+    }
+  };
+
+  updatePassword = async (newPassword: string): Promise<void> => {
+    const { error } = await this.auth.updateUser({
+      password: newPassword,
+    });
     if (error) {
       throw new ApiError(error);
     }

@@ -4,27 +4,18 @@ import { UseFormReturn } from 'react-hook-form';
 
 import { es } from '@i18n';
 
-export type SignUpFormType = { email: string; password: string; confirmPassword: string };
-export type SignUpFormProps = UseFormReturn<SignUpFormType>;
+export type ResetPasswordConfirmFormType = { password: string; confirmPassword: string };
+export type ResetPasswordConfirmFormProps = UseFormReturn<ResetPasswordConfirmFormType>;
 
-const Form: React.FC<SignUpFormProps> = ({ formState: { errors }, register, watch }) => {
+const Form: React.FC<ResetPasswordConfirmFormProps> = ({
+  formState: { errors },
+  register,
+  watch,
+}) => {
   const password = useRef({});
   password.current = watch('password', '');
   return (
     <>
-      <FormControl isInvalid={!!errors.email}>
-        <FormLabel htmlFor="email">{es.auth.signUp.form.email}</FormLabel>
-        <Input
-          id="email"
-          placeholder={es.auth.signUp.form.email}
-          {...register('email', {
-            required: es.common.validation.required,
-            pattern: /^\S+@\S+$/i,
-          })}
-        />
-        <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
-      </FormControl>
-
       <FormControl isInvalid={!!errors.password}>
         <FormLabel htmlFor="password">{es.auth.signUp.form.password}</FormLabel>
         <Input

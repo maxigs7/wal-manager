@@ -14,7 +14,7 @@ const Form: React.FC<SignInFormProps> = ({ formState: { errors }, register }) =>
         id="email"
         placeholder={es.auth.signIn.form.email}
         {...register('email', {
-          required: 'Este campo es requerido.',
+          required: es.common.validation.required,
           pattern: /^\S+@\S+$/i,
         })}
       />
@@ -28,7 +28,7 @@ const Form: React.FC<SignInFormProps> = ({ formState: { errors }, register }) =>
         placeholder={es.auth.signIn.form.password}
         type="password"
         {...register('password', {
-          required: 'Este campo es requerido.',
+          required: es.common.validation.required,
         })}
       />
       <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
