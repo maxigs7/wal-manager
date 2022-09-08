@@ -1,38 +1,38 @@
-// import React from 'react';
-// import { Control, RegisterOptions, useController } from 'react-hook-form';
+import React from 'react';
+import { Control, RegisterOptions, useController } from 'react-hook-form';
 
-// import Select, { ISelectProps } from '../select';
+import { CategorySelect, ICategorySelectProps } from '../select';
 
-// export interface ISelectControlProps extends Omit<ISelectProps, 'onBlur' | 'onChange' | ''> {
-//   control?: Control<any>;
-//   rules?: RegisterOptions;
-// }
+export interface ICategorySelectControlProps
+  extends Omit<ICategorySelectProps, 'onBlur' | 'onChange' | ''> {
+  control?: Control<any>;
+  rules?: RegisterOptions;
+}
 
-// const SelectControl: React.FC<ISelectControlProps> = ({
-//   categories = [],
-//   control,
-//   id,
-//   isLoading,
-//   name,
-//   placeholder,
-//   rules,
-// }) => {
-//   const { field } = useController({
-//     name,
-//     control,
-//     rules,
-//   });
+const CategorySelectControl: React.FC<ICategorySelectControlProps> = ({
+  categories = [],
+  control,
+  id,
+  isLoading,
+  name,
+  placeholder,
+  rules,
+}) => {
+  const { field } = useController({
+    name,
+    control,
+    rules,
+  });
 
-//   return (
-//     <Select
-//       {...field}
-//       categories={categories}
-//       id={id}
-//       isLoading={isLoading}
-//       placeholder={placeholder}
-//     />
-//   );
-// };
+  return (
+    <CategorySelect
+      {...field}
+      categories={categories}
+      id={id}
+      isLoading={isLoading}
+      placeholder={placeholder}
+    />
+  );
+};
 
-// export default SelectControl;
-export {};
+export { CategorySelectControl };

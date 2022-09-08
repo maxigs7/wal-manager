@@ -10,7 +10,6 @@ const CategoryTableContainer: React.FC<CategoryTableActions> = ({
   onRemove,
   onSubCreate,
   onSubMove,
-  onSubRemove,
   onSubUpdate,
   onUpdate,
 }) => {
@@ -24,7 +23,6 @@ const CategoryTableContainer: React.FC<CategoryTableActions> = ({
       onRemove={onRemove}
       onSubCreate={onSubCreate}
       onSubMove={onSubMove}
-      onSubRemove={onSubRemove}
       onSubUpdate={onSubUpdate}
       onUpdate={onUpdate}
     />

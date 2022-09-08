@@ -5,16 +5,17 @@ import { useForm } from 'react-hook-form';
 import { useUser } from '@m/auth';
 import { Category, CategoryType } from '@models';
 
-import { FormActions, RootCategoryForm } from '../../components';
+import { FormActions, SubCategoryForm } from '../../components';
 import { useCategoryCreate, useCategoryGetById, useCategoryUpdate } from '../../hooks';
 
 interface IProps {
   id?: string;
   onConfirmed(category: Category): void;
+  parentId: string;
   type: CategoryType;
 }
 
-const RootCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, type }) => {
+const SubCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, parentId, type }) => {
   const { user } = useUser();
   const create = useCategoryCreate();
   const update = useCategoryUpdate();
@@ -22,7 +23,7 @@ const RootCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, type }) 
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
   const useFormProps = useForm<Category>({
-    defaultValues: { userId: user?.id as string, type },
+    defaultValues: { parentId, userId: user?.id as string, type },
   });
   const {
     formState: { isSubmitting: isFormSubmitting },
@@ -49,8 +50,8 @@ const RootCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, type }) 
         isLoading={isSubmitting || isFormSubmitting}
         type={type}
       />
-      <Skeleton isLoaded={!isLoading || !id} p="5">
-        <RootCategoryForm {...useFormProps} id={id} type={type} />
+      <Skeleton isLoaded={!isLoading || !id} maxW="md" p="5">
+        <SubCategoryForm {...useFormProps} id={id} parentId={parentId} type={type} />
       </Skeleton>
       <FormActions
         display={['flex', 'none']}
@@ -61,4 +62,4 @@ const RootCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, type }) 
   );
 };
 
-export { RootCategoryFormContainer };
+export { SubCategoryFormContainer };

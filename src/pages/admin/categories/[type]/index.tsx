@@ -36,6 +36,11 @@ const CategoriesPage: NextPageWithLayout = withCategoryFilter(() => {
     [dispatchFilters, router],
   );
 
+  // ROOT
+  const onRemove = useCallback((id: string) => {
+    setIdToRemove(id);
+  }, []);
+
   const onUpdate = useCallback(
     (id: string) => {
       router.push(`/admin/categories/${filters.type}/${id}`);
@@ -43,9 +48,28 @@ const CategoriesPage: NextPageWithLayout = withCategoryFilter(() => {
     [filters, router],
   );
 
-  const onRemove = useCallback((id: string) => {
+  // SUB
+  const onSubCreate = useCallback(
+    (parentId: string) => {
+      router.push(`/admin/categories/${filters.type}/${parentId}/create`);
+    },
+    [filters.type, router],
+  );
+  const onSubMove = useCallback(
+    (parentId: string, id: string) => {
+      router.push(`/admin/categories/${filters.type}/${parentId}/${id}/move`);
+    },
+    [filters.type, router],
+  );
+  const onSubRemove = useCallback((id: string) => {
     setIdToRemove(id);
   }, []);
+  const onSubUpdate = useCallback(
+    (parentId: string, id: string) => {
+      router.push(`/admin/categories/${filters.type}/${parentId}/${id}`);
+    },
+    [filters.type, router],
+  );
 
   useEffect(() => {
     setBreadcrumb(breadcrumb);
@@ -73,19 +97,10 @@ const CategoriesPage: NextPageWithLayout = withCategoryFilter(() => {
       <CategoryTypeTabs bg="white" onSelected={onChangedTypeHandler} selectedType={filters.type} />
       <CategoryTableContainer
         onRemove={onRemove}
+        onSubCreate={onSubCreate}
+        onSubMove={onSubMove}
+        onSubUpdate={onSubUpdate}
         onUpdate={onUpdate}
-        onSubCreate={function (parentId: string): void {
-          throw new Error('Function not implemented.');
-        }}
-        onSubMove={function (parentId: string, id: string): void {
-          throw new Error('Function not implemented.');
-        }}
-        onSubRemove={function (parentId: string, id: string): void {
-          throw new Error('Function not implemented.');
-        }}
-        onSubUpdate={function (parentId: string, id: string): void {
-          throw new Error('Function not implemented.');
-        }}
       />
       <CategoryDialogRemove
         id={idToRemove}

@@ -10,7 +10,7 @@ interface IProps extends FlexProps {
   type: CategoryType;
 }
 
-const Actions: React.FC<IProps> = ({ isLoading, type, ...flexProps }) => (
+const FormActions: React.FC<IProps> = ({ isLoading, type, ...flexProps }) => (
   <ActionsFormContainer {...flexProps}>
     <Button
       colorScheme="success"
@@ -34,4 +34,4 @@ const Actions: React.FC<IProps> = ({ isLoading, type, ...flexProps }) => (
   </ActionsFormContainer>
 );
 
-export default Actions;
+export { FormActions };

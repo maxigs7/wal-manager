@@ -5,13 +5,14 @@ export const category = {
     name: 'Nombre',
   },
   form: {
-    currency: 'Moneda',
-    initialAmount: 'Monto inicial',
-    initialAmountPlaceholder: 'Ingrese un monto inicial',
-    isDefault: 'Seleccionar por defecto',
+    color: 'Color',
+    colorPlaceholder: 'Seleccione un color',
+    icon: 'Icono',
+    iconPlaceholder: 'Seleccione un icono',
     name: 'Nombre',
     namePlaceholder: 'Ingrese el nombre de la categoría',
-    type: 'Tipo',
+    parentId: 'Nueva categoría padre',
+    parentIdPlaceholder: 'Seleccione una categoría',
   },
   pages: {
     create: {

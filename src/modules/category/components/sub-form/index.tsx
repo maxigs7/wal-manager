@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
+import { es } from '@i18n';
 import { Category, CategoryType } from '@models';
 
 import { useCategoryIsUnique } from '../../hooks';
@@ -29,13 +30,13 @@ const SubCategoryForm: React.FC<IProps> = ({
 
   return (
     <SimpleGrid columns={[1, 2]} gap={6}>
-      <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.name}>
-        <FormLabel htmlFor="name">Nombre</FormLabel>
+      <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.name} isRequired>
+        <FormLabel htmlFor="name">{es.category.form.name}</FormLabel>
         <Input
           id="name"
-          placeholder="Nombre"
+          placeholder={es.category.form.namePlaceholder}
           {...register('name', {
-            required: 'Este campo es requerido.',
+            required: es.common.validation.required,
             validate: (name) => isUnique(type, name, id, parentId),
           })}
         />

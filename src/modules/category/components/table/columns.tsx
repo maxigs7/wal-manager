@@ -16,7 +16,6 @@ export interface Actions {
   onRemove(id: string): void;
   onSubCreate(parentId: string): void;
   onSubMove(parentId: string, id: string): void;
-  onSubRemove(parentId: string, id: string): void;
   onSubUpdate(parentId: string, id: string): void;
   onUpdate(id: string): void;
 }
@@ -29,7 +28,6 @@ export const getColumns: GetColumnsType = ({
   onRemove,
   onSubCreate,
   onSubMove,
-  onSubRemove,
   onSubUpdate,
   onUpdate,
 }) => [
@@ -60,10 +58,6 @@ export const getColumns: GetColumnsType = ({
         row: { original },
       } = props;
       const onRemoveHandler = () => {
-        if (original.parentId) {
-          onSubRemove(original.parentId, original.id);
-          return;
-        }
         onRemove(original.id);
       };
 

@@ -16,13 +16,12 @@ const CategoryTable: React.FC<Props> = ({
   onRemove,
   onSubCreate,
   onSubMove,
-  onSubRemove,
   onSubUpdate,
   onUpdate,
 }) => {
   const columns = useMemo(
-    () => getColumns({ onRemove, onSubCreate, onSubMove, onSubRemove, onSubUpdate, onUpdate }),
-    [onRemove, onSubCreate, onSubMove, onSubRemove, onSubUpdate, onUpdate],
+    () => getColumns({ onRemove, onSubCreate, onSubMove, onSubUpdate, onUpdate }),
+    [onRemove, onSubCreate, onSubMove, onSubUpdate, onUpdate],
   );
 
   return <Table columns={columns} data={data} isExpandable={true} isLoading={isLoading} />;
