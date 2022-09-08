@@ -1,13 +1,16 @@
 import { VStack, Button } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { es } from '@i18n';
 
-import { AuthError, ResetPasswordForm, ResetPasswordConfirmFormType } from '../../components';
+import { AuthMessage, ResetPasswordForm, ResetPasswordConfirmFormType } from '../../components';
 import { useUpdatePassword } from '../../hooks';
 
 const Container: React.FC = () => {
-  const { isError, isLoading, mutateAsync } = useUpdatePassword();
+  const router = useRouter();
+  const { isError, isLoading, isSuccess, mutateAsync } = useUpdatePassword();
   const form = useForm<ResetPasswordConfirmFormType>();
 
   const resetPasswordHandler = async (form: ResetPasswordConfirmFormType) => {
@@ -18,9 +21,26 @@ const Container: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (isSuccess) {
+      timeout = setTimeout(() => {
+        router.push('/auth/sign-in');
+      }, 10000);
+    }
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [isSuccess, router]);
+
   return (
     <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(resetPasswordHandler)} w="full">
-      {isError && <AuthError>{es.auth.resetPassword.error}</AuthError>}
+      {isError && <AuthMessage>{es.auth.resetPassword.confirmError}</AuthMessage>}
+      {isSuccess && (
+        <AuthMessage type="success">{es.auth.resetPassword.requestSuccess}</AuthMessage>
+      )}
       <ResetPasswordForm {...form} />
       <Button
         colorScheme="accent"

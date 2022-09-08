@@ -1,11 +1,15 @@
 export const auth = {
   resetPassword: {
     confirmAction: 'Cambiar contraseña',
-    error: 'Email incorrecto',
+    confirmError: 'Ha ocurrido un error al intentar cambiar la contraseña',
+    confirmSuccess:
+      'Ha cambiado su contraseña correctamente. En unos segundos sera redireccionado al la pantalla de inicio de sesión',
     form: {
       email: 'Email',
     },
     requestAction: 'Enviar email',
+    requestError: 'Ha ocurrido un error al intentar enviar el email',
+    requestSuccess: 'Se ha enviado el correo correctamente. Verifique su casilla.',
     signInLink: 'Volver a iniciar sesión',
     title: 'Vamos a recuperar tus credenciales',
   },

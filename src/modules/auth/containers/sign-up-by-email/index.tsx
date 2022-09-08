@@ -1,4 +1,3 @@
-
 import { VStack, Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -6,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import { es } from '@i18n';
 
-import { AuthError, SignUpForm, SignUpFormType } from '../../components';
+import { AuthMessage, SignUpForm, SignUpFormType } from '../../components';
 import { useSignUp } from '../../hooks';
 
 interface IState {
@@ -41,7 +40,7 @@ const Container: React.FC = () => {
 
   return (
     <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(signUpHandler)} w="full">
-      {isError && <AuthError>{es.auth.signUp.error(form.getValues('email'))}</AuthError>}
+      {isError && <AuthMessage>{es.auth.signUp.error(form.getValues('email'))}</AuthMessage>}
       <SignUpForm {...form} />
       <Button
         colorScheme="accent"

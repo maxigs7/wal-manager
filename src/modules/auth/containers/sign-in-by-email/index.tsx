@@ -1,4 +1,3 @@
-
 import { VStack, Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -6,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import { es } from '@i18n';
 
-import { AuthError, SignInForm, SignInFormType } from '../../components';
+import { AuthMessage, SignInForm, SignInFormType } from '../../components';
 import { useSignIn } from '../../hooks';
 
 // interface IState {
@@ -42,7 +41,7 @@ const Container: React.FC = () => {
 
   return (
     <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(signInHandler)} w="full">
-      {isError && <AuthError>{es.auth.signIn.error}</AuthError>}
+      {isError && <AuthMessage>{es.auth.signIn.error}</AuthMessage>}
       <SignInForm {...form} />
       <Button
         colorScheme="accent"
