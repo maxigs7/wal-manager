@@ -22,7 +22,7 @@ const Actions: React.FC<IProps> = ({ isLoading, ...flexProps }) => (
 
     <Button
       as="a"
-      href="/admin/creditCards"
+      href="/admin/credit-cards"
       leftIcon={<Icon icon="times" />}
       size="sm"
       variant="outline"
