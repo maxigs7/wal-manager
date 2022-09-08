@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
+import { es } from '@i18n';
 import { Category, CategoryType } from '@models';
 import { ColorSelect, IconSelect } from '@shared';
 
@@ -18,7 +19,7 @@ interface IProps extends UseFormReturn<Category> {
   type: CategoryType;
 }
 
-const CategoryRootForm: React.FC<IProps> = ({
+const RootCategoryForm: React.FC<IProps> = ({
   control,
   formState: { errors },
   id,
@@ -29,41 +30,41 @@ const CategoryRootForm: React.FC<IProps> = ({
 
   return (
     <SimpleGrid columns={[1, 2]} gap={6}>
-      <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.name}>
-        <FormLabel htmlFor="name">Nombre</FormLabel>
+      <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.name} isRequired>
+        <FormLabel htmlFor="name">{es.category.form.name}</FormLabel>
         <Input
           id="name"
-          placeholder="Nombre"
+          placeholder={es.category.form.name}
           {...register('name', {
-            required: 'Este campo es requerido.',
+            required: es.common.validation.required,
             validate: (name) => isUnique(type, name, id),
           })}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl as={GridItem} colSpan={[2, 1]} isInvalid={!!errors.color}>
-        <FormLabel htmlFor="color">Color</FormLabel>
+      <FormControl as={GridItem} colSpan={[2, 1]} isInvalid={!!errors.color} isRequired>
+        <FormLabel htmlFor="color">{es.category.form.color}</FormLabel>
         <ColorSelect
           control={control}
           id="color"
           name="color"
-          placeholder="Color"
+          placeholder={es.category.form.color}
           rules={{
-            required: 'Este campo es requerido.',
+            required: es.common.validation.required,
           }}
         />
         <FormErrorMessage>{errors.color && errors.color.message}</FormErrorMessage>
       </FormControl>
-      <FormControl as={GridItem} colSpan={[2, 1]} isInvalid={!!errors.icon}>
-        <FormLabel htmlFor="icon">Icono</FormLabel>
+      <FormControl as={GridItem} colSpan={[2, 1]} isInvalid={!!errors.icon} isRequired>
+        <FormLabel htmlFor="icon">{es.category.form.icon}</FormLabel>
         <IconSelect
           control={control}
           id="icon"
           name="icon"
-          placeholder="Icono"
+          placeholder={es.category.form.icon}
           rules={{
-            required: 'Este campo es requerido.',
+            required: es.common.validation.required,
           }}
         />
         <FormErrorMessage>{errors.icon && errors.icon.message}</FormErrorMessage>
@@ -72,4 +73,4 @@ const CategoryRootForm: React.FC<IProps> = ({
   );
 };
 
-export { CategoryRootForm };
+export { RootCategoryForm };

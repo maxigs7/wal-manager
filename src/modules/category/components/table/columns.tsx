@@ -86,6 +86,16 @@ export const getColumns: GetColumnsType = ({
               } as ActionButton<CategoryRow>,
             ]
           : []),
+        ...(original.parentId
+          ? [
+              {
+                label: 'Move to new parent',
+                icon: 'arrow-right-arrow-left',
+                colorScheme: 'teal',
+                onClick: (row: CategoryRow) => onSubMove(row.parentId as string, row.id),
+              } as ActionButton<CategoryRow>,
+            ]
+          : []),
         {
           label: 'Edit',
           icon: 'edit',
@@ -98,16 +108,6 @@ export const getColumns: GetColumnsType = ({
           colorScheme: 'danger',
           onClick: onRemoveHandler,
         },
-        ...(original.parentId
-          ? [
-              {
-                label: 'Move to new parent',
-                icon: 'arrow-right-arrow-left',
-                colorScheme: 'teal',
-                onClick: (row: CategoryRow) => onSubMove(row.parentId as string, row.id),
-              } as ActionButton<CategoryRow>,
-            ]
-          : []),
       ];
       return <ActionsCell actions={actions} row={props.row.original} />;
     },

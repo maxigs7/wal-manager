@@ -3,16 +3,16 @@ import { CategoryType, DEFAULT_CATEGORY_TYPE } from '@models';
 ///////////////////////////////////////////////
 // State and Dispatch interfaces
 export interface IState {
-  type: CategoryType;
+  type?: CategoryType;
 }
 
 export interface IDispatch {
   onChangedType(type: CategoryType): void;
 }
 
-export const initialState: (type?: CategoryType) => IState = (type?: CategoryType) => ({
-  type: type || DEFAULT_CATEGORY_TYPE,
-});
+export const initialState: IState = {
+  type: undefined,
+};
 
 ///////////////////////////////////////////////
 // Actions

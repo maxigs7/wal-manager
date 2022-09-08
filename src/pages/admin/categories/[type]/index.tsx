@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { es } from '@i18n';
 import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
 import {
+  CategoryDialogRemove,
   CategoryTableContainer,
   CategoryTypeTabs,
   useCategoryFilter,
@@ -37,9 +38,9 @@ const CategoriesPage: NextPageWithLayout = withCategoryFilter(() => {
 
   const onUpdate = useCallback(
     (id: string) => {
-      router.push(`/admin/categories/${id}`);
+      router.push(`/admin/categories/${filters.type}/${id}`);
     },
-    [router],
+    [filters, router],
   );
 
   const onRemove = useCallback((id: string) => {
@@ -56,7 +57,7 @@ const CategoriesPage: NextPageWithLayout = withCategoryFilter(() => {
         metaTitle={es.category.pages.index.metaTitle}
         title={es.category.pages.index.title}
       >
-        <NextLink href="/admin/categories/create" passHref>
+        <NextLink href={`/admin/categories/${filters.type}/create`} passHref>
           <Button
             as="a"
             colorScheme="primary"
@@ -86,11 +87,12 @@ const CategoriesPage: NextPageWithLayout = withCategoryFilter(() => {
           throw new Error('Function not implemented.');
         }}
       />
-      {/* <CategoryDialogRemove
+      <CategoryDialogRemove
         id={idToRemove}
         isOpen={!!idToRemove}
         onDismiss={() => setIdToRemove(undefined)}
-      /> */}
+        type={filters.type as CategoryType}
+      />
     </Page>
   );
 });

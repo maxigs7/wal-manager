@@ -4,6 +4,7 @@ import {
   PropsWithChildren,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useReducer,
 } from 'react';
@@ -20,7 +21,7 @@ export const useCategoryFilter = () => useContext(CategoryFilterContext);
 
 export const CategoryFilterProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { query } = useRouter();
-  const [state, dispatch] = useReducer(reducer, initialState(query.type as CategoryType));
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const onChangedType = useCallback(
     (type: CategoryType) => {
@@ -35,6 +36,10 @@ export const CategoryFilterProvider: React.FC<PropsWithChildren> = ({ children }
     }),
     [onChangedType],
   );
+
+  useEffect(() => {
+    onChangedType(query.type as CategoryType);
+  }, [onChangedType, query.type]);
 
   return (
     <CategoryFilterContext.Provider value={[state, storeDispatch]}>
