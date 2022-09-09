@@ -1,4 +1,5 @@
 import { HStack } from '@chakra-ui/react';
+import { MenuPlacement } from 'chakra-react-select';
 import React, { useMemo } from 'react';
 
 import { Select as ReactSelect } from '@lib';
@@ -18,6 +19,8 @@ export interface ICreditCardSelectProps {
   isClearable?: boolean;
   isLoading: boolean;
   isSearchable?: boolean;
+  menuPlacement?: MenuPlacement;
+  menuPortalTarget?: HTMLElement | null;
   name: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
   onChange?(value?: string): void;
@@ -39,6 +42,8 @@ const CreditCardSelect = React.forwardRef<any, ICreditCardSelectProps>(
       isClearable = true,
       isLoading = false,
       isSearchable = false,
+      menuPlacement,
+      menuPortalTarget,
       name,
       onBlur,
       onChange,
@@ -65,6 +70,8 @@ const CreditCardSelect = React.forwardRef<any, ICreditCardSelectProps>(
         isClearable={isClearable}
         isLoading={isLoading}
         isSearchable={isSearchable}
+        menuPlacement={menuPlacement}
+        menuPortalTarget={menuPortalTarget}
         name={name}
         onBlur={onBlur}
         onChange={(selected) => onChange && onChange(selected?.value)}

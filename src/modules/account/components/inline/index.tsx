@@ -18,7 +18,7 @@ const AccountInline: React.FC<IProps> = ({ currency, iconSize, name, type, ...te
       <AccountTypeIcon fixedWidth={true} size={iconSize} type={type} />
       <Text {...textProps}>
         {name}
-        <Text as="strong" fontWeight="bold">
+        <Text as="strong" fontWeight="bold" ml="1">
           ({getCurrencyName(currency)})
         </Text>
       </Text>

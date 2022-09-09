@@ -1,3 +1,4 @@
+import { MenuPlacement } from 'chakra-react-select';
 import React, { useMemo } from 'react';
 
 import { Select as ReactSelect } from '@lib';
@@ -13,6 +14,8 @@ export interface ICategorySelectProps {
   isClearable?: boolean;
   isLoading?: boolean;
   isSearchable?: boolean;
+  menuPlacement?: MenuPlacement;
+  menuPortalTarget?: HTMLElement | null;
   name: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
   onChange?(value?: string): void;
@@ -32,6 +35,8 @@ const CategorySelect = React.forwardRef<any, ICategorySelectProps>(
       isClearable = false,
       isLoading = false,
       isSearchable = true,
+      menuPlacement,
+      menuPortalTarget,
       name,
       onBlur,
       onChange,
@@ -58,6 +63,8 @@ const CategorySelect = React.forwardRef<any, ICategorySelectProps>(
         isClearable={isClearable}
         isLoading={isLoading}
         isSearchable={isSearchable}
+        menuPlacement={menuPlacement}
+        menuPortalTarget={menuPortalTarget}
         name={name}
         onBlur={onBlur}
         onChange={(selected) => onChange && onChange(selected?.value)}

@@ -1,6 +1,7 @@
 import { Table as ChakraTable, TableContainer } from '@chakra-ui/react';
 import {
   ColumnDef,
+  ColumnSort,
   ExpandedState,
   getCoreRowModel,
   getExpandedRowModel,
@@ -22,8 +23,9 @@ import { Paginator } from './paginator';
 interface IProps<T extends object> {
   columns: ColumnDef<T>[];
   data?: T[];
-  defaultPageSize?: number;
+  defaultSort?: ColumnSort;
   emptyText?: string;
+  globalFilterEnabled?: boolean;
   isExpandable?: boolean;
   isLoading?: boolean;
 }
@@ -31,12 +33,14 @@ interface IProps<T extends object> {
 export const Table = <T extends object>({
   columns,
   data = [],
+  defaultSort,
   emptyText = es.common.defaultEmptyText,
+  globalFilterEnabled = true,
   isExpandable = false,
   isLoading = false,
 }: IProps<T>): React.ReactElement => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>(defaultSort ? [defaultSort] : []);
   const [globalFilter, setGlobalFilter] = useState('');
 
   const {
@@ -72,7 +76,9 @@ export const Table = <T extends object>({
 
   return (
     <>
-      <GlobalFilter globalFilter={globalFilter} onChangedGlobalFilter={setGlobalFilter} />
+      {globalFilterEnabled && (
+        <GlobalFilter globalFilter={globalFilter} onChangedGlobalFilter={setGlobalFilter} />
+      )}
       <TableContainer>
         <ChakraTable bg="white" size="sm" variant="striped">
           <Header headerGroups={getHeaderGroups()} />
