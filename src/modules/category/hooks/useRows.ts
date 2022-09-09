@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useSupabaseApi } from '@api';
+import { useSupabaseClient } from '@api';
 import { Category, CategoryRow, CategoryType } from '@models';
 
 import { CATEGORIES_KEY } from '../constants';
@@ -31,7 +31,7 @@ const convertToCategoryRowArray = (categories: Category[]): CategoryRow[] =>
     }, [] as CategoryRow[]);
 
 const useRows = (type?: CategoryType): UseQueryResult<CategoryRow[]> => {
-  const { categories } = useSupabaseApi();
+  const { categories } = useSupabaseClient();
 
   const promise = async () => {
     const list = await categories.getAll({

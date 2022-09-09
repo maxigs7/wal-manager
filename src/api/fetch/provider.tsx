@@ -10,10 +10,10 @@ export const FetchApiProvider: React.FC<PropsWithChildren> = ({ children }) => {
   return <FetchApiContext.Provider value={client}>{children}</FetchApiContext.Provider>;
 };
 
-export const useFetchApi = (): IFetchClient => {
+export const useFetchClient = (): IFetchClient => {
   const context = useContext(FetchApiContext);
   if (context === undefined) {
-    throw new Error(`useFetchApi must be used within a FetchApiProvider.`);
+    throw new Error(`useFetchClient must be used within a FetchApiProvider.`);
   }
   return context;
 };

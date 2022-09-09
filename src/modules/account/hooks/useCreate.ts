@@ -1,12 +1,12 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useSupabaseApi } from '@api';
+import { useSupabaseClient } from '@api';
 import { es } from '@i18n';
 import { ApiError, useToast } from '@lib';
 import { Account } from '@models';
 
 const useCreate = (showToast = true): UseMutationResult<Account, ApiError, Account> => {
-  const { accounts } = useSupabaseApi();
+  const { accounts } = useSupabaseClient();
   const toast = useToast();
 
   return useMutation<Account, ApiError, Account>(accounts.create, {

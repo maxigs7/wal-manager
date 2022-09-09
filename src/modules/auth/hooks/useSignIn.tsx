@@ -1,8 +1,8 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { ApiError, ISignInParam, ISignInReturn, useSupabaseApi } from '@api';
+import { ApiError, ISignInParam, ISignInReturn, useSupabaseClient } from '@api';
 
 export const useSignIn = (): UseMutationResult<ISignInReturn, Error, ISignInParam> => {
-  const { auth } = useSupabaseApi();
+  const { auth } = useSupabaseClient();
   return useMutation<ISignInReturn, ApiError, ISignInParam>(auth.signIn);
 };

@@ -1,8 +1,8 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { ApiError, useSupabaseApi } from '@api';
+import { ApiError, useSupabaseClient } from '@api';
 
 export const useResetPasswordRequest = (): UseMutationResult<void, Error, string> => {
-  const { auth } = useSupabaseApi();
+  const { auth } = useSupabaseClient();
   return useMutation<void, ApiError, string>(auth.resetPasswordRequest);
 };

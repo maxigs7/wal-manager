@@ -4,17 +4,17 @@ import { useSupabase } from '@lib';
 
 import { ISupabaseClient, SupabaseClient } from './supabase-client';
 
-export const SupabaseApiContext = createContext<ISupabaseClient>({} as ISupabaseClient);
+export const SupabaseClientContext = createContext<ISupabaseClient>({} as ISupabaseClient);
 
-export const SupabaseApiProvider: React.FC<PropsWithChildren> = ({ children }) => {
+export const SupabaseClientProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const supabase = useSupabase();
   const client = useMemo(() => new SupabaseClient(supabase), [supabase]);
 
-  return <SupabaseApiContext.Provider value={client}>{children}</SupabaseApiContext.Provider>;
+  return <SupabaseClientContext.Provider value={client}>{children}</SupabaseClientContext.Provider>;
 };
 
-export const useSupabaseApi = (): ISupabaseClient => {
-  const context = useContext(SupabaseApiContext);
+export const useSupabaseClient = (): ISupabaseClient => {
+  const context = useContext(SupabaseClientContext);
   if (context === undefined) {
     throw new Error(`useSupabaseApi must be used within a SupabaseApiProvider.`);
   }

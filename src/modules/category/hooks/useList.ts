@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useSupabaseApi } from '@api';
+import { useSupabaseClient } from '@api';
 import { Category, CategoryLookup, CategoryType } from '@models';
 
 import { CATEGORIES_KEY } from '../constants';
@@ -35,7 +35,7 @@ const convertToCategoryLookupArray = (categories: Category[]): CategoryLookup[] 
     }, [] as CategoryLookup[]);
 
 const useList = (filters: GetCategoryFilters = {}): UseQueryResult<CategoryLookup[]> => {
-  const { categories } = useSupabaseApi();
+  const { categories } = useSupabaseClient();
 
   return useQuery(
     [CATEGORIES_KEY, 'lookup'],

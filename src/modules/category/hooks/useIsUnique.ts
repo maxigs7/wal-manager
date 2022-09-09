@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { useSupabaseApi } from '@api';
+import { useSupabaseClient } from '@api';
 import { es } from '@i18n';
 import { CategoryType } from '@models';
 
@@ -12,7 +12,7 @@ type UseIsUniqueReturn = (
 ) => Promise<string | boolean>;
 
 const useIsUnique = (): UseIsUniqueReturn => {
-  const { categories } = useSupabaseApi();
+  const { categories } = useSupabaseClient();
 
   return useCallback(
     async (type: CategoryType, name: string, id?: string, parentId?: string) => {

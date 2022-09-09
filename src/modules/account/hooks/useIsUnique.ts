@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 
-import { useSupabaseApi } from '@api';
+import { useSupabaseClient } from '@api';
 import { es } from '@i18n';
 
 type UseIsUniqueReturn = (name: string, id?: string) => Promise<string | boolean>;
 
 const useIsUnique = (): UseIsUniqueReturn => {
-  const { accounts } = useSupabaseApi();
+  const { accounts } = useSupabaseClient();
 
   return useCallback(
     async (name: string, id?: string) => {

@@ -1,12 +1,12 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useSupabaseApi } from '@api';
+import { useSupabaseClient } from '@api';
 import { es } from '@i18n';
 import { ApiError, useToast } from '@lib';
 import { CreditCard } from '@models';
 
 const useRemove = (showToast = true): UseMutationResult<CreditCard, ApiError, string> => {
-  const { creditCards } = useSupabaseApi();
+  const { creditCards } = useSupabaseClient();
   const toast = useToast();
 
   return useMutation<CreditCard, ApiError, string>(creditCards.remove, {

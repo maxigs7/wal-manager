@@ -1,12 +1,12 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useSupabaseApi } from '@api';
+import { useSupabaseClient } from '@api';
 import { es } from '@i18n';
 import { ApiError, useToast } from '@lib';
 import { Category } from '@models';
 
 const useCreate = (showToast = true): UseMutationResult<Category, ApiError, Category> => {
-  const { categories } = useSupabaseApi();
+  const { categories } = useSupabaseClient();
   const toast = useToast();
 
   return useMutation<Category, ApiError, Category>(categories.create, {
