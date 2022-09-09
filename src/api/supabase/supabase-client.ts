@@ -8,6 +8,8 @@ import {
   AuthRepository,
   CreditCardRepository,
   IAuthRepository,
+  ITransactionRepository,
+  TransactionRepository,
 } from './repositories';
 
 export interface ISupabaseClient {
@@ -15,7 +17,7 @@ export interface ISupabaseClient {
   auth: IAuthRepository;
   categories: IGenericRepository<Category>;
   creditCards: IGenericRepository<CreditCard>;
-  // transactions: ITransactionRepository;
+  transactions: ITransactionRepository;
 }
 
 export class SupabaseClient implements ISupabaseClient {
@@ -23,7 +25,7 @@ export class SupabaseClient implements ISupabaseClient {
   public auth: IAuthRepository;
   public categories: IGenericRepository<Category>;
   public creditCards: IGenericRepository<CreditCard>;
-  // public transactions: IGenericRepository<Transaction>;
+  public transactions: ITransactionRepository;
 
   constructor(private db: OrigSupabaseClient) {
     // TODO: Instance Repo when has been called.
@@ -31,6 +33,6 @@ export class SupabaseClient implements ISupabaseClient {
     this.auth = new AuthRepository(this.db);
     this.categories = new GenericRepository<Category>(this.db, 'category');
     this.creditCards = new CreditCardRepository(this.db);
-    // this.transactions = new GenericRepository<Category>(db, 'transaction');
+    this.transactions = new TransactionRepository(db);
   }
 }

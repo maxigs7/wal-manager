@@ -6,7 +6,7 @@ import { BaseModel, IGenericRepository, IGetAllOptions } from './types';
 export class GenericRepository<T extends BaseModel> implements IGenericRepository<T> {
   constructor(protected supabase: SupabaseClient, private table: string) {}
 
-  private get from() {
+  protected get from() {
     return this.supabase.from(this.table);
   }
 
@@ -79,7 +79,7 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
     return obj[key] === null;
   }
 
-  private cleanFromServer(obj: any, cleanNull = true): any {
+  protected cleanFromServer(obj: any, cleanNull = true): any {
     if (Array.isArray(obj)) {
       return obj.map((v) => this.cleanFromServer(v));
     } else if (obj != null && obj.constructor === Object) {
@@ -95,7 +95,7 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
     return obj;
   }
 
-  private cleanToServer(obj: any): any {
+  protected cleanToServer(obj: any): any {
     if (Array.isArray(obj)) {
       return obj.map((v) => this.cleanToServer(v));
     } else if (obj != null && obj.constructor === Object) {

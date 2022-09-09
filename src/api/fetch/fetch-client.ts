@@ -1,16 +1,16 @@
 import { ApiError } from './api-error';
 
 export interface IFetchClient {
-  del<T = {}>(url: string): Promise<T | T[] | null>;
-  get<T = {}>(url: string): Promise<T | T[] | null>;
-  post<T = {}>(url: string, payload: any): Promise<T | T[] | null>;
-  put<T = {}>(url: string, payload: any): Promise<T | T[] | null>;
+  del<T = {}>(url: string): Promise<T | null>;
+  get<T = {}>(url: string): Promise<T | null>;
+  post<T = {}>(url: string, payload: any): Promise<T | null>;
+  put<T = {}>(url: string, payload: any): Promise<T | null>;
 }
 
 export class FetchClient implements IFetchClient {
   constructor(private fetchLike: typeof fetch, private baseUrl: string) {}
 
-  del<T = {}>(url: string): Promise<T | T[] | null> {
+  del<T = {}>(url: string): Promise<T | null> {
     return this.fecth(url, {
       headers: {
         // TODO: ADD TOKEN
@@ -20,13 +20,11 @@ export class FetchClient implements IFetchClient {
     });
   }
 
-  get<T = {}>(url: string): Promise<T | T[] | null> {
-    return this.fecth(url, {
-      method: 'GET',
-    });
+  get<T>(url: string): Promise<T | null> {
+    return this.fecth<T>(url, { method: 'GET' });
   }
 
-  post<T = {}>(url: string, payload: any): Promise<T | T[] | null> {
+  post<T = {}>(url: string, payload: any): Promise<T | null> {
     return this.fecth(url, {
       body: payload ? JSON.stringify(payload) : undefined,
       headers: {
@@ -37,7 +35,7 @@ export class FetchClient implements IFetchClient {
     });
   }
 
-  put<T = {}>(url: string, payload: any): Promise<T | T[] | null> {
+  put<T = {}>(url: string, payload: any): Promise<T | null> {
     return this.fecth(url, {
       body: payload ? JSON.stringify(payload) : undefined,
       headers: {
@@ -48,7 +46,7 @@ export class FetchClient implements IFetchClient {
     });
   }
 
-  private fecth<T>(url: string, options?: RequestInit): Promise<T | T[] | null> {
+  private fecth<T>(url: string, options?: RequestInit): Promise<T | null> {
     return this.fetchLike(`${this.baseUrl}${url}`, options)
       .then(this.checkStatusCode)
       .then((response) => this.success<T>(response), this.fail);
@@ -61,7 +59,7 @@ export class FetchClient implements IFetchClient {
     return Promise.reject(response);
   }
 
-  private success<T>(response: Response): Promise<T | T[] | null> {
+  private success<T>(response: Response): Promise<T | null> {
     if (this.isBodyJson(response)) {
       return response.json();
     }

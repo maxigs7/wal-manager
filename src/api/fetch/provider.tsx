@@ -5,7 +5,7 @@ import { FetchClient, IFetchClient } from './fetch-client';
 export const FetchApiContext = createContext<IFetchClient>({} as IFetchClient);
 
 export const FetchApiProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const client = useMemo(() => new FetchClient(fetch, '/api'), []);
+  const client = useMemo(() => new FetchClient(window.fetch.bind(window), '/api'), []);
 
   return <FetchApiContext.Provider value={client}>{children}</FetchApiContext.Provider>;
 };
