@@ -17,7 +17,7 @@ export class TransactionRepository implements ITransactionRepository {
 
   create = async (form: TransactionForm): Promise<Transaction> => {
     const transactions = this.toTransactions(form);
-    const { data, error } = await this.from.insert(this.cleanToServer(transactions));
+    const { data, error } = await this.from.insert(this.cleanToServer(transactions)).select();
     if (error) {
       throw new ApiError(error);
     }
@@ -60,7 +60,8 @@ export class TransactionRepository implements ITransactionRepository {
   }: TransactionForm): Promise<Transaction> => {
     const { data, error } = await this.from
       .update(this.cleanToServer(transaction))
-      .match({ id: transaction.id });
+      .match({ id: transaction.id })
+      .select();
 
     if (error) {
       throw new ApiError(error);
@@ -82,13 +83,13 @@ export class TransactionRepository implements ITransactionRepository {
     return this.cleanFromServer(data[0]) as Transaction;
   };
 
-  upsert(model: TransactionForm): Promise<Transaction> {
+  upsert = (model: TransactionForm): Promise<Transaction> => {
     if (!model.id) {
       return this.create(model);
     }
 
     return this.update(model);
-  }
+  };
 
   //#region Utilities
 

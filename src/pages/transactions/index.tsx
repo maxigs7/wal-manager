@@ -1,5 +1,6 @@
 import { Button } from '@chakra-ui/react';
 import compose from 'compose-function';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
@@ -19,39 +20,35 @@ const TransactionsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [state, dispatch] = useTransactionStore();
 
-  const goCreate = useCallback(
-    (type: TransactionType) => {
-      router.push(`/transactions/${type}/create`);
+  const onRemove = useCallback((id: string) => {}, []);
+
+  const onUpdate = useCallback(
+    (id: string) => {
+      router.push(`/transactions/${id}`);
     },
     [router],
   );
 
-  const onRemove = useCallback((id: string) => {}, []);
-
-  const onUpdate = useCallback((id: string) => {}, []);
+  const buildHref = useCallback(
+    (type: TransactionType) => {
+      return `/transactions/create?accountId=${state.account?.id}&type=${type}`;
+    },
+    [state.account?.id],
+  );
 
   return (
     <Page>
       <PageHeader metaTitle={es.transaction.pages.index.metaTitle}>
-        <Button
-          as="a"
-          colorScheme="red"
-          href={`/transactions/create/expenses`}
-          leftIcon={<Icon icon="plus" />}
-          size="sm"
-        >
-          {es.transaction.actions.expenses}
-        </Button>
-        <Button
-          as="a"
-          colorScheme="green"
-          href={`/transactions/create/incomes`}
-          leftIcon={<Icon icon="plus" />}
-          size="sm"
-        >
-          {es.transaction.actions.incomes}
-        </Button>
-
+        <Link as="/transactions/expenses/create" href={buildHref('expenses')} passHref>
+          <Button as="a" colorScheme="red" leftIcon={<Icon icon="plus" />} size="sm">
+            {es.transaction.actions.expenses}
+          </Button>
+        </Link>
+        <Link as="/transactions/incomes/create" href={buildHref('incomes')} passHref>
+          <Button as="a" colorScheme="green" leftIcon={<Icon icon="plus" />} size="sm">
+            {es.transaction.actions.incomes}
+          </Button>
+        </Link>
         {state.account?.currency === 'usd' && (
           <DolarsiButtonToggle
             defaultLabel={es.transaction.actions.changeQuotation}

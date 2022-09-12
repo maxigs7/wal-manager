@@ -71,7 +71,7 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate, quotation }) =>
           onClick: (row: TransactionDto) => onRemove(row.id),
         },
       ];
-      return <ActionsCell actions={actions} row={props.row.original} />;
+      return props.row.original.id && <ActionsCell actions={actions} row={props.row.original} />;
     },
     header: es.common.headers.actions,
   }),

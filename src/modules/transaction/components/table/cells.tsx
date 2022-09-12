@@ -28,6 +28,7 @@ export const CategoryCell: React.FC<CellContext<TransactionDto, string>> = ({
       color={original.rootCategoryColor}
       icon={original.rootCategoryIcon}
       name={original.rootCategory}
+      size="sm"
       subName={original.subCategory}
     />
   );

@@ -6,6 +6,8 @@ export const common = {
     categories: 'Categorías',
     create: 'Crear',
     creditCards: 'Tarjetas',
+    transactions: 'Movimientos',
+    update: 'Editar',
   },
   cancel: 'Cancelar',
   create: 'Crear',

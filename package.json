@@ -37,6 +37,7 @@
     "@types/compose-function": "^0.0.30",
     "@types/node": "18.7.13",
     "@types/react": "18.0.17",
+    "@types/react-datepicker": "^4.4.2",
     "@types/react-dom": "18.0.6",
     "eslint": "8.22.0",
     "eslint-config-next": "12.2.5",

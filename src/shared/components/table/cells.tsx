@@ -56,7 +56,7 @@ export const ActionsCell = <T extends Record<string, unknown>>({
   row,
 }: ActionsCellProps<T>): React.ReactElement => {
   return (
-    <ButtonGroup size="sm" variant="ghost" isAttached>
+    <ButtonGroup size="xs" variant="ghost" isAttached>
       {actions.map((action) => (
         <IconButton
           key={action.label}
@@ -64,7 +64,7 @@ export const ActionsCell = <T extends Record<string, unknown>>({
           colorScheme={action.colorScheme}
           icon={<Icon icon={action.icon} fixedWidth />}
           onClick={() => action.onClick(row)}
-          size="sm"
+          size="xs"
         />
       ))}
     </ButtonGroup>
