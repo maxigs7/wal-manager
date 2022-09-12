@@ -8,6 +8,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  PaginationState,
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
@@ -40,6 +41,10 @@ export const Table = <T extends object>({
   isLoading = false,
 }: IProps<T>): React.ReactElement => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 50,
+  });
   const [sorting, setSorting] = useState<SortingState>(defaultSort ? [defaultSort] : []);
   const [globalFilter, setGlobalFilter] = useState('');
 
@@ -66,10 +71,12 @@ export const Table = <T extends object>({
     getSubRows: isExpandable ? (row) => (row as { subRows: T[] }).subRows : undefined,
     onExpandedChange: isExpandable ? setExpanded : undefined,
     onGlobalFilterChange: setGlobalFilter,
+    onPaginationChange: setPagination,
     onSortingChange: setSorting,
     state: {
       expanded: isExpandable ? expanded : undefined,
       globalFilter,
+      pagination,
       sorting,
     },
   });

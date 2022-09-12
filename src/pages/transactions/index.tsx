@@ -2,12 +2,13 @@ import { Button } from '@chakra-ui/react';
 import compose from 'compose-function';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 import { es } from '@i18n';
 import { getFullLayout, NextPageWithLayout } from '@layout';
 import { DolarsiButtonToggle } from '@m/dolarsi';
 import {
+  TransactionDialogRemove,
   TransactionMainFilterActions,
   TransactionTableContainer,
   useTransactionStore,
@@ -19,8 +20,12 @@ import { Icon, Page, PageHeader } from '@shared';
 const TransactionsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [state, dispatch] = useTransactionStore();
+  const [idToRemove, setIdToRemove] = useState<string>();
 
-  const onRemove = useCallback((id: string) => {}, []);
+  // ROOT
+  const onRemove = useCallback((id: string) => {
+    setIdToRemove(id);
+  }, []);
 
   const onUpdate = useCallback(
     (id: string) => {
@@ -60,6 +65,12 @@ const TransactionsPage: NextPageWithLayout = () => {
 
       <TransactionMainFilterActions p="3" />
       <TransactionTableContainer onRemove={onRemove} onUpdate={onUpdate} />
+
+      <TransactionDialogRemove
+        id={idToRemove}
+        isOpen={!!idToRemove}
+        onDismiss={() => setIdToRemove(undefined)}
+      />
     </Page>
   );
 };
