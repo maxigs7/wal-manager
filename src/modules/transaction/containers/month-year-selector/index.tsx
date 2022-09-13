@@ -39,4 +39,4 @@ const MonthYearSelector: React.FC<ButtonGroupProps> = (props) => {
   );
 };
 
-export default MonthYearSelector;
+export { MonthYearSelector };

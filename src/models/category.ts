@@ -1,6 +1,4 @@
-// import { IconName } from '@fortawesome/fontawesome-svg-core';
-
-import { IconName } from '@fortawesome/free-solid-svg-icons';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 import { BaseModel } from '@lib';
 

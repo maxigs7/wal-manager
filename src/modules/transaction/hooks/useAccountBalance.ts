@@ -5,6 +5,7 @@ import useList from './useList';
 
 export interface IAccountMoney {
   balance: number;
+  // balancePaid: number;
   current: number;
   expenses: number;
   incomes: number;
@@ -34,6 +35,8 @@ const useAccountBalance = (
         if (!t.id && !t.account) {
           return money;
         }
+
+        t.isPaid;
 
         return {
           incomes: (money.incomes || 0) + (t.type === 'incomes' ? t.amount : 0),

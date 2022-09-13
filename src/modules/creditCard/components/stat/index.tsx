@@ -3,7 +3,6 @@ import React from 'react';
 
 import { formatToCurrency } from '@lib';
 import { CreditCardType } from '@models';
-// import { Card } from '@shared';
 
 import { CreditCardTypeIcon } from '..';
 
@@ -14,7 +13,7 @@ interface IProps extends BoxProps {
   type: CreditCardType;
 }
 
-const StatMoney: React.FC<IProps> = ({
+const CreditCardStat: React.FC<IProps> = ({
   amount,
   type,
   iconProps: { width: iconWidth = 50, ...iconProps } = {},
@@ -22,8 +21,19 @@ const StatMoney: React.FC<IProps> = ({
   ...boxProps
 }) => {
   return (
-    // <Card display="inline-flex" justifyContent="center" px="4" py="2" {...boxProps}>
-    <>
+    <Box
+      borderRight="1px"
+      borderRightColor="gray.300"
+      display="inline-flex"
+      flexBasis="100%"
+      justifyContent="center"
+      maxW="xs"
+      minW={['xs', 'xs', null]}
+      my="2"
+      px="4"
+      py="2"
+      {...boxProps}
+    >
       <Box mr="auto">
         {label && (
           <Text color="gray.400" fontSize="md" textTransform="uppercase">
@@ -35,9 +45,8 @@ const StatMoney: React.FC<IProps> = ({
         </Text>
       </Box>
       <CreditCardTypeIcon type={type} width={iconWidth} {...iconProps} />
-    </>
-    // </Card>
+    </Box>
   );
 };
 
-export default StatMoney;
+export { CreditCardStat };

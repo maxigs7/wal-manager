@@ -1,4 +1,4 @@
-import { Table as ChakraTable, TableContainer } from '@chakra-ui/react';
+import { Table as ChakraTable, TableContainer, TableCellProps } from '@chakra-ui/react';
 import {
   ColumnDef,
   ColumnSort,
@@ -29,6 +29,7 @@ interface IProps<T extends object> {
   globalFilterEnabled?: boolean;
   isExpandable?: boolean;
   isLoading?: boolean;
+  isRowHighlighted?(row: T): boolean;
 }
 
 export const Table = <T extends object>({
@@ -39,6 +40,7 @@ export const Table = <T extends object>({
   globalFilterEnabled = true,
   isExpandable = false,
   isLoading = false,
+  isRowHighlighted,
 }: IProps<T>): React.ReactElement => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
   const [pagination, setPagination] = useState<PaginationState>({
@@ -92,6 +94,7 @@ export const Table = <T extends object>({
           <Body
             emptyText={emptyText}
             isLoading={isLoading}
+            isRowHighlighted={isRowHighlighted}
             model={getRowModel()}
             numberOfColumns={getVisibleFlatColumns().length}
           />

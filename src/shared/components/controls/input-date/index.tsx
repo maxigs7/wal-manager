@@ -47,30 +47,6 @@ const InputDate: FC<IProps> = ({ control, defaultValue, name, rules }) => {
   );
 
   return <ClassNames>{render}</ClassNames>;
-  // return (
-  //   // <InputGroup className={'dark-theme'}>
-  // <ClassNames>{render}</ClassNames>;
-  //   <ReactDatePicker
-  //     customInput={<CustomInput />}
-  //     onChange={(date: Date) => onChange(date)}
-  //     portalId="calendarPortal"
-  //     renderCustomHeader={CustomHeader}
-  //     selected={value}
-  //     showPopperArrow={false}
-  //     withPortal={withPortal}
-  //   />
-  //   <InputRightElement>
-  //     <Icon icon="calendar" />
-  //   </InputRightElement>
-  // </InputGroup>
-  // <ReactDatePicker
-  //   onChange={(date: Date) => onChange(date)}
-  //   portalId="calendarPortal"
-  //   selected={value}
-  //   showPopperArrow={false}
-  //   withPortal={withPortal}
-  // />
-  // );
 };
 
 export { InputDate };

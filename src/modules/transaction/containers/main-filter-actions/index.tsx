@@ -13,13 +13,12 @@ import React, { useCallback, useRef } from 'react';
 
 import { es } from '@i18n';
 import { AccountSelectContainer } from '@m/account';
-import { useDolarsi } from '@m/dolarsi';
 import { Account } from '@models';
 import { Icon } from '@shared';
 
 import { useTransactionStore } from '../../providers';
 import { TransactionExtraFilters } from '../extra-filters';
-import MonthYearSelector from '../month-year-selector';
+import { MonthYearSelector } from '../month-year-selector';
 
 interface IProps extends FlexProps {}
 
@@ -49,17 +48,28 @@ const TransactionMainFilterActions: React.FC<IProps> = ({ ...flexProps }) => {
             value={state.account?.id}
           />
         </Box>
-        <MonthYearSelector display={['flex', 'flex', 'inline-flex']} w={['full', 'full', 'auto']} />
-        <IconButton
-          aria-label="expand filters"
-          icon={<Icon icon={isOpen ? 'angle-double-up' : 'angle-double-down'} />}
-          ml="auto"
-          onClick={() => onToggle()}
-          variant="ghost"
-        />
+        <Flex w="full">
+          <MonthYearSelector
+            display={['flex', 'flex', 'inline-flex']}
+            w={['full', 'full', 'auto']}
+          />
+          <IconButton
+            aria-label="expand filters"
+            icon={<Icon icon={isOpen ? 'angle-double-up' : 'filter'} />}
+            ml={['2', '2', 'auto']}
+            onClick={() => onToggle()}
+            variant="ghost"
+          />
+        </Flex>
       </Flex>
       <Collapse in={isOpen}>
-        <TransactionExtraFilters bg="white" gap="2" p="3" target={ref.current} />
+        <TransactionExtraFilters
+          bg="white"
+          direction={{ base: 'column', md: 'row' }}
+          gap="2"
+          p="3"
+          target={ref.current}
+        />
       </Collapse>
     </>
   );

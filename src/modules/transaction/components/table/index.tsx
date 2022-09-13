@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import { TableCellProps, TableRowProps } from '@chakra-ui/react';
+import React, { useCallback, useMemo } from 'react';
 
 import { IDolarsi } from '@api';
 import { TransactionDto, TransactionType } from '@models';
@@ -28,6 +29,11 @@ const TransactionTable: React.FC<IProps> = ({
     [onRemove, onUpdate, quotation],
   );
 
+  const isRowHighlighted = useCallback(
+    (t: TransactionDto) => !!highlightType && t.type !== highlightType,
+    [highlightType],
+  );
+
   return (
     <Table
       columns={columns}
@@ -35,14 +41,9 @@ const TransactionTable: React.FC<IProps> = ({
       defaultSort={{ id: 'date', desc: false }}
       globalFilterEnabled={false}
       isLoading={isLoading}
+      isRowHighlighted={isRowHighlighted}
     />
   );
-  //  getRowProps={(row) => ({
-  //           key: row.original.id,
-  //           style: {
-  //             opacity: highlightType && row.original.type !== highlightType ? '0.5' : '1',
-  //           },
-  //         })}
 };
 
 export { TransactionTable };

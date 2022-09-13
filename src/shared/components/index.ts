@@ -9,4 +9,5 @@ export * from './icon-select';
 export * from './loaders';
 export * from './logo';
 export * from './page';
+export * from './stat-money';
 export * from './table';
