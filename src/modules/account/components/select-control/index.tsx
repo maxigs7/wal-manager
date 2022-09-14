@@ -17,6 +17,7 @@ const AccountSelectControl: React.FC<IAccountSelectControlProps> = ({
   name,
   placeholder,
   rules,
+  ...props
 }) => {
   const def = accounts.find((account) => account.isDefault);
   const { field } = useController({
@@ -28,6 +29,7 @@ const AccountSelectControl: React.FC<IAccountSelectControlProps> = ({
 
   return (
     <AccountSelect
+      {...props}
       {...field}
       accounts={accounts}
       id={id}

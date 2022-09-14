@@ -17,6 +17,7 @@ const CategorySelectControl: React.FC<ICategorySelectControlProps> = ({
   name,
   placeholder,
   rules,
+  ...props
 }) => {
   const { field } = useController({
     name,
@@ -26,6 +27,7 @@ const CategorySelectControl: React.FC<ICategorySelectControlProps> = ({
 
   return (
     <CategorySelect
+      {...props}
       {...field}
       categories={categories}
       id={id}
