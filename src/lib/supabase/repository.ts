@@ -2,6 +2,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 
 import { ApiError } from './api-error';
 import { BaseModel, IGenericRepository, IGetAllOptions } from './types';
+import { cleanFromServer, cleanToServer } from './util';
 
 export class GenericRepository<T extends BaseModel> implements IGenericRepository<T> {
   constructor(protected supabase: SupabaseClient, private table: string) {}
@@ -11,7 +12,7 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
   }
 
   create = async (model: T): Promise<T> => {
-    const { data, error, ...etc } = await this.from.insert<T>(this.cleanToServer(model)).select();
+    const { data, error, ...etc } = await this.from.insert<T>(cleanToServer(model)).select();
 
     if (error) {
       throw new ApiError(error);
@@ -19,7 +20,7 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
     if (!data) {
       throw new Error('Not Found');
     }
-    return this.cleanFromServer(data[0]) as T;
+    return cleanFromServer(data[0]) as T;
   };
 
   getAll = async (options?: IGetAllOptions<T>): Promise<T[]> => {
@@ -32,7 +33,7 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
     if (error) {
       throw new ApiError(error);
     }
-    return data ? (this.cleanFromServer(data) as T[]) : [];
+    return data ? (cleanFromServer(data) as T[]) : [];
   };
 
   getById = async (id: string, columns?: string): Promise<T> => {
@@ -43,7 +44,7 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
     if (!data) {
       throw new Error('Not Found');
     }
-    return this.cleanFromServer(data[0]) as T;
+    return cleanFromServer(data[0]) as T;
   };
 
   remove = async (id: string): Promise<T> => {
@@ -54,12 +55,12 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
     if (!data) {
       throw new Error('Not Found');
     }
-    return this.cleanFromServer(data[0]) as T;
+    return cleanFromServer(data[0]) as T;
   };
 
   update = async (model: Partial<T>): Promise<T> => {
     const { data, error } = await this.from
-      .update(this.cleanToServer(model))
+      .update(cleanToServer(model))
       .match({ id: model.id })
       .select();
     if (error) {
@@ -68,45 +69,6 @@ export class GenericRepository<T extends BaseModel> implements IGenericRepositor
     if (!data) {
       throw new Error('Not Found');
     }
-    return this.cleanFromServer(data[0]) as T;
+    return cleanFromServer(data[0]) as T;
   };
-
-  private isUndefinedSafe(obj: any, key: string) {
-    return typeof obj[key] === 'undefined' || obj[key] === '';
-  }
-
-  private isNullSafe(obj: any, key: string) {
-    return obj[key] === null;
-  }
-
-  protected cleanFromServer(obj: any, cleanNull = true): any {
-    if (Array.isArray(obj)) {
-      return obj.map((v) => this.cleanFromServer(v));
-    } else if (obj != null && obj.constructor === Object) {
-      return Object.keys(obj).reduce(
-        (result, key) => ({
-          ...result,
-          [key]:
-            cleanNull && this.isNullSafe(obj, key) ? undefined : this.cleanFromServer(obj[key]),
-        }),
-        {},
-      );
-    }
-    return obj;
-  }
-
-  protected cleanToServer(obj: any): any {
-    if (Array.isArray(obj)) {
-      return obj.map((v) => this.cleanToServer(v));
-    } else if (obj != null && obj.constructor === Object) {
-      return Object.keys(obj).reduce(
-        (result, key) => ({
-          ...result,
-          [key]: this.isUndefinedSafe(obj, key) ? null : this.cleanToServer(obj[key]),
-        }),
-        {},
-      );
-    }
-    return obj;
-  }
 }

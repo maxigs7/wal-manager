@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { ApiError, GenericRepository } from '@lib';
+import { ApiError, cleanFromServer, GenericRepository } from '@lib';
 import { CreditCard } from '@models';
 
 const tableName = 'creditCard';
@@ -20,6 +20,6 @@ export class CreditCardRepository extends GenericRepository<CreditCard> {
     if (!data) {
       throw new Error('Not Found');
     }
-    return data[0] as CreditCard;
+    return cleanFromServer(data[0]) as CreditCard;
   };
 }

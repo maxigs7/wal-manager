@@ -1,7 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { addMonths, format, parseISO } from 'date-fns';
 
-import { ApiError } from '@lib';
+import { ApiError, cleanFromServer, cleanToServer } from '@lib';
 import { Transaction, TransactionDto, TransactionForm } from '@models';
 
 import { ITransactionRepository } from './transaction.types';
@@ -17,7 +17,7 @@ export class TransactionRepository implements ITransactionRepository {
 
   create = async (form: TransactionForm): Promise<Transaction> => {
     const transactions = this.toTransactions(form);
-    const { data, error } = await this.from.insert(this.cleanToServer(transactions)).select();
+    const { data, error } = await this.from.insert(cleanToServer(transactions)).select();
     if (error) {
       throw new ApiError(error);
     }
@@ -59,7 +59,7 @@ export class TransactionRepository implements ITransactionRepository {
     ...transaction
   }: TransactionForm): Promise<Transaction> => {
     const { data, error } = await this.from
-      .update(this.cleanToServer(transaction))
+      .update(cleanToServer(transaction))
       .match({ id: transaction.id })
       .select();
 
@@ -80,7 +80,7 @@ export class TransactionRepository implements ITransactionRepository {
     if (!data) {
       throw new Error('Not Found');
     }
-    return this.cleanFromServer(data[0]) as Transaction;
+    return cleanFromServer(data[0]) as Transaction;
   };
 
   upsert = (model: TransactionForm): Promise<Transaction> => {
@@ -117,7 +117,7 @@ export class TransactionRepository implements ITransactionRepository {
   private parseTransaction = (data: any[] | null): Transaction[] => {
     if (!data) return [];
 
-    const cleanData = this.cleanFromServer(data);
+    const cleanData = cleanFromServer(data);
     return cleanData.map(
       (t: any) =>
         ({
@@ -131,7 +131,7 @@ export class TransactionRepository implements ITransactionRepository {
   private toDto = (data: any[] | null): TransactionDto[] => {
     if (!data) return [];
 
-    const cleanData = this.cleanFromServer(data);
+    const cleanData = cleanFromServer(data);
     return cleanData.map(
       (t: any) =>
         ({
@@ -140,45 +140,6 @@ export class TransactionRepository implements ITransactionRepository {
         } as TransactionDto),
     );
   };
-
-  private isUndefinedSafe(obj: any, key: string) {
-    return typeof obj[key] === 'undefined' || obj[key] === '';
-  }
-
-  private isNullSafe(obj: any, key: string) {
-    return obj[key] === null;
-  }
-
-  protected cleanFromServer(obj: any, cleanNull = true): any {
-    if (Array.isArray(obj)) {
-      return obj.map((v) => this.cleanFromServer(v));
-    } else if (obj != null && obj.constructor === Object) {
-      return Object.keys(obj).reduce(
-        (result, key) => ({
-          ...result,
-          [key]:
-            cleanNull && this.isNullSafe(obj, key) ? undefined : this.cleanFromServer(obj[key]),
-        }),
-        {},
-      );
-    }
-    return obj;
-  }
-
-  protected cleanToServer(obj: any): any {
-    if (Array.isArray(obj)) {
-      return obj.map((v) => this.cleanToServer(v));
-    } else if (obj != null && obj.constructor === Object) {
-      return Object.keys(obj).reduce(
-        (result, key) => ({
-          ...result,
-          [key]: this.isUndefinedSafe(obj, key) ? null : this.cleanToServer(obj[key]),
-        }),
-        {},
-      );
-    }
-    return obj;
-  }
 
   //#endregion
 }
