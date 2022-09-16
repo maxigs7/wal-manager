@@ -10,7 +10,7 @@ const useMapping = (defaultDate: Date): UseMappingReturn => {
     (transaction: Transaction): Partial<TransactionForm> => {
       const { date, id, isRecurring, parentTransactionId } = transaction;
       const currentDate = setDate(defaultDate, date.getDate());
-      const isOriginal = differenceInDays(currentDate, date) <= 1;
+      const isOriginal = !isRecurring || differenceInDays(currentDate, date) <= 1;
 
       return {
         ...transaction,

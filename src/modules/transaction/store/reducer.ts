@@ -1,9 +1,8 @@
 import {
   Actions,
   CHANGE_ACCOUNT,
-  CHANGE_MONTH,
+  CHANGE_MONTH_YEAR,
   CHANGE_QUOTATION,
-  CHANGE_YEAR,
   FILTER_BY_CATEGORY_ID,
   FILTER_BY_CREDIT_CARD_ID,
   HIGHLIGHT_TYPE,
@@ -22,23 +21,17 @@ export const reducer = (state: IState, action: Actions): IState => {
         account: action.payload,
       };
     }
-    case CHANGE_MONTH: {
+    case CHANGE_MONTH_YEAR: {
       return {
         ...state,
-        month: action.payload,
+        month: action.payload.month,
+        year: action.payload.year,
       };
     }
     case CHANGE_QUOTATION: {
       return {
         ...state,
         quotation: action.payload,
-      };
-    }
-    case CHANGE_YEAR: {
-      return {
-        ...state,
-        month: state.year > action.payload ? 11 : 0,
-        year: action.payload,
       };
     }
     case FILTER_BY_CATEGORY_ID: {

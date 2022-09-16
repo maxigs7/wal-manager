@@ -1,4 +1,5 @@
 import { IconButton } from '@chakra-ui/react';
+import { parseISO } from 'date-fns';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo } from 'react';
@@ -53,6 +54,7 @@ const CreatePage: NextPageWithLayout = () => {
       {type && (
         <TransactionFormContainer
           accountId={router.query.accountId as string}
+          date={parseISO(router.query.date as string)}
           onConfirmed={onConfirmed}
           type={type}
         />

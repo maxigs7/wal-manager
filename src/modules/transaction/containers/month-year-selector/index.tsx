@@ -1,11 +1,14 @@
 import { Button, ButtonGroup, ButtonGroupProps, IconButton } from '@chakra-ui/react';
+import { parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
-import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useMemo } from 'react';
 
 import { useTransactionStore } from '@m/transaction';
 import { Icon } from '@shared';
 
 const MonthYearSelector: React.FC<ButtonGroupProps> = (props) => {
+  const { query } = useRouter();
   const [state, dispatch] = useTransactionStore();
 
   const monthAbbr = useMemo(() => {
@@ -19,6 +22,13 @@ const MonthYearSelector: React.FC<ButtonGroupProps> = (props) => {
   const previousMonthHandler = () => {
     dispatch.onPreviousMonth();
   };
+
+  useEffect(() => {
+    if (query.date) {
+      const date = parseISO(query.date as string);
+      dispatch.onChangedMonthYear(date.getMonth(), date.getFullYear());
+    }
+  }, [dispatch, query.date]);
 
   return (
     <ButtonGroup colorScheme="accent" variant="solid" isAttached {...props}>

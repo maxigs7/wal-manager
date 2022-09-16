@@ -1,5 +1,6 @@
 import { Button, Flex } from '@chakra-ui/react';
 import compose from 'compose-function';
+import { formatISO } from 'date-fns';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -40,9 +41,11 @@ const TransactionsPage: NextPageWithLayout = () => {
 
   const buildHref = useCallback(
     (type: TransactionType) => {
-      return `/transactions/create?accountId=${state.account?.id}&type=${type}`;
+      return `/transactions/create?accountId=${state.account?.id}&type=${type}&date=${formatISO(
+        state.startDate,
+      )}`;
     },
-    [state.account?.id],
+    [state.account?.id, state.startDate],
   );
 
   useEffect(() => {

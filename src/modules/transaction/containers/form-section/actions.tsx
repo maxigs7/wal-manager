@@ -1,14 +1,17 @@
 import { Button, FlexProps } from '@chakra-ui/react';
+import { formatISO } from 'date-fns';
+import Link from 'next/link';
 import React from 'react';
 
 import { es } from '@i18n';
 import { ActionsFormContainer, Icon } from '@shared';
 
 interface IProps extends FlexProps {
+  date: Date;
   isLoading: boolean;
 }
 
-const Actions: React.FC<IProps> = ({ isLoading, ...flexProps }) => (
+const Actions: React.FC<IProps> = ({ date, isLoading, ...flexProps }) => (
   <ActionsFormContainer {...flexProps}>
     <Button
       colorScheme="success"
@@ -20,15 +23,11 @@ const Actions: React.FC<IProps> = ({ isLoading, ...flexProps }) => (
       {es.common.save}
     </Button>
 
-    <Button
-      as="a"
-      href="/transactions"
-      leftIcon={<Icon icon="times" />}
-      size="sm"
-      variant="outline"
-    >
-      {es.common.cancel}
-    </Button>
+    <Link as="/transactions" href={`/transactions?date=${date && formatISO(date)}`} passHref>
+      <Button as="a" leftIcon={<Icon icon="times" />} size="sm" variant="outline">
+        {es.common.cancel}
+      </Button>
+    </Link>
   </ActionsFormContainer>
 );
 

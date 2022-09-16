@@ -3,21 +3,18 @@ import {
   PropsWithChildren,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useReducer,
 } from 'react';
 
 import { IDolarsi } from '@api';
 import { getRangeFromDate } from '@lib';
-import { useDolarsi } from '@m/dolarsi';
 import { Account, TransactionType } from '@models';
 
 import {
   changeAccount,
-  changeMonth,
+  changeMonthYear,
   changeQuotation,
-  changeYear,
   filterByCategory,
   filterByCreditCard,
   highlightType,
@@ -41,9 +38,9 @@ export const StoreProvider: React.FC<PropsWithChildren> = ({ children }) => {
     [dispatch],
   );
 
-  const onChangedMonth = useCallback(
-    (month: number) => {
-      dispatch(changeMonth(month));
+  const onChangedMonthYear = useCallback(
+    (month: number, year: number) => {
+      dispatch(changeMonthYear({ month, year }));
     },
     [dispatch],
   );
@@ -51,13 +48,6 @@ export const StoreProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const onChangedQuotation = useCallback(
     (quotation?: IDolarsi) => {
       dispatch(changeQuotation(quotation));
-    },
-    [dispatch],
-  );
-
-  const onChangedYear = useCallback(
-    (year: number) => {
-      dispatch(changeYear(year));
     },
     [dispatch],
   );
@@ -94,9 +84,8 @@ export const StoreProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const storeDispatch: IDispatch = useMemo(
     () => ({
       onChangedAccount,
-      onChangedMonth,
+      onChangedMonthYear,
       onChangedQuotation,
-      onChangedYear,
       onFilterByCategory,
       onFilterByCreditCard,
       onHighlightType,
@@ -105,9 +94,8 @@ export const StoreProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }),
     [
       onChangedAccount,
-      onChangedMonth,
+      onChangedMonthYear,
       onChangedQuotation,
-      onChangedYear,
       onFilterByCategory,
       onFilterByCreditCard,
       onHighlightType,

@@ -18,9 +18,8 @@ interface IExtendedState extends IState {
 
 export interface IDispatch {
   onChangedAccount(account?: Account): void;
-  onChangedMonth(month: number): void;
+  onChangedMonthYear(month: number, year: number): void;
   onChangedQuotation(quotation?: IDolarsi): void;
-  onChangedYear(year: number): void;
   onFilterByCategory(id: string): void;
   onFilterByCreditCard(id: string): void;
   onHighlightType(type?: TransactionType): void;

@@ -1,4 +1,4 @@
-import { Box, Skeleton } from '@chakra-ui/react';
+import { Box, Flex, Skeleton } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -55,8 +55,8 @@ const TransactionFormContainer: React.FC<IProps> = ({ accountId, date, id, onCon
   }, [transaction]);
 
   return (
-    <Box as="form" bg="white" onSubmit={onSubmit}>
-      <Actions display={['none', 'flex']} isLoading={isSubmitting || isFormSubmitting} />
+    <Flex as="form" bg="white" direction={['column-reverse', 'column']} onSubmit={onSubmit}>
+      <Actions date={useFormProps.getValues('date')} isLoading={isSubmitting || isFormSubmitting} />
       <Skeleton isLoaded={!isLoading || !id} p="5">
         <TransactionFormComponent
           {...useFormProps}
@@ -64,8 +64,7 @@ const TransactionFormContainer: React.FC<IProps> = ({ accountId, date, id, onCon
           type={(transaction?.type || type) as TransactionType}
         />
       </Skeleton>
-      <Actions display={['flex', 'none']} isLoading={isSubmitting || isFormSubmitting} />
-    </Box>
+    </Flex>
   );
 };
 
