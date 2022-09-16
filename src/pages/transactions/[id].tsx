@@ -1,4 +1,5 @@
 import { IconButton } from '@chakra-ui/react';
+import { formatISO } from 'date-fns';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo } from 'react';
@@ -6,7 +7,7 @@ import React, { useEffect, useMemo } from 'react';
 import { es } from '@i18n';
 import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
 import { TransactionFormContainer, useTransactionListRefresh } from '@m/transaction';
-import { TransactionType } from '@models';
+import { TransactionForm, TransactionType } from '@models';
 import { Icon, Page, PageHeader } from '@shared';
 
 const UpdatePage: NextPageWithLayout = () => {
@@ -24,9 +25,9 @@ const UpdatePage: NextPageWithLayout = () => {
     [backUrl],
   );
 
-  const onConfirmed = () => {
+  const onConfirmed = (transaction: TransactionForm) => {
     refresh();
-    router.push(backUrl);
+    router.push(`${backUrl}?date=${formatISO(transaction.date)}`, backUrl);
   };
 
   useEffect(() => {
