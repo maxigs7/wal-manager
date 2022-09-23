@@ -14,6 +14,7 @@ export const category = {
     parentId: 'Nueva categoría padre',
     parentIdPlaceholder: 'Seleccione una categoría',
   },
+  others: 'Otros',
   pages: {
     create: {
       metaTitle: 'Nueva Categoría',

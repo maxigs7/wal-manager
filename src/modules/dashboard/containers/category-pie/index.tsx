@@ -1,22 +1,24 @@
-import { Box, Heading, useTheme } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 import { addMonths } from 'date-fns';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { getDatasetAtEvent, getElementAtEvent, getElementsAtEvent, Pie } from 'react-chartjs-2';
+import { getElementAtEvent, Pie } from 'react-chartjs-2';
 
+import { formatToCurrency } from '@lib';
 import { TransactionType } from '@models';
 
-import { IExpenseDataset, useDatasetByType } from './useDatasetByType';
+import { ICategoryDataset, OTHERS_CATEGORY_ID, PARENTS_CATEGORY_ID } from './types';
+import { useDatasetByType } from './useDatasetByType';
+import { buildPieDataset } from './util';
 
 interface IProps {
   title: string;
   type: TransactionType;
 }
 
-const INACTIVE_INDEX = -1;
 const CategoryPie: React.FC<IProps> = ({ title, type }) => {
   const chartRef = useRef(null);
-  const [active, setActive] = useState(-1);
-  const startDate = useMemo(() => addMonths(new Date(), INACTIVE_INDEX), []);
+  const [active, setActive] = useState<string[]>([]);
+  const startDate = useMemo(() => addMonths(new Date(), -1), []);
   const endDate = useMemo(() => new Date(), []);
   const options = useMemo(
     () => ({
@@ -28,8 +30,14 @@ const CategoryPie: React.FC<IProps> = ({ title, type }) => {
           callbacks: {
             label: function (context: any) {
               const data = context.dataset.data[context.dataIndex];
-              return `${data.label}: ${data.amount}`;
+              return `${data.label}: ${formatToCurrency(data.amount)}`;
             },
+          },
+        },
+        legend: {
+          maxHeight: 60,
+          labels: {
+            usePointStyle: true,
           },
         },
       },
@@ -41,27 +49,7 @@ const CategoryPie: React.FC<IProps> = ({ title, type }) => {
   const pieData = useMemo(() => {
     return {
       labels: [...parents.map((p) => p.label)],
-      datasets: [
-        {
-          id: 'parent',
-          label: 'parents',
-          data: parents,
-          backgroundColor: parents.map((t) => t.color),
-        },
-        ...parents.reduce((subset: any[], parent: IExpenseDataset) => {
-          if (!parent.children || !parent.children.length) return subset;
-          return [
-            ...subset,
-            {
-              id: parent.id,
-              label: parent.label,
-              data: parent.children,
-              backgroundColor: parent.children.map((t) => t.color),
-              hidden: active >= 0 ? parents[active!].id !== parent.id : true,
-            },
-          ];
-        }, []),
-      ],
+      datasets: buildPieDataset(parents, active),
     };
   }, [active, parents]);
 
@@ -69,15 +57,26 @@ const CategoryPie: React.FC<IProps> = ({ title, type }) => {
     (event: any) => {
       if (!chartRef.current) return;
 
-      const [dataset] = getElementAtEvent(chartRef.current, event);
-      console.log(dataset);
-      if (dataset.datasetIndex > 0 || active === dataset.index) {
-        setActive(INACTIVE_INDEX);
+      const [datasetEvt] = getElementAtEvent(chartRef.current, event);
+      if (!datasetEvt) {
+        setActive([]);
       } else {
-        setActive(dataset.index);
+        const datasetData = pieData.datasets[datasetEvt.datasetIndex];
+        const category = datasetData.data[datasetEvt.index];
+        if (
+          datasetData.id !== PARENTS_CATEGORY_ID &&
+          datasetData.id !== OTHERS_CATEGORY_ID &&
+          (active.includes(datasetData.id) || active.includes(category.id))
+        ) {
+          setActive([]);
+        } else if (datasetData.id !== OTHERS_CATEGORY_ID) {
+          setActive([category.id]);
+        } else {
+          setActive((state) => [state[0], category.id]);
+        }
       }
     },
-    [active],
+    [active, pieData.datasets],
   );
 
   return (

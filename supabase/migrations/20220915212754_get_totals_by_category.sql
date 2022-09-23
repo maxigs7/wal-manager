@@ -6,7 +6,7 @@
 CREATE OR REPLACE FUNCTION public.get_totals_by_category(
 	"startDate" timestamp without time zone,
 	"endDate" timestamp without time zone)
-    RETURNS TABLE(type "transactionType", "rootCategoryId" uuid, "rootCategory" character varying, "rootCategoryColor" character varying, "rootCategoryIcon" character varying, "subCategoryId" uuid, "subCategory" character varying, amount numeric)
+    RETURNS TABLE(type "transactionType", "rootCategoryId" uuid, "rootCategory" character varying, "rootCategoryColor" character varying, "rootCategoryIcon" character varying, "subCategoryId" uuid, "subCategory" character varying, amount numeric, total numeric)
     LANGUAGE 'sql'
     COST 100
     VOLATILE PARALLEL UNSAFE
@@ -14,36 +14,72 @@ CREATE OR REPLACE FUNCTION public.get_totals_by_category(
 
 AS $BODY$
 
+with categories as (
+  select
+    coalesce("parentCat".id, cat.id) as "rootCategoryId",
+    coalesce("parentCat".name, cat.name) as "rootCategory",
+    coalesce("parentCat".color, cat.color) as "rootCategoryColor",
+    coalesce("parentCat".icon, cat.icon) as "rootCategoryIcon",
+    case when "parentCat".id is null then null else cat.id end as "subCategoryId",
+    case when "parentCat".id is null then null else cat.name end as "subCategory"
+  from category as cat
+    left join category as "parentCat"
+      on cat."parentId" = "parentCat".id
+)
 select
   t.type,
-  coalesce("parentCat".id, cat.id) as "rootCategoryId",
-  coalesce("parentCat".name, cat.name) as "rootCategory",
-  coalesce("parentCat".color, cat.color) as "rootCategoryColor",
-  coalesce("parentCat".icon, cat.icon) as "rootCategoryIcon",
-  case when "parentCat".id is null then null else cat.id end as "subCategoryId",
-  case when "parentCat".id is null then null else cat.name end as "subCategory",
-  SUM(t.amount) as total
-from transaction as t
-  inner join category as cat
-    on t."categoryId" = cat.id
-  left join category as "parentCat"
-    on cat."parentId" = "parentCat".id
-
+  c."rootCategoryId",
+  c."rootCategory",
+  c."rootCategoryColor",
+  c."rootCategoryIcon",
+  null as "subCategoryId",
+  null as "subCategory",
+  sum(case when t."categoryId" = c."rootCategoryId" then t.amount else 0 end) as amount,
+  sum(t.amount) as total
+from categories as c
+  inner join transaction as t
+    on (c."subCategoryId" is null and t."categoryId" = c."rootCategoryId")
+    or t."categoryId" = c."subCategoryId"
   left join public.get_ocurrences(t.id) as o
-      on o.id = t.id and o.date >= "startDate" and o.date <= "endDate"
-
-where  COALESCE(o.date, t.date) >= "startDate"
-    and COALESCE(o.date, t.date) <= "endDate"
+    on o.id = t.id and o.date >= "startDate" and o.date <= "endDate"
+where coalesce(o.date, t.date) >= "startDate"
+  and coalesce(o.date, t.date) <= "endDate"
 group by
   t.type,
-  "parentCat".id,
-  cat.id,
-  "parentCat".name,
-  cat.name,
-  "parentCat".color,
-  cat.color,
-  "parentCat".icon,
-  cat.icon
+  c."rootCategoryId",
+  c."rootCategory",
+  c."rootCategoryColor",
+  c."rootCategoryIcon"
+having sum(t.amount) > 0
+
+union all
+
+select
+  t.type,
+  c."rootCategoryId",
+  c."rootCategory",
+  c."rootCategoryColor",
+  c."rootCategoryIcon",
+  c."subCategoryId",
+  c."subCategory",
+  sum(t.amount) as amount,
+  sum(t.amount) as total
+from categories as c
+  inner join transaction as t
+    on t."categoryId" = c."subCategoryId"
+  left join public.get_ocurrences(t.id) as o
+    on o.id = t.id and o.date >= "startDate" and o.date <= "endDate"
+where coalesce(o.date, t.date) >= "startDate"
+  and coalesce(o.date, t.date) <= "endDate"
+group by
+  t.type,
+  c."rootCategoryId",
+  c."rootCategory",
+  c."rootCategoryColor",
+  c."rootCategoryIcon",
+  c."subCategoryId",
+  c."subCategory"
+having sum(t.amount) > 0
 
 $BODY$;
 

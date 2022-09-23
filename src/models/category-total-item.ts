@@ -10,5 +10,6 @@ export type CategoryTotalItem = {
   rootCategoryId: string;
   subCategory?: string;
   subCategoryId?: string;
+  total: number;
   type: TransactionType;
 };
