@@ -1,8 +1,9 @@
 import { IDolarsi } from '@api';
-import { Account, TransactionType } from '@models';
+import { Account, Currency, TransactionType } from '@models';
 
 export interface IState {
-  account?: Account;
+  accountCurrency?: Currency;
+  accountId?: string;
   categoryId?: string;
   creditCardId?: string;
   highlightType?: TransactionType;
@@ -17,7 +18,7 @@ interface IExtendedState extends IState {
 }
 
 export interface IDispatch {
-  onChangedAccount(account?: Account): void;
+  onChangedAccount(account?: Partial<Account>): void;
   onChangedMonthYear(month: number, year: number): void;
   onChangedQuotation(quotation?: IDolarsi): void;
   onFilterByCategory(id: string): void;

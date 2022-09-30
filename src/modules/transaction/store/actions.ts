@@ -1,7 +1,7 @@
 import { IDolarsi } from '@api';
 import { Account, TransactionType } from '@models';
 
-export const CHANGE_ACCOUNT = '[TRANSACTIONS] Change Account';
+export const CHANGE_ACCOUNT = '[TRANSACTIONS] Change Account Data';
 export const CHANGE_MONTH_YEAR = '[TRANSACTIONS] Change Month and Year';
 export const CHANGE_QUOTATION = '[TRANSACTIONS] Change Quotation';
 export const FILTER_BY_CATEGORY_ID = '[TRANSACTIONS][FILTER] Filter by category';

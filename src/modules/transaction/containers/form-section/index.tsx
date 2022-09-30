@@ -56,7 +56,11 @@ const TransactionFormContainer: React.FC<IProps> = ({ accountId, date, id, onCon
 
   return (
     <Flex as="form" bg="white" direction={['column-reverse', 'column']} onSubmit={onSubmit}>
-      <Actions date={useFormProps.getValues('date')} isLoading={isSubmitting || isFormSubmitting} />
+      <Actions
+        accountId={useFormProps.getValues('accountId')}
+        date={useFormProps.getValues('date')}
+        isLoading={isSubmitting || isFormSubmitting}
+      />
       <Skeleton isLoaded={!isLoading || !id} p="5">
         <TransactionFormComponent
           {...useFormProps}

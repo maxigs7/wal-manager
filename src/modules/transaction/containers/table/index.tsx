@@ -10,10 +10,10 @@ interface IProps {
 }
 
 const TransactionTableContainer: React.FC<IProps> = ({ onRemove, onUpdate }) => {
-  const [{ account, startDate, endDate, creditCardId, categoryId, highlightType, quotation }] =
+  const [{ accountId, startDate, endDate, creditCardId, categoryId, highlightType, quotation }] =
     useTransactionStore();
 
-  const { data, isLoading } = useTransactionList(account?.id, startDate, endDate, {
+  const { data, isLoading } = useTransactionList(accountId, startDate, endDate, {
     categories: categoryId ? [categoryId] : [],
     creditCards: creditCardId ? [creditCardId] : [],
   });

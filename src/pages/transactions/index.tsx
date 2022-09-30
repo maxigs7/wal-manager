@@ -1,6 +1,6 @@
 import { Button, Flex } from '@chakra-ui/react';
 import compose from 'compose-function';
-import { formatISO } from 'date-fns';
+import { formatISO, parseISO } from 'date-fns';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -41,16 +41,26 @@ const TransactionsPage: NextPageWithLayout = () => {
 
   const buildHref = useCallback(
     (type: TransactionType) => {
-      return `/transactions/create?accountId=${state.account?.id}&type=${type}&date=${formatISO(
+      return `/transactions/create?accountId=${state.accountId}&type=${type}&date=${formatISO(
         state.startDate,
       )}`;
     },
-    [state.account?.id, state.startDate],
+    [state.accountId, state.startDate],
   );
 
   useEffect(() => {
     setBreadcrumb(breadcrumb);
   }, [breadcrumb, setBreadcrumb]);
+
+  useEffect(() => {
+    if (router.query.accountId) {
+      dispatch.onChangedAccount({ id: router.query.accountId as string });
+    }
+    if (router.query.date) {
+      const date = parseISO(router.query.date as string);
+      dispatch.onChangedMonthYear(date.getMonth(), date.getFullYear());
+    }
+  }, [dispatch, router.query]);
 
   return (
     <Page>
@@ -78,7 +88,7 @@ const TransactionsPage: NextPageWithLayout = () => {
               {es.transaction.actions.incomes}
             </Button>
           </Link>
-          {state.account?.currency === 'usd' && (
+          {state.accountCurrency === 'usd' && (
             <DolarsiButtonToggle
               defaultLabel={es.transaction.actions.changeQuotation}
               onChangedQuotation={dispatch.onChangedQuotation}

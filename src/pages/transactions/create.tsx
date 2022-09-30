@@ -6,8 +6,12 @@ import React, { useEffect, useMemo } from 'react';
 
 import { es } from '@i18n';
 import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
-import { TransactionFormContainer, useTransactionListRefresh } from '@m/transaction';
-import { TransactionType } from '@models';
+import {
+  convertQuerystring,
+  TransactionFormContainer,
+  useTransactionListRefresh,
+} from '@m/transaction';
+import { TransactionForm, TransactionType } from '@models';
 import { Icon, Page, PageHeader } from '@shared';
 
 const CreatePage: NextPageWithLayout = () => {
@@ -25,9 +29,9 @@ const CreatePage: NextPageWithLayout = () => {
     [backUrl],
   );
 
-  const onConfirmed = () => {
+  const onConfirmed = (transaction: TransactionForm) => {
     refresh();
-    router.push(backUrl);
+    router.push(`${backUrl}?${convertQuerystring(transaction)}`, backUrl);
   };
 
   useEffect(() => {

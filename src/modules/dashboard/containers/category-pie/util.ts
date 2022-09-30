@@ -107,7 +107,6 @@ export const buildPieDataset = (dataset: ICategoryDataset[], subsetActive: strin
     const hasAnotherLevel = parent.children.some((child) => child.children);
 
     const hidden = !subsetActive.length ? true : !subsetActive.includes(parent.id);
-    debugger;
     return [
       ...subset,
       {

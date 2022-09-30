@@ -7,11 +7,12 @@ import { es } from '@i18n';
 import { ActionsFormContainer, Icon } from '@shared';
 
 interface IProps extends FlexProps {
+  accountId?: string;
   date: Date;
   isLoading: boolean;
 }
 
-const Actions: React.FC<IProps> = ({ date, isLoading, ...flexProps }) => (
+const Actions: React.FC<IProps> = ({ accountId, date, isLoading, ...flexProps }) => (
   <ActionsFormContainer {...flexProps}>
     <Button
       colorScheme="success"
@@ -23,7 +24,11 @@ const Actions: React.FC<IProps> = ({ date, isLoading, ...flexProps }) => (
       {es.common.save}
     </Button>
 
-    <Link as="/transactions" href={`/transactions?date=${date && formatISO(date)}`} passHref>
+    <Link
+      as="/transactions"
+      href={`/transactions?date=${date && formatISO(date)}&accountId=${accountId}`}
+      passHref
+    >
       <Button as="a" leftIcon={<Icon icon="times" />} size="sm" variant="outline">
         {es.common.cancel}
       </Button>

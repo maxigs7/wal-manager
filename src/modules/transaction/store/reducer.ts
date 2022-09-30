@@ -18,7 +18,9 @@ export const reducer = (state: IState, action: Actions): IState => {
     case CHANGE_ACCOUNT: {
       return {
         ...state,
-        account: action.payload,
+        accountCurrency: action.payload?.currency,
+        accountId: action.payload?.id,
+        quotation: action.payload?.currency !== 'usd' ? undefined : state.quotation,
       };
     }
     case CHANGE_MONTH_YEAR: {

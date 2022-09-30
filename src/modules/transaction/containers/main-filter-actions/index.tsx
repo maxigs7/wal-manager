@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Collapse,
-  Flex,
-  IconButton,
-  Stack,
-  FlexProps,
-  Text,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Box, Collapse, Flex, IconButton, FlexProps, useDisclosure } from '@chakra-ui/react';
 import React, { useCallback, useRef } from 'react';
 
 import { es } from '@i18n';
@@ -30,9 +20,6 @@ const TransactionMainFilterActions: React.FC<IProps> = ({ ...flexProps }) => {
   const onChangeAccountHandler = useCallback(
     (_id: string, account?: Account) => {
       dispatch.onChangedAccount(account);
-      if (account?.currency !== 'usd') {
-        dispatch.onChangedQuotation(undefined);
-      }
     },
     [dispatch],
   );
@@ -45,7 +32,7 @@ const TransactionMainFilterActions: React.FC<IProps> = ({ ...flexProps }) => {
             name="accountSelectedId"
             onChange={onChangeAccountHandler}
             placeholder={es.transaction.filters.accountId}
-            value={state.account?.id}
+            value={state.accountId}
           />
         </Box>
         <Flex w="full">
