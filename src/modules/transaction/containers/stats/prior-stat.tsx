@@ -7,10 +7,9 @@ import { useAccountBalance } from '../../hooks';
 import { useTransactionStore } from '../../providers';
 
 const PriorStat: React.FC = () => {
-  const [{ account, startDate, endDate, highlightType, quotation }, { onHighlightType }] =
-    useTransactionStore();
-  const { data: balances, isLoading: isLoadingBalance } = useAccountBalance(
-    account?.id,
+  const [{ accountId, startDate, endDate, quotation }] = useTransactionStore();
+  const { data: balances, isLoading } = useAccountBalance(
+    accountId,
     startDate,
     endDate,
     quotation?.price,
@@ -19,10 +18,7 @@ const PriorStat: React.FC = () => {
   const bgIconCurrent = useColorModeValue('orange.600', 'orange.200');
   const colorIconCurrent = useColorModeValue('white', 'gray.800');
 
-  if (!account) {
-    return null;
-  }
-  if (isLoadingBalance) return <ContentLoader />;
+  if (isLoading) return <ContentLoader />;
   if (!balances) {
     return null;
   }

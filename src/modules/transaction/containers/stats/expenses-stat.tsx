@@ -8,10 +8,10 @@ import { useAccountBalance } from '../../hooks';
 import { useTransactionStore } from '../../providers';
 
 const ExpensesStat: React.FC = () => {
-  const [{ account, startDate, endDate, highlightType, quotation }, { onHighlightType }] =
+  const [{ accountId, startDate, endDate, highlightType, quotation }, { onHighlightType }] =
     useTransactionStore();
-  const { data: balances, isLoading: isLoadingBalance } = useAccountBalance(
-    account?.id,
+  const { data: balances, isLoading } = useAccountBalance(
+    accountId,
     startDate,
     endDate,
     quotation?.price,
@@ -29,10 +29,7 @@ const ExpensesStat: React.FC = () => {
     onHighlightType(type);
   };
 
-  if (!account) {
-    return null;
-  }
-  if (isLoadingBalance) return <ContentLoader />;
+  if (isLoading) return <ContentLoader />;
   if (!balances) {
     return null;
   }

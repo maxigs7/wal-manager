@@ -6,17 +6,13 @@ import { useCreditCardSummary } from '../../hooks';
 import { useTransactionStore } from '../../providers';
 
 const CreditCardSummaryStats: React.FC = () => {
-  const [{ account, startDate, endDate }] = useTransactionStore();
+  const [{ accountId, startDate, endDate }] = useTransactionStore();
 
   const { data: creditCards, isLoading: isLoadingCreditCards } = useCreditCardSummary(
-    account?.id,
+    accountId,
     startDate,
     endDate,
   );
-
-  if (!account) {
-    return null;
-  }
 
   if (!creditCards || !creditCards.length) {
     return null;
