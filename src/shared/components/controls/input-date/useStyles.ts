@@ -2,17 +2,21 @@ import { useMemo } from 'react';
 
 import { StyleObjectOrFn, useTheme, css as chakraCSS } from '@chakra-ui/react';
 
+import { useNextFont } from '@lib';
+
 import breakpoints from 'theme/foundations/breakpoints';
 
 export const useStyles = () => {
   const theme = useTheme();
+  const font = useNextFont();
+
   return useMemo(() => {
     const defaultStyles: StyleObjectOrFn = {
       bg: 'white',
       border: '1px solid',
       borderColor: 'gray.100',
       boxShadow: 'sm',
-      fontFamily: 'Montserrat',
+      fontFamily: font.style.fontFamily,
       p: 2,
 
       '& .react-datepicker': {
@@ -59,5 +63,5 @@ export const useStyles = () => {
       ...theme,
       breakpoints,
     });
-  }, [theme]);
+  }, [font.style.fontFamily, theme]);
 };
