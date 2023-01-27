@@ -1,18 +1,18 @@
 import { useCallback } from 'react';
 
-import { useSupabaseClient } from '@api';
+import { useUow } from '@api';
 import { es } from '@i18n';
 
 type UseIsUniqueReturn = (name: string, id?: string) => Promise<string | boolean>;
 
 const useIsUnique = (): UseIsUniqueReturn => {
-  const { creditCards } = useSupabaseClient();
+  const { creditCard } = useUow();
 
   return useCallback(
     async (name: string, id?: string) => {
-      const data = await creditCards.getAll({
-        filtering: (q) => {
-          const filtered = q.eq('name', name).is('archivedAt', null);
+      const data = await creditCard.select({
+        filter: (query) => {
+          const filtered = query.eq('name', name);
           return id ? filtered.neq('id', id) : filtered;
         },
       });
@@ -20,7 +20,7 @@ const useIsUnique = (): UseIsUniqueReturn => {
       if (data.length > 0) return es.creditCard.toast.uniqueError;
       return true;
     },
-    [creditCards],
+    [creditCard],
   );
 };
 

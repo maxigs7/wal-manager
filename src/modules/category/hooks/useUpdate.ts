@@ -1,15 +1,17 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useSupabaseClient } from '@api';
+import { useUow } from '@api';
 import { es } from '@i18n';
 import { ApiError, useToast } from '@lib';
-import { Category } from '@models';
+import { Category, CategoryUpdate } from '@models';
 
-const useUpdate = (showToast = true): UseMutationResult<Category, ApiError, Category> => {
-  const { categories } = useSupabaseClient();
+const useCategoryUpdate = (
+  showToast = true,
+): UseMutationResult<Category, ApiError, CategoryUpdate> => {
+  const { category } = useUow();
   const toast = useToast();
 
-  return useMutation<Category, ApiError, Category>(categories.update, {
+  return useMutation<Category, ApiError, Partial<CategoryUpdate>>(category.update, {
     onSuccess: () => {
       showToast &&
         toast.success({
@@ -23,4 +25,4 @@ const useUpdate = (showToast = true): UseMutationResult<Category, ApiError, Cate
   });
 };
 
-export default useUpdate;
+export default useCategoryUpdate;

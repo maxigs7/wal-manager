@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
 
 import { es } from '@i18n';
-import { CategoryType } from '@models';
 import { DialogRemove } from '@shared';
 
-import { useCategoryRowsRefresh, useCategoryRemove } from '../../hooks';
+import { useCategorySelectAllRefresh, useCategoryDelete } from '../../hooks';
 
 interface IProps {
   id?: string;
   isOpen: boolean;
   onDismiss(): void;
-  type: CategoryType;
 }
 
-const CategoryDialogRemove: React.FC<IProps> = ({ id, isOpen, onDismiss, type }) => {
-  const { data, isLoading, isSuccess, mutate, reset } = useCategoryRemove();
-  const refresh = useCategoryRowsRefresh();
+const CategoryDialogRemove: React.FC<IProps> = ({ id, isOpen, onDismiss }) => {
+  const { data, isLoading, isSuccess, mutate, reset } = useCategoryDelete();
+  const refresh = useCategorySelectAllRefresh();
 
   const onConfirm = () => {
     id && mutate(id);
@@ -24,10 +22,10 @@ const CategoryDialogRemove: React.FC<IProps> = ({ id, isOpen, onDismiss, type })
   useEffect(() => {
     if (isSuccess && data) {
       reset();
-      refresh(type, data.id);
+      refresh(data.id);
       onDismiss();
     }
-  }, [data, isSuccess, onDismiss, refresh, reset, type]);
+  }, [data, isSuccess, onDismiss, refresh, reset]);
 
   return (
     <DialogRemove

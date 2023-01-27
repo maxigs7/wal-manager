@@ -1,5 +1,6 @@
-import { HStack, Text } from '@chakra-ui/react';
 import React, { useMemo, ReactElement } from 'react';
+
+import { HStack, Text } from '@chakra-ui/react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { Select as ReactSelect } from '@lib';
@@ -84,6 +85,7 @@ const CreditCardTypeSelect: React.FC<IProps> = ({ control, id, name, placeholder
       placeholder={placeholder}
       ref={ref}
       value={options.find((option) => option.value === value)}
+      variant="flushed"
     />
   );
 };

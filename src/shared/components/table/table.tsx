@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Table as ChakraTable, TableContainer, TableCellProps } from '@chakra-ui/react';
 import {
   ColumnDef,
@@ -12,7 +14,6 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import { useState } from 'react';
 
 import { es } from '@i18n';
 

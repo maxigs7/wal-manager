@@ -1,5 +1,6 @@
-import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 import React from 'react';
+
+import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { AccountType, getAccountTypeName } from '@models';

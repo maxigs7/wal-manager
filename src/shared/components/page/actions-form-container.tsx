@@ -1,5 +1,6 @@
-import { Flex, FlexProps } from '@chakra-ui/react';
 import React, { PropsWithChildren } from 'react';
+
+import { Flex, FlexProps } from '@chakra-ui/react';
 
 const ActionsFormContainer: React.FC<PropsWithChildren & FlexProps> = ({
   children,

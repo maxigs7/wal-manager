@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { HStack, Text } from '@chakra-ui/react';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
-import React from 'react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { Select as ReactSelect } from '@lib';

@@ -1,4 +1,6 @@
-import { useColorModeValue } from '@chakra-ui/react';
+import React, { useEffect, useRef } from 'react';
+
+import { useColorModeValue, useMergeRefs } from '@chakra-ui/react';
 import {
   GroupBase,
   Props,
@@ -6,7 +8,6 @@ import {
   SelectComponent,
   SelectInstance,
 } from 'chakra-react-select';
-import React from 'react';
 
 const SelectWrapper = React.forwardRef(
   <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
@@ -16,11 +17,20 @@ const SelectWrapper = React.forwardRef(
       | React.MutableRefObject<SelectInstance<Option, IsMulti, Group> | null>
       | null,
   ) => {
-    const { chakraStyles, selectedOptionColor = 'accent' } = props;
+    const { chakraStyles, selectedOptionColor = 'accent', value } = props;
     const bg = useColorModeValue('white', 'cello.700');
+    const internalRef = useRef<SelectInstance<Option, IsMulti, Group>>(null);
+    const mergedRef = useMergeRefs(ref, internalRef);
+
+    useEffect(() => {
+      if (typeof value === 'undefined' || (value === null && !props.defaultValue)) {
+        internalRef?.current?.clearValue();
+      }
+    }, [props.defaultValue, value]);
+
     return (
       <ReactSelect
-        ref={ref}
+        ref={mergedRef}
         selectedOptionColor={selectedOptionColor}
         chakraStyles={{
           control: (provided: any) => ({

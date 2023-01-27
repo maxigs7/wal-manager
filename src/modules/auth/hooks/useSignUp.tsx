@@ -1,9 +1,13 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { ISignUpParam, ISignUpReturn, useSupabaseClient } from '@api';
-import { ApiError } from '@lib';
+import { useUow } from '@api';
+import { ApiError, UserSession } from '@lib';
 
-export const useSignUp = (): UseMutationResult<ISignUpReturn, Error, ISignUpParam> => {
-  const { auth } = useSupabaseClient();
-  return useMutation<ISignUpReturn, ApiError, ISignUpParam>(auth.signUp);
+import { ISignInParam } from '../models';
+
+export const useSignUp = (): UseMutationResult<UserSession, Error, ISignInParam> => {
+  const { auth } = useUow();
+  return useMutation<UserSession, ApiError, ISignInParam>((params) =>
+    auth.signUp(params.email, params.password),
+  );
 };

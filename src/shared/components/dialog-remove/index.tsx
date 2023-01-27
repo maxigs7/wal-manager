@@ -1,3 +1,5 @@
+import React, { useRef } from 'react';
+
 import {
   AlertDialog,
   AlertDialogBody,
@@ -7,7 +9,6 @@ import {
   AlertDialogOverlay,
   Button,
 } from '@chakra-ui/react';
-import React, { useRef } from 'react';
 
 import { es } from '@i18n';
 

@@ -1,8 +1,10 @@
-import { HStack, Text } from '@chakra-ui/react';
 import React from 'react';
+
+import { HStack, Text } from '@chakra-ui/react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { Select as ReactSelect } from '@lib';
+import { colorTransform } from '@models';
 
 import { ColorCircle } from '../color-circle';
 import { colors } from './colors';
@@ -21,7 +23,7 @@ const options = colors.map(({ key, name }) => ({ value: key, label: name }));
 const ColorOption: React.FC<{ label: string; value: string }> = ({ value, label }) => {
   return (
     <HStack>
-      <ColorCircle bg={value} />
+      <ColorCircle bg={colorTransform(value)} />
       <Text>{label}</Text>
     </HStack>
   );

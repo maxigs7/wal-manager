@@ -1,7 +1,9 @@
-import { Button, FlexProps } from '@chakra-ui/react';
 import React from 'react';
 
+import { Button, FlexProps } from '@chakra-ui/react';
+
 import { es } from '@i18n';
+import { routes } from '@routes';
 import { ActionsFormContainer, Icon } from '@shared';
 
 interface IProps extends FlexProps {
@@ -22,7 +24,7 @@ const Actions: React.FC<IProps> = ({ isLoading, ...flexProps }) => (
 
     <Button
       as="a"
-      href="/admin/accounts"
+      href={routes.admin.account.index}
       leftIcon={<Icon icon="times" />}
       size="sm"
       variant="outline"

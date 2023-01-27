@@ -1,11 +1,23 @@
-export const dollars = [
+import { QuotationType } from '@models';
+
+export const DOLARSI_RESPONSE_KEYS = [
   'Dolar Blue',
   'Dolar Bolsa',
   'Dolar Contado con Liqui',
   'Dolar Oficial',
   'Dolar Solidario',
 ] as const;
-export type DollarType = typeof dollars[number];
+
+export type DolarsiName = typeof DOLARSI_RESPONSE_KEYS[number];
+
+export const DolarsiList = new Map<DolarsiName, QuotationType>([
+  ['Dolar Blue', 'blue'],
+  ['Dolar Bolsa', 'mep'],
+  ['Dolar Contado con Liqui', 'ccl'],
+  ['Dolar Oficial', 'usd'],
+  ['Dolar Solidario', 'usd+'],
+]);
+export type DolarsiType = { key: QuotationType; name: DolarsiName };
 
 export interface IDolarsiResponse {
   casa: IDolarsiItemResponse;
@@ -17,8 +29,7 @@ export interface IDolarsiItemResponse {
   nombre: string;
 }
 
-export interface IDolarsi {
-  name: DollarType;
+export interface IDolarsi extends DolarsiType {
   price: number;
 }
 

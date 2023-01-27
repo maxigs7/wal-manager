@@ -1,9 +1,10 @@
-import { Flex, Heading, IconButton, Link } from '@chakra-ui/react';
-import NavLink from 'next/link';
+import NextLink from 'next/link';
 import React from 'react';
 
+import { Flex, IconButton, Link } from '@chakra-ui/react';
+
 import { es } from '@i18n';
-import { ColorModeToggle, Icon, Logo } from '@shared';
+import { Icon, Logo } from '@shared';
 
 interface IProps {
   closeSidebar(): void;
@@ -12,11 +13,16 @@ interface IProps {
 
 const Header: React.FC<IProps> = React.memo(({ closeSidebar, isSidebarOpen }) => (
   <Flex align="center" justify="space-between" px="2" py="4" w="full">
-    <NavLink href="/dashboard">
-      <Flex align="center" as={Link} gap="3" textTransform="uppercase">
-        <Logo /> {es.common.appName}
-      </Flex>
-    </NavLink>
+    <Link
+      alignItems="center"
+      as={NextLink}
+      display="flex"
+      gap="3"
+      href="/dashboard"
+      textTransform="uppercase"
+    >
+      <Logo /> {es.common.appName}
+    </Link>
 
     <IconButton
       aria-expanded={isSidebarOpen}

@@ -1,16 +1,16 @@
-import { Button, FlexProps } from '@chakra-ui/react';
 import React from 'react';
 
+import { Button, FlexProps } from '@chakra-ui/react';
+
 import { es } from '@i18n';
-import { CategoryType } from '@models';
+import { routes } from '@routes';
 import { ActionsFormContainer, Icon } from '@shared';
 
 interface IProps extends FlexProps {
   isLoading: boolean;
-  type: CategoryType;
 }
 
-const FormActions: React.FC<IProps> = ({ isLoading, type, ...flexProps }) => (
+const FormActions: React.FC<IProps> = ({ isLoading, ...flexProps }) => (
   <ActionsFormContainer {...flexProps}>
     <Button
       colorScheme="success"
@@ -24,7 +24,7 @@ const FormActions: React.FC<IProps> = ({ isLoading, type, ...flexProps }) => (
 
     <Button
       as="a"
-      href={`/admin/categories/${type}`}
+      href={routes.admin.category.index}
       leftIcon={<Icon icon="times" />}
       size="sm"
       variant="outline"

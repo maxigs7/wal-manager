@@ -1,10 +1,12 @@
 import React from 'react';
-import { Control, RegisterOptions, useController } from 'react-hook-form';
+
+import { Control, Controller, RegisterOptions, useController } from 'react-hook-form';
+
+import { CreditCard } from '@models';
 
 import { CreditCardSelect, ICreditCardSelectProps } from '../select';
 
-export interface ICreditCardSelectControlProps
-  extends Omit<ICreditCardSelectProps, 'onBlur' | 'onChange'> {
+export interface ICreditCardSelectControlProps extends Omit<ICreditCardSelectProps, 'onBlur'> {
   control?: Control<any>;
   rules?: RegisterOptions;
 }
@@ -15,24 +17,35 @@ const CreditCardSelectControl: React.FC<ICreditCardSelectControlProps> = ({
   id,
   isLoading,
   name,
+  onChange,
   placeholder,
   rules,
   ...props
 }) => {
-  const { field } = useController({
-    name,
-    control,
-    rules,
-  });
-
   return (
-    <CreditCardSelect
-      {...props}
-      {...field}
-      creditCards={creditCards}
-      id={id}
-      isLoading={isLoading}
-      placeholder={placeholder}
+    <Controller
+      control={control}
+      defaultValue=""
+      name={name}
+      rules={rules}
+      render={({ field: { onChange: onChangeField, onBlur, ...field } }) => {
+        const onChangeHandler = (selected?: CreditCard) => {
+          onChangeField(selected?.id);
+          onChange && onChange(selected);
+        };
+
+        return (
+          <CreditCardSelect
+            {...props}
+            {...field}
+            creditCards={creditCards}
+            id={id}
+            isLoading={isLoading}
+            onChange={onChangeHandler}
+            placeholder={placeholder}
+          />
+        );
+      }}
     />
   );
 };

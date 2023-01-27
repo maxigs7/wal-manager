@@ -5,15 +5,15 @@ import { CreditCardType } from '@models';
 import { CreditCardTypeIcon } from '../type-icon';
 
 interface IProps extends TextProps {
-  iconWidth?: number;
+  iconSize?: number;
   name: string;
   type: CreditCardType;
 }
 
-const CreditCardInline: React.FC<IProps> = ({ iconWidth = 100, name, type, ...textProps }) => {
+const CreditCardInline: React.FC<IProps> = ({ iconSize, name, type, ...textProps }) => {
   return (
     <>
-      <CreditCardTypeIcon type={type} width={iconWidth} />
+      <CreditCardTypeIcon boxSize={iconSize} type={type} />
       <Text {...textProps}>{name}</Text>
     </>
   );

@@ -1,5 +1,6 @@
-import { Flex, FlexProps } from '@chakra-ui/react';
 import React from 'react';
+
+import { Flex, FlexProps } from '@chakra-ui/react';
 
 interface IProps extends FlexProps {
   size?: Sizes;

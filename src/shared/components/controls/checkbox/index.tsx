@@ -1,8 +1,9 @@
-import { Checkbox as ChakraCheckbox, CheckboxProps } from '@chakra-ui/react';
 import React from 'react';
-import { Control, RegisterOptions, useController } from 'react-hook-form';
 
-interface IProps extends CheckboxProps {
+import { Checkbox, CheckboxProps } from '@chakra-ui/react';
+import { Control, Controller, RegisterOptions } from 'react-hook-form';
+
+interface IProps extends Omit<CheckboxProps, 'value' | 'name'> {
   control: Control<any>;
   defaultChecked?: boolean;
   id?: string;
@@ -10,32 +11,62 @@ interface IProps extends CheckboxProps {
   rules?: RegisterOptions;
 }
 
-const Checkbox: React.FC<IProps> = ({
-  children,
-  control,
-  defaultChecked,
-  id,
-  name,
-  rules,
-  ...props
-}) => {
-  const { field } = useController({
-    name,
-    control,
-    rules,
-  });
+const ControlledCheckbox = React.forwardRef<HTMLInputElement, IProps>(
+  (
+    {
+      children,
+      control,
+      defaultChecked,
+      id,
+      name,
+      onBlur,
+      onChange,
+      placeholder,
+      rules,
+      ...checkboxProps
+    },
+    ref,
+  ) => {
+    return (
+      <Controller
+        control={control}
+        defaultValue={defaultChecked}
+        name={name}
+        render={({ field: { onChange: onChangeField, ref: refField, ...field } }) => {
+          const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+            onChangeField(e);
+            onChange && onChange(e);
+          };
 
-  return (
-    <ChakraCheckbox
-      {...field}
-      {...props}
-      defaultChecked={defaultChecked}
-      id={id}
-      isChecked={field.value}
-    >
-      {children}
-    </ChakraCheckbox>
-  );
-};
+          return (
+            <Checkbox
+              {...checkboxProps}
+              {...field}
+              colorScheme="accent"
+              defaultChecked={defaultChecked}
+              id={id}
+              isChecked={field.value}
+              onChange={onChangeHandler}
+              placeholder={placeholder}
+              variant="flushed"
+              ref={(e: HTMLInputElement) => {
+                refField(e);
+                if (ref != null && typeof ref !== 'function') {
+                  ref.current = e;
+                } else if (ref != null && typeof ref === 'function') {
+                  ref(e);
+                }
+              }}
+            >
+              {children}
+            </Checkbox>
+          );
+        }}
+      />
+    );
+  },
+);
 
-export { Checkbox };
+ControlledCheckbox.displayName = 'ControlledCheckbox';
+
+export { ControlledCheckbox };

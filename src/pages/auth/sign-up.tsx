@@ -1,11 +1,12 @@
-import { Heading, Icon, Flex, Link, Box } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
+
+import { Heading, Flex, Link, Box } from '@chakra-ui/react';
 
 import { es } from '@i18n';
 import { getAuthLayout, NextPageWithLayout } from '@layout';
 import { SignUpByEmail } from '@m/auth';
-import { AUTH_SIGN_UP_ENABLED, WalletLogo } from '@shared';
+import { AUTH_SIGN_UP_ENABLED } from '@shared';
 
 const SignUpPage: NextPageWithLayout = () => {
   const router = useRouter();

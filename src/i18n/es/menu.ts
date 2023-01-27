@@ -1,11 +1,13 @@
+import { routes } from '@routes';
+
 export const menu = {
   admin: 'Administración',
   overview: 'General',
 
   // Routes
-  '/dashboard': 'Dashboard',
-  '/transactions': 'Movimientos',
-  '/admin/categories': 'Categorias',
-  '/admin/accounts': 'Cuentas',
-  '/admin/credit-cards': 'Tarjetas',
+  [routes.dashboard]: 'Dashboard',
+  [routes.movement.index]: 'Movimientos',
+  [routes.admin.category.index]: 'Categorias',
+  [routes.admin.account.index]: 'Cuentas',
+  [routes.admin.creditCard.index]: 'Tarjetas',
 };

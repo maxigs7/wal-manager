@@ -1,46 +1,24 @@
-import React, { useCallback, useEffect } from 'react';
-
-import { Account } from '@models';
+import React, { useEffect } from 'react';
 
 import { AccountSelect, IAccountSelectProps } from '../../components';
-import { useAccountList } from '../../hooks';
+import { useAccountSelectAll } from '../../hooks';
 
-type Props = Omit<IAccountSelectProps, 'accounts' | 'isLoading' | 'onChange'> & {
+type Props = Omit<IAccountSelectProps, 'accounts' | 'isLoading'> & {
   firstAsDefault?: boolean;
-  onChange?(id?: string, account?: Account): void;
 };
 
 const AccountSelectContainer: React.FC<Props> = ({ firstAsDefault = true, onChange, ...props }) => {
-  const { data: accounts, isLoading } = useAccountList();
-
-  const onChangeHandler = useCallback(
-    (id?: string) => {
-      if (!id) {
-        onChange && onChange(id);
-        return;
-      }
-      const account = (accounts || []).find((a) => a.id === id);
-      onChange && onChange(id, account);
-    },
-    [accounts, onChange],
-  );
+  const { data: accounts, isLoading } = useAccountSelectAll();
 
   useEffect(() => {
     if (accounts && accounts.length) {
-      const defaultAccount = accounts.find((a) => a.isDefault)?.id;
-      defaultAccount && onChangeHandler && onChangeHandler(defaultAccount);
-      !defaultAccount && firstAsDefault && onChangeHandler && onChangeHandler(accounts[0].id);
+      const defaultAccount = accounts.find((a) => a.isPrimary);
+      defaultAccount && onChange && onChange(defaultAccount);
+      !defaultAccount && firstAsDefault && onChange && onChange(accounts[0]);
     }
-  }, [accounts, firstAsDefault, onChangeHandler]);
+  }, [accounts, firstAsDefault, onChange]);
 
-  return (
-    <AccountSelect
-      accounts={accounts}
-      isLoading={isLoading}
-      onChange={onChangeHandler}
-      {...props}
-    />
-  );
+  return <AccountSelect accounts={accounts} isLoading={isLoading} onChange={onChange} {...props} />;
 };
 
 export { AccountSelectContainer };

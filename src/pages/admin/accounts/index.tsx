@@ -1,11 +1,13 @@
-import { Button } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { Button } from '@chakra-ui/react';
+
 import { es } from '@i18n';
 import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
 import { AccountDialogRemove, AccountTableContainer } from '@m/account';
+import { routes } from '@routes';
 import { Icon, Page, PageHeader } from '@shared';
 
 const AccountsPage: NextPageWithLayout = () => {
@@ -14,7 +16,7 @@ const AccountsPage: NextPageWithLayout = () => {
   const { setBreadcrumb } = useFullLayout();
   const breadcrumb = useMemo(
     () => [
-      { label: es.common.breadcrumbs.admin, link: '/admin' },
+      { label: es.common.breadcrumbs.admin, link: routes.admin.index },
       { label: es.common.breadcrumbs.accounts },
     ],
     [],
@@ -22,7 +24,7 @@ const AccountsPage: NextPageWithLayout = () => {
 
   const onUpdate = useCallback(
     (id: string) => {
-      router.push(`/admin/accounts/${id}`);
+      router.push(routes.admin.account.update(id));
     },
     [router],
   );
@@ -38,17 +40,16 @@ const AccountsPage: NextPageWithLayout = () => {
   return (
     <Page>
       <PageHeader metaTitle={es.account.pages.index.metaTitle} title={es.account.pages.index.title}>
-        <NextLink href="/admin/accounts/create" passHref>
-          <Button
-            as="a"
-            colorScheme="primary"
-            leftIcon={<Icon icon="plus" />}
-            size="sm"
-            textTransform="uppercase"
-          >
-            {es.common.create}
-          </Button>
-        </NextLink>
+        <Button
+          as={NextLink}
+          colorScheme="primary"
+          href={routes.admin.account.create}
+          leftIcon={<Icon icon="plus" />}
+          size="sm"
+          textTransform="uppercase"
+        >
+          {es.common.create}
+        </Button>
       </PageHeader>
 
       <AccountTableContainer onRemove={onRemove} onUpdate={onUpdate} />

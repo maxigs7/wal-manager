@@ -1,5 +1,6 @@
-import { StyleObjectOrFn, useTheme, css as chakraCSS } from '@chakra-ui/react';
 import { useMemo } from 'react';
+
+import { StyleObjectOrFn, useTheme, css as chakraCSS } from '@chakra-ui/react';
 
 import breakpoints from 'theme/foundations/breakpoints';
 

@@ -1,7 +1,7 @@
 import { ButtonGroup, IconButton } from '@chakra-ui/react';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 import { CellContext, HeaderContext } from '@tanstack/react-table';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 import { Icon } from '../icon';
 
@@ -9,9 +9,10 @@ export const BooleanCell = <T extends Record<string, unknown>, D extends boolean
   getValue,
 }: CellContext<T, D>): React.ReactElement => <>{getValue() && <Icon icon="check" fixedWidth />}</>;
 
-export const DateCell = <T extends Record<string, unknown>, D extends Date>({
+export const DateCell = <T extends Record<string, unknown>, D extends string>({
   getValue,
-}: CellContext<T, D>): React.ReactElement => <>{format(getValue(), 'dd/MM/yyyy')}</>;
+}: CellContext<T, D>): React.ReactElement | null =>
+  getValue() ? <>{format(parseISO(getValue()), 'dd/MM/yyyy')}</> : null;
 
 export const ExpandedCell = <T extends Record<string, unknown>, D>({
   row,

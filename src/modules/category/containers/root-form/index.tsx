@@ -1,28 +1,28 @@
-import { Box, Skeleton } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
+
+import { Box, Skeleton } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import { useUser } from '@m/auth';
-import { Category, CategoryType } from '@models';
+import { Category, CategoryInsert } from '@models';
 
 import { FormActions, RootCategoryForm } from '../../components';
-import { useCategoryCreate, useCategoryGetById, useCategoryUpdate } from '../../hooks';
+import { useCategoryCreate, useCategorySelectById, useCategoryUpdate } from '../../hooks';
 
 interface IProps {
   id?: string;
   onConfirmed(category: Category): void;
-  type: CategoryType;
 }
 
-const RootCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, type }) => {
+const RootCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed }) => {
   const { user } = useUser();
   const create = useCategoryCreate();
   const update = useCategoryUpdate();
-  const { data: category, isLoading } = useCategoryGetById(id);
+  const { data: category, isLoading } = useCategorySelectById(id);
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
-  const useFormProps = useForm<Category>({
-    defaultValues: { userId: user?.id as string, type },
+  const useFormProps = useForm<CategoryInsert>({
+    defaultValues: { userId: user?.id as string },
   });
   const {
     formState: { isSubmitting: isFormSubmitting },
@@ -43,20 +43,12 @@ const RootCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, type }) 
   }, [category, reset]);
 
   return (
-    <Box as="form" bg="white" onSubmit={onSubmit}>
-      <FormActions
-        display={['none', 'flex']}
-        isLoading={isSubmitting || isFormSubmitting}
-        type={type}
-      />
+    <Box as="form" bg="white" onSubmit={onSubmit} noValidate>
+      <FormActions display={['none', 'flex']} isLoading={isSubmitting || isFormSubmitting} />
       <Skeleton isLoaded={!isLoading || !id} p="5">
-        <RootCategoryForm {...useFormProps} id={id} type={type} />
+        <RootCategoryForm {...useFormProps} id={id} />
       </Skeleton>
-      <FormActions
-        display={['flex', 'none']}
-        isLoading={isSubmitting || isFormSubmitting}
-        type={type}
-      />
+      <FormActions display={['flex', 'none']} isLoading={isSubmitting || isFormSubmitting} />
     </Box>
   );
 };

@@ -1,5 +1,6 @@
-import { Flex } from '@chakra-ui/react';
 import React from 'react';
+
+import { Flex } from '@chakra-ui/react';
 
 import { SIDEBAR_WIDTH } from '../../constants';
 import { Actions } from './actions';

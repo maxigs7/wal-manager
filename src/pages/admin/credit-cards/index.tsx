@@ -1,11 +1,13 @@
-import { Button } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { Button } from '@chakra-ui/react';
+
 import { es } from '@i18n';
 import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
 import { CreditCardDialogRemove, CreditCardTableContainer } from '@m/creditCard';
+import { routes } from '@routes';
 import { Icon, Page, PageHeader } from '@shared';
 
 const CreditCardsPage: NextPageWithLayout = () => {
@@ -14,7 +16,7 @@ const CreditCardsPage: NextPageWithLayout = () => {
   const { setBreadcrumb } = useFullLayout();
   const breadcrumb = useMemo(
     () => [
-      { label: es.common.breadcrumbs.admin, link: '/admin' },
+      { label: es.common.breadcrumbs.admin, link: routes.admin.index },
       { label: es.common.breadcrumbs.creditCards },
     ],
     [],
@@ -22,7 +24,7 @@ const CreditCardsPage: NextPageWithLayout = () => {
 
   const onUpdate = useCallback(
     (id: string) => {
-      router.push(`/admin/credit-cards/${id}`);
+      router.push(routes.admin.creditCard.update(id));
     },
     [router],
   );
@@ -41,17 +43,16 @@ const CreditCardsPage: NextPageWithLayout = () => {
         metaTitle={es.creditCard.pages.index.metaTitle}
         title={es.creditCard.pages.index.title}
       >
-        <NextLink href="/admin/credit-cards/create" passHref>
-          <Button
-            as="a"
-            colorScheme="primary"
-            leftIcon={<Icon icon="plus" />}
-            size="sm"
-            textTransform="uppercase"
-          >
-            {es.common.create}
-          </Button>
-        </NextLink>
+        <Button
+          as={NextLink}
+          colorScheme="primary"
+          href={routes.admin.creditCard.create}
+          leftIcon={<Icon icon="plus" />}
+          size="sm"
+          textTransform="uppercase"
+        >
+          {es.common.create}
+        </Button>
       </PageHeader>
 
       <CreditCardTableContainer onRemove={onRemove} onUpdate={onUpdate} />

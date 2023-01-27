@@ -1,8 +1,9 @@
-import { VStack, Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { clearTimeout } from 'timers';
+
+import { VStack, Button } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
 
 import { es } from '@i18n';
 

@@ -10,6 +10,7 @@ import { UseFormReturn } from 'react-hook-form';
 
 import { es } from '@i18n';
 import { CreditCard } from '@models';
+import { ControlledInput } from '@shared';
 
 import { useCreditCardIsUnique } from '../../hooks';
 import { CreditCardTypeSelect } from '../type-select';
@@ -18,19 +19,21 @@ interface IProps extends UseFormReturn<CreditCard> {
   id?: string;
 }
 
-const CreditCardForm: React.FC<IProps> = ({ control, formState: { errors }, id, register }) => {
+const CreditCardForm: React.FC<IProps> = ({ control, formState: { errors }, id }) => {
   const isUnique = useCreditCardIsUnique();
   return (
     <SimpleGrid columns={[1, 2]} gap={6}>
       <FormControl as={GridItem} isInvalid={!!errors.name} isRequired>
         <FormLabel htmlFor="name">{es.creditCard.form.name}</FormLabel>
-        <Input
+        <ControlledInput
+          control={control}
           id="name"
+          name="name"
           placeholder={es.creditCard.form.namePlaceholder}
-          {...register('name', {
+          rules={{
             required: es.common.validation.required,
             validate: (name) => isUnique(name, id),
-          })}
+          }}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
       </FormControl>

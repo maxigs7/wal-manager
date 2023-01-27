@@ -1,5 +1,6 @@
-import { Flex, Heading, Icon } from '@chakra-ui/react';
 import React, { PropsWithChildren } from 'react';
+
+import { Flex, Heading, Icon } from '@chakra-ui/react';
 
 import { es } from '@i18n';
 import { WalletLogo } from '@shared';

@@ -1,5 +1,6 @@
-import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { useRef } from 'react';
+
+import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
 import { es } from '@i18n';

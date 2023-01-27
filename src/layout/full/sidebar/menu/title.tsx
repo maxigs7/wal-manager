@@ -1,5 +1,6 @@
-import { Heading } from '@chakra-ui/react';
 import React, { PropsWithChildren } from 'react';
+
+import { Heading } from '@chakra-ui/react';
 
 export const Title: React.FC<PropsWithChildren> = ({ children }) => (
   <Heading

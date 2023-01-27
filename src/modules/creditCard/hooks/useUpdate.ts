@@ -1,15 +1,17 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useSupabaseClient } from '@api';
+import { useUow } from '@api';
 import { es } from '@i18n';
 import { ApiError, useToast } from '@lib';
-import { CreditCard } from '@models';
+import { CreditCard, CreditCardUpdate } from '@models';
 
-const useUpdate = (showToast = true): UseMutationResult<CreditCard, ApiError, CreditCard> => {
-  const { creditCards } = useSupabaseClient();
+const useCreditCardUpdate = (
+  showToast = true,
+): UseMutationResult<CreditCard, ApiError, CreditCardUpdate> => {
+  const { creditCard } = useUow();
   const toast = useToast();
 
-  return useMutation<CreditCard, ApiError, CreditCard>(creditCards.update, {
+  return useMutation<CreditCard, ApiError, CreditCardUpdate>(creditCard.update, {
     onSuccess: () => {
       showToast &&
         toast.success({
@@ -23,4 +25,4 @@ const useUpdate = (showToast = true): UseMutationResult<CreditCard, ApiError, Cr
   });
 };
 
-export default useUpdate;
+export default useCreditCardUpdate;

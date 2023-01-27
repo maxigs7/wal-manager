@@ -7,15 +7,16 @@ import colors from './foundations/colors';
 import fonts from './foundations/fonts';
 import styles from './styles';
 
-const theme = extendTheme({
-  breakpoints,
-  colors,
-  components: {
-    Button,
-    Heading,
-  },
-  fonts,
-  styles,
-});
+const theme = (fontFamily: string) =>
+  extendTheme({
+    breakpoints,
+    colors,
+    components: {
+      Button,
+      Heading,
+    },
+    fonts: fonts(fontFamily),
+    styles,
+  });
 
 export default theme;

@@ -9,36 +9,31 @@ import {
 import { UseFormReturn } from 'react-hook-form';
 
 import { es } from '@i18n';
-import { Category, CategoryType } from '@models';
-import { ColorSelect, IconSelect } from '@shared';
+import { CategoryInsert } from '@models';
+import { ColorSelect, ControlledInput, IconSelect } from '@shared';
 
 import { useCategoryIsUnique } from '../../hooks';
 
-interface IProps extends UseFormReturn<Category> {
+interface IProps extends UseFormReturn<CategoryInsert> {
   id?: string;
-  type: CategoryType;
 }
 
-const RootCategoryForm: React.FC<IProps> = ({
-  control,
-  formState: { errors },
-  id,
-  register,
-  type,
-}) => {
+const RootCategoryForm: React.FC<IProps> = ({ control, formState: { errors }, id, register }) => {
   const isUnique = useCategoryIsUnique();
 
   return (
     <SimpleGrid columns={[1, 2]} gap={6}>
       <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.name} isRequired>
         <FormLabel htmlFor="name">{es.category.form.name}</FormLabel>
-        <Input
+        <ControlledInput
+          control={control}
           id="name"
+          name="name"
           placeholder={es.category.form.name}
-          {...register('name', {
+          rules={{
             required: es.common.validation.required,
-            validate: (name) => isUnique(type, name, id),
-          })}
+            validate: (name) => isUnique(name || '', id),
+          }}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
       </FormControl>

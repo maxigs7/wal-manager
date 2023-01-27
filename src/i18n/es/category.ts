@@ -14,6 +14,7 @@ export const category = {
     parentId: 'Nueva categoría padre',
     parentIdPlaceholder: 'Seleccione una categoría',
   },
+  others: 'Otros',
   pages: {
     create: {
       metaTitle: 'Nueva Categoría',
@@ -22,6 +23,11 @@ export const category = {
     index: {
       metaTitle: 'Mis Categorías',
       title: 'Mis Categorías',
+    },
+    move: {
+      breadcrumb: 'Mover',
+      metaTitle: 'Mover Categoría',
+      title: 'Mover Categoría',
     },
     remove: {
       title: 'Eliminar Categoría',

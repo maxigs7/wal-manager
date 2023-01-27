@@ -1,5 +1,6 @@
-import { SelectProps } from '@chakra-ui/react';
 import React from 'react';
+
+import { SelectProps } from '@chakra-ui/react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import { SelectForm } from '../../form';
