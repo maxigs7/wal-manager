@@ -3,10 +3,11 @@ import NextLink from 'next/link';
 
 import { Heading, Flex, Link, VStack } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { getAuthLayout, NextPageWithLayout } from '@layout';
-import { SignInByEmail } from '@m/auth';
-import { AUTH_SIGN_UP_ENABLED } from '@shared';
+
+import { es } from '@/i18n';
+import { getAuthLayout, NextPageWithLayout } from '@/layout';
+import { SignInByEmail } from '@/m/auth';
+import { AUTH_SIGN_UP_ENABLED } from '@/shared';
 
 const SignInPage: NextPageWithLayout = () => (
   <>

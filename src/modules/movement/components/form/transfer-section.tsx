@@ -10,10 +10,12 @@ import {
 } from '@chakra-ui/react';
 import { useWatch } from 'react-hook-form';
 
-import { es } from '@i18n';
-import { AccountSelectControlContainer } from '@m/account';
-import { Currency } from '@models';
-import { InputCurrency } from '@shared';
+
+
+import { es } from '@/i18n';
+import { AccountSelectControlContainer } from '@/m/account';
+import { Currency } from '@/models';
+import { InputCurrency } from '@/shared';
 
 import { IProps } from './props';
 

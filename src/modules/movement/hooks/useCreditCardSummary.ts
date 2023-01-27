@@ -2,10 +2,11 @@ import { useMemo } from 'react';
 
 import { UseQueryResult } from '@tanstack/react-query';
 
-import { CreditCardType } from '@models';
+import { CreditCardType } from '@/models';
 
 import { CreditCardSummary } from '../models';
 import useSelectAll from './useSelectAll';
+
 
 const useCreditCardSummary = (
   accountId?: string,

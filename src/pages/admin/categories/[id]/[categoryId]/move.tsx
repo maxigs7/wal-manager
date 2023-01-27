@@ -4,12 +4,13 @@ import React, { useEffect, useMemo } from 'react';
 
 import { IconButton } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
-import { SubCategoryMoveFormContainer, useCategorySelectAllRefresh } from '@m/category';
-import { Category } from '@models';
-import { routes } from '@routes';
-import { Icon, Page, PageHeader } from '@shared';
+
+import { es } from '@/i18n';
+import { getFullLayout, NextPageWithLayout, useFullLayout } from '@/layout';
+import { SubCategoryMoveFormContainer, useCategorySelectAllRefresh } from '@/m/category';
+import { Category } from '@/models';
+import { routes } from '@/routes';
+import { Icon, Page, PageHeader } from '@/shared';
 
 const MovePage: NextPageWithLayout = () => {
   const router = useRouter();

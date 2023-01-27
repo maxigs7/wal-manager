@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 
-import { Rows, TablesName } from '@models';
+import { Rows, TablesName } from '@/models';
 
 import { useSelect, UseSelectOptions } from './useSelect';
+
 
 export type UseSelectByIdReturn<TName extends TablesName> = (
   id: string,

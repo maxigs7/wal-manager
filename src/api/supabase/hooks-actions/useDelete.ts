@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { ApiError, Count, Filter, Returning, useSupabase } from '@lib';
-import { Rows, TablesName } from '@models';
+import { ApiError, Count, Filter, Returning, useSupabase } from '@/lib';
+import { Rows, TablesName } from '@/models';
 
 export type UseDeleteReturn<TName extends TablesName> = (
   filter: Filter<TName, Rows<TName>, undefined>,

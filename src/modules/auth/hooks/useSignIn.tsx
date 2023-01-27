@@ -1,7 +1,8 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { ApiError, useUow } from '@api';
-import { UserSession } from '@lib';
+
+import { ApiError, useUow } from '@/api';
+import { UserSession } from '@/lib';
 
 import { ISignInParam } from '../models';
 

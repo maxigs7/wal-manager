@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 import { Button, Flex, Heading, Text } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { getFullLayout, NextPageWithLayout } from '@layout';
-import { routes } from '@routes';
-import { Icon } from '@shared';
+import { es } from '@/i18n';
+import { getFullLayout, NextPageWithLayout } from '@/layout';
+import { routes } from '@/routes';
+import { Icon } from '@/shared';
 
 const NoAccountPage: NextPageWithLayout = () => {
   return (

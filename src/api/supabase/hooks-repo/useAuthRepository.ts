@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { FunctionsArgs, FunctionsName } from '@models';
+import { FunctionsArgs, FunctionsName } from '@/models';
 
 import {
   UseResetPasswordForEmailReturn,
@@ -14,6 +14,7 @@ import {
   useSignUp,
   useUpdatePassword,
 } from '../hooks-actions';
+
 
 export type UseAuthRepositoryReturn = {
   resetPassword: UseResetPasswordForEmailReturn;

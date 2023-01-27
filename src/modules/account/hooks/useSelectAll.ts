@@ -1,7 +1,8 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { Account } from '@models';
+
+import { useUow } from '@/api';
+import { Account } from '@/models';
 
 import { ACCOUNTS_KEY } from '../constants';
 

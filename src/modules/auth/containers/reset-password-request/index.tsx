@@ -5,7 +5,7 @@ import { clearTimeout } from 'timers';
 import { VStack, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import { es } from '@i18n';
+import { es } from '@/i18n';
 
 import {
   AuthMessage,
@@ -13,6 +13,7 @@ import {
   ResetPasswordRequestFormType,
 } from '../../components';
 import { useResetPasswordRequest } from '../../hooks';
+
 
 const Container: React.FC = () => {
   const router = useRouter();

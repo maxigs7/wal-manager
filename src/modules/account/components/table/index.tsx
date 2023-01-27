@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 
-import { Account } from '@models';
-import { Table } from '@shared';
+
+import { Account } from '@/models';
+import { Table } from '@/shared';
 
 import { getColumns } from './columns';
 

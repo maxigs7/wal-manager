@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { IDolarsi, useDolarsiClient } from '@api';
+import { IDolarsi, useDolarsiClient } from '@/api';
 
 const useDolarsi = (): UseQueryResult<IDolarsi[]> => {
   const client = useDolarsiClient();

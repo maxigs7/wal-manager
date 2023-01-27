@@ -4,8 +4,8 @@ import React, { useCallback } from 'react';
 
 import { HStack, IconButton } from '@chakra-ui/react';
 
-import { useSignOut } from '@m/auth';
-import { Icon } from '@shared';
+import { useSignOut } from '@/m/auth';
+import { Icon } from '@/shared';
 
 const Actions: React.FC = () => {
   const router = useRouter();

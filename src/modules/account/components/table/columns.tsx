@@ -1,9 +1,10 @@
 import { Flex } from '@chakra-ui/react';
 import { CellContext, ColumnDef, createColumnHelper } from '@tanstack/react-table';
 
-import { DolarsiList, getDolarsiName } from '@api';
-import { es } from '@i18n';
-import { formatToCurrency } from '@lib';
+
+import { DolarsiList, getDolarsiName } from '@/api';
+import { es } from '@/i18n';
+import { formatToCurrency } from '@/lib';
 import {
   Account,
   AccountType,
@@ -11,8 +12,8 @@ import {
   getAccountTypeName,
   getCurrencyName,
   QuotationType,
-} from '@models';
-import { ActionButton, ActionsCell, BooleanCell } from '@shared';
+} from '@/models';
+import { ActionButton, ActionsCell, BooleanCell } from '@/shared';
 
 import { AccountTypeIcon } from '../type-icon';
 

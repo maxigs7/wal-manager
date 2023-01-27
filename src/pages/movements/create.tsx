@@ -5,8 +5,9 @@ import React, { useEffect, useMemo } from 'react';
 import { IconButton } from '@chakra-ui/react';
 import compose from 'compose-function';
 
-import { es } from '@i18n';
-import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
+
+import { es } from '@/i18n';
+import { getFullLayout, NextPageWithLayout, useFullLayout } from '@/layout';
 import {
   convertQuerystring,
   MovementFormContainer,
@@ -14,10 +15,10 @@ import {
   useMovementSelectAllRefresh,
   useMovementSelectSummaryRefresh,
   withNeedAccount,
-} from '@m/movement';
-import { Movement } from '@models';
-import { routes } from '@routes';
-import { Icon, Page, PageHeader } from '@shared';
+} from '@/m/movement';
+import { Movement } from '@/models';
+import { routes } from '@/routes';
+import { Icon, Page, PageHeader } from '@/shared';
 
 const CreatePage: NextPageWithLayout = () => {
   const router = useRouter();

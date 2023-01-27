@@ -3,8 +3,8 @@ import React from 'react';
 import { HStack, Text } from '@chakra-ui/react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
-import { Select as ReactSelect } from '@lib';
-import { colorTransform } from '@models';
+import { Select as ReactSelect } from '@/lib';
+import { colorTransform } from '@/models';
 
 import { ColorCircle } from '../color-circle';
 import { colors } from './colors';

@@ -8,14 +8,15 @@ import {
 } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { es } from '@i18n';
-import { QuotationSelectControlContainer } from '@m/quotation';
-import { AccountInsert, Currency, DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@models';
-import { ControlledInput, SwitchControl } from '@shared';
+import { es } from '@/i18n';
+import { QuotationSelectControlContainer } from '@/m/quotation';
+import { AccountInsert, Currency, DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@/models';
+import { ControlledInput, SwitchControl } from '@/shared';
 
 import { useAccountIsUnique } from '../../hooks';
 import { SelectCurrencyControl } from '../select-currency-control';
 import { AccountTypeRadioGroup } from '../type-radio-group';
+
 
 interface IProps extends UseFormReturn<AccountInsert> {
   currency?: Currency;

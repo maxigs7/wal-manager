@@ -3,8 +3,9 @@ import React, { useMemo } from 'react';
 import { HStack } from '@chakra-ui/react';
 import { MenuPlacement } from 'chakra-react-select';
 
-import { Select as ReactSelect } from '@lib';
-import { CreditCard, CreditCardType } from '@models';
+
+import { Select as ReactSelect } from '@/lib';
+import { CreditCard, CreditCardType } from '@/models';
 
 import { CreditCardInline } from '../inline';
 

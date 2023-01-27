@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
-import { MovementType } from '@models';
+import { MovementType } from '@/models';
 
 import { MovementTypeSelect, IMovementTypeSelectProps } from '../type-select';
+
 
 export interface IMovementTypeSelectControlProps
   extends Omit<IMovementTypeSelectProps, 'onBlur' | 'onChange' | ''> {

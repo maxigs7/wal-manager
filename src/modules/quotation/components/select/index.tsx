@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
-import { Select as ReactSelect } from '@lib';
-import { Quotation, QuotationType } from '@models';
+import { Select as ReactSelect } from '@/lib';
+import { Quotation, QuotationType } from '@/models';
 
 type SelectOption = {
   label: string;

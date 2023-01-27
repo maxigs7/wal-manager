@@ -2,9 +2,10 @@ import React, { useMemo } from 'react';
 
 import { Control, Controller, RegisterOptions } from 'react-hook-form';
 
-import { Account } from '@models';
+import { Account } from '@/models';
 
 import { AccountSelect, IAccountSelectProps } from '../select';
+
 
 export interface IAccountSelectControlProps extends Omit<IAccountSelectProps, 'onBlur' | ''> {
   excludeId?: string[];

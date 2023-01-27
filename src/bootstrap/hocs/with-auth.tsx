@@ -1,4 +1,4 @@
-import { AuthProvider } from '@m/auth';
+import { AuthProvider } from '@/m/auth';
 
 export const withAuth = <T extends object>(
   WrappedComponent: React.ComponentType<T>,

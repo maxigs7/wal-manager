@@ -14,9 +14,10 @@ import {
 } from '@chakra-ui/react';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 
-import { formatToCurrency } from '@lib';
+import { formatToCurrency } from '@/lib';
 
 import { Icon, WalIconProps } from '../icon';
+
 
 interface IProps extends StatLabelProps {
   amount: number;

@@ -4,14 +4,15 @@ import { Flex, Skeleton } from '@chakra-ui/react';
 import { UseMutateAsyncFunction } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 
-import { ApiError } from '@lib';
-import { useUser } from '@m/auth';
-import { DEFAULT_MOVEMENT_TYPE, Movement, MovementType } from '@models';
+import { ApiError } from '@/lib';
+import { useUser } from '@/m/auth';
+import { DEFAULT_MOVEMENT_TYPE, Movement, MovementType } from '@/models';
 
 import { MovementForm as MovementFormComponent } from '../../components';
 import { useMapMovementToForm, useMovementSelectById } from '../../hooks';
 import { MovementForm } from '../../models';
 import Actions from './actions';
+
 
 interface IProps {
   accountId?: string;

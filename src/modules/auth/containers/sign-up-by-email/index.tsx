@@ -4,10 +4,11 @@ import { useEffect } from 'react';
 import { VStack, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import { es } from '@i18n';
+import { es } from '@/i18n';
 
 import { AuthMessage, SignUpForm, SignUpFormType } from '../../components';
 import { useSignUp } from '../../hooks';
+
 
 interface IState {
   from?: { pathname: string };

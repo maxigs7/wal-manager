@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { ApiError, Count, Returning, useSupabase } from '@lib';
-import { TablesName, Updates, Rows } from '@models';
+import { ApiError, Count, Returning, useSupabase } from '@/lib';
+import { TablesName, Updates, Rows } from '@/models';
 
 export type UseUpdateReturn<TName extends TablesName> = (
   model: Partial<Updates<TName>>,

@@ -1,8 +1,8 @@
 import { getToken, WithCSSVar } from '@chakra-ui/react';
 import { Dict } from '@chakra-ui/utils';
 
-import { es } from '@i18n';
-import { MovementType } from '@models';
+import { es } from '@/i18n';
+import { MovementType } from '@/models';
 
 import { CategoryTotalItem } from '../../models';
 import { ICategoryDataset, OTHERS_CATEGORY_ID } from './types';

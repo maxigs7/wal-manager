@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 
-import { es } from '@i18n';
-import { DialogRemove } from '@shared';
+
+import { es } from '@/i18n';
+import { DialogRemove } from '@/shared';
 
 import { useAccountSelectAllRefresh, useAccountDelete } from '../../hooks';
 

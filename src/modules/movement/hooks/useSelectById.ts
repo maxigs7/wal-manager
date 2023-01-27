@@ -1,7 +1,8 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { Movement, MovementFee } from '@models';
+
+import { useUow } from '@/api';
+import { Movement, MovementFee } from '@/models';
 
 import { MOVEMENTS_KEY } from '../constants';
 

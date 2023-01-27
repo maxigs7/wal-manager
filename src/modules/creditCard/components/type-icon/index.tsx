@@ -2,8 +2,8 @@ import React from 'react';
 
 import { IconProps } from '@chakra-ui/react';
 
-import { CreditCardType } from '@models';
-import { AmexIcon, GenericIcon, MasterCardIcon, VisaIcon } from '@shared';
+import { CreditCardType } from '@/models';
+import { AmexIcon, GenericIcon, MasterCardIcon, VisaIcon } from '@/shared';
 
 interface IProps extends Omit<IconProps, 'type'> {
   type: CreditCardType;

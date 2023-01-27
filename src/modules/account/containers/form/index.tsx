@@ -3,12 +3,13 @@ import React, { useEffect } from 'react';
 import { Box, Skeleton } from '@chakra-ui/react';
 import { useForm, useWatch } from 'react-hook-form';
 
-import { useUser } from '@m/auth';
-import { AccountInsert, DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@models';
+import { useUser } from '@/m/auth';
+import { AccountInsert, DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@/models';
 
 import { AccountForm } from '../../components';
 import { useAccountCreate, useAccountSelectById, useAccountUpdate } from '../../hooks';
 import Actions from './actions';
+
 
 interface IProps {
   id?: string;

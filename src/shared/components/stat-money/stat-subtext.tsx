@@ -7,7 +7,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-import { formatToCurrency } from '@lib';
+import { formatToCurrency } from '@/lib';
 
 interface IProps extends Omit<StatHelpTextProps, 'prefix'> {
   inverted?: boolean;

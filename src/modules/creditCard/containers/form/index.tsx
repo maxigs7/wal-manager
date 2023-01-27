@@ -3,12 +3,13 @@ import React, { useEffect } from 'react';
 import { Box, Skeleton } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import { useUser } from '@m/auth';
-import { CreditCard, DEFAULT_CREDIT_CARD_TYPE } from '@models';
+import { useUser } from '@/m/auth';
+import { CreditCard, DEFAULT_CREDIT_CARD_TYPE } from '@/models';
 
 import { CreditCardForm } from '../../components';
 import { useCreditCardCreate, useCreditCardSelectById, useCreditCardUpdate } from '../../hooks';
 import Actions from './actions';
+
 
 interface IProps {
   id?: string;

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
-import { DolarsiList, DolarsiName } from '@api';
-import { Select as ReactSelect } from '@lib';
-import { QuotationType } from '@models';
+import { DolarsiList, DolarsiName } from '@/api';
+import { Select as ReactSelect } from '@/lib';
+import { QuotationType } from '@/models';
 
 type SelectOption = {
   label: DolarsiName;

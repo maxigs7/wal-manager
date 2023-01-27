@@ -1,7 +1,8 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { Quotation } from '@models';
+
+import { useUow } from '@/api';
+import { Quotation } from '@/models';
 
 import { QUOTATION_KEY } from '../constants';
 

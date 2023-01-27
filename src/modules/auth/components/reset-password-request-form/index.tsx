@@ -1,7 +1,7 @@
 import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { es } from '@i18n';
+import { es } from '@/i18n';
 
 export type ResetPasswordRequestFormType = { email: string };
 export type ResetPasswordRequestFormProps = UseFormReturn<ResetPasswordRequestFormType>;

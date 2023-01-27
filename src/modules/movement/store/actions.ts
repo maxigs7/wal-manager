@@ -1,5 +1,5 @@
-import { IDolarsi } from '@api';
-import { Account, MovementType } from '@models';
+import { IDolarsi } from '@/api';
+import { Account, MovementType } from '@/models';
 
 export const CHANGE_ACCOUNT = '[MOVEMENTS] Change Account Data';
 export const CHANGE_MONTH_YEAR = '[MOVEMENTS] Change Month and Year';

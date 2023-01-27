@@ -1,4 +1,4 @@
-import { MovementType, Currency } from '@models';
+import { MovementType, Currency } from '@/models';
 
 export interface MovementForm {
   accountId: string;

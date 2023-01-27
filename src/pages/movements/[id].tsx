@@ -4,18 +4,19 @@ import React, { useEffect, useMemo } from 'react';
 
 import { IconButton } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
+
+import { es } from '@/i18n';
+import { getFullLayout, NextPageWithLayout, useFullLayout } from '@/layout';
 import {
   convertQuerystring,
   MovementFormContainer,
   useMovementSelectAllRefresh,
   useMovementSelectSummaryRefresh,
   useMovementUpdate,
-} from '@m/movement';
-import { Movement } from '@models';
-import { routes } from '@routes';
-import { Icon, Page, PageHeader } from '@shared';
+} from '@/m/movement';
+import { Movement } from '@/models';
+import { routes } from '@/routes';
+import { Icon, Page, PageHeader } from '@/shared';
 
 const UpdatePage: NextPageWithLayout = () => {
   const router = useRouter();

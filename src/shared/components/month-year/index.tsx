@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { Button, ButtonGroup, ButtonGroupProps, IconButton } from '@chakra-ui/react';
 import { es } from 'date-fns/locale';
 
-import { Icon } from '@shared';
+import { Icon } from '@/shared';
 
 export type MonthYearProps = Omit<ButtonGroupProps, 'onChange'> & {
   onChange(month: number, year: number): void;

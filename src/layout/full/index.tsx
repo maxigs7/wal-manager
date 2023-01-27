@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import { useDisclosure } from '@chakra-ui/hooks';
 
-import { PrivateRoute } from '@m/auth';
+import { PrivateRoute } from '@/m/auth';
 
 import Layout from './layout';
 import { LayoutProvider } from './provider';

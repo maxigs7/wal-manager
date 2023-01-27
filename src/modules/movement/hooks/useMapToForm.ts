@@ -2,9 +2,10 @@ import { useCallback } from 'react';
 
 import { parseISO } from 'date-fns';
 
-import { Movement, MovementFee } from '@models';
+import { Movement, MovementFee } from '@/models';
 
 import { MovementForm } from '../models';
+
 
 type UseMappingReturn = (movement: Movement, fee?: Partial<MovementFee>) => Partial<MovementForm>;
 

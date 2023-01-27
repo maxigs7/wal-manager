@@ -2,9 +2,10 @@ import React, { useMemo } from 'react';
 
 import { Control, Controller, RegisterOptions } from 'react-hook-form';
 
-import { Quotation } from '@models';
+import { Quotation } from '@/models';
 
 import { QuotationSelect, IQuotationSelectProps } from '../select';
+
 
 export interface IQuotationSelectControlProps extends Omit<IQuotationSelectProps, 'onBlur'> {
   control?: Control<any>;

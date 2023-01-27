@@ -1,9 +1,10 @@
 import { Flex } from '@chakra-ui/react';
 import { CellContext, ColumnDef, createColumnHelper } from '@tanstack/react-table';
 
-import { es } from '@i18n';
-import { CreditCard, CreditCardType, getCreditCardTypeName } from '@models';
-import { ActionButton, ActionsCell } from '@shared';
+
+import { es } from '@/i18n';
+import { CreditCard, CreditCardType, getCreditCardTypeName } from '@/models';
+import { ActionButton, ActionsCell } from '@/shared';
 
 import { CreditCardTypeIcon } from '../type-icon';
 

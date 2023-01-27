@@ -29,7 +29,7 @@
             "group": "builtin"
           },
           {
-            "pattern": "@(api|bootstrap|i18n|layout|lib|models|m|pages|routes|shared|theme)/**",
+            "pattern": "@/**",
             "group": "internal",
             "position": "after"
           }

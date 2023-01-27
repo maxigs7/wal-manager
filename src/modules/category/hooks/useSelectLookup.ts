@@ -3,10 +3,11 @@ import { useMemo } from 'react';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 import { UseQueryResult } from '@tanstack/react-query';
 
-import { Category } from '@models';
+import { Category } from '@/models';
 
 import { CategoryLookup } from '../models';
 import useSelectAll from './useSelectAll';
+
 
 export type GetCategoryFilters = {
   excludeChildren?: boolean;

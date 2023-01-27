@@ -1,9 +1,10 @@
 import { Text, TextProps } from '@chakra-ui/react';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 
-import { AccountType, Currency, getCurrencyName } from '@models';
+import { AccountType, Currency, getCurrencyName } from '@/models';
 
 import { AccountTypeIcon } from '../type-icon';
+
 
 interface IProps extends TextProps {
   currency: Currency;

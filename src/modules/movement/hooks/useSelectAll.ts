@@ -1,7 +1,8 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { GetMovementItem, MovementType } from '@models';
+
+import { useUow } from '@/api';
+import { GetMovementItem, MovementType } from '@/models';
 
 import { MOVEMENTS_GRID_KEY, MOVEMENTS_KEY, STALE_TIME } from '../constants';
 

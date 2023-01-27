@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { ApiError, UserSession, useSupabase } from '@lib';
+import { ApiError, UserSession, useSupabase } from '@/lib';
 
 export type UseSignInReturn = (email: string, password: string) => Promise<UserSession>;
 

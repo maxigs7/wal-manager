@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Box, BoxProps, IconProps, Stat, Text, useColorModeValue } from '@chakra-ui/react';
 
-import { formatToCurrency } from '@lib';
-import { CreditCardType } from '@models';
-import { StatLabel, StatNumberFormatted } from '@shared';
+
+import { formatToCurrency } from '@/lib';
+import { CreditCardType } from '@/models';
+import { StatLabel, StatNumberFormatted } from '@/shared';
 
 import { CreditCardTypeIcon } from '..';
 

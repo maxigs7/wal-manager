@@ -1,9 +1,10 @@
 import { useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { es } from '@i18n';
-import { ApiError, useToast } from '@lib';
-import { GetMovementItem, Movement } from '@models';
+
+import { useUow } from '@/api';
+import { es } from '@/i18n';
+import { ApiError, useToast } from '@/lib';
+import { GetMovementItem, Movement } from '@/models';
 
 import { MOVEMENTS_GRID_KEY, MOVEMENTS_KEY } from '../constants';
 import useSelectSummaryRefresh from './useSelectSummaryRefresh';

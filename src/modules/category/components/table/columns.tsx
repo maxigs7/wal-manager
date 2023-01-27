@@ -1,8 +1,9 @@
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 import { CellContext, ColumnDef, createColumnHelper } from '@tanstack/react-table';
 
-import { es } from '@i18n';
-import { colorTransform } from '@models';
+
+import { es } from '@/i18n';
+import { colorTransform } from '@/models';
 import {
   ActionButton,
   ActionsCell,
@@ -10,7 +11,7 @@ import {
   ExpandedAllCell,
   ExpandedCell,
   Icon,
-} from '@shared';
+} from '@/shared';
 
 import { CategoryRow } from '../../models';
 

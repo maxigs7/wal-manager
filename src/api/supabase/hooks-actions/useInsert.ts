@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { ApiError, Count, Returning, useSupabase } from '@lib';
-import { Inserts, Rows, TablesName } from '@models';
+import { ApiError, Count, Returning, useSupabase } from '@/lib';
+import { Inserts, Rows, TablesName } from '@/models';
 
 export type UseInsertReturn<TName extends TablesName> = (
   model: Inserts<TName> | Inserts<TName>[],

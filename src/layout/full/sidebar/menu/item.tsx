@@ -4,9 +4,10 @@ import React from 'react';
 
 import { Badge, Link, Text } from '@chakra-ui/react';
 
-import { Icon } from '@shared';
+import { Icon } from '@/shared';
 
 import { IMenuItem } from './data';
+
 
 const styles = {
   active: (isActive: boolean) =>

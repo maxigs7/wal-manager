@@ -2,13 +2,14 @@ import React, { useCallback, useRef } from 'react';
 
 import { Box, Collapse, Flex, IconButton, FlexProps, useDisclosure } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { AccountSelectContainer } from '@m/account';
-import { Account } from '@models';
-import { Icon, MonthYear } from '@shared';
+import { es } from '@/i18n';
+import { AccountSelectContainer } from '@/m/account';
+import { Account } from '@/models';
+import { Icon, MonthYear } from '@/shared';
 
 import { useMovementStore } from '../../providers';
 import { MovementExtraFilters } from '../extra-filters';
+
 
 interface IProps extends FlexProps {}
 

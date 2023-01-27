@@ -7,11 +7,12 @@ import { parseISO } from 'date-fns';
 import ReactDatePicker from 'react-datepicker';
 import { useController, UseControllerProps } from 'react-hook-form';
 
-import { useMediaQuery } from '@lib';
+import { useMediaQuery } from '@/lib';
 
 import { CustomHeader } from './header';
 import { CustomInput } from './input';
 import { useStyles } from './useStyles';
+
 
 export interface IProps extends UseControllerProps<any> {
   id?: string;

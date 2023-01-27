@@ -1,5 +1,5 @@
-import { useUser } from '@m/auth';
-import { PageLoader } from '@shared';
+import { useUser } from '@/m/auth';
+import { PageLoader } from '@/shared';
 
 export const withAuthCheck = <T extends object>(
   WrappedComponent: React.ComponentType<T>,

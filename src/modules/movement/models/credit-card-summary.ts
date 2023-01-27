@@ -1,4 +1,4 @@
-import { CreditCardType } from '@models';
+import { CreditCardType } from '@/models';
 
 export type CreditCardSummary = {
   amount: number;

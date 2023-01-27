@@ -1,8 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { IDolarsi } from '@api';
-import { GetMovementItem, MovementType } from '@models';
-import { Table } from '@shared';
+
+import { IDolarsi } from '@/api';
+import { GetMovementItem, MovementType } from '@/models';
+import { Table } from '@/shared';
 
 import { getColumns } from './columns';
 

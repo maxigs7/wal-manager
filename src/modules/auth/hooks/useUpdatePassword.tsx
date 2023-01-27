@@ -1,6 +1,6 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { ApiError, useUow } from '@api';
+import { ApiError, useUow } from '@/api';
 
 export const useUpdatePassword = (): UseMutationResult<void, Error, string> => {
   const { auth } = useUow();

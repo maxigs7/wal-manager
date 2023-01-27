@@ -8,11 +8,12 @@ import {
 } from '@chakra-ui/react';
 import { useWatch } from 'react-hook-form';
 
-import { es } from '@i18n';
-import { CreditCardSelectControlContainer } from '@m/creditCard';
-import { ControlledCheckbox, InputNumber } from '@shared';
+import { es } from '@/i18n';
+import { CreditCardSelectControlContainer } from '@/m/creditCard';
+import { ControlledCheckbox, InputNumber } from '@/shared';
 
 import { IProps } from './props';
+
 
 const CreditSection: React.FC<IProps> = ({ control, formState: { errors }, getValues }) => {
   const id = useWatch({ control, name: 'id' });

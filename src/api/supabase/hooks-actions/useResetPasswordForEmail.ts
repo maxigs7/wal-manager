@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { ApiError, useSupabase } from '@lib';
-import { BASE_URL } from '@shared';
+import { ApiError, useSupabase } from '@/lib';
+import { BASE_URL } from '@/shared';
 
 export type UseResetPasswordForEmailReturn = (email: string) => Promise<void>;
 

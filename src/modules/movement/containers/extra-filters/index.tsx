@@ -2,11 +2,12 @@ import React from 'react';
 
 import { Box, FlexProps, Flex } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { CategorySelectContainer } from '@m/category';
-import { CreditCardSelectContainer } from '@m/creditCard';
+import { es } from '@/i18n';
+import { CategorySelectContainer } from '@/m/category';
+import { CreditCardSelectContainer } from '@/m/creditCard';
 
 import { useMovementStore } from '../../providers';
+
 
 type IProps = FlexProps & {
   target?: HTMLElement | null;

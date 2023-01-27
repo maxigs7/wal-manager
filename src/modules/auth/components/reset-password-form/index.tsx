@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { es } from '@i18n';
+import { es } from '@/i18n';
 
 export type ResetPasswordConfirmFormType = { password: string; confirmPassword: string };
 export type ResetPasswordConfirmFormProps = UseFormReturn<ResetPasswordConfirmFormType>;

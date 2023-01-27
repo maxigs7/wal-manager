@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 
 import { Heading, Flex, Link, Box } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { getAuthLayout, NextPageWithLayout } from '@layout';
-import { SignUpByEmail } from '@m/auth';
-import { AUTH_SIGN_UP_ENABLED } from '@shared';
+
+import { es } from '@/i18n';
+import { getAuthLayout, NextPageWithLayout } from '@/layout';
+import { SignUpByEmail } from '@/m/auth';
+import { AUTH_SIGN_UP_ENABLED } from '@/shared';
 
 const SignUpPage: NextPageWithLayout = () => {
   const router = useRouter();

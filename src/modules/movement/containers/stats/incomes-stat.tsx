@@ -2,15 +2,16 @@ import React, { useMemo } from 'react';
 
 import { Stat, useColorModeValue } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { MovementType } from '@models';
+
+import { es } from '@/i18n';
+import { MovementType } from '@/models';
 import {
   ContentLoader,
   StatHelpText,
   StatIconContainer,
   StatLabel,
   StatNumberFormatted,
-} from '@shared';
+} from '@/shared';
 
 import { useMovementSelectSummary } from '../../hooks';
 import { useMovementStore } from '../../providers';

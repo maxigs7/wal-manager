@@ -10,9 +10,10 @@ import {
   Button,
 } from '@chakra-ui/react';
 
-import { es } from '@i18n';
+import { es } from '@/i18n';
 
 import { Icon } from '../icon';
+
 
 const DialogRemove: React.FC<IProps> = ({ isLoading, isOpen, onClose, onConfirm, title }) => {
   const cancelRef = useRef(null);

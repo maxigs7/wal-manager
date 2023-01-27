@@ -3,8 +3,8 @@ import { useEffect, useMemo } from 'react';
 import { FormControl, FormErrorMessage, FormLabel, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { useWatch } from 'react-hook-form';
 
-import { es } from '@i18n';
-import { ControlledCheckbox, MonthYearControl } from '@shared';
+import { es } from '@/i18n';
+import { ControlledCheckbox, MonthYearControl } from '@/shared';
 
 import { NON_EDITABLE_FIELD } from '../../models';
 import { MovementTypeSelectControl } from '../type-select-control';
@@ -12,6 +12,7 @@ import { CreditSection } from './credit-section';
 import { MainSection } from './main-section';
 import { IProps } from './props';
 import { TransferSection } from './transfer-section';
+
 
 const MovementFormComponent: React.FC<IProps> = (props) => {
   const {

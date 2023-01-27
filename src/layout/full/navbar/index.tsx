@@ -2,11 +2,12 @@ import React from 'react';
 
 import { Flex, IconButton, useColorModeValue } from '@chakra-ui/react';
 
-import { ColorModeToggle, Icon } from '@shared';
+import { ColorModeToggle, Icon } from '@/shared';
 
 import { Breadcrumb } from '../breadcrumb';
 import { NAVBAR_HEIGHT, NAVBAR_Z_INDEX, SIDEBAR_WIDTH } from '../constants';
 import { useLayout } from '../provider';
+
 
 export const Navbar: React.FC = () => {
   const { toggleSidebar } = useLayout();

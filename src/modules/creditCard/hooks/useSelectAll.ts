@@ -1,7 +1,8 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { CreditCard } from '@models';
+
+import { useUow } from '@/api';
+import { CreditCard } from '@/models';
 
 import { CREDIT_CARDS_KEY } from '../constants';
 

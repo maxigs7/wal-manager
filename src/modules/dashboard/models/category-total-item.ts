@@ -1,6 +1,6 @@
 import { IconName } from '@fortawesome/fontawesome-common-types';
 
-import { MovementType } from '@models';
+import { MovementType } from '@/models';
 
 export type CategoryTotalItem = {
   amount: number;

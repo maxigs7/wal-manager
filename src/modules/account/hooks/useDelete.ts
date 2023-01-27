@@ -1,9 +1,9 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { es } from '@i18n';
-import { ApiError, useToast } from '@lib';
-import { Account } from '@models';
+import { useUow } from '@/api';
+import { es } from '@/i18n';
+import { ApiError, useToast } from '@/lib';
+import { Account } from '@/models';
 
 const useAccountDelete = (showToast = true): UseMutationResult<Account, ApiError, string> => {
   const { account } = useUow();

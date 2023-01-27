@@ -2,11 +2,12 @@ import React from 'react';
 
 import { Flex } from '@chakra-ui/react';
 
-import { es } from '@i18n';
+import { es } from '@/i18n';
 
 import { mainRoutes, adminRoutes } from './data';
 import { MenuItem } from './item';
 import { Title } from './title';
+
 
 interface IProps {
   closeSidebar(): void;

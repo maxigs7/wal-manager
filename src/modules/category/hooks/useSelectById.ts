@@ -1,7 +1,8 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { Category } from '@models';
+
+import { useUow } from '@/api';
+import { Category } from '@/models';
 
 import { CATEGORIES_KEY } from '../constants';
 

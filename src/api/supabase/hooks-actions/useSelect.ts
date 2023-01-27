@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { ApiError, Count, Filter, Sort, useSupabase } from '@lib';
-import { Rows, TablesName } from '@models';
+import { ApiError, Count, Filter, Sort, useSupabase } from '@/lib';
+import { Rows, TablesName } from '@/models';
 
 export type UseSelectReturn<TName extends TablesName> = (
   config?: UseSelectConfig<TName>,

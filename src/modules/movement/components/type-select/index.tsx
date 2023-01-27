@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
-import { Select as ReactSelect } from '@lib';
-import { getMovementTypeName, MovementType } from '@models';
+import { Select as ReactSelect } from '@/lib';
+import { getMovementTypeName, MovementType } from '@/models';
 
 type SelectOption = {
   label: string;

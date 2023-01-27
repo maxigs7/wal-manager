@@ -1,4 +1,4 @@
-import { QuotationType } from '@models';
+import { QuotationType } from '@/models';
 
 export const DOLARSI_RESPONSE_KEYS = [
   'Dolar Blue',
@@ -8,7 +8,7 @@ export const DOLARSI_RESPONSE_KEYS = [
   'Dolar Solidario',
 ] as const;
 
-export type DolarsiName = typeof DOLARSI_RESPONSE_KEYS[number];
+export type DolarsiName = (typeof DOLARSI_RESPONSE_KEYS)[number];
 
 export const DolarsiList = new Map<DolarsiName, QuotationType>([
   ['Dolar Blue', 'blue'],

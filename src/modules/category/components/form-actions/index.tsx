@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Button, FlexProps } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { routes } from '@routes';
-import { ActionsFormContainer, Icon } from '@shared';
+import { es } from '@/i18n';
+import { routes } from '@/routes';
+import { ActionsFormContainer, Icon } from '@/shared';
 
 interface IProps extends FlexProps {
   isLoading: boolean;

@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { useAccountSelectAll } from '@m/account';
-import { routes } from '@routes';
-import { PageLoader } from '@shared';
+import { useAccountSelectAll } from '@/m/account';
+import { routes } from '@/routes';
+import { PageLoader } from '@/shared';
 
 export const withNeedAccount = <T extends object>(
   WrappedComponent: React.ComponentType<T>,

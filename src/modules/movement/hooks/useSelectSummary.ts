@@ -1,7 +1,8 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { GetMovementSummaryItem } from '@models';
+
+import { useUow } from '@/api';
+import { GetMovementSummaryItem } from '@/models';
 
 import { MOVEMENTS_KEY, MOVEMENTS_SUMMARY_KEY, STALE_TIME } from '../constants';
 

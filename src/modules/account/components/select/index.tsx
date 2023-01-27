@@ -2,8 +2,8 @@ import React, { useCallback, useMemo } from 'react';
 
 import { HStack } from '@chakra-ui/react';
 
-import { Select as ReactSelect } from '@lib';
-import { Account } from '@models';
+import { Select as ReactSelect } from '@/lib';
+import { Account } from '@/models';
 
 import { AccountInline } from '../inline';
 

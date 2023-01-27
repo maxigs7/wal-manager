@@ -2,9 +2,10 @@ import React, { useMemo } from 'react';
 
 import { Stat, StatHelpText } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { formatToCurrency } from '@lib';
-import { ContentLoader, StatIconContainer, StatLabel, StatNumberFormatted } from '@shared';
+
+import { es } from '@/i18n';
+import { formatToCurrency } from '@/lib';
+import { ContentLoader, StatIconContainer, StatLabel, StatNumberFormatted } from '@/shared';
 
 import { useMovementSelectSummary } from '../../hooks';
 import { useMovementStore } from '../../providers';

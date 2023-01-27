@@ -1,6 +1,6 @@
 import { Flex, Input } from '@chakra-ui/react';
 
-import { es } from '@i18n';
+import { es } from '@/i18n';
 
 interface IProps {
   globalFilter?: string;

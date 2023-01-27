@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { useUow } from '@api';
-import { es } from '@i18n';
+import { useUow } from '@/api';
+import { es } from '@/i18n';
 
 type UseIsUniqueReturn = (
   name: string,

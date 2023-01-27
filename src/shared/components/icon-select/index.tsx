@@ -4,8 +4,9 @@ import { HStack, Text } from '@chakra-ui/react';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
-import { Select as ReactSelect } from '@lib';
-import { CategoryIconsName } from '@lib/font-awesome';
+
+import { Select as ReactSelect } from '@/lib';
+import { CategoryIconsName } from '@/lib/font-awesome';
 
 import { Icon } from '../icon';
 

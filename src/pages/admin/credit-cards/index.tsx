@@ -4,11 +4,12 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Button } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
-import { CreditCardDialogRemove, CreditCardTableContainer } from '@m/creditCard';
-import { routes } from '@routes';
-import { Icon, Page, PageHeader } from '@shared';
+
+import { es } from '@/i18n';
+import { getFullLayout, NextPageWithLayout, useFullLayout } from '@/layout';
+import { CreditCardDialogRemove, CreditCardTableContainer } from '@/m/creditCard';
+import { routes } from '@/routes';
+import { Icon, Page, PageHeader } from '@/shared';
 
 const CreditCardsPage: NextPageWithLayout = () => {
   const router = useRouter();

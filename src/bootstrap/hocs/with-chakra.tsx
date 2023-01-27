@@ -1,8 +1,8 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { Montserrat } from '@next/font/google';
 
-import { useNextFont } from '@lib';
-import theme from '@theme';
+import { useNextFont } from '@/lib';
+import theme from '@/theme';
 
 // If loading a variable font, you don't need to specify the font weight
 const montserrat = Montserrat({

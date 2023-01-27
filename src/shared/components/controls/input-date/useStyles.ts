@@ -2,9 +2,9 @@ import { useMemo } from 'react';
 
 import { StyleObjectOrFn, useTheme, css as chakraCSS } from '@chakra-ui/react';
 
-import { useNextFont } from '@lib';
-
 import breakpoints from 'theme/foundations/breakpoints';
+
+import { useNextFont } from '@/lib';
 
 export const useStyles = () => {
   const theme = useTheme();

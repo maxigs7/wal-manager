@@ -15,12 +15,13 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { es } from '@i18n';
+import { es } from '@/i18n';
 
 import Body from './body';
 import GlobalFilter from './global-filter';
 import Header from './header';
 import { Paginator } from './paginator';
+
 
 interface IProps<T extends object> {
   columns: ColumnDef<T>[];

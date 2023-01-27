@@ -8,9 +8,10 @@ import {
 } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { es } from '@i18n';
-import { CreditCard } from '@models';
-import { ControlledInput } from '@shared';
+
+import { es } from '@/i18n';
+import { CreditCard } from '@/models';
+import { ControlledInput } from '@/shared';
 
 import { useCreditCardIsUnique } from '../../hooks';
 import { CreditCardTypeSelect } from '../type-select';

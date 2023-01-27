@@ -1,9 +1,9 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { es } from '@i18n';
-import { ApiError, useToast } from '@lib';
-import { CreditCard, CreditCardUpdate } from '@models';
+import { useUow } from '@/api';
+import { es } from '@/i18n';
+import { ApiError, useToast } from '@/lib';
+import { CreditCard, CreditCardUpdate } from '@/models';
 
 const useCreditCardUpdate = (
   showToast = true,

@@ -1,4 +1,4 @@
-import { DolarsiClientProvider } from '@api';
+import { DolarsiClientProvider } from '@/api';
 
 export const withDolarsiClient = <T extends object>(
   WrappedComponent: React.ComponentType<T>,

@@ -3,9 +3,10 @@ import NextLink from 'next/link';
 
 import { Heading, Flex, Link, Box } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { getAuthLayout, NextPageWithLayout } from '@layout';
-import { ResetPasswordConfirm } from '@m/auth';
+
+import { es } from '@/i18n';
+import { getAuthLayout, NextPageWithLayout } from '@/layout';
+import { ResetPasswordConfirm } from '@/m/auth';
 
 const SignInPage: NextPageWithLayout = () => (
   <>

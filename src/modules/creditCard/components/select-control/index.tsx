@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Control, Controller, RegisterOptions, useController } from 'react-hook-form';
 
-import { CreditCard } from '@models';
+import { CreditCard } from '@/models';
 
 import { CreditCardSelect, ICreditCardSelectProps } from '../select';
+
 
 export interface ICreditCardSelectControlProps extends Omit<ICreditCardSelectProps, 'onBlur'> {
   control?: Control<any>;

@@ -2,10 +2,11 @@ import React, { useMemo } from 'react';
 
 import { MenuPlacement } from 'chakra-react-select';
 
-import { Select as ReactSelect } from '@lib';
+import { Select as ReactSelect } from '@/lib';
 
 import { CategoryLookup } from '../../models';
 import { CategoryTag } from '../tag';
+
 
 type SelectOption = { label: string; value: string } & CategoryLookup;
 

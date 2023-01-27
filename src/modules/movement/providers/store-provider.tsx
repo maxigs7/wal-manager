@@ -7,9 +7,9 @@ import {
   useReducer,
 } from 'react';
 
-import { IDolarsi } from '@api';
-import { CategoryLookup } from '@m/category';
-import { Account, CreditCard, MovementType } from '@models';
+import { IDolarsi } from '@/api';
+import { CategoryLookup } from '@/m/category';
+import { Account, CreditCard, MovementType } from '@/models';
 
 import {
   changeAccount,
@@ -21,6 +21,7 @@ import {
 } from '../store/actions';
 import { reducer } from '../store/reducer';
 import { IDispatch, initialState, Store } from '../store/state';
+
 
 export const StoreContext: React.Context<Store> = createContext<Store>({} as Store);
 

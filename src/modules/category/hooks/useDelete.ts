@@ -1,9 +1,9 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { es } from '@i18n';
-import { ApiError, useToast } from '@lib';
-import { Category } from '@models';
+import { useUow } from '@/api';
+import { es } from '@/i18n';
+import { ApiError, useToast } from '@/lib';
+import { Category } from '@/models';
 
 const useCategoryDelete = (showToast = true): UseMutationResult<Category, ApiError, string> => {
   const { category } = useUow();

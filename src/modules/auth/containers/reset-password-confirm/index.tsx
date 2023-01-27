@@ -4,10 +4,11 @@ import { useEffect } from 'react';
 import { VStack, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import { es } from '@i18n';
+import { es } from '@/i18n';
 
 import { AuthMessage, ResetPasswordForm, ResetPasswordConfirmFormType } from '../../components';
 import { useUpdatePassword } from '../../hooks';
+
 
 const Container: React.FC = () => {
   const router = useRouter();

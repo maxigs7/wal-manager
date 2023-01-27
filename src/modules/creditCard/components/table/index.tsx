@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 
-import { CreditCard } from '@models';
-import { Table } from '@shared';
+
+import { CreditCard } from '@/models';
+import { Table } from '@/shared';
 
 import { getColumns } from './columns';
 

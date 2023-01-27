@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
-import { SupabaseProvider } from '@lib';
-import { Database } from '@models';
-import { SUPABASE_ANON_KEY, SUPABASE_API_URL } from '@shared';
+import { SupabaseProvider } from '@/lib';
+import { Database } from '@/models';
+import { SUPABASE_ANON_KEY, SUPABASE_API_URL } from '@/shared';
 
 const supabase = createClient<Database>(SUPABASE_API_URL, SUPABASE_ANON_KEY);
 

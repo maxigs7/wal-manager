@@ -1,7 +1,7 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-import { es } from '@i18n';
-import { routes } from '@routes';
+import { es } from '@/i18n';
+import { routes } from '@/routes';
 
 export interface IMenuItem {
   badge?: string;

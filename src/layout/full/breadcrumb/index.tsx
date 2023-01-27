@@ -3,9 +3,10 @@ import React from 'react';
 
 import { Breadcrumb as ChakraBreadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
 
-import { Icon } from '@shared';
+import { Icon } from '@/shared';
 
 import { useLayout } from '../provider';
+
 
 export interface IBreadcrumbItem {
   label: string;

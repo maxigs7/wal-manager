@@ -2,12 +2,13 @@ import { Switch } from '@chakra-ui/react';
 import { CellContext, ColumnDef, createColumnHelper, Row } from '@tanstack/react-table';
 import { parseISO } from 'date-fns';
 
-import { IDolarsi } from '@api';
-import { es } from '@i18n';
-import { dateSortType } from '@lib';
-import { GetMovementItem } from '@models';
-import { DateCell, Icon } from '@shared';
-import { ActionButton, ActionsCell } from '@shared';
+
+import { IDolarsi } from '@/api';
+import { es } from '@/i18n';
+import { dateSortType } from '@/lib';
+import { GetMovementItem } from '@/models';
+import { DateCell, Icon } from '@/shared';
+import { ActionButton, ActionsCell } from '@/shared';
 
 import { AccountableCell, CategoryCell, CreditCardCell, DescriptionCell } from './cells';
 

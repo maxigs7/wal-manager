@@ -5,9 +5,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, Flex } from '@chakra-ui/react';
 import compose from 'compose-function';
 
-import { es } from '@i18n';
-import { getFullLayout, NextPageWithLayout, useFullLayout } from '@layout';
-import { DolarsiButtonToggle } from '@m/dolarsi';
+import { es } from '@/i18n';
+import { getFullLayout, NextPageWithLayout, useFullLayout } from '@/layout';
+import { DolarsiButtonToggle } from '@/m/dolarsi';
 import {
   CreditCardSummaryStats,
   SummaryStats,
@@ -18,9 +18,9 @@ import {
   withNeedAccount,
   withMovementStore,
   useMovementUpdateIsPaid,
-} from '@m/movement';
-import { routes } from '@routes';
-import { Icon, Page, PageHeader } from '@shared';
+} from '@/m/movement';
+import { routes } from '@/routes';
+import { Icon, Page, PageHeader } from '@/shared';
 
 const MovementsPage: NextPageWithLayout = () => {
   const router = useRouter();

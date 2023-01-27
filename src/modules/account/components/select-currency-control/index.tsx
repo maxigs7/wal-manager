@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
-import { Currency } from '@models';
+import { Currency } from '@/models';
 
 import { SelectCurrency, ISelectProps } from '../select-currency';
+
 
 export interface ISelectControlProps extends Omit<ISelectProps, 'onBlur' | 'onChange' | ''> {
   control?: Control<any>;

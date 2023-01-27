@@ -1,6 +1,6 @@
 import { addMinutes } from 'date-fns';
 
-import { QuotationType } from '@models';
+import { QuotationType } from '@/models';
 
 import {
   DolarsiList,
@@ -12,6 +12,7 @@ import {
   IDolarsiLocalStorage,
   IDolarsiResponse,
 } from './types';
+
 
 const getKey = (key: DolarsiName): QuotationType => DolarsiList.get(key) as QuotationType;
 

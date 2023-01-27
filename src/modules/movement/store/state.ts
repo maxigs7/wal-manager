@@ -1,8 +1,8 @@
 import { addMonths } from 'date-fns';
 
-import { IDolarsi } from '@api';
-import { CategoryLookup } from '@m/category';
-import { Account, CreditCard, Currency, MovementType } from '@models';
+import { IDolarsi } from '@/api';
+import { CategoryLookup } from '@/m/category';
+import { Account, CreditCard, Currency, MovementType } from '@/models';
 
 export interface IState {
   accountCurrency?: Currency;

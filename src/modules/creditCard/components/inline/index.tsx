@@ -1,8 +1,9 @@
 import { Text, TextProps } from '@chakra-ui/react';
 
-import { CreditCardType } from '@models';
+import { CreditCardType } from '@/models';
 
 import { CreditCardTypeIcon } from '../type-icon';
+
 
 interface IProps extends TextProps {
   iconSize?: number;

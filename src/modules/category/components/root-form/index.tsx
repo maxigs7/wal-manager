@@ -8,9 +8,10 @@ import {
 } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { es } from '@i18n';
-import { CategoryInsert } from '@models';
-import { ColorSelect, ControlledInput, IconSelect } from '@shared';
+
+import { es } from '@/i18n';
+import { CategoryInsert } from '@/models';
+import { ColorSelect, ControlledInput, IconSelect } from '@/shared';
 
 import { useCategoryIsUnique } from '../../hooks';
 

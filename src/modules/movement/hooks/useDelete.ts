@@ -1,9 +1,9 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useUow } from '@api';
-import { es } from '@i18n';
-import { ApiError, useToast } from '@lib';
-import { Movement } from '@models';
+import { useUow } from '@/api';
+import { es } from '@/i18n';
+import { ApiError, useToast } from '@/lib';
+import { Movement } from '@/models';
 
 const useMovementDelete = (showToast = true): UseMutationResult<Movement, ApiError, string> => {
   const { movement } = useUow();

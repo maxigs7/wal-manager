@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Avatar, Flex, Text } from '@chakra-ui/react';
 
-import { useUser } from '@m/auth';
+import { useUser } from '@/m/auth';
 
 const User: React.FC = () => {
   const { user } = useUser();

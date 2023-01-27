@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { FunctionsArgs, FunctionsName, TablesName } from '@models';
+import { FunctionsArgs, FunctionsName, TablesName } from '@/models';
 
 import {
   useDelete,
@@ -18,6 +18,7 @@ import {
   UseRpcReturn,
   useRpc,
 } from '../hooks-actions';
+
 
 export type UseRpcRepositoryReturn<FName extends FunctionsName, TResult> = (
   args: FunctionsArgs<FName>,

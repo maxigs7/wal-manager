@@ -3,8 +3,8 @@ import React from 'react';
 import { Box, FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import { es } from '@i18n';
-import { CategoryUpdate } from '@models';
+import { es } from '@/i18n';
+import { CategoryUpdate } from '@/models';
 
 import { FormActions } from '../../components';
 import { useCategoryUpdate } from '../../hooks';

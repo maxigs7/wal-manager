@@ -3,11 +3,12 @@ import React, { useEffect } from 'react';
 import { Box, Skeleton } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import { useUser } from '@m/auth';
-import { CategoryInsert } from '@models';
+import { useUser } from '@/m/auth';
+import { CategoryInsert } from '@/models';
 
 import { FormActions, SubCategoryForm } from '../../components';
 import { useCategoryCreate, useCategorySelectById, useCategoryUpdate } from '../../hooks';
+
 
 interface IProps {
   id?: string;

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { Button, ButtonProps, Text } from '@chakra-ui/react';
 
-import { IDolarsi } from '@api';
-import { es } from '@i18n';
-import { formatToCurrency } from '@lib';
-import { useDolarsi } from '@m/dolarsi';
+
+import { IDolarsi } from '@/api';
+import { es } from '@/i18n';
+import { formatToCurrency } from '@/lib';
+import { useDolarsi } from '@/m/dolarsi';
 
 interface IProps extends ButtonProps {
   defaultLabel: string;

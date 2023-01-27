@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { ApiError, useSupabase } from '@lib';
+import { ApiError, useSupabase } from '@/lib';
 
 export type UseUpdatePasswordReturn = (newPassword: string) => Promise<void>;
 

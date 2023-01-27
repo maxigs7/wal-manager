@@ -3,8 +3,8 @@ import React from 'react';
 
 import { Flex, IconButton, Link } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { Icon, Logo } from '@shared';
+import { es } from '@/i18n';
+import { Icon, Logo } from '@/shared';
 
 interface IProps {
   closeSidebar(): void;

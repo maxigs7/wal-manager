@@ -2,7 +2,7 @@ import { createContext, PropsWithChildren, useContext } from 'react';
 
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { Database } from '@models';
+import { Database } from '@/models';
 
 interface IProps extends PropsWithChildren {
   supabase: SupabaseClient<Database>;

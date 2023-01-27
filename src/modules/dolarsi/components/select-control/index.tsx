@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
-import { QuotationType } from '@models';
+import { QuotationType } from '@/models';
 
 import { SelectDolarsi, ISelectDolarsiProps } from '../select';
+
 
 export interface ISelectControlProps extends Omit<ISelectDolarsiProps, 'onBlur' | 'onChange' | ''> {
   control?: Control<any>;

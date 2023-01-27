@@ -2,11 +2,11 @@ import { Flex, HStack, Text } from '@chakra-ui/react';
 import { IconName } from '@fortawesome/free-solid-svg-icons';
 import { CellContext } from '@tanstack/react-table';
 
-import { formatToCurrency } from '@lib';
-import { CategoryTag } from '@m/category';
-import { CreditCardInline } from '@m/creditCard';
-import { GetMovementItem } from '@models';
-import { Icon } from '@shared';
+import { formatToCurrency } from '@/lib';
+import { CategoryTag } from '@/m/category';
+import { CreditCardInline } from '@/m/creditCard';
+import { GetMovementItem } from '@/models';
+import { Icon } from '@/shared';
 
 export const AccountableCell: React.FC<Pick<GetMovementItem, 'amount'>> = ({ amount }) => {
   const valueFormatted = formatToCurrency(Math.abs(amount));

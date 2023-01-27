@@ -2,8 +2,8 @@ import React, { PropsWithChildren } from 'react';
 
 import { Flex, Heading, Icon } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { WalletLogo } from '@shared';
+import { es } from '@/i18n';
+import { WalletLogo } from '@/shared';
 
 const AuthLayout: React.FC<PropsWithChildren> = ({ children }) => (
   <Flex

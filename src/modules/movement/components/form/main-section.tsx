@@ -3,14 +3,15 @@ import { useCallback } from 'react';
 import { FormControl, FormErrorMessage, FormLabel, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { useWatch } from 'react-hook-form';
 
-import { es } from '@i18n';
-import { AccountSelectControlContainer } from '@m/account';
-import { CategorySelectControlContainer } from '@m/category';
-import { Account } from '@models';
-import { ControlledInput, InputCurrency, InputDate } from '@shared';
+import { es } from '@/i18n';
+import { AccountSelectControlContainer } from '@/m/account';
+import { CategorySelectControlContainer } from '@/m/category';
+import { Account } from '@/models';
+import { ControlledInput, InputCurrency, InputDate } from '@/shared';
 
 import { NON_EDITABLE_FIELD } from '../../models';
 import { IProps } from './props';
+
 
 const MainSection: React.FC<IProps> = (props) => {
   const {

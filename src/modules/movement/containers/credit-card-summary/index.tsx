@@ -1,6 +1,6 @@
 import { Flex, StatGroup } from '@chakra-ui/react';
 
-import { CreditCardStat } from '@m/creditCard';
+import { CreditCardStat } from '@/m/creditCard';
 
 import { useCreditCardSummary } from '../../hooks';
 import { useMovementStore } from '../../providers';

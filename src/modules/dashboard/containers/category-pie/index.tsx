@@ -4,12 +4,13 @@ import { Box, Heading } from '@chakra-ui/react';
 import { addMonths } from 'date-fns';
 import { getElementAtEvent, Pie } from 'react-chartjs-2';
 
-import { formatToCurrency } from '@lib';
-import { MovementType } from '@models';
+import { formatToCurrency } from '@/lib';
+import { MovementType } from '@/models';
 
 import { ICategoryDataset, OTHERS_CATEGORY_ID, PARENTS_CATEGORY_ID } from './types';
 import { useDatasetByType } from './useDatasetByType';
 import { buildPieDataset } from './util';
+
 
 interface IProps {
   title: string;

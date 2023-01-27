@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 
-import { Rows, TablesName } from '@models';
+import { Rows, TablesName } from '@/models';
 
 import { useDelete, UseDeleteOptions } from './useDelete';
+
 
 export type UseDeleteByIdReturn<TName extends TablesName> = (id: string) => Promise<Rows<TName>>;
 

@@ -2,11 +2,12 @@ import React from 'react';
 
 import { Stat } from '@chakra-ui/react';
 
-import { es } from '@i18n';
-import { ContentLoader, StatIconContainer, StatLabel, StatNumberFormatted } from '@shared';
+import { es } from '@/i18n';
+import { ContentLoader, StatIconContainer, StatLabel, StatNumberFormatted } from '@/shared';
 
 import { useMovementSelectSummary } from '../../hooks';
 import { useMovementStore } from '../../providers';
+
 
 const InvestmentStat: React.FC = () => {
   const [{ accountId, month, previousMonth, previousYear, year }] = useMovementStore();
