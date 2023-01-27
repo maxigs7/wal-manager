@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { Currency, getCurrencyName } from '@models';
-import { SelectControl, SelectForm } from '@shared';
+import { SelectForm } from '@shared';
 
 type SelectOption = {
   label: string;

@@ -1,6 +1,7 @@
+import React, { useMemo } from 'react';
+
 import { HStack } from '@chakra-ui/react';
 import { MenuPlacement } from 'chakra-react-select';
-import React, { useMemo } from 'react';
 
 import { Select as ReactSelect } from '@lib';
 import { CreditCard, CreditCardType } from '@models';
@@ -23,14 +24,14 @@ export interface ICreditCardSelectProps {
   menuPortalTarget?: HTMLElement | null;
   name: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
-  onChange?(value?: string): void;
+  onChange?(value?: CreditCard): void;
   placeholder?: string;
   value?: string;
 }
 
 const Option: React.FC<SelectOption> = ({ label, type }) => (
   <HStack align="center">
-    <CreditCardInline iconWidth={25} name={label} type={type} />
+    <CreditCardInline name={label} type={type} />
   </HStack>
 );
 
@@ -55,8 +56,8 @@ const CreditCardSelect = React.forwardRef<any, ICreditCardSelectProps>(
     const options = useMemo(
       () =>
         creditCards.map((cc) => ({
+          ...cc,
           label: cc.name,
-          type: cc.type,
           value: cc.id,
         })),
       [creditCards],
@@ -74,11 +75,12 @@ const CreditCardSelect = React.forwardRef<any, ICreditCardSelectProps>(
         menuPortalTarget={menuPortalTarget}
         name={name}
         onBlur={onBlur}
-        onChange={(selected) => onChange && onChange(selected?.value)}
+        onChange={(selected) => onChange && onChange(selected || undefined)}
         options={options}
         placeholder={placeholder}
         ref={ref}
         value={options?.find((option) => option.value === value)}
+        variant="flushed"
       />
     );
   },

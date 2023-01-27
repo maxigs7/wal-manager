@@ -1,5 +1,6 @@
-import { FormLabel, Switch, SwitchProps } from '@chakra-ui/react';
 import React from 'react';
+
+import { FormLabel, Switch, SwitchProps } from '@chakra-ui/react';
 import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 interface IProps extends SwitchProps {

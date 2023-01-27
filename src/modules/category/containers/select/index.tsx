@@ -1,16 +1,12 @@
 import React from 'react';
 
-import { CategoryType } from '@models';
-
 import { CategorySelect, ICategorySelectProps } from '../../components';
-import { useCategoryList } from '../../hooks';
+import { useCategorySelectLookup } from '../../hooks';
 
-interface IProps extends Omit<ICategorySelectProps, 'categories' | 'isLoading'> {
-  type?: CategoryType;
-}
+interface IProps extends Omit<ICategorySelectProps, 'categories' | 'isLoading'> {}
 
-const CategorySelectContainer: React.FC<IProps> = ({ type, ...props }) => {
-  const { data: categories, isLoading } = useCategoryList({ type });
+const CategorySelectContainer: React.FC<IProps> = (props) => {
+  const { data: categories, isLoading } = useCategorySelectLookup();
 
   return <CategorySelect categories={categories} isLoading={isLoading} {...props} />;
 };

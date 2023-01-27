@@ -1,13 +1,14 @@
-import { useTheme } from '@chakra-ui/react';
 import { useMemo } from 'react';
 
-import { TransactionType } from '@models';
+import { useTheme } from '@chakra-ui/react';
+
+import { MovementType } from '@models';
 
 import { useTotalsByCategory } from '../../hooks';
 import { buildDatasetByType } from './util';
 
 export const useDatasetByType = (
-  type: TransactionType,
+  type: MovementType,
   startDate: Date,
   endDate: Date,
   maxCategories: number = 5,

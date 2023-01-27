@@ -1,5 +1,6 @@
-import { Flex, useColorModeValue, VStack } from '@chakra-ui/react';
 import React from 'react';
+
+import { Flex, useColorModeValue, VStack } from '@chakra-ui/react';
 
 import { SIDEBAR_WIDTH, SIDEBAR_Z_INDEX } from '../constants';
 import { useLayout } from '../provider';

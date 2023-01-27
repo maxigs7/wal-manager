@@ -24,6 +24,11 @@ export const category = {
       metaTitle: 'Mis Categorías',
       title: 'Mis Categorías',
     },
+    move: {
+      breadcrumb: 'Mover',
+      metaTitle: 'Mover Categoría',
+      title: 'Mover Categoría',
+    },
     remove: {
       title: 'Eliminar Categoría',
     },

@@ -1,12 +1,13 @@
-import { Box, Skeleton } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
+
+import { Box, Skeleton } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import { useUser } from '@m/auth';
 import { CreditCard, DEFAULT_CREDIT_CARD_TYPE } from '@models';
 
 import { CreditCardForm } from '../../components';
-import { useCreditCardCreate, useCreditCardGetById, useCreditCardUpdate } from '../../hooks';
+import { useCreditCardCreate, useCreditCardSelectById, useCreditCardUpdate } from '../../hooks';
 import Actions from './actions';
 
 interface IProps {
@@ -18,7 +19,7 @@ const CreditCardFormContainer: React.FC<IProps> = ({ id, onConfirmed }) => {
   const { user } = useUser();
   const create = useCreditCardCreate();
   const update = useCreditCardUpdate();
-  const { data: creditCard, isLoading } = useCreditCardGetById(id);
+  const { data: creditCard, isLoading } = useCreditCardSelectById(id);
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
   const useFormProps = useForm<CreditCard>({
@@ -43,7 +44,7 @@ const CreditCardFormContainer: React.FC<IProps> = ({ id, onConfirmed }) => {
   }, [creditCard, reset]);
 
   return (
-    <Box as="form" bg="white" onSubmit={onSubmit}>
+    <Box as="form" bg="white" onSubmit={onSubmit} noValidate>
       <Actions display={['none', 'flex']} isLoading={isSubmitting || isFormSubmitting} />
       <Skeleton isLoaded={!isLoading || !id} p="5">
         <CreditCardForm {...useFormProps} id={id} />

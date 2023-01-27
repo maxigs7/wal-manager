@@ -1,0 +1,73 @@
+export const movement = {
+  actions: {
+    changeQuotation: 'Cambiar Cotización',
+    create: 'Nuevo',
+  },
+  headers: {
+    amount: 'Importe',
+    category: 'Categoría',
+    creditCard: 'Tarjeta',
+    date: 'Fecha',
+    description: 'Detalle',
+    isPaid: 'Pago',
+  },
+  filters: {
+    accountId: 'Seleccione una cuenta',
+    categoryId: 'Seleccione una categoría',
+    creditCardId: 'Seleccione una tarjeta',
+  },
+  form: {
+    amount: 'Monto',
+    accountId: 'Cuenta',
+    accountIdPlaceHolder: 'Seleccione una cuenta',
+    billedDate: 'Fecha de cobro',
+    categoryId: 'Categoría',
+    createAll: 'Crear todas las cuotas',
+    categoryIdPlaceHolder: 'Seleccione una categoría',
+    creditCardId: 'Tarjeta',
+    creditCardIdPlaceHolder: 'Seleccione una tarjeta',
+    creditSection: 'Credito',
+    date: 'Fecha',
+    description: 'Descripción',
+    destinationAccountId: 'Cuenta Destino',
+    destinationAccountIdPlaceHolder: 'Seleccione una cuenta',
+    feeNumber: 'Cuotas',
+    isPaid: 'Esta Pago',
+    isRecurring: 'Es Recurrente',
+    monthYear: 'Mes/Año',
+    quotationAmount: 'Cotización',
+    seeLess: 'Ocultar',
+    seeMore: 'Ver mas',
+    transferSection: 'Transferencia',
+    type: 'Tipo',
+    typePlaceHolder: 'Seleccione un tipo de movimiento',
+  },
+  pages: {
+    create: {
+      metaTitle: 'Nuevo Movimiento',
+      title: 'Nuevo Movimiento',
+    },
+    index: {
+      metaTitle: 'Mis Movimientos',
+      title: 'Mis Movimientos',
+    },
+    remove: {
+      title: 'Eliminar Movimiento',
+    },
+    update: {
+      metaTitle: 'Editar Movimiento',
+      title: 'Editar Movimiento',
+    },
+  },
+  summary: {
+    balance: 'Balance',
+    expenses: 'Gastos',
+    incomes: 'Ingresos',
+    investment: 'Inversiones',
+    prior: 'Anterior',
+  },
+  toast: {
+    saveSuccess: 'Se ha guardado el movimiento correctamente.',
+    removeSuccess: 'Se ha eliminado el movimiento correctamente.',
+  },
+};

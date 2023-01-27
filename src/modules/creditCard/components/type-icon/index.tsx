@@ -1,22 +1,24 @@
 import React from 'react';
 
+import { IconProps } from '@chakra-ui/react';
+
 import { CreditCardType } from '@models';
 import { AmexIcon, GenericIcon, MasterCardIcon, VisaIcon } from '@shared';
 
-interface IProps extends React.SVGProps<SVGSVGElement> {
+interface IProps extends Omit<IconProps, 'type'> {
   type: CreditCardType;
 }
 
-const CreditCardTypeIcon: React.FC<IProps> = ({ type, ...props }) => {
+const CreditCardTypeIcon: React.FC<IProps> = ({ type, boxSize = 8, ...props }) => {
   switch (type) {
     case 'amex':
-      return <AmexIcon {...props} />;
+      return <AmexIcon boxSize={boxSize} {...props} />;
     case 'mastercard':
-      return <MasterCardIcon {...props} />;
+      return <MasterCardIcon boxSize={boxSize} {...props} />;
     case 'visa':
-      return <VisaIcon {...props} />;
+      return <VisaIcon boxSize={boxSize} {...props} />;
     default:
-      return <GenericIcon {...props} />;
+      return <GenericIcon boxSize={boxSize} {...props} />;
   }
 };
 

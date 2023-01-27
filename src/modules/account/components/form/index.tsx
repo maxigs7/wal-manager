@@ -9,40 +9,44 @@ import {
 import { UseFormReturn } from 'react-hook-form';
 
 import { es } from '@i18n';
-import { Account, DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@models';
-import { InputCurrency, SwitchControl } from '@shared';
+import { QuotationSelectControlContainer } from '@m/quotation';
+import { AccountInsert, Currency, DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@models';
+import { ControlledInput, SwitchControl } from '@shared';
 
 import { useAccountIsUnique } from '../../hooks';
 import { SelectCurrencyControl } from '../select-currency-control';
 import { AccountTypeRadioGroup } from '../type-radio-group';
 
-interface IProps extends UseFormReturn<Account> {
+interface IProps extends UseFormReturn<AccountInsert> {
+  currency?: Currency;
   id?: string;
 }
 
-const AccountForm: React.FC<IProps> = ({ control, formState: { errors }, id, register }) => {
+const AccountForm: React.FC<IProps> = ({ control, currency, formState: { errors }, id }) => {
   const isUnique = useAccountIsUnique();
+
   return (
     <SimpleGrid columns={[1, 2, 3]} gap={6}>
       <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.name} order="1" isRequired>
         <FormLabel htmlFor="name">{es.account.form.name}</FormLabel>
-        <Input
+        <ControlledInput
+          control={control}
           id="name"
+          name="name"
           placeholder={es.account.form.namePlaceholder}
-          variant="flushed"
-          {...register('name', {
+          rules={{
             required: es.common.validation.required,
             validate: (name) => isUnique(name, id),
-          })}
+          }}
         />
         <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl as={GridItem} isInvalid={!!errors.isDefault} order={{ base: '5', md: '2' }}>
-        <SwitchControl control={control} id="isDefault" name="isDefault">
-          {es.account.form.isDefault}
+      <FormControl as={GridItem} isInvalid={!!errors.isPrimary} order={{ base: '5', md: '2' }}>
+        <SwitchControl control={control} id="isPrimary" name="isPrimary">
+          {es.account.form.isPrimary}
         </SwitchControl>
-        <FormErrorMessage>{errors.isDefault && errors.isDefault.message}</FormErrorMessage>
+        <FormErrorMessage>{errors.isPrimary && errors.isPrimary.message}</FormErrorMessage>
       </FormControl>
 
       <FormControl as={GridItem} isInvalid={!!errors.currency} order={{ base: '2', md: '3' }}>
@@ -56,19 +60,25 @@ const AccountForm: React.FC<IProps> = ({ control, formState: { errors }, id, reg
         <FormErrorMessage>{errors.currency && errors.currency.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl as={GridItem} isInvalid={!!errors.initialAmount} order={{ base: '3', md: '4' }}>
-        <FormLabel htmlFor="initialAmount"> {es.account.form.initialAmount}</FormLabel>
-        <InputCurrency
-          control={control}
-          id="initialAmount"
-          name="initialAmount"
-          placeholder={es.account.form.initialAmountPlaceholder}
-          variant="flushed"
-        />
-        <FormErrorMessage>{errors.initialAmount && errors.initialAmount.message}</FormErrorMessage>
-      </FormControl>
+      {currency === 'usd' && (
+        <FormControl as={GridItem} isInvalid={!!errors.quotationId} order={{ base: '3', md: '4' }}>
+          <FormLabel htmlFor="quotation"> {es.account.form.quotationId}</FormLabel>
+          <QuotationSelectControlContainer
+            control={control}
+            id="quotationId"
+            name="quotationId"
+            placeholder={es.account.form.quotationId}
+          />
+          <FormErrorMessage>{errors.quotationId && errors.quotationId.message}</FormErrorMessage>
+        </FormControl>
+      )}
 
-      <FormControl as={GridItem} isInvalid={!!errors.type} order={{ base: '4', md: '5' }}>
+      <FormControl
+        as={GridItem}
+        gridColumnStart={{ base: '1', md: '3' }}
+        isInvalid={!!errors.type}
+        order={{ base: '4', md: '5' }}
+      >
         <FormLabel htmlFor="type"> {es.account.form.type}</FormLabel>
         <AccountTypeRadioGroup
           control={control}

@@ -2,17 +2,19 @@ export const account = {
   headers: {
     currency: 'Moneda',
     initialAmount: 'Monto Inicial',
-    isDefault: 'Por Defecto',
+    isPrimary: 'Principal',
     name: 'Nombre',
+    quotationId: 'Cotización',
     type: 'Tipo',
   },
   form: {
     currency: 'Moneda',
     initialAmount: 'Monto inicial',
     initialAmountPlaceholder: 'Ingrese un monto inicial',
-    isDefault: 'Seleccionar por defecto',
+    isPrimary: 'Es tu cuenta principal',
     name: 'Nombre',
     namePlaceholder: 'Ingrese el nombre de la cuenta',
+    quotationId: 'Cotización',
     type: 'Tipo',
   },
   pages: {
@@ -30,6 +32,10 @@ export const account = {
     update: {
       metaTitle: 'Editar Cuenta',
       title: 'Editar Cuenta',
+    },
+    noAccount: {
+      message: 'Para gestionar movimientos necesitas al menos una cuenta',
+      title: 'No tienes ninguna cuenta creada',
     },
   },
   toast: {

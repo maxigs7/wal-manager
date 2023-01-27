@@ -1,20 +1,26 @@
 import { addMinutes } from 'date-fns';
 
+import { QuotationType } from '@models';
+
 import {
+  DolarsiList,
+  DolarsiName,
   DOLARSI_DATA_KEY,
   DOLARSI_EXPIRATION_MINUTES,
-  dollars,
-  DollarType,
+  DOLARSI_RESPONSE_KEYS,
   IDolarsi,
   IDolarsiLocalStorage,
   IDolarsiResponse,
 } from './types';
 
+const getKey = (key: DolarsiName): QuotationType => DolarsiList.get(key) as QuotationType;
+
 export const parseResponse = (data: IDolarsiResponse[]): IDolarsi[] =>
   data
-    .filter((i: IDolarsiResponse) => dollars.includes(i.casa.nombre as DollarType))
+    .filter((i: IDolarsiResponse) => DOLARSI_RESPONSE_KEYS.includes(i.casa.nombre as DolarsiName))
     .map((i) => ({
-      name: i.casa.nombre as DollarType,
+      key: getKey(i.casa.nombre as DolarsiName),
+      name: i.casa.nombre as DolarsiName,
       price: parseFloat(i.casa.venta.replace(',', '.')),
     }));
 
@@ -39,4 +45,15 @@ export const persistData = (data: IDolarsi[]) => {
       expiration: addMinutes(new Date(), DOLARSI_EXPIRATION_MINUTES).getTime(),
     }),
   );
+};
+
+export const getName = (val: QuotationType): DolarsiName => {
+  let quotation = '';
+  DolarsiList.forEach((v, k) => {
+    if (v === val) {
+      quotation = k;
+      return;
+    }
+  });
+  return quotation as DolarsiName;
 };

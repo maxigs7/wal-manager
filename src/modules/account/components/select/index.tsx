@@ -1,5 +1,6 @@
+import React, { useCallback, useMemo } from 'react';
+
 import { HStack } from '@chakra-ui/react';
-import React, { useMemo } from 'react';
 
 import { Select as ReactSelect } from '@lib';
 import { Account } from '@models';
@@ -17,7 +18,7 @@ export interface IAccountSelectProps {
   isLoading: boolean;
   name: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
-  onChange?(value?: string): void;
+  onChange?(selected?: Account): void;
   placeholder?: string;
   value?: string;
 }
@@ -49,11 +50,12 @@ const AccountSelect = React.forwardRef<any, IAccountSelectProps>(
         isSearchable={false}
         name={name}
         onBlur={onBlur}
-        onChange={(selected) => onChange && onChange(selected?.value)}
+        onChange={(selected) => onChange && onChange(selected || undefined)}
         options={options}
         placeholder={placeholder}
         ref={ref}
         value={options?.find((option) => option.value === value)}
+        variant="flushed"
       />
     );
   },

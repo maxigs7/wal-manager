@@ -1,24 +1,22 @@
 import { useCallback } from 'react';
 
-import { useSupabaseClient } from '@api';
+import { useUow } from '@api';
 import { es } from '@i18n';
-import { CategoryType } from '@models';
 
 type UseIsUniqueReturn = (
-  type: CategoryType,
   name: string,
   id?: string,
   parentId?: string,
 ) => Promise<string | boolean>;
 
 const useIsUnique = (): UseIsUniqueReturn => {
-  const { categories } = useSupabaseClient();
+  const { category } = useUow();
 
   return useCallback(
-    async (type: CategoryType, name: string, id?: string, parentId?: string) => {
-      const data = await categories.getAll({
-        filtering: (q) => {
-          let filtered = q.eq('type', type).eq('name', name);
+    async (name: string, id?: string, parentId?: string) => {
+      const data = await category.select({
+        filter: (query) => {
+          let filtered = query.eq('name', name);
           if (parentId) {
             filtered = filtered.eq('parentId', parentId);
           } else {
@@ -34,7 +32,7 @@ const useIsUnique = (): UseIsUniqueReturn => {
       if (data.length > 0) return es.category.toast.uniqueError;
       return true;
     },
-    [categories],
+    [category],
   );
 };
 

@@ -5,4 +5,3 @@ export * from './select-control';
 export * from './sub-form';
 export * from './table';
 export * from './tag';
-export * from './type-filter-tabs';

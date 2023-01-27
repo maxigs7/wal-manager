@@ -4,4 +4,4 @@ export * from './category';
 export * from './common';
 export * from './creditCard';
 export * from './menu';
-export * from './transaction';
+export * from './movement';

@@ -1,17 +1,16 @@
 import React from 'react';
 
 import { CategorySelectControl, ICategorySelectControlProps } from '../../components';
-import { GetCategoryFilters, useCategoryList } from '../../hooks';
+import { GetCategoryFilters, useCategorySelectLookup } from '../../hooks';
 
 type Props = Omit<ICategorySelectControlProps, 'categories' | 'isLoading'> & GetCategoryFilters;
 
 const CategorySelectControlContainer: React.FC<Props> = ({
   excludeChildren,
   excludeId,
-  type,
   ...props
 }) => {
-  const { data: categories, isLoading } = useCategoryList({ excludeChildren, excludeId, type });
+  const { data: categories, isLoading } = useCategorySelectLookup({ excludeChildren, excludeId });
   return <CategorySelectControl categories={categories} isLoading={isLoading} {...props} />;
 };
 

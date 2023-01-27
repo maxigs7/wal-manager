@@ -13,9 +13,9 @@
     "noEmit": true,
     "paths": {
       "@api": ["./api"],
-      "@app": ["./app"],
       "@assets": ["./assets"],
       "@assets/*": ["./assets/*"],
+      "@bootstrap": ["./bootstrap"],
       "@i18n": ["./i18n"],
       "@layout": ["./layout"],
       "@lib": ["./lib"],
@@ -32,9 +32,14 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es5",
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "typeRoots": ["./src/types", "./node_modules/@types"],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./src/types"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./src/types", ".next/types/**/*.ts"],
   "exclude": [
     "dist",
     "out",

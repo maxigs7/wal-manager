@@ -1,19 +1,28 @@
 import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
+import { Session, User } from '@supabase/supabase-js';
 
-export type BaseModel = {
-  id: string;
+import { Rows, Schema, TablesName } from '@models';
+
+export type Count = 'exact' | 'planned' | 'estimated';
+
+export type Filter<TName extends TablesName, Row extends Rows<TName>, Result = Row> = (
+  query: PostgrestFilterBuilder<Schema, Rows<TName>, Result>,
+) => PostgrestFilterBuilder<Schema, Row, Result>;
+
+export type Sort = {
+  ascending?: boolean;
+  field: string;
+  foreignTable?: string;
+  nullsFirst?: boolean;
 };
 
-export interface IGetAllOptions<T extends BaseModel> {
-  columns?: string;
-  sort?: { field: string; ascending?: boolean };
-  filtering?: (query: PostgrestFilterBuilder<T, any>) => PostgrestFilterBuilder<T, any>;
-}
+export type PostgrestError = {
+  code: string;
+  details: string;
+  hint: string;
+  message: string;
+};
 
-export interface IGenericRepository<T extends BaseModel> {
-  create(model: T): Promise<T>;
-  getAll(options?: IGetAllOptions<T>): Promise<T[]>;
-  getById(id: string, columns?: string): Promise<T>;
-  remove(id: string): Promise<T>;
-  update(model: Partial<T>): Promise<T>;
-}
+export type Returning = 'minimal' | 'representation';
+
+export type UserSession = { session: Session | null; user: User | null };

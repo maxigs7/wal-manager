@@ -1,5 +1,6 @@
-import { useDisclosure } from '@chakra-ui/hooks';
 import { PropsWithChildren } from 'react';
+
+import { useDisclosure } from '@chakra-ui/hooks';
 
 import { PrivateRoute } from '@m/auth';
 

@@ -1,46 +1,74 @@
+import React from 'react';
+
 import {
+  InputGroup,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
   NumberInputField,
+  NumberInputProps,
   NumberInputStepper,
 } from '@chakra-ui/react';
-import React from 'react';
-import { Control, RegisterOptions, useController } from 'react-hook-form';
+import { Control, Controller, RegisterOptions } from 'react-hook-form';
 
-interface IProps {
+interface IProps extends Omit<NumberInputProps, 'onChange'> {
   control: Control<any>;
   defaultValue?: number;
   id?: string;
   name: string;
   placeholder?: string;
-  rules?: RegisterOptions;
+  rules?: Omit<Partial<RegisterOptions>, 'valueAsNumber'>;
 }
 
-const InputNumber: React.FC<IProps> = ({ control, defaultValue, id, name, rules }) => {
-  const {
-    field: { onChange, ...field },
-  } = useController({
-    name,
-    control,
-    rules,
-    defaultValue,
-  });
+const InputNumber = React.forwardRef<HTMLInputElement, IProps>(
+  ({ control, defaultValue, id, name, onBlur, placeholder, rules, ...inputProps }, ref) => {
+    return (
+      <Controller
+        control={control}
+        defaultValue=""
+        name={name}
+        render={({ field: { onChange: onChangeField, ref: refField, ...field } }) => {
+          const onChangeHandler = (valueAsString: string, valueAsNumber: number) => {
+            let value: string | number = valueAsNumber;
+            if (valueAsString === '' || valueAsString.includes('.')) {
+              value = valueAsString;
+            }
 
-  const handleWithPrecision = (valueAsString: string, valueAsNumber: number) => {
-    if (valueAsString === '' || valueAsString.includes('.')) return onChange(valueAsString);
-    return onChange(valueAsNumber);
-  };
+            onChangeField(value);
+          };
 
-  return (
-    <NumberInput {...field} defaultValue={defaultValue} id={id} onChange={handleWithPrecision}>
-      <NumberInputField />
-      <NumberInputStepper>
-        <NumberIncrementStepper />
-        <NumberDecrementStepper />
-      </NumberInputStepper>
-    </NumberInput>
-  );
-};
+          return (
+            <NumberInput
+              {...inputProps}
+              {...field}
+              as={InputGroup}
+              defaultValue={defaultValue}
+              id={id}
+              onChange={onChangeHandler}
+              type="numeric"
+              variant="flushed"
+              ref={(e: HTMLInputElement) => {
+                refField(e);
+                if (ref != null && typeof ref !== 'function') {
+                  ref.current = e;
+                } else if (ref != null && typeof ref === 'function') {
+                  ref(e);
+                }
+              }}
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          );
+        }}
+      />
+    );
+  },
+);
+
+InputNumber.displayName = 'InputNumber';
 
 export { InputNumber };

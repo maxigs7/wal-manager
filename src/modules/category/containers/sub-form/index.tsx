@@ -1,29 +1,29 @@
-import { Box, Skeleton } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
+
+import { Box, Skeleton } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import { useUser } from '@m/auth';
-import { Category, CategoryType } from '@models';
+import { CategoryInsert } from '@models';
 
 import { FormActions, SubCategoryForm } from '../../components';
-import { useCategoryCreate, useCategoryGetById, useCategoryUpdate } from '../../hooks';
+import { useCategoryCreate, useCategorySelectById, useCategoryUpdate } from '../../hooks';
 
 interface IProps {
   id?: string;
-  onConfirmed(category: Category): void;
+  onConfirmed(category: CategoryInsert): void;
   parentId: string;
-  type: CategoryType;
 }
 
-const SubCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, parentId, type }) => {
+const SubCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, parentId }) => {
   const { user } = useUser();
   const create = useCategoryCreate();
   const update = useCategoryUpdate();
-  const { data: category, isLoading } = useCategoryGetById(id);
+  const { data: category, isLoading } = useCategorySelectById(id);
   const { isLoading: isSubmitting, mutateAsync } = id ? update : create;
 
-  const useFormProps = useForm<Category>({
-    defaultValues: { parentId, userId: user?.id as string, type },
+  const useFormProps = useForm<CategoryInsert>({
+    defaultValues: { parentId, userId: user?.id as string },
   });
   const {
     formState: { isSubmitting: isFormSubmitting },
@@ -44,20 +44,12 @@ const SubCategoryFormContainer: React.FC<IProps> = ({ id, onConfirmed, parentId,
   }, [category, reset]);
 
   return (
-    <Box as="form" bg="white" onSubmit={onSubmit}>
-      <FormActions
-        display={['none', 'flex']}
-        isLoading={isSubmitting || isFormSubmitting}
-        type={type}
-      />
+    <Box as="form" bg="white" onSubmit={onSubmit} noValidate>
+      <FormActions display={['none', 'flex']} isLoading={isSubmitting || isFormSubmitting} />
       <Skeleton isLoaded={!isLoading || !id} maxW="md" p="5">
-        <SubCategoryForm {...useFormProps} id={id} parentId={parentId} type={type} />
+        <SubCategoryForm {...useFormProps} id={id} parentId={parentId} />
       </Skeleton>
-      <FormActions
-        display={['flex', 'none']}
-        isLoading={isSubmitting || isFormSubmitting}
-        type={type}
-      />
+      <FormActions display={['flex', 'none']} isLoading={isSubmitting || isFormSubmitting} />
     </Box>
   );
 };

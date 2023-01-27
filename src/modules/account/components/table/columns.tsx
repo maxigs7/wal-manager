@@ -1,9 +1,17 @@
 import { Flex } from '@chakra-ui/react';
 import { CellContext, ColumnDef, createColumnHelper } from '@tanstack/react-table';
 
+import { DolarsiList, getDolarsiName } from '@api';
 import { es } from '@i18n';
 import { formatToCurrency } from '@lib';
-import { Account, AccountType, Currency, getAccountTypeName, getCurrencyName } from '@models';
+import {
+  Account,
+  AccountType,
+  Currency,
+  getAccountTypeName,
+  getCurrencyName,
+  QuotationType,
+} from '@models';
 import { ActionButton, ActionsCell, BooleanCell } from '@shared';
 
 import { AccountTypeIcon } from '../type-icon';
@@ -36,14 +44,16 @@ export const getColumns: GetColumnsType = ({ onRemove, onUpdate }) => [
     header: es.account.headers.currency,
     enableSorting: false,
   }),
-  columnHelper.accessor('initialAmount', {
-    cell: (props: CellContext<Account, number>) =>
-      props.getValue() && formatToCurrency(props.getValue()),
-    header: es.account.headers.initialAmount,
+  columnHelper.accessor('quotationId', {
+    cell: (props: CellContext<Account, QuotationType>) => {
+      if (!props.getValue()) return null;
+      return getDolarsiName(props.getValue());
+    },
+    header: es.account.headers.quotationId,
   }),
-  columnHelper.accessor('isDefault', {
+  columnHelper.accessor('isPrimary', {
     cell: BooleanCell,
-    header: es.account.headers.isDefault,
+    header: es.account.headers.isPrimary,
     enableSorting: false,
   }),
   columnHelper.display({

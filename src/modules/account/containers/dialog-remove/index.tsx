@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { es } from '@i18n';
 import { DialogRemove } from '@shared';
 
-import { useAccountListRefresh, useAccountRemove } from '../../hooks';
+import { useAccountSelectAllRefresh, useAccountDelete } from '../../hooks';
 
 interface IProps {
   id?: string;
@@ -12,8 +12,8 @@ interface IProps {
 }
 
 const AccountDialogRemove: React.FC<IProps> = ({ id, isOpen, onDismiss }) => {
-  const { data, isLoading, isSuccess, mutate, reset } = useAccountRemove();
-  const refresh = useAccountListRefresh();
+  const { data, isLoading, isSuccess, mutate, reset } = useAccountDelete();
+  const refresh = useAccountSelectAllRefresh();
 
   const onConfirm = () => {
     id && mutate(id);

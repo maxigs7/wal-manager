@@ -1,6 +1,7 @@
-import { Flex, FlexProps, Heading, useColorModeValue } from '@chakra-ui/react';
 import Head from 'next/head';
 import React, { PropsWithChildren } from 'react';
+
+import { Flex, FlexProps, Heading, useColorModeValue } from '@chakra-ui/react';
 
 interface IProps extends PropsWithChildren {
   metaDescription?: string;

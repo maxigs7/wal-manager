@@ -1,6 +1,7 @@
-import { Flex, ScaleFade } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { PropsWithChildren } from 'react';
+
+import { Box, Flex, ScaleFade } from '@chakra-ui/react';
 
 import { NAVBAR_HEIGHT, SIDEBAR_WIDTH } from './constants';
 import { Navbar } from './navbar';
@@ -20,11 +21,11 @@ const FullLayout: React.FC<PropsWithChildren> = ({ children }) => {
         pt={NAVBAR_HEIGHT}
       >
         <Navbar />
-        <ScaleFade key={router.route} in={true} initialScale={0.9}>
-          <Flex as="main" mx="auto" w="full">
+        <Box key={router.route} as={ScaleFade} h="full" in={true} initialScale={0.9}>
+          <Flex as="main" h="full" mx="auto" w="full">
             {children}
           </Flex>
-        </ScaleFade>
+        </Box>
       </Flex>
     </Flex>
   );

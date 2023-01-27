@@ -1,3 +1,2 @@
-export * from './provider';
-export * from './repositories';
-export type { ISupabaseClient } from './supabase-client';
+export * from './hooks-actions';
+export * from './hooks-repo';

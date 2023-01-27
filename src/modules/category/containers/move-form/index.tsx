@@ -1,26 +1,26 @@
-import { Box, FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import React from 'react';
+
+import { Box, FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import { es } from '@i18n';
-import { Category, CategoryMoveForm, CategoryType } from '@models';
+import { CategoryUpdate } from '@models';
 
 import { FormActions } from '../../components';
-import { useCategoryMove } from '../../hooks';
+import { useCategoryUpdate } from '../../hooks';
 import { CategorySelectControlContainer } from '../select-control';
 
 interface IProps {
   id: string;
-  onConfirmed(category: Category): void;
+  onConfirmed(category: CategoryUpdate): void;
   parentId: string;
-  type: CategoryType;
 }
 
-const SubCategoryMoveFormContainer: React.FC<IProps> = ({ id, onConfirmed, parentId, type }) => {
-  const move = useCategoryMove();
+const SubCategoryMoveFormContainer: React.FC<IProps> = ({ id, onConfirmed, parentId }) => {
+  const move = useCategoryUpdate();
   const { isLoading: isSubmitting, mutateAsync } = move;
 
-  const useFormProps = useForm<CategoryMoveForm>({
+  const useFormProps = useForm<CategoryUpdate>({
     defaultValues: { id, parentId },
   });
   const {
@@ -37,11 +37,7 @@ const SubCategoryMoveFormContainer: React.FC<IProps> = ({ id, onConfirmed, paren
 
   return (
     <Box as="form" bg="white" onSubmit={onSubmit}>
-      <FormActions
-        display={['none', 'flex']}
-        isLoading={isSubmitting || isFormSubmitting}
-        type={type}
-      />
+      <FormActions display={['none', 'flex']} isLoading={isSubmitting || isFormSubmitting} />
       <Box maxW="md" p="5">
         <FormControl isInvalid={!!errors.parentId} isRequired>
           <FormLabel htmlFor="parentId">{es.category.form.parentId}</FormLabel>
@@ -51,7 +47,6 @@ const SubCategoryMoveFormContainer: React.FC<IProps> = ({ id, onConfirmed, paren
             id="parentId"
             name="parentId"
             placeholder={es.category.form.parentIdPlaceholder}
-            type={type}
             rules={{
               required: es.common.validation.required,
             }}
@@ -60,11 +55,7 @@ const SubCategoryMoveFormContainer: React.FC<IProps> = ({ id, onConfirmed, paren
           <FormErrorMessage>{errors.parentId && errors.parentId.message}</FormErrorMessage>
         </FormControl>
       </Box>
-      <FormActions
-        display={['flex', 'none']}
-        isLoading={isSubmitting || isFormSubmitting}
-        type={type}
-      />
+      <FormActions display={['flex', 'none']} isLoading={isSubmitting || isFormSubmitting} />
     </Box>
   );
 };

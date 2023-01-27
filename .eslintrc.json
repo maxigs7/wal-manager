@@ -13,25 +13,28 @@
     "import/order": [
       "warn",
       {
-        "groups": [["external", "builtin"], "internal", ["parent", "index", "sibling", "object"]],
+        "groups": ["builtin", "external", "internal", ["parent", "index", "sibling", "object"]],
         "pathGroups": [
           {
-            "pattern": "(react|next/**)",
-            "group": "external",
-            "position": "before"
-          },
-          {
-            "pattern": "@chakra-ui/**",
+            "pattern": "next",
             "group": "builtin",
             "position": "after"
           },
-
           {
-            "pattern": "@(api|app|i18n|layout|lib|models|m|pages|routes|shared|theme)/**",
+            "pattern": "next/**",
+            "group": "builtin"
+          },
+          {
+            "pattern": "react",
+            "group": "builtin"
+          },
+          {
+            "pattern": "@(api|bootstrap|i18n|layout|lib|models|m|pages|routes|shared|theme)/**",
             "group": "internal",
             "position": "after"
           }
         ],
+        "pathGroupsExcludedImportTypes": ["next", "next/**", "react"],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",

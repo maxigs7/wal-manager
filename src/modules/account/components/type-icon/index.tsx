@@ -1,5 +1,6 @@
-import { IconName } from '@fortawesome/fontawesome-svg-core';
 import React, { useMemo } from 'react';
+
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 import { AccountType } from '@models';
 import { Icon, WalIconProps } from '@shared';

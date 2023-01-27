@@ -1,5 +1,6 @@
-import { Button, ButtonProps, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+
+import { Button, ButtonProps, Text } from '@chakra-ui/react';
 
 import { IDolarsi } from '@api';
 import { es } from '@i18n';

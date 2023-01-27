@@ -1,9 +1,10 @@
-import { MenuPlacement } from 'chakra-react-select';
 import React, { useMemo } from 'react';
 
-import { Select as ReactSelect } from '@lib';
-import { CategoryLookup } from '@models';
+import { MenuPlacement } from 'chakra-react-select';
 
+import { Select as ReactSelect } from '@lib';
+
+import { CategoryLookup } from '../../models';
 import { CategoryTag } from '../tag';
 
 type SelectOption = { label: string; value: string } & CategoryLookup;
@@ -18,7 +19,7 @@ export interface ICategorySelectProps {
   menuPortalTarget?: HTMLElement | null;
   name: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
-  onChange?(value?: string): void;
+  onChange?(selected?: CategoryLookup): void;
   placeholder?: string;
   value?: string;
 }
@@ -67,11 +68,12 @@ const CategorySelect = React.forwardRef<any, ICategorySelectProps>(
         menuPortalTarget={menuPortalTarget}
         name={name}
         onBlur={onBlur}
-        onChange={(selected) => onChange && onChange(selected?.value)}
+        onChange={(selected) => onChange && onChange(selected || undefined)}
         options={options}
         placeholder={placeholder}
         ref={ref}
         value={options?.find((option) => option.value === value)}
+        variant="flushed"
       />
     );
   },

@@ -2,8 +2,9 @@ import { getToken, WithCSSVar } from '@chakra-ui/react';
 import { Dict } from '@chakra-ui/utils';
 
 import { es } from '@i18n';
-import { CategoryTotalItem, TransactionType } from '@models';
+import { MovementType } from '@models';
 
+import { CategoryTotalItem } from '../../models';
 import { ICategoryDataset, OTHERS_CATEGORY_ID } from './types';
 
 export const getColor = (colorToken: string, theme: WithCSSVar<Dict<any>>): string =>
@@ -52,7 +53,7 @@ const buildSubDataset = (categories: CategoryTotalItem[], rootId: string, rootCo
 
 export const buildDatasetByType = (
   categories: CategoryTotalItem[],
-  type: TransactionType,
+  type: MovementType,
   theme: WithCSSVar<Dict<any>>,
   maxCategories: number,
 ) => {

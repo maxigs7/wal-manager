@@ -1,5 +1,6 @@
-import { Flex, IconButton, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
+
+import { Flex, IconButton, useColorModeValue } from '@chakra-ui/react';
 
 import { ColorModeToggle, Icon } from '@shared';
 

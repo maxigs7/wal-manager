@@ -7,6 +7,7 @@ export * from './form';
 export * from './icon';
 export * from './icon-select';
 export * from './loaders';
+export * from './month-year';
 export * from './logo';
 export * from './page';
 export * from './stat-money';

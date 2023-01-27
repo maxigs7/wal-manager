@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { CreditCardTable } from '../../components';
-import { useCreditCardList } from '../../hooks';
+import { useCreditCardSelectAll } from '../../hooks';
 
 interface IProps {
   onRemove(id: string): void;
@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const CreditCardTableContainer: React.FC<IProps> = ({ onRemove, onUpdate }) => {
-  const { data: creditCards, isLoading } = useCreditCardList();
+  const { data: creditCards, isLoading } = useCreditCardSelectAll();
 
   return (
     <CreditCardTable

@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-import { CategoryRow } from '@models';
 import { Table } from '@shared';
 
+import { CategoryRow } from '../../models';
 import { Actions, getColumns } from './columns';
 
 type Props = Actions & {

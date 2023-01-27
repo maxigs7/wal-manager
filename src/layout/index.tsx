@@ -1,5 +1,6 @@
-import { NextPage } from 'next';
 import { ReactElement, ReactNode } from 'react';
+
+import { NextPage } from 'next';
 
 import { default as AuthLayout } from './auth';
 import { default as DefaultLayout } from './default';

@@ -1,10 +1,7 @@
 import React from 'react';
 
-import { ContentLoader } from '@shared';
-
 import { CategoryTable, CategoryTableActions } from '../../components';
-import { useCategoryRows } from '../../hooks';
-import { useCategoryFilter } from '../../providers';
+import { useCategorySelectRow } from '../../hooks';
 
 const CategoryTableContainer: React.FC<CategoryTableActions> = ({
   onRemove,
@@ -13,8 +10,7 @@ const CategoryTableContainer: React.FC<CategoryTableActions> = ({
   onSubUpdate,
   onUpdate,
 }) => {
-  const [state] = useCategoryFilter();
-  const { data: categories, isLoading } = useCategoryRows(state.type);
+  const { data: categories, isLoading } = useCategorySelectRow();
 
   return (
     <CategoryTable

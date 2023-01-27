@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   InputGroup,
   InputLeftElement,
@@ -5,12 +7,11 @@ import {
   NumberInputField,
   NumberInputProps,
 } from '@chakra-ui/react';
-import React from 'react';
-import { Control, RegisterOptions, useController } from 'react-hook-form';
+import { Control, Controller, RegisterOptions } from 'react-hook-form';
 
 import { Icon } from '../../icon';
 
-interface IProps extends NumberInputProps {
+interface IProps extends Omit<NumberInputProps, 'onChange'> {
   control: Control<any>;
   defaultValue?: number;
   id?: string;
@@ -19,50 +20,62 @@ interface IProps extends NumberInputProps {
   rules?: Omit<Partial<RegisterOptions>, 'valueAsNumber'>;
 }
 
-const InputCurrency: React.FC<IProps> = ({
-  control,
-  defaultValue,
-  id,
-  name,
-  placeholder,
-  rules,
-  ...inputProps
-}) => {
-  const {
-    field: { onChange, ...field },
-  } = useController({
-    name,
-    control,
-    rules,
-    defaultValue,
-  });
+const InputCurrency = React.forwardRef<HTMLInputElement, IProps>(
+  ({ control, defaultValue, id, name, onBlur, placeholder, rules, ...inputProps }, ref) => {
+    return (
+      <Controller
+        control={control}
+        defaultValue=""
+        name={name}
+        render={({ field: { onChange: onChangeField, ref: refField, ...field } }) => {
+          const onChangeHandler = (valueAsString: string, valueAsNumber: number) => {
+            let value: string | number = valueAsNumber;
+            if (valueAsString === '' || valueAsString.includes('.')) {
+              value = valueAsString;
+            }
 
-  const handleWithPrecision = (valueAsString: string, valueAsNumber: number) => {
-    if (valueAsString === '' || valueAsString.includes('.')) return onChange(valueAsString);
-    return onChange(valueAsNumber);
-  };
+            onChangeField(value);
+          };
 
-  return (
-    <NumberInput
-      {...inputProps}
-      {...field}
-      as={InputGroup}
-      defaultValue={defaultValue}
-      id={id}
-      onChange={handleWithPrecision}
-      precision={2}
-      type="numeric"
-    >
-      <InputLeftElement
-        // eslint-disable-next-line react/no-children-prop
-        children={<Icon icon="dollar-sign" />}
-        color="gray.300"
-        fontSize="1.2em"
-        pointerEvents="none"
+          return (
+            <NumberInput
+              {...inputProps}
+              {...field}
+              as={InputGroup}
+              defaultValue={defaultValue}
+              id={id}
+              onChange={onChangeHandler}
+              precision={2}
+              type="numeric"
+              ref={(e: HTMLInputElement) => {
+                refField(e);
+                if (ref != null && typeof ref !== 'function') {
+                  ref.current = e;
+                } else if (ref != null && typeof ref === 'function') {
+                  ref(e);
+                }
+              }}
+            >
+              <InputLeftElement
+                // eslint-disable-next-line react/no-children-prop
+                children={<Icon icon="dollar-sign" />}
+                color="gray.300"
+                fontSize="1.2em"
+                pointerEvents="none"
+              />
+              <NumberInputField
+                paddingInlineEnd={10}
+                paddingInlineStart={10}
+                placeholder={placeholder}
+              />
+            </NumberInput>
+          );
+        }}
       />
-      <NumberInputField paddingInlineEnd={10} paddingInlineStart={10} placeholder={placeholder} />
-    </NumberInput>
-  );
-};
+    );
+  },
+);
+
+InputCurrency.displayName = 'InputCurrency';
 
 export { InputCurrency };

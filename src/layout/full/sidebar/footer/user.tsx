@@ -1,11 +1,8 @@
-import { Avatar, Flex, HStack, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
-import NavLink from 'next/link';
 import React from 'react';
 
-import { useUser } from '@m/auth';
-import { Icon } from '@shared';
+import { Avatar, Flex, Text } from '@chakra-ui/react';
 
-import { SIDEBAR_WIDTH } from '../../constants';
+import { useUser } from '@m/auth';
 
 const User: React.FC = () => {
   const { user } = useUser();

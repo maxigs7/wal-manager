@@ -2,7 +2,7 @@ import { IconName } from '@fortawesome/free-solid-svg-icons';
 import { CellContext, ColumnDef, createColumnHelper } from '@tanstack/react-table';
 
 import { es } from '@i18n';
-import { CategoryRow } from '@models';
+import { colorTransform } from '@models';
 import {
   ActionButton,
   ActionsCell,
@@ -11,6 +11,8 @@ import {
   ExpandedCell,
   Icon,
 } from '@shared';
+
+import { CategoryRow } from '../../models';
 
 export interface Actions {
   onRemove(id: string): void;
@@ -41,7 +43,7 @@ export const getColumns: GetColumnsType = ({
   }),
   columnHelper.accessor('color', {
     cell: (props: CellContext<CategoryRow, string>) =>
-      props.getValue() ? <ColorCircle bg={props.getValue()} h="6" w="6" /> : null,
+      props.getValue() ? <ColorCircle bg={colorTransform(props.getValue())} h="6" w="6" /> : null,
     header: es.category.headers.color,
     enableSorting: false,
   }),

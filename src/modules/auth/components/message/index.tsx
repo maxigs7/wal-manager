@@ -1,5 +1,6 @@
-import { Box } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
+
+import { Box } from '@chakra-ui/react';
 
 interface IProps extends PropsWithChildren {
   type?: 'danger' | 'success';
