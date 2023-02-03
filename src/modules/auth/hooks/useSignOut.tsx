@@ -1,9 +1,9 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { useUow } from '@/api';
-import { ApiError } from '@/lib';
+import { SupabaseError } from '@/lib/supabase';
+import { useUow } from '@/shared';
 
-export const useSignOut = (): UseMutationResult<void, ApiError, void> => {
+export const useSignOut = (): UseMutationResult<void, SupabaseError, void> => {
   const { auth } = useUow();
-  return useMutation<void, ApiError, void>(auth.signOut);
+  return useMutation<void, SupabaseError, void>(auth.signOut);
 };

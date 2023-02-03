@@ -1,5 +1,5 @@
+import { Session, User } from '@supabase/auth-helpers-nextjs';
 import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
-import { Session, User } from '@supabase/supabase-js';
 
 import { Rows, Schema, TablesName } from '@/models';
 

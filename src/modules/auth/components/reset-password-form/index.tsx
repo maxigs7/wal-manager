@@ -8,7 +8,7 @@ import { es } from '@/i18n';
 export type ResetPasswordConfirmFormType = { password: string; confirmPassword: string };
 export type ResetPasswordConfirmFormProps = UseFormReturn<ResetPasswordConfirmFormType>;
 
-const Form: React.FC<ResetPasswordConfirmFormProps> = ({
+const ResetPasswordConfirmForm: React.FC<ResetPasswordConfirmFormProps> = ({
   formState: { errors },
   register,
   watch,
@@ -49,4 +49,4 @@ const Form: React.FC<ResetPasswordConfirmFormProps> = ({
   );
 };
 
-export default Form;
+export { ResetPasswordConfirmForm };

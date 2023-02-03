@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 
 import { useColorModeValue, useMergeRefs } from '@chakra-ui/react';

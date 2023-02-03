@@ -1,4 +1,4 @@
-import { Session, User } from '@supabase/supabase-js';
+import { Session, User } from '@supabase/auth-helpers-nextjs';
 
 export type AuthInitPayload = {
   session: Session | null;

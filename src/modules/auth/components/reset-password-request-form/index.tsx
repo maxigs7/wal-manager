@@ -6,7 +6,10 @@ import { es } from '@/i18n';
 export type ResetPasswordRequestFormType = { email: string };
 export type ResetPasswordRequestFormProps = UseFormReturn<ResetPasswordRequestFormType>;
 
-const Form: React.FC<ResetPasswordRequestFormProps> = ({ formState: { errors }, register }) => (
+const ResetPasswordRequestForm: React.FC<ResetPasswordRequestFormProps> = ({
+  formState: { errors },
+  register,
+}) => (
   <FormControl isInvalid={!!errors.email}>
     <FormLabel htmlFor="email">{es.auth.signIn.form.email}</FormLabel>
     <Input
@@ -21,4 +24,4 @@ const Form: React.FC<ResetPasswordRequestFormProps> = ({ formState: { errors }, 
   </FormControl>
 );
 
-export default Form;
+export { ResetPasswordRequestForm };

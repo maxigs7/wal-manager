@@ -1,8 +1,9 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-import { ApiError, useUow } from '@/api';
+import { SupabaseError } from '@/lib/supabase';
+import { useUow } from '@/shared';
 
-export const useUpdatePassword = (): UseMutationResult<void, Error, string> => {
+export const useUpdatePassword = (): UseMutationResult<void, SupabaseError, string> => {
   const { auth } = useUow();
-  return useMutation<void, ApiError, string>(auth.updatePassword);
+  return useMutation<void, SupabaseError, string>(auth.updatePassword);
 };

@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { clearTimeout } from 'timers';
 
@@ -14,8 +14,7 @@ import {
 } from '../../components';
 import { useResetPasswordRequest } from '../../hooks';
 
-
-const Container: React.FC = () => {
+const ResetPasswordRequest: React.FC = () => {
   const router = useRouter();
   const { isError, isLoading, isSuccess, mutateAsync } = useResetPasswordRequest();
   const form = useForm<ResetPasswordRequestFormType>();
@@ -63,4 +62,4 @@ const Container: React.FC = () => {
   );
 };
 
-export default Container;
+export { ResetPasswordRequest };

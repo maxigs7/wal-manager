@@ -1,21 +1,19 @@
-import { useRouter } from 'next/router';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { VStack, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import { es } from '@/i18n';
+import { routes } from '@/routes';
 
 import { AuthMessage, SignInForm, SignInFormType } from '../../components';
 import { useSignIn } from '../../hooks';
 
-
-// interface IState {
-//   from?: { pathname: string };
-// }
-
-const Container: React.FC = () => {
+const SignInByEmail: React.FC = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
   const { isError, isLoading, mutateAsync } = useSignIn();
   const form = useForm<SignInFormType>();
 
@@ -28,9 +26,8 @@ const Container: React.FC = () => {
       // when they get to the protected page and click the back button, they
       // won't end up back on the login page, which is also really nice for the
       // user experience.
-      // const from = state?.from?.pathname || '/dashboard';
-
-      router.push('/dashboard');
+      const from = searchParams.get('from') || routes.dashboard;
+      router.push(from);
     } catch (error) {
       console.error(error);
     }
@@ -38,8 +35,9 @@ const Container: React.FC = () => {
 
   useEffect(() => {
     // Prefetch the dashboard page
-    router.prefetch('/dashboard');
-  }, [router]);
+    const from = searchParams.get('from') || routes.dashboard;
+    router.prefetch(from);
+  }, [router, searchParams]);
 
   return (
     <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(signInHandler)} w="full">
@@ -59,4 +57,4 @@ const Container: React.FC = () => {
   );
 };
 
-export default Container;
+export { SignInByEmail };

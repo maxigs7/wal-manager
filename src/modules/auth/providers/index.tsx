@@ -1,16 +1,17 @@
 import { createContext, PropsWithChildren, useContext, useEffect, useReducer } from 'react';
 
-import { useSupabase } from '@/lib';
+import { useSupabase } from '@/lib/supabase';
 
 import { authEnd, authStart } from '../store/actions';
 import { reducer } from '../store/reducer';
 import { initialState, IState } from '../store/state';
 
-
 export const AuthContext = createContext<IState>(initialState);
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { auth } = useSupabase();
+  const {
+    supabase: { auth },
+  } = useSupabase();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {

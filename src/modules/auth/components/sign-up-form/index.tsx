@@ -8,7 +8,7 @@ import { es } from '@/i18n';
 export type SignUpFormType = { email: string; password: string; confirmPassword: string };
 export type SignUpFormProps = UseFormReturn<SignUpFormType>;
 
-const Form: React.FC<SignUpFormProps> = ({ formState: { errors }, register, watch }) => {
+const SignUpForm: React.FC<SignUpFormProps> = ({ formState: { errors }, register, watch }) => {
   const password = useRef({});
   password.current = watch('password', '');
   return (
@@ -58,4 +58,4 @@ const Form: React.FC<SignUpFormProps> = ({ formState: { errors }, register, watc
   );
 };
 
-export default Form;
+export { SignUpForm };

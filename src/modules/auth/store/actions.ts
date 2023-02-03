@@ -1,4 +1,4 @@
-import { User } from '@supabase/supabase-js';
+import { User } from '@supabase/auth-helpers-nextjs';
 
 export const AUTH_END = '[AUTH] End';
 export const AUTH_START = '[AUTH] Start';

@@ -6,7 +6,7 @@ import { es } from '@/i18n';
 export type SignInFormType = { email: string; password: string };
 export type SignInFormProps = UseFormReturn<SignInFormType>;
 
-const Form: React.FC<SignInFormProps> = ({ formState: { errors }, register }) => (
+const SignInForm: React.FC<SignInFormProps> = ({ formState: { errors }, register }) => (
   <>
     <FormControl isInvalid={!!errors.email}>
       <FormLabel htmlFor="email">{es.auth.signIn.form.email}</FormLabel>
@@ -36,4 +36,4 @@ const Form: React.FC<SignInFormProps> = ({ formState: { errors }, register }) =>
   </>
 );
 
-export default Form;
+export { SignInForm };

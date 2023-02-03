@@ -1,14 +1,13 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-
-import { ApiError, useUow } from '@/api';
-import { UserSession } from '@/lib';
+import { SupabaseError, UserSession } from '@/lib/supabase';
+import { useUow } from '@/shared';
 
 import { ISignInParam } from '../models';
 
 export const useSignIn = (): UseMutationResult<UserSession, Error, ISignInParam> => {
   const { auth } = useUow();
-  return useMutation<UserSession, ApiError, ISignInParam>((params) =>
+  return useMutation<UserSession, SupabaseError, ISignInParam>((params) =>
     auth.signIn(params.email, params.password),
   );
 };

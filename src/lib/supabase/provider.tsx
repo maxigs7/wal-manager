@@ -1,23 +1,32 @@
-import { createContext, PropsWithChildren, useContext } from 'react';
+import { createContext, PropsWithChildren, useContext, useState } from 'react';
 
-import { SupabaseClient } from '@supabase/supabase-js';
+import { Session, SupabaseClient } from '@supabase/auth-helpers-nextjs';
 
 import { Database } from '@/models';
 
-interface IProps extends PropsWithChildren {
+import { createBrowserClient } from './create-browser-client';
+
+type MaybeSession = Session | null;
+
+type SupabaseContext = {
   supabase: SupabaseClient<Database>;
-}
+  session: MaybeSession;
+};
 
-export const SupabaseContext: React.Context<SupabaseClient<Database>> = createContext<
-  SupabaseClient<Database>
->({} as SupabaseClient<Database>);
-
-export const SupabaseProvider: React.FC<IProps> = ({ children, supabase }) => (
-  <SupabaseContext.Provider value={supabase}>{children}</SupabaseContext.Provider>
+const Context: React.Context<SupabaseContext> = createContext<SupabaseContext>(
+  {} as SupabaseContext,
 );
 
-export const useSupabase = (): SupabaseClient<Database> => {
-  const context = useContext(SupabaseContext);
+export const SupabaseProvider: React.FC<PropsWithChildren & { session: MaybeSession }> = ({
+  children,
+  session,
+}) => {
+  const [supabase] = useState(() => createBrowserClient());
+  return <Context.Provider value={{ supabase, session }}>{children}</Context.Provider>;
+};
+
+export const useSupabase = (): SupabaseContext => {
+  const context = useContext(Context);
   if (context === undefined) {
     throw new Error(`useSupabase must be used within a SupabaseProvider.`);
   }

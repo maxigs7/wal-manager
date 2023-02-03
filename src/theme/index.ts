@@ -1,4 +1,8 @@
+'use client';
+
 import { extendTheme } from '@chakra-ui/react';
+
+import { ThemeBuild } from '@/lib/chakra-ui';
 
 import { Button } from './components/button';
 import { Heading } from './components/heading';
@@ -7,7 +11,7 @@ import colors from './foundations/colors';
 import fonts from './foundations/fonts';
 import styles from './styles';
 
-const theme = (fontFamily: string) =>
+const theme: ThemeBuild = ({ bodyFontFamily }) =>
   extendTheme({
     breakpoints,
     colors,
@@ -15,7 +19,7 @@ const theme = (fontFamily: string) =>
       Button,
       Heading,
     },
-    fonts: fonts(fontFamily),
+    fonts: fonts(bodyFontFamily),
     styles,
   });
 

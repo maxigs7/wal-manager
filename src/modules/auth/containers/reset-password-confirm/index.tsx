@@ -1,16 +1,20 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { VStack, Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import { es } from '@/i18n';
+import { routes } from '@/routes';
 
-import { AuthMessage, ResetPasswordForm, ResetPasswordConfirmFormType } from '../../components';
+import {
+  AuthMessage,
+  ResetPasswordConfirmForm,
+  ResetPasswordConfirmFormType,
+} from '../../components';
 import { useUpdatePassword } from '../../hooks';
 
-
-const Container: React.FC = () => {
+const ResetPasswordConfirm: React.FC = () => {
   const router = useRouter();
   const { isError, isLoading, isSuccess, mutateAsync } = useUpdatePassword();
   const form = useForm<ResetPasswordConfirmFormType>();
@@ -27,7 +31,7 @@ const Container: React.FC = () => {
     let timeout: NodeJS.Timeout;
     if (isSuccess) {
       timeout = setTimeout(() => {
-        router.push('/auth/sign-in');
+        router.push(routes.auth.signIn);
       }, 10000);
     }
     return () => {
@@ -43,7 +47,7 @@ const Container: React.FC = () => {
       {isSuccess && (
         <AuthMessage type="success">{es.auth.resetPassword.requestSuccess}</AuthMessage>
       )}
-      <ResetPasswordForm {...form} />
+      <ResetPasswordConfirmForm {...form} />
       <Button
         colorScheme="accent"
         isLoading={isLoading}
@@ -58,4 +62,4 @@ const Container: React.FC = () => {
   );
 };
 
-export default Container;
+export { ResetPasswordConfirm };

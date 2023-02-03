@@ -14,4 +14,4 @@ const AuthMessage: React.FC<IProps> = ({ children, type = 'danger' }) => {
   );
 };
 
-export default AuthMessage;
+export { AuthMessage };

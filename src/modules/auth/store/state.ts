@@ -1,4 +1,4 @@
-import { User } from '@supabase/supabase-js';
+import { User } from '@supabase/auth-helpers-nextjs';
 
 export const initialState: IState = {
   initializing: true,

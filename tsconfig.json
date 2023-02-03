@@ -13,36 +13,25 @@
     "noEmit": true,
     "paths": {
       "@/*": ["./*"],
-      "@/m/*": ["./modules/*"]
-
-      // "@/api": ["./api"],
-      // "@assets": ["./assets"],
-      // "@assets/*": ["./assets/*"],
-      // "@/bootstrap": ["./bootstrap"],
-      // "@/i18n": ["./i18n"],
-      // "@/layout": ["./layout"],
-      // "@/lib": ["./lib"],
-      // "@/lib/*": ["./lib/*"],
-      // "@/models": ["./models"],
-      // "@m/*": ["./modules/*"],
-      // "@pages": ["./pages"],
-      // "@pages/*": ["./pages/*"],
-      // "@/routes": ["./routes"],
-      // "@/shared": ["./shared"],
-      // "@/theme": ["./theme"]
+      "@/m/*": ["./modules/*"],
+      "@chakra-ui/hooks": ["./lib/chakra-ui/hooks"],
+      "@chakra-ui/hooks/old": ["../node_modules/@chakra-ui/hooks/dist/index"],
+      "@chakra-ui/react": ["./lib/chakra-ui/react"],
+      "@chakra-ui/react/old": ["../node_modules/@chakra-ui/react/dist/index"]
     },
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "es5",
-    "typeRoots": ["./src/types", "./node_modules/@types"],
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es5",
+    "typeRoots": ["../node_modules/@types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./src/types", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+
   "exclude": [
     "dist",
     "out",
@@ -53,6 +42,6 @@
     "**/*.test.ts",
     "**/*.test.tsx",
     "coverage",
-    "old"
+    "bak"
   ]
 }
