@@ -1,15 +1,16 @@
+import 'server-only';
+
 import { PropsWithChildren } from 'react';
 
-import { Heading, Text } from '@chakra-ui/react';
+import { LayoutProvider } from '@/layout/full';
+import FullLayout from '@/layout/full/layout';
 
-// export default App;
-const FullLayout: React.FC<PropsWithChildren> = ({ children }) => {
+const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <>
-      <h1>Full Layout</h1>
-      {children}
-    </>
+    <LayoutProvider>
+      <FullLayout>{children}</FullLayout>
+    </LayoutProvider>
   );
 };
 
-export default FullLayout;
+export default Layout;

@@ -1,12 +1,18 @@
+'use client';
+
 import Link from 'next/link';
 import React from 'react';
 
-import { Breadcrumb as ChakraBreadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
+import {
+  Breadcrumb as ChakraBreadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Icon,
+} from '@chakra-ui/react';
 
-import { Icon } from '@/shared';
+import { ChevronRight } from '@/lib/svg';
 
 import { useLayout } from '../provider';
-
 
 export interface IBreadcrumbItem {
   label: string;
@@ -15,9 +21,9 @@ export interface IBreadcrumbItem {
 }
 
 export const Breadcrumb: React.FC = () => {
-  const { breadcrumb } = useLayout();
+  const { breadcrumb = [] } = useLayout();
   return (
-    <ChakraBreadcrumb separator={<Icon icon="chevron-right" />} spacing="8px">
+    <ChakraBreadcrumb separator={<Icon as={ChevronRight} />} spacing="8px">
       {breadcrumb.map((item) => (
         <BreadcrumbItem key={item.label}>
           {item.link && (

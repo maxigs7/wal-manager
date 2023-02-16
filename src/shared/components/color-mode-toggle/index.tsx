@@ -1,14 +1,18 @@
-import { Button, useColorMode } from '@chakra-ui/react';
+import { Button, Icon, IconButton, useColorMode } from '@chakra-ui/react';
 
-import { Icon } from '../icon';
+import { DarkMode, LightMode } from '@/lib/svg';
 
 const ColorModeToggle: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Button colorScheme="white" onClick={toggleColorMode} variant="ghost">
-      <Icon icon={colorMode === 'dark' ? 'sun' : 'moon'} />
-    </Button>
+    <IconButton
+      aria-label="Color Mode"
+      colorScheme="white"
+      icon={<Icon as={colorMode === 'dark' ? LightMode : DarkMode} boxSize="6" fill="current" />}
+      onClick={toggleColorMode}
+      variant="ghost"
+    />
   );
 };
 

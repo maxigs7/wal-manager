@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, PropsWithChildren, useContext, useRef, useState } from 'react';
 
 import { useDisclosure } from '@chakra-ui/react';

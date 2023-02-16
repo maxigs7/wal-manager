@@ -1,12 +1,11 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-
 import { es } from '@/i18n';
 import { routes } from '@/routes';
 
+export type IconType = 'dashboard' | 'movements' | 'categories' | 'accounts' | 'creditCards';
 export interface IMenuItem {
   badge?: string;
   exact?: boolean;
-  icon: IconProp;
+  icon: IconType;
   path: string;
   title: string;
 }
@@ -14,13 +13,13 @@ export interface IMenuItem {
 export const mainRoutes: IMenuItem[] = [
   {
     exact: true,
-    icon: 'tachometer-alt',
+    icon: 'dashboard',
     path: routes.dashboard,
     title: es.menu[routes.dashboard],
   },
   {
     exact: true,
-    icon: 'money-check-alt',
+    icon: 'movements',
     path: routes.movement.index,
     title: es.menu[routes.movement.index],
   },
@@ -28,17 +27,17 @@ export const mainRoutes: IMenuItem[] = [
 
 export const adminRoutes: IMenuItem[] = [
   {
-    icon: 'list-alt',
+    icon: 'categories',
     path: routes.admin.category.index,
     title: es.menu[routes.admin.category.index],
   },
   {
-    icon: 'university',
+    icon: 'accounts',
     path: routes.admin.account.index,
     title: es.menu[routes.admin.account.index],
   },
   {
-    icon: 'credit-card',
+    icon: 'creditCards',
     path: routes.admin.creditCard.index,
     title: es.menu[routes.admin.creditCard.index],
   },

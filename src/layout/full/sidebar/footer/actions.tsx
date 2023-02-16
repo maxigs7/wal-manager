@@ -1,19 +1,21 @@
+'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import React from 'react';
 
-import { HStack, IconButton } from '@chakra-ui/react';
+import { HStack, Icon, IconButton } from '@chakra-ui/react';
 
+import { Power, Tune } from '@/lib/svg';
 import { useSignOut } from '@/m/auth';
-import { Icon } from '@/shared';
 
 const Actions: React.FC = () => {
   const router = useRouter();
   const { mutateAsync } = useSignOut();
-  const signOutHandler = useCallback(async () => {
+  const signOutHandler = async () => {
     await mutateAsync();
     router.push('/auth/sign-in');
-  }, [mutateAsync, router]);
+  };
 
   return (
     <HStack>
@@ -21,8 +23,8 @@ const Actions: React.FC = () => {
         aria-label="Settings"
         as={Link}
         colorScheme="white"
-        href="/settings"
-        icon={<Icon icon="gear" />}
+        href="/dashboard"
+        icon={<Icon as={Tune} boxSize="6" fill="current" />}
         variant="ghost"
         w="full"
       />
@@ -30,7 +32,7 @@ const Actions: React.FC = () => {
       <IconButton
         aria-label="Sign Out"
         colorScheme="white"
-        icon={<Icon icon="power-off" />}
+        icon={<Icon as={Power} boxSize="6" fill="current" />}
         onClick={signOutHandler}
         variant="ghost"
         w="full"
@@ -38,7 +40,5 @@ const Actions: React.FC = () => {
     </HStack>
   );
 };
-
-Actions.displayName = 'Actions';
 
 export { Actions };

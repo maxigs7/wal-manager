@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 
 import { Avatar, Flex, Text } from '@chakra-ui/react';
@@ -18,7 +19,5 @@ const User: React.FC = () => {
     </Flex>
   );
 };
-
-User.displayName = 'User';
 
 export { User };

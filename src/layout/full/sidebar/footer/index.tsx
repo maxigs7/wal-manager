@@ -23,6 +23,4 @@ const Footer: React.FC = () => {
   );
 };
 
-Footer.displayName = 'Footer';
-
 export { Footer };

@@ -7,18 +7,16 @@ const Logo: React.FC = () => {
   const color = useColorModeValue('white', 'primary.800');
 
   return (
-    <Box
-      alignItems="center"
+    <Icon
+      as={WalletLogo}
       bg={bg}
+      boxSize="8"
       color={color}
-      display="inline-flex"
+      fill="current"
       fontSize="xl"
-      justifyContent="center"
-      p="2"
+      p="1"
       rounded="lg"
-    >
-      <Icon as={WalletLogo} />
-    </Box>
+    />
   );
 };
 export { Logo };

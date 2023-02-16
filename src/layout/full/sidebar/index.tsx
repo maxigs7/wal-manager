@@ -1,56 +1,24 @@
 import React from 'react';
 
-import { Flex, useColorModeValue, VStack } from '@chakra-ui/react';
-
-import { SIDEBAR_WIDTH, SIDEBAR_Z_INDEX } from '../constants';
-import { useLayout } from '../provider';
 import { Backdrop } from './backdrop';
 import { Footer } from './footer';
 import { Header } from './header';
+import { SidebarManager } from './manager';
 import { Menu } from './menu';
+import { SidebarWrapper } from './wrapper';
 
-const Sidebar: React.FC = React.memo(() => {
-  const { closeSidebar, isSidebarOpen } = useLayout();
-  const bg = useColorModeValue('primary.600', 'primary.800');
-
+const Sidebar: React.FC = () => {
   return (
-    <Flex
-      bottom="0"
-      left="0"
-      position="fixed"
-      top="0"
-      w={{ lg: SIDEBAR_WIDTH }}
-      zIndex={SIDEBAR_Z_INDEX}
-    >
-      {/* Sidebar backdrop (mobile only) */}
-      <Backdrop closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
+    <SidebarWrapper>
+      <Backdrop />
 
-      {/* Sidebar */}
-      <Flex
-        bg={bg}
-        color="white"
-        direction="column"
-        h="100%"
-        id="sidebar"
-        left={{ base: 0, lg: 'auto' }}
-        overflowY="auto"
-        pos={{ base: 'absolute', lg: 'static' }}
-        top={{ base: 0, lg: 'auto' }}
-        transition="transform 0.2s ease-in-out"
-        w={SIDEBAR_WIDTH}
-        transform={{
-          base: isSidebarOpen ? 'translateX(0)' : 'translateX(-16rem)',
-          lg: 'translateX(0)',
-        }}
-      >
-        <Header closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
-        <Menu closeSidebar={closeSidebar} />
+      <SidebarManager>
+        <Header />
+        <Menu />
         <Footer />
-      </Flex>
-    </Flex>
+      </SidebarManager>
+    </SidebarWrapper>
   );
-});
-
-Sidebar.displayName = 'Sidebar';
+};
 
 export { Sidebar };

@@ -23,6 +23,12 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
+  if (session && req.nextUrl.pathname === '/') {
+    const redirectUrl = req.nextUrl.clone();
+    redirectUrl.pathname = routes.dashboard;
+    return NextResponse.redirect(redirectUrl);
+  }
+
   return res;
 }
 
