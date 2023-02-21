@@ -25,7 +25,7 @@ export const useSelect = <TName extends TablesName>(table: TablesName): UseSelec
   return async (config?: UseSelectConfig<TName>) => {
     const query = supabase
       .from(table)
-      .select<string, Rows<TName>>(config?.columns, config?.options);
+      .select<string, Rows<TName>>(config?.columns || '*', config?.options);
 
     const queryFiltered = config?.filter ? config.filter(query) : query;
     const querySorted = config?.order

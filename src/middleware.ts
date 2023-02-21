@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-
+  
   if (!session && !PUBLIC_ROUTES.includes(req.nextUrl.pathname)) {
     // Auth condition not met, redirect to home page.
     const redirectUrl = req.nextUrl.clone();

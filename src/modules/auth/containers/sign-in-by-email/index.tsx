@@ -27,7 +27,7 @@ const SignInByEmail: React.FC = () => {
       // won't end up back on the login page, which is also really nice for the
       // user experience.
       const from = searchParams.get('from') || routes.dashboard;
-      router.push(from);
+      router.replace(from);
     } catch (error) {
       console.error(error);
     }

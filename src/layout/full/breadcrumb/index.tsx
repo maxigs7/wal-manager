@@ -23,11 +23,11 @@ export interface IBreadcrumbItem {
 export const Breadcrumb: React.FC = () => {
   const { breadcrumb = [] } = useLayout();
   return (
-    <ChakraBreadcrumb separator={<Icon as={ChevronRight} />} spacing="8px">
+    <ChakraBreadcrumb separator={<Icon as={ChevronRight} fill="current" />} spacing="8px">
       {breadcrumb.map((item) => (
         <BreadcrumbItem key={item.label}>
           {item.link && (
-            <Link as={item.as} href={item.link} legacyBehavior passHref>
+            <Link as={item.as} href={item.link} prefetch={false} legacyBehavior passHref>
               <BreadcrumbLink href={item.link} isCurrentPage={!item.link}>
                 {item.label}
               </BreadcrumbLink>
