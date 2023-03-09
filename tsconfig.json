@@ -17,7 +17,9 @@
       "@chakra-ui/hooks": ["./lib/chakra-ui/hooks"],
       "@chakra-ui/hooks/old": ["../node_modules/@chakra-ui/hooks/dist/index"],
       "@chakra-ui/react": ["./lib/chakra-ui/react"],
-      "@chakra-ui/react/old": ["../node_modules/@chakra-ui/react/dist/index"]
+      "@chakra-ui/react/old": ["../node_modules/@chakra-ui/react/dist/index"],
+      "react-hook-form": ["./lib/react-hook-form/index"],
+      "react-hook-form/old": ["../node_modules/react-hook-form"]
     },
     "plugins": [
       {
@@ -28,7 +30,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es5",
-    "typeRoots": ["../node_modules/@types"]
+    "typeRoots": ["../node_modules/@types", "./typings"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
 
