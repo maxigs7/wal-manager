@@ -1,64 +1,25 @@
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { clearTimeout } from 'timers';
-
-import { VStack, Button } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+import { useForm, yupResolver } from 'react-hook-form';
 
 import { es } from '@/i18n';
+import { Button } from '@/shared/components';
 
-import {
-  AuthMessage,
-  ResetPasswordRequestForm,
-  ResetPasswordRequestFormType,
-} from '../../components';
-import { useResetPasswordRequest } from '../../hooks';
+import { ResetPasswordRequestForm } from '../../components';
+import { ResetPasswordRequestFormType, resetPasswordRequestFormTypeSchema } from '../../models';
+import { FormContainer } from './form-container';
 
 const ResetPasswordRequest: React.FC = () => {
-  const router = useRouter();
-  const { isError, isLoading, isSuccess, mutateAsync } = useResetPasswordRequest();
-  const form = useForm<ResetPasswordRequestFormType>();
-
-  const resetPasswordHandler = async (form: ResetPasswordRequestFormType) => {
-    try {
-      await mutateAsync(form.email);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (isSuccess) {
-      timeout = setTimeout(() => {
-        router.push('/auth/sign-in');
-      }, 10000);
-    }
-    return () => {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-    };
-  }, [isSuccess, router]);
+  const form = useForm<ResetPasswordRequestFormType>({
+    resolver: yupResolver(resetPasswordRequestFormTypeSchema),
+  });
 
   return (
-    <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(resetPasswordHandler)} w="full">
-      {isError && <AuthMessage>{es.auth.resetPassword.requestError}</AuthMessage>}
-      {isSuccess && (
-        <AuthMessage type="success">{es.auth.resetPassword.requestSuccess}</AuthMessage>
-      )}
+    <FormContainer handleSubmit={form.handleSubmit}>
       <ResetPasswordRequestForm {...form} />
-      <Button
-        colorScheme="accent"
-        isLoading={isLoading}
-        mt={{ base: 12, sm: 6 }}
-        mx={2}
-        type="submit"
-        w="full"
-      >
+
+      <Button isLoading={form.formState.isSubmitting} type="submit">
         {es.auth.resetPassword.requestAction}
       </Button>
-    </VStack>
+    </FormContainer>
   );
 };
 

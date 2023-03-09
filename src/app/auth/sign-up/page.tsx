@@ -1,34 +1,28 @@
-import NextLink from 'next/link';
+import 'server-only';
 
-import { Heading, Flex, Link, Box } from '@chakra-ui/react';
+import Link from 'next/link';
 
 import { es } from '@/i18n';
-import { SignUpByEmail } from '@/m/auth';
+import { AuthPageTitle, AuthPageWrapper } from '@/layout/auth/components';
+import { SignUpByEmail } from '@/m/auth/containers';
 import { routes } from '@/routes';
+import { AUTH_SIGN_UP_ENABLED } from '@/shared/config';
 
-export default async function Page() {
+export default function Page() {
   return (
-    <Flex
-      align="center"
-      color="primary.700"
-      direction="column"
-      justify="center"
-      maxW={[null, null, null, 'md', 'xl']}
-      mb={5}
-      minW={[null, null, null, 'md', 'xl']}
-      p="5"
-    >
-      <Heading as="h3" mb={['4', '8', '10']} size="xl" textAlign="center" textTransform="uppercase">
-        {es.auth.signUp.title}
-      </Heading>
+    <AuthPageWrapper>
+      <AuthPageTitle>{es.auth.signUp.title}</AuthPageTitle>
 
       <SignUpByEmail />
 
-      <Box mt="3">
-        <Link as={NextLink} href={routes.auth.signIn}>
-          {es.auth.signUp.signInLink}
-        </Link>
-      </Box>
-    </Flex>
+      {AUTH_SIGN_UP_ENABLED && (
+        <p className="mt-8 text-sm text-gray-500">
+          {es.auth.signUp.signInLink.haveAnAccount}
+          <Link className="ml-1 font-bold text-black underline" href={routes.auth.signIn}>
+            {es.auth.signUp.signInLink.link}
+          </Link>
+        </p>
+      )}
+    </AuthPageWrapper>
   );
 }

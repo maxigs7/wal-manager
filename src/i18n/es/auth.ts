@@ -21,21 +21,34 @@ export const auth = {
       password: 'Password',
     },
     resetPasswordLink: 'Olvidaste tu contraseña?',
-    registrationLink: 'No tienes una cuenta? Crea una aquí',
-    title: 'Inicia sesión en tu cuenta',
+    registrationLink: {
+      dontHaveAccount: 'No tienes una cuenta?',
+      link: 'Registrese gratis',
+    },
+    title: 'Bienvenido! Inicia sesión',
   },
   signUp: {
     action: 'Registrarse',
-    error: (email: string) => `${email} ya se encuentra registrado`,
+    error: 'El correo ya se encuentra registrado',
     form: {
       confirmPassword: 'Confirmar Password',
       email: 'Email',
       password: 'Password',
     },
-    signInLink: 'Ya tienes una cuenta? Inicia sesión',
+    signInLink: {
+      haveAnAccount: 'Ya tienes una cuenta?',
+      link: 'Inicia sesión aquí',
+    },
     title: 'Registre una nueva cuenta',
   },
   validation: {
+    password: {
+      min: 'La constraseña es muy corta. Min: 8',
+      minLowercase: 'La constraseña debe contener al menos una minuscula.',
+      minUppercase: 'La constraseña debe contener al menos una mayuscula',
+      minNumbers: 'La constraseña debe contener al menos un numero',
+      minSymbols: 'La constraseña debe contener al menos un caracter especial',
+    },
     passwordMismatch: 'Las contraseñas no coinciden',
   },
 };

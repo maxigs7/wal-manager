@@ -28,6 +28,7 @@ export const common = {
     success: 'Exito!',
   },
   validation: {
+    email: 'El correo es invalido',
     required: 'Este campo es requerido',
   },
 };

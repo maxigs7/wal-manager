@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, PropsWithChildren, useContext, useEffect, useReducer } from 'react';
 
 import { useSupabase } from '@/lib/supabase';

@@ -1,59 +1,36 @@
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import Link from 'next/link';
 
-import { VStack, Button } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+import { useForm, yupResolver } from 'react-hook-form';
 
 import { es } from '@/i18n';
 import { routes } from '@/routes';
+import { Button } from '@/shared/components';
 
-import { AuthMessage, SignInForm, SignInFormType } from '../../components';
-import { useSignIn } from '../../hooks';
+import { SignInForm } from '../../components';
+import { signInFormSchema, SignInFormType } from '../../models';
+import { FormContainer } from './form-container';
 
 const SignInByEmail: React.FC = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const { isError, isLoading, mutateAsync } = useSignIn();
-  const form = useForm<SignInFormType>();
-
-  const signInHandler = async (user: SignInFormType) => {
-    try {
-      await mutateAsync({ ...user });
-      // Send them back to the page they tried to visit when they were
-      // redirected to the login page. Use { replace: true } so we don't create
-      // another entry in the history stack for the login page.  This means that
-      // when they get to the protected page and click the back button, they
-      // won't end up back on the login page, which is also really nice for the
-      // user experience.
-      const from = searchParams.get('from') || routes.dashboard;
-      router.replace(from);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    // Prefetch the dashboard page
-    const from = searchParams.get('from') || routes.dashboard;
-    router.prefetch(from);
-  }, [router, searchParams]);
+  const form = useForm<SignInFormType>({
+    resolver: yupResolver(signInFormSchema),
+  });
 
   return (
-    <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(signInHandler)} w="full">
-      {isError && <AuthMessage>{es.auth.signIn.error}</AuthMessage>}
+    <FormContainer handleSubmit={form.handleSubmit}>
       <SignInForm {...form} />
-      <Button
-        colorScheme="accent"
-        isLoading={isLoading}
-        mt={{ base: 12, sm: 6 }}
-        mx={2}
-        type="submit"
-        w="full"
+
+      <Link
+        className="self-end text-sm font-bold text-blue-gray-800 underline"
+        href={routes.auth.resetPassword}
+        prefetch={false}
       >
+        {es.auth.signIn.resetPasswordLink}
+      </Link>
+
+      <Button isLoading={form.formState.isSubmitting} type="submit">
         {es.auth.signIn.action}
       </Button>
-    </VStack>
+    </FormContainer>
   );
 };
 

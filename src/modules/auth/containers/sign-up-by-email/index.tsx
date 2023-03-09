@@ -1,58 +1,25 @@
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
-
-import { VStack, Button } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+import { useForm, yupResolver } from 'react-hook-form';
 
 import { es } from '@/i18n';
-import { routes } from '@/routes';
+import { Button } from '@/shared/components';
 
-import { AuthMessage, SignUpForm, SignUpFormType } from '../../components';
-import { useSignUp } from '../../hooks';
+import { SignUpForm } from '../../components';
+import { signUpFormSchema, SignUpFormType } from '../../models';
+import { FormContainer } from './form-container';
 
 const SignUpByEmail: React.FC = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const { isError, isLoading, mutateAsync } = useSignUp();
-  const form = useForm<SignUpFormType>();
-
-  const signUpHandler = async (user: SignUpFormType) => {
-    try {
-      await mutateAsync({ ...user });
-      // Send them back to the page they tried to visit when they were
-      // redirected to the login page. Use { replace: true } so we don't create
-      // another entry in the history stack for the login page.  This means that
-      // when they get to the protected page and click the back button, they
-      // won't end up back on the login page, which is also really nice for the
-      // user experience.
-      const from = searchParams.get('from') || routes.dashboard;
-      router.push(from);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    // Prefetch the dashboard page
-    const from = searchParams.get('from') || routes.dashboard;
-    router.prefetch(from);
-  }, [router, searchParams]);
+  const form = useForm<SignUpFormType>({
+    resolver: yupResolver(signUpFormSchema),
+  });
 
   return (
-    <VStack as="form" maxW="xs" onSubmit={form.handleSubmit(signUpHandler)} w="full">
-      {isError && <AuthMessage>{es.auth.signUp.error(form.getValues('email'))}</AuthMessage>}
+    <FormContainer handleSubmit={form.handleSubmit}>
       <SignUpForm {...form} />
-      <Button
-        colorScheme="accent"
-        isLoading={isLoading}
-        mt={{ base: 12, sm: 6 }}
-        mx={2}
-        type="submit"
-        w="full"
-      >
+
+      <Button isLoading={form.formState.isSubmitting} type="submit">
         {es.auth.signUp.action}
       </Button>
-    </VStack>
+    </FormContainer>
   );
 };
 
