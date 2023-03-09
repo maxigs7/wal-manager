@@ -1,21 +1,11 @@
 import React from 'react';
 
-import { FlexProps, Flex, SpinnerProps } from '@chakra-ui/react';
+import { Loader } from './loader';
 
-import Loader from './loader';
-
-type Props = FlexProps & { spinner?: SpinnerProps };
-
-const ContentLoader: React.FC<Props> = ({
-  align = 'center',
-  justify = 'center',
-  p = 5,
-  spinner,
-  ...props
-}) => (
-  <Flex align={align} justify={justify} p={p} {...props}>
-    <Loader {...spinner} />
-  </Flex>
+const ContentLoader: React.FC = () => (
+  <div className="flex items-center justify-center p-5">
+    <Loader />
+  </div>
 );
 
-export default React.memo(ContentLoader);
+export { ContentLoader };
