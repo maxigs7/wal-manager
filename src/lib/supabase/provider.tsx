@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
 
 import { Session, SupabaseClient } from '@supabase/auth-helpers-nextjs';

@@ -11,6 +11,7 @@ export const routes = {
 };
 
 export const PUBLIC_ROUTES = [
+  '/components',
   authRoute.resetPassword,
   authRoute.resetPasswordConfirm,
   authRoute.signIn,

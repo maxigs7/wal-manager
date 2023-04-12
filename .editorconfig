@@ -10,3 +10,38 @@ indent_style = space
 indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.js]
+max_line_length = 100
+quote_type = single
+semi = true
+
+[*.jsx]
+max_line_length = 100
+quote_type = single
+semi = true
+
+[*.ts]
+max_line_length = 100
+quote_type = single
+semi = true
+
+[*.tsx]
+max_line_length = 100
+quote_type = single
+semi = true
+
+[*.css]
+max_line_length = 80
+indent_size = 2
+
+[*.scss]
+max_line_length = 80
+indent_size = 2
+
+[*.json]
+indent_size = 2
+quote_type = double
