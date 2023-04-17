@@ -1,7 +1,7 @@
+import { Button } from '@chakra-ui/react';
 import { useForm, yupResolver } from 'react-hook-form';
 
 import { es } from '@/i18n';
-import { Button } from '@/shared/components';
 
 import { SignUpForm } from '../../components';
 import { signUpFormSchema, SignUpFormType } from '../../models';
@@ -16,7 +16,13 @@ const SignUpByEmail: React.FC = () => {
     <FormContainer handleSubmit={form.handleSubmit}>
       <SignUpForm {...form} />
 
-      <Button isLoading={form.formState.isSubmitting} type="submit">
+      <Button
+        colorScheme="accent"
+        isLoading={form.formState.isSubmitting}
+        maxW="sm"
+        type="submit"
+        w="full"
+      >
         {es.auth.signUp.action}
       </Button>
     </FormContainer>

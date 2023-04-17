@@ -1,28 +1,31 @@
 import 'server-only';
 
-import Link from 'next/link';
+import { Text } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
-import { AuthPageTitle, AuthPageWrapper } from '@/layout/auth/components';
+import { PageTitle } from '@/layout/auth';
 import { SignUpByEmail } from '@/m/auth/containers';
+import { AuthLink } from '@/modules/auth/components';
 import { routes } from '@/routes';
-import { AUTH_SIGN_UP_ENABLED } from '@/shared/config';
 
-export default function Page() {
+export const metadata = {
+  title: `${es.auth.signUp.title} - WAL`,
+};
+
+const Page = () => {
   return (
-    <AuthPageWrapper>
-      <AuthPageTitle>{es.auth.signUp.title}</AuthPageTitle>
-
+    <>
+      <PageTitle>{es.auth.signUp.title}</PageTitle>
       <SignUpByEmail />
 
-      {AUTH_SIGN_UP_ENABLED && (
-        <p className="mt-8 text-sm text-gray-500">
-          {es.auth.signUp.signInLink.haveAnAccount}
-          <Link className="ml-1 font-bold text-black underline" href={routes.auth.signIn}>
-            {es.auth.signUp.signInLink.link}
-          </Link>
-        </p>
-      )}
-    </AuthPageWrapper>
+      <Text color="gray.500" fontSize="sm" mx="auto" my="8">
+        {es.auth.signUp.signInLink.haveAnAccount}
+        <AuthLink href={routes.auth.signIn} ml="1">
+          {es.auth.signUp.signInLink.link}
+        </AuthLink>
+      </Text>
+    </>
   );
-}
+};
+
+export default Page;

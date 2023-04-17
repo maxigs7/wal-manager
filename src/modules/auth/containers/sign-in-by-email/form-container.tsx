@@ -1,18 +1,17 @@
-'use client';
-
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ComponentProps, useEffect } from 'react';
 
+import { VStack } from '@chakra-ui/react';
 import { UseFormHandleSubmit } from 'react-hook-form';
 
 import { es } from '@/i18n';
 import { routes } from '@/routes';
 
-import { ErrorBox } from '../../components';
+import { AuthAlert } from '../../components';
 import { useSignIn } from '../../hooks';
 import { SignInFormType } from '../../models';
 
-type Props = Omit<ComponentProps<'form'>, 'onSubmit'> & {
+type Props = ComponentProps<'form'> & {
   handleSubmit: UseFormHandleSubmit<SignInFormType>;
 };
 
@@ -30,7 +29,7 @@ export const FormContainer: React.FC<Props> = ({ children, handleSubmit }) => {
       // when they get to the protected page and click the back button, they
       // won't end up back on the login page, which is also really nice for the
       // user experience.
-      const from = searchParams.get('from') || routes.dashboard;
+      const from = searchParams?.get('from') || routes.dashboard;
       router.replace(from);
     } catch (error) {
       console.error(error);
@@ -39,17 +38,14 @@ export const FormContainer: React.FC<Props> = ({ children, handleSubmit }) => {
 
   useEffect(() => {
     // Prefetch the dashboard page
-    const from = searchParams.get('from') || routes.dashboard;
+    const from = searchParams?.get('from') || routes.dashboard;
     router.prefetch(from);
   }, [router, searchParams]);
 
   return (
-    <form
-      className="mx-auto my-5 flex w-full max-w-md flex-col gap-5"
-      onSubmit={handleSubmit(signInHandler)}
-    >
-      {isError && <ErrorBox>{es.auth.signIn.error}</ErrorBox>}
+    <VStack as="form" gap="2" mx="auto" my="5" onSubmit={handleSubmit(signInHandler)} w="full">
+      {isError && <AuthAlert status="error">{es.auth.signIn.error}</AuthAlert>}
       {children}
-    </form>
+    </VStack>
   );
 };

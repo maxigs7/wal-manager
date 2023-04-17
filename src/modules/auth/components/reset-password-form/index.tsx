@@ -1,33 +1,53 @@
+'use client';
+import { useRef } from 'react';
+
+import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
 import { es } from '@/i18n';
-import { FormControl, FormErrorMessage, Input } from '@/shared/components';
 
-import { ResetPasswordConfirmFormType } from '../../models/reset-password-confirm-form';
-
+export type ResetPasswordConfirmFormType = { password: string; confirmPassword: string };
 export type ResetPasswordConfirmFormProps = UseFormReturn<ResetPasswordConfirmFormType>;
 
 const ResetPasswordConfirmForm: React.FC<ResetPasswordConfirmFormProps> = ({
   formState: { errors },
   register,
-}) => (
-  <>
-    <FormControl isInvalid={!!errors.password}>
-      <Input id="password" type="password" {...register('password')}>
-        {es.auth.signUp.form.password}
-      </Input>
-      <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
-    </FormControl>
+  watch,
+}) => {
+  const password = useRef({});
+  password.current = watch('password', '');
+  return (
+    <>
+      <FormControl isInvalid={!!errors.password}>
+        <FormLabel htmlFor="password">{es.auth.signUp.form.password}</FormLabel>
+        <Input
+          id="password"
+          placeholder={es.auth.signUp.form.password}
+          type="password"
+          {...register('password', {
+            required: es.common.validation.required,
+          })}
+        />
+        <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
+      </FormControl>
 
-    <FormControl isInvalid={!!errors.confirmPassword}>
-      <Input id="confirm-password" type="password" {...register('confirmPassword')}>
-        {es.auth.signUp.form.confirmPassword}
-      </Input>
-      <FormErrorMessage>
-        {errors.confirmPassword && errors.confirmPassword.message}
-      </FormErrorMessage>
-    </FormControl>
-  </>
-);
+      <FormControl isInvalid={!!errors.confirmPassword}>
+        <FormLabel htmlFor="confirm-password">{es.auth.signUp.form.confirmPassword}</FormLabel>
+        <Input
+          id="confirm-password"
+          placeholder={es.auth.signUp.form.confirmPassword}
+          type="password"
+          {...register('confirmPassword', {
+            required: es.common.validation.required,
+            validate: (value) => value === password.current || es.auth.validation.passwordMismatch,
+          })}
+        />
+        <FormErrorMessage>
+          {errors.confirmPassword && errors.confirmPassword.message}
+        </FormErrorMessage>
+      </FormControl>
+    </>
+  );
+};
 
 export { ResetPasswordConfirmForm };

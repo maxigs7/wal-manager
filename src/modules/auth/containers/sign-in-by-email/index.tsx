@@ -1,12 +1,10 @@
-import Link from 'next/link';
-
+import { Button } from '@chakra-ui/react';
 import { useForm, yupResolver } from 'react-hook-form';
 
 import { es } from '@/i18n';
 import { routes } from '@/routes';
-import { Button } from '@/shared/components';
 
-import { SignInForm } from '../../components';
+import { AuthLink, SignInForm } from '../../components';
 import { signInFormSchema, SignInFormType } from '../../models';
 import { FormContainer } from './form-container';
 
@@ -19,15 +17,15 @@ const SignInByEmail: React.FC = () => {
     <FormContainer handleSubmit={form.handleSubmit}>
       <SignInForm {...form} />
 
-      <Link
-        className="self-end text-sm font-bold text-blue-gray-800 underline"
-        href={routes.auth.resetPassword}
-        prefetch={false}
-      >
-        {es.auth.signIn.resetPasswordLink}
-      </Link>
+      <AuthLink href={routes.auth.resetPassword}>{es.auth.signIn.resetPasswordLink}</AuthLink>
 
-      <Button isLoading={form.formState.isSubmitting} type="submit">
+      <Button
+        colorScheme="accent"
+        isLoading={form.formState.isSubmitting}
+        maxW="sm"
+        type="submit"
+        w="full"
+      >
         {es.auth.signIn.action}
       </Button>
     </FormContainer>

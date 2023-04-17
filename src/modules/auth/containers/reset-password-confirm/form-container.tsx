@@ -1,14 +1,13 @@
-'use client';
-
 import { useRouter } from 'next/navigation';
 import { ComponentProps, useEffect } from 'react';
 
+import { VStack } from '@chakra-ui/react';
 import { UseFormHandleSubmit } from 'react-hook-form';
 
 import { es } from '@/i18n';
 import { routes } from '@/routes';
 
-import { ErrorBox, SuccessBox } from '../../components';
+import { AuthAlert } from '../../components';
 import { useUpdatePassword } from '../../hooks';
 import { ResetPasswordConfirmFormType } from '../../models';
 
@@ -43,13 +42,17 @@ export const FormContainer: React.FC<Props> = ({ children, handleSubmit }) => {
   }, [isSuccess, router]);
 
   return (
-    <form
-      className="mx-auto my-5 flex w-full max-w-md flex-col gap-5"
+    <VStack
+      as="form"
+      gap="2"
+      mx="auto"
+      my="5"
       onSubmit={handleSubmit(resetPasswordHandler)}
+      w="full"
     >
-      {isError && <ErrorBox>{es.auth.resetPassword.confirmError}</ErrorBox>}
-      {isSuccess && <SuccessBox>{es.auth.resetPassword.requestSuccess}</SuccessBox>}
+      {isError && <AuthAlert status="error">{es.auth.resetPassword.confirmError}</AuthAlert>}
+      {isSuccess && <AuthAlert status="success">{es.auth.resetPassword.confirmSuccess}</AuthAlert>}
       {children}
-    </form>
+    </VStack>
   );
 };

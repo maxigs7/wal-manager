@@ -1,20 +1,22 @@
-import Link from 'next/link';
-
 import { es } from '@/i18n';
-import { AuthPageTitle, AuthPageWrapper } from '@/layout/auth/components';
+import { PageTitle } from '@/layout/auth';
 import { ResetPasswordConfirm } from '@/m/auth/containers';
+import { AuthLink } from '@/modules/auth/components';
 import { routes } from '@/routes';
+
+export const metadata = {
+  title: `${es.auth.resetPassword.title} - WAL`,
+};
 
 export default function Page() {
   return (
-    <AuthPageWrapper>
-      <AuthPageTitle>{es.auth.resetPassword.title}</AuthPageTitle>
-
+    <>
+      <PageTitle>{es.auth.resetPassword.title}</PageTitle>
       <ResetPasswordConfirm />
 
-      <Link className="mt-8 text-sm font-bold text-black underline" href={routes.auth.signIn}>
+      <AuthLink color="gray.500" fontSize="sm" href={routes.auth.signIn} mx="auto" my="8">
         {es.auth.resetPassword.signInLink}
-      </Link>
-    </AuthPageWrapper>
+      </AuthLink>
+    </>
   );
 }

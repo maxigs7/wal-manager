@@ -1,28 +1,34 @@
 import 'server-only';
 
-import Link from 'next/link';
+import { Text } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
-import { AuthPageTitle, AuthPageWrapper } from '@/layout/auth/components';
+import { PageTitle } from '@/layout/auth';
 import { SignInByEmail } from '@/m/auth/containers';
+import { AuthLink } from '@/modules/auth/components';
 import { routes } from '@/routes';
 import { AUTH_SIGN_UP_ENABLED } from '@/shared/config';
 
-export default function Page() {
-  return (
-    <AuthPageWrapper>
-      <AuthPageTitle>{es.auth.signIn.title}</AuthPageTitle>
+export const metadata = {
+  title: `${es.auth.signIn.title} - WAL`,
+};
 
+const Page = () => {
+  return (
+    <>
+      <PageTitle>{es.auth.signIn.title}</PageTitle>
       <SignInByEmail />
 
       {AUTH_SIGN_UP_ENABLED && (
-        <p className="mt-8 text-sm text-gray-500">
+        <Text color="gray.500" fontSize="sm" mx="auto" my="8">
           {es.auth.signIn.registrationLink.dontHaveAccount}
-          <Link className="ml-1 font-bold text-black underline" href={routes.auth.signUp}>
+          <AuthLink href={routes.auth.signUp} ml="1">
             {es.auth.signIn.registrationLink.link}
-          </Link>
-        </p>
+          </AuthLink>
+        </Text>
       )}
-    </AuthPageWrapper>
+    </>
   );
-}
+};
+
+export default Page;

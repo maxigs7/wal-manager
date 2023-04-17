@@ -4,6 +4,7 @@ import { extendTheme } from '@chakra-ui/react';
 
 import { Button } from './components/button';
 import { Heading } from './components/heading';
+import { Input } from './components/input';
 import config from './config';
 import breakpoints from './foundations/breakpoints';
 import colors from './foundations/colors';
@@ -15,6 +16,7 @@ const theme = extendTheme({
   colors,
   components: {
     Button,
+    Input,
     Heading,
   },
   config,

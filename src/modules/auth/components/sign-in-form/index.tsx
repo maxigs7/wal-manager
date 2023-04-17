@@ -1,7 +1,7 @@
+import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { UseFormReturn } from 'react-hook-form';
 
 import { es } from '@/i18n';
-import { FormControl, FormErrorMessage, Input } from '@/shared/components';
 
 import { SignInFormType } from '../../models';
 
@@ -10,16 +10,29 @@ export type SignInFormProps = UseFormReturn<SignInFormType>;
 const SignInForm: React.FC<SignInFormProps> = ({ formState: { errors }, register }) => (
   <>
     <FormControl isInvalid={!!errors.email}>
-      <Input id="email" type="email" {...register('email')}>
-        {es.auth.signIn.form.email}
-      </Input>
-      <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+      <FormLabel htmlFor="email">{es.auth.signIn.form.email}</FormLabel>
+      <Input
+        id="email"
+        placeholder={es.auth.signIn.form.email}
+        {...register('email', {
+          required: es.common.validation.required,
+          pattern: /^\S+@\S+$/i,
+        })}
+      />
+      <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
     </FormControl>
+
     <FormControl isInvalid={!!errors.password}>
-      <Input id="password" type="password" {...register('password')}>
-        {es.auth.signIn.form.password}
-      </Input>
-      <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+      <FormLabel htmlFor="password">{es.auth.signIn.form.password}</FormLabel>
+      <Input
+        id="password"
+        placeholder={es.auth.signIn.form.password}
+        type="password"
+        {...register('password', {
+          required: es.common.validation.required,
+        })}
+      />
+      <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
     </FormControl>
   </>
 );
