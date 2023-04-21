@@ -3,7 +3,7 @@ import { useForm, yupResolver } from 'react-hook-form';
 
 import { es } from '@/i18n';
 
-import { SignUpForm } from '../../components';
+import { SignUpForm } from '../../components/sign-up-form';
 import { signUpFormSchema, SignUpFormType } from '../../models';
 import { FormContainer } from './form-container';
 

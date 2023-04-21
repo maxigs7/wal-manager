@@ -1,29 +1,34 @@
-import NextLink from 'next/link';
 import React from 'react';
 
-import { Flex, Link } from '@chakra-ui/react';
+import { Icon } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
+import { Link } from '@/lib/chakra-ui';
 import { routes } from '@/routes';
-import { Logo } from '@/shared';
+import { WalletLogo } from '@/shared/assets';
 
 import { CloseButton } from './close-button';
+import { Wrapper } from './wrapper';
 
 const Header: React.FC = () => (
-  <Flex align="center" justify="space-between" px="2" py="4" w="full">
+  <Wrapper>
     <Link
       alignItems="center"
-      as={NextLink}
       display="flex"
       gap="3"
       href={routes.dashboard}
+      textDecoration="none"
       textTransform="uppercase"
+      _hover={{
+        textDecoration: 'none',
+      }}
     >
-      <Logo /> {es.common.appName}
+      <Icon as={WalletLogo} boxSize="6" />
+      {es.common.appName}
     </Link>
 
     <CloseButton />
-  </Flex>
+  </Wrapper>
 );
 
 export { Header };

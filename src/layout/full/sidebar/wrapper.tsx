@@ -13,7 +13,7 @@ const SidebarWrapper: React.FC<PropsWithChildren> = ({ children }) => {
       position="fixed"
       top="0"
       w={{ lg: SIDEBAR_WIDTH }}
-      zIndex={SIDEBAR_Z_INDEX}
+      zIndex={{ base: SIDEBAR_Z_INDEX, lg: 'auto' }}
     >
       {children}
     </Flex>

@@ -3,25 +3,23 @@
 import React from 'react';
 
 import { Icon, IconButton } from '@chakra-ui/react';
-
-import { ChevronLeft } from '@/lib/svg';
+import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 
 import { useLayout } from '../../provider';
 
 const CloseButton: React.FC = () => {
-  const { closeSidebar, isSidebarOpen } = useLayout();
+  const {
+    sidebar: { onClose, getButtonProps },
+  } = useLayout();
 
   return (
     <IconButton
-      aria-expanded={isSidebarOpen}
+      {...getButtonProps()}
       aria-label="Close Sidebar"
-      display={{ lg: 'none' }}
-      h={6}
-      icon={<Icon as={ChevronLeft} fill="current" />}
-      onClick={closeSidebar}
-      textDecor="none"
-      variant="link"
-      w={6}
+      display={{ base: 'flex', lg: 'none' }}
+      icon={<Icon as={ArrowLeftIcon} boxSize="6" />}
+      onClick={onClose}
+      variant="ghost"
     />
   );
 };

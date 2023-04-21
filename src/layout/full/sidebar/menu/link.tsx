@@ -1,10 +1,9 @@
 'use client';
 
-import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { PropsWithChildren } from 'react';
 
-import { Link } from '@chakra-ui/react';
+import { Link } from '@/lib/chakra-ui';
 
 import { useLayout } from '../../provider';
 import { IMenuItem } from './data';
@@ -22,7 +21,9 @@ const styles = {
 type Props = Pick<IMenuItem, 'path'> & PropsWithChildren;
 
 export const MenuItemLink: React.FC<Props> = ({ children, path }) => {
-  const { closeSidebar } = useLayout();
+  const {
+    sidebar: { onClose },
+  } = useLayout();
   const pathname = usePathname();
   const isActive = pathname?.startsWith(path) || false;
 
@@ -30,10 +31,9 @@ export const MenuItemLink: React.FC<Props> = ({ children, path }) => {
     <Link
       _focus={{ outline: 'none' }}
       alignItems="center"
-      as={NextLink}
       display="flex"
       href={path}
-      onClick={closeSidebar}
+      onClick={onClose}
       outline="none"
       p="3"
       prefetch={false}

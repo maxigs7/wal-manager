@@ -1,43 +1,29 @@
 'use client';
 
-import { createContext, PropsWithChildren, useContext, useRef, useState } from 'react';
+import { PropsWithChildren } from 'react';
 
-import { useDisclosure } from '@chakra-ui/react';
+import { createContext } from '@/lib/react/context';
 
-import { IBreadcrumbItem } from '../breadcrumb';
+import { UseSidebarManagerReturn, useSidebarManager } from './useSidebarManager';
 
 interface IProps {
-  breadcrumb: IBreadcrumbItem[];
-  breadcrumbRef: any;
-  closeSidebar(): void;
-  isSidebarOpen: boolean;
-  openSidebar(): void;
-  setBreadcrumb(items: IBreadcrumbItem[]): void;
-  toggleSidebar(): void;
+  sidebar: UseSidebarManagerReturn;
 }
 
-export const LayoutContext: React.Context<IProps> = createContext<IProps>({} as IProps);
+const [LayoutContextProvider, useLayout] = createContext<IProps>({ name: 'FullLayoutContext' });
 
-export const useLayout = () => useContext(LayoutContext);
-
-export const LayoutProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
-  const breadcrumbRef = useRef();
-  const [breadcrumb, setBreadcrumb] = useState<IBreadcrumbItem[]>([]);
+const Provider: React.FC<PropsWithChildren> = ({ children }) => {
+  const sidebar = useSidebarManager();
 
   return (
-    <LayoutContext.Provider
+    <LayoutContextProvider
       value={{
-        breadcrumb,
-        breadcrumbRef: breadcrumbRef,
-        closeSidebar: onClose,
-        isSidebarOpen: isOpen,
-        openSidebar: onOpen,
-        setBreadcrumb,
-        toggleSidebar: onToggle,
+        sidebar,
       }}
     >
       {children}
-    </LayoutContext.Provider>
+    </LayoutContextProvider>
   );
 };
+
+export { Provider as LayoutProvider, useLayout };

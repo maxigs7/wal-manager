@@ -3,7 +3,7 @@ import { useForm, yupResolver } from 'react-hook-form';
 
 import { es } from '@/i18n';
 
-import { ResetPasswordConfirmForm } from '../../components';
+import { ResetPasswordConfirmForm } from '../../components/reset-password-form';
 import { resetPasswordConfirmFormSchema, ResetPasswordConfirmFormType } from '../../models';
 import { FormContainer } from './form-container';
 

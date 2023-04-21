@@ -3,6 +3,11 @@ import { routes } from '@/routes';
 export const menu = {
   admin: 'Administración',
   overview: 'General',
+  user: {
+    profile: 'Perfil',
+    settings: 'Configuracion',
+    signOut: 'Cerrar Sesión',
+  },
 
   // Routes
   [routes.dashboard]: 'Dashboard',

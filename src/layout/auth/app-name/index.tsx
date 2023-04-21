@@ -1,5 +1,3 @@
-// import React, { PropsWithChildren } from 'react';
-
 import { Box, Heading, Icon } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
