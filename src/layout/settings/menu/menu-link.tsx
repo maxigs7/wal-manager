@@ -2,13 +2,15 @@
 
 import { usePathname } from 'next/navigation';
 
+import { useColorModeValue } from '@chakra-ui/react';
+
 import { Link, LinkProps } from '@/lib/chakra-ui';
 
 const styles = {
-  active: (isActive: boolean) =>
+  active: (isActive: boolean, bg: string) =>
     isActive
       ? {
-          bg: 'accent.500',
+          bg: bg,
           color: 'white',
         }
       : {},
@@ -17,13 +19,15 @@ const styles = {
 export const MenuLink: React.FC<LinkProps> = ({ children, href }) => {
   const pathname = usePathname();
   const isActive = pathname === href.toString() || false;
+  const bg = useColorModeValue('accent.500', 'accent.800');
+  const border = useColorModeValue('gray.100', 'primary.900');
 
   return (
     <Link
       _focus={{ outline: 'none' }}
-      borderBottomColor="gray.100"
+      borderBottomColor={border}
       borderBottomWidth={{ base: '0', lg: '1px' }}
-      borderRightColor="gray.100"
+      borderRightColor={border}
       borderRightWidth={{ base: '1px', lg: '0' }}
       href={href}
       minW={{ base: '140px', lg: 'full' }}
@@ -34,9 +38,9 @@ export const MenuLink: React.FC<LinkProps> = ({ children, href }) => {
       transition="all 0.3s"
       _hover={{
         textDecor: 'none',
-        ...styles.active(true),
+        ...styles.active(true, bg),
       }}
-      {...styles.active(isActive)}
+      {...styles.active(isActive, bg)}
     >
       {children}
     </Link>

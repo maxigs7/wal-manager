@@ -3,16 +3,18 @@
 import { usePathname } from 'next/navigation';
 import React, { PropsWithChildren } from 'react';
 
+import { useColorModeValue } from '@chakra-ui/react';
+
 import { Link } from '@/lib/chakra-ui';
 
 import { useLayout } from '../../provider';
 import { IMenuItem } from './data';
 
 const styles = {
-  active: (isActive: boolean) =>
+  active: (isActive: boolean, bg: string) =>
     isActive
       ? {
-          bg: 'accent.500',
+          bg: bg,
           color: 'white',
         }
       : {},
@@ -26,6 +28,7 @@ export const MenuItemLink: React.FC<Props> = ({ children, path }) => {
   } = useLayout();
   const pathname = usePathname();
   const isActive = pathname?.startsWith(path) || false;
+  const bg = useColorModeValue('accent.500', 'accent.800');
 
   return (
     <Link
@@ -42,9 +45,9 @@ export const MenuItemLink: React.FC<Props> = ({ children, path }) => {
       transition="all 0.3s"
       _hover={{
         textDecor: 'none',
-        ...styles.active(true),
+        ...styles.active(true, bg),
       }}
-      {...styles.active(isActive)}
+      {...styles.active(isActive, bg)}
     >
       {children}
     </Link>
