@@ -23,6 +23,12 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
+  if (req.nextUrl.pathname === routes.settings.index) {
+    const redirectUrl = req.nextUrl.clone();
+    redirectUrl.pathname = routes.settings.user;
+    return NextResponse.redirect(redirectUrl);
+  }
+
   return res;
 }
 

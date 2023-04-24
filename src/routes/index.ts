@@ -1,7 +1,7 @@
 import adminRoute from './admin';
 import authRoute from './auth';
 import movementRoute from './movement';
-import userRoute from './user';
+import settingsRoute from './settings';
 
 export const routes = {
   admin: adminRoute,
@@ -9,7 +9,7 @@ export const routes = {
   dashboard: '/dashboard',
   movement: movementRoute,
   noAccount: '/no-account',
-  user: userRoute,
+  settings: settingsRoute,
 };
 
 export const PUBLIC_ROUTES = [

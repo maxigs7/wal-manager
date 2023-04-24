@@ -22,13 +22,13 @@ export const mainRoutes: IMenuItem[] = [
     exact: true,
     icon: 'dashboard',
     path: routes.dashboard,
-    title: 'Dashboard',
+    title: es.menu.sidebar[routes.dashboard],
   },
   {
     exact: true,
     icon: 'accounts',
     path: routes.movement.index,
-    title: 'Cuentas',
+    title: es.menu.sidebar[routes.movement.index],
   },
   {
     exact: true,
@@ -55,9 +55,9 @@ export const mainRoutes: IMenuItem[] = [
     title: 'Prestamos',
   },
   {
-    exact: true,
+    exact: false,
     icon: 'settings',
-    path: routes.dashboard,
-    title: 'Configuracion',
+    path: routes.settings.index,
+    title: es.menu.sidebar[routes.settings.index],
   },
 ];

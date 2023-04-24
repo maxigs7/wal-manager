@@ -8,8 +8,8 @@ export const Wrapper: React.FC<PropsWithChildren> = ({ children }) => (
     bg="primary.900"
     justify="center"
     minH="100vh"
-    minW="100vw"
     py={[null, null, '5']}
+    w="full"
   >
     <Flex
       bg="white"

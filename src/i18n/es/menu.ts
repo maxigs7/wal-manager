@@ -1,18 +1,23 @@
 import { routes } from '@/routes';
 
 export const menu = {
-  admin: 'Administración',
-  overview: 'General',
-  user: {
-    profile: 'Perfil',
-    settings: 'Configuracion',
-    signOut: 'Cerrar Sesión',
+  settings: {
+    [routes.settings.account.index]: 'Cuentas',
+    [routes.settings.category.index]: 'Categorias',
+    [routes.settings.creditCard.index]: 'Tarjetas',
+    [routes.settings.investments.index]: 'Inversiones',
+    [routes.settings.user]: 'Usuario',
   },
-
-  // Routes
-  [routes.dashboard]: 'Dashboard',
-  [routes.movement.index]: 'Movimientos',
-  [routes.admin.category.index]: 'Categorias',
-  [routes.admin.account.index]: 'Cuentas',
-  [routes.admin.creditCard.index]: 'Tarjetas',
+  sidebar: {
+    [routes.dashboard]: 'Dashboard',
+    [routes.movement.index]: 'Cuentas',
+    [routes.settings.index]: 'Configuracion',
+  },
+  navbar: {
+    user: {
+      profile: 'Perfil',
+      settings: 'Configuracion',
+      signOut: 'Cerrar Sesión',
+    },
+  },
 };

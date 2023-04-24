@@ -9,11 +9,11 @@ import { SignOutMenuItem } from './sign-out';
 const UserMenuList: React.FC = () => {
   return (
     <MenuList>
-      <MenuItem as={Link} href={routes.user.profile} prefetch={false}>
-        {es.menu.user.profile}
+      <MenuItem as={Link} href={routes.settings.user} prefetch={false}>
+        {es.menu.navbar.user.profile}
       </MenuItem>
-      <MenuItem as={Link} href={routes.user.settings} prefetch={false}>
-        {es.menu.user.settings}
+      <MenuItem as={Link} href={routes.settings.index} prefetch={false}>
+        {es.menu.navbar.user.settings}
       </MenuItem>
       <MenuDivider />
       <SignOutMenuItem />

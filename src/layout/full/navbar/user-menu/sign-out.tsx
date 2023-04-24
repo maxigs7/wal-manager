@@ -16,7 +16,7 @@ const SignOutMenuItem: React.FC = () => {
     router.push('/auth/sign-in');
   };
 
-  return <MenuItem onClick={signOutHandler}>{es.menu.user.signOut}</MenuItem>;
+  return <MenuItem onClick={signOutHandler}>{es.menu.navbar.user.signOut}</MenuItem>;
 };
 
 export { SignOutMenuItem };
