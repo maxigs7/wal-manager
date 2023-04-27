@@ -4,7 +4,7 @@ import { es } from '@/i18n';
 import { useToast } from '@/lib/chakra-ui';
 import { SupabaseError } from '@/lib/supabase';
 import { Account } from '@/models';
-import { useUow } from '@/shared';
+import { useUow } from '@/shared/api';
 
 const useAccountDelete = (showToast = true): UseMutationResult<Account, SupabaseError, string> => {
   const { account } = useUow();
