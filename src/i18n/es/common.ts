@@ -23,6 +23,16 @@ export const common = {
   },
   remove: 'Eliminar',
   save: 'Guardar',
+  table: {
+    pagination: {
+      page: 'Pag.',
+      pageSummary: (index: number, total: number) => `${index} de ${total}`,
+      rowsByPage: (size: number) => `${size} filas`,
+      showing: (from: number, to: number, total: number) => {
+        return `${from} a ${to} de ${total} ${total > 1 ? 'filas' : 'fila'}`;
+      },
+    },
+  },
   toast: {
     error: 'Error!',
     success: 'Exito!',
