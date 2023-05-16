@@ -4,8 +4,8 @@ import { Text } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
 import { PageTitle } from '@/layout/auth';
+import { AuthLink } from '@/m/auth/components';
 import { SignInByEmail } from '@/m/auth/containers';
-import { AuthLink } from '@/modules/auth/components';
 import { routes } from '@/routes';
 import { AUTH_SIGN_UP_ENABLED } from '@/shared/config';
 

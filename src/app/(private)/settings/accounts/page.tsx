@@ -1,9 +1,12 @@
+import 'server-only';
+
 import { Box } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
 import { Title } from '@/layout/settings';
-import { AccountTableContainer } from '@/modules/accounts/containers/table';
+import { AccountTableContainer } from '@/m/accounts/containers';
 import { routes } from '@/routes';
+import { useUow } from '@/shared/api/server';
 import { CreateButtonLink } from '@/shared/components';
 
 export const revalidate = 0;
@@ -11,7 +14,10 @@ export const metadata = {
   title: es.account.pages.index.metaTitle,
 };
 
-const Page = () => {
+const Page = async () => {
+  const { account } = useUow();
+  const data = await account.select({ order: { field: 'name' } });
+
   return (
     <>
       <Title>{es.account.pages.index.title}</Title>
@@ -25,7 +31,7 @@ const Page = () => {
             {es.common.create}
           </CreateButtonLink>
         </Box>
-        <AccountTableContainer />
+        <AccountTableContainer data={data || []} />
       </Box>
     </>
   );

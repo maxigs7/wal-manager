@@ -1,11 +1,23 @@
 import React from 'react';
 
+import { Flex } from '@chakra-ui/react';
+
 import { Loader } from './loader';
 
 const PageLoader: React.FC = () => (
-  <div className="h-scren fixed top-0 left-0 z-50 w-screen items-center justify-center bg-white opacity-75">
+  <Flex
+    align="center"
+    bg="white"
+    justify="center"
+    left="0"
+    minH="100vh"
+    minW="100vw"
+    opacity="0.75"
+    position="fixed"
+    top="0"
+  >
     <Loader />
-  </div>
+  </Flex>
 );
 
 export { PageLoader };

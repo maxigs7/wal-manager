@@ -14,6 +14,9 @@ export const common = {
   defaultEmptyText: 'No se encontraron datos...',
   description: 'Maneje sus finanzas de manera organizada',
   dialog: {
+    removeWarningWithName: (name: string) =>
+      `Estas seguro que desea eliminar ${name}? Esta accion no se puede deshacer.`,
+
     removeWarning: 'Estas seguro? Esta accion no se puede deshacer.',
   },
   globalFilterPlaceholder: 'Buscar...',

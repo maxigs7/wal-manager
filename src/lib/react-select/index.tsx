@@ -20,7 +20,7 @@ const SelectWrapper = React.forwardRef(
       | null,
   ) => {
     const { chakraStyles, selectedOptionColor = 'accent', value } = props;
-    const bg = useColorModeValue('white', 'cello.700');
+    const bg = useColorModeValue('white', 'accent.700');
     const internalRef = useRef<SelectInstance<Option, IsMulti, Group>>(null);
     const mergedRef = useMergeRefs(ref, internalRef);
 
@@ -38,6 +38,7 @@ const SelectWrapper = React.forwardRef(
           control: (provided: any) => ({
             ...provided,
             bg,
+            variant: 'flushed',
           }),
           ...chakraStyles,
         }}

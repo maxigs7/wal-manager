@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import React, { PropsWithChildren } from 'react';
 
-import { useColorModeValue } from '@chakra-ui/react';
+import { useColorModeValue, useMediaQuery } from '@chakra-ui/react';
 
 import { Link } from '@/lib/chakra-ui';
 
@@ -23,12 +23,16 @@ const styles = {
 type Props = Pick<IMenuItem, 'path'> & PropsWithChildren;
 
 export const MenuItemLink: React.FC<Props> = ({ children, path }) => {
+  const [isLg] = useMediaQuery('(min-width: 960px)');
   const {
     sidebar: { onClose },
   } = useLayout();
   const pathname = usePathname();
   const isActive = pathname?.startsWith(path) || false;
   const bg = useColorModeValue('accent.500', 'accent.800');
+  const onClick = () => {
+    if (!isLg) onClose();
+  };
 
   return (
     <Link
@@ -36,7 +40,7 @@ export const MenuItemLink: React.FC<Props> = ({ children, path }) => {
       alignItems="center"
       display="flex"
       href={path}
-      onClick={onClose}
+      onClick={onClick}
       outline="none"
       p="3"
       prefetch={false}

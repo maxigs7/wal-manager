@@ -28,6 +28,10 @@ export const account = {
     },
     remove: {
       title: 'Eliminar Cuenta',
+      warning: {
+        first: 'Estas seguro que desea eliminar la cuenta ',
+        last: '? Esta accion no se puede deshacer.',
+      },
     },
     update: {
       metaTitle: 'Editar Cuenta',
