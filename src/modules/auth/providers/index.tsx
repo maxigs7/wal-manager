@@ -1,15 +1,17 @@
 'use client';
 
-import { createContext, PropsWithChildren, useContext, useEffect, useReducer } from 'react';
+import { PropsWithChildren, useEffect, useReducer } from 'react';
 
-import { useSupabase } from '@/lib/supabase';
+import { createContext } from '@/lib/react/context';
+import { useSupabase } from '@/lib/supabase/provider';
 
 import { authEnd, authStart } from '../store/actions';
 import { reducer } from '../store/reducer';
 import { initialState, IState } from '../store/state';
 
-export const AuthContext = createContext<IState>(initialState);
+const [AuthContextProvider, useUser] = createContext<IState>({ name: 'FullLayoutContext' });
 
+export { useUser };
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const {
     supabase: { auth },
@@ -53,13 +55,5 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     };
   }, [auth]);
 
-  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
-};
-
-export const useUser = (): IState => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error(`useUser must be used within a AuthProvider.`);
-  }
-  return context;
+  return <AuthContextProvider value={state}>{children}</AuthContextProvider>;
 };

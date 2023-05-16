@@ -2,16 +2,16 @@
 
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
 
-import { Session, SupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { Session } from '@supabase/auth-helpers-nextjs';
 
-import { Database } from '@/models';
+import { WalManagerSupabase } from '@/models';
 
 import { createBrowserClient } from './create-browser-client';
 
 type MaybeSession = Session | null;
 
 type SupabaseContext = {
-  supabase: SupabaseClient<Database>;
+  supabase: WalManagerSupabase;
   session: MaybeSession;
 };
 

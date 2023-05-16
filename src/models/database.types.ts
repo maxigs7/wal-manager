@@ -1,4 +1,9 @@
+import { SupabaseClient } from '@supabase/supabase-js';
+
 import { FunctionsArgs, FunctionsReturns, Inserts, Rows, Updates } from './database.extension';
+import { Database } from './database.schema';
+
+export type WalManagerSupabase = SupabaseClient<Database>;
 
 export type Account = Rows<'account'>;
 export type AccountInsert = Inserts<'account'>;

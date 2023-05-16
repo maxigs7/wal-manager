@@ -4,7 +4,8 @@ import { Session } from '@supabase/auth-helpers-nextjs';
 
 import { ChakraUiProvider } from '@/lib/chakra-ui';
 import { ReactQueryProvider } from '@/lib/react-query';
-import { SupabaseListener, SupabaseProvider } from '@/lib/supabase';
+import { SupabaseListener } from '@/lib/supabase/listener';
+import { SupabaseProvider } from '@/lib/supabase/provider';
 import { AuthProvider } from '@/m/auth/providers';
 import theme from '@/theme';
 

@@ -2,10 +2,9 @@ import 'server-only';
 
 import { PropsWithChildren } from 'react';
 
-import { createServerClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/supabase/create-server-client';
 
 import { AppProviders } from './app-providers';
-
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
   const supabase = createServerClient();
