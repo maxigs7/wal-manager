@@ -1,20 +1,20 @@
+import 'server-only';
 import React from 'react';
 
-import { useUow } from '@/shared/api/server';
+import { createServerClient } from '@/lib/supabase/create-server-client';
+import { select } from '@/supabase';
 
-import { Table } from './table-container';
-
-export type AccountTableContainerProps = {
-  onRemove(id: string): void;
-  onUpdate(id: string): void;
-};
+import { AccountTableClient } from './client';
 
 /* @ts-expect-error Async Server Component */
-const AccountTableContainer: React.FC<AccountTableContainerProps> = async (props) => {
-  const { account } = useUow();
-  const data = await account.select({ order: { field: 'name' } });
+const AccountTableServer: React.FC = async () => {
+  const supabase = createServerClient();
 
-  return <Table data={data || []} {...props} />;
+  const data = await select<'account'>(
+    supabase,
+    'account',
+  )({ order: { field: 'name', ascending: true } });
+  return <AccountTableClient data={data || []} />;
 };
 
-export { AccountTableContainer };
+export { AccountTableServer };

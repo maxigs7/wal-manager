@@ -1,16 +1,21 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
+import { useSupabase } from '@/lib/supabase/provider';
 import { Account } from '@/models';
-import { useUow } from '@/shared';
+import { select } from '@/supabase';
 
 import { ACCOUNTS_KEY } from '../constants';
 
 const useSelectAll = (initialData?: Account[]): UseQueryResult<Account[]> => {
-  const { account } = useUow();
+  const { supabase } = useSupabase();
 
-  return useQuery([ACCOUNTS_KEY], () => account.select({ order: { field: 'name' } }), {
-    initialData,
-  });
+  return useQuery(
+    [ACCOUNTS_KEY],
+    () => select<'account'>(supabase, 'account')({ order: { field: 'name' } }),
+    {
+      initialData,
+    },
+  );
 };
 
 export default useSelectAll;

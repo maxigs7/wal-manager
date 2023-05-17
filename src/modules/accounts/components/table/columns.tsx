@@ -15,12 +15,12 @@ import { ActionButton, ActionsCell, BooleanCell } from '@/shared/components';
 
 import { AccountTypeIcon } from '../type-icon';
 
-interface IProps {
+type Props = {
   onRemove(id: string): void;
   onUpdate(id: string): void;
-}
+};
 
-type GetColumnsType = (props: IProps) => ColumnDef<Account, any>[];
+type GetColumnsType = (props: Props) => ColumnDef<Account, any>[];
 
 const columnHelper = createColumnHelper<Account>();
 
