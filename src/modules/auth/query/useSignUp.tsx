@@ -6,11 +6,11 @@ import { SupabaseError, UserSession } from '@/lib/supabase';
 import { useSupabase } from '@/lib/supabase/provider';
 import { signUp } from '@/supabase';
 
-import { ISignInParam } from '../models';
+import { SignInParam } from '../models';
 
-export const useSignUp = (): UseMutationResult<UserSession, SupabaseError, ISignInParam> => {
+export const useSignUp = (): UseMutationResult<UserSession, SupabaseError, SignInParam> => {
   const { supabase } = useSupabase();
-  return useMutation<UserSession, SupabaseError, ISignInParam>((params) =>
+  return useMutation<UserSession, SupabaseError, SignInParam>((params) =>
     signUp(supabase)(params.email, params.password),
   );
 };

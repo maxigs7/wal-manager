@@ -1,11 +1,11 @@
 import { User } from '@supabase/auth-helpers-nextjs';
 
-export const initialState: IState = {
+export const initialState: State = {
   initializing: true,
   user: null,
 };
 
-export interface IState {
+export type State = {
   initializing: boolean;
   user: User | null;
-}
+};

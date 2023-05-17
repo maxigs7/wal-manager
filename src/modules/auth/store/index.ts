@@ -1,1 +1,1 @@
-export type { IState as IAuthState } from './state';
+export type { State as AuthState } from './state';

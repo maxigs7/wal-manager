@@ -1,7 +1,7 @@
 import { Actions, AUTH_END, AUTH_START } from './actions';
-import { IState } from './state';
+import { State } from './state';
 
-export const reducer = (state: IState, action: Actions): IState => {
+export const reducer = (state: State, action: Actions): State => {
   switch (action.type) {
     case AUTH_START:
       return {

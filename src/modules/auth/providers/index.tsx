@@ -7,9 +7,9 @@ import { useSupabase } from '@/lib/supabase/provider';
 
 import { authEnd, authStart } from '../store/actions';
 import { reducer } from '../store/reducer';
-import { initialState, IState } from '../store/state';
+import { initialState, State } from '../store/state';
 
-const [AuthContextProvider, useUser] = createContext<IState>({ name: 'FullLayoutContext' });
+const [AuthContextProvider, useUser] = createContext<State>({ name: 'FullLayoutContext' });
 
 export { useUser };
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
