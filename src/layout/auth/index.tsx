@@ -1,3 +1,3 @@
-export * from './app-name';
-export * from './page-title';
-export * from './wrapper';
+export { AppName } from './app-name';
+export { PageTitle } from './page-title';
+export { Wrapper } from './wrapper';

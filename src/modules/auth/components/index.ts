@@ -1,2 +1,2 @@
-export * from './auth-alert';
-export * from './link';
+export { AuthAlert } from './auth-alert';
+export { AuthLink } from './link';

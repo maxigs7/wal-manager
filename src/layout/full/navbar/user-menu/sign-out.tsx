@@ -6,7 +6,7 @@ import React from 'react';
 import { MenuItem } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
-import { useSignOut } from '@/m/auth/hooks';
+import { useSignOut } from '@/m/auth/query';
 
 const SignOutMenuItem: React.FC = () => {
   const router = useRouter();

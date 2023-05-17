@@ -1,5 +1,5 @@
-export * from './content-wrapper';
-export * from './main-content';
-export * from './navbar';
-export * from './sidebar';
-export * from './wrapper';
+export { ContentWrapper } from './content-wrapper';
+export { MainContent } from './main-content';
+export { Navbar } from './navbar';
+export { Sidebar } from './sidebar';
+export { Wrapper } from './wrapper';

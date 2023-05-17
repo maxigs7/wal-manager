@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Backdrop } from './backdrop';
-// import { Footer } from './footer';
 import { Header } from './header';
 import { SidebarManager } from './manager';
 import { Menu } from './menu';
@@ -15,7 +14,6 @@ const Sidebar: React.FC = () => {
       <SidebarManager>
         <Header />
         <Menu />
-        {/* <Footer /> */}
       </SidebarManager>
     </SidebarWrapper>
   );

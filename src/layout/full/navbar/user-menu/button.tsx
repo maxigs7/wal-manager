@@ -15,7 +15,7 @@ const UserMenuButton: React.FC = () => {
       as={IconButton}
       icon={<Avatar name={user?.email} size="sm" src={userPhotoUrl} />}
       variant="ghost"
-    ></MenuButton>
+    />
   );
 };
 
