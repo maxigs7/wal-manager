@@ -4,9 +4,9 @@ import { Box } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
 import { Title } from '@/layout/settings';
-import { AccountTableServer } from '@/m/accounts/containers';
+import { AccountTableSSR } from '@/m/accounts/account-table/table-ssr';
+import { CreateButtonLink } from '@/m/shared/buttons';
 import { routes } from '@/routes';
-import { CreateButtonLink } from '@/shared/components';
 
 export const revalidate = 0;
 export const metadata = {
@@ -27,7 +27,7 @@ const Page = async () => {
             {es.common.create}
           </CreateButtonLink>
         </Box>
-        <AccountTableServer />
+        <AccountTableSSR />
       </Box>
     </>
   );

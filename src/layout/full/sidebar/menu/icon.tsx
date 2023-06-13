@@ -4,13 +4,14 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 
 import { Icon as ChakraIcon } from '@chakra-ui/react';
+
 import {
   BuildingLibraryIcon,
   ScaleIcon,
   ChartBarIcon,
   WrenchIcon,
   DocumentTextIcon,
-} from '@heroicons/react/24/outline';
+} from '@/lib/heroicons';
 
 import { IconType, IMenuItem } from './data';
 

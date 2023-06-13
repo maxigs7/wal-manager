@@ -1,7 +1,8 @@
 'use client';
 
 import { Icon, IconButton, useColorMode } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
+
+import { MoonIcon, SunIcon } from '@/lib/heroicons';
 
 const ColorModeToggle: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();

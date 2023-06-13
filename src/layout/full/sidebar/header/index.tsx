@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Icon } from '@chakra-ui/react';
 
+import { WalletLogo } from '@/assets';
 import { es } from '@/i18n';
 import { Link } from '@/lib/chakra-ui';
 import { routes } from '@/routes';
-import { WalletLogo } from '@/shared/assets';
 
 import { CloseButton } from './close-button';
 import { Wrapper } from './wrapper';

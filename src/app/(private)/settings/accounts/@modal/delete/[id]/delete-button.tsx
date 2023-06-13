@@ -1,35 +1,34 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { es } from '@/i18n';
 import { ConfirmButton } from '@/layout/modal-remove';
-import { useModalLayout } from '@/layout/modal-remove/provider';
-import { useAccountDelete, useAccountSelectAllRefresh } from '@/m/accounts/hooks';
+import { useAccountDelete } from '@/m/accounts/query';
+import { routes } from '@/routes';
 
 type Props = {
   id: string;
 };
 
 const DeleteButton: React.FC<Props> = ({ id }) => {
-  const { onClose } = useModalLayout();
+  const router = useRouter();
   const { data, isLoading, isSuccess, mutate, reset } = useAccountDelete();
-  const refresh = useAccountSelectAllRefresh();
 
-  const onConfirm = () => {
+  const onDeleteConfirm = () => {
     id && mutate(id);
   };
 
   useEffect(() => {
     if (isSuccess && data) {
       reset();
-      refresh(data.id);
-      onClose();
+      router.replace(routes.settings.account.index);
     }
-  }, [data, isSuccess, onClose, refresh, reset]);
+  }, [data, router, reset, isSuccess]);
 
   return (
-    <ConfirmButton isLoading={isLoading} onConfirm={onConfirm}>
+    <ConfirmButton isLoading={isLoading} onConfirm={onDeleteConfirm}>
       {es.common.remove}
     </ConfirmButton>
   );

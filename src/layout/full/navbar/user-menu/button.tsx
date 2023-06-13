@@ -2,7 +2,7 @@
 
 import { Avatar, IconButton, MenuButton } from '@chakra-ui/react';
 
-import { useUser } from '@/modules/auth/providers';
+import { useUser } from '@/m/auth/providers';
 
 const UserMenuButton: React.FC = () => {
   const { user } = useUser();

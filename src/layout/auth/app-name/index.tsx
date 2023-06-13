@@ -1,7 +1,7 @@
 import { Box, Heading, Icon } from '@chakra-ui/react';
 
+import { WalletLogo } from '@/assets';
 import { es } from '@/i18n';
-import { WalletLogo } from '@/shared/assets';
 
 const AppName: React.FC = () => (
   <Heading

@@ -1,7 +1,8 @@
 'use client';
 
 import { Icon, IconButton, MenuButton } from '@chakra-ui/react';
-import { BellIcon } from '@heroicons/react/24/solid';
+
+import { BellIcon } from '@/lib/heroicons';
 
 const NotificationsMenuButton: React.FC = () => {
   return (

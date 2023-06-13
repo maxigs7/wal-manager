@@ -18,7 +18,7 @@ const styles = {
 
 export const MenuLink: React.FC<LinkProps> = ({ children, href }) => {
   const pathname = usePathname();
-  const isActive = pathname === href.toString() || false;
+  const isActive = pathname?.startsWith(href.toString()) || false;
   const bg = useColorModeValue('accent.500', 'accent.800');
   const border = useColorModeValue('gray.100', 'primary.900');
 

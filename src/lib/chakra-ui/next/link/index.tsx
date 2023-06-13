@@ -29,12 +29,12 @@ export const Link: LinkComponent = forwardRef(function Link(props, ref) {
 
   return (
     <chakra.a
-      href={href as any}
-      ref={ref}
       {...rest}
       __css={styles}
       as={NextLink}
       className={cx('chakra-link', className)}
+      href={href as any}
+      ref={ref}
     >
       {children}
     </chakra.a>

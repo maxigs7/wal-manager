@@ -1,3 +1,4 @@
+import 'server-only';
 import { notFound } from 'next/navigation';
 
 import { Text } from '@chakra-ui/react';
@@ -6,7 +7,8 @@ import { es } from '@/i18n';
 import { Body } from '@/layout/modal-remove/body';
 import { Footer } from '@/layout/modal-remove/footer';
 import { Wrapper } from '@/layout/modal-remove/wrapper';
-import { useUow } from '@/shared/api/server';
+import { createServerClient } from '@/lib/supabase/create-server-client';
+import { selectById } from '@/supabase';
 
 import { DeleteButton } from './delete-button';
 
@@ -22,9 +24,11 @@ type AccountCheckingProps = {
 };
 
 const Page = async ({ params }: AccountCheckingProps) => {
-  const { account } = useUow();
-  const data = await account.selectById(params.id);
-  if (!data) {
+  const supabase = createServerClient();
+  const account = await selectById<'account'>(supabase, 'account')(params.id);
+
+  console.log(account);
+  if (!account) {
     notFound();
   }
 
@@ -33,7 +37,7 @@ const Page = async ({ params }: AccountCheckingProps) => {
       <Body>
         {es.account.pages.remove.warning.first}
         <Text as="strong" fontWeight="bold">
-          {data.name}
+          {account.name}
         </Text>
         {es.account.pages.remove.warning.last}
       </Body>

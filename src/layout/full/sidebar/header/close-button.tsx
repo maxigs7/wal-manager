@@ -3,7 +3,8 @@
 import React from 'react';
 
 import { Icon, IconButton } from '@chakra-ui/react';
-import { ArrowLeftIcon } from '@heroicons/react/24/solid';
+
+import { ArrowLeftIcon } from '@/lib/heroicons';
 
 import { useLayout } from '../../provider';
 

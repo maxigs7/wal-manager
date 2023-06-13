@@ -3,7 +3,8 @@
 import React from 'react';
 
 import { Icon, IconButton } from '@chakra-ui/react';
-import { Bars3Icon } from '@heroicons/react/24/solid';
+
+import { Bars3Icon } from '@/lib/heroicons';
 
 import { useLayout } from '../provider';
 
