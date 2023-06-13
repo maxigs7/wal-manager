@@ -18,7 +18,9 @@ export const auth = {
     error: 'Usuario o contraseña incorrecta',
     form: {
       email: 'Email',
+      emailPlaceholder: 'john.doe@example.com',
       password: 'Password',
+      passwordPlaceholder: 'my-supper-secret',
     },
     resetPasswordLink: 'Olvidaste tu contraseña?',
     registrationLink: {
@@ -32,8 +34,11 @@ export const auth = {
     error: 'El correo ya se encuentra registrado',
     form: {
       confirmPassword: 'Confirmar Password',
+      confirmPasswordPlaceholder: 'my-supper-secret-again',
       email: 'Email',
+      emailPlaceholder: 'john.doe@example.com',
       password: 'Password',
+      passwordPlaceholder: 'my-supper-secret',
     },
     signInLink: {
       haveAnAccount: 'Ya tienes una cuenta?',

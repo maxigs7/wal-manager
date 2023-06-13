@@ -17,7 +17,11 @@ const SignUpForm: React.FC = () => {
     <>
       <FormControl isInvalid={!!errors.email}>
         <FormLabel htmlFor="email">{es.auth.signUp.form.email}</FormLabel>
-        <Input id="email" placeholder={es.auth.signUp.form.email} {...register('email')} />
+        <Input
+          id="email"
+          placeholder={es.auth.signUp.form.emailPlaceholder}
+          {...register('email')}
+        />
         <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
       </FormControl>
 
@@ -25,7 +29,7 @@ const SignUpForm: React.FC = () => {
         <FormLabel htmlFor="password">{es.auth.signUp.form.password}</FormLabel>
         <Input
           id="password"
-          placeholder={es.auth.signUp.form.password}
+          placeholder={es.auth.signUp.form.passwordPlaceholder}
           type="password"
           {...register('password')}
         />
@@ -36,7 +40,7 @@ const SignUpForm: React.FC = () => {
         <FormLabel htmlFor="confirm-password">{es.auth.signUp.form.confirmPassword}</FormLabel>
         <Input
           id="confirm-password"
-          placeholder={es.auth.signUp.form.confirmPassword}
+          placeholder={es.auth.signUp.form.confirmPasswordPlaceholder}
           type="password"
           {...register('confirmPassword')}
         />

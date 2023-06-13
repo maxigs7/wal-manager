@@ -1,0 +1,58 @@
+[
+  {
+    "comingSoon": false,
+    "exact": false,
+    "href": "/dashboard",
+    "icon": "dashboard",
+    "id": 1,
+    "title": "Dashboard"
+  },
+  {
+    "comingSoon": false,
+    "exact": false,
+    "href": "/accounts",
+    "icon": "accounts",
+    "id": 2,
+    "title": "Cuentas"
+  },
+  {
+    "comingSoon": true,
+    "exact": false,
+    "href": "/invoices",
+    "icon": "invoices",
+    "id": 3,
+    "title": "Invoices"
+  },
+  {
+    "comingSoon": true,
+    "exact": false,
+    "href": "/bills",
+    "icon": "bills",
+    "id": 4,
+    "title": "Facturacion"
+  },
+  {
+    "comingSoon": true,
+    "exact": false,
+    "href": "/investments",
+    "icon": "investment",
+    "id": 5,
+    "title": "Inversiones"
+  },
+  {
+    "comingSoon": true,
+    "exact": false,
+    "href": "/loans",
+    "icon": "loans",
+    "id": 6,
+    "title": "Prestamos"
+  },
+  {
+    "comingSoon": false,
+    "exact": false,
+    "href": "/settings",
+    "icon": "settings",
+    "id": 7,
+    "title": "Configuracion"
+  }
+]

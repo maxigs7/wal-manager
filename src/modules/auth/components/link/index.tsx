@@ -1,7 +1,7 @@
 import { Link, LinkProps } from '@/lib/chakra-ui';
 
 const AuthLink: React.FC<LinkProps> = ({
-  color = 'primary.800',
+  color = 'primary.700',
   children,
   fontSize = 'sm',
   fontWeight = 'bold',

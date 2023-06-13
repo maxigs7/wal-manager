@@ -1,7 +1,6 @@
-import { Box, Heading, Icon } from '@chakra-ui/react';
+import { Heading, Icon } from '@chakra-ui/react';
 
-import { WalletLogo } from '@/assets';
-import { es } from '@/i18n';
+import { WMLogo } from '@/assets';
 
 const AppName: React.FC = () => (
   <Heading
@@ -12,10 +11,7 @@ const AppName: React.FC = () => (
     py="6"
     textTransform="uppercase"
   >
-    <Icon as={WalletLogo} boxSize="12" />
-    <Box as="span" fontSize="4xl" ml="3">
-      {es.common.appName}
-    </Box>
+    <Icon as={WMLogo} boxSize="24" color="white" fill="primary.400" />
   </Heading>
 );
 

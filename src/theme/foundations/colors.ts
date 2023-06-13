@@ -4,10 +4,10 @@ const { colors: defaultColors } = theme;
 
 const colors = {
   primary: {
-    ...defaultColors.blue,
+    ...defaultColors.purple,
   },
   accent: {
-    ...defaultColors.cyan,
+    ...defaultColors.pink,
   },
   success: {
     ...defaultColors.green,

@@ -1,0 +1,50 @@
+[
+  {
+    "comingSoon": false,
+    "exact": false,
+    "href": "/settings/user",
+    "icon": "user",
+    "id": 1,
+    "title": "Usuario"
+  },
+  {
+    "comingSoon": true,
+    "exact": false,
+    "href": "/settings/categories",
+    "icon": "category",
+    "id": 2,
+    "title": "Categorias"
+  },
+  {
+    "comingSoon": false,
+    "exact": false,
+    "href": "/settings/accounts",
+    "icon": "account",
+    "id": 3,
+    "title": "Cuentas"
+  },
+  {
+    "comingSoon": true,
+    "exact": false,
+    "href": "/settings/investments",
+    "icon": "investment",
+    "id": 4,
+    "title": "Inversiones"
+  },
+  {
+    "comingSoon": true,
+    "exact": false,
+    "href": "/loans",
+    "icon": "loans",
+    "id": 5,
+    "title": "Prestamos"
+  },
+  {
+    "comingSoon": true,
+    "exact": false,
+    "href": "/settings/credit-cards",
+    "icon": "credit-card",
+    "id": 6,
+    "title": "Tarjetas"
+  }
+]
