@@ -8,7 +8,6 @@ import { select } from '@/supabase';
 import { AccountFormProvider } from '../account-form/form-provider';
 import { AccountFormContainer } from './form';
 
-/* @ts-expect-error Async Server Component */
 const AccountCreateFormSSR: React.FC = async () => {
   // Initialize Supabase client
   const supabase = createServerClient();

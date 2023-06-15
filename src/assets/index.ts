@@ -1,5 +1,6 @@
 'use client';
 export { default as ArrowDownIcon } from './arrow-down.svg';
+export { default as ArrowLeftIcon } from './arrow-left.svg';
 export { default as ArrowRightIcon } from './arrow-right.svg';
 export { default as ArrowUpIcon } from './arrow-up.svg';
 export { default as BankIcon } from './bank.svg';
@@ -22,6 +23,7 @@ export { default as MoonIcon } from './moon.svg';
 export { default as NotificationIcon } from './notification.svg';
 export { default as PencilIcon } from './pencil.svg';
 export { default as PlusIcon } from './plus.svg';
+export { default as SaveIcon } from './save.svg';
 export { default as SettingsIcon } from './settings.svg';
 export { default as SortDescIcon } from './sort-desc.svg';
 export { default as SunIcon } from './sun.svg';

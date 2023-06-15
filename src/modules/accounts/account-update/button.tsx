@@ -3,16 +3,17 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import { Button } from '@chakra-ui/react';
+import { Button, ButtonProps, Icon } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
+import { SaveIcon } from '@/assets';
 import { es } from '@/i18n';
 import { AccountInsert } from '@/models';
 import { routes } from '@/routes';
 
 import { useAccountUpdate } from '../query';
 
-const UpdateAccountButton: React.FC = () => {
+const UpdateAccountButton: React.FC<ButtonProps> = (buttonProps) => {
   const router = useRouter();
   const { handleSubmit, formState } = useFormContext<AccountInsert>();
   const { isSubmitting: isFormSubmitting } = formState;
@@ -26,9 +27,13 @@ const UpdateAccountButton: React.FC = () => {
 
   return (
     <Button
+      {...buttonProps}
       colorScheme="accent"
       isLoading={isFormSubmitting || isAsyncSubmitting}
+      leftIcon={<Icon as={SaveIcon} boxSize="3" />}
       onClick={onSubmit}
+      rounded="2xl"
+      shadow="md"
       size="sm"
     >
       {es.common.save}

@@ -21,7 +21,7 @@ const SwitchControl: React.FC<Props> = ({ children, control, id, name, rules, ..
   return (
     <>
       <FormLabel htmlFor={id}>{children}</FormLabel>
-      <Switch {...props} {...field} id={id} isChecked={field.value} />
+      <Switch {...props} {...field} colorScheme="accent" id={id} isChecked={field.value} />
     </>
   );
 };

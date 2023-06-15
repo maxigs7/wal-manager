@@ -1,9 +1,9 @@
 import 'server-only';
 
-import { Box } from '@chakra-ui/react';
+import { Box, Flex, ScaleFade } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
-import { ActionBar, Title } from '@/layout/settings';
+import { Title } from '@/layout/settings';
 import { createServerClient } from '@/lib/supabase/create-server-client';
 import { AccountCreateFormSSR } from '@/m/accounts/account-create';
 import { CreateAccountButton } from '@/m/accounts/account-create/button';
@@ -24,15 +24,24 @@ const Page = async () => {
 
   return (
     <AccountUseFormProvider userId={session?.user.id || ''}>
-      <Title>{es.account.pages.create.title}</Title>
       <Box as="form" noValidate>
-        <ActionBar>
-          <BackButtonLink href={routes.settings.account.index}>{es.common.goBack}</BackButtonLink>
-          <CreateAccountButton />
-        </ActionBar>
-        <Box p="3">
+        <ScaleFade in={true}>
+          <Flex align="center" flexWrap="wrap" mb="2">
+            <Title flexBasis={{ base: '100%', md: 'auto' }}>{es.account.pages.create.title}</Title>
+            <Flex flexBasis={{ base: '100%', md: 'auto' }} gap="2" ml={{ base: '0', md: 'auto' }}>
+              <BackButtonLink
+                flexBasis={{ base: '50%', md: 'auto' }}
+                href={routes.settings.account.index}
+              >
+                {es.common.goBack}
+              </BackButtonLink>
+              <CreateAccountButton flexBasis={{ base: '50%', md: 'auto' }} />
+            </Flex>
+          </Flex>
+        </ScaleFade>
+        <ScaleFade in={true}>
           <AccountCreateFormSSR />
-        </Box>
+        </ScaleFade>
       </Box>
     </AccountUseFormProvider>
   );

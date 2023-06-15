@@ -9,7 +9,7 @@ const AccountTypeRadioGroup: React.FC<Omit<RadioGroupProps, 'children'>> = React
   Omit<RadioGroupProps, 'children'>
 >((props, ref) => {
   return (
-    <RadioGroup {...props} ref={ref}>
+    <RadioGroup {...props} colorScheme="accent" ref={ref}>
       <Stack direction="row">
         <Radio value="bank">{getAccountTypeName('bank')}</Radio>
         <Radio value="cash">{getAccountTypeName('cash')}</Radio>
