@@ -2,7 +2,7 @@
 
 import { Icon, IconButton, useColorMode } from '@chakra-ui/react';
 
-import { MoonIcon, SunIcon } from '@/lib/heroicons';
+import { MoonIcon, SunIcon } from '@/assets';
 
 const ColorModeToggle: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -10,10 +10,11 @@ const ColorModeToggle: React.FC = () => {
   return (
     <IconButton
       aria-label="Color Mode"
-      colorScheme="gray"
-      icon={<Icon as={colorMode === 'dark' ? SunIcon : MoonIcon} boxSize="6" fill="current" />}
+      colorScheme="accent"
+      icon={<Icon as={colorMode === 'dark' ? SunIcon : MoonIcon} boxSize="5" />}
       onClick={toggleColorMode}
-      variant="ghost"
+      rounded="full"
+      shadow="md"
     />
   );
 };

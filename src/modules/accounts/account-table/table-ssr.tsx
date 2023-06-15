@@ -6,7 +6,6 @@ import { select } from '@/supabase';
 
 import { AccountTableContainer } from './table-container';
 
-/* @ts-expect-error Async Server Component */
 const AccountTableSSR: React.FC = async () => {
   const supabase = createServerClient();
 

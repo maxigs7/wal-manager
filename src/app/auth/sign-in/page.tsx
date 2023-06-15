@@ -6,8 +6,8 @@ import { es } from '@/i18n';
 import { PageTitle } from '@/layout/auth';
 import { AuthLink } from '@/m/auth/components';
 import { SignInFormContainer, SignInForm } from '@/m/auth/sign-in';
+import { AUTH_SIGN_UP_ENABLED } from '@/m/shared/config';
 import { routes } from '@/routes';
-import { AUTH_SIGN_UP_ENABLED } from '@/shared/config';
 
 export const metadata = {
   title: `${es.auth.signIn.title} - WAL`,

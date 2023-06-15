@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
 import { Title } from '@/layout/settings';
@@ -16,19 +16,18 @@ export const metadata = {
 const Page = async () => {
   return (
     <>
-      <Title>{es.account.pages.index.title}</Title>
-      <Box>
-        <Box p="3">
-          <CreateButtonLink
-            href={routes.settings.account.create}
-            size="sm"
-            textTransform="uppercase"
-          >
-            {es.common.create}
-          </CreateButtonLink>
-        </Box>
-        <AccountTableSSR />
-      </Box>
+      <Flex>
+        <Title>{es.account.pages.index.title}</Title>
+        <CreateButtonLink
+          href={routes.settings.account.create}
+          ml="auto"
+          size="sm"
+          textTransform="uppercase"
+        >
+          {es.common.create}
+        </CreateButtonLink>
+      </Flex>
+      <AccountTableSSR />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react';
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { CellContext, ColumnDef, createColumnHelper } from '@tanstack/react-table';
 
+import { PencilIcon, TrashIcon } from '@/assets';
 import { es } from '@/i18n';
 import { ActionButton, ActionsCell, BooleanCell } from '@/m/shared/data-table/cells';
 import {

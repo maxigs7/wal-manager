@@ -1,17 +1,21 @@
 import React from 'react';
 
-import { Icon } from '@chakra-ui/react';
+import { Flex, Icon } from '@chakra-ui/react';
 
-import { WalletLogo } from '@/assets';
-import { es } from '@/i18n';
+import { WMLogo } from '@/assets';
 import { Link } from '@/lib/chakra-ui';
 import { routes } from '@/routes';
 
+import { NAVBAR_HEIGHT } from '../../constants';
 import { CloseButton } from './close-button';
-import { Wrapper } from './wrapper';
 
 const Header: React.FC = () => (
-  <Wrapper>
+  <Flex
+    align="center"
+    justify={{ base: 'space-between', lg: 'center' }}
+    minH={NAVBAR_HEIGHT}
+    px="3"
+  >
     <Link
       alignItems="center"
       display="flex"
@@ -23,12 +27,11 @@ const Header: React.FC = () => (
         textDecoration: 'none',
       }}
     >
-      <Icon as={WalletLogo} boxSize="6" />
-      {es.common.appName}
+      <Icon as={WMLogo} boxSize="12" fill="primary.400" />
     </Link>
 
     <CloseButton />
-  </Wrapper>
+  </Flex>
 );
 
 export { Header };

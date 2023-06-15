@@ -2,15 +2,17 @@
 
 import { Icon, IconButton, MenuButton } from '@chakra-ui/react';
 
-import { BellIcon } from '@/lib/heroicons';
+import { NotificationIcon } from '@/assets';
 
 const NotificationsMenuButton: React.FC = () => {
   return (
     <MenuButton
       aria-label="Notifications Menu"
       as={IconButton}
-      icon={<Icon as={BellIcon} boxSize="6" fill="current" />}
-      variant="ghost"
+      colorScheme="accent"
+      icon={<Icon as={NotificationIcon} boxSize="5" fill="current" />}
+      rounded="full"
+      shadow="md"
     />
   );
 };

@@ -1,29 +1,21 @@
-'use client';
+import { AnimatePresence } from '@/lib/framer-motion';
+import { IconType, MenuItem as MenuItemModel } from '@/models';
 
-import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { MenuContainer } from './container';
+import { MenuItem } from './item';
 
-import { menuData } from './data';
-import { MenuLink } from './menu-link';
+export const Menu: React.FC = async () => {
+  const menu: MenuItemModel[] = await import('@/assets/menu-settings.json').then(
+    (obj) => obj.default,
+  );
 
-export const Menu: React.FC = () => {
-  const bg = useColorModeValue('white', 'primary.800');
   return (
-    <Flex
-      align={{ base: 'center', lg: 'flex-start' }}
-      basis={{ lg: '300px' }}
-      bg={bg}
-      direction={{ lg: 'column' }}
-      m={{ lg: '2' }}
-      overflowX={{ base: 'auto', lg: 'hidden' }}
-      overflowY={{ base: 'hidden' }}
-      rounded={{ base: 'none', lg: 'md' }}
-      shadow="md"
-    >
-      {menuData.map((data, index) => (
-        <MenuLink key={index} href={data.href}>
-          {data.label}
-        </MenuLink>
-      ))}
-    </Flex>
+    <AnimatePresence>
+      <MenuContainer>
+        {menu.map((item) => (
+          <MenuItem {...item} key={item.id} icon={item.icon as IconType} />
+        ))}
+      </MenuContainer>
+    </AnimatePresence>
   );
 };

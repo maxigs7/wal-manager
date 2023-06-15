@@ -1,5 +1,5 @@
 'use client';
-import { PageLoader } from '@/shared/components';
+import { PageLoader } from '@/m/shared/loaders/page-loader';
 
 const Loading = () => {
   return <PageLoader />;

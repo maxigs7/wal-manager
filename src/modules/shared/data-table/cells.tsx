@@ -4,11 +4,13 @@ import { ButtonGroup, Icon, IconButton, IconProps } from '@chakra-ui/react';
 import { CellContext, HeaderContext } from '@tanstack/react-table';
 import { format, parseISO } from 'date-fns';
 
-import { ArrowDownIcon, ArrowRightIcon, CheckIcon } from '@/lib/heroicons';
+import { ArrowDownIcon, ArrowRightIcon, CheckIcon } from '@/assets';
 
 export const BooleanCell = <T extends Record<string, unknown>, D extends boolean>({
   getValue,
-}: CellContext<T, D>): React.ReactElement => <>{getValue() && <Icon as={CheckIcon} />}</>;
+}: CellContext<T, D>): React.ReactElement => (
+  <>{getValue() && <Icon as={CheckIcon} boxSize="3" />}</>
+);
 
 export const DateCell = <T extends Record<string, unknown>, D extends string>({
   getValue,
@@ -21,7 +23,7 @@ export const ExpandedCell = <T extends Record<string, unknown>, D>({
   row.getCanExpand() ? (
     <IconButton
       aria-label="expander"
-      icon={<Icon as={row.getIsExpanded() ? ArrowDownIcon : ArrowRightIcon} />}
+      icon={<Icon as={row.getIsExpanded() ? ArrowDownIcon : ArrowRightIcon} boxSize="3" />}
       onClick={row.getToggleExpandedHandler()}
       pl={row.depth * 2}
       size="xs"
@@ -34,7 +36,7 @@ export const ExpandedAllCell = <T extends Record<string, unknown>, D>({
 }: HeaderContext<T, D>): React.ReactElement | null => (
   <IconButton
     aria-label="expander"
-    icon={<Icon as={getIsAllRowsExpanded() ? ArrowDownIcon : ArrowRightIcon} />}
+    icon={<Icon as={getIsAllRowsExpanded() ? ArrowDownIcon : ArrowRightIcon} boxSize="3" />}
     onClick={getToggleAllRowsExpandedHandler()}
     size="xs"
     variant="ghost"
@@ -68,7 +70,7 @@ export const ActionsCell = <T extends Record<string, unknown>>({
           as={Link}
           colorScheme={action.colorScheme}
           href={action.href}
-          icon={<Icon as={action.icon} boxSize={action.iconSize || '4'} />}
+          icon={<Icon as={action.icon} boxSize={action.iconSize || '3'} />}
           onClick={() => action.onClick && action.onClick(row)}
           prefetch={false}
           rounded="full"

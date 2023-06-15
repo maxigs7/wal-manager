@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Icon, IconButton } from '@chakra-ui/react';
 
-import { ArrowLeftIcon } from '@/lib/heroicons';
+import { CloseIcon } from '@/assets';
 
 import { useLayout } from '../../provider';
 
@@ -17,8 +17,9 @@ const CloseButton: React.FC = () => {
     <IconButton
       {...getButtonProps()}
       aria-label="Close Sidebar"
+      colorScheme="white"
       display={{ base: 'flex', lg: 'none' }}
-      icon={<Icon as={ArrowLeftIcon} boxSize="6" />}
+      icon={<Icon as={CloseIcon} boxSize="6" />}
       onClick={onClose}
       variant="ghost"
     />

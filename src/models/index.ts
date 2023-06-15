@@ -4,3 +4,4 @@ export * from './database.extension';
 export * from './database.schema';
 export * from './database.types';
 export * from './database.utils';
+export * from './menu';

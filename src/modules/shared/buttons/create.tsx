@@ -1,10 +1,8 @@
-'use client';
-
 import Link from 'next/link';
 
 import { Button, ButtonProps, Icon } from '@chakra-ui/react';
 
-import { PlusIcon } from '@/lib/heroicons';
+import { PlusIcon } from '@/assets';
 
 type Props = ButtonProps & { href: string };
 
@@ -13,7 +11,6 @@ const CreateButtonLink: React.FC<Props> = ({
   colorScheme = 'accent',
   href,
   size = 'sm',
-  textTransform = 'uppercase',
   ...buttonProps
 }) => {
   return (
@@ -21,10 +18,10 @@ const CreateButtonLink: React.FC<Props> = ({
       as={Link}
       colorScheme={colorScheme}
       href={href}
-      leftIcon={<Icon as={PlusIcon} />}
+      leftIcon={<Icon as={PlusIcon} boxSize="3" />}
       prefetch={false}
+      rounded="2xl"
       size={size}
-      textTransform={textTransform}
       {...buttonProps}
     >
       {children}

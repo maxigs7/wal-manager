@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Icon, IconButton } from '@chakra-ui/react';
 
-import { Bars3Icon } from '@/lib/heroicons';
+import { BarsIcon } from '@/assets';
 
 import { useLayout } from '../provider';
 
@@ -16,10 +16,11 @@ export const Hamburger: React.FC = () => {
     <IconButton
       {...getButtonProps()}
       aria-label="Open Sidebar"
-      colorScheme="gray"
-      icon={<Icon as={Bars3Icon} boxSize="6" fill="current" />}
+      colorScheme="accent"
+      icon={<Icon as={BarsIcon} boxSize="5" />}
       onClick={onToggle}
-      variant="ghost"
+      rounded="full"
+      shadow="md"
     />
   );
 };

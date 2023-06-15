@@ -14,7 +14,7 @@ export const Navbar: React.FC = () => {
       <Flex align="center" h="full">
         <Hamburger />
       </Flex>
-      <Flex align="center" h="full" ml="auto">
+      <Flex align="center" gap="2" h="full" ml="auto">
         <ColorModeToggle />
         <NotificationsMenu />
         <UserMenu />

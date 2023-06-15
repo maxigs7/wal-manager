@@ -1,6 +1,6 @@
 import { SupabaseError } from '@/lib/supabase';
+import { BASE_URL } from '@/m/shared/config';
 import { WalManagerSupabase } from '@/models';
-import { BASE_URL } from '@/shared/config';
 
 export type ResetPasswordForEmailReturn = (email: string) => Promise<void>;
 

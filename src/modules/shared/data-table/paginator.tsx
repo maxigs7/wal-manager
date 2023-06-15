@@ -12,13 +12,13 @@ import {
   Tr,
 } from '@chakra-ui/react';
 
-import { es } from '@/i18n';
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-} from '@/lib/heroicons';
+} from '@/assets';
+import { es } from '@/i18n';
 
 import { pageSizes, pageIndexes } from './util';
 
@@ -71,14 +71,14 @@ export const Paginator: React.FC<Props> = ({
             <ButtonGroup colorScheme="accent" size="xs" variant="outline">
               <IconButton
                 aria-label="First page"
-                icon={<Icon as={ChevronDoubleLeftIcon} />}
+                icon={<Icon as={ChevronDoubleLeftIcon} boxSize="2" />}
                 isDisabled={!canPreviousPage}
                 onClick={() => setPageIndex(0)}
                 rounded="full"
               />
               <IconButton
                 aria-label="Previous page"
-                icon={<Icon as={ChevronLeftIcon} />}
+                icon={<Icon as={ChevronLeftIcon} boxSize="2" />}
                 isDisabled={!canPreviousPage}
                 onClick={() => previousPage()}
                 rounded="full"
@@ -101,14 +101,14 @@ export const Paginator: React.FC<Props> = ({
 
               <IconButton
                 aria-label="First page"
-                icon={<Icon as={ChevronRightIcon} />}
+                icon={<Icon as={ChevronRightIcon} boxSize="2" />}
                 isDisabled={!canNextPage}
                 onClick={() => nextPage()}
                 rounded="full"
               />
               <IconButton
                 aria-label="Previous page"
-                icon={<Icon as={ChevronDoubleRightIcon} />}
+                icon={<Icon as={ChevronDoubleRightIcon} boxSize="2" />}
                 isDisabled={!canNextPage}
                 onClick={() => setPageIndex(pageCount - 1)}
                 rounded="full"

@@ -1,6 +1,6 @@
 import { Box, Heading } from '@chakra-ui/react';
 
-import { CurrencySelect } from '@/shared/components';
+import { CurrencySelect } from '@/m/shared/form/currency-select';
 
 export const revalidate = 0;
 

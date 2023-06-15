@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 
 import { Icon, IconProps } from '@chakra-ui/react';
 
-import { BanknotesIcon, BuildingLibraryIcon } from '@/lib/heroicons';
+import { BankIcon, CashIcon } from '@/assets';
 import { AccountType } from '@/models';
 
 type Props = Omit<IconProps, 'as'> & {
@@ -15,11 +15,11 @@ const AccountTypeIcon: React.FC<Props> = ({ type, ...props }) => {
   const icon = useMemo(() => {
     switch (type) {
       case 'bank':
-        return BuildingLibraryIcon;
+        return BankIcon;
       case 'cash':
-        return BanknotesIcon;
+        return CashIcon;
       default:
-        return BuildingLibraryIcon;
+        return null;
     }
   }, [type]);
   return (

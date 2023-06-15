@@ -1,6 +1,6 @@
 'use client';
 
-import { Table as ChakraTable, TableContainer } from '@chakra-ui/react';
+import { Table as ChakraTable, TableContainer, useColorModeValue } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
 
@@ -27,6 +27,8 @@ export const DataTable = <T extends object>({
   isLoading = false,
   isRowHighlighted,
 }: Props<T>): React.ReactElement => {
+  const bg = useColorModeValue('white', 'primary.800');
+  const bgHeader = useColorModeValue('primary.300', 'primary.700');
   const {
     getCanNextPage,
     getCanPreviousPage,
@@ -51,13 +53,18 @@ export const DataTable = <T extends object>({
     <>
       {globalFilterEnabled && (
         <GlobalFilter
+          bg={bg}
+          display="inline-flex"
           globalFilter={getState().globalFilter}
+          mb="2"
           onChangedGlobalFilter={setGlobalFilter}
+          rounded="lg"
+          shadow="md"
         />
       )}
-      <TableContainer>
-        <ChakraTable size="sm">
-          <Header headerGroups={getHeaderGroups()} />
+      <TableContainer rounded="lg" shadow="md">
+        <ChakraTable bg={bg} size="sm">
+          <Header bg={bgHeader} color="white" headerGroups={getHeaderGroups()} />
           <Body
             emptyText={emptyText}
             isLoading={isLoading}

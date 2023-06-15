@@ -2,8 +2,8 @@
 
 import React, { useMemo } from 'react';
 
+import { DataTable } from '@/m/shared/data-table/table';
 import { Account } from '@/models';
-import { DataTable } from '@/shared/components';
 
 import { getColumns } from './columns';
 

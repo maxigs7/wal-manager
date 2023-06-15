@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar, IconButton, MenuButton } from '@chakra-ui/react';
+import { Avatar, Button, MenuButton } from '@chakra-ui/react';
 
 import { useUser } from '@/m/auth/providers';
 
@@ -12,10 +12,16 @@ const UserMenuButton: React.FC = () => {
   return (
     <MenuButton
       aria-label="User Menu"
-      as={IconButton}
-      icon={<Avatar name={user?.email} size="sm" src={userPhotoUrl} />}
-      variant="ghost"
-    />
+      as={Button}
+      colorScheme="accent"
+      fontSize="sm"
+      leftIcon={<Avatar bg="primary.400" name={user?.email} size="xs" src={userPhotoUrl} />}
+      rounded="3xl"
+      shadow="md"
+      textTransform="none"
+    >
+      {user?.email}
+    </MenuButton>
   );
 };
 

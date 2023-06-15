@@ -2,7 +2,7 @@
 
 import React, { PropsWithChildren, useMemo } from 'react';
 
-import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { SIDEBAR_WIDTH } from '../constants';
 import { useLayout } from '../provider';
@@ -12,8 +12,6 @@ const SidebarManager: React.FC<PropsWithChildren> = ({ children }) => {
     sidebar: { isOpen, isTouched, getDisclosureProps },
   } = useLayout();
   const { id } = getDisclosureProps();
-  const bg = useColorModeValue('gray.200', 'primary.800');
-  const color = useColorModeValue('primary.800', 'white');
   const transform = useMemo(() => {
     const open = 'translateX(0)';
     const close = 'translateX(-16rem)';
@@ -30,8 +28,8 @@ const SidebarManager: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Flex
-      bg={bg}
-      color={color}
+      bg="primary.800"
+      color="white"
       direction="column"
       h="100%"
       id={id}

@@ -11,7 +11,7 @@
     "comingSoon": true,
     "exact": false,
     "href": "/settings/categories",
-    "icon": "category",
+    "icon": "categories",
     "id": 2,
     "title": "Categorias"
   },
@@ -19,7 +19,7 @@
     "comingSoon": false,
     "exact": false,
     "href": "/settings/accounts",
-    "icon": "account",
+    "icon": "accounts",
     "id": 3,
     "title": "Cuentas"
   },
@@ -27,14 +27,14 @@
     "comingSoon": true,
     "exact": false,
     "href": "/settings/investments",
-    "icon": "investment",
+    "icon": "investments",
     "id": 4,
     "title": "Inversiones"
   },
   {
     "comingSoon": true,
     "exact": false,
-    "href": "/loans",
+    "href": "/settings/loans",
     "icon": "loans",
     "id": 5,
     "title": "Prestamos"
@@ -43,7 +43,7 @@
     "comingSoon": true,
     "exact": false,
     "href": "/settings/credit-cards",
-    "icon": "credit-card",
+    "icon": "credit-cards",
     "id": 6,
     "title": "Tarjetas"
   }

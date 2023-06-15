@@ -5,35 +5,23 @@ import SortingColumn from './sorting-column';
 
 type Props<T extends object> = {
   headerGroups: HeaderGroup<T>[];
-};
+} & TableColumnHeaderProps;
 
-const Header = <T extends object>({ headerGroups }: Props<T>): React.ReactElement => (
+const Header = <T extends object>({ headerGroups, ...thProps }: Props<T>): React.ReactElement => (
   <Thead>
     {headerGroups.map((headerGroup: HeaderGroup<T>) => (
       <Tr key={headerGroup.id}>
-        {headerGroup.headers.map((header, ix, arr) => {
+        {headerGroup.headers.map((header) => {
           const conditinalProps: TableColumnHeaderProps = {
-            ...(ix === arr.length - 1
-              ? {}
-              : {
-                  borderRight: 'solid',
-                  borderRightColor: 'gray.300',
-                  borderRightWidth: 'thin',
-                }),
-
             ...(header.colSpan === 1 ? {} : { colSpan: header.colSpan, textAlign: 'center' }),
           };
           return (
             <Th
               key={header.id}
-              borderBottom="solid"
-              borderBottomColor="gray.300"
-              borderBottomWidth="thin"
-              borderTop="solid"
-              borderTopColor="gray.300"
-              borderTopWidth="thin"
               onClick={header.column.getToggleSortingHandler()}
+              verticalAlign="bottom"
               whiteSpace="nowrap"
+              {...thProps}
               {...conditinalProps}
             >
               {header.isPlaceholder ? null : (

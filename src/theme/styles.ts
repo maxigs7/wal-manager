@@ -9,8 +9,8 @@ const styles = {
   global: ({ colorMode }: GlobalProps): any => {
     return {
       body: {
-        bg: colorMode === 'dark' ? 'gray.900' : 'gray.100',
-        color: colorMode === 'dark' ? 'gray.300' : 'gray.600',
+        bg: colorMode === 'dark' ? 'primary.900' : 'gray.100',
+        color: colorMode === 'dark' ? 'primary.100' : 'gray.700',
       },
     };
   },
