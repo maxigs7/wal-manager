@@ -5,7 +5,9 @@ import { extendTheme } from '@chakra-ui/react';
 import { Button } from './components/button';
 import { Heading } from './components/heading';
 import { Input } from './components/input';
+import { RadioGroup } from './components/radio-group';
 import { Select } from './components/select';
+import { Switch } from './components/switch';
 import config from './config';
 import breakpoints from './foundations/breakpoints';
 import colors from './foundations/colors';
@@ -19,7 +21,9 @@ const theme = extendTheme({
     Button,
     Input,
     Heading,
+    RadioGroup,
     Select,
+    Switch,
   },
   config,
   fonts,
