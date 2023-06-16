@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { ComponentProps, useEffect } from 'react';
+import { ComponentProps } from 'react';
 
 import { Button, VStack } from '@chakra-ui/react';
 import { FormProvider, useForm, yupResolver } from 'react-hook-form';

@@ -12,7 +12,7 @@ export type SelectOptions = {
 
 export type SelectConfig<TName extends TablesName> = {
   columns?: string;
-  filter?: Filter<TName, Rows<TName>> | false | null;
+  filter?: Filter<TName, Rows<TName>, Rows<TName>[]> | false | null;
   order?: Sort;
   options?: SelectOptions;
 };

@@ -8,14 +8,14 @@ import { useFormContext } from 'react-hook-form';
 
 import { SaveIcon } from '@/assets';
 import { es } from '@/i18n';
-import { AccountInsert } from '@/models';
 import { routes } from '@/routes';
 
+import { AccountFormType } from '../models/account';
 import { useAccountUpdate } from '../query';
 
 const UpdateAccountButton: React.FC<ButtonProps> = (buttonProps) => {
   const router = useRouter();
-  const { handleSubmit, formState } = useFormContext<AccountInsert>();
+  const { handleSubmit, formState } = useFormContext<AccountFormType>();
   const { isSubmitting: isFormSubmitting } = formState;
   const { isLoading: isAsyncSubmitting, mutateAsync: updateAccount } = useAccountUpdate();
 

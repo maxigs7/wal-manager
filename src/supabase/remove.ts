@@ -2,7 +2,7 @@ import { SupabaseError, Count, Filter, Returning, SupabaseNotFoundError } from '
 import { Rows, TablesName, WalManagerSupabase } from '@/models';
 
 export type RemoveReturn<TName extends TablesName> = (
-  filter: Filter<TName, Rows<TName>, undefined>,
+  filter: Filter<TName, Rows<TName>, null>,
 ) => Promise<Rows<TName>>;
 
 export type RemoveOptions = {
@@ -15,7 +15,7 @@ export const remove = <TName extends TablesName>(
   table: TablesName,
   options: RemoveOptions = {},
 ): RemoveReturn<TName> => {
-  return async (filter: Filter<TName, Rows<TName>, undefined>) => {
+  return async (filter: Filter<TName, Rows<TName>, null>) => {
     const query = supabase.from(table).delete(options);
     const { data, error } = await filter(query).select<string, Rows<TName>>();
 

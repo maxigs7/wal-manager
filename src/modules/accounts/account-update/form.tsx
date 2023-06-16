@@ -4,9 +4,10 @@ import React, { useEffect } from 'react';
 
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import { Account, AccountInsert } from '@/models';
+import { Account } from '@/models';
 
 import { AccountForm } from '../account-form';
+import { AccountFormType } from '../models/account';
 import { useAccountSelectById } from '../query';
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
 };
 
 const AccountFormContainer: React.FC<Props> = ({ account: initialAccount }) => {
-  const { control, setValue, reset } = useFormContext<AccountInsert>();
+  const { control, setValue, reset } = useFormContext<AccountFormType>();
   const { data: account } = useAccountSelectById(initialAccount, initialAccount.id);
 
   const currency = useWatch({

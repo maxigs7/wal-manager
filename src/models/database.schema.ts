@@ -11,15 +11,18 @@ export interface Database {
     Functions: {
       graphql: {
         Args: {
-          operationName: string;
-          query: string;
-          variables: Json;
-          extensions: Json;
+          operationName?: string;
+          query?: string;
+          variables?: Json;
+          extensions?: Json;
         };
         Returns: Json;
       };
     };
     Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
       [_ in never]: never;
     };
   };
@@ -56,6 +59,20 @@ export interface Database {
           type?: Database['public']['Enums']['accountType'];
           userId?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'fk_account_quotation';
+            columns: ['quotationId'];
+            referencedRelation: 'quotation';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_account_user';
+            columns: ['userId'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       category: {
         Row: {
@@ -85,6 +102,20 @@ export interface Database {
           parentId?: string | null;
           userId?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'fk_category_user';
+            columns: ['userId'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_parent_category';
+            columns: ['parentId'];
+            referencedRelation: 'category';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       creditCard: {
         Row: {
@@ -111,6 +142,20 @@ export interface Database {
           type?: Database['public']['Enums']['creditCardType'];
           userId?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'fk_creditCard_account';
+            columns: ['accountId'];
+            referencedRelation: 'account';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_creditCard_user';
+            columns: ['userId'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       investment: {
         Row: {
@@ -152,6 +197,20 @@ export interface Database {
           type?: Database['public']['Enums']['investmentType'];
           userId?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'fk_investment_account';
+            columns: ['accountId'];
+            referencedRelation: 'account';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_investment_user';
+            columns: ['userId'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       movement: {
         Row: {
@@ -202,6 +261,38 @@ export interface Database {
           userId?: string;
           year?: number;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'fk_movement_account';
+            columns: ['accountId'];
+            referencedRelation: 'account';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_movement_category';
+            columns: ['categoryId'];
+            referencedRelation: 'category';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_movement_creditCard';
+            columns: ['creditCardId'];
+            referencedRelation: 'creditCard';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_movement_investment';
+            columns: ['investmentId'];
+            referencedRelation: 'investment';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_movement_user';
+            columns: ['userId'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       movementFee: {
         Row: {
@@ -222,6 +313,14 @@ export interface Database {
           id?: string;
           totalFees?: number;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'fk_movement_movementFee';
+            columns: ['id'];
+            referencedRelation: 'movement';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       quotation: {
         Row: {
@@ -242,6 +341,7 @@ export interface Database {
           id?: Database['public']['Enums']['quotationType'];
           name?: string;
         };
+        Relationships: [];
       };
       transfer: {
         Row: {
@@ -265,6 +365,26 @@ export interface Database {
           sourceMovementId?: string;
           userId?: string;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'fk_movement_destinationMovement';
+            columns: ['destinationMovementId'];
+            referencedRelation: 'movement';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_movement_sourceMovement';
+            columns: ['sourceMovementId'];
+            referencedRelation: 'movement';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'fk_transfer_user';
+            columns: ['userId'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
       };
     };
     Views: {
@@ -272,11 +392,32 @@ export interface Database {
     };
     Functions: {
       deleteMovement: {
-        Args: { id: string };
-        Returns: unknown;
+        Args: {
+          id: string;
+        };
+        Returns: {
+          accountId: string;
+          amount: number;
+          categoryId: string;
+          createdAt: string;
+          creditCardId: string | null;
+          date: string;
+          description: string | null;
+          id: string;
+          investmentId: string | null;
+          isPaid: boolean;
+          month: number;
+          type: Database['public']['Enums']['movementType'];
+          userId: string;
+          year: number;
+        }[];
       };
       getMovements: {
-        Args: { pAccountId: string; pMonth: number; pYear: number };
+        Args: {
+          pAccountId: string;
+          pMonth: number;
+          pYear: number;
+        };
         Returns: {
           account: string;
           amount: number;
@@ -334,15 +475,30 @@ export interface Database {
           pType: Database['public']['Enums']['movementType'];
           pUserId: string;
           pYear: number;
-          pCreateAll: boolean | null;
-          pCreditCardId: string | null;
-          pDescription: string | null;
-          pDestinationAccountId: string | null;
-          pFeeNumber: number | null;
-          pIsPaid: boolean | null;
-          pQuotationAmount: number | null;
+          pCreateAll?: boolean;
+          pCreditCardId?: string;
+          pDescription?: string;
+          pDestinationAccountId?: string;
+          pFeeNumber?: number;
+          pIsPaid?: boolean;
+          pQuotationAmount?: number;
         };
-        Returns: unknown;
+        Returns: {
+          accountId: string;
+          amount: number;
+          categoryId: string;
+          createdAt: string;
+          creditCardId: string | null;
+          date: string;
+          description: string | null;
+          id: string;
+          investmentId: string | null;
+          isPaid: boolean;
+          month: number;
+          type: Database['public']['Enums']['movementType'];
+          userId: string;
+          year: number;
+        }[];
       };
       updateMovement: {
         Args: {
@@ -352,12 +508,27 @@ export interface Database {
           pId: string;
           pMonth: number;
           pYear: number;
-          pCreditCardId: string | null;
-          pDescription: string | null;
-          pFeeNumber: number | null;
-          pIsPaid: boolean | null;
+          pCreditCardId?: string;
+          pDescription?: string;
+          pFeeNumber?: number;
+          pIsPaid?: boolean;
         };
-        Returns: unknown;
+        Returns: {
+          accountId: string;
+          amount: number;
+          categoryId: string;
+          createdAt: string;
+          creditCardId: string | null;
+          date: string;
+          description: string | null;
+          id: string;
+          investmentId: string | null;
+          isPaid: boolean;
+          month: number;
+          type: Database['public']['Enums']['movementType'];
+          userId: string;
+          year: number;
+        }[];
       };
     };
     Enums: {
@@ -368,12 +539,18 @@ export interface Database {
       movementType: 'expenses' | 'incomes' | 'investment' | 'transfer';
       quotationType: 'blue' | 'mep' | 'ccl' | 'usd' | 'usd+';
     };
+    CompositeTypes: {
+      [_ in never]: never;
+    };
   };
   storage: {
     Tables: {
       buckets: {
         Row: {
+          allowed_mime_types: string[] | null;
+          avif_autodetection: boolean | null;
           created_at: string | null;
+          file_size_limit: number | null;
           id: string;
           name: string;
           owner: string | null;
@@ -381,7 +558,10 @@ export interface Database {
           updated_at: string | null;
         };
         Insert: {
+          allowed_mime_types?: string[] | null;
+          avif_autodetection?: boolean | null;
           created_at?: string | null;
+          file_size_limit?: number | null;
           id: string;
           name: string;
           owner?: string | null;
@@ -389,13 +569,24 @@ export interface Database {
           updated_at?: string | null;
         };
         Update: {
+          allowed_mime_types?: string[] | null;
+          avif_autodetection?: boolean | null;
           created_at?: string | null;
+          file_size_limit?: number | null;
           id?: string;
           name?: string;
           owner?: string | null;
           public?: boolean | null;
           updated_at?: string | null;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'buckets_owner_fkey';
+            columns: ['owner'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       migrations: {
         Row: {
@@ -416,6 +607,7 @@ export interface Database {
           id?: number;
           name?: string;
         };
+        Relationships: [];
       };
       objects: {
         Row: {
@@ -428,6 +620,7 @@ export interface Database {
           owner: string | null;
           path_tokens: string[] | null;
           updated_at: string | null;
+          version: string | null;
         };
         Insert: {
           bucket_id?: string | null;
@@ -439,6 +632,7 @@ export interface Database {
           owner?: string | null;
           path_tokens?: string[] | null;
           updated_at?: string | null;
+          version?: string | null;
         };
         Update: {
           bucket_id?: string | null;
@@ -450,39 +644,72 @@ export interface Database {
           owner?: string | null;
           path_tokens?: string[] | null;
           updated_at?: string | null;
+          version?: string | null;
         };
+        Relationships: [
+          {
+            foreignKeyName: 'objects_bucketId_fkey';
+            columns: ['bucket_id'];
+            referencedRelation: 'buckets';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'objects_owner_fkey';
+            columns: ['owner'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
       };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
+      can_insert_object: {
+        Args: {
+          bucketid: string;
+          name: string;
+          owner: string;
+          metadata: Json;
+        };
+        Returns: undefined;
+      };
       extension: {
-        Args: { name: string };
+        Args: {
+          name: string;
+        };
         Returns: string;
       };
       filename: {
-        Args: { name: string };
+        Args: {
+          name: string;
+        };
         Returns: string;
       };
       foldername: {
-        Args: { name: string };
-        Returns: string[];
+        Args: {
+          name: string;
+        };
+        Returns: unknown;
       };
       get_size_by_bucket: {
         Args: Record<PropertyKey, never>;
-        Returns: { size: number; bucket_id: string }[];
+        Returns: {
+          size: number;
+          bucket_id: string;
+        }[];
       };
       search: {
         Args: {
           prefix: string;
           bucketname: string;
-          limits: number;
-          levels: number;
-          offsets: number;
-          search: string;
-          sortcolumn: string;
-          sortorder: string;
+          limits?: number;
+          levels?: number;
+          offsets?: number;
+          search?: string;
+          sortcolumn?: string;
+          sortorder?: string;
         };
         Returns: {
           name: string;
@@ -495,6 +722,9 @@ export interface Database {
       };
     };
     Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
       [_ in never]: never;
     };
   };

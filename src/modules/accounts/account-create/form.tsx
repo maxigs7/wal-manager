@@ -4,12 +4,11 @@ import React, { useEffect } from 'react';
 
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import { AccountInsert } from '@/models';
-
 import { AccountForm } from '../account-form';
+import { AccountFormType } from '../models/account';
 
 const AccountFormContainer: React.FC = () => {
-  const { control, setValue } = useFormContext<AccountInsert>();
+  const { control, setValue } = useFormContext<AccountFormType>();
 
   const currency = useWatch({
     control: control,

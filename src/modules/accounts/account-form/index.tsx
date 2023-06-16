@@ -15,9 +15,10 @@ import { CurrencySelectControl } from '@/m/shared/controls/currency-select';
 import { InputControl } from '@/m/shared/controls/input';
 import { QuotationSelectControl } from '@/m/shared/controls/quotation-select';
 import { SwitchControl } from '@/m/shared/controls/switch';
-import { AccountInsert, DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@/models';
+import { DEFAULT_ACCOUNT_TYPE, DEFAULT_CURRENCY } from '@/models';
 
 import { AccountTypeRadioGroup } from '../account-type-radio';
+import { AccountFormType } from '../models/account';
 import { useAccountForm } from './form-provider';
 
 const AccountForm: React.FC = () => {
@@ -27,7 +28,7 @@ const AccountForm: React.FC = () => {
     control,
     formState: { errors },
     getValues,
-  } = useFormContext<AccountInsert>();
+  } = useFormContext<AccountFormType>();
 
   return (
     <SimpleGrid bg={bg} columns={[1, 2, 3]} gap={6} p="3" rounded="lg" shadow="md">

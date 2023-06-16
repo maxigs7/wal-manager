@@ -11,7 +11,6 @@ type Props = {
   id: string;
 };
 
-/* @ts-expect-error Async Server Component */
 const AccountUpdateFormSSR: React.FC<Props> = async ({ id }) => {
   const supabase = createServerClient();
   const quotations = await select<'quotation'>(
