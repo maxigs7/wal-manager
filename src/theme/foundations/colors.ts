@@ -2,12 +2,19 @@ import { theme } from '@chakra-ui/react';
 
 const { colors: defaultColors } = theme;
 
+const themes = {
+  blue: { primary: defaultColors.blue, accent: defaultColors.cyan },
+  green: { primary: defaultColors.green, accent: defaultColors.teal },
+  purple: { primary: defaultColors.purple, accent: defaultColors.pink },
+  red: { primary: defaultColors.red, accent: defaultColors.yellow },
+};
+
 const colors = {
   primary: {
-    ...defaultColors.purple,
+    ...themes.green.primary,
   },
   accent: {
-    ...defaultColors.pink,
+    ...themes.green.accent,
   },
   success: {
     ...defaultColors.green,
