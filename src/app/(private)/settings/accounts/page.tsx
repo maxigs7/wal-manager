@@ -6,6 +6,7 @@ import { es } from '@/i18n';
 import { Title } from '@/layout/settings';
 import { AccountTableSSR } from '@/m/accounts/account-table/table-ssr';
 import { CreateButtonLink } from '@/m/shared/buttons';
+import { ModalManagerProvider } from '@/modules/shared/modal-manager/provider';
 import { routes } from '@/routes';
 
 export const revalidate = 0;
@@ -15,7 +16,7 @@ export const metadata = {
 
 const Page = async () => {
   return (
-    <>
+    <ModalManagerProvider>
       <Flex>
         <Title>{es.account.pages.index.title}</Title>
         <CreateButtonLink
@@ -28,7 +29,7 @@ const Page = async () => {
         </CreateButtonLink>
       </Flex>
       <AccountTableSSR />
-    </>
+    </ModalManagerProvider>
   );
 };
 
