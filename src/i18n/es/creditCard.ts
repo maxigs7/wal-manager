@@ -20,6 +20,10 @@ export const creditCard = {
     },
     remove: {
       title: 'Eliminar Tarjeta',
+      warning: {
+        first: 'Estas seguro que desea eliminar la tarjeta ',
+        last: '? Esta accion no se puede deshacer.',
+      },
     },
     update: {
       metaTitle: 'Editar Tarjeta',

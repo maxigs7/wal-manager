@@ -7,17 +7,17 @@ import { CloseIcon, TrashIcon } from '@/assets';
 import { es } from '@/i18n';
 import { useModalManager } from '@/m/shared/modal-manager/provider';
 
-import { useAccountDelete, useAccountSelectAllRefresh } from '../query';
+import { useCreditCardDelete, useCreditCardSelectAllRefresh } from '../query';
 
-export type AccountDeleteModalProps = {
+export type CreditCardDeleteModalProps = {
   name: string;
   id: string;
 };
 
-const AccountDeleteModal: React.FC<AccountDeleteModalProps> = ({ id, name }) => {
+const CreditCardDeleteModal: React.FC<CreditCardDeleteModalProps> = ({ id, name }) => {
   const { onClose } = useModalManager();
-  const { data, isLoading, isSuccess, mutate, reset } = useAccountDelete();
-  const refresh = useAccountSelectAllRefresh();
+  const { data, isLoading, isSuccess, mutate, reset } = useCreditCardDelete();
+  const refresh = useCreditCardSelectAllRefresh();
 
   const onDeleteConfirm = () => {
     id && mutate(id);
@@ -34,11 +34,11 @@ const AccountDeleteModal: React.FC<AccountDeleteModalProps> = ({ id, name }) => 
   return (
     <>
       <ModalBody pb={6}>
-        {es.account.pages.remove.warning.first}
+        {es.creditCard.pages.remove.warning.first}
         <Text as="strong" fontWeight="bold">
           {name}
         </Text>
-        {es.account.pages.remove.warning.last}
+        {es.creditCard.pages.remove.warning.last}
       </ModalBody>
 
       <ModalFooter>
@@ -59,4 +59,4 @@ const AccountDeleteModal: React.FC<AccountDeleteModalProps> = ({ id, name }) => 
   );
 };
 
-export default AccountDeleteModal;
+export default CreditCardDeleteModal;

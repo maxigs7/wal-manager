@@ -40,7 +40,7 @@
     "title": "Prestamos"
   },
   {
-    "comingSoon": true,
+    "comingSoon": false,
     "exact": false,
     "href": "/settings/credit-cards",
     "icon": "credit-cards",

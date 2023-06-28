@@ -4,23 +4,23 @@ import { Flex } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
 import { Title } from '@/layout/settings';
-import { AccountTableSSR } from '@/m/accounts/account-table/table-ssr';
+import { CreditCardTableSSR } from '@/m/credit-cards/credit-card-table/table-ssr';
 import { CreateButtonLink } from '@/m/shared/buttons';
 import { ModalManagerProvider } from '@/m/shared/modal-manager/provider';
 import { routes } from '@/routes';
 
 export const revalidate = 0;
 export const metadata = {
-  title: es.account.pages.index.metaTitle,
+  title: es.creditCard.pages.index.metaTitle,
 };
 
 const Page = async () => {
   return (
     <ModalManagerProvider>
       <Flex>
-        <Title>{es.account.pages.index.title}</Title>
+        <Title>{es.creditCard.pages.index.title}</Title>
         <CreateButtonLink
-          href={routes.settings.account.create}
+          href={routes.settings.creditCard.create}
           ml="auto"
           size="sm"
           textTransform="uppercase"
@@ -28,7 +28,7 @@ const Page = async () => {
           {es.common.create}
         </CreateButtonLink>
       </Flex>
-      <AccountTableSSR />
+      <CreditCardTableSSR />
     </ModalManagerProvider>
   );
 };

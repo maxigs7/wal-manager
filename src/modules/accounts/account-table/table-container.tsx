@@ -3,9 +3,9 @@
 import React, { useCallback } from 'react';
 
 import { es } from '@/i18n';
+import { useModalManager } from '@/m/shared/modal-manager/provider';
+import { ModalKey } from '@/m/shared/modal-manager/types';
 import { Account } from '@/models';
-import { useModalManager } from '@/modules/shared/modal-manager/provider';
-import { ModalKey } from '@/modules/shared/modal-manager/types';
 
 import { useAccountSelectAll } from '../query';
 import { AccountTable } from './table';
