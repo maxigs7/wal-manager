@@ -7,17 +7,17 @@ import { ACCOUNTS_KEY } from '../constants';
 type UseSelectAllRefresh = () => (accountId?: string) => void;
 
 const useSelectAllRefresh: UseSelectAllRefresh = (): ((accountId?: string) => void) => {
-  const { resetQueries, removeQueries } = useQueryClient();
+  const queryCache = useQueryClient();
 
   const resetAccounts = useCallback(() => {
-    resetQueries([ACCOUNTS_KEY], { exact: true }, { cancelRefetch: true });
-  }, [resetQueries]);
+    queryCache.resetQueries([ACCOUNTS_KEY], { exact: true }, { cancelRefetch: true });
+  }, [queryCache]);
 
   const removeAccount = useCallback(
     (accountId: string) => {
-      removeQueries([ACCOUNTS_KEY, accountId], { exact: true });
+      queryCache.removeQueries([ACCOUNTS_KEY, accountId], { exact: true });
     },
-    [removeQueries],
+    [queryCache],
   );
 
   return useCallback(

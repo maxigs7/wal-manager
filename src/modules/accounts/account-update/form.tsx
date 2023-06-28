@@ -16,7 +16,7 @@ type Props = {
 
 const AccountFormContainer: React.FC<Props> = ({ account: initialAccount }) => {
   const { control, setValue, reset } = useFormContext<AccountFormType>();
-  const { data: account } = useAccountSelectById(initialAccount, initialAccount.id);
+  const { data: account } = useAccountSelectById(initialAccount.id, initialAccount);
 
   const currency = useWatch({
     control: control,

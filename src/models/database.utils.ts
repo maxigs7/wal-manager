@@ -4,6 +4,7 @@ import {
   Currency,
   InvestmentType,
   MovementType,
+  QuotationType,
 } from './database.enums';
 
 export const colorTransform = (categoryColor: string) =>
@@ -67,4 +68,15 @@ export const getMovementTypeName = (type: MovementType): string => {
     default:
       return '';
   }
+};
+
+export const quotationNames = new Map<QuotationType, string>([
+  ['blue', 'Dolar Blue'],
+  ['mep', 'Dolar Bolsa'],
+  ['ccl', 'Dolar Contado con Liqui'],
+  ['usd', 'Dolar Oficial'],
+  ['usd+', 'Dolar Solidario'],
+]);
+export const getQuotationTypeName = (type: QuotationType): string => {
+  return quotationNames.get(type) || '';
 };

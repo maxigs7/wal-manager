@@ -63,20 +63,21 @@ export const ActionsCell = <T extends Record<string, unknown>>({
 }: ActionsCellProps<T>): React.ReactElement => {
   return (
     <ButtonGroup size="xs" spacing="1" variant="outline">
-      {actions.map((action) => (
-        <IconButton
-          key={action.label}
-          aria-label={action.label}
-          as={Link}
-          colorScheme={action.colorScheme}
-          href={action.href}
-          icon={<Icon as={action.icon} boxSize={action.iconSize || '3'} />}
-          onClick={() => action.onClick && action.onClick(row)}
-          prefetch={false}
-          rounded="full"
-          size="xs"
-        />
-      ))}
+      {actions.map((action) => {
+        const linkProps = action.href ? { as: Link, href: action.href, prefetch: false } : {};
+        return (
+          <IconButton
+            key={action.label}
+            aria-label={action.label}
+            colorScheme={action.colorScheme}
+            icon={<Icon as={action.icon} boxSize={action.iconSize || '3'} />}
+            onClick={() => action.onClick && action.onClick(row)}
+            rounded="full"
+            size="xs"
+            {...linkProps}
+          />
+        );
+      })}
     </ButtonGroup>
   );
 };

@@ -8,11 +8,11 @@ import { selectById } from '@/supabase';
 
 import { ACCOUNTS_KEY } from '../constants';
 
-type UseSelectById = (initialData?: Account, id?: string) => UseQueryResult<Account>;
+type UseSelectById = (id?: string, initialData?: Account) => UseQueryResult<Account>;
 
 const useSelectById: UseSelectById = (
-  initialData?: Account,
   id?: string,
+  initialData?: Account,
 ): UseQueryResult<Account> => {
   const { supabase } = useSupabase();
   const queryKey = [ACCOUNTS_KEY, id];

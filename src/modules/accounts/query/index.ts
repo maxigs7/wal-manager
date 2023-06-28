@@ -1,3 +1,5 @@
+'use client';
+
 export { default as useAccountDelete } from './useDelete';
 export { default as useAccountInsert } from './useInsert';
 export { default as useAccountNameIsUnique } from './useIsNameUnique';

@@ -10,17 +10,21 @@ import {
   Currency,
   getAccountTypeName,
   getCurrencyName,
+  getQuotationTypeName,
   QuotationType,
 } from '@/models';
 import { routes } from '@/routes';
 
 import { AccountTypeIcon } from '../account-type-icon';
 
-type GetColumnsType = () => ColumnDef<Account, any>[];
+type GetColumnsTypeParams = {
+  onRemove: (account: Account) => void;
+};
+type GetColumnsType = (params: GetColumnsTypeParams) => ColumnDef<Account, any>[];
 
 const columnHelper = createColumnHelper<Account>();
 
-export const getColumns: GetColumnsType = () => [
+export const getColumns: GetColumnsType = (params) => [
   // Accessor Column
   columnHelper.accessor('type', {
     cell: (props: CellContext<Account, AccountType>) => (
@@ -42,7 +46,7 @@ export const getColumns: GetColumnsType = () => [
   }),
   columnHelper.accessor('quotationId', {
     cell: (props: CellContext<Account, QuotationType>) => {
-      return props.getValue() || null;
+      return getQuotationTypeName(props.getValue());
     },
     header: es.account.headers.quotationId,
   }),
@@ -63,7 +67,7 @@ export const getColumns: GetColumnsType = () => [
         },
         {
           label: 'Remove',
-          href: routes.settings.account.delete(props.row.original.id),
+          onClick: params.onRemove,
           icon: TrashIcon,
           colorScheme: 'danger',
         },
