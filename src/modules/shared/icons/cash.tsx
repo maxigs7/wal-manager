@@ -1,6 +1,9 @@
 import { createIcon } from '@chakra-ui/react';
 
 export const CashIcon = createIcon({
+  defaultProps: {
+    fill: 'none',
+  },
   displayName: 'CashIcon',
   viewBox: '0 0 14 14',
   // path can also be an array of elements, if you have multiple paths, lines, shapes, etc.

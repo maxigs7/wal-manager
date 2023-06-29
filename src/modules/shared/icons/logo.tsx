@@ -1,6 +1,9 @@
 import { createIcon } from '@chakra-ui/react';
 
 export const LogoIcon = createIcon({
+  defaultProps: {
+    fill: 'none',
+  },
   displayName: 'LogoIcon',
   viewBox: '0 0 200 200',
   // path can also be an array of elements, if you have multiple paths, lines, shapes, etc.
