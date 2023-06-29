@@ -8,7 +8,7 @@
     "title": "Usuario"
   },
   {
-    "comingSoon": true,
+    "comingSoon": false,
     "exact": false,
     "href": "/settings/categories",
     "icon": "categories",
