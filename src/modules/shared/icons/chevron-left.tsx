@@ -9,8 +9,8 @@ export const ChevronLeftIcon = createIcon({
       d="M10.15.5 4 6.65a.48.48 0 0 0 0 .7l6.15 6.15"
       fill="none"
       stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   ),
 });

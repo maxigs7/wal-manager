@@ -5,7 +5,7 @@ export const GoogleIcon = createIcon({
   viewBox: '0 0 36 36',
   // path can also be an array of elements, if you have multiple paths, lines, shapes, etc.
   path: (
-    <g fill="none" fill-rule="evenodd">
+    <g fill="none" fillRule="evenodd">
       <path
         d="M34.437 18.602c0-1.15-.106-2.258-.301-3.32H18.549v6.28h8.907c-.384 2.029-1.55 3.748-3.302 4.9v4.072h5.348c3.13-2.826 4.935-6.988 4.935-11.932z"
         fill="#4285F4"
