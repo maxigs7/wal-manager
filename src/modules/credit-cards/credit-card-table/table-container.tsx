@@ -29,7 +29,25 @@ const CreditCardTableContainer: React.FC<CreditCardTableContainerProps> = ({ dat
     [onOpen],
   );
 
-  return <CreditCardTable data={creditCards || []} isLoading={isLoading} onRemove={onRemove} />;
+  const onUpdate = useCallback(
+    (creditCard: CreditCard) => {
+      onOpen(
+        ModalKey.CREDIT_CARD_UPDATE,
+        { title: es.creditCard.pages.update.title, size: '4xl' },
+        { creditCardId: creditCard.id },
+      );
+    },
+    [onOpen],
+  );
+
+  return (
+    <CreditCardTable
+      data={creditCards || []}
+      isLoading={isLoading}
+      onRemove={onRemove}
+      onUpdate={onUpdate}
+    />
+  );
 };
 
 export { CreditCardTableContainer };

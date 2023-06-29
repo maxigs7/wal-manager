@@ -5,16 +5,15 @@ import React, { useMemo } from 'react';
 import { DataTable } from '@/m/shared/data-table/table';
 import { CreditCard } from '@/models';
 
-import { getColumns } from './columns';
+import { GetColumnsTypeParams, getColumns } from './columns';
 
 type Props = {
   data: CreditCard[];
   isLoading: boolean;
-  onRemove: (creditCard: CreditCard) => void;
-};
+} & GetColumnsTypeParams;
 
-const CreditCardTable: React.FC<Props> = ({ data, isLoading, onRemove }) => {
-  const columns = useMemo(() => getColumns({ onRemove }), [onRemove]);
+const CreditCardTable: React.FC<Props> = ({ data, isLoading, onRemove, onUpdate }) => {
+  const columns = useMemo(() => getColumns({ onRemove, onUpdate }), [onRemove, onUpdate]);
 
   return <DataTable columns={columns} data={data} isLoading={isLoading} />;
 };

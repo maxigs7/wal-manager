@@ -28,12 +28,7 @@ const Page = async () => {
       <Flex>
         <Title>{es.account.pages.index.title}</Title>
 
-        <CreateAccountButton
-          ml="auto"
-          size="sm"
-          textTransform="uppercase"
-          userId={session?.user?.id as string}
-        />
+        <CreateAccountButton ml="auto" userId={session?.user?.id as string} />
       </Flex>
       <AccountTableSSR />
     </ModalManagerProvider>

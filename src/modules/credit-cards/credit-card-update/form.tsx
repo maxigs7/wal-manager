@@ -8,15 +8,13 @@ import { CreditCard } from '@/models';
 
 import { CreditCardForm } from '../credit-card-form';
 import { CreditCardFormType } from '../models/credit-card';
-import { useCreditCardSelectById } from '../query';
 
 type Props = {
   creditCard: CreditCard;
 };
 
-const CreditCardFormContainer: React.FC<Props> = ({ creditCard: initialCreditCard }) => {
+const CreditCardFormContainer: React.FC<Props> = ({ creditCard }) => {
   const { reset } = useFormContext<CreditCardFormType>();
-  const { data: creditCard } = useCreditCardSelectById(initialCreditCard.id, initialCreditCard);
 
   useEffect(() => {
     if (creditCard) {

@@ -1,10 +1,10 @@
 'use client';
 import { useEffect } from 'react';
 
-import { Button, Icon, ModalBody, ModalFooter, Text } from '@chakra-ui/react';
+import { ModalBody, ModalFooter, Text } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
-import { CloseIcon, TrashIcon } from '@/m/shared/icons';
+import { CancelButton, DeleteButton } from '@/m/shared/buttons';
 import { useModalManager } from '@/m/shared/modal-manager/provider';
 
 import { useCreditCardDelete, useCreditCardSelectAllRefresh } from '../query';
@@ -33,7 +33,7 @@ const CreditCardDeleteModal: React.FC<CreditCardDeleteModalProps> = ({ id, name 
 
   return (
     <>
-      <ModalBody pb={6}>
+      <ModalBody>
         {es.creditCard.pages.remove.warning.first}
         <Text as="strong" fontWeight="bold">
           {name}
@@ -42,18 +42,8 @@ const CreditCardDeleteModal: React.FC<CreditCardDeleteModalProps> = ({ id, name 
       </ModalBody>
 
       <ModalFooter>
-        <Button
-          colorScheme="danger"
-          isLoading={isLoading}
-          leftIcon={<Icon as={TrashIcon} boxSize="4" />}
-          mr={3}
-          onClick={onDeleteConfirm}
-        >
-          {es.common.remove}
-        </Button>
-        <Button leftIcon={<Icon as={CloseIcon} boxSize="4" />} onClick={onClose}>
-          Cancel
-        </Button>
+        <DeleteButton isLoading={isLoading} mr="2" onClick={onDeleteConfirm} />
+        <CancelButton onClick={onClose} />
       </ModalFooter>
     </>
   );

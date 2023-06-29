@@ -10,13 +10,13 @@ import { ModalKey } from '@/m/shared/modal-manager/types';
 
 type Props = { userId: string } & Omit<ButtonProps, 'onClick'>;
 
-const CreateAccountButton: React.FC<Props> = ({ userId, ...buttonProps }) => {
+const CreateCreditCardButton: React.FC<Props> = ({ userId, ...buttonProps }) => {
   const { onOpen } = useModalManager();
 
   const onClick = useCallback(() => {
     onOpen(
-      ModalKey.ACCOUNT_CREATE,
-      { title: es.account.pages.create.title, size: '4xl' },
+      ModalKey.CREDIT_CARD_CREATE,
+      { title: es.creditCard.pages.create.title, size: '4xl' },
       { userId },
     );
   }, [onOpen, userId]);
@@ -28,4 +28,4 @@ const CreateAccountButton: React.FC<Props> = ({ userId, ...buttonProps }) => {
   );
 };
 
-export { CreateAccountButton };
+export { CreateCreditCardButton };

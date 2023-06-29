@@ -11,18 +11,20 @@ export const ModalsRegister: React.FC = () => {
 
   useEffect(() => {
     register(
-      ModalKey.ACCOUNT_CREATE,
-      dynamic(() => import('@/m/accounts/account-create/modal'), {
+      ModalKey.CREDIT_CARD_CREATE,
+      dynamic(() => import('@/m/credit-cards/credit-card-create/modal'), {
         loading: () => <ContentLoader />,
       }),
     );
     register(
-      ModalKey.ACCOUNT_DELETE,
-      dynamic(() => import('@/m/accounts/account-delete'), { loading: () => <ContentLoader /> }),
+      ModalKey.CREDIT_CARD_DELETE,
+      dynamic(() => import('@/m/credit-cards/credit-card-delete'), {
+        loading: () => <ContentLoader />,
+      }),
     );
     register(
-      ModalKey.ACCOUNT_UPDATE,
-      dynamic(() => import('@/m/accounts/account-update/modal'), {
+      ModalKey.CREDIT_CARD_UPDATE,
+      dynamic(() => import('@/m/credit-cards/credit-card-update/modal'), {
         loading: () => <ContentLoader />,
       }),
     );

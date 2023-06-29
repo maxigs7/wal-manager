@@ -2,11 +2,10 @@
 
 import React from 'react';
 
-import { Button, ButtonProps, Icon } from '@chakra-ui/react';
+import { ButtonProps } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
-import { es } from '@/i18n';
-import { SaveIcon } from '@/m/shared/icons';
+import { SaveButton } from '@/m/shared/buttons';
 
 import { AccountFormType } from '../models/account';
 import { useAccountInsert } from '../query';
@@ -26,18 +25,11 @@ const CreateAccountButton: React.FC<Props> = ({ onSuccess, ...buttonProps }) => 
   });
 
   return (
-    <Button
+    <SaveButton
       {...buttonProps}
-      colorScheme="accent"
       isLoading={isFormSubmitting || isAsyncSubmitting}
-      leftIcon={<Icon as={SaveIcon} boxSize="3" />}
       onClick={onSubmit}
-      rounded="2xl"
-      shadow="md"
-      size="sm"
-    >
-      {es.common.save}
-    </Button>
+    />
   );
 };
 

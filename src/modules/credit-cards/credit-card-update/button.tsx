@@ -1,43 +1,34 @@
 'use client';
-
-import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import { Button, ButtonProps, Icon } from '@chakra-ui/react';
+import { ButtonProps } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
-import { es } from '@/i18n';
-import { SaveIcon } from '@/m/shared/icons';
-import { routes } from '@/routes';
+import { SaveButton } from '@/m/shared/buttons';
 
 import { CreditCardFormType } from '../models/credit-card';
 import { useCreditCardUpdate } from '../query';
 
-const UpdateCreditCardButton: React.FC<ButtonProps> = (buttonProps) => {
-  const router = useRouter();
+type Props = ButtonProps & {
+  onSuccess: () => void;
+};
+
+const UpdateCreditCardButton: React.FC<Props> = ({ onSuccess, ...buttonProps }) => {
   const { handleSubmit, formState } = useFormContext<CreditCardFormType>();
   const { isSubmitting: isFormSubmitting } = formState;
   const { isLoading: isAsyncSubmitting, mutateAsync: updateCreditCard } = useCreditCardUpdate();
 
-  const onSubmit = handleSubmit((model) => {
-    const onSuccess = () => router.push(routes.settings.creditCard.index);
+  const onSubmit = handleSubmit((creditCard) => {
     const options = { onSuccess };
-    return updateCreditCard(model, options);
+    return updateCreditCard(creditCard, options);
   });
 
   return (
-    <Button
+    <SaveButton
       {...buttonProps}
-      colorScheme="accent"
       isLoading={isFormSubmitting || isAsyncSubmitting}
-      leftIcon={<Icon as={SaveIcon} boxSize="3" />}
       onClick={onSubmit}
-      rounded="2xl"
-      shadow="md"
-      size="sm"
-    >
-      {es.common.save}
-    </Button>
+    />
   );
 };
 

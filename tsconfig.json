@@ -12,8 +12,8 @@
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {
-      "@/*": ["./*"],
       "@/m/*": ["./modules/*"],
+      "@/*": ["./*"],
       "@chakra-ui/hooks": ["./lib/chakra-ui/hooks"],
       "@chakra-ui/hooks/old": ["../node_modules/@chakra-ui/hooks/dist/index"],
       "@chakra-ui/react": ["./lib/chakra-ui/react"],

@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 
 import { ModalBody, ModalFooter } from '@chakra-ui/react';
 
+import { useQuotationSelectAll } from '@/m/quotations/query';
+import { CancelButton } from '@/m/shared/buttons';
 import { useModalManager } from '@/m/shared/modal-manager/provider';
-import { useQuotationSelectAll } from '@/modules/quotations/query';
-import { CancelButton } from '@/modules/shared/buttons';
 
 import { AccountFormProvider } from '../account-form/form-provider';
 import { AccountUseFormProvider } from '../account-form/use-form-provider';

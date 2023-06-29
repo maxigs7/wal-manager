@@ -11,6 +11,7 @@ const CreateButton: React.FC<Props> = ({
   colorScheme = 'accent',
   href,
   size = 'sm',
+  textTransform = 'uppercase',
   ...buttonProps
 }) => {
   const linkProps = href ? { as: Link, href, prefetch: false } : {};
@@ -21,6 +22,7 @@ const CreateButton: React.FC<Props> = ({
       leftIcon={<Icon as={PlusIcon} boxSize="3" />}
       rounded="2xl"
       size={size}
+      textTransform={textTransform}
       {...buttonProps}
     >
       {children}

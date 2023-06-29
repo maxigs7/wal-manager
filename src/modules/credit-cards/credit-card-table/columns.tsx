@@ -6,10 +6,10 @@ import { CreditCardTypeIcon } from '@/m/shared/credit-card-type-icon';
 import { ActionButton, ActionsCell } from '@/m/shared/data-table/cells';
 import { PencilIcon, TrashIcon } from '@/m/shared/icons';
 import { CreditCard, CreditCardType, getCreditCardTypeName } from '@/models';
-import { routes } from '@/routes';
 
-type GetColumnsTypeParams = {
+export type GetColumnsTypeParams = {
   onRemove: (creditCard: CreditCard) => void;
+  onUpdate: (creditCard: CreditCard) => void;
 };
 type GetColumnsType = (params: GetColumnsTypeParams) => ColumnDef<CreditCard, any>[];
 
@@ -36,7 +36,7 @@ export const getColumns: GetColumnsType = (params) => [
       const actions: ActionButton<CreditCard>[] = [
         {
           label: 'Edit',
-          href: routes.settings.creditCard.update(props.row.original.id),
+          onClick: params.onUpdate,
           icon: PencilIcon,
           colorScheme: 'primary',
         },
