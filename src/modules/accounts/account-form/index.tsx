@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  GridItem,
-  SimpleGrid,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { FormControl, FormErrorMessage, FormLabel, GridItem, SimpleGrid } from '@chakra-ui/react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { es } from '@/i18n';
@@ -22,7 +15,6 @@ import { AccountFormType } from '../models/account';
 import { useAccountForm } from './form-provider';
 
 const AccountForm: React.FC = () => {
-  const bg = useColorModeValue('white', 'primary.900');
   const { quotations } = useAccountForm();
   const {
     control,
@@ -31,7 +23,7 @@ const AccountForm: React.FC = () => {
   } = useFormContext<AccountFormType>();
 
   return (
-    <SimpleGrid bg={bg} columns={[1, 2, 3]} gap={6} p="3" rounded="lg" shadow="md">
+    <SimpleGrid columns={[1, 2, 3]} gap={6}>
       <FormControl as={GridItem} colSpan={[1, 2]} isInvalid={!!errors.name} order="1" isRequired>
         <FormLabel htmlFor="name">{es.account.form.name}</FormLabel>
         <InputControl

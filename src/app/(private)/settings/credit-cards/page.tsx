@@ -5,7 +5,7 @@ import { Flex } from '@chakra-ui/react';
 import { es } from '@/i18n';
 import { Title } from '@/layout/settings';
 import { CreditCardTableSSR } from '@/m/credit-cards/credit-card-table/table-ssr';
-import { CreateButtonLink } from '@/m/shared/buttons';
+import { CreateButton } from '@/m/shared/buttons';
 import { ModalManagerProvider } from '@/m/shared/modal-manager/provider';
 import { routes } from '@/routes';
 
@@ -19,14 +19,14 @@ const Page = async () => {
     <ModalManagerProvider>
       <Flex>
         <Title>{es.creditCard.pages.index.title}</Title>
-        <CreateButtonLink
+        <CreateButton
           href={routes.settings.creditCard.create}
           ml="auto"
           size="sm"
           textTransform="uppercase"
         >
           {es.common.create}
-        </CreateButtonLink>
+        </CreateButton>
       </Flex>
       <CreditCardTableSSR />
     </ModalManagerProvider>

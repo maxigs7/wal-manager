@@ -4,10 +4,12 @@ import { Flex } from '@chakra-ui/react';
 
 import { es } from '@/i18n';
 import { Title } from '@/layout/settings';
+import { createServerClient } from '@/lib/supabase/create-server-client';
 import { AccountTableSSR } from '@/m/accounts/account-table/table-ssr';
-import { CreateButtonLink } from '@/m/shared/buttons';
 import { ModalManagerProvider } from '@/m/shared/modal-manager/provider';
-import { routes } from '@/routes';
+
+import { CreateAccountButton } from './create-button';
+import { ModalsRegister } from './modals-register';
 
 export const revalidate = 0;
 export const metadata = {
@@ -15,18 +17,23 @@ export const metadata = {
 };
 
 const Page = async () => {
+  const supabase = createServerClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
   return (
     <ModalManagerProvider>
+      <ModalsRegister />
       <Flex>
         <Title>{es.account.pages.index.title}</Title>
-        <CreateButtonLink
-          href={routes.settings.account.create}
+
+        <CreateAccountButton
           ml="auto"
           size="sm"
           textTransform="uppercase"
-        >
-          {es.common.create}
-        </CreateButtonLink>
+          userId={session?.user?.id as string}
+        />
       </Flex>
       <AccountTableSSR />
     </ModalManagerProvider>

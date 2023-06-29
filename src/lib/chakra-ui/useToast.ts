@@ -1,4 +1,9 @@
-import { CreateToastFnReturn, useToast as useChakraToast, UseToastOptions } from '@chakra-ui/react';
+import {
+  CreateToastFnReturn,
+  useToast as useChakraToast,
+  useColorModeValue,
+  UseToastOptions,
+} from '@chakra-ui/react';
 
 interface IToast {
   toast: CreateToastFnReturn;
@@ -9,11 +14,12 @@ interface IToast {
 }
 
 export const useToast = (): IToast => {
+  const variant = useColorModeValue('left-accent', 'solid');
   const toast = useChakraToast({
     duration: 3000,
     isClosable: true,
     position: 'top-right',
-    variant: 'left-accent',
+    variant,
   });
 
   return {

@@ -21,6 +21,7 @@ const AccountUseFormProvider: React.FC<Props> = ({ accountId, children, userId }
       type: DEFAULT_ACCOUNT_TYPE,
       userId: userId,
     },
+    mode: 'onBlur',
     resolver: yupResolver<AccountFormType>(validationSchema),
   });
 

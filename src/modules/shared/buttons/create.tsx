@@ -4,22 +4,21 @@ import { Button, ButtonProps, Icon } from '@chakra-ui/react';
 
 import { PlusIcon } from '@/m/shared/icons';
 
-type Props = ButtonProps & { href: string };
+type Props = ButtonProps & { href?: string };
 
-const CreateButtonLink: React.FC<Props> = ({
+const CreateButton: React.FC<Props> = ({
   children,
   colorScheme = 'accent',
   href,
   size = 'sm',
   ...buttonProps
 }) => {
+  const linkProps = href ? { as: Link, href, prefetch: false } : {};
   return (
     <Button
-      as={Link}
+      {...linkProps}
       colorScheme={colorScheme}
-      href={href}
       leftIcon={<Icon as={PlusIcon} boxSize="3" />}
-      prefetch={false}
       rounded="2xl"
       size={size}
       {...buttonProps}
@@ -29,4 +28,4 @@ const CreateButtonLink: React.FC<Props> = ({
   );
 };
 
-export { CreateButtonLink };
+export { CreateButton };

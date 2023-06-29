@@ -13,12 +13,12 @@ import {
   getQuotationTypeName,
   QuotationType,
 } from '@/models';
-import { routes } from '@/routes';
 
 import { AccountTypeIcon } from '../account-type-icon';
 
-type GetColumnsTypeParams = {
+export type GetColumnsTypeParams = {
   onRemove: (account: Account) => void;
+  onUpdate: (account: Account) => void;
 };
 type GetColumnsType = (params: GetColumnsTypeParams) => ColumnDef<Account, any>[];
 
@@ -61,7 +61,7 @@ export const getColumns: GetColumnsType = (params) => [
       const actions: ActionButton<Account>[] = [
         {
           label: 'Edit',
-          href: routes.settings.account.update(props.row.original.id),
+          onClick: params.onUpdate,
           icon: PencilIcon,
           colorScheme: 'primary',
         },

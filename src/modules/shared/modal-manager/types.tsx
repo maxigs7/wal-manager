@@ -1,14 +1,16 @@
-import dynamic from 'next/dynamic';
 import { MutableRefObject } from 'react';
 
-import { ContentLoader } from '../loaders/content-loader';
+import { ModalProps } from '@chakra-ui/react';
 
 export enum ModalKey {
+  ACCOUNT_CREATE = 'account-create',
   ACCOUNT_DELETE = 'account-delete',
+  ACCOUNT_UPDATE = 'account-update',
   CREDIT_CARD_DELETE = 'credit-card-delete',
 }
 
 export type ModalOptions = {
+  size?: ModalProps['size'];
   title: string;
 };
 
@@ -22,22 +24,10 @@ export type ModalMap = Map<ModalKey, React.ComponentType<any>>;
 
 export type ModalManagerProps = {
   finalRef: MutableRefObject<any>;
-  get(key: ModalKey): any;
+  get<TProps>(key: ModalKey): React.ComponentType<TProps>;
   initialRef: MutableRefObject<any>;
   isOpen: boolean;
   onOpen<TProps>(key: ModalKey, options: ModalOptions, props?: TProps): void;
   onClose(): void;
+  register<TProps>(key: ModalKey, Component: React.ComponentType<TProps>): void;
 };
-
-export const ModalRegistered = new Map<ModalKey, React.ComponentType<any>>([
-  [
-    ModalKey.ACCOUNT_DELETE,
-    dynamic(() => import('@/m/accounts/account-delete'), { loading: () => <ContentLoader /> }),
-  ],
-  [
-    ModalKey.CREDIT_CARD_DELETE,
-    dynamic(() => import('@/m/credit-cards/credit-card-delete'), {
-      loading: () => <ContentLoader />,
-    }),
-  ],
-]);
