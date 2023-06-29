@@ -4,7 +4,7 @@ import { ButtonGroup, Icon, IconButton, IconProps } from '@chakra-ui/react';
 import { CellContext, HeaderContext } from '@tanstack/react-table';
 import { format, parseISO } from 'date-fns';
 
-import { ArrowDownIcon, ArrowRightIcon, CheckIcon } from '@/assets';
+import { ArrowDownIcon, ArrowRightIcon, CheckIcon } from '@/m/shared/icons';
 
 export const BooleanCell = <T extends Record<string, unknown>, D extends boolean>({
   getValue,
@@ -36,6 +36,7 @@ export const ExpandedAllCell = <T extends Record<string, unknown>, D>({
 }: HeaderContext<T, D>): React.ReactElement | null => (
   <IconButton
     aria-label="expander"
+    colorScheme="accent"
     icon={<Icon as={getIsAllRowsExpanded() ? ArrowDownIcon : ArrowRightIcon} boxSize="3" />}
     onClick={getToggleAllRowsExpandedHandler()}
     size="xs"

@@ -2,7 +2,7 @@
 
 import { Icon, IconButton, MenuButton } from '@chakra-ui/react';
 
-import { NotificationIcon } from '@/assets';
+import { NotificationIcon } from '@/m/shared/icons';
 
 const NotificationsMenuButton: React.FC = () => {
   return (

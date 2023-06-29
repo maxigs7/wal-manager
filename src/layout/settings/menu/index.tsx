@@ -5,7 +5,7 @@ import { MenuContainer } from './container';
 import { MenuItem } from './item';
 
 export const Menu: React.FC = async () => {
-  const menu: MenuItemModel[] = await import('@/assets/menu-settings.json').then(
+  const menu: MenuItemModel[] = await import('@/m/shared/menu/settings.json').then(
     (obj) => obj.default,
   );
 

@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 
 import { Button, Icon, ModalBody, ModalFooter, Text } from '@chakra-ui/react';
 
-import { CloseIcon, TrashIcon } from '@/assets';
 import { es } from '@/i18n';
+import { CloseIcon, TrashIcon } from '@/m/shared/icons';
 import { useModalManager } from '@/m/shared/modal-manager/provider';
 
 import { useAccountDelete, useAccountSelectAllRefresh } from '../query';

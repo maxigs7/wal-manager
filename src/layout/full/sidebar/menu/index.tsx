@@ -11,7 +11,9 @@ import { MenuItem } from './item';
 
 export const Menu: React.FC = async () => {
   // Read the json file
-  const menu: MenuItemModel[] = await import('@/assets/menu.json').then((obj) => obj.default);
+  const menu: MenuItemModel[] = await import('@/m/shared/menu/main.json').then(
+    (obj) => obj.default,
+  );
 
   return (
     <AnimatePresence>

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Button, ButtonProps, Icon } from '@chakra-ui/react';
 
-import { PlusIcon } from '@/assets';
+import { PlusIcon } from '@/m/shared/icons';
 
 type Props = ButtonProps & { href: string };
 

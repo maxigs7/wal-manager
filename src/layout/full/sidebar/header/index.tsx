@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Flex, Icon } from '@chakra-ui/react';
 
-import { WMLogo } from '@/assets';
 import { Link } from '@/lib/chakra-ui';
+import { WMLogo } from '@/m/shared/icons';
 import { routes } from '@/routes';
 
 import { NAVBAR_HEIGHT } from '../../constants';

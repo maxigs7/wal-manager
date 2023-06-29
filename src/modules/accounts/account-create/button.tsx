@@ -6,8 +6,8 @@ import React from 'react';
 import { Button, ButtonProps, Icon } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 
-import { SaveIcon } from '@/assets';
 import { es } from '@/i18n';
+import { SaveIcon } from '@/m/shared/icons';
 import { routes } from '@/routes';
 
 import { AccountFormType } from '../models/account';

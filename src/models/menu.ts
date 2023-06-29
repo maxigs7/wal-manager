@@ -9,7 +9,7 @@ import {
   DashboardIcon,
   FilesIcon,
   SettingsIcon,
-} from '@/assets';
+} from '@/m/shared/icons';
 
 export type IconType =
   | 'accounts'

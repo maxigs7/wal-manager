@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { Button, ButtonProps, Icon } from '@chakra-ui/react';
 
-import { ArrowLeftIcon } from '@/assets';
+import { ArrowLeftIcon } from '@/m/shared/icons';
 
 type Props = ButtonProps & { href: string };
 

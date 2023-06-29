@@ -12,13 +12,13 @@ import {
   Tr,
 } from '@chakra-ui/react';
 
+import { es } from '@/i18n';
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-} from '@/assets';
-import { es } from '@/i18n';
+} from '@/m/shared/icons';
 
 import { pageSizes, pageIndexes } from './util';
 

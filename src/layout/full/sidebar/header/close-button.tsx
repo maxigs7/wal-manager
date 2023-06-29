@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Icon, IconButton } from '@chakra-ui/react';
 
-import { CloseIcon } from '@/assets';
+import { CloseIcon } from '@/m/shared/icons';
 
 import { useLayout } from '../../provider';
 

@@ -1,7 +1,7 @@
 import { Icon, chakra } from '@chakra-ui/react';
 import { SortDirection } from '@tanstack/react-table';
 
-import { SortDescIcon } from '@/assets';
+import { SortDescIcon } from '@/m/shared/icons';
 
 type Props = {
   direction?: SortDirection | false;

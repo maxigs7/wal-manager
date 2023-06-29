@@ -2,7 +2,7 @@
 
 import { Icon, IconButton, useColorMode } from '@chakra-ui/react';
 
-import { MoonIcon, SunIcon } from '@/assets';
+import { MoonIcon, SunIcon } from '@/m/shared/icons';
 
 const ColorModeToggle: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();

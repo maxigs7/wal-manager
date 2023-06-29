@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Icon, IconButton } from '@chakra-ui/react';
 
-import { BarsIcon } from '@/assets';
+import { BarsIcon } from '@/m/shared/icons';
 
 import { useLayout } from '../provider';
 

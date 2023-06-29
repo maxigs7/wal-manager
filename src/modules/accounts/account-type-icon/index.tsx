@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 
 import { Icon, IconProps } from '@chakra-ui/react';
 
-import { BankIcon, CashIcon } from '@/assets';
+import { BankIcon, CashIcon } from '@/m/shared/icons';
 import { AccountType } from '@/models';
 
 type Props = Omit<IconProps, 'as'> & {
