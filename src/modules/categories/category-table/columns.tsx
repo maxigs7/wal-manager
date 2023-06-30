@@ -41,9 +41,8 @@ export const getColumns: GetColumnsType = (params) => [
     enableSorting: false,
   }),
   columnHelper.accessor('icon', {
-    cell: (props: CellContext<CategoryRow, string>) => (
-      <CategoryIcon boxSize="6" category={props.getValue()} />
-    ),
+    cell: (props: CellContext<CategoryRow, string>) =>
+      !props.row.original.parentId && <CategoryIcon boxSize="6" category={props.getValue()} />,
     header: es.category.headers.icon,
     enableSorting: false,
   }),
