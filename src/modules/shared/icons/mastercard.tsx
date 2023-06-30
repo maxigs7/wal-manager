@@ -1,7 +1,7 @@
 import { createIcon } from '@chakra-ui/react';
 
-export const MasterCardIcon = createIcon({
-  displayName: 'MasterCardIcon',
+export const MastercardIcon = createIcon({
+  displayName: 'MastercardIcon',
   viewBox: '0 -140 780 780',
   // path can also be an array of elements, if you have multiple paths, lines, shapes, etc.
   path: [
