@@ -1,6 +1,6 @@
 import { Heading, Icon } from '@chakra-ui/react';
 
-import { WMLogo } from '@/m/shared/icons';
+import { LogoIcon } from '@/m/shared/icons';
 
 const AppName: React.FC = () => (
   <Heading
@@ -11,7 +11,7 @@ const AppName: React.FC = () => (
     py="6"
     textTransform="uppercase"
   >
-    <Icon as={WMLogo} boxSize="24" color="white" fill="primary.400" />
+    <Icon as={LogoIcon} boxSize="24" color="white" fill="primary.400" />
   </Heading>
 );
 
