@@ -10,25 +10,31 @@ export const ModalsRegister: React.FC = () => {
   const { register } = useModalManager();
 
   useEffect(() => {
-    // register(
-    //   ModalKey.CATEGORY_CREATE,
-    //   dynamic(() => import('@/m/categories/category-create/modal'), {
-    //     loading: () => <ContentLoader />,
-    //   }),
-    // );
+    register(
+      ModalKey.CATEGORY_CREATE,
+      dynamic(() => import('@/m/categories/category-create/modal'), {
+        loading: () => <ContentLoader />,
+      }),
+    );
     register(
       ModalKey.CATEGORY_DELETE,
       dynamic(() => import('@/m/categories/category-delete'), { loading: () => <ContentLoader /> }),
     );
-    // register(
-    //   ModalKey.CATEGORY_UPDATE,
-    //   dynamic(() => import('@/m/categories/category-update/modal'), {
-    //     loading: () => <ContentLoader />,
-    //   }),
-    // );
+    register(
+      ModalKey.CATEGORY_UPDATE,
+      dynamic(() => import('@/m/categories/category-update/modal'), {
+        loading: () => <ContentLoader />,
+      }),
+    );
     register(
       ModalKey.SUBCATEGORY_CREATE,
       dynamic(() => import('@/m/categories/subcategory-create/modal'), {
+        loading: () => <ContentLoader />,
+      }),
+    );
+    register(
+      ModalKey.SUBCATEGORY_UPDATE,
+      dynamic(() => import('@/m/categories/subcategory-update/modal'), {
         loading: () => <ContentLoader />,
       }),
     );

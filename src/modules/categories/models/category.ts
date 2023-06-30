@@ -4,20 +4,16 @@ import { es } from '@/i18n';
 
 import { UseIsNameUniqueReturn } from '../query';
 
-export const subcategoryFormSchema = (
-  isUnique: UseIsNameUniqueReturn,
-  parentId: string,
-  categoryId?: string,
-) =>
+export const categoryFormSchema = (isUnique: UseIsNameUniqueReturn, categoryId?: string) =>
   object()
     .shape({
-      color: string().nullable(),
-      icon: string().nullable(),
+      color: string().required(es.common.validation.required).nullable(),
+      icon: string().required(es.common.validation.required).nullable(),
       name: string()
         .test({
           name: 'duplicateName',
           test(value, ctx) {
-            return isUnique(value, categoryId, parentId).then((isUnique) => {
+            return isUnique(value, categoryId).then((isUnique) => {
               if (!isUnique) {
                 return ctx.createError({ message: es.category.toast.uniqueError });
               }
@@ -26,9 +22,9 @@ export const subcategoryFormSchema = (
           },
         })
         .required(es.common.validation.required),
-      parentId: string().required(es.common.validation.required).nullable(),
+      parentId: string().nullable(),
       userId: string().required(es.common.validation.required),
     })
     .required();
 
-export type SubcategoryFormType = InferType<ReturnType<typeof subcategoryFormSchema>>;
+export type CategoryFormType = InferType<ReturnType<typeof categoryFormSchema>>;

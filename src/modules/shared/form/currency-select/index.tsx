@@ -3,9 +3,9 @@
 import React, { useMemo } from 'react';
 
 import { Select as ReactSelect } from '@/lib/react-select';
-import { Currency, getCurrencyName } from '@/models';
+import { Currency } from '@/models';
 
-import { SelectOption } from '../../models';
+import { CURRENCY_OPTIONS } from './currencies';
 
 export type CurrencySelectProps = {
   id?: string;
@@ -18,19 +18,7 @@ export type CurrencySelectProps = {
 
 const CurrencySelect = React.forwardRef<any, CurrencySelectProps>(
   ({ id, name, onBlur, onChange, placeholder, value }, ref) => {
-    const options: SelectOption<Currency>[] = useMemo(
-      () => [
-        {
-          label: getCurrencyName('ars'),
-          value: 'ars',
-        },
-        {
-          label: getCurrencyName('usd'),
-          value: 'usd',
-        },
-      ],
-      [],
-    );
+    const options = useMemo(() => CURRENCY_OPTIONS, []);
 
     return (
       <ReactSelect

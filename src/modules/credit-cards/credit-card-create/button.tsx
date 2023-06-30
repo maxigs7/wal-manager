@@ -19,9 +19,9 @@ const CreateCreditCardButton: React.FC<Props> = ({ onSuccess, ...buttonProps }) 
   const { isSubmitting: isFormSubmitting } = formState;
   const { isLoading: isAsyncSubmitting, mutateAsync: insertCreditCard } = useCreditCardInsert();
 
-  const onSubmit = handleSubmit((account) => {
+  const onSubmit = handleSubmit((creditCard) => {
     const options = { onSuccess };
-    return insertCreditCard(account, options);
+    return insertCreditCard(creditCard, options);
   });
 
   return (

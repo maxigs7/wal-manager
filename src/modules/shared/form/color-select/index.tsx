@@ -1,35 +1,35 @@
-'use client';
-
 import React, { useMemo } from 'react';
 
 import { HStack, Text } from '@chakra-ui/react';
 
 import { Select as ReactSelect } from '@/lib/react-select';
-import { CreditCardType } from '@/models';
+import { colorTransform } from '@/models';
 
-import { CREDIT_CARD_TYPE_OPTIONS, CreditCardTypeOption } from './types';
+import { ColorCircle } from '../../color-circle';
+import { SelectOption } from '../../models';
+import { COLOR_OPTIONS } from './colors';
 
-export type CreditCardTypeSelectProps = {
+export type ColorSelectProps = {
   id?: string;
   name: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
-  onChange?(selected?: CreditCardType): void;
+  onChange?(selected?: string): void;
   placeholder?: string;
-  value?: CreditCardType;
+  value?: string;
 };
 
-const Option: React.FC<CreditCardTypeOption> = ({ icon, label }) => {
+const Option: React.FC<SelectOption> = ({ value, label }) => {
   return (
     <HStack>
-      {icon}
+      <ColorCircle bg={colorTransform(value)} />
       <Text>{label}</Text>
     </HStack>
   );
 };
 
-const CreditCardTypeSelect = React.forwardRef<any, CreditCardTypeSelectProps>(
+const ColorSelect = React.forwardRef<any, ColorSelectProps>(
   ({ id, name, onBlur, onChange, placeholder, value }, ref) => {
-    const options = useMemo(() => CREDIT_CARD_TYPE_OPTIONS, []);
+    const options = useMemo(() => COLOR_OPTIONS, []);
 
     return (
       <ReactSelect
@@ -50,6 +50,6 @@ const CreditCardTypeSelect = React.forwardRef<any, CreditCardTypeSelectProps>(
   },
 );
 
-CreditCardTypeSelect.displayName = 'CreditCardTypeSelect';
+ColorSelect.displayName = 'ColorSelect';
 
-export { CreditCardTypeSelect };
+export { ColorSelect };

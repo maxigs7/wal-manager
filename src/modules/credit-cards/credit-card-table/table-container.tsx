@@ -34,7 +34,7 @@ const CreditCardTableContainer: React.FC<CreditCardTableContainerProps> = ({ dat
       onOpen(
         ModalKey.CREDIT_CARD_UPDATE,
         { title: es.creditCard.pages.update.title, size: '4xl' },
-        { creditCardId: creditCard.id },
+        { id: creditCard.id },
       );
     },
     [onOpen],

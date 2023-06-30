@@ -15,13 +15,13 @@ import { UpdateAccountButton } from './button';
 import { AccountFormContainer } from './form';
 
 export type AccountUpdateModalProps = {
-  accountId: string;
+  id: string;
 };
 
-const AccountUpdateModal: React.FC<AccountUpdateModalProps> = ({ accountId }) => {
+const AccountUpdateModal: React.FC<AccountUpdateModalProps> = ({ id }) => {
   const { onClose } = useModalManager();
   const { data: quotations } = useQuotationSelectAll();
-  const { data: account } = useAccountSelectById(accountId);
+  const { data: account } = useAccountSelectById(id);
 
   const refresh = useAccountSelectAllRefresh();
 

@@ -14,6 +14,7 @@ export const category = {
     parentId: 'Nueva categoría padre',
     parentIdPlaceholder: 'Seleccione una categoría',
   },
+  iconNotFound: 'El icono no se encuentra, por favor modifique la categoria',
   others: 'Otros',
   pages: {
     create: {

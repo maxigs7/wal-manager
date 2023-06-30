@@ -3,7 +3,7 @@ import React from 'react';
 import { Flex, Icon } from '@chakra-ui/react';
 
 import { Link } from '@/lib/chakra-ui';
-import { WMLogo } from '@/m/shared/icons';
+import { LogoIcon } from '@/m/shared/icons';
 import { routes } from '@/routes';
 
 import { NAVBAR_HEIGHT } from '../../constants';
@@ -27,7 +27,7 @@ const Header: React.FC = () => (
         textDecoration: 'none',
       }}
     >
-      <Icon as={WMLogo} boxSize="12" fill="primary.400" />
+      <Icon as={LogoIcon} boxSize="12" fill="primary.400" />
     </Link>
 
     <CloseButton />

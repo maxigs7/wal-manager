@@ -13,12 +13,12 @@ import { UpdateCreditCardButton } from './button';
 import { CreditCardFormContainer } from './form';
 
 export type CreditCardUpdateModalProps = {
-  creditCardId: string;
+  id: string;
 };
 
-const CreditCardUpdateModal: React.FC<CreditCardUpdateModalProps> = ({ creditCardId }) => {
+const CreditCardUpdateModal: React.FC<CreditCardUpdateModalProps> = ({ id }) => {
   const { onClose } = useModalManager();
-  const { data: creditCard } = useCreditCardSelectById(creditCardId);
+  const { data: creditCard } = useCreditCardSelectById(id);
 
   const refresh = useCreditCardSelectAllRefresh();
 

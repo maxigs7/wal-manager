@@ -94,4 +94,5 @@ export { TrashIcon } from './trash';
 export { UserIcon } from './user';
 export { VisaIcon } from './visa';
 export { WalletIcon } from './wallet';
+export { WarningIcon } from './warning';
 export { WheelchairIcon } from './wheelchair';

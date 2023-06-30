@@ -56,7 +56,7 @@ const CategoryTableContainer: React.FC<CategoryTableContainerProps> = ({ data })
     (category: CategoryRow) => {
       onOpen(
         category.parentId ? ModalKey.SUBCATEGORY_UPDATE : ModalKey.CATEGORY_UPDATE,
-        { title: es.category.pages.update.title },
+        { title: es.category.pages.update.title, size: !category.parentId ? '2xl' : undefined },
         { id: category.id },
       );
     },

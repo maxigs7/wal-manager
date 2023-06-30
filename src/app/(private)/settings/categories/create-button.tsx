@@ -16,7 +16,7 @@ const CreateCategoryButton: React.FC<Props> = ({ userId, ...buttonProps }) => {
   const onClick = useCallback(() => {
     onOpen(
       ModalKey.CATEGORY_CREATE,
-      { title: es.account.pages.create.title, size: '4xl' },
+      { title: es.account.pages.create.title, size: '2xl' },
       { userId },
     );
   }, [onOpen, userId]);

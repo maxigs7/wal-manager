@@ -2,34 +2,31 @@
 
 import React, { useMemo } from 'react';
 
-import { HStack, Text } from '@chakra-ui/react';
+import { HStack, Icon, Text } from '@chakra-ui/react';
 
 import { Select as ReactSelect } from '@/lib/react-select';
-import { CreditCardType } from '@/models';
 
-import { CREDIT_CARD_TYPE_OPTIONS, CreditCardTypeOption } from './types';
+import { ICON_OPTIONS, IconOption } from './icons';
 
-export type CreditCardTypeSelectProps = {
+export type IconSelectProps = {
   id?: string;
   name: string;
   onBlur?(e: React.FocusEvent<HTMLInputElement>): void;
-  onChange?(selected?: CreditCardType): void;
+  onChange?(selected?: string): void;
   placeholder?: string;
-  value?: CreditCardType;
+  value?: string;
 };
 
-const Option: React.FC<CreditCardTypeOption> = ({ icon, label }) => {
-  return (
-    <HStack>
-      {icon}
-      <Text>{label}</Text>
-    </HStack>
-  );
-};
+const Option: React.FC<IconOption> = ({ label, icon }) => (
+  <HStack>
+    <Icon as={icon} boxSize="4" />
+    <Text>{label}</Text>
+  </HStack>
+);
 
-const CreditCardTypeSelect = React.forwardRef<any, CreditCardTypeSelectProps>(
+const IconSelect = React.forwardRef<any, IconSelectProps>(
   ({ id, name, onBlur, onChange, placeholder, value }, ref) => {
-    const options = useMemo(() => CREDIT_CARD_TYPE_OPTIONS, []);
+    const options = useMemo(() => ICON_OPTIONS.sort((a, b) => a.label.localeCompare(b.label)), []);
 
     return (
       <ReactSelect
@@ -37,7 +34,7 @@ const CreditCardTypeSelect = React.forwardRef<any, CreditCardTypeSelectProps>(
         getOptionValue={(option) => option.value}
         id={id}
         instanceId={id}
-        isSearchable={false}
+        isSearchable={true}
         name={name}
         onBlur={onBlur}
         onChange={(selected) => onChange && onChange(selected?.value || undefined)}
@@ -50,6 +47,6 @@ const CreditCardTypeSelect = React.forwardRef<any, CreditCardTypeSelectProps>(
   },
 );
 
-CreditCardTypeSelect.displayName = 'CreditCardTypeSelect';
+IconSelect.displayName = 'IconSelect';
 
-export { CreditCardTypeSelect };
+export { IconSelect };

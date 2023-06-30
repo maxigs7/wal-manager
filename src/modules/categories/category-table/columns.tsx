@@ -1,6 +1,7 @@
 import { CellContext, ColumnDef, createColumnHelper } from '@tanstack/react-table';
 
 import { es } from '@/i18n';
+import { CategoryIcon } from '@/m/shared/category-icon';
 import { ColorCircle } from '@/m/shared/color-circle';
 import {
   ActionButton,
@@ -40,7 +41,9 @@ export const getColumns: GetColumnsType = (params) => [
     enableSorting: false,
   }),
   columnHelper.accessor('icon', {
-    cell: (props: CellContext<CategoryRow, string>) => props.getValue(),
+    cell: (props: CellContext<CategoryRow, string>) => (
+      <CategoryIcon boxSize="6" category={props.getValue()} />
+    ),
     header: es.category.headers.icon,
     enableSorting: false,
   }),

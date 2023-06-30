@@ -34,7 +34,7 @@ const AccountTableContainer: React.FC<AccountTableContainerProps> = ({ data }) =
       onOpen(
         ModalKey.ACCOUNT_UPDATE,
         { title: es.account.pages.update.title, size: '4xl' },
-        { accountId: account.id },
+        { id: account.id },
       );
     },
     [onOpen],
