@@ -6,9 +6,15 @@ export enum ModalKey {
   ACCOUNT_CREATE = 'account-create',
   ACCOUNT_DELETE = 'account-delete',
   ACCOUNT_UPDATE = 'account-update',
+  CATEGORY_CREATE = 'category-create',
+  CATEGORY_DELETE = 'category-delete',
+  CATEGORY_UPDATE = 'category-update',
   CREDIT_CARD_CREATE = 'credit-card-create',
   CREDIT_CARD_DELETE = 'credit-card-delete',
   CREDIT_CARD_UPDATE = 'credit-card-update',
+  SUBCATEGORY_CREATE = 'subcategory-create',
+  SUBCATEGORY_MOVE = 'subcategory-move',
+  SUBCATEGORY_UPDATE = 'subcategory-update',
 }
 
 export type ModalOptions = {
