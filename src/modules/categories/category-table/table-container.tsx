@@ -24,7 +24,7 @@ const CategoryTableContainer: React.FC<CategoryTableContainerProps> = ({ data })
       onOpen(
         ModalKey.SUBCATEGORY_CREATE,
         { title: es.category.pages.create.title },
-        { parentId: parent.id },
+        { parentId: parent.id, userId: parent.userId },
       );
     },
     [onOpen],

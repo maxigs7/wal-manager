@@ -5,4 +5,5 @@ export type CategoryRow = {
   name: string;
   parentId?: string;
   subRows: CategoryRow[];
+  userId: string;
 };

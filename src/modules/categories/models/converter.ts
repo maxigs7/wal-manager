@@ -9,6 +9,7 @@ const convertToRow = (cat: Category): CategoryRow => ({
   name: cat.name,
   parentId: cat.parentId || undefined,
   subRows: [],
+  userId: cat.userId,
 });
 
 export const convertToRowArray = (categories: Category[]): CategoryRow[] =>

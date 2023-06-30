@@ -26,6 +26,12 @@ export const ModalsRegister: React.FC = () => {
     //     loading: () => <ContentLoader />,
     //   }),
     // );
+    register(
+      ModalKey.SUBCATEGORY_CREATE,
+      dynamic(() => import('@/m/categories/subcategory-create/modal'), {
+        loading: () => <ContentLoader />,
+      }),
+    );
   }, [register]);
 
   return null;
