@@ -22,11 +22,12 @@ const AccountTypeIcon: React.FC<Props> = ({ type, ...props }) => {
         return null;
     }
   }, [type]);
-  return (
-    <>
-      <Icon {...props} as={icon} />
-    </>
-  );
+
+  if (!icon) {
+    return null;
+  }
+
+  return <Icon {...props} as={icon} />;
 };
 
 export { AccountTypeIcon };
