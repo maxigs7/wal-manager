@@ -16,10 +16,10 @@ export const ModalsRegister: React.FC = () => {
     //     loading: () => <ContentLoader />,
     //   }),
     // );
-    // register(
-    //   ModalKey.CATEGORY_DELETE,
-    //   dynamic(() => import('@/m/categories/category-delete'), { loading: () => <ContentLoader /> }),
-    // );
+    register(
+      ModalKey.CATEGORY_DELETE,
+      dynamic(() => import('@/m/categories/category-delete'), { loading: () => <ContentLoader /> }),
+    );
     // register(
     //   ModalKey.CATEGORY_UPDATE,
     //   dynamic(() => import('@/m/categories/category-update/modal'), {

@@ -31,6 +31,10 @@ export const category = {
     },
     remove: {
       title: 'Eliminar Categoría',
+      warning: {
+        first: 'Estas seguro que desea eliminar la categoria ',
+        last: '? Esta accion no se puede deshacer.',
+      },
     },
     update: {
       metaTitle: 'Editar Categoría',

@@ -8,7 +8,7 @@ import {
   ExpandedAllCell,
   ExpandedCell,
 } from '@/m/shared/data-table/cells';
-import { PencilIcon, PlusIcon, TrashIcon } from '@/m/shared/icons';
+import { ArrowCrossoverRightIcon, PencilIcon, PlusIcon, TrashIcon } from '@/m/shared/icons';
 import { colorTransform } from '@/models';
 
 import { CategoryRow } from '../models';
@@ -66,7 +66,7 @@ export const getColumns: GetColumnsType = (params) => [
           ? [
               {
                 colorScheme: 'teal',
-                icon: PlusIcon,
+                icon: ArrowCrossoverRightIcon,
                 onClick: params.onMove,
                 label: 'Move to new parent',
               } as ActionButton<CategoryRow>,

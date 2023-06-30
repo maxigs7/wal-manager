@@ -1,5 +1,6 @@
 'use client';
 export { AmexIcon } from './amex';
+export { ArrowCrossoverRightIcon } from './arrow-crossover-right';
 export { ArrowDownIcon } from './arrow-down';
 export { ArrowLeftIcon } from './arrow-left';
 export { ArrowRightIcon } from './arrow-right';
