@@ -1,14 +1,14 @@
 import {
+  BankIcon,
+  CoinShareIcon,
   CreditCardIcon,
+  DashboardIcon,
+  MoneyCashBagIcon,
+  MoneyCashBillIcon,
+  ReceiptIcon,
+  SettingsIcon,
   TagIcon,
   UserIcon,
-  BankIcon,
-  MoneyCashBillIcon,
-  MoneyCashBagIcon,
-  FavoriteGiveHeartIcon,
-  DashboardIcon,
-  FilesIcon,
-  SettingsIcon,
 } from '@/m/shared/icons';
 
 export type IconType =
@@ -47,9 +47,9 @@ export const getIcon = (key: IconType) => {
     case 'investments':
       return MoneyCashBagIcon;
     case 'invoices':
-      return FilesIcon;
+      return ReceiptIcon;
     case 'loans':
-      return FavoriteGiveHeartIcon;
+      return CoinShareIcon;
     case 'settings':
       return SettingsIcon;
     case 'user':
