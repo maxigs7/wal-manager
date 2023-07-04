@@ -35,7 +35,7 @@ const CategoryTableContainer: React.FC<CategoryTableContainerProps> = ({ data })
       onOpen(
         ModalKey.SUBCATEGORY_MOVE,
         { title: es.category.pages.move.title },
-        { id: subcategory.id },
+        { id: subcategory.id, parentId: subcategory.parentId },
       );
     },
     [onOpen],

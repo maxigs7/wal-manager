@@ -33,6 +33,12 @@ export const ModalsRegister: React.FC = () => {
       }),
     );
     register(
+      ModalKey.SUBCATEGORY_MOVE,
+      dynamic(() => import('@/m/categories/subcategory-move/modal'), {
+        loading: () => <ContentLoader />,
+      }),
+    );
+    register(
       ModalKey.SUBCATEGORY_UPDATE,
       dynamic(() => import('@/m/categories/subcategory-update/modal'), {
         loading: () => <ContentLoader />,

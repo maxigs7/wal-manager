@@ -161,3 +161,6 @@ export const ICON_OPTIONS: IconOption[] = [
   { label: 'Usuario', value: 'User', icon: UserIcon },
   { label: 'Silla de ruedas', value: 'Wheelchair', icon: WheelchairIcon },
 ];
+
+export const findIconByValue = (value: string) =>
+  ICON_OPTIONS.find((option) => option.value === value)?.icon;
