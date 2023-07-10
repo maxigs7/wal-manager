@@ -1,10 +1,10 @@
-import adminRoute from './admin';
+import accountsRoute from './accounts';
 import authRoute from './auth';
 import movementRoute from './movement';
 import settingsRoute from './settings';
 
 export const routes = {
-  admin: adminRoute,
+  accounts: accountsRoute,
   auth: authRoute,
   dashboard: '/dashboard',
   movement: movementRoute,
