@@ -1,13 +1,18 @@
+const nextTranslate = require('next-translate-plugin');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     appDir: true,
   },
+  i18n: {
+    localeDetection: false,
+  },
   images: {
     domains: ['images.unsplash.com'],
   },
   reactStrictMode: true,
-  async redirects() {
+  redirects: async () => {
     return [
       {
         source: '/',
@@ -16,7 +21,7 @@ const nextConfig = {
       },
     ];
   },
-  webpack(config) {
+  webpack: (config) => {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
 
@@ -43,4 +48,5 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = nextTranslate(nextConfig);
+// module.exports = nextConfig;

@@ -1,26 +1,35 @@
 import 'server-only';
 
-import { es } from '@/i18n';
+import { Metadata } from 'next';
+
+import useTranslation from 'next-translate/useTranslation';
+
 import { PageTitle } from '@/layout/auth';
 import { AuthLink } from '@/m/auth/components';
 import { ResetPasswordConfirmContainer, ResetPasswordConfirmForm } from '@/m/auth/reset-password';
 import { routes } from '@/routes';
 
-export const metadata = {
-  title: `${es.auth.resetPassword.title} - WAL`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useTranslation('auth-reset-password');
+
+  return {
+    title: `${t('title')} - WAL`,
+  };
+}
 
 export default function Page() {
+  const { t } = useTranslation('auth-reset-password');
   return (
     <>
-      <PageTitle>{es.auth.resetPassword.title}</PageTitle>
+      <PageTitle>{t('title')}</PageTitle>
 
       <ResetPasswordConfirmContainer>
         <ResetPasswordConfirmForm />
       </ResetPasswordConfirmContainer>
 
       <AuthLink color="gray.500" fontSize="sm" href={routes.auth.signIn} mx="auto" my="8">
-        {es.auth.resetPassword.signInLink}
+        {t('signInLink')}
       </AuthLink>
     </>
   );

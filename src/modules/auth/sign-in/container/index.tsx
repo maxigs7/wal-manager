@@ -1,12 +1,12 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { ComponentProps } from 'react';
+import { ComponentProps, useMemo } from 'react';
 
 import { Button, VStack } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 import { FormProvider, useForm, yupResolver } from 'react-hook-form';
 
-import { es } from '@/i18n';
 import { routes } from '@/routes';
 
 import { AuthAlert, AuthLink } from '../../components';
@@ -16,8 +16,10 @@ import { useSignIn } from '../../query';
 type Props = ComponentProps<'form'>;
 
 export const SignInFormContainer: React.FC<Props> = ({ children }) => {
+  const { t } = useTranslation('auth-sign-in');
+  const resolver = useMemo(() => yupResolver(signInFormSchema(t)), [t]);
   const form = useForm<SignInFormType>({
-    resolver: yupResolver(signInFormSchema),
+    resolver,
   });
   const { handleSubmit } = form;
   const router = useRouter();
@@ -49,9 +51,9 @@ export const SignInFormContainer: React.FC<Props> = ({ children }) => {
   return (
     <FormProvider {...form}>
       <VStack as="form" gap="2" mx="auto" my="5" onSubmit={handleSubmit(signInHandler)} w="full">
-        {isError && <AuthAlert status="error">{es.auth.signIn.error}</AuthAlert>}
+        {isError && <AuthAlert status="error">{t('error')}</AuthAlert>}
         {children}
-        <AuthLink href={routes.auth.resetPassword}>{es.auth.signIn.resetPasswordLink}</AuthLink>
+        <AuthLink href={routes.auth.resetPassword}>{t('resetPasswordLink')}</AuthLink>
 
         <Button
           colorScheme="accent"
@@ -60,7 +62,7 @@ export const SignInFormContainer: React.FC<Props> = ({ children }) => {
           type="submit"
           w="full"
         >
-          {es.auth.signIn.action}
+          {t('action')}
         </Button>
       </VStack>
     </FormProvider>

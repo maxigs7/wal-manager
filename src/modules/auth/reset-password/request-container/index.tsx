@@ -1,20 +1,21 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect, useMemo } from 'react';
 
 import { Button, VStack } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 import { FormProvider, useForm, yupResolver } from 'react-hook-form';
-
-import { es } from '@/i18n';
 
 import { AuthAlert } from '../../components';
 import { ResetPasswordRequestFormType, resetPasswordRequestFormTypeSchema } from '../../models';
 import { useResetPasswordRequest } from '../../query';
 
 const ResetPasswordRequestContainer: React.FC<PropsWithChildren> = ({ children }) => {
+  const { t } = useTranslation('auth-reset-password');
+  const resolver = useMemo(() => yupResolver(resetPasswordRequestFormTypeSchema(t)), [t]);
   const form = useForm<ResetPasswordRequestFormType>({
-    resolver: yupResolver(resetPasswordRequestFormTypeSchema),
+    resolver,
   });
   const { handleSubmit } = form;
   const router = useRouter();
@@ -52,10 +53,8 @@ const ResetPasswordRequestContainer: React.FC<PropsWithChildren> = ({ children }
         onSubmit={handleSubmit(resetPasswordHandler)}
         w="full"
       >
-        {isError && <AuthAlert status="error">{es.auth.resetPassword.requestError}</AuthAlert>}
-        {isSuccess && (
-          <AuthAlert status="success">{es.auth.resetPassword.requestSuccess}</AuthAlert>
-        )}
+        {isError && <AuthAlert status="error">{t('requestError')}</AuthAlert>}
+        {isSuccess && <AuthAlert status="success">{t('requestSuccess')}</AuthAlert>}
         {children}
         <Button
           colorScheme="accent"
@@ -64,7 +63,7 @@ const ResetPasswordRequestContainer: React.FC<PropsWithChildren> = ({ children }
           type="submit"
           w="full"
         >
-          {es.auth.resetPassword.requestAction}
+          {t('requestAction')}
         </Button>
       </VStack>
     </FormProvider>

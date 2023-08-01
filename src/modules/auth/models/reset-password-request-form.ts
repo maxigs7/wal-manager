@@ -1,9 +1,11 @@
+import { Translate } from 'next-translate';
 import { object, string, InferType } from 'yup';
 
-import { es } from '@/i18n';
+export const resetPasswordRequestFormTypeSchema = (t: Translate) =>
+  object({
+    email: string().email(t('common:validation.email')).required(t('common:validation.required')),
+  }).required();
 
-export const resetPasswordRequestFormTypeSchema = object({
-  email: string().email(es.common.validation.email).required(es.common.validation.required),
-}).required();
-
-export type ResetPasswordRequestFormType = InferType<typeof resetPasswordRequestFormTypeSchema>;
+export type ResetPasswordRequestFormType = InferType<
+  ReturnType<typeof resetPasswordRequestFormTypeSchema>
+>;

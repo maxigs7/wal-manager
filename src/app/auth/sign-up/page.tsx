@@ -1,30 +1,38 @@
 import 'server-only';
 
-import { Text } from '@chakra-ui/react';
+import { Metadata } from 'next';
 
-import { es } from '@/i18n';
+import { Text } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
+
 import { PageTitle } from '@/layout/auth';
 import { AuthLink } from '@/m/auth/components';
 import { SignUpFormContainer, SignUpForm } from '@/m/auth/sign-up';
 import { routes } from '@/routes';
 
-export const metadata = {
-  title: `${es.auth.signUp.title} - WAL`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useTranslation('auth-sign-up');
+
+  return {
+    title: `${t('title')} - WAL`,
+  };
+}
 
 const Page = () => {
+  const { t } = useTranslation('auth-sign-up');
   return (
     <>
-      <PageTitle>{es.auth.signUp.title}</PageTitle>
+      <PageTitle>{t('title')}</PageTitle>
 
       <SignUpFormContainer>
         <SignUpForm />
       </SignUpFormContainer>
 
       <Text color="gray.500" fontSize="sm" mx="auto" my="8">
-        {es.auth.signUp.signInLink.haveAnAccount}
+        {t('signInLink.haveAnAccount')}
         <AuthLink href={routes.auth.signIn} ml="1">
-          {es.auth.signUp.signInLink.link}
+          {t('signInLink.link')}
         </AuthLink>
       </Text>
     </>

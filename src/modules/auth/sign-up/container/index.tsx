@@ -1,12 +1,12 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useMemo } from 'react';
 
 import { Button, VStack } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 import { FormProvider, useForm, yupResolver } from 'react-hook-form';
 
-import { es } from '@/i18n';
 import { routes } from '@/routes';
 
 import { AuthAlert } from '../../components';
@@ -14,8 +14,10 @@ import { signUpFormSchema, SignUpFormType } from '../../models';
 import { useSignUp } from '../../query';
 
 const SignUpFormContainer: React.FC<PropsWithChildren> = ({ children }) => {
+  const { t } = useTranslation('auth-sign-up');
+  const resolver = useMemo(() => yupResolver(signUpFormSchema(t)), [t]);
   const form = useForm<SignUpFormType>({
-    resolver: yupResolver(signUpFormSchema),
+    resolver,
   });
   const { handleSubmit } = form;
   const router = useRouter();
@@ -47,7 +49,7 @@ const SignUpFormContainer: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <FormProvider {...form}>
       <VStack as="form" gap="2" mx="auto" my="5" onSubmit={handleSubmit(signUpHandler)} w="full">
-        {isError && <AuthAlert status="error">{es.auth.signIn.error}</AuthAlert>}
+        {isError && <AuthAlert status="error">{t('error')}</AuthAlert>}
         {children}
 
         <Button
@@ -57,7 +59,7 @@ const SignUpFormContainer: React.FC<PropsWithChildren> = ({ children }) => {
           type="submit"
           w="full"
         >
-          {es.auth.signUp.action}
+          {t('action')}
         </Button>
       </VStack>
     </FormProvider>
