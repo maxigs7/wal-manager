@@ -1,21 +1,23 @@
-import { Link, LinkProps } from '@/lib/chakra-ui';
+import NextLink from 'next/link';
+
+import { Link, LinkProps } from '@nextui-org/link';
+
+import { classnames } from '@/lib/classnames';
 
 const AuthLink: React.FC<LinkProps> = ({
-  color = 'primary.700',
   children,
-  fontSize = 'sm',
-  fontWeight = 'bold',
-  prefetch = false,
-  textDecoration = 'underline',
+  className,
+  href,
+  underline = 'always',
   ...props
 }) => {
   return (
     <Link
-      color={color}
-      fontSize={fontSize}
-      fontWeight={fontWeight}
-      prefetch={prefetch}
-      textDecoration={textDecoration}
+      as={NextLink}
+      className={classnames('font-bold text-tiny', className)}
+      href={href}
+      prefetch={false}
+      underline={underline}
       {...props}
     >
       {children}

@@ -1,18 +1,13 @@
-import { Heading, Icon } from '@chakra-ui/react';
-
 import { LogoIcon } from '@/m/shared/icons';
 
+const styles = {
+  logo: 'w-24 h-24 text-white fill-primary-400',
+  title: 'flex items-center justify-center py-6 uppercase',
+};
 const AppName: React.FC = () => (
-  <Heading
-    alignItems="center"
-    as="h1"
-    display="flex"
-    justifyContent="center"
-    py="6"
-    textTransform="uppercase"
-  >
-    <Icon as={LogoIcon} boxSize="24" color="white" fill="primary.400" />
-  </Heading>
+  <h1 className={styles.title}>
+    <LogoIcon className={styles.logo} />
+  </h1>
 );
 
 export { AppName };

@@ -1,1 +1,1 @@
-export * as es from './es';
+export * from './types';

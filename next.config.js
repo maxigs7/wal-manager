@@ -1,15 +1,9 @@
-const nextTranslate = require('next-translate-plugin');
+const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     appDir: true,
-  },
-  i18n: {
-    localeDetection: false,
-  },
-  images: {
-    domains: ['images.unsplash.com'],
   },
   reactStrictMode: true,
   redirects: async () => {
@@ -37,7 +31,36 @@ const nextConfig = {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
         resourceQuery: { not: /url/ }, // exclude if *.svg?url
-        use: ['@svgr/webpack'],
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              svgoConfig: {
+                replaceAttrValues: {
+                  '#3e3e3e': 'currentColor',
+                },
+                plugins: [
+                  {
+                    name: 'preset-default',
+                    params: {
+                      overrides: {
+                        removeViewBox: false,
+                      },
+                    },
+                  },
+                  'removeDimensions',
+                  'convertStyleToAttrs',
+                  {
+                    name: 'convertColors',
+                    params: {
+                      currentColor: true,
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ],
       },
     );
 
@@ -48,5 +71,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextTranslate(nextConfig);
-// module.exports = nextConfig;
+module.exports = nextConfig;

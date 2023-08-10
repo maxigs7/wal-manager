@@ -1,26 +1,12 @@
 import React, { PropsWithChildren } from 'react';
 
-import { Flex } from '@chakra-ui/react';
+const styles = {
+  container: 'flex items-center bg-background-900 justify-center min-h-screen md:py-5 w-full',
+  box: 'flex flex-col bg-background text-foreground min-w-full md:min-w-[32rem] px-5 py-3 md:rounded-xl shadow-xl',
+};
 
 export const Wrapper: React.FC<PropsWithChildren> = ({ children }) => (
-  <Flex
-    align="center"
-    bg="primary.900"
-    justify="center"
-    minH="100vh"
-    py={[null, null, '5']}
-    w="full"
-  >
-    <Flex
-      bg="white"
-      direction="column"
-      minW={{ base: 'full', md: 'xl' }}
-      px={{ base: '5' }}
-      py="3"
-      rounded={[null, null, 'xl']}
-      shadow="xl"
-    >
-      {children}
-    </Flex>
-  </Flex>
+  <div className={styles.container}>
+    <div className={styles.box}>{children}</div>
+  </div>
 );

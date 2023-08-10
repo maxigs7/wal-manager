@@ -1,14 +1,5 @@
-import { Heading, HeadingProps } from '@chakra-ui/react';
+import { PropsWithChildren } from 'react';
 
-export const PageTitle: React.FC<HeadingProps> = ({
-  as = 'h2',
-  children,
-  fontSize = 'xl',
-  textAlign = 'center',
-  mb = '5',
-  ...props
-}) => (
-  <Heading as={as} fontSize={fontSize} mb={mb} textAlign={textAlign} {...props}>
-    {children}
-  </Heading>
+export const PageTitle: React.FC<PropsWithChildren> = ({ children }) => (
+  <h2 className="text-center text-xl mb-5">{children}</h2>
 );
