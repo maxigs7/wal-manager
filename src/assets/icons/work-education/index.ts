@@ -1,0 +1,14 @@
+export { default as BookReadingIcon } from './work-education/book-reading.svg';
+export { default as ClassLessonIcon } from './work-education/class-lesson.svg';
+export { default as CollaborationsIdeaIcon } from './work-education/collaborations-idea.svg';
+export { default as DefinitionSearchBookIcon } from './work-education/definition-search-book.svg';
+export { default as DictionaryLanguageBookIcon } from './work-education/dictionary-language-book.svg';
+export { default as GlobalLearningIcon } from './work-education/global-learning.svg';
+export { default as GraduationCapIcon } from './work-education/graduation-cap.svg';
+export { default as GroupMeetingCallIcon } from './work-education/group-meeting-call.svg';
+export { default as OfficeBuilding1Icon } from './work-education/office-building-1.svg';
+export { default as OfficeWorkerIcon } from './work-education/office-worker.svg';
+export { default as SearchDollarIcon } from './work-education/search-dollar.svg';
+export { default as StrategyTasksIcon } from './work-education/strategy-tasks.svg';
+export { default as TaskListIcon } from './work-education/task-list.svg';
+export { default as WorkspaceDeskIcon } from './work-education/workspace-desk.svg';

@@ -1,0 +1,14 @@
+export { default as BoxSignIcon } from './shipping/box-sign.svg';
+export { default as ContainerIcon } from './shipping/container.svg';
+export { default as FragileIcon } from './shipping/fragile.svg';
+export { default as ParachuteDropIcon } from './shipping/parachute-drop.svg';
+export { default as ShipmentAddIcon } from './shipping/shipment-add.svg';
+export { default as ShipmentCheckIcon } from './shipping/shipment-check.svg';
+export { default as ShipmentDownloadIcon } from './shipping/shipment-download.svg';
+export { default as ShipmentRemoveIcon } from './shipping/shipment-remove.svg';
+export { default as ShipmentUploadIcon } from './shipping/shipment-upload.svg';
+export { default as ShippingBox1Icon } from './shipping/shipping-box-1.svg';
+export { default as ShippingTruckIcon } from './shipping/shipping-truck.svg';
+export { default as TransferMotorcycleIcon } from './shipping/transfer-motorcycle.svg';
+export { default as TransferVanIcon } from './shipping/transfer-van.svg';
+export { default as Warehouse1Icon } from './shipping/warehouse-1.svg';
