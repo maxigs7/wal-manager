@@ -2,11 +2,19 @@
 import { useRouter } from 'next/navigation';
 
 import { Avatar } from '@nextui-org/avatar';
-import { Dropdown, DropdownTrigger, DropdownItem, DropdownMenu } from '@nextui-org/dropdown';
+import {
+  Dropdown,
+  DropdownSection,
+  DropdownTrigger,
+  DropdownItem,
+  DropdownMenu,
+} from '@nextui-org/dropdown';
 
 import { useScopedI18n } from '@/i18n/client';
 import { useSignOut } from '@/m/auth/query';
 import { routes } from '@/routes';
+
+import { LangSwitcher } from './lang-switcher';
 
 type Props = {
   imageUrl?: string;
@@ -26,7 +34,7 @@ const UserMenu: React.FC<Props> = ({ userName, imageUrl }) => {
 
   return (
     <Dropdown placement="bottom-end">
-      <DropdownTrigger>
+      <DropdownTrigger aria-controls={t('user.label')}>
         <Avatar
           as="button"
           className="transition-transform"
@@ -38,11 +46,18 @@ const UserMenu: React.FC<Props> = ({ userName, imageUrl }) => {
         />
       </DropdownTrigger>
       <DropdownMenu aria-label={t('user.label')} variant="flat">
-        <DropdownItem key="profile" className="h-14 gap-2">
-          <p className="font-semibold">{t('user.signedInAs')}</p>
-          <p className="font-semibold">{userName}</p>
-        </DropdownItem>
-        <DropdownItem key="settings">{tMenu('user.settings')}</DropdownItem>
+        <DropdownSection showDivider>
+          <DropdownItem key="profile" className="h-14 gap-2">
+            <p className="font-semibold">{t('user.signedInAs')}</p>
+            <p className="font-semibold">{userName}</p>
+          </DropdownItem>
+          <DropdownItem key="settings">{tMenu('user.settings')}</DropdownItem>
+        </DropdownSection>
+        <DropdownSection showDivider>
+          <DropdownItem key="language" endContent={<LangSwitcher />}>
+            {tMenu('user.lang')}
+          </DropdownItem>
+        </DropdownSection>
         <DropdownItem key="logout" color="danger" onClick={signOutHandler}>
           {tMenu('user.signOut')}
         </DropdownItem>

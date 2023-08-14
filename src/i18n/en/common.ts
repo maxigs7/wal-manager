@@ -6,6 +6,10 @@ const translations = {
   description: 'Manage your finances in an organized way',
   globalFilterPlaceholder: 'Search...',
   goBack: 'Go back',
+  lang: {
+    es: 'Switch to Spanish',
+    en: 'Switch to English',
+  },
   navbar: {
     colorMode: 'Color Mode',
     notifications: {

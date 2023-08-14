@@ -18,7 +18,7 @@ type Props = PropsWithChildren & { locale: string; session: Session | null };
 export const Providers: React.FC<Props> = ({ children, locale, session }) => {
   return (
     <I18nProviderClient locale={locale}>
-      <NextUIProvider>
+      <NextUIProvider locale={locale}>
         {/* <ChakraUiProvider theme={theme}> */}
         <ReactQueryProvider>
           <SupabaseProvider session={session}>

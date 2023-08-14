@@ -22,6 +22,7 @@ const translations = {
   } as SidebarMenuType,
   navbar: {
     user: {
+      lang: 'Language',
       profile: 'Profile',
       settings: 'Settings',
       signOut: 'Sign Out',

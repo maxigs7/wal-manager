@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { createMiddlewareSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 import { createI18nMiddleware } from 'next-international/middleware';
 
 import type { Database } from '@/models';
@@ -14,7 +14,7 @@ const I18nMiddleware = createI18nMiddleware(['en', 'es'] as const, 'es', {
 export async function middleware(req: NextRequest) {
   // USER CHECK
   const res = I18nMiddleware(req);
-  const supabase = createMiddlewareSupabaseClient<Database>({ req, res });
+  const supabase = createMiddlewareClient<Database>({ req, res });
   const {
     data: { session },
   } = await supabase.auth.getSession();
