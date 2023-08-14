@@ -24,7 +24,7 @@ const RootLayout = async ({ children, params }: PropsWithChildren & PageBase) =>
   } = await supabase.auth.getSession();
 
   return (
-    <html className={classnames(openSans.variable, 'green-dark')} lang={params.locale}>
+    <html className={classnames(openSans.variable, 'green-light')} lang={params.locale}>
       <body>
         <Providers locale={params.locale} session={session}>
           {children}

@@ -15,13 +15,14 @@ const translations = {
     },
     user: {
       label: 'Menu Usuario',
+      signedInAs: 'Conectado como',
     },
   },
   remove: 'Eliminar',
   save: 'Guardar',
   sidebar: {
-    close: 'Cerrar Barra Lateral',
-    hamburger: 'Alternar Barra Lateral',
+    close: 'Cerrar Menu',
+    open: 'Abrir Menu',
     soon: 'soon',
   },
   table: {

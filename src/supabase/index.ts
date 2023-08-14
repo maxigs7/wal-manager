@@ -1,3 +1,4 @@
+export { getUser } from './get-user';
 export { insert } from './insert';
 export { removeById } from './remove-by-id';
 export { remove } from './remove';

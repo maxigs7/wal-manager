@@ -2,20 +2,23 @@ import 'server-only';
 
 import { PropsWithChildren } from 'react';
 
-import { ContentWrapper, MainContent, Navbar, Sidebar, Wrapper } from '@/layout/full';
-import { LayoutProvider } from '@/layout/full/provider';
+import { ContentWrapper } from '@/layout/full-new/content-wrapper';
+import { Navbar } from '@/layout/full-new/navbar';
+import { Sidebar } from '@/layout/full-new/sidebar';
+import { SidebarProvider } from '@/layout/full-new/sidebar/provider';
+import { Wrapper } from '@/layout/full-new/wrapper';
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <LayoutProvider>
+    <SidebarProvider>
       <Wrapper>
         <Sidebar />
         <ContentWrapper>
           <Navbar />
-          <MainContent>{children}</MainContent>
+          {children}
         </ContentWrapper>
       </Wrapper>
-    </LayoutProvider>
+    </SidebarProvider>
   );
 };
 
