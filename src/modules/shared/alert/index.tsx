@@ -2,10 +2,10 @@ import { PropsWithChildren } from 'react';
 
 import { tv, type VariantProps } from 'tailwind-variants';
 
-import InfoIcon from '@/assets/interface-essential/information-circle.svg';
-import SuccessIcon from '@/assets/interface-essential/shield-check.svg';
-import ErrorIcon from '@/assets/interface-essential/skull-1.svg';
-import WarningIcon from '@/assets/interface-essential/warning-triangle.svg';
+import InfoIcon from '@/assets/icons/interface-essential/information-circle.svg';
+import SuccessIcon from '@/assets/icons/interface-essential/shield-check.svg';
+import ErrorIcon from '@/assets/icons/interface-essential/skull-1.svg';
+import WarningIcon from '@/assets/icons/interface-essential/warning-triangle.svg';
 
 const alert = tv({
   slots: {
