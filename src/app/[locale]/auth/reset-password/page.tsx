@@ -1,21 +1,24 @@
 import 'server-only';
 
+import NextLink from 'next/link';
+
 import { Metadata } from 'next';
 
+import Link from '@mui/material/Link';
+
 import { getScopedI18n } from '@/i18n/server';
-import { PageTitle } from '@/layout/auth';
-import { AuthLink } from '@/m/auth/components/link';
-import {
-  ResetPasswordRequestManager,
-  ResetPasswordRequestForm,
-} from '@/m/auth/reset-password/request';
+import ResetPasswordRequestButtonSubmit from '@/m/auth/reset-password/request/button';
+import { ResetPasswordRequestForm } from '@/m/auth/reset-password/request/form';
+import ResetPasswordRequestFormManager from '@/m/auth/reset-password/request/manager';
+import PageDescription from '@/m/layout/auth/page-description';
+import PageTitle from '@/m/layout/auth/page-title';
 import { routes } from '@/routes';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getScopedI18n('auth.resetPassword');
 
   return {
-    title: `${t('title')} - WAL`,
+    title: `${t('requestTitle')} - WAL`,
   };
 }
 
@@ -23,25 +26,27 @@ const Page = async () => {
   const t = await getScopedI18n('auth.resetPassword');
   return (
     <>
-      <PageTitle>{t('title')}</PageTitle>
-      <ResetPasswordRequestManager
+      <PageTitle>{t('requestTitle')}</PageTitle>
+      <PageDescription>{t('requestDescription')}</PageDescription>
+
+      <ResetPasswordRequestFormManager
         translations={{
           requestError: t('requestError'),
-          requestAction: t('requestAction'),
           requestSuccess: t('requestSuccess'),
         }}
       >
         <ResetPasswordRequestForm
           translations={{
             email: t('form.email'),
-            emailPlaceholder: t('form.emailPlaceholder'),
           }}
         />
-      </ResetPasswordRequestManager>
 
-      <AuthLink className="mx-auto my-8" href={routes.auth.signIn}>
+        <ResetPasswordRequestButtonSubmit>{t('requestAction')}</ResetPasswordRequestButtonSubmit>
+      </ResetPasswordRequestFormManager>
+
+      <Link component={NextLink} href={routes.auth.signIn} ml={1} prefetch={false} variant="body2">
         {t('signInLink')}
-      </AuthLink>
+      </Link>
     </>
   );
 };

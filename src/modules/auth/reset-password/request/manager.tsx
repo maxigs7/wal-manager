@@ -3,21 +3,21 @@
 import { useRouter } from 'next/navigation';
 import { ComponentProps, useEffect, useMemo } from 'react';
 
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 import { FormProvider, useForm, yupResolver } from 'react-hook-form';
 
 import { useScopedI18n } from '@/i18n/client';
-import { Button } from '@/lib/@nextui-org/button';
-import { Alert } from '@/m/shared/alert';
 import { routes } from '@/routes';
 
 import { ResetPasswordRequestFormType, resetPasswordRequestFormTypeSchema } from '../../models';
 import { useResetPasswordRequest } from '../../query';
 
 type Props = ComponentProps<'form'> & {
-  translations: Record<'requestError' | 'requestAction' | 'requestSuccess', string>;
+  translations: Record<'requestError' | 'requestSuccess', string>;
 };
 
-const ResetPasswordRequestManager: React.FC<Props> = ({ children, translations }) => {
+const ResetPasswordRequestFormManager: React.FC<Props> = ({ children, translations }) => {
   const t = useScopedI18n('common');
   const resolver = useMemo(() => yupResolver(resetPasswordRequestFormTypeSchema(t)), [t]);
   const form = useForm<ResetPasswordRequestFormType>({
@@ -51,27 +51,18 @@ const ResetPasswordRequestManager: React.FC<Props> = ({ children, translations }
 
   return (
     <FormProvider {...form}>
-      <form
-        className="flex flex-col gap-3 mx-auto my-5 w-full items-center"
+      <Box
+        className="flex flex-col gap-3 mx-auto my-3 w-full items-center"
+        component="form"
         onSubmit={handleSubmit(resetPasswordHandler)}
       >
-        {isError && <Alert status="error">{translations.requestError}</Alert>}
-        {isSuccess && <Alert status="success">{translations.requestSuccess}</Alert>}
+        {isError && <Alert severity="error">{translations.requestError}</Alert>}
+        {isSuccess && <Alert severity="success">{translations.requestSuccess}</Alert>}
 
         {children}
-
-        <Button
-          className="uppercase max-w-xs  font-bold"
-          color="accent"
-          isLoading={form.formState.isSubmitting}
-          type="submit"
-          fullWidth
-        >
-          {translations.requestAction}
-        </Button>
-      </form>
+      </Box>
     </FormProvider>
   );
 };
 
-export { ResetPasswordRequestManager };
+export default ResetPasswordRequestFormManager;

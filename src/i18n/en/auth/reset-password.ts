@@ -12,10 +12,11 @@ const translations = {
     passwordPlaceholder: 'my-supper-secret',
   },
   requestAction: 'Send email',
+  requestDescription: 'Enter your email and we′ll send you instructions to reset your password',
   requestError: 'An error occurred while trying to send the email',
   requestSuccess: 'The email has been sent successfully. Please check your inbox.',
+  requestTitle: 'Forgot Password? 🔒',
   signInLink: 'Back to sign in',
-  title: "Let's recover your credentials",
 };
 
 export default translations;

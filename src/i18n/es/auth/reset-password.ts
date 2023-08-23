@@ -12,10 +12,12 @@ const translations = {
     passwordPlaceholder: 'my-supper-secret',
   },
   requestAction: 'Enviar email',
+  requestDescription:
+    'Ingrese su correo electrónico y le enviaremos instrucciones para restablecer su contraseña',
   requestError: 'Ha ocurrido un error al intentar enviar el email',
   requestSuccess: 'Se ha enviado el correo correctamente. Verifique su casilla.',
+  requestTitle: 'Olvidates tu contraseña? 🔒',
   signInLink: 'Volver a iniciar sesión',
-  title: 'Vamos a recuperar tus credenciales',
 };
 
 export default translations;

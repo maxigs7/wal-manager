@@ -1,5 +1,6 @@
 const translations = {
   action: 'Sign Up',
+  description: 'Make your finances easy and fun!',
   error: 'The email address is already registered',
   form: {
     confirmPassword: 'Confirm Password',
@@ -13,7 +14,7 @@ const translations = {
     haveAnAccount: 'Already have an account?',
     link: 'Sign in here',
   },
-  title: 'Register a new account',
+  title: 'Register a new account 🚀',
 };
 
 export default translations;
