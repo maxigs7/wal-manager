@@ -33,7 +33,12 @@ const Page = async () => {
 
       <SignInFormManager translations={{ error: t('error') }}>
         <SignInForm translations={{ email: t('form.email'), password: t('form.password') }} />
-        <Link component={NextLink} href={routes.auth.resetPassword} variant="body2">
+        <Link
+          component={NextLink}
+          href={routes.auth.resetPassword}
+          prefetch={false}
+          variant="body2"
+        >
           {t('resetPasswordLink')}
         </Link>
         <SignInButtonSubmit>{t('action')}</SignInButtonSubmit>
@@ -42,7 +47,7 @@ const Page = async () => {
       <Typography color="text.secondary" variant="body2">
         {t('registrationLink.dontHaveAccount')}
 
-        <Link component={NextLink} href={routes.auth.signUp} ml={1}>
+        <Link component={NextLink} href={routes.auth.signUp} ml={1} prefetch={false}>
           {t('registrationLink.link')}
         </Link>
       </Typography>

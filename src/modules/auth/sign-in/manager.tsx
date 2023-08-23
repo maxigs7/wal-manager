@@ -54,7 +54,7 @@ const SignInFormManager: React.FC<Props> = ({ children, translations }) => {
   return (
     <FormProvider {...form}>
       <Box
-        className="flex flex-col gap-3 mx-auto my-5 w-full items-center"
+        className="flex flex-col gap-3 mx-auto my-3 w-full items-center"
         component="form"
         onSubmit={handleSubmit(signInHandler)}
       >

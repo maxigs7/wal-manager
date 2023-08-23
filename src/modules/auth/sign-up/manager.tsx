@@ -4,21 +4,21 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { ComponentProps, useMemo } from 'react';
 import React from 'react';
 
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 import { FormProvider, useForm, yupResolver } from 'react-hook-form';
 
 import { useScopedI18n } from '@/i18n/client';
-import { Button } from '@/lib/@nextui-org/button';
-import { Alert } from '@/m/shared/alert';
 import { routes } from '@/routes';
 
 import { SignUpFormType, signUpFormSchema } from '../models';
 import { useSignUp } from '../query';
 
 type Props = ComponentProps<'form'> & {
-  translations: Record<'error' | 'action', string>;
+  translations: Record<'error', string>;
 };
 
-export const SignUpFormManager: React.FC<Props> = ({ children, translations }) => {
+const SignUpFormManager: React.FC<Props> = ({ children, translations }) => {
   const t = useScopedI18n('common');
   const resolver = useMemo(() => yupResolver(signUpFormSchema(t)), [t]);
   const form = useForm<SignUpFormType>({
@@ -53,24 +53,17 @@ export const SignUpFormManager: React.FC<Props> = ({ children, translations }) =
 
   return (
     <FormProvider {...form}>
-      <form
-        className="flex flex-col gap-3 mx-auto my-5 w-full items-center"
+      <Box
+        className="flex flex-col gap-3 mx-auto my-3 w-full items-center"
+        component="form"
         onSubmit={handleSubmit(signUpHandler)}
       >
-        {isError && <Alert status="error">{translations.error}</Alert>}
+        {isError && <Alert severity="error">{translations.error}</Alert>}
 
         {children}
-
-        <Button
-          className="uppercase max-w-xs font-bold"
-          color="accent"
-          isLoading={form.formState.isSubmitting}
-          type="submit"
-          fullWidth
-        >
-          {translations.action}
-        </Button>
-      </form>
+      </Box>
     </FormProvider>
   );
 };
+
+export default SignUpFormManager;

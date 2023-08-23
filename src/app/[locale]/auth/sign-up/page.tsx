@@ -1,11 +1,18 @@
 import 'server-only';
 
+import NextLink from 'next/link';
+
 import { Metadata } from 'next';
 
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+
 import { getScopedI18n } from '@/i18n/server';
-import { PageTitle } from '@/layout/auth';
-import { AuthLink } from '@/m/auth/components/link';
-import { SignUpFormManager, SignUpForm } from '@/m/auth/sign-up';
+import SignUpButtonSubmit from '@/m/auth/sign-up/button';
+import SignUpForm from '@/m/auth/sign-up/form';
+import SignUpFormManager from '@/m/auth/sign-up/manager';
+import PageDescription from '@/m/layout/auth/page-description';
+import PageTitle from '@/m/layout/auth/page-title';
 import { routes } from '@/routes';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,31 +29,27 @@ const Page = async () => {
   return (
     <>
       <PageTitle>{t('title')}</PageTitle>
+      <PageDescription>{t('description')}</PageDescription>
 
-      <SignUpFormManager
-        translations={{
-          error: t('error'),
-          action: t('action'),
-        }}
-      >
+      <SignUpFormManager translations={{ error: t('error') }}>
         <SignUpForm
           translations={{
             email: t('form.email'),
-            emailPlaceholder: t('form.emailPlaceholder'),
             password: t('form.password'),
-            passwordPlaceholder: t('form.passwordPlaceholder'),
             confirmPassword: t('form.confirmPassword'),
-            confirmPasswordPlaceholder: t('form.confirmPasswordPlaceholder'),
           }}
         />
+
+        <SignUpButtonSubmit>{t('action')}</SignUpButtonSubmit>
       </SignUpFormManager>
 
-      <p className="gray.500 text-tiny mx-auto my-8">
+      <Typography color="text.secondary" variant="body2">
         {t('signInLink.haveAnAccount')}
-        <AuthLink className="ml-1" href={routes.auth.signIn}>
+
+        <Link component={NextLink} href={routes.auth.signIn} ml={1} prefetch={false}>
           {t('signInLink.link')}
-        </AuthLink>
-      </p>
+        </Link>
+      </Typography>
     </>
   );
 };
