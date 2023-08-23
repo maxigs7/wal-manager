@@ -5,6 +5,11 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  modularizeImports: {
+    '@mui/icons-material': {
+      transform: '@mui/icons-material/{{member}}',
+    },
+  },
   reactStrictMode: true,
   redirects: async () => {
     return [
@@ -36,9 +41,6 @@ const nextConfig = {
             loader: '@svgr/webpack',
             options: {
               svgoConfig: {
-                replaceAttrValues: {
-                  '#3e3e3e': 'currentColor',
-                },
                 plugins: [
                   {
                     name: 'preset-default',

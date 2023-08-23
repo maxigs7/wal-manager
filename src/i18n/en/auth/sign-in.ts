@@ -1,6 +1,7 @@
 const translations = {
   action: 'Sign In',
   error: 'User or password incorrect',
+  description: 'Please sign-in to your account and start the adventure',
   form: {
     email: 'Email',
     emailPlaceholder: 'john.doe@example.com',
@@ -12,7 +13,7 @@ const translations = {
     dontHaveAccount: "Don't you have an account?",
     link: 'Register here',
   },
-  title: 'Welcome! Sign In',
+  title: 'Welcome! Sign In 👋🏻',
 };
 
 export default translations;

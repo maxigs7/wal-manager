@@ -54,6 +54,12 @@
           "caseInsensitive": true
         }
       }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["@mui/*/*/*"]
+      }
     ]
   },
   "settings": {

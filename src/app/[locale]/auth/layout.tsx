@@ -1,13 +1,17 @@
+import 'server-only';
+
 import { PropsWithChildren } from 'react';
 
-import { AppName, Wrapper } from '@/layout/auth';
+import AppName from '@/m/layout/auth/app-name';
+import PageContainer from '@/m/layout/auth/page-container';
 
-const AuthRootLayout = async ({ children }: PropsWithChildren) => {
+const AuthRootLayout = ({ children }: PropsWithChildren) => {
   return (
-    <Wrapper>
+    <PageContainer>
       <AppName />
+
       {children}
-    </Wrapper>
+    </PageContainer>
   );
 };
 

@@ -4,22 +4,21 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { ComponentProps, useMemo } from 'react';
 import React from 'react';
 
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 import { FormProvider, useForm, yupResolver } from 'react-hook-form';
 
 import { useScopedI18n } from '@/i18n/client';
-import { Button } from '@/lib/@nextui-org/button';
-import { Alert } from '@/m/shared/alert';
 import { routes } from '@/routes';
 
-import { AuthLink } from '../components/link';
 import { SignInFormType, signInFormSchema } from '../models';
 import { useSignIn } from '../query';
 
 type Props = ComponentProps<'form'> & {
-  translations: Record<'error' | 'action' | 'resetPasswordLink', string>;
+  translations: Record<'error', string>;
 };
 
-export const SignInFormManager: React.FC<Props> = ({ children, translations }) => {
+const SignInFormManager: React.FC<Props> = ({ children, translations }) => {
   const t = useScopedI18n('common');
   const resolver = useMemo(() => yupResolver(signInFormSchema(t)), [t]);
   const form = useForm<SignInFormType>({
@@ -54,26 +53,17 @@ export const SignInFormManager: React.FC<Props> = ({ children, translations }) =
 
   return (
     <FormProvider {...form}>
-      <form
+      <Box
         className="flex flex-col gap-3 mx-auto my-5 w-full items-center"
+        component="form"
         onSubmit={handleSubmit(signInHandler)}
       >
-        {isError && <Alert status="error">{translations.error}</Alert>}
+        {isError && <Alert severity="error">{translations.error}</Alert>}
 
         {children}
-
-        <AuthLink href={routes.auth.resetPassword}>{translations.resetPasswordLink}</AuthLink>
-
-        <Button
-          className="uppercase max-w-xs font-bold"
-          color="accent"
-          isLoading={form.formState.isSubmitting}
-          type="submit"
-          fullWidth
-        >
-          {translations.action}
-        </Button>
-      </form>
+      </Box>
     </FormProvider>
   );
 };
+
+export default SignInFormManager;

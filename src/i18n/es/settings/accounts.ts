@@ -1,13 +1,11 @@
 const translations = {
-  table: {
-    headers: {
-      currency: 'Moneda',
-      initialAmount: 'Monto Inicial',
-      isPrimary: 'Principal',
-      name: 'Nombre',
-      quotationId: 'Cotización',
-      type: 'Tipo',
-    },
+  headers: {
+    currency: 'Moneda',
+    initialAmount: 'Monto Inicial',
+    isPrimary: 'Principal',
+    name: 'Nombre',
+    quotationId: 'Cotización',
+    type: 'Tipo',
   },
   form: {
     currency: 'Moneda',

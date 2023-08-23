@@ -1,13 +1,18 @@
 import 'server-only';
 
+import NextLink from 'next/link';
+
 import { Metadata } from 'next';
 
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+
 import { getScopedI18n } from '@/i18n/server';
-import { PageTitle } from '@/layout/auth';
-import { AuthLink } from '@/m/auth/components/link';
-import { SignInForm } from '@/m/auth/sign-in/form';
-import { SignInFormManager } from '@/m/auth/sign-in/manager';
-import { AUTH_SIGN_UP_ENABLED } from '@/m/shared/config';
+import SignInButtonSubmit from '@/m/auth/sign-in/button';
+import SignInForm from '@/m/auth/sign-in/form';
+import SignInFormManager from '@/m/auth/sign-in/manager';
+import PageDescription from '@/m/layout/auth/page-description';
+import PageTitle from '@/m/layout/auth/page-title';
 import { routes } from '@/routes';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,31 +29,23 @@ const Page = async () => {
   return (
     <>
       <PageTitle>{t('title')}</PageTitle>
-      <SignInFormManager
-        translations={{
-          error: t('error'),
-          action: t('action'),
-          resetPasswordLink: t('resetPasswordLink'),
-        }}
-      >
-        <SignInForm
-          translations={{
-            email: t('form.email'),
-            emailPlaceholder: t('form.emailPlaceholder'),
-            password: t('form.password'),
-            passwordPlaceholder: t('form.passwordPlaceholder'),
-          }}
-        />
+      <PageDescription>{t('description')}</PageDescription>
+
+      <SignInFormManager translations={{ error: t('error') }}>
+        <SignInForm translations={{ email: t('form.email'), password: t('form.password') }} />
+        <Link component={NextLink} href={routes.auth.resetPassword} variant="body2">
+          {t('resetPasswordLink')}
+        </Link>
+        <SignInButtonSubmit>{t('action')}</SignInButtonSubmit>
       </SignInFormManager>
 
-      {AUTH_SIGN_UP_ENABLED && (
-        <p className="gray.500 text-tiny mx-auto my-8">
-          {t('registrationLink.dontHaveAccount')}
-          <AuthLink className="ml-1" href={routes.auth.signUp}>
-            {t('registrationLink.link')}
-          </AuthLink>
-        </p>
-      )}
+      <Typography color="text.secondary" variant="body2">
+        {t('registrationLink.dontHaveAccount')}
+
+        <Link component={NextLink} href={routes.auth.signUp} ml={1}>
+          {t('registrationLink.link')}
+        </Link>
+      </Typography>
     </>
   );
 };

@@ -1,18 +1,9 @@
-import { nextui } from '@nextui-org/theme';
-
-import blue from './tailwind/blue';
-import dark from './tailwind/dark';
-import green from './tailwind/green';
-import light from './tailwind/light';
-import purple from './tailwind/purple';
-import red from './tailwind/red';
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  corePlugins: {
+    preflight: false,
+  },
   theme: {
     screens: {
       sm: '375px',
@@ -23,22 +14,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-open-sans)'],
+        sans: ['var(--roboto)'],
       },
     },
   },
   darkMode: 'class',
-  plugins: [
-    nextui({
-      prefix: 'wmui',
-      themes: {
-        dark,
-        light,
-        ...blue,
-        ...green,
-        ...purple,
-        ...red,
-      },
-    }),
-  ],
 };
