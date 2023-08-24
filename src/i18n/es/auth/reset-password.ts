@@ -1,8 +1,11 @@
 const translations = {
   confirmAction: 'Cambiar contraseña',
+  confirmDescription:
+    'La nueva contraseña debe ser diferente de las contraseñas utilizadas anteriormente',
   confirmError: 'Ha ocurrido un error al intentar cambiar la contraseña',
   confirmSuccess:
     'Ha cambiado su contraseña correctamente. En unos segundos sera redireccionado al la pantalla de inicio de sesión',
+  confirmTitle: 'Reiniciar Contraseña 🔒',
   form: {
     confirmPassword: 'Confirmar Password',
     confirmPasswordPlaceholder: 'my-supper-secret-again',

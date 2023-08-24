@@ -1,51 +1,53 @@
 import 'server-only';
 
+import NextLink from 'next/link';
+
 import { Metadata } from 'next';
 
+import Link from '@mui/material/Link';
+
 import { getScopedI18n } from '@/i18n/server';
-import { PageTitle } from '@/layout/auth';
-import { AuthLink } from '@/m/auth/components/link';
-import {
-  ResetPasswordConfirmManager,
-  ResetPasswordConfirmForm,
-} from '@/m/auth/reset-password/confirm';
+import ResetPasswordConfirmButtonSubmit from '@/m/auth/reset-password/confirm/button';
+import { ResetPasswordConfirmForm } from '@/m/auth/reset-password/confirm/form';
+import ResetPasswordConfirmFormManager from '@/m/auth/reset-password/confirm/manager';
+import PageDescription from '@/m/layout/auth/page-description';
+import PageTitle from '@/m/layout/auth/page-title';
 import { routes } from '@/routes';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getScopedI18n('auth.resetPassword');
 
   return {
-    title: `${t('title')} - WAL`,
+    title: `${t('confirmTitle')} - WAL`,
   };
 }
 
 const Page = async () => {
   const t = await getScopedI18n('auth.resetPassword');
-
   return (
     <>
-      <PageTitle>{t('title')}</PageTitle>
+      <PageTitle>{t('confirmTitle')}</PageTitle>
+      <PageDescription>{t('confirmDescription')}</PageDescription>
 
-      <ResetPasswordConfirmManager
+      <ResetPasswordConfirmFormManager
         translations={{
           confirmError: t('confirmError'),
-          confirmAction: t('confirmAction'),
           confirmSuccess: t('confirmSuccess'),
         }}
       >
         <ResetPasswordConfirmForm
           translations={{
             password: t('form.password'),
-            passwordPlaceholder: t('form.passwordPlaceholder'),
             confirmPassword: t('form.confirmPassword'),
-            confirmPasswordPlaceholder: t('form.confirmPasswordPlaceholder'),
           }}
         />
-      </ResetPasswordConfirmManager>
 
-      <AuthLink className="mx-auto my-8" href={routes.auth.signIn}>
+        <ResetPasswordConfirmButtonSubmit>{t('confirmAction')}</ResetPasswordConfirmButtonSubmit>
+      </ResetPasswordConfirmFormManager>
+
+      <Link component={NextLink} href={routes.auth.signIn} ml={1} prefetch={false} variant="body2">
         {t('signInLink')}
-      </AuthLink>
+      </Link>
     </>
   );
 };

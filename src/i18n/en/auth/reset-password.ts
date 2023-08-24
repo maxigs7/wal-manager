@@ -1,8 +1,10 @@
 const translations = {
   confirmAction: 'Reset your password',
+  confirmDescription: 'Your new password must be different from previously used passwords',
   confirmError: 'An error occurred while trying to change the password',
   confirmSuccess:
     'Your password has been changed successfully. You will be redirected to the login screen in a few seconds',
+  confirmTitle: 'Reset Password 🔒',
   form: {
     confirmPassword: 'Confirm Password',
     confirmPasswordPlaceholder: 'my-supper-secret-again',
