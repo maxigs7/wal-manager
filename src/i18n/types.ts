@@ -1,14 +1,16 @@
-const sidebarKeys = [
-  '/dashboard',
-  '/accounts',
-  '/settings',
-  '/invoices',
-  '/bills',
-  '/investments',
-  '/loans',
-] as const;
-
-export type SidebarMenuKeys = (typeof sidebarKeys)[number];
+export type SidebarMenuKeys =
+  | 'dashboard'
+  | 'accounts'
+  | 'my-accounts'
+  | 'investments'
+  | 'loans'
+  | 'invoices'
+  | 'afip'
+  | 'monotributo'
+  | 'bills'
+  | 'settings'
+  | 'settings-user'
+  | 'settings-accounts';
 
 export type SidebarMenuType = Record<SidebarMenuKeys, string>;
 

@@ -2,23 +2,29 @@ import 'server-only';
 
 import { PropsWithChildren } from 'react';
 
-import { ContentWrapper } from '@/layout/full-new/content-wrapper';
-import { Navbar } from '@/layout/full-new/navbar';
-import { Sidebar } from '@/layout/full-new/sidebar';
-import { SidebarProvider } from '@/layout/full-new/sidebar/provider';
-import { Wrapper } from '@/layout/full-new/wrapper';
+import MenuIcon from '@mui/icons-material/Menu';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+
+import Navbar from '@/m/layout/admin/navbar';
+import { AdminLayoutProvider } from '@/m/layout/admin/provider';
+import Sidebar from '@/m/layout/admin/sidebar';
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <SidebarProvider>
-      <Wrapper>
+    <AdminLayoutProvider>
+      <div className="flex">
+        <Navbar />
         <Sidebar />
-        <ContentWrapper>
-          <Navbar />
+        <Box component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - 250px)` } }}>
           {children}
-        </ContentWrapper>
-      </Wrapper>
-    </SidebarProvider>
+        </Box>
+      </div>
+    </AdminLayoutProvider>
   );
 };
 
