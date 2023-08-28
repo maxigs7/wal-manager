@@ -16,9 +16,15 @@ const SubMenuListItem: React.FC<Required<Pick<MenuItem, 'id' | 'subItems'>>> = (
 
   return (
     <Collapse in={menuItemSelected === id} timeout="auto" unmountOnExit>
-      <List component="div" disablePadding>
+      <List
+        component="div"
+        sx={{
+          mt: -0.5,
+        }}
+        disablePadding
+      >
         {subItems.map((item) => (
-          <MenuListItem key={item.id} {...item} />
+          <MenuListItem key={item.id} {...item} isSubItem={true} />
         ))}
       </List>
     </Collapse>

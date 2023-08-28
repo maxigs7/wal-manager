@@ -25,8 +25,10 @@ const Drawer: React.FC<PropsWithChildren> = ({ children }) => {
         width: SIDEBAR_WIDTH,
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: SIDEBAR_WIDTH,
+          bgcolor: 'primary.dark',
           boxSizing: 'border-box',
+          color: 'primary.contrastText',
+          width: SIDEBAR_WIDTH,
         },
       }}
     >
