@@ -3,49 +3,78 @@
     "comingSoon": false,
     "exact": false,
     "href": "/dashboard",
-    "icon": "dashboard",
-    "id": 1
+    "id": "dashboard"
   },
   {
     "comingSoon": false,
     "exact": false,
-    "href": "/accounts",
-    "icon": "accounts",
-    "id": 2
+    "group": "accounts",
+    "id": "accounts",
+    "subItems": [
+      {
+        "comingSoon": false,
+        "exact": false,
+        "href": "/my-accounts",
+        "id": "my-accounts"
+      },
+      {
+        "comingSoon": true,
+        "exact": false,
+        "href": "/investments",
+        "id": "investments"
+      },
+      {
+        "comingSoon": true,
+        "exact": false,
+        "href": "/loans",
+        "id": "loans"
+      }
+    ]
   },
   {
     "comingSoon": true,
     "exact": false,
     "href": "/invoices",
-    "icon": "invoices",
-    "id": 3
-  },
-  {
-    "comingSoon": true,
-    "exact": false,
-    "href": "/bills",
-    "icon": "bills",
-    "id": 4
-  },
-  {
-    "comingSoon": true,
-    "exact": false,
-    "href": "/investments",
-    "icon": "investments",
-    "id": 5
-  },
-  {
-    "comingSoon": true,
-    "exact": false,
-    "href": "/loans",
-    "icon": "loans",
-    "id": 6
+    "id": "invoices"
   },
   {
     "comingSoon": false,
     "exact": false,
-    "href": "/settings",
-    "icon": "settings",
-    "id": 7
+    "group": "afip",
+    "id": "afip",
+    "subItems": [
+      {
+        "comingSoon": true,
+        "exact": false,
+        "href": "/afip/monotributo",
+        "id": "monotributo"
+      },
+      {
+        "comingSoon": true,
+        "exact": false,
+        "href": "/afip/bills",
+        "id": "bills"
+      }
+    ]
+  },
+  {
+    "comingSoon": false,
+    "exact": false,
+    "group": "afip",
+    "id": "settings",
+    "subItems": [
+      {
+        "comingSoon": true,
+        "exact": false,
+        "href": "/settings/user",
+        "id": "settings-user"
+      },
+      {
+        "comingSoon": true,
+        "exact": false,
+        "href": "/settings/accounts",
+        "id": "settings-accounts"
+      }
+    ]
   }
 ]

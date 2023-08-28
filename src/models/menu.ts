@@ -1,59 +1,47 @@
-import {
-  BankIcon,
-  CoinShareIcon,
-  CreditCardIcon,
-  DashboardIcon,
-  MoneyCashBagIcon,
-  MoneyCashBillIcon,
-  ReceiptIcon,
-  SettingsIcon,
-  TagIcon,
-  UserIcon,
-} from '@/m/shared/icons';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import DangerousIcon from '@mui/icons-material/Dangerous';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import SettingsIcon from '@mui/icons-material/Settings';
 
-export type IconType =
-  | 'accounts'
-  | 'bills'
-  | 'categories'
-  | 'credit-cards'
-  | 'dashboard'
-  | 'investments'
-  | 'invoices'
-  | 'loans'
-  | 'settings'
-  | 'user';
-
+import { SidebarMenuKeys } from '@/i18n';
 export type MenuItem = {
-  comingSoon: boolean;
-  exact: boolean;
-  icon: string;
-  id: number;
-  href: string;
-  title: string;
+  exact?: boolean;
+  group?: string;
+  href?: string;
+  id: SidebarMenuKeys;
+  label?: string;
+  new?: boolean;
+  soon?: boolean;
+  subItems?: MenuItem[];
 };
 
-export const getIcon = (key: IconType) => {
-  switch (key) {
-    case 'accounts':
-      return BankIcon;
-    case 'bills':
-      return MoneyCashBillIcon;
-    case 'categories':
-      return TagIcon;
-    case 'credit-cards':
-      return CreditCardIcon;
+export const getIcon = (id: string): typeof DashboardIcon | null => {
+  switch (id) {
     case 'dashboard':
       return DashboardIcon;
+    case 'accounts':
+      return AccountBalanceIcon;
+    case 'my-accounts':
+      return null;
     case 'investments':
-      return MoneyCashBagIcon;
+      return null;
+    case 'loans':
+      return null;
     case 'invoices':
       return ReceiptIcon;
-    case 'loans':
-      return CoinShareIcon;
+    case 'afip':
+      return DangerousIcon;
+    case 'monotributo':
+      return null;
+    case 'bills':
+      return null;
     case 'settings':
       return SettingsIcon;
-    case 'user':
-      return UserIcon;
+    case 'settings-user':
+      return null;
+    case 'settings-accounts':
+      return null;
     default:
       return null;
   }

@@ -13,6 +13,7 @@ const TextFieldControl: React.FC<TextFieldControlProps> = ({ name, control, labe
   return (
     <Controller
       control={control}
+      defaultValue=""
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <TextField
