@@ -74,6 +74,18 @@
         "exact": false,
         "href": "/settings/accounts",
         "id": "settings-accounts"
+      },
+      {
+        "comingSoon": true,
+        "exact": false,
+        "href": "/settings/categories",
+        "id": "settings-categories"
+      },
+      {
+        "comingSoon": true,
+        "exact": false,
+        "href": "/settings/credit-cards",
+        "id": "settings-credit-cards"
       }
     ]
   }

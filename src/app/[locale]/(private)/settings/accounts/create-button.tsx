@@ -1,31 +1,22 @@
 'use client';
+
 import React, { useCallback } from 'react';
 
-import { ButtonProps } from '@chakra-ui/react';
+import { useScopedI18n } from '@/i18n/client';
+import { CreateButton, CreateButtonProps } from '@/m/shared/buttons/create';
+import { useModalStore } from '@/m/shared/modal-manager/modal-store';
 
-import { es } from '@/i18n';
-import { CreateButton } from '@/m/shared/buttons';
-import { useModalManager } from '@/m/shared/modal-manager/provider';
-import { ModalKey } from '@/m/shared/modal-manager/types';
-
-type Props = { userId: string } & Omit<ButtonProps, 'onClick'>;
+type Props = { userId: string } & Omit<CreateButtonProps, 'onClick'>;
 
 const CreateAccountButton: React.FC<Props> = ({ userId, ...buttonProps }) => {
-  const { onOpen } = useModalManager();
+  const { onOpen } = useModalStore();
+  const t = useScopedI18n('settings.accounts.pages.create');
 
   const onClick = useCallback(() => {
-    onOpen(
-      ModalKey.ACCOUNT_CREATE,
-      { title: es.account.pages.create.title, size: '4xl' },
-      { userId },
-    );
-  }, [onOpen, userId]);
+    onOpen('ACCOUNT_CREATE_MODAL', { title: t('title'), size: 'lg' }, { userId });
+  }, [onOpen, t, userId]);
 
-  return (
-    <CreateButton {...buttonProps} onClick={onClick}>
-      {es.common.create}
-    </CreateButton>
-  );
+  return <CreateButton {...buttonProps} onClick={onClick} />;
 };
 
-export { CreateAccountButton };
+export default CreateAccountButton;

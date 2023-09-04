@@ -1,16 +1,6 @@
-import { routes } from '@/routes';
-
-import { SettingsMenuType, SidebarMenuType } from '../types';
+import { SidebarMenuType } from '../types';
 
 const translations = {
-  settings: {
-    [routes.settings.account.index]: 'Accounts',
-    [routes.settings.category.index]: 'Categories',
-    [routes.settings.creditCard.index]: 'Credit Cards',
-    [routes.settings.investments.index]: 'Investments',
-    '/settings/loans': 'Loans',
-    [routes.settings.user]: 'User',
-  } as SettingsMenuType,
   sidebar: {
     dashboard: 'Dashboard',
     accounts: 'Accounts',
@@ -24,6 +14,8 @@ const translations = {
     settings: 'Settings',
     'settings-user': 'User',
     'settings-accounts': 'Accounts',
+    'settings-categories': 'Categories',
+    'settings-credit-cards': 'Credit Cards',
   } as SidebarMenuType,
   navbar: {
     user: {

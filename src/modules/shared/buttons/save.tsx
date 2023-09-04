@@ -1,21 +1,17 @@
-import { Button, ButtonProps, Icon } from '@chakra-ui/react';
+import SaveIcon from '@mui/icons-material/Save';
+import LoadingButton, { LoadingButtonProps } from '@mui/lab/LoadingButton';
 
-import { es } from '@/i18n';
-import { SaveIcon } from '@/m/shared/icons';
+import { useScopedI18n } from '@/i18n/client';
 
-type Props = ButtonProps;
+type Props = LoadingButtonProps;
 
-const SaveButton: React.FC<Props> = ({ colorScheme = 'accent', size = 'sm', ...buttonProps }) => {
+const SaveButton: React.FC<Props> = ({ variant = 'contained', ...buttonProps }) => {
+  const t = useScopedI18n('common');
+
   return (
-    <Button
-      colorScheme={colorScheme}
-      leftIcon={<Icon as={SaveIcon} boxSize="3" />}
-      rounded="2xl"
-      size={size}
-      {...buttonProps}
-    >
-      {es.common.save}
-    </Button>
+    <LoadingButton startIcon={<SaveIcon />} type="submit" variant={variant} {...buttonProps}>
+      {t('save')}
+    </LoadingButton>
   );
 };
 

@@ -1,24 +1,9 @@
-import { MutableRefObject } from 'react';
-
-import { ModalProps } from '@chakra-ui/react';
-
-export enum ModalKey {
-  ACCOUNT_CREATE = 'account-create',
-  ACCOUNT_DELETE = 'account-delete',
-  ACCOUNT_UPDATE = 'account-update',
-  CATEGORY_CREATE = 'category-create',
-  CATEGORY_DELETE = 'category-delete',
-  CATEGORY_UPDATE = 'category-update',
-  CREDIT_CARD_CREATE = 'credit-card-create',
-  CREDIT_CARD_DELETE = 'credit-card-delete',
-  CREDIT_CARD_UPDATE = 'credit-card-update',
-  SUBCATEGORY_CREATE = 'subcategory-create',
-  SUBCATEGORY_MOVE = 'subcategory-move',
-  SUBCATEGORY_UPDATE = 'subcategory-update',
-}
+import { DialogProps } from '@mui/material/Dialog';
 
 export type ModalOptions = {
-  size?: ModalProps['size'];
+  closeOnBackdropClick?: boolean;
+  fullScreen?: DialogProps['fullScreen'];
+  size?: DialogProps['maxWidth'];
   title: string;
 };
 
@@ -28,14 +13,10 @@ export type CurrentModalType = {
   props?: any;
 };
 
-export type ModalMap = Map<ModalKey, React.ComponentType<any>>;
+export type ModalMap = Map<string, React.ComponentType<any>>;
 
 export type ModalManagerProps = {
-  finalRef: MutableRefObject<any>;
-  get<TProps>(key: ModalKey): React.ComponentType<TProps>;
-  initialRef: MutableRefObject<any>;
   isOpen: boolean;
-  onOpen<TProps>(key: ModalKey, options: ModalOptions, props?: TProps): void;
+  onOpen<TProps>(key: string, options: ModalOptions, props?: TProps): void;
   onClose(): void;
-  register<TProps>(key: ModalKey, Component: React.ComponentType<TProps>): void;
 };

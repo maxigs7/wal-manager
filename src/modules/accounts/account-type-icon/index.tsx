@@ -1,33 +1,24 @@
-'use client';
+import React from 'react';
 
-import React, { useMemo } from 'react';
+import BankIcon from '@mui/icons-material/AccountBalance';
+import CashIcon from '@mui/icons-material/LocalAtm';
+import { SvgIconProps } from '@mui/material/SvgIcon';
 
-import { Icon, IconProps } from '@chakra-ui/react';
-
-import { BankIcon, CashIcon } from '@/m/shared/icons';
 import { AccountType } from '@/models';
 
-type Props = Omit<IconProps, 'as'> & {
+type Props = SvgIconProps & {
   type: AccountType;
 };
 
-const AccountTypeIcon: React.FC<Props> = ({ type, ...props }) => {
-  const icon = useMemo(() => {
-    switch (type) {
-      case 'bank':
-        return BankIcon;
-      case 'cash':
-        return CashIcon;
-      default:
-        return null;
-    }
-  }, [type]);
-
-  if (!icon) {
-    return null;
+const AccountTypeIcon: React.FC<Props> = ({ type, ...iconProps }) => {
+  switch (type) {
+    case 'bank':
+      return <BankIcon {...iconProps} />;
+    case 'cash':
+      return <CashIcon {...iconProps} />;
+    default:
+      return null;
   }
-
-  return <Icon {...props} as={icon} />;
 };
 
-export { AccountTypeIcon };
+export default AccountTypeIcon;

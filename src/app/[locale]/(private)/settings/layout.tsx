@@ -2,15 +2,15 @@ import 'server-only';
 
 import { PropsWithChildren } from 'react';
 
-import { ContentWrapper, Menu, Wrapper } from '@/layout/settings';
+import SettingsNav from '@/m/layout/admin/settings-nav';
 
 export const revalidate = 0;
-const Layout: React.FC<PropsWithChildren> = ({ children }) => {
+const Layout: React.FC<PropsWithChildren> = async ({ children }) => {
   return (
-    <Wrapper>
-      <Menu />
-      <ContentWrapper>{children}</ContentWrapper>
-    </Wrapper>
+    <>
+      <SettingsNav />
+      {children}
+    </>
   );
 };
 

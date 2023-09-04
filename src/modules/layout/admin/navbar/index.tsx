@@ -1,6 +1,7 @@
 import 'server-only';
 
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
 import { getScopedI18n } from '@/i18n/server';
@@ -22,9 +23,13 @@ const Navbar: React.FC = async () => {
       }}
     >
       <Toolbar>
-        <SidebarToggle aria-label={tCommon('sidebar.open')} />
+        <Box>
+          <SidebarToggle aria-label={tCommon('sidebar.open')} />
+        </Box>
 
-        <RightSide />
+        <Box ml="auto">
+          <RightSide />
+        </Box>
       </Toolbar>
     </AppBar>
   );

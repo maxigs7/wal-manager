@@ -1,7 +1,5 @@
 import 'server-only';
 
-import Box from '@mui/material/Box';
-
 import { createServerClient } from '@/lib/supabase/create-server-client';
 import { getUser } from '@/supabase';
 
@@ -11,11 +9,7 @@ const RightSide: React.FC = async () => {
   const supabase = createServerClient();
   const user = await getUser(supabase);
 
-  return (
-    <Box ml="auto">
-      <UserMenu email={user?.email || ''} />
-    </Box>
-  );
+  return <UserMenu email={user?.email || ''} />;
 };
 
 export default RightSide;

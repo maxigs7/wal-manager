@@ -1,30 +1,39 @@
 'use client';
 
-import {
-  Modal,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  ModalProps,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import CloseIcon from '@mui/icons-material/Close';
+import Dialog, { DialogProps } from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
 
 import { ModalOptions } from './types';
 
-type Props = { options?: ModalOptions } & ModalProps;
+type Props = { options?: ModalOptions } & DialogProps;
 
-const ModalContainer: React.FC<Props> = ({ children, options, ...modalProps }) => {
-  const bg = useColorModeValue('white', 'primary.900');
+const ModalContainer: React.FC<Props> = ({ children, options, ...dialogProps }) => {
   return (
-    <Modal {...modalProps} size={options?.size || 'sm'}>
-      <ModalOverlay />
-      <ModalContent bg={bg}>
-        <ModalHeader>{options?.title}</ModalHeader>
-        <ModalCloseButton />
-        {children}
-      </ModalContent>
-    </Modal>
+    <Dialog
+      fullScreen={options?.fullScreen}
+      maxWidth={options?.size || 'sm'}
+      fullWidth
+      {...dialogProps}
+    >
+      <DialogTitle>{options?.title}</DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={(e) => dialogProps.onClose?.(e, 'escapeKeyDown')}
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: 8,
+          color: (theme) => theme.palette.grey[500],
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+
+      <DialogContent dividers>{children}</DialogContent>
+    </Dialog>
   );
 };
 

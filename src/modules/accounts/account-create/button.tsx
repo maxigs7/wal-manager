@@ -2,15 +2,15 @@
 
 import React from 'react';
 
-import { ButtonProps } from '@chakra-ui/react';
+import { LoadingButtonProps } from '@mui/lab/LoadingButton';
 import { useFormContext } from 'react-hook-form';
 
-import { SaveButton } from '@/m/shared/buttons';
+import { SaveButton } from '@/m/shared/buttons/save';
 
 import { AccountFormType } from '../models/account';
 import { useAccountInsert } from '../query';
 
-type Props = ButtonProps & {
+type Props = LoadingButtonProps & {
   onSuccess: () => void;
 };
 
@@ -27,7 +27,7 @@ const CreateAccountButton: React.FC<Props> = ({ onSuccess, ...buttonProps }) => 
   return (
     <SaveButton
       {...buttonProps}
-      isLoading={isFormSubmitting || isAsyncSubmitting}
+      loading={isFormSubmitting || isAsyncSubmitting}
       onClick={onSubmit}
     />
   );

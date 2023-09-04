@@ -1,30 +1,20 @@
-import Link from 'next/link';
+'use client';
+import AddIcon from '@mui/icons-material/Add';
+import Button, { ButtonProps } from '@mui/material/Button';
 
-import { Button, ButtonProps, Icon } from '@chakra-ui/react';
+import { NextLinkComposed } from '../link';
 
-import { PlusIcon } from '@/m/shared/icons';
+export type CreateButtonProps = ButtonProps & { href?: string };
 
-type Props = ButtonProps & { href?: string };
-
-const CreateButton: React.FC<Props> = ({
+const CreateButton: React.FC<CreateButtonProps> = ({
   children,
-  colorScheme = 'accent',
+  variant = 'contained',
   href,
-  size = 'sm',
-  textTransform = 'uppercase',
   ...buttonProps
 }) => {
-  const linkProps = href ? { as: Link, href, prefetch: false } : {};
+  const linkProps = href ? { component: NextLinkComposed, to: href, prefetch: false } : {};
   return (
-    <Button
-      {...linkProps}
-      colorScheme={colorScheme}
-      leftIcon={<Icon as={PlusIcon} boxSize="3" />}
-      rounded="2xl"
-      size={size}
-      textTransform={textTransform}
-      {...buttonProps}
-    >
+    <Button {...linkProps} startIcon={<AddIcon />} variant={variant} {...buttonProps}>
       {children}
     </Button>
   );

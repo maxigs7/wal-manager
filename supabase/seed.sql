@@ -28,10 +28,19 @@ values
   ('c2244a40-b6d5-43f1-8004-bbba5971a22f', 'Luz', null, null, '800fd66b-eac0-452d-8234-276211378f25', '100fd4fa-3b0f-4cd8-9dcd-45a02ca49262')
   ;
 
-
-insert into public.investment(id, description, type,  "accountId",  amount, days, "dueDate", "annualRate", profit, "userId")
+insert into public."mutualFund"(id, name, key)
 values
-  ('b12e9cf2-6209-48cd-a489-1adda7c9b3ea', 'Mi primer plazo fijo', 'fixed', '9e9a8297-1372-4c96-8bc1-4afdfd449680', 20000, 30, '2022-11-15', 0.75, 1643.83, '100fd4fa-3b0f-4cd8-9dcd-45a02ca49262')
+  ('462ddd2e-9875-40cd-8918-d76b03ce4cd9', 'Fondo Fima Premium - Clase A', 'fima-premium-a'),
+  ('7de6543c-db88-4847-8a2c-a463a2240b86', 'Fondo Fima Ahorro Pesos - Clase A', 'fima-ahorro-pesos-a'),
+  ('4c01f762-f4dc-4c12-8656-b78b54b0cd5b', 'Fondo Fima Ahorro Plus - Clase A', 'fima-ahorro-plus-a'),
+  ('60448639-3d9f-4f6e-a146-44f65bd4311e', 'Fondo Fima Renta en Pesos - Clase A', 'fima-renta-pesos-a'),
+  ('781e74d7-c6b4-40f5-acd1-0940d7938cb3', 'Fondo Fima Mix I - Clase A', 'fima-mix-i-a'),
+  ('940b7b61-2747-4d1c-8c85-9d2b611ab11e', 'Fondo Fima Mix II - Clase A', 'fima-mix-ii-a')
+  ;
+
+insert into public.investment(id, description, type, amount, days, "dueDate", "annualRate", profit, "userId")
+values
+  ('b12e9cf2-6209-48cd-a489-1adda7c9b3ea', 'Mi primer plazo fijo', 'fixed', 20000, 30, '2022-11-15', 0.75, 1643.83, '100fd4fa-3b0f-4cd8-9dcd-45a02ca49262')
   ;
 
 insert into public.movement(id, type, description, amount, "accountId", "categoryId", "creditCardId", "investmentId", month, year, date, "isPaid", "userId")

@@ -30,6 +30,11 @@ const translations = {
     soon: 'soon',
   },
   table: {
+    actions: {
+      add: 'Agregar',
+      edit: 'Editar',
+      delete: 'Eliminar',
+    },
     headers: {
       actions: '...',
     },
